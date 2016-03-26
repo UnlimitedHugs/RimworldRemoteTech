@@ -1,0 +1,137 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ThingDefs>
+
+  <ThingDef Name="BuildingBase" Abstract="True">
+    <category>Building</category>
+    <soundImpactDefault>BulletImpactMetal</soundImpactDefault>
+    <selectable>true</selectable>
+    <drawerType>MapMeshAndRealTime</drawerType>
+    <terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
+    <repairEffect>Repair</repairEffect>
+    <leaveResourcesWhenKilled>true</leaveResourcesWhenKilled>
+    <filthLeaving>BuildingRubble</filthLeaving>
+  </ThingDef>
+  
+  <ThingDef Name="ExplosiveBase" ParentName="BuildingBase" Abstract="True">
+    <thingClass>RemoteExplosives.Building_RemoteExplosive</thingClass>
+    <altitudeLayer>Waist</altitudeLayer>
+    <drawerType>RealtimeOnly</drawerType>
+    <rotatable>false</rotatable>
+    <tickerType>Normal</tickerType>
+    <statBases>
+      <MaxHitPoints>60</MaxHitPoints>
+      <WorkToMake>150</WorkToMake>
+      <Beauty>-4</Beauty>
+    </statBases>
+    <designationCategory>Security</designationCategory>
+  </ThingDef>
+  
+  <ThingDef ParentName="ExplosiveBase">
+    <defName>TrapRemoteBomb</defName>
+    <label>Remote IED</label>
+    <graphicData>
+      <texPath>remote_mine</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <description>An explosive canister with a radio trigger.
+Craft at the Machining Bench.
+Arm, then detonate from the Remote Explosives Console.</description>
+    <costList>
+      <RemoteBomb>1</RemoteBomb>
+    </costList>
+    <designationHotKey>H</designationHotKey>
+    <researchPrerequisite>IEDBomb</researchPrerequisite>
+	<comps>
+      <li>
+        <compClass>CompCustomExplosive</compClass>
+        <explosiveRadius>2.9</explosiveRadius>
+        <explosiveDamageType>Bomb</explosiveDamageType>
+        <startWickHitPointsPercent>0.2</startWickHitPointsPercent>
+        <wickTicks>
+          <min>40</min>
+          <max>40</max>
+        </wickTicks>
+      </li>
+    </comps>
+  </ThingDef>
+  
+  <ThingDef ParentName="ExplosiveBase">
+    <defName>TrapRemoteIncendiary</defName>
+    <label>Remote Fire IED</label>
+    <graphicData>
+      <texPath>remote_mine_incendiary</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <description>A canister filled with flammable chemicals with a radio trigger.
+Craft at the Machining Bench.
+Arm, then detonate from the Remote Explosives Console.</description>
+    <costList>
+      <RemoteFireBomb>1</RemoteFireBomb>
+    </costList>
+    <designationHotKey>J</designationHotKey>
+    <researchPrerequisite>IEDIncendiary</researchPrerequisite>
+	<comps>
+      <li>
+        <compClass>CompCustomExplosive</compClass>
+        <explosiveRadius>2.9</explosiveRadius>
+        <explosiveDamageType>Flame</explosiveDamageType>
+        <startWickHitPointsPercent>0.2</startWickHitPointsPercent>
+        <wickTicks>
+          <min>40</min>
+          <max>40</max>
+        </wickTicks>
+      </li>
+    </comps>
+  </ThingDef>
+
+
+  <ThingDef ParentName="BuildingBase">
+    <DefName>TableDetonator</DefName>
+    <label>remote detonator</label>
+    <ThingClass>RemoteExplosives.Building_DetonatorTable</ThingClass>
+    <Description>A transmitter to detonate armed explosives in range.</Description>
+    <graphicData>
+      <texPath>detonator_table</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+	  <shaderType>CutoutComplex</shaderType>
+      <drawSize>(2,1)</drawSize>
+    </graphicData>
+	<castEdgeShadows>true</castEdgeShadows>
+    <staticSunShadowHeight>0.10</staticSunShadowHeight>
+    <CostList>
+	  <Steel>60</Steel>
+      <Silver>10</Silver>
+    </CostList>
+    <AltitudeLayer>Waist</AltitudeLayer>
+    <fillPercent>0.5</fillPercent>
+    <useHitPoints>True</useHitPoints>
+    <statBases>
+      <WorkToMake>2500</WorkToMake>
+      <MaxHitPoints>180</MaxHitPoints>
+      <Flammability>1.0</Flammability>
+      <Beauty>3</Beauty>
+    </statBases>
+    <Size>(2,1)</Size>
+    <terrainAffordanceNeeded>Heavy</terrainAffordanceNeeded>
+    <constructEffect>ConstructMetal</constructEffect>
+    <DesignationCategory>Security</DesignationCategory>
+    <Passability>PassThroughOnly</Passability>
+    <pathCost>60</pathCost>
+    <hasInteractionCell>True</hasInteractionCell>
+    <interactionCellOffset>(1,0,-1)</interactionCellOffset>
+    <surfaceType>Item</surfaceType>
+    <designationHotKey></designationHotKey>
+	<specialDisplayRadius>35</specialDisplayRadius>
+	<minifiedDef>MinifiedFurniture</minifiedDef>
+    <tickerType>Normal</tickerType>
+	<comps>
+      <li>
+        <compClass>CompPowerTrader</compClass>
+        <startElectricalFires>false</startElectricalFires>
+        <basePowerConsumption>200</basePowerConsumption>
+      </li>
+    </comps>
+    <researchPrerequisite>RemoteDetonator</researchPrerequisite>
+  </ThingDef>
+  
+</ThingDefs>

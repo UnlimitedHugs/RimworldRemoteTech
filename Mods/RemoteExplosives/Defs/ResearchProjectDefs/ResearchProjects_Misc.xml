@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ResearchProjectDefs>
+
+  <ResearchProjectDef>
+    <defName>RemoteDetonator</defName>
+    <label>Remote Detonator</label>
+    <description>Allows you to build a console that detonates remote explosives.
+Research Explosive IEDs or Incendiary IEDs to deploy the actual explosives.</description>
+    <totalCost>1300</totalCost>
+    <prerequisites></prerequisites>
+  </ResearchProjectDef>
+<!--
+  <ResearchProjectDef>
+    <defName>IEDBomb</defName>
+    <label>Explosive IEDs</label>
+    <description>Allows colonists to build improvised explosive device-based traps from artillery shells.</description>
+    <totalCost>1600</totalCost>
+    <prerequisites></prerequisites>
+  </ResearchProjectDef>
+
+  <ResearchProjectDef>
+    <defName>IEDIncendiary</defName>
+    <label>Incendiary IEDs</label>
+    <description>Allows colonists to build incendiary explosive traps from artillery shells.</description>
+    <totalCost>1600</totalCost>
+    <prerequisites></prerequisites>
+  </ResearchProjectDef>
+-->
+</ResearchProjectDefs>

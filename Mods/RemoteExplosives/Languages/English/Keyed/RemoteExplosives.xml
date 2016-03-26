@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+
+	<DetonatorTable_detonate_label>Detonate</DetonatorTable_detonate_label>
+	<DetonatorTable_detonate_desc>Detonates all armed remote explosives in range.</DetonatorTable_detonate_desc>
+	<DetonatorTable_inrange>Armed explosives in range</DetonatorTable_inrange>
+	<DetonatorTable_notargets>Cannot detonate- no armed explosives in range.</DetonatorTable_notargets>
+	<DetonatorTable_detonatenow>Detonate explosives NOW</DetonatorTable_detonatenow>
+	<DetonatorTable_detonatenow_reserved>(reserved by %)</DetonatorTable_detonatenow_reserved>
+	
+	<RemoteExplosive_arm_label>Arm</RemoteExplosive_arm_label>
+	<RemoteExplosive_arm_desc>When armed, this explosive can be remotely detonated.</RemoteExplosive_arm_desc>
+
+</LanguageData>
