@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DefPackage-SoundDef>
+
+  <SoundDef>
+    <defName>RemoteExplosiveBeep</defName>  
+    <eventNames />  
+    <maxVoices>4</maxVoices>   
+    <maxSimultaneous>5</maxSimultaneous>  
+    <subSounds>
+      <li>
+        <grains>
+          <li Class="AudioGrain_Clip">
+            <clipPath>beep</clipPath>
+          </li>
+        </grains>     
+       <volumeRange>
+          <min>5</min>
+          <max>5</max>
+        </volumeRange>   
+      </li>   
+    </subSounds>
+  </SoundDef>
+  
+  <SoundDef>
+    <defName>RemoteExplosiveArmed</defName>  
+    <eventNames />  
+    <maxVoices>4</maxVoices>   
+    <maxSimultaneous>1</maxSimultaneous>  
+    <subSounds>
+      <li>
+        <grains>
+          <li Class="AudioGrain_Clip">
+            <clipPath>arm_beep</clipPath>
+          </li>
+        </grains>     
+       <volumeRange>
+          <min>5</min>
+          <max>6</max>
+        </volumeRange>
+      </li>   
+    </subSounds>
+  </SoundDef>
+</DefPackage-SoundDef>
