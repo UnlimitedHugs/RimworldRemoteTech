@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using RimWorld;
-using UnityEngine;
-using Verse;
+﻿using System.Collections.Generic;
 using Verse.AI;
-using Verse.Sound;
 
 namespace RemoteExplosives {
 	public class JobDriver_DetonateRemoteExplosives : JobDriver {

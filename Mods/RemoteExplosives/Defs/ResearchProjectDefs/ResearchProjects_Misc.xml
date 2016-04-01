@@ -5,25 +5,21 @@
     <defName>RemoteDetonator</defName>
     <label>Remote Detonator</label>
     <description>Allows you to build a console that detonates remote explosives.
-Research Explosive IEDs or Incendiary IEDs to deploy the actual explosives.</description>
+Comes with two types of remote mining charges.
+Research Explosive IEDs or Incendiary IEDs to deploy combat-grade remote explosives.</description>
     <totalCost>1300</totalCost>
     <prerequisites></prerequisites>
   </ResearchProjectDef>
-<!--
+  
   <ResearchProjectDef>
-    <defName>IEDBomb</defName>
-    <label>Explosive IEDs</label>
-    <description>Allows colonists to build improvised explosive device-based traps from artillery shells.</description>
-    <totalCost>1600</totalCost>
-    <prerequisites></prerequisites>
+    <defName>RemoteEmpMine</defName>
+    <label>Remote EMP Charge</label>
+    <description>Allows the deployment of EMP charges that can be triggered with a remote detonator.
+	While expensive, they can be devastating against mechanoids.</description>
+    <totalCost>1500</totalCost>
+    <prerequisites>
+		<li>RemoteDetonator</li>
+	</prerequisites>
   </ResearchProjectDef>
-
-  <ResearchProjectDef>
-    <defName>IEDIncendiary</defName>
-    <label>Incendiary IEDs</label>
-    <description>Allows colonists to build incendiary explosive traps from artillery shells.</description>
-    <totalCost>1600</totalCost>
-    <prerequisites></prerequisites>
-  </ResearchProjectDef>
--->
+  
 </ResearchProjectDefs>

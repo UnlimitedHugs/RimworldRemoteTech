@@ -5,10 +5,20 @@ using UnityEngine;
 using Verse;
 using Verse.AI;
 using Verse.Sound;
+using System.Linq;
 
 namespace RemoteExplosives
 {
 	public class Building_DetonatorTable : Building {
+
+		private struct ScheduledTrigger {
+			public readonly Building_RemoteExplosive target;
+			public readonly int triggerTick;
+			public ScheduledTrigger(Building_RemoteExplosive target, int triggerTick) {
+				this.target = target;
+				this.triggerTick = triggerTick;
+			}
+		}
 
 		private static readonly Texture2D UITex_Detonate = ContentFinder<Texture2D>.Get("UIDetonate");
 
@@ -16,6 +26,8 @@ namespace RemoteExplosives
 		private static readonly string DetonateButtonDesc = "DetonatorTable_detonate_desc".Translate();
 
 		private const int FindExplosivesEveryTicks = 120;
+		// how long it will take to trigger an additional explosive
+		private const int TicksBetweenTriggers = 2;
 
 		private bool wantDetonation;
 
@@ -24,6 +36,8 @@ namespace RemoteExplosives
 		private int numViableExplosives;
 
 		private Pawn lastSeenFloatMenuPawn;
+
+		private readonly Queue<ScheduledTrigger> triggerQueue = new Queue<ScheduledTrigger>();
 
 		public override void ExposeData()
 		{
@@ -61,12 +75,17 @@ namespace RemoteExplosives
 				return;
 			}
 			SoundDefOf.FlickSwitch.PlayOneShot(Position);
-			var anyFound = false;
-			foreach (var explosive in FindArmedExplosivesInRange()) {
-				anyFound = true;
-				explosive.LightFuse();
-			}
-			if(!anyFound) {
+
+			var armedExplosives = FindArmedExplosivesInRange();
+			if(armedExplosives.Count>0) {
+				// schedule explosives to be triggered, closer ones first
+				armedExplosives = armedExplosives.OrderBy(e => e.Position.DistanceToSquared(Position)).ToList();
+				var lastTriggerTime = Find.TickManager.TicksGame+1;
+				foreach (var explosive in armedExplosives) {
+					triggerQueue.Enqueue(new ScheduledTrigger(explosive, lastTriggerTime));
+					lastTriggerTime += TicksBetweenTriggers;
+				}
+			} else {
 				Messages.Message("DetonatorTable_notargets".Translate(), MessageSound.Standard);
 			}
 		}
@@ -79,10 +98,21 @@ namespace RemoteExplosives
 
 		public override void Tick() {
 			base.Tick();
+			// find explosives in range
 			ticksSinceLastInspections++;
 			if (ticksSinceLastInspections>=FindExplosivesEveryTicks) {
 				ticksSinceLastInspections = 0;
 				numViableExplosives = FindArmedExplosivesInRange().Count;
+			}
+			// trigger scheduled explosives
+			if(triggerQueue.Count>0) {
+				var currentTick = Find.TickManager.TicksGame;
+				while (triggerQueue.Count>0) {
+					var entry = triggerQueue.Peek();
+					if(entry.triggerTick>currentTick) break;
+					triggerQueue.Dequeue();
+					entry.target.LightFuse();
+				}
 			}
 		}
 

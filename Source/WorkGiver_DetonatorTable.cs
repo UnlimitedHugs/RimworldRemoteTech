@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using RimWorld;
-using UnityEngine;
 using Verse;
 using Verse.AI;
-using Verse.Sound;
 
 namespace RemoteExplosives {
 	public class WorkGiver_DetonatorTable : WorkGiver_Scanner {
@@ -38,8 +34,8 @@ namespace RemoteExplosives {
 		}
 
 		public override Job JobOnThing(Pawn pawn, Thing t) {
-			var def = DefDatabase<JobDef>.GetNamed(JobDriver_DetonateRemoteExplosives.JobDefName);
-			return new Job(def, t);
+			var jobDef = DefDatabase<JobDef>.GetNamed(JobDriver_DetonateRemoteExplosives.JobDefName);
+			return new Job(jobDef, t);
 		}
 	}
 }

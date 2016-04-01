@@ -39,7 +39,6 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="UnityEngine">
@@ -49,10 +48,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Source\Building_MiningExplosive.cs" />
     <Compile Include="Source\Building_DetonatorTable.cs" />
+    <Compile Include="Source\Building_MiningExplosiveSquare.cs" />
     <Compile Include="Source\Building_RemoteExplosive.cs" />
+    <Compile Include="Source\Building_RemoteExplosiveEmp.cs" />
     <Compile Include="Source\CompCustomExplosive.cs" />
+    <Compile Include="Source\CompMiningExplosive.cs" />
+    <Compile Include="Source\CompMiningExplosiveProperties.cs" />
+    <Compile Include="Source\CompRandomResourceLeaver.cs" />
+    <Compile Include="Source\CompRandomResourceLeaverProperties.cs" />
     <Compile Include="Source\JobDriver_DetonateRemoteExplosives.cs" />
+    <Compile Include="Source\PlaceWorker_MiningExplosiveSquare.cs" />
     <Compile Include="Source\WorkGiver_DetonatorTable.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

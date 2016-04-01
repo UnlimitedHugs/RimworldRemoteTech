@@ -14,8 +14,8 @@
           </li>
         </grains>     
        <volumeRange>
-          <min>5</min>
-          <max>5</max>
+          <min>3</min>
+          <max>3</max>
         </volumeRange>   
       </li>   
     </subSounds>
@@ -34,10 +34,59 @@
           </li>
         </grains>     
        <volumeRange>
-          <min>5</min>
-          <max>6</max>
+          <min>3</min>
+          <max>4</max>
         </volumeRange>
       </li>   
     </subSounds>
   </SoundDef>
+  
+  <SoundDef>
+    <defName>RemoteMiningCavein</defName>  
+    <eventNames />  
+    <maxVoices>3</maxVoices>   
+    <maxSimultaneous>3</maxSimultaneous>  
+    <subSounds>
+      <li>
+        <grains>
+          <li Class="AudioGrain_Clip">
+            <clipPath>cavein</clipPath>
+          </li>
+        </grains>     
+       <volumeRange>
+          <min>50</min>
+          <max>80</max>
+        </volumeRange>
+		<pitchRange>
+          <min>0.9</min>        
+          <max>1.1</max>
+        </pitchRange>
+      </li>   
+    </subSounds>
+  </SoundDef>
+  
+  <SoundDef>
+    <defName>RemoteEmpCharge</defName>  
+    <eventNames />  
+    <maxVoices>3</maxVoices>   
+    <maxSimultaneous>3</maxSimultaneous>  
+    <subSounds>
+      <li>
+        <grains>
+          <li Class="AudioGrain_Clip">
+            <clipPath>emp_charge</clipPath>
+          </li>
+        </grains>     
+       <volumeRange>
+          <min>40</min>
+          <max>50</max>
+        </volumeRange>
+		<pitchRange>
+          <min>0.9</min>        
+          <max>1.1</max>
+        </pitchRange>
+      </li>   
+    </subSounds>
+  </SoundDef>
+  
 </DefPackage-SoundDef>
