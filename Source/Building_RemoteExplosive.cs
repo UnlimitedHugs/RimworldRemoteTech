@@ -8,8 +8,6 @@ using Verse.Sound;
 namespace RemoteExplosives {
 	public class Building_RemoteExplosive : Building, IFlickable {
 		
-		private const int ticksBetweenBlinksArmed = 100;
-		private const int ticksBetweenBlinksLit = 6;
 		private const string flareGraphicPath = "mine_flare";
 		private const string flareGraphicStrongPath = "mine_flare_strong";
 
@@ -22,6 +20,10 @@ namespace RemoteExplosives {
 
 		private static readonly string ArmButtonLabel = "RemoteExplosive_arm_label".Translate();
 		private static readonly string ArmButtonDesc = "RemoteExplosive_arm_desc".Translate();
+
+		protected int ticksBetweenBlinksArmed = 100;
+		protected int ticksBetweenBlinksLit = 7;
+		protected bool beepWhenLit = true;
 
 		private CompCustomExplosive comp;
 
@@ -37,9 +39,9 @@ namespace RemoteExplosives {
 			get { return comp.WickStarted; }
 		}
 
-		public void LightFuse() {
+		public virtual void LightFuse() {
 			if(FuseLit) return;
-			comp.StartSilentWick();
+			comp.StartWick(true);
 		}
 
 		public override void SpawnSetup() {
@@ -64,21 +66,31 @@ namespace RemoteExplosives {
 		}
 
 		public void DoFlick() {
-			isArmed = desiredArmState;
-			if (isArmed) {
-				DrawFlareOverlay(true);
-				armSound.PlayOneShot(Position);
+			if(!isArmed) {
+				Arm();
+			} else {
+				isArmed = false;
+				if(comp.WickStarted) comp.StopWick();
 			}
 		}
 
+		public void Arm() {
+			if(IsArmed) return;
+			DrawFlareOverlay(true);
+			armSound.PlayOneShot(Position);
+			desiredArmState = true;
+			isArmed = true;
+		}
+
 		public override IEnumerable<Gizmo> GetGizmos() {
-			var armGizmo = new Command_Toggle();
-			armGizmo.toggleAction = ArmGizmoAction;
-			armGizmo.isActive = () => desiredArmState;
-			armGizmo.icon = UITex_Arm;
-			armGizmo.defaultLabel = ArmButtonLabel;
-			armGizmo.defaultDesc = ArmButtonDesc;
-			armGizmo.hotKey = KeyBindingDef.Named("RemoteExplosiveArm");
+			var armGizmo = new Command_Toggle {
+				toggleAction = ArmGizmoAction,
+				isActive = () => desiredArmState,
+				icon = UITex_Arm,
+				defaultLabel = ArmButtonLabel,
+				defaultDesc = ArmButtonDesc,
+				hotKey = KeyBindingDef.Named("RemoteExplosiveArm")
+			};
 
 			yield return armGizmo;
 			foreach (var g in base.GetGizmos()) {
@@ -98,8 +110,10 @@ namespace RemoteExplosives {
 			base.Tick();
 			ticksSinceFlare++;
 			// beep in sync with the flash
-			if(FuseLit && ticksSinceFlare == 1) {
-				var pitchRamp = (1 - (comp.WickTicksRemaining / (float)comp.WickTotalTicks))*.15f;
+			if (beepWhenLit && FuseLit && ticksSinceFlare == 1) {
+				// raise pitch with each beep
+				const float maxAdditionalPitch = .15f;
+				var pitchRamp = (1 - (comp.WickTicksLeft / (float)comp.WickTotalTicks)) * maxAdditionalPitch;
 				EmitBeep(1f + pitchRamp);
 			}
 		}

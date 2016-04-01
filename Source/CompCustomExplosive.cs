@@ -1,85 +1,142 @@
-﻿using System.Collections.Generic;
-using System.Reflection;
-using System.Text;
+﻿using System.Reflection;
 using RimWorld;
 using UnityEngine;
 using Verse;
 using Verse.AI;
 using Verse.Sound;
 
-/*
- * A CompExplosive that can be quietely lit but will also use the regular fuse animation & sound when triggered by damage
- */
-public class CompCustomExplosive : CompExplosive {
+namespace RemoteExplosives {
+	/*
+	 * An explosive with a timer. Can be triggered silently, but will revert to the vanilla wick if it takes enough damage.
+	 */
 
-	private static readonly int PawnNotifyCellCount = GenRadial.NumCellsInRadius(4.5f);
+	public class CompCustomExplosive : ThingComp {
+		private static readonly SoundDef WickStartSound = SoundDef.Named("MetalHitImportant");
+		private static readonly SoundDef WickLoopSound = SoundDef.Named("HissSmall");
+		private static readonly int PawnNotifyCellCount = GenRadial.NumCellsInRadius(4.5f);
+		private static MethodInfo pawnNotifyMethod;
+		private bool wickStarted;
+		private int wickTicksLeft;
+		private Sustainer wickSoundSustainer;
+		private bool detonated;
+		private int wickTotalTicks;
+		private bool wickIsSilent;
 
-	private bool silentWickStarted;
-	private int silentWickTicksLeft;
-	private MethodInfo pawnNotifyMethod;
-	private int silentWickTotalTicks;
+		public int WickTotalTicks {
+			get { return wickTotalTicks; }
+		}
 
-	public override void Initialize(CompProperties p) {
-		base.Initialize(p);
+		public int WickTicksLeft {
+			get { return wickTicksLeft; }
+		}
 
-		// some reflection to get access to an internal method
-		pawnNotifyMethod = typeof(Pawn_MindState).GetMethod("Notify_WickStarted", BindingFlags.NonPublic | BindingFlags.Instance);
-	}
+		public override void Initialize(CompProperties p) {
+			base.Initialize(p);
+			// some reflection to get access to an internal method
+			pawnNotifyMethod = typeof (Pawn_MindState).GetMethod("Notify_WickStarted", BindingFlags.NonPublic | BindingFlags.Instance);
+		}
 
-	public override void CompTick() {
-		base.CompTick();
-		if(!silentWickStarted) return;
-		silentWickTicksLeft--;
-		if(silentWickTicksLeft<=0) Detonate();
-	}
+		protected int StartWickThreshold {
+			get {
+				return Mathf.RoundToInt(props.startWickHitPointsPercent * parent.MaxHitPoints);
+			}
+		}
 
-	public override void PostExposeData() {
-		base.PostExposeData();
-		Scribe_Values.LookValue(ref silentWickStarted, "silentWickStarted", false);
-		Scribe_Values.LookValue(ref silentWickTicksLeft, "silentWickTicksLeft", 0);
-		Scribe_Values.LookValue(ref silentWickTotalTicks, "silentWickTotalTicks", 0);
-	}
+		public override void PostExposeData() {
+			base.PostExposeData();
+			Scribe_Values.LookValue(ref wickStarted, "wickStarted", false);
+			Scribe_Values.LookValue(ref wickTicksLeft, "wickTicksLeft", 0);
+			Scribe_Values.LookValue(ref wickTotalTicks, "wickTotalTicks", 0);
+			Scribe_Values.LookValue(ref wickIsSilent, "wickIsSilent", false);
+		}
 
-	public void StartSilentWick() {
-		if(WickStarted) return;
-		silentWickTotalTicks = silentWickTicksLeft = props.wickTicks.RandomInRange;
-		silentWickStarted = true;
-		NotifyNearbyPawns();
-	}
+		public override void CompTick() {
+			if (!wickStarted) return;
+			if (wickSoundSustainer == null) {
+				if (!wickIsSilent) {
+					StartWickSustainer();
+				}
+			} else {
+				wickSoundSustainer.Maintain();
+			}
+			wickTicksLeft--;
+			if (wickTicksLeft <= 0) {
+				Detonate();
+			}
+		}
 
-	public bool WickStarted {
-		get { return wickStarted || silentWickStarted; }
-	}
+		private void StartWickSustainer() {
+			WickStartSound.PlayOneShot(parent.Position);
+			SoundInfo info = SoundInfo.InWorld(parent, MaintenanceType.PerTick);
+			wickSoundSustainer = WickLoopSound.TrySpawnSustainer(info);
+		}
 
-	public int WickTotalTicks {
+		public override void PostDraw() {
+			if (wickStarted && !wickIsSilent) {
+				OverlayDrawer.DrawOverlay(parent, OverlayTypes.BurningWick);
+			}
+		}
 
-		get { return silentWickTotalTicks; }
+		public override void PostPostApplyDamage(DamageInfo dinfo, float totalDamageDealt) {
+			if (parent.HitPoints <= 0) {
+				if (dinfo.Def.externalViolence) {
+					Detonate();
+				}
+			} else if (wickStarted && (dinfo.Def == DamageDefOf.Stun || (wickIsSilent && dinfo.Def == DamageDefOf.EMP))) { // silent wick can be stopped by EMP
+				StopWick();
+			} else if (!wickStarted && StartWickThreshold!=0 && parent.HitPoints <= StartWickThreshold && dinfo.Def.externalViolence) {
+				StartWick(false);
+			}
+		}
 
-	}
+		public void StartWick(bool silent) {
+			if (wickStarted && !silent) wickIsSilent = false;
+			if (wickStarted) return;
+			wickIsSilent = silent;
+			wickStarted = true;
+			wickTotalTicks = wickTicksLeft = props.wickTicks.RandomInRange;
+			NotifyNearbyPawns();
+		}
 
-	public int WickTicksRemaining {
+		public void StopWick() {
+			wickStarted = false;
+		}
 
-		get { return silentWickTicksLeft; }
+		public bool WickStarted {
+			get { return wickStarted; }
+		}
 
-	}
-
-	private void NotifyNearbyPawns() {
-		Room room = parent.GetRoom();
-		for (int i = 0; i < PawnNotifyCellCount; i++) {
-			var c = parent.Position + GenRadial.RadialPattern[i];
-			if (c.InBounds()) {
-				var thingList = c.GetThingList();
+		private void NotifyNearbyPawns() {
+			Room room = parent.GetRoom();
+			for (int i = 0; i < PawnNotifyCellCount; i++) {
+				var cell = parent.Position + GenRadial.RadialPattern[i];
+				if (!cell.InBounds()) continue;
+				var thingList = cell.GetThingList();
 				for (int j = 0; j < thingList.Count; j++) {
 					var p = thingList[j] as Pawn;
 					if (p != null
-						&& p.RaceProps.intelligence >= Intelligence.Humanlike
-						&& !p.Drafted
-						&& p.Position.GetRoom() == room
-						&& GenSight.LineOfSight(parent.Position, p.Position, true))
-					//p.mindState.Notify_WickStarted(parent);
-					pawnNotifyMethod.Invoke(p.mindState, new object[] { parent });
+					    && p.RaceProps.intelligence >= Intelligence.Humanlike
+					    && !p.Drafted
+					    && p.Position.GetRoom() == room
+					    && GenSight.LineOfSight(parent.Position, p.Position, true))
+						pawnNotifyMethod.Invoke(p.mindState, new object[] {parent});
 				}
 			}
 		}
+
+		protected virtual void Detonate() {
+			if (detonated) return;
+			detonated = true;
+			if (!parent.Destroyed) {
+				parent.Destroy(DestroyMode.Kill);
+			}
+			float num = props.explosiveRadius;
+			if (parent.stackCount > 1 && props.explosiveExpandPerStackcount > 0f) {
+				num += Mathf.Sqrt((parent.stackCount - 1) * props.explosiveExpandPerStackcount);
+			}
+			GenExplosion.DoExplosion(parent.Position, num, props.explosiveDamageType, parent);
+		}
+
+		
 	}
 }

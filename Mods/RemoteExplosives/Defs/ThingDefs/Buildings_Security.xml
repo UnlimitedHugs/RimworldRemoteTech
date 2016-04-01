@@ -8,7 +8,7 @@
     <drawerType>MapMeshAndRealTime</drawerType>
     <terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
     <repairEffect>Repair</repairEffect>
-    <leaveResourcesWhenKilled>true</leaveResourcesWhenKilled>
+    <leaveResourcesWhenKilled>false</leaveResourcesWhenKilled>
     <filthLeaving>BuildingRubble</filthLeaving>
   </ThingDef>
   
@@ -28,7 +28,7 @@
   
   <ThingDef ParentName="ExplosiveBase">
     <defName>TrapRemoteBomb</defName>
-    <label>Remote IED</label>
+    <label>Remote explosive charge</label>
     <graphicData>
       <texPath>remote_mine</texPath>
       <graphicClass>Graphic_Single</graphicClass>
@@ -39,11 +39,10 @@ Arm, then detonate from the Remote Explosives Console.</description>
     <costList>
       <RemoteBomb>1</RemoteBomb>
     </costList>
-    <designationHotKey>H</designationHotKey>
     <researchPrerequisite>IEDBomb</researchPrerequisite>
 	<comps>
       <li>
-        <compClass>CompCustomExplosive</compClass>
+        <compClass>RemoteExplosives.CompCustomExplosive</compClass>
         <explosiveRadius>2.9</explosiveRadius>
         <explosiveDamageType>Bomb</explosiveDamageType>
         <startWickHitPointsPercent>0.2</startWickHitPointsPercent>
@@ -57,7 +56,7 @@ Arm, then detonate from the Remote Explosives Console.</description>
   
   <ThingDef ParentName="ExplosiveBase">
     <defName>TrapRemoteIncendiary</defName>
-    <label>Remote Fire IED</label>
+    <label>Remote incendiary charge</label>
     <graphicData>
       <texPath>remote_mine_incendiary</texPath>
       <graphicClass>Graphic_Single</graphicClass>
@@ -68,11 +67,10 @@ Arm, then detonate from the Remote Explosives Console.</description>
     <costList>
       <RemoteFireBomb>1</RemoteFireBomb>
     </costList>
-    <designationHotKey>J</designationHotKey>
     <researchPrerequisite>IEDIncendiary</researchPrerequisite>
 	<comps>
       <li>
-        <compClass>CompCustomExplosive</compClass>
+        <compClass>RemoteExplosives.CompCustomExplosive</compClass>
         <explosiveRadius>2.9</explosiveRadius>
         <explosiveDamageType>Flame</explosiveDamageType>
         <startWickHitPointsPercent>0.2</startWickHitPointsPercent>
@@ -81,6 +79,48 @@ Arm, then detonate from the Remote Explosives Console.</description>
           <max>40</max>
         </wickTicks>
       </li>
+    </comps>
+  </ThingDef>
+  
+  <ThingDef ParentName="ExplosiveBase">
+    <defName>TrapRemoteEmp</defName>
+    <label>Remote EMP charge</label>
+    <thingClass>RemoteExplosives.Building_RemoteExplosiveEmp</thingClass>
+    <graphicData>
+      <texPath>mine_emp</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <description>A single-use electromagnetic pulse generator.
+Very powerful against mechanoids.
+Craft at the Machining Bench.
+Arm, then detonate from the Remote Explosives Console.</description>
+    <costList>
+      <RemoteEmpBomb>1</RemoteEmpBomb>
+    </costList>
+	<killedLeavings>
+		<ChunkSlagSteel>1</ChunkSlagSteel>
+	</killedLeavings>
+    <researchPrerequisite>RemoteEmpMine</researchPrerequisite>
+	<comps>
+      <li>
+        <compClass>RemoteExplosives.CompCustomExplosive</compClass>
+        <explosiveRadius>7.5</explosiveRadius>
+        <explosiveDamageType>EMP</explosiveDamageType>
+		<!-- will never be triggered by damage -->
+        <startWickHitPointsPercent>0</startWickHitPointsPercent>
+        <wickTicks>
+          <min>50</min>
+          <max>50</max>
+        </wickTicks>
+      </li>
+	  <li Class="RemoteExplosives.CompRandomResourceLeaverProperties">
+		<compClass>RemoteExplosives.CompRandomResourceLeaver</compClass>
+		<thingDef>Gold</thingDef>
+		<amount>
+			<min>3</min>
+			<max>10</max>
+		</amount>
+	  </li>
     </comps>
   </ThingDef>
 

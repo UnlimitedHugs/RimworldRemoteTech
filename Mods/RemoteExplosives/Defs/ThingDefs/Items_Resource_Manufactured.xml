@@ -25,7 +25,7 @@
     <stackLimit>10</stackLimit>
     <statBases>
       <MaxHitPoints>70</MaxHitPoints>
-      <MarketValue>50</MarketValue>
+      <MarketValue>80</MarketValue>
       <Flammability>1.0</Flammability>
       <DeteriorationRate>0</DeteriorationRate>
     </statBases>
@@ -83,6 +83,49 @@ Place as a building from the Security menu to use.</description>
       </li>
     </comps>
   </ThingDef>
+  
+  <ThingDef ParentName="BaseExposive">
+    <defName>MiningExplosiveComponent</defName>
+    <label>mining explosive</label>
+    <description>The main part of a remote mining explosive.
+Place as a building from the Misc menu to use.</description>
+    <graphicData>
+      <texPath>explosive_part</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <comps>
+      <li Class="RemoteExplosives.CompMiningExplosiveProperties">
+        <compClass>RemoteExplosives.CompMiningExplosive</compClass>
+		<rockChunkChance>0.5</rockChunkChance>
+        <miningRadius>2.9</miningRadius>
+        <explosiveRadius>2.9</explosiveRadius>
+        <explosiveDamageType>Bomb</explosiveDamageType>
+        <explosiveExpandPerStackcount>0.5</explosiveExpandPerStackcount>
+        <startWickHitPointsPercent>0.333</startWickHitPointsPercent>
+        <wickTicks>
+          <min>30</min>
+          <max>60</max>
+        </wickTicks>
+      </li>
+    </comps>
+	<statBases>
+      <MarketValue>80</MarketValue>
+    </statBases>
+  </ThingDef>
 
-
+  <ThingDef ParentName="BaseExposive">
+    <defName>RemoteEmpBomb</defName>
+    <label>deployable EMP remote charge</label>
+    <description>A single-use electromagnetic pulse generator.
+Place as a building from the Security menu to use.</description>
+    <graphicData>
+      <texPath>mine_emp</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+	<statBases>
+      <MaxHitPoints>120</MaxHitPoints>
+      <MarketValue>200</MarketValue>
+    </statBases>
+  </ThingDef>
+  
 </Defs>
