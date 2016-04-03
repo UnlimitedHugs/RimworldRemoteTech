@@ -17,6 +17,7 @@ namespace RemoteExplosives {
 
 		private static readonly SoundDef armSound = SoundDef.Named("RemoteExplosiveArmed");
 		private static readonly SoundDef beepSound = SoundDef.Named("RemoteExplosiveBeep");
+		private static readonly SoundDef changeChannelSound = SoundDef.Named("RemoteChannelChange");
 
 		private static readonly string ArmButtonLabel = "RemoteExplosive_arm_label".Translate();
 		private static readonly string ArmButtonDesc = "RemoteExplosive_arm_desc".Translate();
@@ -30,6 +31,8 @@ namespace RemoteExplosives {
 		private bool desiredArmState;
 		private bool isArmed;
 		private int ticksSinceFlare;
+		private RemoteExplosivesUtility.RemoteChannel currentChannel;
+		private RemoteExplosivesUtility.RemoteChannel desiredChannel;
 
 		public bool IsArmed {
 			get { return isArmed; }
@@ -39,6 +42,10 @@ namespace RemoteExplosives {
 			get { return comp.WickStarted; }
 		}
 
+		public RemoteExplosivesUtility.RemoteChannel CurrentChannel {
+			get { return currentChannel; }
+		}
+
 		public virtual void LightFuse() {
 			if(FuseLit) return;
 			comp.StartWick(true);
@@ -46,32 +53,42 @@ namespace RemoteExplosives {
 
 		public override void SpawnSetup() {
 			base.SpawnSetup();
+			if (flareOverlayNormal == null) {
+				flareOverlayNormal = GraphicDatabase.Get<Graphic_Single>(flareGraphicPath, ShaderDatabase.TransparentPostLight);
+				flareOverlayStrong = GraphicDatabase.Get<Graphic_Single>(flareGraphicStrongPath, ShaderDatabase.TransparentPostLight);
+				flareOverlayStrong.drawSize = flareOverlayNormal.drawSize = def.graphicData.drawSize;
+			}
+
 			comp = GetComp<CompCustomExplosive>();
-
-			if (flareOverlayNormal != null) return;
-			flareOverlayNormal = GraphicDatabase.Get<Graphic_Single>(flareGraphicPath, ShaderDatabase.TransparentPostLight);
-			flareOverlayStrong = GraphicDatabase.Get<Graphic_Single>(flareGraphicStrongPath, ShaderDatabase.TransparentPostLight);
-
-			flareOverlayStrong.drawSize = flareOverlayNormal.drawSize = def.graphicData.drawSize;
+			RemoteExplosivesUtility.UpdateFlickDesignation(this);
 		}
 
 		public override void ExposeData() {
 			base.ExposeData();
 			Scribe_Values.LookValue(ref isArmed, "isArmed", false);
 			Scribe_Values.LookValue(ref ticksSinceFlare, "ticksSinceFlare", 0);
+			Scribe_Values.LookValue(ref desiredArmState, "desiredArmState", false);
+			Scribe_Values.LookValue(ref currentChannel, "currentChannel", RemoteExplosivesUtility.RemoteChannel.White);
+			Scribe_Values.LookValue(ref desiredChannel, "desiredChannel", RemoteExplosivesUtility.RemoteChannel.White);
 		}
 
 		public bool WantsFlick() {
-			return isArmed != desiredArmState;
+			return isArmed != desiredArmState || currentChannel!=desiredChannel;
 		}
 
 		public void DoFlick() {
-			if(!isArmed) {
-				Arm();
-			} else {
-				isArmed = false;
-				if(comp.WickStarted) comp.StopWick();
+			if (isArmed != desiredArmState) {
+				if (!isArmed) {
+					Arm();
+				} else {
+					Disarm();
+				}
 			}
+			if(desiredChannel!=currentChannel) {
+				currentChannel = desiredChannel;
+				changeChannelSound.PlayOneShot(SoundInfo.InWorld(this));
+			}
+			RemoteExplosivesUtility.UpdateFlickDesignation(this);
 		}
 
 		public void Arm() {
@@ -80,6 +97,13 @@ namespace RemoteExplosives {
 			armSound.PlayOneShot(Position);
 			desiredArmState = true;
 			isArmed = true;
+		}
+
+		public void Disarm() {
+			if (!IsArmed) return;
+			desiredArmState = false;
+			isArmed = false;
+			comp.StopWick();
 		}
 
 		public override IEnumerable<Gizmo> GetGizmos() {
@@ -91,19 +115,26 @@ namespace RemoteExplosives {
 				defaultDesc = ArmButtonDesc,
 				hotKey = KeyBindingDef.Named("RemoteExplosiveArm")
 			};
-
 			yield return armGizmo;
+
+			if (RemoteExplosivesUtility.ChannelsUnlocked()) {
+				var channelGizmo = RemoteExplosivesUtility.MakeChannelGizmo(desiredChannel, ChannelGizmoAction);
+				yield return channelGizmo;
+			}
+			
 			foreach (var g in base.GetGizmos()) {
 				yield return g;
 			}
 		}
 
+		private void ChannelGizmoAction() {
+			desiredChannel = RemoteExplosivesUtility.GetNextChannel(desiredChannel);
+			RemoteExplosivesUtility.UpdateFlickDesignation(this);
+		}
+
 		private void ArmGizmoAction() {
 			desiredArmState = !desiredArmState;
-			Find.DesignationManager.RemoveAllDesignationsOn(this);
-			if (WantsFlick()) {
-				Find.DesignationManager.AddDesignation(new Designation(new TargetInfo(this), DesignationDefOf.Flick));
-			}
+			RemoteExplosivesUtility.UpdateFlickDesignation(this);
 		}
 
 		public override void Tick() {
@@ -115,6 +146,13 @@ namespace RemoteExplosives {
 				const float maxAdditionalPitch = .15f;
 				var pitchRamp = (1 - (comp.WickTicksLeft / (float)comp.WickTotalTicks)) * maxAdditionalPitch;
 				EmitBeep(1f + pitchRamp);
+			}
+		}
+
+		public override void PostApplyDamage(DamageInfo dinfo, float totalDamageDealt) {
+			base.PostApplyDamage(dinfo, totalDamageDealt);
+			if(dinfo.Def == DamageDefOf.EMP) {
+				Disarm();
 			}
 		}
 
@@ -157,6 +195,10 @@ namespace RemoteExplosives {
 				stringBuilder.Append("TrapArmed".Translate());
 			} else {
 				stringBuilder.Append("TrapNotArmed".Translate());
+			}
+			if (RemoteExplosivesUtility.ChannelsUnlocked()) {
+				stringBuilder.AppendLine();
+				stringBuilder.Append(RemoteExplosivesUtility.GetCurrentChannelInspectString(currentChannel));
 			}
 			return stringBuilder.ToString();
 		}

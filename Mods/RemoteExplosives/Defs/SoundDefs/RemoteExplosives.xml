@@ -89,4 +89,53 @@
     </subSounds>
   </SoundDef>
   
+  <SoundDef>
+    <defName>RemoteChannelChange</defName>  
+    <eventNames />  
+    <maxVoices>3</maxVoices>   
+    <maxSimultaneous>3</maxSimultaneous>  
+    <subSounds>
+      <li>
+        <grains>
+          <li Class="AudioGrain_Clip">
+            <clipPath>dial_click</clipPath>
+          </li>
+        </grains>     
+       <volumeRange>
+          <min>5</min>
+          <max>6</max>
+        </volumeRange>
+		<pitchRange>
+          <min>1.15</min>        
+          <max>1.25</max>
+        </pitchRange>
+      </li>   
+    </subSounds>
+  </SoundDef>
+  
+  <SoundDef>
+    <defName>RemoteUIDialClick</defName>  
+    <eventNames />  
+    <maxVoices>3</maxVoices>   
+    <maxSimultaneous>3</maxSimultaneous>  
+    <subSounds>
+      <li>
+	    <onCamera>True</onCamera>  
+        <grains>
+          <li Class="AudioGrain_Clip">
+            <clipPath>dial_click</clipPath>
+          </li>
+        </grains>     
+       <volumeRange>
+          <min>7</min>
+          <max>8</max>
+        </volumeRange>
+		<pitchRange>
+          <min>0.95</min>        
+          <max>1.05</max>
+        </pitchRange>
+      </li>   
+    </subSounds>
+  </SoundDef>
+  
 </DefPackage-SoundDef>

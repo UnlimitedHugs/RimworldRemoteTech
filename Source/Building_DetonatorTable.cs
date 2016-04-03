@@ -21,7 +21,6 @@ namespace RemoteExplosives
 		}
 
 		private static readonly Texture2D UITex_Detonate = ContentFinder<Texture2D>.Get("UIDetonate");
-
 		private static readonly string DetonateButtonLabel = "DetonatorTable_detonate_label".Translate();
 		private static readonly string DetonateButtonDesc = "DetonatorTable_detonate_desc".Translate();
 
@@ -37,31 +36,45 @@ namespace RemoteExplosives
 
 		private Pawn lastSeenFloatMenuPawn;
 
+		private RemoteExplosivesUtility.RemoteChannel currentChannel;
+
 		private readonly Queue<ScheduledTrigger> triggerQueue = new Queue<ScheduledTrigger>();
 
 		public override void ExposeData()
 		{
 			base.ExposeData();
 			Scribe_Values.LookValue(ref wantDetonation, "wantDetonation", false);
+			Scribe_Values.LookValue(ref currentChannel, "currentChannel", RemoteExplosivesUtility.RemoteChannel.White);
 		}
 
 		public override IEnumerable<Gizmo> GetGizmos(){
-			var detonateGizmo = new Command_Toggle();
-			detonateGizmo.toggleAction = DetonateGizmoAction;
-			detonateGizmo.isActive = ()=>wantDetonation;
-			detonateGizmo.icon = UITex_Detonate;
-			detonateGizmo.defaultLabel = DetonateButtonLabel;
-			detonateGizmo.defaultDesc = DetonateButtonDesc;
-			detonateGizmo.hotKey = KeyBindingDef.Named("RemoteTableDetonate");
-
+			var detonateGizmo = new Command_Toggle {
+				toggleAction = DetonateGizmoAction,
+				isActive = () => wantDetonation,
+				icon = UITex_Detonate,
+				defaultLabel = DetonateButtonLabel,
+				defaultDesc = DetonateButtonDesc,
+				hotKey = KeyBindingDef.Named("RemoteTableDetonate")
+			};
 			yield return detonateGizmo;
+
+			if (RemoteExplosivesUtility.ChannelsUnlocked()) {
+				var channelGizmo = RemoteExplosivesUtility.MakeChannelGizmo(currentChannel, ChannelGizmoAction);
+				yield return channelGizmo;
+			}
+
 			foreach (var g in base.GetGizmos()) {
 				yield return g;
 			}
-		} 
+		}
 
 		private void DetonateGizmoAction() {
 			wantDetonation = !wantDetonation;
+		}
+
+		private void ChannelGizmoAction() {
+			currentChannel = RemoteExplosivesUtility.GetNextChannel(currentChannel);
+			UpdateNumArmedExplosivesInRange();
 		}
 
 		public bool WantsDetonation() {
@@ -90,19 +103,13 @@ namespace RemoteExplosives
 			}
 		}
 
-		private void PlayNeedPowerEffect() {
-			var info = SoundInfo.InWorld(this);
-			info.volumeFactor = 3f;
-			SoundDefOf.PowerOffSmall.PlayOneShot(info);
-		}
-
 		public override void Tick() {
 			base.Tick();
 			// find explosives in range
 			ticksSinceLastInspections++;
 			if (ticksSinceLastInspections>=FindExplosivesEveryTicks) {
 				ticksSinceLastInspections = 0;
-				numViableExplosives = FindArmedExplosivesInRange().Count;
+				UpdateNumArmedExplosivesInRange();
 			}
 			// trigger scheduled explosives
 			if(triggerQueue.Count>0) {
@@ -116,11 +123,21 @@ namespace RemoteExplosives
 			}
 		}
 
+		private void PlayNeedPowerEffect() {
+			var info = SoundInfo.InWorld(this);
+			info.volumeFactor = 3f;
+			SoundDefOf.PowerOffSmall.PlayOneShot(info);
+		}
+
+		private void UpdateNumArmedExplosivesInRange() {
+			numViableExplosives = FindArmedExplosivesInRange().Count;
+		}
+
 		private List<Building_RemoteExplosive> FindArmedExplosivesInRange() {
 			var results = new List<Building_RemoteExplosive>();
 			var sample = Find.ListerBuildings.AllBuildingsColonistOfClass<Building_RemoteExplosive>();
 			foreach (var explosive in sample) {
-				if (explosive.IsArmed && !explosive.FuseLit && TileIsInRange(explosive.Position)) {
+				if (explosive.IsArmed && explosive.CurrentChannel == currentChannel && !explosive.FuseLit && TileIsInRange(explosive.Position)) {
 					results.Add(explosive);
 				}
 			}
@@ -138,6 +155,10 @@ namespace RemoteExplosives
 			stringBuilder.AppendLine();
 			stringBuilder.Append("DetonatorTable_inrange".Translate());
 			stringBuilder.Append(": " + numViableExplosives);
+			if(RemoteExplosivesUtility.ChannelsUnlocked()) {
+				stringBuilder.AppendLine();
+				stringBuilder.Append(RemoteExplosivesUtility.GetCurrentChannelInspectString(currentChannel));
+			}
 			return stringBuilder.ToString();
 		}
 
@@ -152,7 +173,8 @@ namespace RemoteExplosives
 				};
 				if (Find.Reservations.IsReserved(this, Faction.OfColony)) {
 					entry.Disabled = true;
-					entry.label += " " + "DetonatorTable_detonatenow_reserved".Translate().Replace("%", Find.Reservations.FirstReserverOf(this, Faction.OfColony).Name.ToStringShort);
+					var reservedByName = Find.Reservations.FirstReserverOf(this, Faction.OfColony).Name.ToStringShort;
+					entry.label += " " + string.Format("DetonatorTable_detonatenow_reserved".Translate(), reservedByName);
 				}
 				yield return entry;
 			}
