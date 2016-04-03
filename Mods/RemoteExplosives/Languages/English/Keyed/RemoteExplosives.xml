@@ -2,13 +2,21 @@
 <LanguageData>
 
 	<DetonatorTable_detonate_label>Detonate</DetonatorTable_detonate_label>
-	<DetonatorTable_detonate_desc>Detonates all armed remote explosives in range.</DetonatorTable_detonate_desc>
+	<DetonatorTable_detonate_desc>Detonates all armed remote explosives on the same channel in range.</DetonatorTable_detonate_desc>
 	<DetonatorTable_inrange>Armed explosives in range</DetonatorTable_inrange>
-	<DetonatorTable_notargets>Cannot detonate- no armed explosives in range.</DetonatorTable_notargets>
+	<DetonatorTable_notargets>Cannot detonate- no armed explosives in range on this channel.</DetonatorTable_notargets>
 	<DetonatorTable_detonatenow>Detonate explosives NOW</DetonatorTable_detonatenow>
-	<DetonatorTable_detonatenow_reserved>(reserved by %)</DetonatorTable_detonatenow_reserved>
+	<DetonatorTable_detonatenow_reserved>(reserved by {0})</DetonatorTable_detonatenow_reserved>
 	
 	<RemoteExplosive_arm_label>Arm</RemoteExplosive_arm_label>
 	<RemoteExplosive_arm_desc>When armed, this explosive can be remotely detonated.</RemoteExplosive_arm_desc>
+	
+	<RemoteExplosive_currentChannel>Current channel: {0}</RemoteExplosive_currentChannel>
+	<RemoteExplosive_channelChanger_label>{0} channel</RemoteExplosive_channelChanger_label>
+	<RemoteExplosive_detonatorChannelChanger_desc>Sets the channel of the detonator. Only explosives on the same channel can be detonated.</RemoteExplosive_detonatorChannelChanger_desc>
+	
+	<RemoteExplosive_channel0>White</RemoteExplosive_channel0>
+	<RemoteExplosive_channel1>Red</RemoteExplosive_channel1>
+	<RemoteExplosive_channel2>Green</RemoteExplosive_channel2>
 
 </LanguageData>

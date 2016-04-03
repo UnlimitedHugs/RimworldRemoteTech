@@ -12,6 +12,16 @@ Research Explosive IEDs or Incendiary IEDs to deploy combat-grade remote explosi
   </ResearchProjectDef>
   
   <ResearchProjectDef>
+    <defName>RemoteExplosivesChannels</defName>
+    <label>Remote Explosives Channels</label>
+    <description>Unlocks the use of channel on your remote explosives and the detonator. Only explosives on the same channel as the detonator can be triggerd. This allows to set up multiple lines of explosive defenses.</description>
+    <totalCost>750</totalCost>
+    <prerequisites>
+		<li>RemoteDetonator</li>
+	</prerequisites>
+  </ResearchProjectDef>
+  
+  <ResearchProjectDef>
     <defName>RemoteEmpMine</defName>
     <label>Remote EMP Charge</label>
     <description>Allows the deployment of EMP charges that can be triggered with a remote detonator.
