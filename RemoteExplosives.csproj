@@ -59,6 +59,8 @@
     <Compile Include="Source\CompRandomResourceLeaver.cs" />
     <Compile Include="Source\CompRandomResourceLeaverProperties.cs" />
     <Compile Include="Source\JobDriver_InstallChannelsComponent.cs" />
+    <Compile Include="Source\MapComponent_TraderStockInjector.cs" />
+    <Compile Include="Source\TraderStockInjectorDef.cs" />
     <Compile Include="Source\WorkGiver_RemoteExposive.cs" />
     <Compile Include="Source\ISwitchable.cs" />
     <Compile Include="Source\JobDriver_DetonateRemoteExplosives.cs" />
