@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DefPackage-TraderStockInjectorDef>
+
+  <TraderStockInjectorDef>
+    <defName>BulkGoods_inject</defName>
+    <traderDef>Orbital_Misc_BulkGoods</traderDef>
+    <stockGenerators>
+	<!-- mining -->
+      <li Class="StockGenerator_SingleDef">
+        <thingDef>MiningExplosiveComponent</thingDef>
+        <countRange>
+          <min>3</min>
+          <max>12</max>
+        </countRange>
+      </li>
+    </stockGenerators>
+  </TraderStockInjectorDef>
+
+  <TraderStockInjectorDef>
+    <defName>CombatSupplier_inject</defName>
+    <traderDef>Orbital_Misc_CombatSupplier</traderDef>
+    <stockGenerators>
+	<!-- combat -->
+	<li Class="StockGenerator_SingleDef">
+        <thingDef>RemoteBomb</thingDef>
+        <countRange>
+          <min>5</min>
+          <max>15</max>
+        </countRange>
+      </li>
+	<li Class="StockGenerator_SingleDef">
+		<thingDef>RemoteFireBomb</thingDef>
+		<countRange>
+		  <min>5</min>
+		  <max>10</max>
+		</countRange>
+	  </li>
+	<!-- emp -->
+	<li Class="StockGenerator_SingleDef">
+		<thingDef>RemoteEmpBomb</thingDef>
+		<countRange>
+		  <min>1</min>
+		  <max>4</max>
+		</countRange>
+	  </li>
+    </stockGenerators>
+  </TraderStockInjectorDef>
+
+  <TraderStockInjectorDef>
+    <defName>PirateMerchant_inject</defName>
+    <traderDef>Orbital_Misc_PirateMerchant</traderDef>
+    <stockGenerators>
+	 <!-- combat, cheap -->
+	 <li Class="StockGenerator_SingleDef">
+        <thingDef>RemoteBomb</thingDef>
+        <price>Cheap</price>
+        <countRange>
+          <min>0</min>
+          <max>10</max>
+        </countRange>
+      </li>
+	<li Class="StockGenerator_SingleDef">
+		<thingDef>RemoteFireBomb</thingDef>
+		<price>Cheap</price>
+		<countRange>
+		  <min>0</min>
+		  <max>10</max>
+		</countRange>
+	  </li>
+    </stockGenerators>
+  </TraderStockInjectorDef>
+  
+  <TraderStockInjectorDef>
+    <defName>Exotic_inject</defName>
+    <traderDef>Orbital_Misc_Exotic</traderDef>
+    <stockGenerators>
+		<!-- foam, gas -->
+    </stockGenerators>
+  </TraderStockInjectorDef>
+</DefPackage-TraderStockInjectorDef>

@@ -25,12 +25,11 @@
     <stackLimit>10</stackLimit>
     <statBases>
       <MaxHitPoints>70</MaxHitPoints>
-      <MarketValue>80</MarketValue>
       <Flammability>1.0</Flammability>
       <DeteriorationRate>0</DeteriorationRate>
     </statBases>
     <thingCategories>
-      <li>Manufactured</li>
+      <li>Explosives</li>
     </thingCategories>
 
   </ThingDef>
@@ -38,7 +37,7 @@
 
   <ThingDef ParentName="BaseExplosivePart">
     <defName>RemoteBomb</defName>
-    <label>deployable remote explosive</label>
+    <label>remote explosive</label>
     <description>Explosive trap with a remote trigger.
 Place as a building from the Security menu to use.</description>
     <graphicData>
@@ -58,11 +57,14 @@ Place as a building from the Security menu to use.</description>
         </wickTicks>
       </li>
     </comps>
+	<statBases>
+      <MarketValue>125</MarketValue>
+    </statBases>
   </ThingDef>
   
   <ThingDef ParentName="BaseExplosivePart">
     <defName>RemoteFireBomb</defName>
-    <label>deployable incendiary remote explosive</label>
+    <label>incendiary remote explosive</label>
     <description>A canister filled with flammable chemicals with a radio trigger.
 Place as a building from the Security menu to use.</description>
     <graphicData>
@@ -82,6 +84,9 @@ Place as a building from the Security menu to use.</description>
         </wickTicks>
       </li>
     </comps>
+	<statBases>
+      <MarketValue>125</MarketValue>
+    </statBases>
   </ThingDef>
   
   <ThingDef ParentName="BaseExplosivePart">
@@ -109,13 +114,13 @@ Place as a building from the Misc menu to use.</description>
       </li>
     </comps>
 	<statBases>
-      <MarketValue>80</MarketValue>
+      <MarketValue>100</MarketValue>
     </statBases>
   </ThingDef>
 
   <ThingDef ParentName="BaseExplosivePart">
     <defName>RemoteEmpBomb</defName>
-    <label>deployable EMP remote explosive</label>
+    <label>EMP remote explosive</label>
     <description>A single-use electromagnetic pulse generator.
 Place as a building from the Security menu to use.</description>
     <graphicData>
@@ -124,7 +129,7 @@ Place as a building from the Security menu to use.</description>
     </graphicData>
 	<statBases>
       <MaxHitPoints>120</MaxHitPoints>
-      <MarketValue>200</MarketValue>
+      <MarketValue>360</MarketValue>
     </statBases>
   </ThingDef>
   
