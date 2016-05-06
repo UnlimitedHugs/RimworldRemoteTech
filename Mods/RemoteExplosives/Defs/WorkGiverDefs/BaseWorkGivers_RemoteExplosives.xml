@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<WorkGivers>
+
+  <WorkGiverDef>
+    <defName>DetonateRemoteExplosives</defName>
+    <giverClass>RemoteExplosives.WorkGiver_DetonatorTable</giverClass>
+    <workType>Flicker</workType>
+    <priorityInType>10</priorityInType>
+    <verb>detonate</verb>
+    <gerund>detonating</gerund>
+  </WorkGiverDef>
+  
+  <WorkGiverDef>
+    <defName>SwitchRemoteExplosive</defName>
+    <giverClass>RemoteExplosives.WorkGiver_RemoteExplosive</giverClass>
+    <workType>Flicker</workType>
+    <priorityInType>9</priorityInType>
+    <verb>switch</verb>
+    <gerund>switching</gerund>
+  </WorkGiverDef>
+
+  <WorkGiverDef>
+    <defName>InstallChannelsComponent</defName>
+    <giverClass>RemoteExplosives.WorkGiver_DetonatorTable</giverClass>
+    <workType>Construction</workType>
+    <priorityInType>200</priorityInType>
+    <verb>install channel component</verb>
+    <gerund>installing channel component</gerund>
+  </WorkGiverDef>
+  
+</WorkGivers>

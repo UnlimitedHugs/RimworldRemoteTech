@@ -30,7 +30,7 @@
             <li>Steel</li>
           </thingDefs>
         </filter>
-        <count>40</count>
+        <count>30</count>
       </li>
       <li>
         <filter>
@@ -84,7 +84,7 @@
             <li>Steel</li>
           </thingDefs>
         </filter>
-        <count>40</count>
+        <count>30</count>
       </li>
       <li>
         <filter>
@@ -129,7 +129,7 @@
             <li>Steel</li>
           </thingDefs>
         </filter>
-        <count>40</count>
+        <count>30</count>
       </li>
       <li>
         <filter>
@@ -170,10 +170,10 @@
       <li>
         <filter>
           <thingDefs>
-            <li>Steel</li>
+            <li>Components</li>
           </thingDefs>
         </filter>
-        <count>40</count>
+        <count>1</count>
       </li>
       <li>
         <filter>
@@ -194,7 +194,7 @@
     </ingredients>
     <fixedIngredientFilter>
       <thingDefs>
-        <li>Steel</li>
+        <li>Components</li>
         <li>Silver</li>
         <li>Gold</li>
       </thingDefs>

@@ -1,5 +1,4 @@
 ﻿using System;
-using RimWorld;
 using UnityEngine;
 using Verse;
 
@@ -17,18 +16,23 @@ namespace RemoteExplosives {
 		private static readonly string ChannelDialLabelBase = "RemoteExplosive_channelChanger_label".Translate();
 		private static readonly string CurrenthannelLabelBase = "RemoteExplosive_currentChannel".Translate();
 
+		private static DesignationDef desigationDef;
+		public static DesignationDef SwitchDesigationDef {
+			get { return desigationDef ?? (desigationDef = DefDatabase<DesignationDef>.GetNamed("RemoteExplosiveSwitch")); }
+		}
+
 		public enum RemoteChannel {
 			White = 0,
 			Red = 1,
 			Green = 2
 		}
 
-		public static void UpdateFlickDesignation(Thing thing) {
-			if(thing == null || !(thing is IFlickable)) return;
-			bool flag = (thing as IFlickable).WantsFlick();
-			Designation designation = Find.DesignationManager.DesignationOn(thing, DesignationDefOf.Flick);
+		public static void UpdateSwitchDesignation(Thing thing) {
+			if(thing == null || !(thing is ISwitchable)) return;
+			bool flag = (thing as ISwitchable).WantsSwitch();
+			Designation designation = Find.DesignationManager.DesignationOn(thing, SwitchDesigationDef);
 			if (flag && designation == null) {
-				Find.DesignationManager.AddDesignation(new Designation(thing, DesignationDefOf.Flick));
+				Find.DesignationManager.AddDesignation(new Designation(thing, SwitchDesigationDef));
 			} else if (!flag && designation != null) {
 				designation.Delete();
 			}

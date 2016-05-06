@@ -12,7 +12,7 @@
     <filthLeaving>BuildingRubble</filthLeaving>
   </ThingDef>
   
-  <ThingDef Name="ExplosiveBase" ParentName="BuildingBase" Abstract="True">
+  <ThingDef Name="RemoteExplosiveBase" ParentName="BuildingBase" Abstract="True">
     <thingClass>RemoteExplosives.Building_RemoteExplosive</thingClass>
     <altitudeLayer>Waist</altitudeLayer>
     <drawerType>RealtimeOnly</drawerType>
@@ -26,7 +26,7 @@
     <designationCategory>Security</designationCategory>
   </ThingDef>
   
-  <ThingDef ParentName="ExplosiveBase">
+  <ThingDef ParentName="RemoteExplosiveBase">
     <defName>TrapRemoteBomb</defName>
     <label>Remote explosive charge</label>
     <graphicData>
@@ -39,9 +39,9 @@ Arm, then detonate from the Remote Explosives Console.</description>
     <costList>
       <RemoteBomb>1</RemoteBomb>
     </costList>
-    <researchPrerequisite>IEDBomb</researchPrerequisite>
+    <researchPrerequisites><li>IEDBomb</li></researchPrerequisites>
 	<comps>
-      <li>
+      <li Class="CompProperties_Explosive">
         <compClass>RemoteExplosives.CompCustomExplosive</compClass>
         <explosiveRadius>2.9</explosiveRadius>
         <explosiveDamageType>Bomb</explosiveDamageType>
@@ -54,7 +54,7 @@ Arm, then detonate from the Remote Explosives Console.</description>
     </comps>
   </ThingDef>
   
-  <ThingDef ParentName="ExplosiveBase">
+  <ThingDef ParentName="RemoteExplosiveBase">
     <defName>TrapRemoteIncendiary</defName>
     <label>Remote incendiary charge</label>
     <graphicData>
@@ -67,9 +67,9 @@ Arm, then detonate from the Remote Explosives Console.</description>
     <costList>
       <RemoteFireBomb>1</RemoteFireBomb>
     </costList>
-    <researchPrerequisite>IEDIncendiary</researchPrerequisite>
+    <researchPrerequisites><li>IEDIncendiary</li></researchPrerequisites>
 	<comps>
-      <li>
+      <li Class="CompProperties_Explosive">
         <compClass>RemoteExplosives.CompCustomExplosive</compClass>
         <explosiveRadius>2.9</explosiveRadius>
         <explosiveDamageType>Flame</explosiveDamageType>
@@ -82,7 +82,7 @@ Arm, then detonate from the Remote Explosives Console.</description>
     </comps>
   </ThingDef>
   
-  <ThingDef ParentName="ExplosiveBase">
+  <ThingDef ParentName="RemoteExplosiveBase">
     <defName>TrapRemoteEmp</defName>
     <label>Remote EMP charge</label>
     <thingClass>RemoteExplosives.Building_RemoteExplosiveEmp</thingClass>
@@ -100,9 +100,9 @@ Arm, then detonate from the Remote Explosives Console.</description>
 	<killedLeavings>
 		<ChunkSlagSteel>1</ChunkSlagSteel>
 	</killedLeavings>
-    <researchPrerequisite>RemoteEmpMine</researchPrerequisite>
+    <researchPrerequisites><li>RemoteEmpMine</li></researchPrerequisites>
 	<comps>
-      <li>
+      <li Class="CompProperties_Explosive">
         <compClass>RemoteExplosives.CompCustomExplosive</compClass>
         <explosiveRadius>6.5</explosiveRadius>
         <explosiveDamageType>EMP</explosiveDamageType>
@@ -139,7 +139,8 @@ Arm, then detonate from the Remote Explosives Console.</description>
 	<castEdgeShadows>true</castEdgeShadows>
     <staticSunShadowHeight>0.10</staticSunShadowHeight>
     <CostList>
-	  <Steel>60</Steel>
+	  <Components>2</Components>
+	  <Steel>20</Steel>
       <Silver>10</Silver>
     </CostList>
     <AltitudeLayer>Waist</AltitudeLayer>
@@ -165,13 +166,15 @@ Arm, then detonate from the Remote Explosives Console.</description>
 	<minifiedDef>MinifiedFurniture</minifiedDef>
     <tickerType>Normal</tickerType>
 	<comps>
-      <li>
+      <li Class="CompProperties_Power">
         <compClass>CompPowerTrader</compClass>
         <startElectricalFires>false</startElectricalFires>
         <basePowerConsumption>200</basePowerConsumption>
       </li>
+      <li Class="CompProperties_Flickable"/>
+      <li Class="CompProperties_Breakdownable"/>
     </comps>
-    <researchPrerequisite>RemoteDetonator</researchPrerequisite>
+    <researchPrerequisites><li>RemoteDetonator</li></researchPrerequisites>
   </ThingDef>
   
 </ThingDefs>

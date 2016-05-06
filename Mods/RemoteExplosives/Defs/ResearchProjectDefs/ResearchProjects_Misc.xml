@@ -14,7 +14,8 @@ Research Explosive IEDs or Incendiary IEDs to deploy combat-grade remote explosi
   <ResearchProjectDef>
     <defName>RemoteExplosivesChannels</defName>
     <label>Remote Explosives Channels</label>
-    <description>Unlocks the use of channel on your remote explosives and the detonator. Only explosives on the same channel as the detonator can be triggerd. This allows to set up multiple lines of explosive defenses.</description>
+    <description>Unlocks the use of channel on your remote explosives and the detonator. Only explosives on the same channel as the detonator can be triggerd. This allows to set up multiple lines of explosive defenses.
+The detonator must be upgraded with a component for this to work.</description>
     <totalCost>750</totalCost>
     <prerequisites>
 		<li>RemoteDetonator</li>

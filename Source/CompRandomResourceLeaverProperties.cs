@@ -1,5 +1,4 @@
-﻿using System.Xml;
-using Verse;
+﻿using Verse;
 
 namespace RemoteExplosives {
 	public class CompRandomResourceLeaverProperties : CompProperties {

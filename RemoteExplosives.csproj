@@ -58,7 +58,11 @@
     <Compile Include="Source\CompMiningExplosiveProperties.cs" />
     <Compile Include="Source\CompRandomResourceLeaver.cs" />
     <Compile Include="Source\CompRandomResourceLeaverProperties.cs" />
+    <Compile Include="Source\JobDriver_InstallChannelsComponent.cs" />
+    <Compile Include="Source\WorkGiver_RemoteExposive.cs" />
+    <Compile Include="Source\ISwitchable.cs" />
     <Compile Include="Source\JobDriver_DetonateRemoteExplosives.cs" />
+    <Compile Include="Source\JobDriver_SwitchRemoteExplosive.cs" />
     <Compile Include="Source\PlaceWorker_MiningExplosiveSquare.cs" />
     <Compile Include="Source\RemoteExplosivesUtility.cs" />
     <Compile Include="Source\WorkGiver_DetonatorTable.cs" />

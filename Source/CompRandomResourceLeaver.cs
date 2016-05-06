@@ -5,8 +5,8 @@ namespace RemoteExplosives {
 	 * Drops a random amount of a certain item on death.
 	 */
 	public class CompRandomResourceLeaver : ThingComp {
-		public override void PostDestroy(DestroyMode mode = DestroyMode.Vanish) {
-			base.PostDestroy(mode);
+		public override void PostDestroy(DestroyMode mode, bool wasSpawned) {
+			base.PostDestroy(mode, wasSpawned);
 			if(mode!=DestroyMode.Kill) return;
 			var leaverProps = props as CompRandomResourceLeaverProperties;
 			if (leaverProps == null || leaverProps.thingDef == null) return;

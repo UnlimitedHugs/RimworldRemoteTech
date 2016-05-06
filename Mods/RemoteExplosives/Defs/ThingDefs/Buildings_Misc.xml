@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ThingDefs>
-
-  <ThingDef Name="BuildingBase" Abstract="True">
-    <category>Building</category>
+  
+  <ThingDef Name="MiningExplosiveBase" Abstract="True">
+	<category>Building</category>
     <soundImpactDefault>BulletImpactGround</soundImpactDefault>
     <selectable>true</selectable>
     <drawerType>MapMeshAndRealTime</drawerType>
@@ -10,11 +10,7 @@
     <repairEffect>Repair</repairEffect>
     <leaveResourcesWhenKilled>false</leaveResourcesWhenKilled>
     <filthLeaving>BuildingRubble</filthLeaving>
-  </ThingDef>
-  
-  <ThingDef Name="ExplosiveBase" ParentName="BuildingBase" Abstract="True">
     <altitudeLayer>Waist</altitudeLayer>
-    <drawerType>RealtimeOnly</drawerType>
     <rotatable>false</rotatable>
     <tickerType>Normal</tickerType>
     <statBases>
@@ -25,7 +21,7 @@
     <designationCategory>Misc</designationCategory>
   </ThingDef>
   
-  <ThingDef ParentName="ExplosiveBase">
+  <ThingDef ParentName="MiningExplosiveBase">
     <defName>MiningChargeChunks</defName>
 	<thingClass>RemoteExplosives.Building_MiningExplosive</thingClass>
     <label>Fracturing explosive</label>
@@ -39,7 +35,7 @@ Detonate from the Remote Explosives Console.</description>
     <costList>
       <MiningExplosiveComponent>1</MiningExplosiveComponent>
     </costList>
-    <researchPrerequisite>RemoteDetonator</researchPrerequisite>
+    <researchPrerequisites><li>RemoteDetonator</li></researchPrerequisites>
 	<specialDisplayRadius>3.5</specialDisplayRadius>
 	<comps>
       <li Class="RemoteExplosives.CompMiningExplosiveProperties">
@@ -58,7 +54,7 @@ Detonate from the Remote Explosives Console.</description>
     </comps>
   </ThingDef>
   
-  <ThingDef ParentName="ExplosiveBase">
+  <ThingDef ParentName="MiningExplosiveBase">
     <defName>MiningChargeClearing</defName>
 	<thingClass>RemoteExplosives.Building_MiningExplosiveSquare</thingClass>
     <label>Clearing explosive</label>
@@ -72,7 +68,7 @@ Detonate from the Remote Explosives Console.</description>
     <costList>
       <MiningExplosiveComponent>1</MiningExplosiveComponent>
     </costList>
-    <researchPrerequisite>RemoteDetonator</researchPrerequisite>
+    <researchPrerequisites><li>RemoteDetonator</li></researchPrerequisites>
 	<comps>
       <li Class="RemoteExplosives.CompMiningExplosiveProperties">
         <compClass>RemoteExplosives.CompMiningExplosive</compClass>

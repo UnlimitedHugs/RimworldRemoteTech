@@ -1,0 +1,39 @@
+﻿using System.Collections.Generic;
+using RimWorld;
+using Verse;
+using Verse.AI;
+
+namespace RemoteExplosives {
+	public class WorkGiver_RemoteExplosive : WorkGiver_Scanner {
+		
+		private const PathEndMode pathEndMode = PathEndMode.Touch;
+
+		public override ThingRequest PotentialWorkThingRequest {
+			get {
+				return ThingRequest.ForGroup(ThingRequestGroup.BuildingArtificial);
+			}
+		}
+
+		public override IEnumerable<Thing> PotentialWorkThingsGlobal(Pawn Pawn) {
+			var exposives = Find.DesignationManager.DesignationsOfDef(RemoteExplosivesUtility.SwitchDesigationDef);
+			foreach (var exposive in exposives) {
+				yield return exposive.target.Thing;
+			}
+		}
+
+		public override bool HasJobOnThing(Pawn pawn, Thing t) {
+			if (!(t is Building_RemoteExplosive)) return false;
+			return
+				!pawn.Dead
+				&& !pawn.Downed
+				&& !pawn.IsBurning()
+				&& (t as Building_RemoteExplosive).WantsSwitch()
+				&& pawn.CanReserveAndReach(t, pathEndMode, Danger.Some);
+		}
+
+		public override Job JobOnThing(Pawn pawn, Thing t) {
+			var jobDef = DefDatabase<JobDef>.GetNamed(JobDriver_SwitchRemoteExplosive.JobDefName);
+			return new Job(jobDef, t);
+		}
+	}
+}
