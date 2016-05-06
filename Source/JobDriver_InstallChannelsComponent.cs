@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using RimWorld;
 using Verse;
 using Verse.AI;
@@ -18,7 +19,7 @@ namespace RemoteExplosives {
 			yield return Toils_Goto.GotoCell(ComponentInd, PathEndMode.Touch);
 			yield return Toils_Haul.StartCarryThing(ComponentInd);
 			yield return Toils_Goto.GotoCell(TableInd, PathEndMode.InteractionCell);
-			yield return Toils_General.Wait(InstallWorkDuration).WithEffect(EffecterDefOf.ConstructMetal, TableInd);
+			yield return Toils_General.Wait(InstallWorkDuration).WithEffect(EffecterDefOf.ConstructMetal, TableInd).WithProgressBarToilDelay(ComponentInd, InstallWorkDuration);
 			yield return Toils_Reserve.Release(ComponentInd);
 			yield return new Toil {
 				initAction = ()=>{

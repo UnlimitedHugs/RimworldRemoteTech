@@ -6,19 +6,22 @@ namespace RemoteExplosives {
 		public static string JobDefName = "JobDef_SwitchRemoteExplosive";
 
 		protected override IEnumerable<Toil> MakeNewToils() {
+			AddFailCondition(JobHasFailed);
 			var explosive = TargetThingA as Building_RemoteExplosive;
+			if (explosive == null) yield break;
 			yield return Toils_Reserve.Reserve(TargetIndex.A);
 			yield return Toils_Goto.GotoCell(TargetIndex.A, PathEndMode.InteractionCell);
 			yield return new Toil {
-				initAction = () => {
-					if (explosive != null && explosive.WantsSwitch()) {
-						explosive.DoSwitch();
-					}
-				},
+				initAction = () => explosive.DoSwitch(),
 				defaultCompleteMode = ToilCompleteMode.Instant,
 			};
 
 			yield return Toils_Reserve.Release(TargetIndex.A);
+		}
+
+		private bool JobHasFailed() {
+			var explosive = TargetThingA as Building_RemoteExplosive;
+			return explosive == null || explosive.Destroyed || !explosive.WantsSwitch();
 		}
 	}
 }
