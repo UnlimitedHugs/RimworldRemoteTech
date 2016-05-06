@@ -171,7 +171,6 @@ Arm, then detonate from the Remote Explosives Console.</description>
         <startElectricalFires>false</startElectricalFires>
         <basePowerConsumption>200</basePowerConsumption>
       </li>
-      <li Class="CompProperties_Flickable"/>
       <li Class="CompProperties_Breakdownable"/>
     </comps>
     <researchPrerequisites><li>RemoteDetonator</li></researchPrerequisites>
