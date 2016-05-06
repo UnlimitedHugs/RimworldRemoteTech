@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Defs>
 
-  <ThingDef Name="BaseExposive" Abstract="True">
+  <ThingDef Name="BaseExplosivePart" Abstract="True">
     <thingClass>ThingWithComps</thingClass>
     <label>unspecified resource</label>
     <category>Item</category>
@@ -36,7 +36,7 @@
   </ThingDef>
 
 
-  <ThingDef ParentName="BaseExposive">
+  <ThingDef ParentName="BaseExplosivePart">
     <defName>RemoteBomb</defName>
     <label>deployable remote explosive</label>
     <description>Explosive trap with a remote trigger.
@@ -46,7 +46,7 @@ Place as a building from the Security menu to use.</description>
       <graphicClass>Graphic_Single</graphicClass>
     </graphicData>
     <comps>
-      <li>
+      <li Class="CompProperties_Explosive">
         <compClass>CompExplosive</compClass>
         <explosiveRadius>2.9</explosiveRadius>
         <explosiveDamageType>Bomb</explosiveDamageType>
@@ -60,7 +60,7 @@ Place as a building from the Security menu to use.</description>
     </comps>
   </ThingDef>
   
-  <ThingDef ParentName="BaseExposive">
+  <ThingDef ParentName="BaseExplosivePart">
     <defName>RemoteFireBomb</defName>
     <label>deployable incendiary remote explosive</label>
     <description>A canister filled with flammable chemicals with a radio trigger.
@@ -70,7 +70,7 @@ Place as a building from the Security menu to use.</description>
       <graphicClass>Graphic_Single</graphicClass>
     </graphicData>
     <comps>
-      <li>
+      <li Class="CompProperties_Explosive">
         <compClass>CompExplosive</compClass>
         <explosiveRadius>2.9</explosiveRadius>
         <explosiveDamageType>Flame</explosiveDamageType>
@@ -84,7 +84,7 @@ Place as a building from the Security menu to use.</description>
     </comps>
   </ThingDef>
   
-  <ThingDef ParentName="BaseExposive">
+  <ThingDef ParentName="BaseExplosivePart">
     <defName>MiningExplosiveComponent</defName>
     <label>mining explosive</label>
     <description>The main part of a remote mining explosive.
@@ -113,9 +113,9 @@ Place as a building from the Misc menu to use.</description>
     </statBases>
   </ThingDef>
 
-  <ThingDef ParentName="BaseExposive">
+  <ThingDef ParentName="BaseExplosivePart">
     <defName>RemoteEmpBomb</defName>
-    <label>deployable EMP remote charge</label>
+    <label>deployable EMP remote explosive</label>
     <description>A single-use electromagnetic pulse generator.
 Place as a building from the Security menu to use.</description>
     <graphicData>

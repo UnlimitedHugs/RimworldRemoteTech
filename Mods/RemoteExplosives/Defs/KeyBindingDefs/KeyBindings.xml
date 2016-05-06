@@ -1,18 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 
 <KeyBindingDefs>
-  
-  <KeyBindingDef Name="RemoteExplosivesKeys" Abstract="true">
-    <category>SelectionSpecial</category>
-  </KeyBindingDef>
-
-  <KeyBindingDef ParentName="RemoteExplosivesKeys">
-    <defName>RemoteTableDetonate</defName>
+  <KeyBindingDef>
+    <category>RemoteExplosivesDetonator</category>
+	<defName>RemoteTableDetonate</defName>
     <label>Remote Detonator Detonate</label>
-    <defaultKeyCodeA>X</defaultKeyCodeA>
+    <defaultKeyCodeA>Z</defaultKeyCodeA>
   </KeyBindingDef>
 
-  <KeyBindingDef ParentName="RemoteExplosivesKeys">
+  <KeyBindingDef>
+    <category>RemoteExplosives</category>
     <defName>RemoteExplosiveArm</defName>
     <label>Remote Explosive Arm</label>
     <defaultKeyCodeA>Z</defaultKeyCodeA>

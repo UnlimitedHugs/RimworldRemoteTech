@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System.Collections.Generic;
+using System.Reflection;
 using RimWorld;
 using UnityEngine;
 using Verse;
@@ -22,6 +23,10 @@ namespace RemoteExplosives {
 		private int wickTotalTicks;
 		private bool wickIsSilent;
 
+		private CompProperties_Explosive ExplosiveProps {
+			get { return (CompProperties_Explosive)props; }
+		}
+
 		public int WickTotalTicks {
 			get { return wickTotalTicks; }
 		}
@@ -33,12 +38,12 @@ namespace RemoteExplosives {
 		public override void Initialize(CompProperties p) {
 			base.Initialize(p);
 			// some reflection to get access to an internal method
-			pawnNotifyMethod = typeof (Pawn_MindState).GetMethod("Notify_WickStarted", BindingFlags.NonPublic | BindingFlags.Instance);
+			pawnNotifyMethod = typeof(Pawn_MindState).GetMethod("Notify_DangerousWickStarted", BindingFlags.NonPublic | BindingFlags.Instance);
 		}
 
 		protected int StartWickThreshold {
 			get {
-				return Mathf.RoundToInt(props.startWickHitPointsPercent * parent.MaxHitPoints);
+				return Mathf.RoundToInt(ExplosiveProps.startWickHitPointsPercent * parent.MaxHitPoints);
 			}
 		}
 
@@ -94,7 +99,7 @@ namespace RemoteExplosives {
 			if (wickStarted) return;
 			wickIsSilent = silent;
 			wickStarted = true;
-			wickTotalTicks = wickTicksLeft = props.wickTicks.RandomInRange;
+			wickTotalTicks = wickTicksLeft = ExplosiveProps.wickTicks.RandomInRange;
 			NotifyNearbyPawns();
 		}
 
@@ -109,17 +114,17 @@ namespace RemoteExplosives {
 		private void NotifyNearbyPawns() {
 			Room room = parent.GetRoom();
 			for (int i = 0; i < PawnNotifyCellCount; i++) {
-				var cell = parent.Position + GenRadial.RadialPattern[i];
-				if (!cell.InBounds()) continue;
-				var thingList = cell.GetThingList();
+				IntVec3 c = parent.Position + GenRadial.RadialPattern[i];
+				if (!c.InBounds()) continue;
+				List<Thing> thingList = c.GetThingList();
 				for (int j = 0; j < thingList.Count; j++) {
-					var p = thingList[j] as Pawn;
-					if (p != null
-					    && p.RaceProps.intelligence >= Intelligence.Humanlike
-					    && !p.Drafted
-					    && p.Position.GetRoom() == room
-					    && GenSight.LineOfSight(parent.Position, p.Position, true))
-						pawnNotifyMethod.Invoke(p.mindState, new object[] {parent});
+					var pawn = thingList[j] as Pawn;
+					if (pawn != null && 
+						pawn.RaceProps.intelligence >= Intelligence.Humanlike && 
+						pawn.Position.GetRoom() == room && 
+						GenSight.LineOfSight(parent.Position, pawn.Position, true)) {
+						pawnNotifyMethod.Invoke(pawn.mindState, new object[] {parent});
+					}
 				}
 			}
 		}
@@ -130,11 +135,12 @@ namespace RemoteExplosives {
 			if (!parent.Destroyed) {
 				parent.Destroy(DestroyMode.Kill);
 			}
-			float num = props.explosiveRadius;
-			if (parent.stackCount > 1 && props.explosiveExpandPerStackcount > 0f) {
-				num += Mathf.Sqrt((parent.stackCount - 1) * props.explosiveExpandPerStackcount);
+			var exProps = ExplosiveProps;
+			float num = exProps.explosiveRadius;
+			if (parent.stackCount > 1 && exProps.explosiveExpandPerStackcount > 0f) {
+				num += Mathf.Sqrt((parent.stackCount - 1) * exProps.explosiveExpandPerStackcount);
 			}
-			GenExplosion.DoExplosion(parent.Position, num, props.explosiveDamageType, parent);
+			GenExplosion.DoExplosion(parent.Position, num, exProps.explosiveDamageType, parent);
 		}
 
 		

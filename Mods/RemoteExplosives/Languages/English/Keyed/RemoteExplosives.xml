@@ -18,5 +18,8 @@
 	<RemoteExplosive_channel0>White</RemoteExplosive_channel0>
 	<RemoteExplosive_channel1>Red</RemoteExplosive_channel1>
 	<RemoteExplosive_channel2>Green</RemoteExplosive_channel2>
+	
+	<DetonatorTable_component_label>Install channels</DetonatorTable_component_label>
+	<DetonatorTable_component_desc>Install a component to allow detonating explosives on different channels.</DetonatorTable_component_desc>
 
 </LanguageData>

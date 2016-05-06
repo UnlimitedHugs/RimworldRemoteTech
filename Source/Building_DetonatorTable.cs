@@ -24,6 +24,10 @@ namespace RemoteExplosives
 		private static readonly string DetonateButtonLabel = "DetonatorTable_detonate_label".Translate();
 		private static readonly string DetonateButtonDesc = "DetonatorTable_detonate_desc".Translate();
 
+		private static readonly Texture2D UITex_InstallComponent = ContentFinder<Texture2D>.Get("UIChannelComponent");
+		private static readonly string InstallComponentButtonLabel = "DetonatorTable_component_label".Translate();
+		private static readonly string InstallComponentButtonDesc = "DetonatorTable_component_desc".Translate();
+
 		private const int FindExplosivesEveryTicks = 120;
 		// how long it will take to trigger an additional explosive
 		private const int TicksBetweenTriggers = 2;
@@ -40,11 +44,23 @@ namespace RemoteExplosives
 
 		private readonly Queue<ScheduledTrigger> triggerQueue = new Queue<ScheduledTrigger>();
 
+		private bool hasChannelsComponent;
+		public bool HasChannelsComponent {
+			get { return hasChannelsComponent; }
+		}
+
+		private bool wantChannelsComponent;
+		public bool WantChannelsComponent {
+			get { return wantChannelsComponent; }
+		}
+
 		public override void ExposeData()
 		{
 			base.ExposeData();
 			Scribe_Values.LookValue(ref wantDetonation, "wantDetonation", false);
 			Scribe_Values.LookValue(ref currentChannel, "currentChannel", RemoteExplosivesUtility.RemoteChannel.White);
+			Scribe_Values.LookValue(ref hasChannelsComponent, "hasChannelsComponent", false);
+			Scribe_Values.LookValue(ref wantChannelsComponent, "wantChannelsComponent", false);
 		}
 
 		public override IEnumerable<Gizmo> GetGizmos(){
@@ -59,13 +75,28 @@ namespace RemoteExplosives
 			yield return detonateGizmo;
 
 			if (RemoteExplosivesUtility.ChannelsUnlocked()) {
-				var channelGizmo = RemoteExplosivesUtility.MakeChannelGizmo(currentChannel, ChannelGizmoAction);
-				yield return channelGizmo;
+				if (hasChannelsComponent) {
+					var channelGizmo = RemoteExplosivesUtility.MakeChannelGizmo(currentChannel, ChannelGizmoAction);
+					yield return channelGizmo;
+				} else {
+					var componentGizmo = new Command_Toggle {
+						toggleAction = ComponentGizmoAction,
+						isActive = () => wantChannelsComponent,
+						icon = UITex_InstallComponent,
+						defaultLabel = InstallComponentButtonLabel,
+						defaultDesc = InstallComponentButtonDesc
+					};
+					yield return componentGizmo;
+				}
 			}
 
 			foreach (var g in base.GetGizmos()) {
 				yield return g;
 			}
+		}
+
+		private void ComponentGizmoAction() {
+			wantChannelsComponent = !wantChannelsComponent;
 		}
 
 		private void DetonateGizmoAction() {
@@ -79,6 +110,11 @@ namespace RemoteExplosives
 
 		public bool WantsDetonation() {
 			return wantDetonation;
+		}
+		
+		public void InstallChannelsComponent() {
+			hasChannelsComponent = true;
+			wantChannelsComponent = false;
 		}
 
 		public void DoDetonation() {

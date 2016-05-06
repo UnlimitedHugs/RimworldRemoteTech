@@ -6,7 +6,7 @@ using Verse;
 using Verse.Sound;
 
 namespace RemoteExplosives {
-	public class Building_RemoteExplosive : Building, IFlickable {
+	public class Building_RemoteExplosive : Building, ISwitchable {
 		
 		private const string flareGraphicPath = "mine_flare";
 		private const string flareGraphicStrongPath = "mine_flare_strong";
@@ -60,7 +60,7 @@ namespace RemoteExplosives {
 			}
 
 			comp = GetComp<CompCustomExplosive>();
-			RemoteExplosivesUtility.UpdateFlickDesignation(this);
+			RemoteExplosivesUtility.UpdateSwitchDesignation(this);
 		}
 
 		public override void ExposeData() {
@@ -72,11 +72,11 @@ namespace RemoteExplosives {
 			Scribe_Values.LookValue(ref desiredChannel, "desiredChannel", RemoteExplosivesUtility.RemoteChannel.White);
 		}
 
-		public bool WantsFlick() {
+		public bool WantsSwitch() {
 			return isArmed != desiredArmState || currentChannel!=desiredChannel;
 		}
 
-		public void DoFlick() {
+		public void DoSwitch() {
 			if (isArmed != desiredArmState) {
 				if (!isArmed) {
 					Arm();
@@ -88,7 +88,7 @@ namespace RemoteExplosives {
 				currentChannel = desiredChannel;
 				changeChannelSound.PlayOneShot(SoundInfo.InWorld(this));
 			}
-			RemoteExplosivesUtility.UpdateFlickDesignation(this);
+			RemoteExplosivesUtility.UpdateSwitchDesignation(this);
 		}
 
 		public void Arm() {
@@ -129,12 +129,12 @@ namespace RemoteExplosives {
 
 		private void ChannelGizmoAction() {
 			desiredChannel = RemoteExplosivesUtility.GetNextChannel(desiredChannel);
-			RemoteExplosivesUtility.UpdateFlickDesignation(this);
+			RemoteExplosivesUtility.UpdateSwitchDesignation(this);
 		}
 
 		private void ArmGizmoAction() {
 			desiredArmState = !desiredArmState;
-			RemoteExplosivesUtility.UpdateFlickDesignation(this);
+			RemoteExplosivesUtility.UpdateSwitchDesignation(this);
 		}
 
 		public override void Tick() {

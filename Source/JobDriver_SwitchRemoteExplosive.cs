@@ -1,0 +1,24 @@
+﻿using System.Collections.Generic;
+using Verse.AI;
+
+namespace RemoteExplosives {
+	public class JobDriver_SwitchRemoteExplosive : JobDriver {
+		public static string JobDefName = "JobDef_SwitchRemoteExplosive";
+
+		protected override IEnumerable<Toil> MakeNewToils() {
+			var explosive = TargetThingA as Building_RemoteExplosive;
+			yield return Toils_Reserve.Reserve(TargetIndex.A);
+			yield return Toils_Goto.GotoCell(TargetIndex.A, PathEndMode.InteractionCell);
+			yield return new Toil {
+				initAction = () => {
+					if (explosive != null && explosive.WantsSwitch()) {
+						explosive.DoSwitch();
+					}
+				},
+				defaultCompleteMode = ToilCompleteMode.Instant,
+			};
+
+			yield return Toils_Reserve.Release(TargetIndex.A);
+		}
+	}
+}
