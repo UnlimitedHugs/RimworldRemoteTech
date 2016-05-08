@@ -98,7 +98,7 @@ Arm, then detonate from the Remote Explosives Console.</description>
       <RemoteEmpBomb>1</RemoteEmpBomb>
     </costList>
 	<killedLeavings>
-		<ChunkSlagSteel>1</ChunkSlagSteel>
+		<ChunkSlagGold>1</ChunkSlagGold>
 	</killedLeavings>
     <researchPrerequisites><li>RemoteEmpMine</li></researchPrerequisites>
 	<comps>
@@ -113,14 +113,6 @@ Arm, then detonate from the Remote Explosives Console.</description>
           <max>50</max>
         </wickTicks>
       </li>
-	  <li Class="RemoteExplosives.CompRandomResourceLeaverProperties">
-		<compClass>RemoteExplosives.CompRandomResourceLeaver</compClass>
-		<thingDef>Gold</thingDef>
-		<amount>
-			<min>3</min>
-			<max>10</max>
-		</amount>
-	  </li>
     </comps>
   </ThingDef>
 
