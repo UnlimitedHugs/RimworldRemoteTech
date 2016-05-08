@@ -3,12 +3,13 @@
 
   <RecipeDef>
     <defName>MakeRemoteBomb</defName>
-    <label>make deployable remote explosive</label>
+    <label>make remote explosive</label>
     <description>Craft a deployable remote explosive.</description>
     <jobString>Making deployable remote explosive.</jobString>
 	<recipeUsers>
-		<li>TableMachining</li>
+		<li>RemoteExplosivesBench</li>
 	</recipeUsers>
+	<researchPrerequisite>IEDBomb</researchPrerequisite>
     <workSpeedStat>SmithingSpeed</workSpeedStat>
     <effectWorking>Cook</effectWorking>
     <soundWorking>Recipe_Machining</soundWorking>
@@ -27,10 +28,10 @@
       <li>
         <filter>
           <thingDefs>
-            <li>Steel</li>
+            <li>Components</li>
           </thingDefs>
         </filter>
-        <count>30</count>
+        <count>1</count>
       </li>
       <li>
         <filter>
@@ -44,7 +45,7 @@
     <fixedIngredientFilter>
       <thingDefs>
         <li>ArtilleryShell</li>
-        <li>Steel</li>
+        <li>Components</li>
         <li>Silver</li>
       </thingDefs>
     </fixedIngredientFilter>
@@ -57,12 +58,13 @@
   
   <RecipeDef>
     <defName>MakeRemoteFireBomb</defName>
-    <label>make deployable incendiary remote explosive</label>
+    <label>make incendiary remote explosive</label>
     <description>Craft a deployable incendiary remote explosive.</description>
     <jobString>Making deployable incendiary remote explosive.</jobString>
 	<recipeUsers>
-		<li>TableMachining</li>
+		<li>RemoteExplosivesBench</li>
 	</recipeUsers>
+    <researchPrerequisite>IEDIncendiary</researchPrerequisite>
     <workSpeedStat>SmithingSpeed</workSpeedStat>
     <effectWorking>Cook</effectWorking>
     <soundWorking>Recipe_Machining</soundWorking>
@@ -81,10 +83,10 @@
       <li>
         <filter>
           <thingDefs>
-            <li>Steel</li>
+            <li>Components</li>
           </thingDefs>
         </filter>
-        <count>30</count>
+        <count>1</count>
       </li>
       <li>
         <filter>
@@ -98,7 +100,7 @@
     <fixedIngredientFilter>
       <thingDefs>
         <li>ArtilleryShell</li>
-        <li>Steel</li>
+        <li>Components</li>
         <li>Silver</li>
       </thingDefs>
     </fixedIngredientFilter>
@@ -109,57 +111,14 @@
   </RecipeDef>
 
   <RecipeDef>
-    <defName>MakeMiningExplosiveComponent</defName>
-    <label>make mining explosive</label>
-    <description>Craft a mining explosive.</description>
-    <jobString>Making mining explosive.</jobString>
-	<recipeUsers>
-		<li>TableMachining</li>
-	</recipeUsers>
-    <workSpeedStat>SmithingSpeed</workSpeedStat>
-    <effectWorking>Cook</effectWorking>
-    <soundWorking>Recipe_Machining</soundWorking>
-    <allowMixingIngredients>true</allowMixingIngredients>
-    <workAmount>1000</workAmount>
-    <targetCountAdjustment>5</targetCountAdjustment>
-    <ingredients>
-      <li>
-        <filter>
-          <thingDefs>
-            <li>Steel</li>
-          </thingDefs>
-        </filter>
-        <count>30</count>
-      </li>
-      <li>
-        <filter>
-          <thingDefs>
-            <li>Silver</li>
-          </thingDefs>
-        </filter>
-        <count>2</count>
-      </li>
-    </ingredients>
-    <fixedIngredientFilter>
-      <thingDefs>
-        <li>Steel</li>
-        <li>Silver</li>
-      </thingDefs>
-    </fixedIngredientFilter>
-    <products>
-      <MiningExplosiveComponent>1</MiningExplosiveComponent>
-    </products>
-    <workSkill>Crafting</workSkill>
-  </RecipeDef>  
-
-  <RecipeDef>
     <defName>MakeRemoteEmpBomb</defName>
     <label>make remote EMP charge</label>
     <description>Craft a remote EMP charge.</description>
     <jobString>Making remote EMP charge.</jobString>
 	<recipeUsers>
-		<li>TableMachining</li>
+		<li>RemoteExplosivesBench</li>
 	</recipeUsers>
+    <researchPrerequisite>RemoteEmpMine</researchPrerequisite>
     <workSpeedStat>SmithingSpeed</workSpeedStat>
     <effectWorking>Cook</effectWorking>
     <soundWorking>Recipe_Machining</soundWorking>
@@ -201,6 +160,51 @@
     </fixedIngredientFilter>
     <products>
       <RemoteEmpBomb>1</RemoteEmpBomb>
+    </products>
+    <workSkill>Crafting</workSkill>
+  </RecipeDef>  
+
+  <RecipeDef>
+    <defName>MakeMiningExplosiveComponent</defName>
+    <label>make mining explosive</label>
+    <description>Craft a mining explosive.</description>
+    <jobString>Making mining explosive.</jobString>
+	<recipeUsers>
+		<li>RemoteExplosivesBench</li>
+	</recipeUsers>
+    <researchPrerequisite>RemoteDetonator</researchPrerequisite>
+    <workSpeedStat>SmithingSpeed</workSpeedStat>
+    <effectWorking>Cook</effectWorking>
+    <soundWorking>Recipe_Machining</soundWorking>
+    <allowMixingIngredients>true</allowMixingIngredients>
+    <workAmount>1000</workAmount>
+    <targetCountAdjustment>5</targetCountAdjustment>
+    <ingredients>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Components</li>
+          </thingDefs>
+        </filter>
+        <count>1</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Silver</li>
+          </thingDefs>
+        </filter>
+        <count>2</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>Components</li>
+        <li>Silver</li>
+      </thingDefs>
+    </fixedIngredientFilter>
+    <products>
+      <MiningExplosiveComponent>1</MiningExplosiveComponent>
     </products>
     <workSkill>Crafting</workSkill>
   </RecipeDef>  
