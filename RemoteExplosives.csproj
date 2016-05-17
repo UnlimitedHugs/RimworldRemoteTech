@@ -53,13 +53,14 @@
     <Compile Include="Source\Building_MiningExplosiveSquare.cs" />
     <Compile Include="Source\Building_RemoteExplosive.cs" />
     <Compile Include="Source\Building_RemoteExplosiveEmp.cs" />
+    <Compile Include="Source\ITab_ExplosivesBills.cs" />
     <Compile Include="Source\CompCustomExplosive.cs" />
     <Compile Include="Source\CompMiningExplosive.cs" />
     <Compile Include="Source\CompMiningExplosiveProperties.cs" />
     <Compile Include="Source\CompRandomResourceLeaver.cs" />
     <Compile Include="Source\CompRandomResourceLeaverProperties.cs" />
     <Compile Include="Source\JobDriver_InstallChannelsComponent.cs" />
-    <Compile Include="Source\MapComponent_TraderStockInjector.cs" />
+    <Compile Include="Source\MapComponent_RemoteExplosivesInjector.cs" />
     <Compile Include="Source\TraderStockInjectorDef.cs" />
     <Compile Include="Source\WorkGiver_RemoteExposive.cs" />
     <Compile Include="Source\ISwitchable.cs" />

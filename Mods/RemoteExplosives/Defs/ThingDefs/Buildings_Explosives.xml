@@ -128,7 +128,7 @@ Research different types of remote explosives to unlock available recipes.</Desc
     <surfaceType>Item</surfaceType>
 	<minifiedDef>MinifiedFurniture</minifiedDef>
     <inspectorTabs>
-      <li>ITab_Bills</li>
+      <li>RemoteExplosives.ITab_ExplosivesBills</li>
     </inspectorTabs>
     <building>
       <spawnedConceptLearnOpportunity>BillsTab</spawnedConceptLearnOpportunity>

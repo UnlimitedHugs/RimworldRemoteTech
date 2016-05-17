@@ -22,4 +22,8 @@
 	<DetonatorTable_component_label>Install channels</DetonatorTable_component_label>
 	<DetonatorTable_component_desc>Install a component to allow detonating explosives on different channels.</DetonatorTable_component_desc>
 
+	<BillsTab_MaterialButton_label>Material: {0}</BillsTab_MaterialButton_label>
+	<BillsTab_MaterialButton_component_mode>Components</BillsTab_MaterialButton_component_mode>
+	<BillsTab_MaterialButton_steel_mode>Steel</BillsTab_MaterialButton_steel_mode>
+	<BillsTab_MaterialButton_tooltip>Sets the base material that new bills are created with.</BillsTab_MaterialButton_tooltip>
 </LanguageData>
