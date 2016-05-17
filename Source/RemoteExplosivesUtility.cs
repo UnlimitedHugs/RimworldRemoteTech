@@ -4,6 +4,8 @@ using Verse;
 
 namespace RemoteExplosives {
 	public static class RemoteExplosivesUtility {
+		public static readonly string InjectedRecipeNameSuffix = "Injected";
+
 		private static readonly SoundDef UIChannelSound = SoundDef.Named("RemoteUIDialClick");
 		private static readonly ResearchProjectDef channelsResearchDef = ResearchProjectDef.Named("RemoteExplosivesChannels");
 		private static readonly Texture2D[] UITex_Channels = new[] {
@@ -58,7 +60,7 @@ namespace RemoteExplosives {
 				icon = GetUITextureForChannel(currentChannel),
 				activateSound = UIChannelSound,
 				defaultDesc = ChannelDialDesc,
-				defaultLabel = string.Format(ChannelDialLabelBase, GetChannelName(currentChannel))
+				defaultLabel = String.Format(ChannelDialLabelBase, GetChannelName(currentChannel))
 			};
 		}
 
