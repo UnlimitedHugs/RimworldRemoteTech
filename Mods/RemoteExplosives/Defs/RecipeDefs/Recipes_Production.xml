@@ -209,6 +209,60 @@
     <workSkill>Crafting</workSkill>
   </RecipeDef>  
   
+  <RecipeDef>
+    <defName>MakeRemoteChemicalCan</defName>
+    <label>make remote chemical canister</label>
+    <description>Craft a remote chemical canister.</description>
+    <jobString>Making remote chemical canister.</jobString>
+	<recipeUsers>
+		<li>RemoteExplosivesBench</li>
+	</recipeUsers>
+    <researchPrerequisite>RemoteDetonator</researchPrerequisite>
+    <workSpeedStat>SmithingSpeed</workSpeedStat>
+    <effectWorking>Cook</effectWorking>
+    <soundWorking>Recipe_Machining</soundWorking>
+    <allowMixingIngredients>true</allowMixingIngredients>
+    <workAmount>1400</workAmount>
+    <targetCountAdjustment>5</targetCountAdjustment>
+    <ingredients>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Components</li>
+          </thingDefs>
+        </filter>
+        <count>1</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Silver</li>
+          </thingDefs>
+        </filter>
+        <count>6</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>HerbalMedicine</li>
+          </thingDefs>
+        </filter>
+        <count>2</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>Components</li>
+        <li>Silver</li>
+        <li>HerbalMedicine</li>
+      </thingDefs>
+    </fixedIngredientFilter>
+    <products>
+      <RemoteChemicalCan>1</RemoteChemicalCan>
+    </products>
+    <workSkill>Crafting</workSkill>
+  </RecipeDef>
+  
    <RecipeDef>
     <defName>ExtractGoldFromSlag</defName>
     <label>extract gold from slag</label>

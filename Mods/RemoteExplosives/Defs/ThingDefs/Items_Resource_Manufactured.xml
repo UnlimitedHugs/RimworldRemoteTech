@@ -39,7 +39,7 @@
     <defName>RemoteBomb</defName>
     <label>remote explosive</label>
     <description>Explosive trap with a remote trigger.
-Place as a building from the Security menu to use.</description>
+Place as a building from the Explosives menu to use.</description>
     <graphicData>
       <texPath>remote_mine</texPath>
       <graphicClass>Graphic_Single</graphicClass>
@@ -66,7 +66,7 @@ Place as a building from the Security menu to use.</description>
     <defName>RemoteFireBomb</defName>
     <label>incendiary remote explosive</label>
     <description>A canister filled with flammable chemicals with a radio trigger.
-Place as a building from the Security menu to use.</description>
+Place as a building from the Explosives menu to use.</description>
     <graphicData>
       <texPath>remote_mine_incendiary</texPath>
       <graphicClass>Graphic_Single</graphicClass>
@@ -93,13 +93,13 @@ Place as a building from the Security menu to use.</description>
     <defName>MiningExplosiveComponent</defName>
     <label>mining explosive</label>
     <description>The main part of a remote mining explosive.
-Place as a building from the Misc menu to use.</description>
+Place as a building from the Explosives menu to use.</description>
     <graphicData>
       <texPath>explosive_part</texPath>
       <graphicClass>Graphic_Single</graphicClass>
     </graphicData>
     <comps>
-      <li Class="RemoteExplosives.CompMiningExplosiveProperties">
+      <li Class="RemoteExplosives.CompProperties_MiningExplosive">
         <compClass>RemoteExplosives.CompMiningExplosive</compClass>
 		<rockChunkChance>0.5</rockChunkChance>
         <miningRadius>2.9</miningRadius>
@@ -122,7 +122,7 @@ Place as a building from the Misc menu to use.</description>
     <defName>RemoteEmpBomb</defName>
     <label>EMP remote explosive</label>
     <description>A single-use electromagnetic pulse generator.
-Place as a building from the Security menu to use.</description>
+Place as a building from the Explosives menu to use.</description>
     <graphicData>
       <texPath>mine_emp</texPath>
       <graphicClass>Graphic_Single</graphicClass>
@@ -130,6 +130,31 @@ Place as a building from the Security menu to use.</description>
 	<statBases>
       <MaxHitPoints>120</MaxHitPoints>
       <MarketValue>360</MarketValue>
+    </statBases>
+  </ThingDef>
+  
+  <ThingDef ParentName="BaseExplosivePart">
+    <defName>RemoteChemicalCan</defName>
+    <label>remote chemical canister</label>
+    <description>A remotely triggered canister for chemicals.
+Place as a building from the Explosives menu to use.</description>
+    <graphicData>
+      <texPath>chemical_canister</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <comps>
+      <li Class="RemoteExplosives.CompProperties_ChemicalExplosive">
+        <compClass>RemoteExplosives.CompChemicalExplosive</compClass>
+        <wickTicks>
+          <min>50</min>
+          <max>50</max>
+        </wickTicks>
+		<startWickHitPointsPercent>0</startWickHitPointsPercent>
+		<BreakSound>RemoteGlassBreak</BreakSound>
+      </li>
+    </comps>
+	<statBases>
+      <MarketValue>180</MarketValue>
     </statBases>
   </ThingDef>
   
