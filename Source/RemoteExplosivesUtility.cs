@@ -68,6 +68,12 @@ namespace RemoteExplosives {
 			return String.Format(CurrenthannelLabelBase, GetChannelName(currentChannnel));
 		}
 
+		public static float QuinticEaseOut (float t, float start, float change, float duration) {
+			t /= duration;
+			t--;
+			return change*(t*t*t*t*t + 1) + start;
+		}
+
 		private static Texture2D GetUITextureForChannel(RemoteChannel channel) {
 			return UITex_Channels[(int)channel];
 		}

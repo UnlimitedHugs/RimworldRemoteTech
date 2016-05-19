@@ -136,11 +136,13 @@ namespace RemoteExplosives {
 				parent.Destroy(DestroyMode.Kill);
 			}
 			var exProps = ExplosiveProps;
-			float num = exProps.explosiveRadius;
-			if (parent.stackCount > 1 && exProps.explosiveExpandPerStackcount > 0f) {
-				num += Mathf.Sqrt((parent.stackCount - 1) * exProps.explosiveExpandPerStackcount);
+			if (exProps.explosiveDamageType != null) {
+				float num = exProps.explosiveRadius;
+				if (parent.stackCount > 1 && exProps.explosiveExpandPerStackcount > 0f) {
+					num += Mathf.Sqrt((parent.stackCount - 1)*exProps.explosiveExpandPerStackcount);
+				}
+				GenExplosion.DoExplosion(parent.Position, num, exProps.explosiveDamageType, parent);
 			}
-			GenExplosion.DoExplosion(parent.Position, num, exProps.explosiveDamageType, parent);
 		}
 
 		

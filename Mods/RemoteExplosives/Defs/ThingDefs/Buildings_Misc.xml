@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ThingDefs>
+
+  <ThingDef Name="BuildingMiscBase" Abstract="True">
+    <category>Building</category>
+    <soundImpactDefault>BulletImpactGround</soundImpactDefault>
+    <selectable>true</selectable>
+    <drawerType>MapMeshAndRealTime</drawerType>
+    <terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
+    <leaveResourcesWhenKilled>false</leaveResourcesWhenKilled>
+    <filthLeaving>BuildingRubble</filthLeaving>
+  </ThingDef>
+  
+  <ThingDef ParentName="BuildingMiscBase">
+    <DefName>WallFoamBlob</DefName>
+    <label>chemical foam</label>
+    <ThingClass>RemoteExplosives.Building_FoamBlob</ThingClass>
+    <Description>Becomes tougher than rock as it solidifies.</Description>
+    <graphicData>
+      <texPath>foam_blob</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+	  <shaderType>CutoutComplex</shaderType>
+      <drawSize>(1.1,1.1)</drawSize>
+    </graphicData>
+    <drawerType>RealtimeOnly</drawerType>
+	<castEdgeShadows>false</castEdgeShadows>
+    <AltitudeLayer>BuildingTall</AltitudeLayer>
+    <fillPercent>0.5</fillPercent>
+    <coversFloor>false</coversFloor>
+    <useHitPoints>True</useHitPoints>
+    <statBases>
+      <WorkToMake>50</WorkToMake>
+      <MaxHitPoints>30</MaxHitPoints>
+      <Flammability>2.0</Flammability>
+      <Beauty>-20</Beauty>
+    </statBases>
+    <Size>(1,1)</Size>
+    <constructEffect>ConstructMetal</constructEffect>
+    <Passability>PassThroughOnly</Passability>
+    <pathCost>230</pathCost>
+    <tickerType>Normal</tickerType>
+	<building Class="RemoteExplosives.FoamBlobBuildingProperties">
+		<TicksToHarden>
+			<min>750</min>
+			<max>850</max>
+		</TicksToHarden>
+		<TicksBetweenSpreading>
+			<min>10</min>
+			<max>15</max>
+		</TicksBetweenSpreading>
+		<HardenedDef>FoamWall</HardenedDef>
+	</building>
+  </ThingDef>
+  
+   <ThingDef ParentName="BuildingMiscBase" Name="FoamWall">
+    <defName>FoamWall</defName>
+    <label>hardened foam wall</label>
+    <thingClass>RemoteExplosives.Building_FoamWall</thingClass>
+    <category>Building</category>
+    <description>Solidified chemical foam. Extremely tough and non-flammable.</description>
+    <graphicData>
+      <texPath>foam_wall</texPath>
+      <graphicClass>Graphic_Appearances</graphicClass>
+      <linkType>CornerFiller</linkType>
+      <linkFlags>
+        <li>Custom1</li>
+      </linkFlags>
+      <damageData>
+        <cornerTL>Damage/Corner</cornerTL>
+        <cornerTR>Damage/Corner</cornerTR>
+        <cornerBL>Damage/Corner</cornerBL>
+        <cornerBR>Damage/Corner</cornerBR>
+        <edgeTop>Damage/Edge</edgeTop>
+        <edgeBot>Damage/Edge</edgeBot>
+        <edgeLeft>Damage/Edge</edgeLeft>
+        <edgeRight>Damage/Edge</edgeRight>
+      </damageData>
+    </graphicData>
+    <blueprintGraphicData>
+      <texPath>Things/Building/Linked/Wall_Blueprint_Atlas</texPath>
+    </blueprintGraphicData>
+    <uiIconPath>foam_wall/foam_wall_icon</uiIconPath>
+    <statBases>
+      <MaxHitPoints>8500</MaxHitPoints>
+      <WorkToMake>0</WorkToMake>
+      <Flammability>0</Flammability>
+    </statBases>
+    <leaveResourcesWhenKilled>false</leaveResourcesWhenKilled>
+    <altitudeLayer>BuildingTall</altitudeLayer>
+    <passability>Impassable</passability>
+    <castEdgeShadows>true</castEdgeShadows>
+    <staticSunShadowHeight>1.0</staticSunShadowHeight>
+    <blockLight>true</blockLight>
+    <fillPercent>1</fillPercent>
+    <coversFloor>true</coversFloor>
+    <placingDraggableDimensions>1</placingDraggableDimensions>
+    <tickerType>Never</tickerType>
+    <rotatable>false</rotatable>
+    <selectable>true</selectable>
+    <neverMultiSelect>true</neverMultiSelect>
+    <terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
+    <holdsRoof>true</holdsRoof>
+	<saveCompressible>true</saveCompressible>
+	<mineable>true</mineable>
+    <building>
+      <isInert>true</isInert>
+      <ignoreNeedsPower>true</ignoreNeedsPower>
+      <isNaturalRock>false</isNaturalRock>
+      <soundMined>CollapseRock</soundMined>
+      <canBuildNonEdificesUnder>false</canBuildNonEdificesUnder>
+      <deconstructible>false</deconstructible>
+	  <repairable>false</repairable>
+    </building>
+    <damageMultipliers>
+      <li>
+        <damageDef>Bomb</damageDef>
+        <multiplier>1.75</multiplier>
+      </li>
+	  <li>
+        <damageDef>Bullet</damageDef>
+        <multiplier>0.03</multiplier>
+      </li>
+    </damageMultipliers>
+  </ThingDef> 
+ </ThingDefs>
