@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <ThingDef>
+    <defName>Gas_Sleeping</defName>
+	<label>sleeping gas cloud</label>
+    <thingClass>RemoteExplosives.GasCloud</thingClass>
+    <category>Item</category>
+	<graphicData>
+      <texPath>Things/Item/Chunk/ChunkSlag</texPath>
+      <graphicClass>RemoteExplosives.Graphic_GasCloud</graphicClass>
+      <shaderType>Transparent</shaderType>
+	  <drawSize>(1.2,1.2)</drawSize>
+    </graphicData>
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+    <mote Class="RemoteExplosives.MoteProperties_GasCloud">
+		<!-- game ticks between gas ticks --> 
+      	<GastickInterval>25</GastickInterval>
+		<!-- gas will attempt to spread every x gas ticks -->
+		<SpreadInterval>2</SpreadInterval> 
+		<!-- how much concentration a cloud passes to its neighbours in 1 spreading. A value of 1 will equalize concentrations with adjacent clouds on each spread attempt -->
+		<SpreadAmountMultiplier>1</SpreadAmountMultiplier>
+		<!-- when concentration is below this threshold, gas will not attempt to spread -->
+		<SpreadMinConcentration>100</SpreadMinConcentration>
+		<!-- concentrations below this will make the sprite progressively transparent -->
+		<FullAlphaConcentration>1000</FullAlphaConcentration>
+		<!-- the amount to concentration lost on each gas tick when on a tile with a roof -->		
+		<RoofedDissipation>1</RoofedDissipation>
+		<!-- the amount to concentration lost under the open sky -->		
+		<UnroofedDissipation>30</UnroofedDissipation>
+		<!-- how much the sprite will deviate from its base position while animating -->		
+		<AnimationAmplitude>.2</AnimationAmplitude> 
+		<!-- duration of an animation cycle in seconds -->
+		<AnimationPeriod> 
+			<min>4</min>
+			<max>6</max>
+		</AnimationPeriod> 
+    </mote>
+	<isSaveable>true</isSaveable>
+    <tickerType>Normal</tickerType>
+	<selectable>true</selectable>
+    <useHitPoints>false</useHitPoints>
+    <rotatable>false</rotatable>
+  </ThingDef>
+
+</Defs>

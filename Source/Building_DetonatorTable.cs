@@ -34,7 +34,7 @@ namespace RemoteExplosives
 
 		private bool wantDetonation;
 
-		private int ticksSinceLastInspections;
+		private int ticksSinceLastInspection;
 
 		private int numViableExplosives;
 
@@ -142,9 +142,9 @@ namespace RemoteExplosives
 		public override void Tick() {
 			base.Tick();
 			// find explosives in range
-			ticksSinceLastInspections++;
-			if (ticksSinceLastInspections>=FindExplosivesEveryTicks) {
-				ticksSinceLastInspections = 0;
+			ticksSinceLastInspection++;
+			if (ticksSinceLastInspection>=FindExplosivesEveryTicks) {
+				ticksSinceLastInspection = 0;
 				UpdateNumArmedExplosivesInRange();
 			}
 			// trigger scheduled explosives

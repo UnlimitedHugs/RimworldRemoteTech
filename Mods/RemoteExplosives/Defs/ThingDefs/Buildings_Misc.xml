@@ -18,7 +18,7 @@
     <Description>Becomes tougher than rock as it solidifies.</Description>
     <graphicData>
       <texPath>foam_blob</texPath>
-      <graphicClass>Graphic_Single</graphicClass>
+      <graphicClass>RemoteExplosives.Graphic_FoamBlob</graphicClass>
 	  <shaderType>CutoutComplex</shaderType>
       <drawSize>(1.1,1.1)</drawSize>
     </graphicData>
@@ -39,7 +39,7 @@
     <Passability>PassThroughOnly</Passability>
     <pathCost>230</pathCost>
     <tickerType>Normal</tickerType>
-	<building Class="RemoteExplosives.FoamBlobBuildingProperties">
+	<building Class="RemoteExplosives.BuildingProperties_FoamBlob">
 		<TicksToHarden>
 			<min>750</min>
 			<max>850</max>

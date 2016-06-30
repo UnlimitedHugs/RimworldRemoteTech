@@ -9,23 +9,25 @@ namespace RemoteExplosives {
 		private static readonly SoundDef spraySound = SoundDef.Named("RemoteFoamSpray");
 		private static readonly SoundDef solidifySound = SoundDef.Named("RemoteFoamSolidify");
 		
-		private const int numFramesInAnimation = 60;
+		private const float animationDuration = 1f;
 		private const float animationMagnitude = 1.5f;
 
-		private FoamBlobBuildingProperties foamProps;
+		private BuildingProperties_FoamBlob foamProps;
 		
 		private int ticksUntilHardened = -1;
 		private int numSpreadsLeft;
 		private int ticksUntilNextSpread;
+		[Unsaved]
+		private readonly DisposablePrimitiveWrapper<float> animationProgress = new DisposablePrimitiveWrapper<float>(1);
+		[Unsaved]
+		public Vector2 spriteScaleMultiplier = new Vector2(1f, 1f);
 
-		private float animationProgress = 1;
-		private Vector2 originalDrawSize;
 		private List<IntVec3> adjacentCells;
 		private bool justCreated;
 
 		public override void SpawnSetup() {
 			base.SpawnSetup();
-			foamProps = (FoamBlobBuildingProperties)def.building;
+			foamProps = (BuildingProperties_FoamBlob)def.building;
 			if(justCreated) {
 				SetFactionDirect(Faction.OfColony);
 				ticksUntilHardened = foamProps.TicksToHarden.RandomInRange;
@@ -53,8 +55,8 @@ namespace RemoteExplosives {
 		}
 
 		private void PrimeSpawnAnimation() {
-			animationProgress = 0;
-			originalDrawSize = def.graphicData.drawSize;
+			animationProgress.Value = 0f;
+			ValueInterpolator.Instance.InterpolateValue(animationProgress, 1f, animationDuration, ValueInterpolator.InterpolationCurveType.QuinticEaseOut);
 		}
 
 		private void Harden() {
@@ -83,34 +85,22 @@ namespace RemoteExplosives {
 
 		public override void Draw() {
 			if (animationProgress < 1) {
-				animationProgress += 1 / (float)numFramesInAnimation;
-				if (animationProgress > 1) animationProgress = 1;
+				//animationProgress += 1 / (float)numFramesInAnimation;
+				//if (animationProgress > 1) animationProgress = 1;
+				
+				//var easedProgress = RemoteExplosivesUtility.QuinticEaseOut(animationProgress, 0, 1f, 1f);
+				var easedProgress = animationProgress;
 				const float delta = .5f * animationMagnitude;
-				var easedProgress = RemoteExplosivesUtility.QuinticEaseOut(animationProgress, 0, 1f, 1f);
 				var fixedScalar = easedProgress;
 				var xScalar = 1f + delta - delta * easedProgress;
 				var yScalar = (1f - delta) + delta * easedProgress;
-				var scale = new Vector2(
-					originalDrawSize.x * fixedScalar * xScalar,
-					originalDrawSize.y * fixedScalar * yScalar
-					);
-				DrawScaledThing(this, scale);
-			} else {
-				base.Draw();
+				spriteScaleMultiplier = new Vector2(fixedScalar * xScalar, fixedScalar * yScalar);
 			}
+			base.Draw();
 		}
 
 		public override string GetInspectString() {
 			return string.Format("FoamBlob_solidify_progress".Translate(), 100-Mathf.Ceil((ticksUntilHardened / (float)foamProps.TicksToHarden.max) * 100));
-		}
-
-		private void DrawScaledThing(Thing thing, Vector2 scale) {
-			var mesh = MeshPool.GridPlane(scale);
-			Material material = thing.Graphic.MatAt(thing.Rotation, thing);
-			Graphics.DrawMesh(mesh, thing.DrawPos, Quaternion.identity, material, 0);
-			if (thing.Graphic.ShadowGraphic != null) {
-				thing.Graphic.ShadowGraphic.DrawWorker(thing.Position.ToVector3(), thing.Rotation, thing.def, thing);
-			}
 		}
 
 		private void SpreadFoam() {
