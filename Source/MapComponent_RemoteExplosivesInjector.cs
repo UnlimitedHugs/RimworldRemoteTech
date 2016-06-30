@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Reflection;
 using RimWorld;
+using UnityEngine;
 using Verse;
 using System.Linq;
 
@@ -18,6 +19,8 @@ namespace RemoteExplosives {
 		public MapComponent_RemoteExplosivesInjector() {
 			InjectTraderStocks();
 			InjectSteelRecipeVariants();
+			InitializeInterpolator();
+			EnsureComponentIsActive();
 		}
 
 		/**
@@ -61,6 +64,21 @@ namespace RemoteExplosives {
 			}
 		}
 
+		private void InitializeInterpolator() {
+			ValueInterpolator.Instance.Initialize(Find.RealTime.timeUnpaused);
+		}
+
+		/**
+		 * This is a sneaky way to ensure the component is active even in games where the mod was not active at map creation
+		 */
+		private void EnsureComponentIsActive() {
+			LongEventHandler.ExecuteWhenFinished(() => {
+				var components = Find.Map.components;
+				if(components.Any(c => c is MapComponent_RemoteExplosivesInjector)) return;
+				Find.Map.components.Add(this);
+			});
+		}
+
 		private bool SteelRecipesInjected() {
 			return DefDatabase<RecipeDef>.GetNamedSilentFail(BasicRemoteBombRecipe.defName + RemoteExplosivesUtility.InjectedRecipeNameSuffix) != null;
 		}
@@ -72,7 +90,7 @@ namespace RemoteExplosives {
 			});
 		} 
 		
-		// Will retrn null if recipe reqires no components
+		// Will retrn null if recipe requires no components
 		private RecipeDef TryMakeRecipeVariantWithSteel(RecipeDef recipeOriginal) {
 			var recipeCopy = (RecipeDef)cloneMethod.Invoke(recipeOriginal, null);
 			recipeCopy.defName += RemoteExplosivesUtility.InjectedRecipeNameSuffix;
@@ -105,6 +123,29 @@ namespace RemoteExplosives {
 			recipeCopy.ingredients = newIngredientList;
 			recipeCopy.ResolveReferences();
 			return recipeCopy;
-		} 
+		}
+
+		public override void MapComponentUpdate() {
+			base.MapComponentUpdate();
+			ValueInterpolator.Instance.Update(Find.RealTime.timeUnpaused);
+		}
+
+		public override void MapComponentOnGUI() {
+			base.MapComponentOnGUI();
+			if(Widgets.TextButton(new Rect(10, 10, 50, 24), "Cloud")) {
+				DebugTools.curTool = new DebugTool("GasCloud placer", () => {
+					const float concentration = 100000;
+					var cell = Gen.MouseCell();
+					var cloud = Find.ThingGrid.ThingAt<GasCloud>(cell);
+					if(cloud!=null) {
+						cloud.ReceiveConcentration(concentration);
+					} else {
+						cloud = (GasCloud)ThingMaker.MakeThing(ThingDef.Named("Gas_Sleeping"));
+						cloud.ReceiveConcentration(concentration);
+						GenPlace.TryPlaceThing(cloud, cell, ThingPlaceMode.Direct);
+					}
+				});
+			}
+		}
 	}
 }

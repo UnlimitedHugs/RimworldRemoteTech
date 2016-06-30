@@ -179,6 +179,9 @@ Arm, then detonate from the Remote Explosives Console.</description>
         </wickTicks>
       </li>
     </comps>
+	<building Class="RemoteExplosives.BuildingProperties_RemoteExplosive">
+		<startsArmed>false</startsArmed>
+	</building>
   </ThingDef>
   
   <ThingDef ParentName="RemoteExplosiveBase">
@@ -206,6 +209,9 @@ Arm, then detonate from the Remote Explosives Console.</description>
         </wickTicks>
       </li>
     </comps>
+	<building Class="RemoteExplosives.BuildingProperties_RemoteExplosive">
+		<startsArmed>false</startsArmed>
+	</building>
   </ThingDef>
   
   <ThingDef ParentName="RemoteExplosiveBase">
@@ -239,6 +245,9 @@ Arm, then detonate from the Remote Explosives Console.</description>
         </wickTicks>
       </li>
     </comps>
+	<building Class="RemoteExplosives.BuildingProperties_RemoteExplosive">
+		<startsArmed>false</startsArmed>
+	</building>
   </ThingDef>
   
   <!-- Mining explosives -->
@@ -273,6 +282,9 @@ Detonate from the Remote Explosives Console.</description>
         </wickTicks>
       </li>
     </comps>
+	<building Class="RemoteExplosives.BuildingProperties_RemoteExplosive">
+		<startsArmed>false</startsArmed>
+	</building>
   </ThingDef>
   
   <ThingDef ParentName="MiningExplosiveBase">
@@ -304,6 +316,9 @@ Detonate from the Remote Explosives Console.</description>
         </wickTicks>
       </li>
     </comps>
+	<building Class="RemoteExplosives.BuildingProperties_RemoteExplosive">
+		<startsArmed>false</startsArmed>
+	</building>
 	<placeWorkers>
 		<li>RemoteExplosives.PlaceWorker_MiningExplosiveSquare</li>
 	</placeWorkers>
@@ -338,6 +353,9 @@ Arm, then detonate from the Remote Explosives Console.</description>
 		<NumFoamBlobs>5</NumFoamBlobs>
       </li>
     </comps>
+	<building Class="RemoteExplosives.BuildingProperties_RemoteExplosive">
+		<startsArmed>false</startsArmed>
+	</building>
   </ThingDef>
 
 </ThingDefs>

@@ -34,6 +34,8 @@ namespace RemoteExplosives {
 		private RemoteExplosivesUtility.RemoteChannel currentChannel;
 		private RemoteExplosivesUtility.RemoteChannel desiredChannel;
 
+		private bool justCreated;
+
 		public bool IsArmed {
 			get { return isArmed; }
 		}
@@ -51,6 +53,11 @@ namespace RemoteExplosives {
 			comp.StartWick(true);
 		}
 
+		public override void PostMake() {
+			base.PostMake();
+			justCreated = true;
+		}
+
 		public override void SpawnSetup() {
 			base.SpawnSetup();
 			if (flareOverlayNormal == null) {
@@ -58,9 +65,16 @@ namespace RemoteExplosives {
 				flareOverlayStrong = GraphicDatabase.Get<Graphic_Single>(flareGraphicStrongPath, ShaderDatabase.TransparentPostLight);
 				flareOverlayStrong.drawSize = flareOverlayNormal.drawSize = def.graphicData.drawSize;
 			}
-
 			comp = GetComp<CompCustomExplosive>();
 			RemoteExplosivesUtility.UpdateSwitchDesignation(this);
+			
+			if (justCreated) {
+				var customProps = def.building as BuildingProperties_RemoteExplosive;
+				if (customProps != null && customProps.startsArmed) {
+					Arm();
+				}
+				justCreated = false;
+			}
 		}
 
 		public override void ExposeData() {

@@ -57,7 +57,8 @@ namespace RemoteExplosives {
 						}
 						GenPlace.TryPlaceThing(rockDrop, mineable.Position, ThingPlaceMode.Direct);
 					}
-				} else {
+				} else { 
+					// all other mineables
 					mineable.Destroy(DestroyMode.Kill);
 				}
 			}
