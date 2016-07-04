@@ -13,7 +13,8 @@ namespace RemoteExplosives {
 		private readonly ThingCategoryDef explosivesItemCategory = ThingCategoryDef.Named("Explosives");
 		private readonly RecipeDef BasicRemoteBombRecipe = DefDatabase<RecipeDef>.GetNamed("MakeRemoteBomb");
 		private readonly MethodInfo cloneMethod = typeof(object).GetMethod("MemberwiseClone", BindingFlags.Instance | BindingFlags.NonPublic);
-
+		private readonly bool showDebugControls = false;
+		
 		private const int ComponentValueInSteel = 40;
 
 		public MapComponent_RemoteExplosivesInjector() {
@@ -132,7 +133,11 @@ namespace RemoteExplosives {
 
 		public override void MapComponentOnGUI() {
 			base.MapComponentOnGUI();
-			if(Widgets.TextButton(new Rect(10, 10, 50, 24), "Cloud")) {
+			if(showDebugControls) DrawDebugControls();
+		}
+
+		private void DrawDebugControls(){
+			if(Widgets.TextButton(new Rect(10, 10, 50, 20), "Cloud")) {
 				DebugTools.curTool = new DebugTool("GasCloud placer", () => {
 					const float concentration = 100000;
 					var cell = Gen.MouseCell();
@@ -146,6 +151,7 @@ namespace RemoteExplosives {
 					}
 				});
 			}
+
 		}
 	}
 }

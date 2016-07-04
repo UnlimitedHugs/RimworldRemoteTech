@@ -150,7 +150,7 @@ Place as a building from the Explosives menu to use.</description>
           <max>50</max>
         </wickTicks>
 		<startWickHitPointsPercent>0</startWickHitPointsPercent>
-		<BreakSound>RemoteGlassBreak</BreakSound>
+		<breakSound>RemoteGlassBreak</breakSound>
       </li>
     </comps>
 	<statBases>

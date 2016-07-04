@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using RimWorld;
 using UnityEngine;
 using Verse;
 
@@ -9,16 +10,23 @@ namespace RemoteExplosives {
 		private const float SpreadingAnimationDuration = 1f;
 
 		private const string ConcentrationLabelId = "GasCloud_concentration_label";
+
+		public delegate bool TraversibilityTest(Building b, GasCloud g);
+		public static Dictionary<Type, TraversibilityTest> TraversibleBuildings = new Dictionary<Type, TraversibilityTest> {
+			{typeof(Building_Vent), (d,g)=> true },
+			{typeof(Building_Door), (d,g)=> ((Building_Door)d).Open }
+		};
+
 		// uniformely distribute gas ticks to reduce per frame workload
 		private static int GlobalTickOffsetCounter;
+		private static readonly List<GasCloud> adjacentBuffer = new List<GasCloud>(4);
+		private static readonly List<IntVec3> positionBuffer = new List<IntVec3>(4);
 
 		public Vector2 spriteOffset;
 		public Vector2 spriteScaleMultiplier = new Vector2(1f, 1f);
 		public float spriteAlpha = 1f;
 		public float spriteRotation;
-
-		private readonly List<GasCloud> adjacentBuffer = new List<GasCloud>(4);
-		private readonly List<IntVec3> positionBuffer = new List<IntVec3>(4);
+		public int relativeZOrder; // to avoid z fighting among clouds
 		private MoteProperties_GasCloud gasProps;
 		
 		private float interpolatedAlpha;
@@ -26,9 +34,9 @@ namespace RemoteExplosives {
 		private DisposablePrimitiveWrapper<float> interpolatedOffsetY;
 		private DisposablePrimitiveWrapper<float> interpolatedScale;
 		private DisposablePrimitiveWrapper<float> interpolatedRotation;
+		private int gasTickOffset;
 
 		//saved fields
-		private int gasTickOffset;
 		private float concentration;
 		//
 
@@ -36,10 +44,17 @@ namespace RemoteExplosives {
 			get { return concentration; }
 		}
 
+		public bool IsBlocked {
+			get {
+				return !TileIsGasTraversible(Position, this);
+			}
+		}
+
 		public override void SpawnSetup() {
 			base.SpawnSetup();
 			gasProps = def.mote as MoteProperties_GasCloud;
 			gasTickOffset = ++GlobalTickOffsetCounter;
+			relativeZOrder = GlobalTickOffsetCounter % 100;
 			if (gasProps == null) throw new Exception("Missing required gas mote properties in " + def.defName);
 			var spreadingTransitionStarted = interpolatedOffsetX != null;
 			if (!spreadingTransitionStarted) {
@@ -55,6 +70,11 @@ namespace RemoteExplosives {
 			}
 		}
 
+		public override void ExposeData() {
+			base.ExposeData();
+			Scribe_Values.LookValue(ref concentration, "concentration", 0);
+		}
+
 		public override void Draw() {
 			var targetApha = Mathf.Min(1f, concentration / gasProps.FullAlphaConcentration);
 			spriteAlpha = interpolatedAlpha = DoAdditiveEasing(interpolatedAlpha, targetApha, AlphaEasingDivider, Time.deltaTime);
@@ -65,8 +85,7 @@ namespace RemoteExplosives {
 		}
 
 		public override string GetInspectString() {
-			var extra = "adjacent: " + adjacentBuffer.Count + " positions:" + positionBuffer.Count+"\n";
-			return extra+string.Format(ConcentrationLabelId.Translate(), string.Format("{0:n0}", concentration));
+			return string.Format(ConcentrationLabelId.Translate(), string.Format("{0:n0}", concentration));
 		}
 
 		public override void Tick() {
@@ -87,7 +106,7 @@ namespace RemoteExplosives {
 			ValueInterpolator.Instance.InterpolateValue(interpolatedOffsetY, 0, SpreadingAnimationDuration, ValueInterpolator.InterpolationCurveType.QuinticEaseOut);
 		}
 
-		public void GasTick() {
+		public virtual void GasTick() {
 			// dissipate
 			var underRoof = Find.RoofGrid.Roofed(Position);
 			concentration -= underRoof ? gasProps.RoofedDissipation : gasProps.UnroofedDissipation;
@@ -101,6 +120,11 @@ namespace RemoteExplosives {
 			var gasTickFitForSpreading = (currentTick + gasTickOffset) % (gasProps.GastickInterval*gasProps.SpreadInterval) == 0;
 			if(gasTickFitForSpreading) {
 				TryCreateNewNeighbours();
+			}
+
+			// if filled in
+			if(IsBlocked) {
+				ForcePushConcentrationToNeighbours();
 			}
 
 			// balance concentration
@@ -162,7 +186,7 @@ namespace RemoteExplosives {
 			positionBuffer.Clear();
 			for (int i = 0; i < 4; i++) {
 				var adjPosition = GenAdj.CardinalDirections[i] + Position;
-				if(Find.PathGrid.Walkable(adjPosition) && Find.ThingGrid.ThingAt<GasCloud>(adjPosition) == null) {
+				if(TileIsGasTraversible(adjPosition, this) && Find.ThingGrid.ThingAt<GasCloud>(adjPosition) == null) {
 					positionBuffer.Add(adjPosition);
 				}
 			}
@@ -184,39 +208,41 @@ namespace RemoteExplosives {
 
 		private void ShareConcentrationWithMinorNeighbours() {
 			var neighbours = GetAdjacentGasClouds();
-			var neighbourConcentrationPool = 0f;
 			var numSharingNeighbours = 0;
-			var pathGrid = Find.PathGrid;
 			for (int i = 0; i < neighbours.Count; i++) {
 				var neighbour = neighbours[i];
-				if (neighbour.Concentration >= concentration || !pathGrid.WalkableFast(neighbour.Position)) { // also skip clouds on closed off tiles
+				if (neighbour.Concentration >= concentration || neighbour.IsBlocked) {
 					neighbours[i] = null;
 				} else {
-					neighbourConcentrationPool += neighbour.Concentration;
 					numSharingNeighbours++;
 				}
 			}
-			if (neighbourConcentrationPool == 0) neighbourConcentrationPool = numSharingNeighbours;
 			if (numSharingNeighbours > 0) {
-				var includeSelf = pathGrid.WalkableFast(Position) ? 1 : 0; // attempt to push all concentration if own tile became filled
-				var equalSharePerNeighbour = (neighbourConcentrationPool + concentration) / (numSharingNeighbours + includeSelf);
-				var bestAmountToShare = concentration - equalSharePerNeighbour;
-				if (bestAmountToShare > 0) {
-					var adjustedAmountToShare = bestAmountToShare * gasProps.SpreadAmountMultiplier;
-					for (int i = 0; i < neighbours.Count; i++) {
-						var neighbour = neighbours[i];
-						if (neighbour == null) continue;
-						var neighbourConcentration = neighbour.Concentration > 0 ? neighbour.Concentration : 1;
-						var proportionalAmountToShare = (neighbourConcentration / neighbourConcentrationPool) * adjustedAmountToShare;
-						neighbour.ReceiveConcentration(proportionalAmountToShare);
-						concentration -= proportionalAmountToShare;
-					}
+				for (int i = 0; i < neighbours.Count; i++) {
+					var neighbour = neighbours[i];
+					if (neighbour == null) continue;
+					var neighbourConcentration = neighbour.concentration > 0 ? neighbour.Concentration : 1;
+					var amountToShare = ((concentration - neighbourConcentration)/(numSharingNeighbours+1))*gasProps.SpreadAmountMultiplier;
+					neighbour.ReceiveConcentration(amountToShare);
+					concentration -= amountToShare;
 				}
+
+			}
+		}
+
+		private void ForcePushConcentrationToNeighbours() {
+			var neighbours = GetAdjacentGasClouds();
+			for (int i = 0; i < neighbours.Count; i++) {
+				var neighbour = neighbours[i];
+				if (neighbour.IsBlocked) continue;
+				var pushAmount = concentration/neighbours.Count;
+				neighbour.ReceiveConcentration(pushAmount);
+				concentration -= pushAmount;
 			}
 		}
 
 		private void TryCreateNewNeighbours() {
-			var spreadsLeft = Mathf.FloorToInt(concentration / gasProps.SpreadMinConcentration) - 1;
+			var spreadsLeft = Mathf.FloorToInt(concentration / gasProps.SpreadMinConcentration);
 			if (spreadsLeft <= 0) return;
 			var viableCells = GetSpreadableAdacentCells();
 			for (int i = 0; i < viableCells.Count; i++) {
@@ -229,5 +255,13 @@ namespace RemoteExplosives {
 			}
 		}
 
+		private bool TileIsGasTraversible(IntVec3 pos, GasCloud sourceCloud) {
+			if (!pos.InBounds()) return false;
+			var edifice = Find.EdificeGrid[pos];
+			var walkable = Find.PathGrid.WalkableFast(pos);
+			TraversibilityTest travTest = null;
+			if (edifice != null) TraversibleBuildings.TryGetValue(edifice.GetType(), out travTest);
+			return (walkable && travTest == null) || (travTest != null && travTest(edifice, sourceCloud));
+		}
 	}
 }

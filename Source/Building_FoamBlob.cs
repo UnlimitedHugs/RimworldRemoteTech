@@ -30,7 +30,7 @@ namespace RemoteExplosives {
 			foamProps = (BuildingProperties_FoamBlob)def.building;
 			if(justCreated) {
 				SetFactionDirect(Faction.OfColony);
-				ticksUntilHardened = foamProps.TicksToHarden.RandomInRange;
+				ticksUntilHardened = foamProps.ticksToHarden.RandomInRange;
 				spraySound.PlayOneShot(this);
 				PrimeSpawnAnimation();
 				justCreated = false;
@@ -51,7 +51,7 @@ namespace RemoteExplosives {
 
 		public void SetSpreadingCharges(int numCharges) {
 			numSpreadsLeft = numCharges;
-			ticksUntilNextSpread = foamProps.TicksBetweenSpreading.RandomInRange;
+			ticksUntilNextSpread = foamProps.ticksBetweenSpreading.RandomInRange;
 		}
 
 		private void PrimeSpawnAnimation() {
@@ -61,7 +61,7 @@ namespace RemoteExplosives {
 
 		private void Harden() {
 			Destroy();
-			var wallTile = ThingMaker.MakeThing(foamProps.HardenedDef);
+			var wallTile = ThingMaker.MakeThing(foamProps.hardenedDef);
 			wallTile.SetFactionDirect(Faction.OfColony);
 			GenPlace.TryPlaceThing(wallTile, Position, ThingPlaceMode.Direct);
 			solidifySound.PlayOneShot(this);
@@ -74,7 +74,7 @@ namespace RemoteExplosives {
 				if(ticksUntilNextSpread<=0) {
 					SpreadFoam();
 					numSpreadsLeft--;
-					ticksUntilNextSpread = foamProps.TicksBetweenSpreading.RandomInRange;
+					ticksUntilNextSpread = foamProps.ticksBetweenSpreading.RandomInRange;
 				}
 			}
 			ticksUntilHardened--;
@@ -100,7 +100,7 @@ namespace RemoteExplosives {
 		}
 
 		public override string GetInspectString() {
-			return string.Format("FoamBlob_solidify_progress".Translate(), 100-Mathf.Ceil((ticksUntilHardened / (float)foamProps.TicksToHarden.max) * 100));
+			return string.Format("FoamBlob_solidify_progress".Translate(), 100-Mathf.Ceil((ticksUntilHardened / (float)foamProps.ticksToHarden.max) * 100));
 		}
 
 		private void SpreadFoam() {

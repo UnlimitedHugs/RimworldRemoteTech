@@ -20,7 +20,7 @@
       <texPath>foam_blob</texPath>
       <graphicClass>RemoteExplosives.Graphic_FoamBlob</graphicClass>
 	  <shaderType>CutoutComplex</shaderType>
-      <drawSize>(1.1,1.1)</drawSize>
+      <drawSize>(1.2,1.2)</drawSize>
     </graphicData>
     <drawerType>RealtimeOnly</drawerType>
 	<castEdgeShadows>false</castEdgeShadows>
@@ -40,26 +40,26 @@
     <pathCost>230</pathCost>
     <tickerType>Normal</tickerType>
 	<building Class="RemoteExplosives.BuildingProperties_FoamBlob">
-		<TicksToHarden>
+		<ticksToHarden>
 			<min>750</min>
 			<max>850</max>
-		</TicksToHarden>
-		<TicksBetweenSpreading>
+		</ticksToHarden>
+		<ticksBetweenSpreading>
 			<min>10</min>
 			<max>15</max>
-		</TicksBetweenSpreading>
-		<HardenedDef>FoamWall</HardenedDef>
+		</ticksBetweenSpreading>
+		<hardenedDef>FoamWall</hardenedDef>
 	</building>
   </ThingDef>
   
-   <ThingDef ParentName="BuildingMiscBase" Name="FoamWall">
+  <ThingDef ParentName="BuildingMiscBase" Name="FoamWall">
     <defName>FoamWall</defName>
     <label>hardened foam wall</label>
     <thingClass>RemoteExplosives.Building_FoamWall</thingClass>
     <category>Building</category>
     <description>Solidified chemical foam. Extremely tough and non-flammable.</description>
     <graphicData>
-      <texPath>foam_wall</texPath>
+      <texPath>FoamWall</texPath>
       <graphicClass>Graphic_Appearances</graphicClass>
       <linkType>CornerFiller</linkType>
       <linkFlags>
@@ -79,7 +79,7 @@
     <blueprintGraphicData>
       <texPath>Things/Building/Linked/Wall_Blueprint_Atlas</texPath>
     </blueprintGraphicData>
-    <uiIconPath>foam_wall/foam_wall_icon</uiIconPath>
+    <uiIconPath>FoamWall/foam_wall_icon</uiIconPath>
     <statBases>
       <MaxHitPoints>8500</MaxHitPoints>
       <WorkToMake>0</WorkToMake>

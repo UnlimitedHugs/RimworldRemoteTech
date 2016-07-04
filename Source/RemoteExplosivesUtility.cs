@@ -8,6 +8,7 @@ namespace RemoteExplosives {
 
 		private static readonly SoundDef UIChannelSound = SoundDef.Named("RemoteUIDialClick");
 		private static readonly ResearchProjectDef channelsResearchDef = ResearchProjectDef.Named("RemoteExplosivesChannels");
+		private static readonly KeyBindingDef nextChannelKeybindingDef = KeyBindingDef.Named("RemoteExplosivesNextChannel");
 		private static readonly Texture2D[] UITex_Channels = new[] {
 			ContentFinder<Texture2D>.Get("UIChannel0"),
 			ContentFinder<Texture2D>.Get("UIChannel1"),
@@ -19,6 +20,7 @@ namespace RemoteExplosives {
 		private static readonly string CurrenthannelLabelBase = "RemoteExplosive_currentChannel".Translate();
 
 		private static DesignationDef desigationDef;
+
 		public static DesignationDef SwitchDesigationDef {
 			get { return desigationDef ?? (desigationDef = DefDatabase<DesignationDef>.GetNamed("RemoteExplosiveSwitch")); }
 		}
@@ -60,7 +62,8 @@ namespace RemoteExplosives {
 				icon = GetUITextureForChannel(currentChannel),
 				activateSound = UIChannelSound,
 				defaultDesc = ChannelDialDesc,
-				defaultLabel = String.Format(ChannelDialLabelBase, GetChannelName(currentChannel))
+				defaultLabel = String.Format(ChannelDialLabelBase, GetChannelName(currentChannel)),
+				hotKey = nextChannelKeybindingDef
 			};
 		}
 

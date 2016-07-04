@@ -59,7 +59,13 @@
     <Compile Include="Source\Building_FoamBlob.cs" />
     <Compile Include="Source\CompChemicalExplosive.cs" />
     <Compile Include="Source\CompProperties_ChemicalExplosive.cs" />
+    <Compile Include="Source\HediffCompProps_SeverityRecovery.cs" />
+    <Compile Include="Source\HediffComp_SeverityRecovery.cs" />
+    <Compile Include="Source\HediffDef_NonLethal.cs" />
+    <Compile Include="Source\Hediff_NonLethal.cs" />
+    <Compile Include="Source\MoteProperties_GasCloud_HediffGiver.cs" />
     <Compile Include="Source\GasCloud.cs" />
+    <Compile Include="Source\GasCloud_HediffGiver.cs" />
     <Compile Include="Source\Graphic_FoamBlob.cs" />
     <Compile Include="Source\MoteProperties_GasCloud.cs" />
     <Compile Include="Source\Graphic_GasCloud.cs" />
@@ -74,6 +80,7 @@
     <Compile Include="Source\TraderStockInjectorDef.cs" />
     <Compile Include="Source\BuildingProperties_FoamBlob.cs" />
     <Compile Include="Source\ValueInterpolator.cs" />
+    <Compile Include="Source\WorkGiver_DetonatorTableChannels.cs" />
     <Compile Include="Source\WorkGiver_RemoteExposive.cs" />
     <Compile Include="Source\ISwitchable.cs" />
     <Compile Include="Source\JobDriver_DetonateRemoteExplosives.cs" />
@@ -83,9 +90,7 @@
     <Compile Include="Source\WorkGiver_DetonatorTable.cs" />
     <Compile Include="Source\DisposablePrimitiveWrapper.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Tests\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

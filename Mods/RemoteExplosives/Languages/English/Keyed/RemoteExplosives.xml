@@ -34,4 +34,5 @@
 	
 	<GasCloud_concentration_label>Concentration: {0}</GasCloud_concentration_label>
 	
+	<HediffRecovery_status_label>recovering</HediffRecovery_status_label>
 </LanguageData>

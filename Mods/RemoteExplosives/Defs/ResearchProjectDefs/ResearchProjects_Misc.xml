@@ -4,10 +4,11 @@
   <ResearchProjectDef>
     <defName>RemoteDetonator</defName>
     <label>Remote Detonator</label>
-    <description>Allows you to build a console that detonates remote explosives.
-Comes with two types of remote mining charges.
-Research Explosive IEDs or Incendiary IEDs to deploy combat-grade remote explosives.</description>
-    <totalCost>1300</totalCost>
+    <description>Allows you to build a console that detonates remote explosives, as well as a workbench to manifacture them.
+The explosives workshop can create mining explosives that can be deployed as Fracturing or Clearing charges.
+	
+Research Explosive IEDs or Incendiary IEDs to manifacture combat-grade remote explosives.</description>
+    <totalCost>1500</totalCost>
     <prerequisites></prerequisites>
   </ResearchProjectDef>
   
@@ -25,12 +26,25 @@ The detonator must be upgraded with a component for this to work.</description>
   <ResearchProjectDef>
     <defName>RemoteEmpMine</defName>
     <label>Remote EMP Charge</label>
-    <description>Allows the deployment of EMP charges that can be triggered with a remote detonator.
-	While expensive, they can be devastating against mechanoids.</description>
+    <description>Allows the creation of EMP charges that can be triggered with a remote detonator.
+While expensive, they can be devastating against mechanoids when properly used.</description>
     <totalCost>1500</totalCost>
     <prerequisites>
 		<li>RemoteDetonator</li>
 	</prerequisites>
   </ResearchProjectDef>
+  
+ <ResearchProjectDef>
+    <defName>RemoteChemicals</defName>
+    <label>Remote Chemical Charges</label>
+    <description>Allows the creation of remotely triggered canisters for specialized chemicals.
+The sealing foam can create walls and seal passages, while the sleeping gas can disable biological targets.
+Use in enclosed areas for best results.</description>
+    <totalCost>1800</totalCost>
+    <prerequisites>
+		<li>RemoteDetonator</li>
+	</prerequisites>
+  </ResearchProjectDef>
+   
   
 </ResearchProjectDefs>

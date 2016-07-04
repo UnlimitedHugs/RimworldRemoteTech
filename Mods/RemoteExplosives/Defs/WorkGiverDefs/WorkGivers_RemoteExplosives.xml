@@ -21,7 +21,7 @@
 
   <WorkGiverDef>
     <defName>InstallChannelsComponent</defName>
-    <giverClass>RemoteExplosives.WorkGiver_DetonatorTable</giverClass>
+    <giverClass>RemoteExplosives.WorkGiver_DetonatorTableChannels</giverClass>
     <workType>Construction</workType>
     <priorityInType>200</priorityInType>
     <verb>install channel component</verb>

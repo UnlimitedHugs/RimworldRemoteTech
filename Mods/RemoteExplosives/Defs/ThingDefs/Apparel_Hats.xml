@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ThingDefs>
+
+  <ThingDef ParentName="HatMakeableBase">
+    <defName>Apparel_GasMask</defName>
+    <label>gas mask</label>
+    <description>A mask that protects the wearer from toxic gasses and other air-borne contaminants.
+The filters wear out fairly quickly, so it's recommended to wear this only when necessary.</description>
+    <techLevel>Midworld</techLevel>
+    <recipeMaker>
+      <unfinishedThingDef>UnfinishedTechArmor</unfinishedThingDef>
+    </recipeMaker>
+    <graphicData>
+      <texPath>GasMask/GasMask</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <statBases>
+      <WorkToMake>3500</WorkToMake>
+      <MaxHitPoints>50</MaxHitPoints>
+      <MarketValue>160</MarketValue>
+      <ArmorRating_Blunt>0.05</ArmorRating_Blunt>
+      <ArmorRating_Sharp>0.05</ArmorRating_Sharp>
+    </statBases>
+    <costList>
+      <Components>2</Components>
+      <Medicine>2</Medicine>
+	  <Steel>40</Steel>
+    </costList>
+    <equippedStatOffsets>
+      <ShootingAccuracy>-0.05</ShootingAccuracy>
+      <SocialImpact>-0.2</SocialImpact>
+    </equippedStatOffsets>
+    <apparel>
+      <bodyPartGroups>
+        <li>FullHead</li>
+      </bodyPartGroups>
+      <worngraphicPath>GasMask/GasMask</worngraphicPath>
+      <layers>
+        <li>Overhead</li>
+      </layers>
+      <commonality>.8</commonality>
+      <tags>
+		<li>Outlander</li>
+        <li>Military</li>
+      </tags>
+      <defaultOutfitTags>
+		<li>Soldier</li>
+	  </defaultOutfitTags> 
+	  <wearPerDay>12.5</wearPerDay>
+	</apparel>
+    <colorGenerator Class="ColorGenerator_Options">
+      <options>
+        <li>
+          <weight>10</weight>
+          <only>RGBA(0.33,0.33,0.33,1)</only>
+        </li>
+        <li>
+          <weight>5</weight>
+          <only>RGBA(1,0.56,0.7,1)</only>
+        </li>
+        <li>
+          <weight>10</weight>
+          <only>RGBA(0.9,0.9,0.9,1)</only>
+        </li>
+      </options>
+    </colorGenerator>
+  </ThingDef>
+
+</ThingDefs>
