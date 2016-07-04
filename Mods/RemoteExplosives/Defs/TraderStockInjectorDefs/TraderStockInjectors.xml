@@ -15,6 +15,20 @@
       </li>
     </stockGenerators>
   </TraderStockInjectorDef>
+  
+  <TraderStockInjectorDef>
+    <defName>BulkCaravan_inject</defName>
+    <traderDef>Caravan_Outlander_BulkGoods</traderDef>
+    <stockGenerators>
+      <li Class="StockGenerator_SingleDef">
+        <thingDef>MiningExplosiveComponent</thingDef>
+        <countRange>
+          <min>2</min>
+          <max>4</max>
+        </countRange>
+      </li>
+    </stockGenerators>
+  </TraderStockInjectorDef>
 
   <TraderStockInjectorDef>
     <defName>CombatSupplier_inject</defName>
@@ -45,6 +59,37 @@
 	  </li>
     </stockGenerators>
   </TraderStockInjectorDef>
+  
+  <TraderStockInjectorDef>
+    <defName>CombatSupplierCaravan_inject</defName>
+    <traderDef>Caravan_Outlander_CombatSupplier</traderDef>
+    <stockGenerators>
+	<!-- combat -->
+	<li Class="StockGenerator_SingleDef">
+        <thingDef>RemoteBomb</thingDef>
+        <countRange>
+          <min>2</min>
+          <max>5</max>
+        </countRange>
+      </li>
+	<li Class="StockGenerator_SingleDef">
+		<thingDef>RemoteFireBomb</thingDef>
+		<countRange>
+		  <min>1</min>
+		  <max>4</max>
+		</countRange>
+	  </li>
+	<!-- emp -->
+	<li Class="StockGenerator_SingleDef">
+		<thingDef>RemoteEmpBomb</thingDef>
+		<price>Expensive</price>
+		<countRange>
+		  <min>1</min>
+		  <max>1</max>
+		</countRange>
+	  </li>
+    </stockGenerators>
+  </TraderStockInjectorDef>
 
   <TraderStockInjectorDef>
     <defName>PirateMerchant_inject</defName>
@@ -69,12 +114,42 @@
 	  </li>
     </stockGenerators>
   </TraderStockInjectorDef>
+
+  <TraderStockInjectorDef>
+    <defName>PirateCaravan_inject</defName>
+    <traderDef>Caravan_Outlander_PirateMerchant</traderDef>
+    <stockGenerators>
+	 <!-- combat, cheap -->
+	 <li Class="StockGenerator_SingleDef">
+        <thingDef>RemoteBomb</thingDef>
+        <price>Cheap</price>
+        <countRange>
+          <min>0</min>
+          <max>6</max>
+        </countRange>
+      </li>
+	<li Class="StockGenerator_SingleDef">
+		<thingDef>RemoteFireBomb</thingDef>
+		<price>Cheap</price>
+		<countRange>
+		  <min>0</min>
+		  <max>6</max>
+		</countRange>
+	  </li>
+    </stockGenerators>
+  </TraderStockInjectorDef>
   
   <TraderStockInjectorDef>
     <defName>Exotic_inject</defName>
     <traderDef>Orbital_Misc_Exotic</traderDef>
     <stockGenerators>
-		<!-- foam, gas -->
+		<li Class="StockGenerator_SingleDef">
+			<thingDef>RemoteChemicalCan</thingDef>
+			<countRange>
+			  <min>2</min>
+			  <max>8</max>
+			</countRange>
+		</li>
     </stockGenerators>
   </TraderStockInjectorDef>
 </DefPackage-TraderStockInjectorDef>

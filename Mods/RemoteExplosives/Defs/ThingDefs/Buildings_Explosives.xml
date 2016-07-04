@@ -156,13 +156,13 @@ Research different types of remote explosives to unlock available recipes.</Desc
   
   <ThingDef ParentName="RemoteExplosiveBase">
     <defName>TrapRemoteBomb</defName>
-    <label>Remote explosive charge</label>
+    <label>remote explosive charge</label>
     <graphicData>
       <texPath>remote_mine</texPath>
       <graphicClass>Graphic_Single</graphicClass>
     </graphicData>
     <description>An explosive canister with a radio trigger.
-Craft at the Explosives Bench.
+Craft at the Explosives Workshop.
 Arm, then detonate from the Remote Explosives Console.</description>
     <costList>
       <RemoteBomb>1</RemoteBomb>
@@ -186,13 +186,13 @@ Arm, then detonate from the Remote Explosives Console.</description>
   
   <ThingDef ParentName="RemoteExplosiveBase">
     <defName>TrapRemoteIncendiary</defName>
-    <label>Remote incendiary charge</label>
+    <label>remote incendiary charge</label>
     <graphicData>
       <texPath>remote_mine_incendiary</texPath>
       <graphicClass>Graphic_Single</graphicClass>
     </graphicData>
     <description>A canister filled with flammable chemicals with a radio trigger.
-Craft at the Explosives Bench.
+Craft at the Explosives Workshop.
 Arm, then detonate from the Remote Explosives Console.</description>
     <costList>
       <RemoteFireBomb>1</RemoteFireBomb>
@@ -216,7 +216,7 @@ Arm, then detonate from the Remote Explosives Console.</description>
   
   <ThingDef ParentName="RemoteExplosiveBase">
     <defName>TrapRemoteEmp</defName>
-    <label>Remote EMP charge</label>
+    <label>remote EMP charge</label>
     <thingClass>RemoteExplosives.Building_RemoteExplosiveEmp</thingClass>
     <graphicData>
       <texPath>mine_emp</texPath>
@@ -224,7 +224,7 @@ Arm, then detonate from the Remote Explosives Console.</description>
     </graphicData>
     <description>A single-use electromagnetic pulse generator.
 Very powerful against mechanoids.
-Craft at the Explosives Bench.
+Craft at the Explosives Workshop.
 Arm, then detonate from the Remote Explosives Console.</description>
     <costList>
       <RemoteEmpBomb>1</RemoteEmpBomb>
@@ -255,13 +255,13 @@ Arm, then detonate from the Remote Explosives Console.</description>
   <ThingDef ParentName="MiningExplosiveBase">
     <defName>MiningChargeChunks</defName>
 	<thingClass>RemoteExplosives.Building_MiningExplosive</thingClass>
-    <label>Fracturing explosive</label>
+    <label>fracturing explosive</label>
     <graphicData>
       <texPath>rock_explosive</texPath>
       <graphicClass>Graphic_Single</graphicClass>
     </graphicData>
     <description>A remote mining explosive that creates a lot of rock chunks.
-Requires a part crafted at the Machining Bench.
+Requires a part crafted at the Explosives Workshop.
 Detonate from the Remote Explosives Console.</description>
     <costList>
       <MiningExplosiveComponent>1</MiningExplosiveComponent>
@@ -283,20 +283,20 @@ Detonate from the Remote Explosives Console.</description>
       </li>
     </comps>
 	<building Class="RemoteExplosives.BuildingProperties_RemoteExplosive">
-		<startsArmed>false</startsArmed>
+		<startsArmed>true</startsArmed>
 	</building>
   </ThingDef>
   
   <ThingDef ParentName="MiningExplosiveBase">
     <defName>MiningChargeClearing</defName>
 	<thingClass>RemoteExplosives.Building_MiningExplosiveSquare</thingClass>
-    <label>Clearing explosive</label>
+    <label>clearing explosive</label>
     <graphicData>
       <texPath>clear_explosive</texPath>
       <graphicClass>Graphic_Single</graphicClass>
     </graphicData>
     <description>A remote mining explosive that can clear a room-sized area without creating much rubble.
-Requires a part crafted at the Machining Bench.
+Requires a part crafted at the Explosives Workshop.
 Detonate from the Remote Explosives Console.</description>
     <costList>
       <MiningExplosiveComponent>1</MiningExplosiveComponent>
@@ -317,7 +317,7 @@ Detonate from the Remote Explosives Console.</description>
       </li>
     </comps>
 	<building Class="RemoteExplosives.BuildingProperties_RemoteExplosive">
-		<startsArmed>false</startsArmed>
+		<startsArmed>true</startsArmed>
 	</building>
 	<placeWorkers>
 		<li>RemoteExplosives.PlaceWorker_MiningExplosiveSquare</li>
@@ -328,14 +328,14 @@ Detonate from the Remote Explosives Console.</description>
   
   <ThingDef ParentName="RemoteExplosiveBase">
     <defName>RemoteCanFoam</defName>
-    <label>Sealing Foam Can</label>
+    <label>sealing foam can</label>
     <thingClass>RemoteExplosives.Building_RemoteExplosive</thingClass>
     <graphicData>
       <texPath>canister_foam</texPath>
       <graphicClass>Graphic_Single</graphicClass>
     </graphicData>
     <description>A remotely triggered canister that releases a rapidly hardening foam. 
-Craft at the Explosives Bench.
+Craft at the Explosives Workshop.
 Arm, then detonate from the Remote Explosives Console.</description>
     <costList>
       <RemoteChemicalCan>1</RemoteChemicalCan>
@@ -348,9 +348,9 @@ Arm, then detonate from the Remote Explosives Console.</description>
           <max>50</max>
         </wickTicks>
 		<startWickHitPointsPercent>.2</startWickHitPointsPercent>
-		<BreakSound>RemoteGlassBreak</BreakSound>
-		<SpawnThingDef>WallFoamBlob</SpawnThingDef>
-		<NumFoamBlobs>5</NumFoamBlobs>
+		<breakSound>RemoteGlassBreak</breakSound>
+		<spawnThingDef>WallFoamBlob</spawnThingDef>
+		<numFoamBlobs>5</numFoamBlobs>
       </li>
     </comps>
 	<building Class="RemoteExplosives.BuildingProperties_RemoteExplosive">
@@ -358,4 +358,35 @@ Arm, then detonate from the Remote Explosives Console.</description>
 	</building>
   </ThingDef>
 
+  <ThingDef ParentName="RemoteExplosiveBase">
+    <defName>RemoteCanSleepGas</defName>
+    <label>sleeping gas can</label>
+    <thingClass>RemoteExplosives.Building_RemoteExplosive</thingClass>
+    <graphicData>
+      <texPath>canister_gas</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <description>A remotely triggered canister filled with sleeping gas. 
+Craft at the Explosives Workshop.
+Arm, then detonate from the Remote Explosives Console.</description>
+    <costList>
+      <RemoteChemicalCan>1</RemoteChemicalCan>
+    </costList>
+    <comps>
+      <li Class="RemoteExplosives.CompProperties_ChemicalExplosive">
+        <compClass>RemoteExplosives.CompChemicalExplosive</compClass>
+        <wickTicks>
+          <min>50</min>
+          <max>50</max>
+        </wickTicks>
+		<startWickHitPointsPercent>.2</startWickHitPointsPercent>
+		<breakSound>RemoteGlassBreak</breakSound>
+		<spawnThingDef>Gas_Sleeping</spawnThingDef>
+		<gasConcentration>80000</gasConcentration>
+      </li>
+    </comps>
+	<building Class="RemoteExplosives.BuildingProperties_RemoteExplosive">
+		<startsArmed>false</startsArmed>
+	</building>
+  </ThingDef>
 </ThingDefs>

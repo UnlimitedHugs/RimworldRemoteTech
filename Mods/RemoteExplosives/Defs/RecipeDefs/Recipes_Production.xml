@@ -217,7 +217,7 @@
 	<recipeUsers>
 		<li>RemoteExplosivesBench</li>
 	</recipeUsers>
-    <researchPrerequisite>RemoteDetonator</researchPrerequisite>
+    <researchPrerequisite>RemoteChemicals</researchPrerequisite>
     <workSpeedStat>SmithingSpeed</workSpeedStat>
     <effectWorking>Cook</effectWorking>
     <soundWorking>Recipe_Machining</soundWorking>

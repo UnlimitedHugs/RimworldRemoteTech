@@ -12,7 +12,7 @@ namespace RemoteExplosives {
 		public float AnimationAmplitude;
 		public FloatRange AnimationPeriod;
 
-		public void PostLoad() {
+		public virtual void PostLoad() {
 			Assert(GastickInterval > 0, "GastickInterval must be greater than zero");
 			Assert(SpreadInterval > 0, "SpreadInterval must be greater than zero");
 			Assert(SpreadAmountMultiplier >= 0 && SpreadAmountMultiplier <= 1, "SpreadAmountMultiplier must be between 0 and 1");
