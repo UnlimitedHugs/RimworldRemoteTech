@@ -11,9 +11,6 @@ namespace RemoteExplosives {
 		public override void SpawnSetup() {
 			base.SpawnSetup();
 			ticksBetweenBlinksLit = 25;
-			if(!IsArmed) {
-				Arm();
-			}
 			var comp = GetComp<CompMiningExplosive>();
 			if (comp != null) {
 				affectedCells = GetAffectedCellsAtPosition(Position, comp.MiningProps.miningRadius);

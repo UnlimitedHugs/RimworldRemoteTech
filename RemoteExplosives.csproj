@@ -35,6 +35,7 @@
       <HintPath>..\Assembly-CSharp.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -48,19 +49,38 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Source\BuildingProperties_RemoteExplosive.cs" />
+    <Compile Include="Source\Building_FoamWall.cs" />
     <Compile Include="Source\Building_MiningExplosive.cs" />
     <Compile Include="Source\Building_DetonatorTable.cs" />
     <Compile Include="Source\Building_MiningExplosiveSquare.cs" />
     <Compile Include="Source\Building_RemoteExplosive.cs" />
     <Compile Include="Source\Building_RemoteExplosiveEmp.cs" />
+    <Compile Include="Source\Building_FoamBlob.cs" />
+    <Compile Include="Source\CompChemicalExplosive.cs" />
+    <Compile Include="Source\CompProperties_ChemicalExplosive.cs" />
+    <Compile Include="Source\HediffCompProps_SeverityRecovery.cs" />
+    <Compile Include="Source\HediffComp_SeverityRecovery.cs" />
+    <Compile Include="Source\HediffDef_NonLethal.cs" />
+    <Compile Include="Source\Hediff_NonLethal.cs" />
+    <Compile Include="Source\MoteProperties_GasCloud_HediffGiver.cs" />
+    <Compile Include="Source\GasCloud.cs" />
+    <Compile Include="Source\GasCloud_HediffGiver.cs" />
+    <Compile Include="Source\Graphic_FoamBlob.cs" />
+    <Compile Include="Source\MoteProperties_GasCloud.cs" />
+    <Compile Include="Source\Graphic_GasCloud.cs" />
+    <Compile Include="Source\ITab_ExplosivesBills.cs" />
     <Compile Include="Source\CompCustomExplosive.cs" />
     <Compile Include="Source\CompMiningExplosive.cs" />
-    <Compile Include="Source\CompMiningExplosiveProperties.cs" />
+    <Compile Include="Source\CompProperties_MiningExplosive.cs" />
     <Compile Include="Source\CompRandomResourceLeaver.cs" />
     <Compile Include="Source\CompRandomResourceLeaverProperties.cs" />
     <Compile Include="Source\JobDriver_InstallChannelsComponent.cs" />
-    <Compile Include="Source\MapComponent_TraderStockInjector.cs" />
+    <Compile Include="Source\MapComponent_RemoteExplosivesInjector.cs" />
     <Compile Include="Source\TraderStockInjectorDef.cs" />
+    <Compile Include="Source\BuildingProperties_FoamBlob.cs" />
+    <Compile Include="Source\ValueInterpolator.cs" />
+    <Compile Include="Source\WorkGiver_DetonatorTableChannels.cs" />
     <Compile Include="Source\WorkGiver_RemoteExposive.cs" />
     <Compile Include="Source\ISwitchable.cs" />
     <Compile Include="Source\JobDriver_DetonateRemoteExplosives.cs" />
@@ -68,7 +88,9 @@
     <Compile Include="Source\PlaceWorker_MiningExplosiveSquare.cs" />
     <Compile Include="Source\RemoteExplosivesUtility.cs" />
     <Compile Include="Source\WorkGiver_DetonatorTable.cs" />
+    <Compile Include="Source\DisposablePrimitiveWrapper.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

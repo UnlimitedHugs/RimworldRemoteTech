@@ -14,9 +14,9 @@ namespace RemoteExplosives {
 		
 		private List<IntVec3> customArea;
 
-		public CompMiningExplosiveProperties MiningProps {
+		public CompProperties_MiningExplosive MiningProps {
 			get {
-				return (CompMiningExplosiveProperties) props;
+				return (CompProperties_MiningExplosive) props;
 			}
 		}
 
@@ -57,6 +57,9 @@ namespace RemoteExplosives {
 						}
 						GenPlace.TryPlaceThing(rockDrop, mineable.Position, ThingPlaceMode.Direct);
 					}
+				} else { 
+					// all other mineables
+					mineable.Destroy(DestroyMode.Kill);
 				}
 			}
 			if (affectedMineables.Count > 5)

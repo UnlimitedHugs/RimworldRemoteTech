@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <DamageDef>
+    <defName>FoamWallRekt</defName>
+    <label>trapped</label>
+    <workerClass>DamageWorker_AddInjury</workerClass>
+	<hediff>Misc</hediff>
+    <harmsHealth>true</harmsHealth>
+    <makesBlood>false</makesBlood>
+	<externalViolence>false</externalViolence>
+  </DamageDef>
+
+</Defs>

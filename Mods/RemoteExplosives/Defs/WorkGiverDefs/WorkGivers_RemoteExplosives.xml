@@ -21,11 +21,27 @@
 
   <WorkGiverDef>
     <defName>InstallChannelsComponent</defName>
-    <giverClass>RemoteExplosives.WorkGiver_DetonatorTable</giverClass>
+    <giverClass>RemoteExplosives.WorkGiver_DetonatorTableChannels</giverClass>
     <workType>Construction</workType>
     <priorityInType>200</priorityInType>
     <verb>install channel component</verb>
     <gerund>installing channel component</gerund>
+  </WorkGiverDef>
+  
+  <WorkGiverDef>
+    <defName>DoBillsRemoteExplosivesBench</defName>
+    <label>assemble explosive</label>
+    <giverClass>WorkGiver_DoBill</giverClass>
+    <workType>Smithing</workType>
+    <priorityInType>60</priorityInType>
+    <fixedBillGiverDefs>
+      <li>RemoteExplosivesBench</li>
+    </fixedBillGiverDefs>
+    <verb>assemble explosive</verb>
+    <gerund>assembling explosive at</gerund>
+    <requiredCapacities>
+      <li>Manipulation</li>
+    </requiredCapacities>
   </WorkGiverDef>
   
 </WorkGivers>
