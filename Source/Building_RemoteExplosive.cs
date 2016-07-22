@@ -6,14 +6,15 @@ using Verse;
 using Verse.Sound;
 
 namespace RemoteExplosives {
+	[StaticConstructorOnStartup]
 	public class Building_RemoteExplosive : Building, ISwitchable {
 		
 		private const string flareGraphicPath = "mine_flare";
 		private const string flareGraphicStrongPath = "mine_flare_strong";
 
 		private static readonly Texture2D UITex_Arm = ContentFinder<Texture2D>.Get("UIArm");
-		private static Graphic flareOverlayNormal;
-		private static Graphic flareOverlayStrong;
+		private static readonly Graphic flareOverlayNormal = GraphicDatabase.Get<Graphic_Single>(flareGraphicPath, ShaderDatabase.TransparentPostLight);
+		private static readonly Graphic flareOverlayStrong = GraphicDatabase.Get<Graphic_Single>(flareGraphicStrongPath, ShaderDatabase.TransparentPostLight);
 
 		private static readonly SoundDef armSound = SoundDef.Named("RemoteExplosiveArmed");
 		private static readonly SoundDef beepSound = SoundDef.Named("RemoteExplosiveBeep");
@@ -60,11 +61,8 @@ namespace RemoteExplosives {
 
 		public override void SpawnSetup() {
 			base.SpawnSetup();
-			if (flareOverlayNormal == null) {
-				flareOverlayNormal = GraphicDatabase.Get<Graphic_Single>(flareGraphicPath, ShaderDatabase.TransparentPostLight);
-				flareOverlayStrong = GraphicDatabase.Get<Graphic_Single>(flareGraphicStrongPath, ShaderDatabase.TransparentPostLight);
-				flareOverlayStrong.drawSize = flareOverlayNormal.drawSize = def.graphicData.drawSize;
-			}
+			flareOverlayStrong.drawSize = flareOverlayNormal.drawSize = def.graphicData.drawSize;
+			
 			comp = GetComp<CompCustomExplosive>();
 			RemoteExplosivesUtility.UpdateSwitchDesignation(this);
 			

@@ -66,7 +66,7 @@ namespace RemoteExplosives {
 		}
 
 		private void InitializeInterpolator() {
-			ValueInterpolator.Instance.Initialize(Find.RealTime.timeUnpaused);
+			ValueInterpolator.Instance.Initialize(Time.realtimeSinceStartup);
 		}
 
 		/**
@@ -98,7 +98,7 @@ namespace RemoteExplosives {
 
 			var newFixedFilter = new ThingFilter();
 			foreach (var allowedThingDef in recipeOriginal.fixedIngredientFilter.AllowedThingDefs) {
-				if (allowedThingDef == ThingDefOf.Components) continue;
+				if (allowedThingDef == ThingDefOf.Component) continue;
 				newFixedFilter.SetAllow(allowedThingDef, true);
 			}
 			newFixedFilter.SetAllow(ThingDefOf.Steel, true);
@@ -108,7 +108,7 @@ namespace RemoteExplosives {
 			float numComponentsRequired = 0;
 			var newIngredientList = new List<IngredientCount>(recipeOriginal.ingredients);
 			foreach (var ingredientCount in newIngredientList) {
-				if (ingredientCount.filter.Allows(ThingDefOf.Components)) {
+				if (ingredientCount.filter.Allows(ThingDefOf.Component)) {
 					numComponentsRequired = ingredientCount.GetBaseCount();
 					newIngredientList.Remove(ingredientCount);
 					break;
@@ -128,7 +128,7 @@ namespace RemoteExplosives {
 
 		public override void MapComponentUpdate() {
 			base.MapComponentUpdate();
-			ValueInterpolator.Instance.Update(Find.RealTime.timeUnpaused);
+			ValueInterpolator.Instance.Update(Time.realtimeSinceStartup);
 		}
 
 		public override void MapComponentOnGUI() {
@@ -137,7 +137,7 @@ namespace RemoteExplosives {
 		}
 
 		private void DrawDebugControls(){
-			if(Widgets.TextButton(new Rect(10, 10, 50, 20), "Cloud")) {
+			if(Widgets.ButtonText(new Rect(10, 10, 50, 20), "Cloud")) {
 				DebugTools.curTool = new DebugTool("GasCloud placer", () => {
 					const float concentration = 100000;
 					var cell = Gen.MouseCell();

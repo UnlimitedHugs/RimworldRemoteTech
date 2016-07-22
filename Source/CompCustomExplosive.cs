@@ -1,9 +1,6 @@
-﻿using System.Collections.Generic;
-using System.Reflection;
-using RimWorld;
+﻿using RimWorld;
 using UnityEngine;
 using Verse;
-using Verse.AI;
 using Verse.Sound;
 
 namespace RemoteExplosives {
@@ -14,8 +11,6 @@ namespace RemoteExplosives {
 	public class CompCustomExplosive : ThingComp {
 		private static readonly SoundDef WickStartSound = SoundDef.Named("MetalHitImportant");
 		private static readonly SoundDef WickLoopSound = SoundDef.Named("HissSmall");
-		private static readonly int PawnNotifyCellCount = GenRadial.NumCellsInRadius(4.5f);
-		private static MethodInfo pawnNotifyMethod;
 		private bool wickStarted;
 		private int wickTicksLeft;
 		private Sustainer wickSoundSustainer;
@@ -33,12 +28,6 @@ namespace RemoteExplosives {
 
 		public int WickTicksLeft {
 			get { return wickTicksLeft; }
-		}
-
-		public override void Initialize(CompProperties p) {
-			base.Initialize(p);
-			// some reflection to get access to an internal method
-			pawnNotifyMethod = typeof(Pawn_MindState).GetMethod("Notify_DangerousWickStarted", BindingFlags.NonPublic | BindingFlags.Instance);
 		}
 
 		protected int StartWickThreshold {
@@ -100,7 +89,9 @@ namespace RemoteExplosives {
 			wickIsSilent = silent;
 			wickStarted = true;
 			wickTotalTicks = wickTicksLeft = ExplosiveProps.wickTicks.RandomInRange;
-			NotifyNearbyPawns();
+			if (ExplosiveProps.explosiveDamageType != null) {
+				GenExplosion.NotifyNearbyPawnsOfDangerousExplosive(parent, ExplosiveProps.explosiveDamageType);
+			}
 		}
 
 		public void StopWick() {
@@ -109,24 +100,6 @@ namespace RemoteExplosives {
 
 		public bool WickStarted {
 			get { return wickStarted; }
-		}
-
-		private void NotifyNearbyPawns() {
-			Room room = parent.GetRoom();
-			for (int i = 0; i < PawnNotifyCellCount; i++) {
-				IntVec3 c = parent.Position + GenRadial.RadialPattern[i];
-				if (!c.InBounds()) continue;
-				List<Thing> thingList = c.GetThingList();
-				for (int j = 0; j < thingList.Count; j++) {
-					var pawn = thingList[j] as Pawn;
-					if (pawn != null && 
-						pawn.RaceProps.intelligence >= Intelligence.Humanlike && 
-						pawn.Position.GetRoom() == room && 
-						GenSight.LineOfSight(parent.Position, pawn.Position, true)) {
-						pawnNotifyMethod.Invoke(pawn.mindState, new object[] {parent});
-					}
-				}
-			}
 		}
 
 		protected virtual void Detonate() {

@@ -57,8 +57,8 @@ namespace RemoteExplosives {
 		}
 
 		private Thing FindInstallableComponent(Pawn pawn) {
-			Predicate<Thing> searchPredicate = thing => !thing.IsForbidden(pawn.Faction) && pawn.CanReserveAndReach(thing, PathEndMode.ClosestTouch, Danger.Some);
-			return GenClosest.ClosestThingReachable(pawn.Position, ThingRequest.ForDef(ThingDefOf.Components), PathEndMode.ClosestTouch, TraverseParms.For(TraverseMode.ByPawn), maxComponentSearchDist, searchPredicate);
+			Predicate<Thing> searchPredicate = thing => !thing.IsForbidden(pawn) && pawn.CanReserveAndReach(thing, PathEndMode.ClosestTouch, Danger.Some);
+			return GenClosest.ClosestThingReachable(pawn.Position, ThingRequest.ForDef(ThingDefOf.Component), PathEndMode.ClosestTouch, TraverseParms.For(TraverseMode.ByPawn, Danger.Some), maxComponentSearchDist, searchPredicate);
 		}
 	}
 }

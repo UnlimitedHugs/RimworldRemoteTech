@@ -7,8 +7,8 @@ using Verse.AI;
 using Verse.Sound;
 using System.Linq;
 
-namespace RemoteExplosives
-{
+namespace RemoteExplosives {
+	[StaticConstructorOnStartup]
 	public class Building_DetonatorTable : Building {
 
 		private struct ScheduledTrigger {
@@ -205,12 +205,12 @@ namespace RemoteExplosives
 				var entry = new FloatMenuOption {
 					action = FloatMenuDetonateNowAction,
 					autoTakeable = false,
-					label = "DetonatorTable_detonatenow".Translate(),
+					Label = "DetonatorTable_detonatenow".Translate(),
 				};
-				if (Find.Reservations.IsReserved(this, Faction.OfColony)) {
+				if (Find.Reservations.IsReserved(this, Faction.OfPlayer)) {
 					entry.Disabled = true;
-					var reservedByName = Find.Reservations.FirstReserverOf(this, Faction.OfColony).Name.ToStringShort;
-					entry.label += " " + string.Format("DetonatorTable_detonatenow_reserved".Translate(), reservedByName);
+					var reservedByName = Find.Reservations.FirstReserverOf(this, Faction.OfPlayer).Name.ToStringShort;
+					entry.Label += " " + string.Format("DetonatorTable_detonatenow_reserved".Translate(), reservedByName);
 				}
 				yield return entry;
 			}

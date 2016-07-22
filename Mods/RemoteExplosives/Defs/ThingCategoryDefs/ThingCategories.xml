@@ -1,11 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ThingCategoryDefs>
-
-      <ThingCategoryDef>
+	
+	<ThingCategoryDef>
         <defName>Explosives</defName>
         <label>exposives</label>
         <parent>Manufactured</parent>
         <iconPath>explosive_part</iconPath>
-      </ThingCategoryDef>
-
+	</ThingCategoryDef>
+	
 </ThingCategoryDefs>

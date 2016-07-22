@@ -1,161 +1,161 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Defs>
-
-  <ThingDef Name="BaseExplosivePart" Abstract="True">
-    <thingClass>ThingWithComps</thingClass>
-    <label>unspecified resource</label>
-    <category>Item</category>
-    <resourceReadoutPriority>Middle</resourceReadoutPriority>
-    <useHitPoints>true</useHitPoints>
-    <selectable>true</selectable>
-    <altitudeLayer>Item</altitudeLayer>
-    <stackLimit>75</stackLimit>
-    <comps>
-      <li>
-        <compClass>CompForbiddable</compClass>
-      </li>
-    </comps>
-    <alwaysHaulable>true</alwaysHaulable>
-    <drawGUIOverlay>true</drawGUIOverlay>
-    <rotatable>false</rotatable>
-    <pathCost>15</pathCost>    
-	<soundInteract>Metal_Drop</soundInteract>
-    <soundDrop>Standard_Drop</soundDrop>
-    <tickerType>Normal</tickerType>
-    <stackLimit>10</stackLimit>
-    <statBases>
-      <MaxHitPoints>70</MaxHitPoints>
-      <Flammability>1.0</Flammability>
-      <DeteriorationRate>0</DeteriorationRate>
-    </statBases>
-    <thingCategories>
-      <li>Explosives</li>
-    </thingCategories>
-
-  </ThingDef>
-
-
-  <ThingDef ParentName="BaseExplosivePart">
-    <defName>RemoteBomb</defName>
-    <label>remote explosive</label>
-    <description>Explosive trap with a remote trigger.
+	
+	<ThingDef Name="BaseExplosivePart" Abstract="True">
+		<thingClass>ThingWithComps</thingClass>
+		<label>unspecified resource</label>
+		<category>Item</category>
+		<resourceReadoutPriority>Middle</resourceReadoutPriority>
+		<useHitPoints>true</useHitPoints>
+		<selectable>true</selectable>
+		<altitudeLayer>Item</altitudeLayer>
+		<stackLimit>75</stackLimit>
+		<comps>
+			<li>
+				<compClass>CompForbiddable</compClass>
+			</li>
+		</comps>
+		<alwaysHaulable>true</alwaysHaulable>
+		<drawGUIOverlay>true</drawGUIOverlay>
+		<rotatable>false</rotatable>
+		<pathCost>15</pathCost>    
+		<soundInteract>Metal_Drop</soundInteract>
+		<soundDrop>Standard_Drop</soundDrop>
+		<tickerType>Normal</tickerType>
+		<stackLimit>10</stackLimit>
+		<statBases>
+			<MaxHitPoints>70</MaxHitPoints>
+			<Flammability>1.0</Flammability>
+			<DeteriorationRate>0</DeteriorationRate>
+		</statBases>
+		<thingCategories>
+			<li>Explosives</li>
+		</thingCategories>
+		
+	</ThingDef>
+	
+	
+	<ThingDef ParentName="BaseExplosivePart">
+		<defName>RemoteBomb</defName>
+		<label>remote explosive</label>
+		<description>Explosive trap with a remote trigger.
 Place as a building from the Explosives menu to use.</description>
-    <graphicData>
-      <texPath>remote_mine</texPath>
-      <graphicClass>Graphic_Single</graphicClass>
-    </graphicData>
-    <comps>
-      <li Class="CompProperties_Explosive">
-        <compClass>CompExplosive</compClass>
-        <explosiveRadius>2.9</explosiveRadius>
-        <explosiveDamageType>Bomb</explosiveDamageType>
-        <explosiveExpandPerStackcount>0.4</explosiveExpandPerStackcount>
-        <startWickHitPointsPercent>0.333</startWickHitPointsPercent>
-        <wickTicks>
-          <min>10</min>
-          <max>30</max>
-        </wickTicks>
-      </li>
-    </comps>
-	<statBases>
-      <MarketValue>125</MarketValue>
-    </statBases>
-  </ThingDef>
-  
-  <ThingDef ParentName="BaseExplosivePart">
-    <defName>RemoteFireBomb</defName>
-    <label>incendiary remote explosive</label>
-    <description>A canister filled with flammable chemicals with a radio trigger.
+		<graphicData>
+			<texPath>remote_mine</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+		</graphicData>
+		<comps>
+			<li Class="CompProperties_Explosive">
+				<compClass>CompExplosive</compClass>
+				<explosiveRadius>2.9</explosiveRadius>
+				<explosiveDamageType>Bomb</explosiveDamageType>
+				<explosiveExpandPerStackcount>0.4</explosiveExpandPerStackcount>
+				<startWickHitPointsPercent>0.333</startWickHitPointsPercent>
+				<wickTicks>
+					<min>10</min>
+					<max>30</max>
+				</wickTicks>
+			</li>
+		</comps>
+		<statBases>
+			<MarketValue>125</MarketValue>
+		</statBases>
+	</ThingDef>
+	
+	<ThingDef ParentName="BaseExplosivePart">
+		<defName>RemoteFireBomb</defName>
+		<label>incendiary remote explosive</label>
+		<description>A canister filled with flammable chemicals with a radio trigger.
 Place as a building from the Explosives menu to use.</description>
-    <graphicData>
-      <texPath>remote_mine_incendiary</texPath>
-      <graphicClass>Graphic_Single</graphicClass>
-    </graphicData>
-    <comps>
-      <li Class="CompProperties_Explosive">
-        <compClass>CompExplosive</compClass>
-        <explosiveRadius>2.9</explosiveRadius>
-        <explosiveDamageType>Flame</explosiveDamageType>
-        <explosiveExpandPerStackcount>0.4</explosiveExpandPerStackcount>
-        <startWickHitPointsPercent>0.333</startWickHitPointsPercent>
-        <wickTicks>
-          <min>10</min>
-          <max>30</max>
-        </wickTicks>
-      </li>
-    </comps>
-	<statBases>
-      <MarketValue>125</MarketValue>
-    </statBases>
-  </ThingDef>
-  
-  <ThingDef ParentName="BaseExplosivePart">
-    <defName>MiningExplosiveComponent</defName>
-    <label>mining explosive</label>
-    <description>The main part of a remote mining explosive.
+		<graphicData>
+			<texPath>remote_mine_incendiary</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+		</graphicData>
+		<comps>
+			<li Class="CompProperties_Explosive">
+				<compClass>CompExplosive</compClass>
+				<explosiveRadius>2.9</explosiveRadius>
+				<explosiveDamageType>Flame</explosiveDamageType>
+				<explosiveExpandPerStackcount>0.4</explosiveExpandPerStackcount>
+				<startWickHitPointsPercent>0.333</startWickHitPointsPercent>
+				<wickTicks>
+					<min>10</min>
+					<max>30</max>
+				</wickTicks>
+			</li>
+		</comps>
+		<statBases>
+			<MarketValue>125</MarketValue>
+		</statBases>
+	</ThingDef>
+	
+	<ThingDef ParentName="BaseExplosivePart">
+		<defName>MiningExplosiveComponent</defName>
+		<label>mining explosive</label>
+		<description>The main part of a remote mining explosive.
 Place as a building from the Explosives menu to use.</description>
-    <graphicData>
-      <texPath>explosive_part</texPath>
-      <graphicClass>Graphic_Single</graphicClass>
-    </graphicData>
-    <comps>
-      <li Class="RemoteExplosives.CompProperties_MiningExplosive">
-        <compClass>RemoteExplosives.CompMiningExplosive</compClass>
-		<rockChunkChance>0.5</rockChunkChance>
-        <miningRadius>2.9</miningRadius>
-        <explosiveRadius>2.9</explosiveRadius>
-        <explosiveDamageType>Bomb</explosiveDamageType>
-        <explosiveExpandPerStackcount>0.5</explosiveExpandPerStackcount>
-        <startWickHitPointsPercent>0.333</startWickHitPointsPercent>
-        <wickTicks>
-          <min>30</min>
-          <max>60</max>
-        </wickTicks>
-      </li>
-    </comps>
-	<statBases>
-      <MarketValue>100</MarketValue>
-    </statBases>
-  </ThingDef>
-
-  <ThingDef ParentName="BaseExplosivePart">
-    <defName>RemoteEmpBomb</defName>
-    <label>EMP remote explosive</label>
-    <description>A single-use electromagnetic pulse generator.
+		<graphicData>
+			<texPath>explosive_part</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+		</graphicData>
+		<comps>
+			<li Class="RemoteExplosives.CompProperties_MiningExplosive">
+				<compClass>RemoteExplosives.CompMiningExplosive</compClass>
+				<rockChunkChance>0.5</rockChunkChance>
+				<miningRadius>2.9</miningRadius>
+				<explosiveRadius>2.9</explosiveRadius>
+				<explosiveDamageType>Bomb</explosiveDamageType>
+				<explosiveExpandPerStackcount>0.5</explosiveExpandPerStackcount>
+				<startWickHitPointsPercent>0.333</startWickHitPointsPercent>
+				<wickTicks>
+					<min>30</min>
+					<max>60</max>
+				</wickTicks>
+			</li>
+		</comps>
+		<statBases>
+			<MarketValue>100</MarketValue>
+		</statBases>
+	</ThingDef>
+	
+	<ThingDef ParentName="BaseExplosivePart">
+		<defName>RemoteEmpBomb</defName>
+		<label>EMP remote explosive</label>
+		<description>A single-use electromagnetic pulse generator.
 Place as a building from the Explosives menu to use.</description>
-    <graphicData>
-      <texPath>mine_emp</texPath>
-      <graphicClass>Graphic_Single</graphicClass>
-    </graphicData>
-	<statBases>
-      <MaxHitPoints>120</MaxHitPoints>
-      <MarketValue>360</MarketValue>
-    </statBases>
-  </ThingDef>
-  
-  <ThingDef ParentName="BaseExplosivePart">
-    <defName>RemoteChemicalCan</defName>
-    <label>remote chemical canister</label>
-    <description>A remotely triggered canister for chemicals.
+		<graphicData>
+			<texPath>mine_emp</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+		</graphicData>
+		<statBases>
+			<MaxHitPoints>120</MaxHitPoints>
+			<MarketValue>360</MarketValue>
+		</statBases>
+	</ThingDef>
+	
+	<ThingDef ParentName="BaseExplosivePart">
+		<defName>RemoteChemicalCan</defName>
+		<label>remote chemical canister</label>
+		<description>A remotely triggered canister for chemicals.
 Place as a building from the Explosives menu to use.</description>
-    <graphicData>
-      <texPath>chemical_canister</texPath>
-      <graphicClass>Graphic_Single</graphicClass>
-    </graphicData>
-    <comps>
-      <li Class="RemoteExplosives.CompProperties_ChemicalExplosive">
-        <compClass>RemoteExplosives.CompChemicalExplosive</compClass>
-        <wickTicks>
-          <min>50</min>
-          <max>50</max>
-        </wickTicks>
-		<startWickHitPointsPercent>0</startWickHitPointsPercent>
-		<breakSound>RemoteGlassBreak</breakSound>
-      </li>
-    </comps>
-	<statBases>
-      <MarketValue>180</MarketValue>
-    </statBases>
-  </ThingDef>
-  
+		<graphicData>
+			<texPath>chemical_canister</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+		</graphicData>
+		<comps>
+			<li Class="RemoteExplosives.CompProperties_ChemicalExplosive">
+				<compClass>RemoteExplosives.CompChemicalExplosive</compClass>
+				<wickTicks>
+					<min>50</min>
+					<max>50</max>
+				</wickTicks>
+				<startWickHitPointsPercent>0</startWickHitPointsPercent>
+				<breakSound>RemoteGlassBreak</breakSound>
+			</li>
+		</comps>
+		<statBases>
+			<MarketValue>180</MarketValue>
+		</statBases>
+	</ThingDef>
+	
 </Defs>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<DefPackage-TraderStockInjectorDef>
+<DefPackage-RemoteExplosives.TraderStockInjectorDef>
 
-  <TraderStockInjectorDef>
+  <RemoteExplosives.TraderStockInjectorDef>
     <defName>BulkGoods_inject</defName>
     <traderDef>Orbital_Misc_BulkGoods</traderDef>
     <stockGenerators>
@@ -14,9 +14,9 @@
         </countRange>
       </li>
     </stockGenerators>
-  </TraderStockInjectorDef>
+  </RemoteExplosives.TraderStockInjectorDef>
   
-  <TraderStockInjectorDef>
+  <RemoteExplosives.TraderStockInjectorDef>
     <defName>BulkCaravan_inject</defName>
     <traderDef>Caravan_Outlander_BulkGoods</traderDef>
     <stockGenerators>
@@ -28,9 +28,9 @@
         </countRange>
       </li>
     </stockGenerators>
-  </TraderStockInjectorDef>
+  </RemoteExplosives.TraderStockInjectorDef>
 
-  <TraderStockInjectorDef>
+  <RemoteExplosives.TraderStockInjectorDef>
     <defName>CombatSupplier_inject</defName>
     <traderDef>Orbital_Misc_CombatSupplier</traderDef>
     <stockGenerators>
@@ -58,9 +58,9 @@
 		</countRange>
 	  </li>
     </stockGenerators>
-  </TraderStockInjectorDef>
+  </RemoteExplosives.TraderStockInjectorDef>
   
-  <TraderStockInjectorDef>
+  <RemoteExplosives.TraderStockInjectorDef>
     <defName>CombatSupplierCaravan_inject</defName>
     <traderDef>Caravan_Outlander_CombatSupplier</traderDef>
     <stockGenerators>
@@ -89,9 +89,9 @@
 		</countRange>
 	  </li>
     </stockGenerators>
-  </TraderStockInjectorDef>
+  </RemoteExplosives.TraderStockInjectorDef>
 
-  <TraderStockInjectorDef>
+  <RemoteExplosives.TraderStockInjectorDef>
     <defName>PirateMerchant_inject</defName>
     <traderDef>Orbital_Misc_PirateMerchant</traderDef>
     <stockGenerators>
@@ -113,9 +113,9 @@
 		</countRange>
 	  </li>
     </stockGenerators>
-  </TraderStockInjectorDef>
+  </RemoteExplosives.TraderStockInjectorDef>
 
-  <TraderStockInjectorDef>
+  <RemoteExplosives.TraderStockInjectorDef>
     <defName>PirateCaravan_inject</defName>
     <traderDef>Caravan_Outlander_PirateMerchant</traderDef>
     <stockGenerators>
@@ -137,19 +137,19 @@
 		</countRange>
 	  </li>
     </stockGenerators>
-  </TraderStockInjectorDef>
+  </RemoteExplosives.TraderStockInjectorDef>
   
-  <TraderStockInjectorDef>
+  <RemoteExplosives.TraderStockInjectorDef>
     <defName>Exotic_inject</defName>
     <traderDef>Orbital_Misc_Exotic</traderDef>
     <stockGenerators>
 		<li Class="StockGenerator_SingleDef">
 			<thingDef>RemoteChemicalCan</thingDef>
 			<countRange>
-			  <min>2</min>
-			  <max>8</max>
+			  <min>4</min>
+			  <max>12</max>
 			</countRange>
 		</li>
     </stockGenerators>
-  </TraderStockInjectorDef>
-</DefPackage-TraderStockInjectorDef>
+  </RemoteExplosives.TraderStockInjectorDef>
+</DefPackage-RemoteExplosives.TraderStockInjectorDef>

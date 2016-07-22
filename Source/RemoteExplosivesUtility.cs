@@ -3,6 +3,7 @@ using UnityEngine;
 using Verse;
 
 namespace RemoteExplosives {
+	[StaticConstructorOnStartup]
 	public static class RemoteExplosivesUtility {
 		public static readonly string InjectedRecipeNameSuffix = "Injected";
 
@@ -43,7 +44,7 @@ namespace RemoteExplosives {
 		}
 
 		public static bool ChannelsUnlocked() {
-			return Find.ResearchManager.IsFinished(channelsResearchDef);
+			return channelsResearchDef.IsFinished;
 		}
 
 		public static RemoteChannel GetNextChannel(RemoteChannel channel) {

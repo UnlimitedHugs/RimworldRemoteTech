@@ -1,60 +1,60 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Defs>
-
-  <ThingDef>
-    <defName>Gas_Sleeping</defName>
-	<label>sleeping gas cloud</label>
-	<description>Knocks out living organisms after enough exposure.
+	
+	<ThingDef>
+		<defName>Gas_Sleeping</defName>
+		<label>sleeping gas cloud</label>
+		<description>Knocks out living organisms after enough exposure.
 Rapidly dissipates when under an open sky.</description>
-    <thingClass>RemoteExplosives.GasCloud_HediffGiver</thingClass>
-    <category>Ethereal</category>
-	<graphicData>
-      <texPath>GasCloud</texPath>
-      <graphicClass>RemoteExplosives.Graphic_GasCloud</graphicClass>
-      <shaderType>Mote</shaderType>
-	  <drawSize>(1.3,1.3)</drawSize>
-	  <color>(0.8, 0.6 , 1, 1)</color>
-    </graphicData>
-    <altitudeLayer>MoteOverhead</altitudeLayer>
-    <mote Class="RemoteExplosives.MoteProperties_GasCloud_HediffGiver">
-		<!-- game ticks between gas ticks --> 
-      	<GastickInterval>25</GastickInterval>
-		<!-- gas will attempt to multiply every x gas ticks -->
-		<SpreadInterval>2</SpreadInterval> 
-		<!-- how much concentration a cloud passes to its neighbours. A value of 1 will equalize concentrations with adjacent clouds on each gas tick -->
-		<SpreadAmountMultiplier>1</SpreadAmountMultiplier>
-		<!-- when concentration is below this threshold, gas will not attempt to multiply -->
-		<SpreadMinConcentration>200</SpreadMinConcentration>
-		<!-- concentrations below this will make the sprite progressively transparent -->
-		<FullAlphaConcentration>1000</FullAlphaConcentration>
-		<!-- the amount to concentration lost on each gas tick when on a tile with a roof -->		
-		<RoofedDissipation>1</RoofedDissipation>
-		<!-- the amount to concentration lost under the open sky -->		
-		<UnroofedDissipation>25</UnroofedDissipation>
-		<!-- how much the sprite will deviate from its base position and scale while animating -->		
-		<AnimationAmplitude>.225</AnimationAmplitude> 
-		<!-- duration of an animation cycle in seconds -->
-		<AnimationPeriod> 
-			<min>4</min>
-			<max>6</max>
-		</AnimationPeriod> 
-		
-		<hediffDef>SleepingGas</hediffDef>
-		<hediffSeverityPerGastick>
-			<min>0.005</min>
-			<max>0.010</max>
-		</hediffSeverityPerGastick>
-		<requiresFleshyPawn>true</requiresFleshyPawn>
-		<immunizingApparelDefs>
-			<li>Apparel_GasMask</li>
-			<li>Apparel_PowerArmorHelmet</li>
-		</immunizingApparelDefs>
-    </mote>
-	<isSaveable>true</isSaveable>
-    <tickerType>Normal</tickerType>
-	<selectable>true</selectable>
-    <useHitPoints>false</useHitPoints>
-    <rotatable>false</rotatable>
-  </ThingDef>
-
+		<thingClass>RemoteExplosives.GasCloud_HediffGiver</thingClass>
+		<category>Ethereal</category>
+		<graphicData>
+			<texPath>GasCloud</texPath>
+			<graphicClass>RemoteExplosives.Graphic_GasCloud</graphicClass>
+			<shaderType>Mote</shaderType>
+			<drawSize>(1.3,1.3)</drawSize>
+			<color>(0.8, 0.6 , 1, 1)</color>
+		</graphicData>
+		<altitudeLayer>MoteOverhead</altitudeLayer>
+		<mote Class="RemoteExplosives.MoteProperties_GasCloud_HediffGiver">
+			<!-- game ticks between gas ticks --> 
+			<GastickInterval>25</GastickInterval>
+			<!-- gas will attempt to multiply every x gas ticks -->
+			<SpreadInterval>2</SpreadInterval> 
+			<!-- how much concentration a cloud passes to its neighbours. A value of 1 will equalize concentrations with adjacent clouds on each gas tick -->
+			<SpreadAmountMultiplier>1</SpreadAmountMultiplier>
+			<!-- when concentration is below this threshold, gas will not attempt to multiply -->
+			<SpreadMinConcentration>200</SpreadMinConcentration>
+			<!-- concentrations below this will make the sprite progressively transparent -->
+			<FullAlphaConcentration>1000</FullAlphaConcentration>
+			<!-- the amount to concentration lost on each gas tick when on a tile with a roof -->		
+			<RoofedDissipation>1</RoofedDissipation>
+			<!-- the amount to concentration lost under the open sky -->		
+			<UnroofedDissipation>25</UnroofedDissipation>
+			<!-- how much the sprite will deviate from its base position and scale while animating -->		
+			<AnimationAmplitude>.225</AnimationAmplitude> 
+			<!-- duration of an animation cycle in seconds -->
+			<AnimationPeriod> 
+				<min>4</min>
+				<max>6</max>
+			</AnimationPeriod> 
+			
+			<hediffDef>SleepingGas</hediffDef>
+			<hediffSeverityPerGastick>
+				<min>0.005</min>
+				<max>0.010</max>
+			</hediffSeverityPerGastick>
+			<requiresFleshyPawn>true</requiresFleshyPawn>
+			<immunizingApparelDefs>
+				<li>Apparel_GasMask</li>
+				<li>Apparel_PowerArmorHelmet</li>
+			</immunizingApparelDefs>
+		</mote>
+		<isSaveable>true</isSaveable>
+		<tickerType>Normal</tickerType>
+		<selectable>true</selectable>
+		<useHitPoints>false</useHitPoints>
+		<rotatable>false</rotatable>
+	</ThingDef>
+	
 </Defs>
