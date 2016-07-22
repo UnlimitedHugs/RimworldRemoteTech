@@ -29,7 +29,7 @@ namespace RemoteExplosives {
 			base.SpawnSetup();
 			foamProps = (BuildingProperties_FoamBlob)def.building;
 			if(justCreated) {
-				SetFactionDirect(Faction.OfColony);
+				SetFactionDirect(Faction.OfPlayer);
 				ticksUntilHardened = foamProps.ticksToHarden.RandomInRange;
 				spraySound.PlayOneShot(this);
 				PrimeSpawnAnimation();
@@ -62,7 +62,7 @@ namespace RemoteExplosives {
 		private void Harden() {
 			Destroy();
 			var wallTile = ThingMaker.MakeThing(foamProps.hardenedDef);
-			wallTile.SetFactionDirect(Faction.OfColony);
+			wallTile.SetFactionDirect(Faction.OfPlayer);
 			GenPlace.TryPlaceThing(wallTile, Position, ThingPlaceMode.Direct);
 			solidifySound.PlayOneShot(this);
 		}
@@ -85,10 +85,6 @@ namespace RemoteExplosives {
 
 		public override void Draw() {
 			if (animationProgress < 1) {
-				//animationProgress += 1 / (float)numFramesInAnimation;
-				//if (animationProgress > 1) animationProgress = 1;
-				
-				//var easedProgress = RemoteExplosivesUtility.QuinticEaseOut(animationProgress, 0, 1f, 1f);
 				var easedProgress = animationProgress;
 				const float delta = .5f * animationMagnitude;
 				var fixedScalar = easedProgress;

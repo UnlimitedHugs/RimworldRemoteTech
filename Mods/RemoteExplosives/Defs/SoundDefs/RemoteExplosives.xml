@@ -1,213 +1,213 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <DefPackage-SoundDef>
-
-  <SoundDef>
-    <defName>RemoteExplosiveBeep</defName>  
-    <eventNames />  
-    <maxVoices>4</maxVoices>   
-    <maxSimultaneous>5</maxSimultaneous>  
-    <subSounds>
-      <li>
-        <grains>
-          <li Class="AudioGrain_Clip">
-            <clipPath>beep</clipPath>
-          </li>
-        </grains>     
-       <volumeRange>
-          <min>3</min>
-          <max>3</max>
-        </volumeRange>   
-      </li>   
-    </subSounds>
-  </SoundDef>
-  
-  <SoundDef>
-    <defName>RemoteExplosiveArmed</defName>  
-    <eventNames />  
-    <maxVoices>4</maxVoices>   
-    <maxSimultaneous>1</maxSimultaneous>  
-    <subSounds>
-      <li>
-        <grains>
-          <li Class="AudioGrain_Clip">
-            <clipPath>arm_beep</clipPath>
-          </li>
-        </grains>     
-       <volumeRange>
-          <min>3</min>
-          <max>4</max>
-        </volumeRange>
-      </li>   
-    </subSounds>
-  </SoundDef>
-  
-  <SoundDef>
-    <defName>RemoteMiningCavein</defName>  
-    <eventNames />  
-    <maxVoices>3</maxVoices>   
-    <maxSimultaneous>3</maxSimultaneous>  
-    <subSounds>
-      <li>
-        <grains>
-          <li Class="AudioGrain_Clip">
-            <clipPath>cavein</clipPath>
-          </li>
-        </grains>     
-       <volumeRange>
-          <min>50</min>
-          <max>80</max>
-        </volumeRange>
-		<pitchRange>
-          <min>0.9</min>        
-          <max>1.1</max>
-        </pitchRange>
-      </li>   
-    </subSounds>
-  </SoundDef>
-  
-  <SoundDef>
-    <defName>RemoteEmpCharge</defName>  
-    <eventNames />  
-    <maxVoices>3</maxVoices>   
-    <maxSimultaneous>3</maxSimultaneous>  
-    <subSounds>
-      <li>
-        <grains>
-          <li Class="AudioGrain_Clip">
-            <clipPath>emp_charge</clipPath>
-          </li>
-        </grains>     
-       <volumeRange>
-          <min>40</min>
-          <max>50</max>
-        </volumeRange>
-		<pitchRange>
-          <min>0.9</min>        
-          <max>1.1</max>
-        </pitchRange>
-      </li>   
-    </subSounds>
-  </SoundDef>
-  
-  <SoundDef>
-    <defName>RemoteChannelChange</defName>  
-    <eventNames />  
-    <maxVoices>3</maxVoices>   
-    <maxSimultaneous>3</maxSimultaneous>  
-    <subSounds>
-      <li>
-        <grains>
-          <li Class="AudioGrain_Clip">
-            <clipPath>dial_click</clipPath>
-          </li>
-        </grains>     
-       <volumeRange>
-          <min>5</min>
-          <max>6</max>
-        </volumeRange>
-		<pitchRange>
-          <min>1.15</min>        
-          <max>1.25</max>
-        </pitchRange>
-      </li>   
-    </subSounds>
-  </SoundDef>
-  
-  <SoundDef>
-    <defName>RemoteUIDialClick</defName>  
-    <eventNames />  
-    <maxVoices>3</maxVoices>   
-    <maxSimultaneous>3</maxSimultaneous>  
-    <subSounds>
-      <li>
-	    <onCamera>True</onCamera>  
-        <grains>
-          <li Class="AudioGrain_Clip">
-            <clipPath>dial_click</clipPath>
-          </li>
-        </grains>     
-       <volumeRange>
-          <min>7</min>
-          <max>8</max>
-        </volumeRange>
-		<pitchRange>
-          <min>0.95</min>        
-          <max>1.05</max>
-        </pitchRange>
-      </li>   
-    </subSounds>
-  </SoundDef>
-  
-  <SoundDef>
-    <defName>RemoteFoamSpray</defName>  
-    <eventNames />  
-    <maxVoices>5</maxVoices>   
-    <maxSimultaneous>5</maxSimultaneous>  
-    <subSounds>
-      <li>
-        <grains>
-          <li Class="AudioGrain_Clip">
-            <clipPath>foam_spray</clipPath>
-          </li>
-        </grains>     
-       <volumeRange>
-          <min>40</min>
-          <max>70</max>
-        </volumeRange>
-		<pitchRange>
-          <min>0.85</min>        
-          <max>1.15</max>
-        </pitchRange>
-      </li>   
-    </subSounds>
-  </SoundDef>
-  
-  <SoundDef>
-    <defName>RemoteGlassBreak</defName>  
-    <eventNames />  
-    <maxVoices>4</maxVoices>   
-    <maxSimultaneous>4</maxSimultaneous>  
-    <subSounds>
-      <li>
-        <grains>
-          <li Class="AudioGrain_Clip">
-            <clipPath>glass_break</clipPath>
-          </li>
-        </grains>     
-       <volumeRange>
-          <min>60</min>
-          <max>80</max>
-        </volumeRange>
-		<pitchRange>
-          <min>0.8</min>        
-          <max>1.2</max>
-        </pitchRange>
-      </li>   
-    </subSounds>
-  </SoundDef>
-  
-  <SoundDef>
-    <defName>RemoteFoamSolidify</defName>  
-    <eventNames />  
-    <maxVoices>4</maxVoices>   
-    <maxSimultaneous>4</maxSimultaneous>  
-    <subSounds>
-      <li>
-        <grains>
-          <li Class="AudioGrain_Clip">
-            <clipPath>foam_solidify</clipPath>
-          </li>
-        </grains>     
-       <volumeRange>
-          <min>25</min>
-          <max>40</max>
-        </volumeRange>
-		<pitchRange>
-          <min>0.8</min>        
-          <max>1.2</max>
-        </pitchRange>
-      </li>   
-    </subSounds>
-  </SoundDef>
-  
+	
+	<SoundDef>
+		<defName>RemoteExplosiveBeep</defName>  
+		<eventNames />  
+		<maxVoices>4</maxVoices>   
+		<maxSimultaneous>5</maxSimultaneous>  
+		<subSounds>
+			<li>
+				<grains>
+					<li Class="AudioGrain_Clip">
+						<clipPath>beep</clipPath>
+					</li>
+				</grains>     
+				<volumeRange>
+					<min>3</min>
+					<max>3</max>
+				</volumeRange>   
+			</li>   
+		</subSounds>
+	</SoundDef>
+	
+	<SoundDef>
+		<defName>RemoteExplosiveArmed</defName>  
+		<eventNames />  
+		<maxVoices>4</maxVoices>   
+		<maxSimultaneous>1</maxSimultaneous>  
+		<subSounds>
+			<li>
+				<grains>
+					<li Class="AudioGrain_Clip">
+						<clipPath>arm_beep</clipPath>
+					</li>
+				</grains>     
+				<volumeRange>
+					<min>3</min>
+					<max>4</max>
+				</volumeRange>
+			</li>   
+		</subSounds>
+	</SoundDef>
+	
+	<SoundDef>
+		<defName>RemoteMiningCavein</defName>  
+		<eventNames />  
+		<maxVoices>3</maxVoices>   
+		<maxSimultaneous>3</maxSimultaneous>  
+		<subSounds>
+			<li>
+				<grains>
+					<li Class="AudioGrain_Clip">
+						<clipPath>cavein</clipPath>
+					</li>
+				</grains>     
+				<volumeRange>
+					<min>50</min>
+					<max>80</max>
+				</volumeRange>
+				<pitchRange>
+					<min>0.9</min>        
+					<max>1.1</max>
+				</pitchRange>
+			</li>   
+		</subSounds>
+	</SoundDef>
+	
+	<SoundDef>
+		<defName>RemoteEmpCharge</defName>  
+		<eventNames />  
+		<maxVoices>3</maxVoices>   
+		<maxSimultaneous>3</maxSimultaneous>  
+		<subSounds>
+			<li>
+				<grains>
+					<li Class="AudioGrain_Clip">
+						<clipPath>emp_charge</clipPath>
+					</li>
+				</grains>     
+				<volumeRange>
+					<min>40</min>
+					<max>50</max>
+				</volumeRange>
+				<pitchRange>
+					<min>0.9</min>        
+					<max>1.1</max>
+				</pitchRange>
+			</li>   
+		</subSounds>
+	</SoundDef>
+	
+	<SoundDef>
+		<defName>RemoteChannelChange</defName>  
+		<eventNames />  
+		<maxVoices>3</maxVoices>   
+		<maxSimultaneous>3</maxSimultaneous>  
+		<subSounds>
+			<li>
+				<grains>
+					<li Class="AudioGrain_Clip">
+						<clipPath>dial_click</clipPath>
+					</li>
+				</grains>     
+				<volumeRange>
+					<min>5</min>
+					<max>6</max>
+				</volumeRange>
+				<pitchRange>
+					<min>1.15</min>        
+					<max>1.25</max>
+				</pitchRange>
+			</li>   
+		</subSounds>
+	</SoundDef>
+	
+	<SoundDef>
+		<defName>RemoteUIDialClick</defName>  
+		<eventNames />  
+		<maxVoices>3</maxVoices>   
+		<maxSimultaneous>3</maxSimultaneous>  
+		<subSounds>
+			<li>
+				<onCamera>True</onCamera>  
+				<grains>
+					<li Class="AudioGrain_Clip">
+						<clipPath>dial_click</clipPath>
+					</li>
+				</grains>     
+				<volumeRange>
+					<min>7</min>
+					<max>8</max>
+				</volumeRange>
+				<pitchRange>
+					<min>0.95</min>        
+					<max>1.05</max>
+				</pitchRange>
+			</li>   
+		</subSounds>
+	</SoundDef>
+	
+	<SoundDef>
+		<defName>RemoteFoamSpray</defName>  
+		<eventNames />  
+		<maxVoices>5</maxVoices>   
+		<maxSimultaneous>5</maxSimultaneous>  
+		<subSounds>
+			<li>
+				<grains>
+					<li Class="AudioGrain_Clip">
+						<clipPath>foam_spray</clipPath>
+					</li>
+				</grains>     
+				<volumeRange>
+					<min>40</min>
+					<max>70</max>
+				</volumeRange>
+				<pitchRange>
+					<min>0.85</min>        
+					<max>1.15</max>
+				</pitchRange>
+			</li>   
+		</subSounds>
+	</SoundDef>
+	
+	<SoundDef>
+		<defName>RemoteGlassBreak</defName>  
+		<eventNames />  
+		<maxVoices>4</maxVoices>   
+		<maxSimultaneous>4</maxSimultaneous>  
+		<subSounds>
+			<li>
+				<grains>
+					<li Class="AudioGrain_Clip">
+						<clipPath>glass_break</clipPath>
+					</li>
+				</grains>     
+				<volumeRange>
+					<min>60</min>
+					<max>80</max>
+				</volumeRange>
+				<pitchRange>
+					<min>0.8</min>        
+					<max>1.2</max>
+				</pitchRange>
+			</li>   
+		</subSounds>
+	</SoundDef>
+	
+	<SoundDef>
+		<defName>RemoteFoamSolidify</defName>  
+		<eventNames />  
+		<maxVoices>4</maxVoices>   
+		<maxSimultaneous>4</maxSimultaneous>  
+		<subSounds>
+			<li>
+				<grains>
+					<li Class="AudioGrain_Clip">
+						<clipPath>foam_solidify</clipPath>
+					</li>
+				</grains>     
+				<volumeRange>
+					<min>25</min>
+					<max>40</max>
+				</volumeRange>
+				<pitchRange>
+					<min>0.8</min>        
+					<max>1.2</max>
+				</pitchRange>
+			</li>   
+		</subSounds>
+	</SoundDef>
+	
 </DefPackage-SoundDef>

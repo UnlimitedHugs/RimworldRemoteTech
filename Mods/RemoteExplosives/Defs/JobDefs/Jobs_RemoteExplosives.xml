@@ -1,21 +1,21 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <JobDefs>
-
-  <JobDef>
-    <defName>JobDef_DetonateRemoteExplosives</defName>
-    <driverClass>RemoteExplosives.JobDriver_DetonateRemoteExplosives</driverClass>
-    <reportString>Detonating remote explosives.</reportString>
-  </JobDef>
-
-  <JobDef>
-    <defName>JobDef_SwitchRemoteExplosive</defName>
-    <driverClass>RemoteExplosives.JobDriver_SwitchRemoteExplosive</driverClass>
-    <reportString>Switching remote explosive.</reportString>
-  </JobDef>
-  
-  <JobDef>
-    <defName>JobDef_InstallChannelsComponent</defName>
-    <driverClass>RemoteExplosives.JobDriver_InstallChannelsComponent</driverClass>
-    <reportString>Installing remote channels component.</reportString>
-  </JobDef>
+	
+	<JobDef>
+		<defName>JobDef_DetonateRemoteExplosives</defName>
+		<driverClass>RemoteExplosives.JobDriver_DetonateRemoteExplosives</driverClass>
+		<reportString>Detonating remote explosives.</reportString>
+	</JobDef>
+	
+	<JobDef>
+		<defName>JobDef_SwitchRemoteExplosive</defName>
+		<driverClass>RemoteExplosives.JobDriver_SwitchRemoteExplosive</driverClass>
+		<reportString>Switching remote explosive.</reportString>
+	</JobDef>
+	
+	<JobDef>
+		<defName>JobDef_InstallChannelsComponent</defName>
+		<driverClass>RemoteExplosives.JobDriver_InstallChannelsComponent</driverClass>
+		<reportString>Installing remote channels component.</reportString>
+	</JobDef>
 </JobDefs>

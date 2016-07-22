@@ -43,7 +43,7 @@ namespace RemoteExplosives {
 
 			var buttonRect = new Rect(canvasRect.x + 160f, canvasRect.y, 170f, 29f);
 			TooltipHandler.TipRegion(buttonRect, modeButtonTooltip);
-			if (Widgets.TextButton(buttonRect, String.Format(modeButtonLabel, currentRecipeMode == RecipeMode.Components ? modeButtonComponents : modeButtonSteel))) {
+			if (Widgets.ButtonText(buttonRect, String.Format(modeButtonLabel, currentRecipeMode == RecipeMode.Components ? modeButtonComponents : modeButtonSteel))) {
 				currentRecipeMode = currentRecipeMode == RecipeMode.Components ? RecipeMode.Steel : RecipeMode.Components;
 			}
 			

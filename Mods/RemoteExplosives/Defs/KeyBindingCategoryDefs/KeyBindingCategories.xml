@@ -1,23 +1,23 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 
 <KeyBindingCategoryDefs>
-  <KeyBindingCategoryDef>
-    <defName>RemoteExplosives</defName>
-    <label>Remote Explosives</label>
-    <description>Shortcuts for actions in the Remote Explosives mod.</description>
-    <checkForConflicts>
-      <li>GameMapCamera</li>
-      <li>Game</li>
-    </checkForConflicts>
-  </KeyBindingCategoryDef>
-  
+	<KeyBindingCategoryDef>
+		<defName>RemoteExplosives</defName>
+		<label>Remote Explosives</label>
+		<description>Shortcuts for actions in the Remote Explosives mod.</description>
+		<checkForConflicts>
+			<li>GameMapCamera</li>
+			<li>Game</li>
+		</checkForConflicts>
+	</KeyBindingCategoryDef>
+	
     <KeyBindingCategoryDef>
-    <defName>RemoteExplosivesDetonator</defName>
-    <label>Remote Explosives Detonator</label>
-    <description>Shortcuts for actions in the Remote Explosives mod.</description>
-    <checkForConflicts>
-      <li>GameMapCamera</li>
-      <li>Game</li>
-    </checkForConflicts>
-  </KeyBindingCategoryDef>
+		<defName>RemoteExplosivesDetonator</defName>
+		<label>Remote Explosives Detonator</label>
+		<description>Shortcuts for actions in the Remote Explosives mod.</description>
+		<checkForConflicts>
+			<li>GameMapCamera</li>
+			<li>Game</li>
+		</checkForConflicts>
+	</KeyBindingCategoryDef>
 </KeyBindingCategoryDefs>

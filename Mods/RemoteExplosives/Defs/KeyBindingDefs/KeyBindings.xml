@@ -1,25 +1,25 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 
 <KeyBindingDefs>
-  <KeyBindingDef>
-    <category>RemoteExplosivesDetonator</category>
-	<defName>RemoteTableDetonate</defName>
-    <label>Remote detonator: Detonate</label>
-    <defaultKeyCodeA>Z</defaultKeyCodeA>
-  </KeyBindingDef>
-  
-  <KeyBindingDef>
-    <category>RemoteExplosives</category>
-	<defName>RemoteExplosivesNextChannel</defName>
-    <label>Detonator, explosives: Switch channel</label>
-    <defaultKeyCodeA>C</defaultKeyCodeA>
-  </KeyBindingDef>
-
-  <KeyBindingDef>
-    <category>RemoteExplosives</category>
-    <defName>RemoteExplosiveArm</defName>
-    <label>Remote Explosive Arm</label>
-    <defaultKeyCodeA>Z</defaultKeyCodeA>
-  </KeyBindingDef>
-
+	<KeyBindingDef>
+		<category>RemoteExplosivesDetonator</category>
+		<defName>RemoteTableDetonate</defName>
+		<label>Remote detonator: Detonate</label>
+		<defaultKeyCodeA>Z</defaultKeyCodeA>
+	</KeyBindingDef>
+	
+	<KeyBindingDef>
+		<category>RemoteExplosives</category>
+		<defName>RemoteExplosivesNextChannel</defName>
+		<label>Detonator, explosives: Switch channel</label>
+		<defaultKeyCodeA>C</defaultKeyCodeA>
+	</KeyBindingDef>
+	
+	<KeyBindingDef>
+		<category>RemoteExplosives</category>
+		<defName>RemoteExplosiveArm</defName>
+		<label>Remote Explosive Arm</label>
+		<defaultKeyCodeA>Z</defaultKeyCodeA>
+	</KeyBindingDef>
+	
 </KeyBindingDefs>

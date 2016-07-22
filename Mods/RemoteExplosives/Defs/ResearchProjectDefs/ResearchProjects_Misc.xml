@@ -1,50 +1,54 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ResearchProjectDefs>
-
-  <ResearchProjectDef>
-    <defName>RemoteDetonator</defName>
-    <label>Remote Detonator</label>
-    <description>Allows you to build a console that detonates remote explosives, as well as a workbench to manifacture them.
-The explosives workshop can create mining explosives that can be deployed as Fracturing or Clearing charges.
 	
+	<ResearchProjectDef>
+		<defName>RemoteDetonator</defName>
+		<label>Remote Detonator</label>
+		<description>Allows you to build a console that detonates remote explosives, as well as a workbench to manifacture them.
+The explosives workshop can create mining explosives that can be deployed as Fracturing or Clearing charges.
+			
 Research Explosive IEDs or Incendiary IEDs to manifacture combat-grade remote explosives.</description>
-    <totalCost>1500</totalCost>
-    <prerequisites></prerequisites>
-  </ResearchProjectDef>
-  
-  <ResearchProjectDef>
-    <defName>RemoteExplosivesChannels</defName>
-    <label>Remote Explosives Channels</label>
-    <description>Unlocks the use of channel on your remote explosives and the detonator. Only explosives on the same channel as the detonator can be triggerd. This allows to set up multiple lines of explosive defenses.
+		<baseCost>1500</baseCost>
+		<techLevel>Industrial</techLevel>
+		<prerequisites></prerequisites>
+	</ResearchProjectDef>
+	
+	<ResearchProjectDef>
+		<defName>RemoteExplosivesChannels</defName>
+		<label>Remote Explosives Channels</label>
+		<description>Unlocks the use of channel on your remote explosives and the detonator. Only explosives on the same channel as the detonator can be triggerd. This allows to set up multiple lines of explosive defenses.
 The detonator must be upgraded with a component for this to work.</description>
-    <totalCost>750</totalCost>
-    <prerequisites>
-		<li>RemoteDetonator</li>
-	</prerequisites>
-  </ResearchProjectDef>
-  
-  <ResearchProjectDef>
-    <defName>RemoteEmpMine</defName>
-    <label>Remote EMP Charge</label>
-    <description>Allows the creation of EMP charges that can be triggered with a remote detonator.
+		<baseCost>750</baseCost>
+		<techLevel>Industrial</techLevel>
+		<prerequisites>
+			<li>RemoteDetonator</li>
+		</prerequisites>
+	</ResearchProjectDef>
+	
+	<ResearchProjectDef>
+		<defName>RemoteEmpMine</defName>
+		<label>Remote EMP Charge</label>
+		<description>Allows the creation of EMP charges that can be triggered with a remote detonator.
 While expensive, they can be devastating against mechanoids when properly used.</description>
-    <totalCost>1500</totalCost>
-    <prerequisites>
-		<li>RemoteDetonator</li>
-	</prerequisites>
-  </ResearchProjectDef>
-  
- <ResearchProjectDef>
-    <defName>RemoteChemicals</defName>
-    <label>Remote Chemical Charges</label>
-    <description>Allows the creation of remotely triggered canisters for specialized chemicals.
+		<baseCost>1500</baseCost>
+		<techLevel>Industrial</techLevel>
+		<prerequisites>
+			<li>RemoteDetonator</li>
+		</prerequisites>
+	</ResearchProjectDef>
+	
+	<ResearchProjectDef>
+		<defName>RemoteChemicals</defName>
+		<label>Remote Chemical Charges</label>
+		<description>Allows the creation of remotely triggered canisters for specialized chemicals.
 The sealing foam can create walls and seal passages, while the sleeping gas can disable biological targets.
 Use in enclosed areas for best results.</description>
-    <totalCost>1800</totalCost>
-    <prerequisites>
-		<li>RemoteDetonator</li>
-	</prerequisites>
-  </ResearchProjectDef>
-   
-  
+		<baseCost>1800</baseCost>
+		<techLevel>Industrial</techLevel>
+		<prerequisites>
+			<li>RemoteDetonator</li>
+		</prerequisites>
+	</ResearchProjectDef>
+	
+	
 </ResearchProjectDefs>

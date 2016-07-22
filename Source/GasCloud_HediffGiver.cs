@@ -1,7 +1,6 @@
 ﻿using System;
 using UnityEngine;
 using Verse;
-using System.Linq;
 
 namespace RemoteExplosives {
 	public class GasCloud_HediffGiver : GasCloud {
