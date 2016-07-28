@@ -12,8 +12,10 @@ namespace RemoteExplosives {
 	public class MapComponent_RemoteExplosivesInjector : MapComponent {
 		private readonly ThingCategoryDef explosivesItemCategory = ThingCategoryDef.Named("Explosives");
 		private readonly RecipeDef BasicRemoteBombRecipe = DefDatabase<RecipeDef>.GetNamed("MakeRemoteBomb");
-		private readonly MethodInfo cloneMethod = typeof(object).GetMethod("MemberwiseClone", BindingFlags.Instance | BindingFlags.NonPublic);
+		private readonly MethodInfo objectCloneMethod = typeof(object).GetMethod("MemberwiseClone", BindingFlags.Instance | BindingFlags.NonPublic);
 		private readonly bool showDebugControls = false;
+
+		private AutoReplaceWatcher replaceWatcher;
 		
 		private const int ComponentValueInSteel = 40;
 
@@ -22,6 +24,27 @@ namespace RemoteExplosives {
 			InjectSteelRecipeVariants();
 			InitializeInterpolator();
 			EnsureComponentIsActive();
+			replaceWatcher = new AutoReplaceWatcher();
+		}
+
+		public override void ExposeData() {
+			Scribe_Deep.LookDeep(ref replaceWatcher, "replaceWatcher", new object[0]);
+			if(replaceWatcher == null) replaceWatcher = new AutoReplaceWatcher();
+		}
+
+		public override void MapComponentUpdate() {
+			base.MapComponentUpdate();
+			ValueInterpolator.Instance.Update(Time.realtimeSinceStartup);
+		}
+
+		public override void MapComponentOnGUI() {
+			base.MapComponentOnGUI();
+			if (showDebugControls) DrawDebugControls();
+		}
+
+		public override void MapComponentTick() {
+			base.MapComponentTick();
+			replaceWatcher.Tick();
 		}
 
 		/**
@@ -93,7 +116,7 @@ namespace RemoteExplosives {
 		
 		// Will retrn null if recipe requires no components
 		private RecipeDef TryMakeRecipeVariantWithSteel(RecipeDef recipeOriginal) {
-			var recipeCopy = (RecipeDef)cloneMethod.Invoke(recipeOriginal, null);
+			var recipeCopy = (RecipeDef)objectCloneMethod.Invoke(recipeOriginal, null);
 			recipeCopy.defName += RemoteExplosivesUtility.InjectedRecipeNameSuffix;
 
 			var newFixedFilter = new ThingFilter();
@@ -124,16 +147,6 @@ namespace RemoteExplosives {
 			recipeCopy.ingredients = newIngredientList;
 			recipeCopy.ResolveReferences();
 			return recipeCopy;
-		}
-
-		public override void MapComponentUpdate() {
-			base.MapComponentUpdate();
-			ValueInterpolator.Instance.Update(Time.realtimeSinceStartup);
-		}
-
-		public override void MapComponentOnGUI() {
-			base.MapComponentOnGUI();
-			if(showDebugControls) DrawDebugControls();
 		}
 
 		private void DrawDebugControls(){

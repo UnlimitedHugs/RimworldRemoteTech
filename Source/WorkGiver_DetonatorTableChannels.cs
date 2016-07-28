@@ -58,7 +58,15 @@ namespace RemoteExplosives {
 
 		private Thing FindInstallableComponent(Pawn pawn) {
 			Predicate<Thing> searchPredicate = thing => !thing.IsForbidden(pawn) && pawn.CanReserveAndReach(thing, PathEndMode.ClosestTouch, Danger.Some);
-			return GenClosest.ClosestThingReachable(pawn.Position, ThingRequest.ForDef(ThingDefOf.Component), PathEndMode.ClosestTouch, TraverseParms.For(TraverseMode.ByPawn, Danger.Some), maxComponentSearchDist, searchPredicate);
+			Thing component = null;
+			try {
+				component = GenClosest.ClosestThingReachable(pawn.Position, ThingRequest.ForDef(ThingDefOf.Component), PathEndMode.ClosestTouch,
+																 TraverseParms.For(TraverseMode.ByPawn, Danger.Some), maxComponentSearchDist, searchPredicate);
+			} catch (NullReferenceException) {
+				// there seems to be a problem with the vanilla search algorithm right now (at PawnUtility.GetAvoidGrid)
+				// just fail the search should it come up
+			}
+			return component;
 		}
 	}
 }
