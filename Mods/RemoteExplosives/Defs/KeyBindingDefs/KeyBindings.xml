@@ -22,4 +22,11 @@
 		<defaultKeyCodeA>Z</defaultKeyCodeA>
 	</KeyBindingDef>
 	
+	<KeyBindingDef>
+		<category>RemoteExplosives</category>
+		<defName>RemoteExplosiveAutoReplace</defName>
+		<label>Remote Explosive Auto Replace</label>
+		<defaultKeyCodeA>R</defaultKeyCodeA>
+	</KeyBindingDef>
+	
 </KeyBindingDefs>

@@ -49,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Source\AutoReplaceWatcher.cs" />
     <Compile Include="Source\BuildingProperties_RemoteExplosive.cs" />
     <Compile Include="Source\Building_FoamWall.cs" />
     <Compile Include="Source\Building_MiningExplosive.cs" />

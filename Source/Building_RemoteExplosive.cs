@@ -13,6 +13,7 @@ namespace RemoteExplosives {
 		private const string flareGraphicStrongPath = "mine_flare_strong";
 
 		private static readonly Texture2D UITex_Arm = ContentFinder<Texture2D>.Get("UIArm");
+		private static readonly Texture2D UITex_AutoReplace = ContentFinder<Texture2D>.Get("UIAutoReplace");
 		private static readonly Graphic flareOverlayNormal = GraphicDatabase.Get<Graphic_Single>(flareGraphicPath, ShaderDatabase.TransparentPostLight);
 		private static readonly Graphic flareOverlayStrong = GraphicDatabase.Get<Graphic_Single>(flareGraphicStrongPath, ShaderDatabase.TransparentPostLight);
 
@@ -22,6 +23,8 @@ namespace RemoteExplosives {
 
 		private static readonly string ArmButtonLabel = "RemoteExplosive_arm_label".Translate();
 		private static readonly string ArmButtonDesc = "RemoteExplosive_arm_desc".Translate();
+		private static readonly string AutoReplaceButtonLabel = "RemoteExplosive_autoReplace_label".Translate();
+		private static readonly string AutoReplaceButtonDesc = "RemoteExplosive_autoReplace_desc".Translate();
 
 		protected int ticksBetweenBlinksArmed = 100;
 		protected int ticksBetweenBlinksLit = 7;
@@ -34,6 +37,7 @@ namespace RemoteExplosives {
 		private int ticksSinceFlare;
 		private RemoteExplosivesUtility.RemoteChannel currentChannel;
 		private RemoteExplosivesUtility.RemoteChannel desiredChannel;
+		private bool autoReplace;
 
 		private bool justCreated;
 
@@ -71,6 +75,7 @@ namespace RemoteExplosives {
 				if (customProps != null && customProps.startsArmed) {
 					Arm();
 				}
+				AutoReplaceWatcher.Instance.TryApplySavedSettings(this);
 				justCreated = false;
 			}
 		}
@@ -82,6 +87,7 @@ namespace RemoteExplosives {
 			Scribe_Values.LookValue(ref desiredArmState, "desiredArmState", false);
 			Scribe_Values.LookValue(ref currentChannel, "currentChannel", RemoteExplosivesUtility.RemoteChannel.White);
 			Scribe_Values.LookValue(ref desiredChannel, "desiredChannel", RemoteExplosivesUtility.RemoteChannel.White);
+			Scribe_Values.LookValue(ref autoReplace, "autoReplace", false);
 		}
 
 		public bool WantsSwitch() {
@@ -111,6 +117,14 @@ namespace RemoteExplosives {
 			isArmed = true;
 		}
 
+		public void SetChannel(RemoteExplosivesUtility.RemoteChannel channel) {
+			currentChannel = desiredChannel = channel;
+		}
+
+		public void EnableAutoReplace() {
+			autoReplace = true;
+		}
+
 		public void Disarm() {
 			if (!IsArmed) return;
 			desiredArmState = false;
@@ -133,10 +147,24 @@ namespace RemoteExplosives {
 				var channelGizmo = RemoteExplosivesUtility.MakeChannelGizmo(desiredChannel, ChannelGizmoAction);
 				yield return channelGizmo;
 			}
+
+			var replaceGizmo = new Command_Toggle {
+				toggleAction = ReplaceGizmoAction,
+				isActive = () => autoReplace,
+				icon = UITex_AutoReplace,
+				defaultLabel = AutoReplaceButtonLabel,
+				defaultDesc = AutoReplaceButtonDesc,
+				hotKey = KeyBindingDef.Named("RemoteExplosiveAutoReplace")
+			};
+			yield return replaceGizmo;
 			
 			foreach (var g in base.GetGizmos()) {
 				yield return g;
 			}
+		}
+
+		private void ReplaceGizmoAction() {
+			autoReplace = !autoReplace;
 		}
 
 		private void ChannelGizmoAction() {
@@ -181,6 +209,13 @@ namespace RemoteExplosives {
 					}
 				}
 			}
+		}
+
+		public override void Destroy(DestroyMode mode = DestroyMode.Vanish) {
+			if (mode == DestroyMode.Kill && autoReplace) {
+				AutoReplaceWatcher.Instance.ScheduleReplacement(this);
+			}
+			base.Destroy(mode);
 		}
 
 		private void DrawFlareOverlay(bool useStrong) {

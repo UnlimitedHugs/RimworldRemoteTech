@@ -10,10 +10,10 @@ using System.Text.RegularExpressions;
 //////////////////////////////////////////////////////////////////////
 
 enum ReleaseType {
-	major,
-	semimajor,
-	minor,
-	fix
+	major = 0,
+	semimajor = 1,
+	minor = 2,
+	fix = 3
 };
 
 ReleaseType release;
@@ -62,7 +62,14 @@ Task("Increment version")
 			
 			if(release != ReleaseType.fix){
 				var verParts = fullVersion.Split('.');
-				verParts[(int)release] = (int.Parse(verParts[(int)release])+1).ToString();
+				var releaseInt = (int)release;
+				verParts[releaseInt] = (int.Parse(verParts[releaseInt])+1).ToString();
+				if(release < ReleaseType.minor){
+					verParts[(int)ReleaseType.minor] = "0";
+				}
+				if(release < ReleaseType.semimajor){
+					verParts[(int)ReleaseType.semimajor] = "0";
+				}
 				fullVersion = string.Join(".", verParts);
 				
 				WriteAssemblyInfoVersion(infoPath, fullVersion);

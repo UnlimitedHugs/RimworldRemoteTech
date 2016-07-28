@@ -15,6 +15,10 @@
 	<RemoteExplosive_channelChanger_label>{0} channel</RemoteExplosive_channelChanger_label>
 	<RemoteExplosive_detonatorChannelChanger_desc>Sets the channel of the detonator. Only explosives on the same channel can be detonated.</RemoteExplosive_detonatorChannelChanger_desc>
 	
+	<RemoteExplosive_autoReplace_label>Auto replace</RemoteExplosive_autoReplace_label>
+	<RemoteExplosive_autoReplace_desc>If enabled, this explosive will be automatically re-placed after being detonated.</RemoteExplosive_autoReplace_desc>
+	
+	
 	<RemoteExplosive_channel0>White</RemoteExplosive_channel0>
 	<RemoteExplosive_channel1>Red</RemoteExplosive_channel1>
 	<RemoteExplosive_channel2>Green</RemoteExplosive_channel2>
