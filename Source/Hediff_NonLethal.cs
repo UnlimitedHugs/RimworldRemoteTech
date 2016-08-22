@@ -1,9 +1,7 @@
 ﻿using Verse;
 
 namespace RemoteExplosives {
-	/**
-	 * This hediff will prevent the game from randomly killing off non-colonist pawns when incapacitated
-	 */
+	// This hediff will prevent the game from randomly killing off non-colonist pawns when incapacitated by an increase in severity.
 	public class Hediff_NonLethal : HediffWithComps {
 
 		public override float Severity {

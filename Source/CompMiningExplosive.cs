@@ -6,9 +6,7 @@ using Verse;
 using Verse.Sound;
 
 namespace RemoteExplosives {
-	/**
-	 * An explosive with high power against rocks. Will break rocks within the defined area.
-	 */
+	// An explosive with high power against rocks. Will break rocks within the defined area.
 	public class CompMiningExplosive : CompCustomExplosive {
 		private static readonly SoundDef caveinEffect = SoundDef.Named("RemoteMiningCavein");
 		

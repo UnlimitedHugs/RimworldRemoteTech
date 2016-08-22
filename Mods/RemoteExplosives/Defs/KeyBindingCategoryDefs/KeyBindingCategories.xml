@@ -20,4 +20,16 @@
 			<li>Game</li>
 		</checkForConflicts>
 	</KeyBindingCategoryDef>
+	
+    <KeyBindingCategoryDef>
+		<defName>RemoteExplosivesTools</defName>
+		<label>Remote Explosives Tools</label>
+		<description>Shortcuts for activation of Remote Explosives items worn by pawns.</description>
+		<checkForConflicts>
+			<li>GameMapCamera</li>
+			<li>Game</li>
+		</checkForConflicts>
+	</KeyBindingCategoryDef>
+	
+	
 </KeyBindingCategoryDefs>

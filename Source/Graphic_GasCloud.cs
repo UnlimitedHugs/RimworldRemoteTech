@@ -2,9 +2,7 @@
 using Verse;
 
 namespace RemoteExplosives {
-	/**
-	 * An advanced version of Graphic_Random with support for alpha, position offset, scaling and rotation
-	 */
+	// An advanced version of Graphic_Random with support for alpha, position offset, scaling and rotation
 	public class Graphic_GasCloud : Graphic_Collection {
 		public override void DrawWorker(Vector3 loc, Rot4 rot, ThingDef thingDef, Thing thing) {
 			var cloud = (GasCloud)thing;

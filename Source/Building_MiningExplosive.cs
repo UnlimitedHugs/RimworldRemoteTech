@@ -3,6 +3,7 @@ using Verse;
 using System.Linq;
 
 namespace RemoteExplosives {
+	// A remote explosive that shows its range when selected.
 	public class Building_MiningExplosive : Building_RemoteExplosive {
 
 		private List<IntVec3> affectedCells;

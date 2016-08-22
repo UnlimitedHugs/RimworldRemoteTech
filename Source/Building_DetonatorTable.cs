@@ -5,21 +5,12 @@ using UnityEngine;
 using Verse;
 using Verse.AI;
 using Verse.Sound;
-using System.Linq;
 
 namespace RemoteExplosives {
+	// Finds remote explosive charges in range and detonates them on command.
+	// Can be upgraded with a component to unlock the ability to use channels.
 	[StaticConstructorOnStartup]
 	public class Building_DetonatorTable : Building {
-
-		private struct ScheduledTrigger {
-			public readonly Building_RemoteExplosive target;
-			public readonly int triggerTick;
-			public ScheduledTrigger(Building_RemoteExplosive target, int triggerTick) {
-				this.target = target;
-				this.triggerTick = triggerTick;
-			}
-		}
-
 		private static readonly Texture2D UITex_Detonate = ContentFinder<Texture2D>.Get("UIDetonate");
 		private static readonly string DetonateButtonLabel = "DetonatorTable_detonate_label".Translate();
 		private static readonly string DetonateButtonDesc = "DetonatorTable_detonate_desc".Translate();
@@ -29,8 +20,6 @@ namespace RemoteExplosives {
 		private static readonly string InstallComponentButtonDesc = "DetonatorTable_component_desc".Translate();
 
 		private const int FindExplosivesEveryTicks = 120;
-		// how long it will take to trigger an additional explosive
-		private const int TicksBetweenTriggers = 2;
 
 		private bool wantDetonation;
 
@@ -42,12 +31,7 @@ namespace RemoteExplosives {
 
 		private RemoteExplosivesUtility.RemoteChannel currentChannel;
 
-		private readonly Queue<ScheduledTrigger> triggerQueue = new Queue<ScheduledTrigger>();
-
 		private bool hasChannelsComponent;
-		public bool HasChannelsComponent {
-			get { return hasChannelsComponent; }
-		}
 
 		private bool wantChannelsComponent;
 		public bool WantChannelsComponent {
@@ -125,18 +109,7 @@ namespace RemoteExplosives {
 			}
 			SoundDefOf.FlickSwitch.PlayOneShot(Position);
 
-			var armedExplosives = FindArmedExplosivesInRange();
-			if(armedExplosives.Count>0) {
-				// schedule explosives to be triggered, closer ones first
-				armedExplosives = armedExplosives.OrderBy(e => e.Position.DistanceToSquared(Position)).ToList();
-				var lastTriggerTime = Find.TickManager.TicksGame+1;
-				foreach (var explosive in armedExplosives) {
-					triggerQueue.Enqueue(new ScheduledTrigger(explosive, lastTriggerTime));
-					lastTriggerTime += TicksBetweenTriggers;
-				}
-			} else {
-				Messages.Message("DetonatorTable_notargets".Translate(), MessageSound.Standard);
-			}
+			RemoteExplosivesUtility.LightArmedExplosivesInRange(Position, SignalRange, currentChannel);
 		}
 
 		public override void Tick() {
@@ -147,16 +120,10 @@ namespace RemoteExplosives {
 				ticksSinceLastInspection = 0;
 				UpdateNumArmedExplosivesInRange();
 			}
-			// trigger scheduled explosives
-			if(triggerQueue.Count>0) {
-				var currentTick = Find.TickManager.TicksGame;
-				while (triggerQueue.Count>0) {
-					var entry = triggerQueue.Peek();
-					if(entry.triggerTick>currentTick) break;
-					triggerQueue.Dequeue();
-					entry.target.LightFuse();
-				}
-			}
+		}
+
+		private float SignalRange {
+			get { return def.specialDisplayRadius; }
 		}
 
 		private void PlayNeedPowerEffect() {
@@ -166,23 +133,7 @@ namespace RemoteExplosives {
 		}
 
 		private void UpdateNumArmedExplosivesInRange() {
-			numViableExplosives = FindArmedExplosivesInRange().Count;
-		}
-
-		private List<Building_RemoteExplosive> FindArmedExplosivesInRange() {
-			var results = new List<Building_RemoteExplosive>();
-			var sample = Find.ListerBuildings.AllBuildingsColonistOfClass<Building_RemoteExplosive>();
-			foreach (var explosive in sample) {
-				if (explosive.IsArmed && explosive.CurrentChannel == currentChannel && !explosive.FuseLit && TileIsInRange(explosive.Position)) {
-					results.Add(explosive);
-				}
-			}
-			return results;
-		}
-
-		private bool TileIsInRange(IntVec3 pos) {
-			var maxDistance = def.specialDisplayRadius;
-			return Mathf.Sqrt(Mathf.Pow(pos.x - Position.x, 2) + Mathf.Pow(pos.z - Position.z, 2)) <= maxDistance;
+			numViableExplosives = RemoteExplosivesUtility.FindArmedExplosivesInRange(Position, SignalRange, currentChannel).Count;
 		}
 
 		public override string GetInspectString(){

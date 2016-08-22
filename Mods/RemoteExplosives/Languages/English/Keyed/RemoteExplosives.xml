@@ -1,10 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <LanguageData>
-
+	
 	<DetonatorTable_detonate_label>Detonate</DetonatorTable_detonate_label>
 	<DetonatorTable_detonate_desc>Detonates all armed remote explosives on the same channel in range.</DetonatorTable_detonate_desc>
 	<DetonatorTable_inrange>Armed explosives in range</DetonatorTable_inrange>
-	<DetonatorTable_notargets>Cannot detonate- no armed explosives in range on this channel.</DetonatorTable_notargets>
 	<DetonatorTable_detonatenow>Detonate explosives NOW</DetonatorTable_detonatenow>
 	<DetonatorTable_detonatenow_reserved>(reserved by {0})</DetonatorTable_detonatenow_reserved>
 	
@@ -25,7 +24,7 @@
 	
 	<DetonatorTable_component_label>Install channels</DetonatorTable_component_label>
 	<DetonatorTable_component_desc>Install a component to allow detonating explosives on different channels.</DetonatorTable_component_desc>
-
+	
 	<BillsTab_MaterialButton_label>Material: {0}</BillsTab_MaterialButton_label>
 	<BillsTab_MaterialButton_component_mode>Components</BillsTab_MaterialButton_component_mode>
 	<BillsTab_MaterialButton_steel_mode>Steel</BillsTab_MaterialButton_steel_mode>
@@ -39,4 +38,11 @@
 	<GasCloud_concentration_label>Concentration: {0}</GasCloud_concentration_label>
 	
 	<HediffRecovery_status_label>recovering</HediffRecovery_status_label>
+	
+	<PortableDetonator_detonate_label>Detonate explosives</PortableDetonator_detonate_label>
+	<PortableDetonator_detonate_desc>Detonates all armed explosives in range on the white channel.</PortableDetonator_detonate_desc>
+	<PortableDetonator_detonate_uses>Uses left: {0}</PortableDetonator_detonate_uses>
+	<PortableDetonator_broke_msg>The Portable Detonator ran out of battery power.</PortableDetonator_broke_msg>
+	
+	<Detonator_notargets>Cannot detonate- no armed explosives in range on this channel.</Detonator_notargets>
 </LanguageData>

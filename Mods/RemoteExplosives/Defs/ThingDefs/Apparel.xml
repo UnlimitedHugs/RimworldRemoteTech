@@ -66,4 +66,51 @@ The filters wear out fairly quickly, so it's recommended to wear this only when 
 		</colorGenerator>
 	</ThingDef>
 	
+	<ThingDef ParentName="ApparelBase">
+		<thingClass>RemoteExplosives.PortableDetonator</thingClass>
+		<defName>Apparel_PortableDetonator</defName>
+		<label>portable remote detonator</label>
+		<description>A portable version of the detonator table for triggering remote explosives.
+Works only on the white channel, has limited range and runs on a non-rechargeable battery- but hey, you can almost fit it in your pocket. Not really, though.</description>
+		<graphicData>
+			<texPath>detonator_portable</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+		</graphicData>
+		<statBases>
+			<WorkToMake>3000</WorkToMake>
+			<MaxHitPoints>80</MaxHitPoints>
+			<MarketValue>300</MarketValue>
+			<PortableDetonatorRange>18</PortableDetonatorRange>
+			<PortableDetonatorNumUses>20</PortableDetonatorNumUses>
+		</statBases>
+		<recipeMaker>
+			<workSpeedStat>SmithingSpeed</workSpeedStat>
+			<workSkill>Crafting</workSkill>
+			<effectWorking>Smith</effectWorking>
+			<soundWorking>Recipe_Machining</soundWorking>
+			<recipeUsers>
+				<li>RemoteExplosivesBench</li>
+			</recipeUsers>
+			<unfinishedThingDef>UnfinishedComponent</unfinishedThingDef>
+			<researchPrerequisite>RemoteDetonator</researchPrerequisite>
+		</recipeMaker>
+		<costList>
+			<Component>2</Component>
+			<Silver>8</Silver>
+			<Steel>40</Steel>
+		</costList>
+		<thingCategories>
+			<li>Apparel</li>
+		</thingCategories>
+		<apparel>
+			<bodyPartGroups>
+				<li>Torso</li>
+			</bodyPartGroups>
+			<layers>
+				<li>Accessory</li>
+			</layers>
+			<commonality>0</commonality>
+		</apparel>
+	</ThingDef>
+	
 </ThingDefs>

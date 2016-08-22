@@ -3,6 +3,7 @@
 
   <WorkGiverDef>
     <defName>DetonateRemoteExplosives</defName>
+	<label>trigger remote detonator</label>
     <giverClass>RemoteExplosives.WorkGiver_DetonatorTable</giverClass>
     <workType>Flicker</workType>
     <priorityInType>10</priorityInType>
@@ -12,6 +13,7 @@
   
   <WorkGiverDef>
     <defName>SwitchRemoteExplosive</defName>
+	<label>switch remote explosive</label>
     <giverClass>RemoteExplosives.WorkGiver_RemoteExplosive</giverClass>
     <workType>Flicker</workType>
     <priorityInType>9</priorityInType>
@@ -21,6 +23,7 @@
 
   <WorkGiverDef>
     <defName>InstallChannelsComponent</defName>
+	<label>install detonator channels</label>
     <giverClass>RemoteExplosives.WorkGiver_DetonatorTableChannels</giverClass>
     <workType>Construction</workType>
     <priorityInType>200</priorityInType>

@@ -6,9 +6,8 @@ using Verse;
 using System.Linq;
 
 namespace RemoteExplosives {
-	/**
-	 * Technically, not a component of the map (stores no data), but it provides a covenient entry point at map load.
-	 */
+	// This is a catch-all for all tasks that are not attached to any building or item, but require ticking or execution at map load.
+	// Injectes trader stock generators, generates recipe copies for the workbench, controls the animation interpolator and runs the auto-replace watcher.
 	public class MapComponent_RemoteExplosivesInjector : MapComponent {
 		private readonly ThingCategoryDef explosivesItemCategory = ThingCategoryDef.Named("Explosives");
 		private readonly RecipeDef BasicRemoteBombRecipe = DefDatabase<RecipeDef>.GetNamed("MakeRemoteBomb");

@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using RimWorld;
 using Verse;
 using Verse.AI;
-/**
- * Used to install a component into a detonator to unlock channels
- */
+
 namespace RemoteExplosives {
+	// Gives JobDriver_InstallChannelsComponent job to colonists
 	public class WorkGiver_DetonatorTableChannels : WorkGiver_Scanner {
 
 		private const PathEndMode pathEndMode = PathEndMode.InteractionCell;

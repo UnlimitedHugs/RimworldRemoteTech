@@ -1,11 +1,17 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Verse;
 
 namespace RemoteExplosives {
+	// A place for common functions and utilities used by the mod.
 	[StaticConstructorOnStartup]
 	public static class RemoteExplosivesUtility {
-		public static readonly string InjectedRecipeNameSuffix = "Injected";
+		public const string InjectedRecipeNameSuffix = "Injected";
+
+		// how long it will take to trigger an additional explosive
+		private const int TicksBetweenTriggers = 2;
 
 		private static readonly SoundDef UIChannelSound = SoundDef.Named("RemoteUIDialClick");
 		private static readonly ResearchProjectDef channelsResearchDef = ResearchProjectDef.Named("RemoteExplosivesChannels");
@@ -34,8 +40,8 @@ namespace RemoteExplosives {
 
 		public static void UpdateSwitchDesignation(Thing thing) {
 			if(thing == null || !(thing is ISwitchable)) return;
-			bool flag = (thing as ISwitchable).WantsSwitch();
-			Designation designation = Find.DesignationManager.DesignationOn(thing, SwitchDesigationDef);
+			var flag = (thing as ISwitchable).WantsSwitch();
+			var designation = Find.DesignationManager.DesignationOn(thing, SwitchDesigationDef);
 			if (flag && designation == null) {
 				Find.DesignationManager.AddDesignation(new Designation(thing, SwitchDesigationDef));
 			} else if (!flag && designation != null) {
@@ -72,10 +78,33 @@ namespace RemoteExplosives {
 			return String.Format(CurrenthannelLabelBase, GetChannelName(currentChannnel));
 		}
 
-		public static float QuinticEaseOut (float t, float start, float change, float duration) {
-			t /= duration;
-			t--;
-			return change*(t*t*t*t*t + 1) + start;
+		public static void LightArmedExplosivesInRange(IntVec3 center, float radius, RemoteChannel channel) {
+			var armedExplosives = FindArmedExplosivesInRange(center, radius, channel);
+			if (armedExplosives.Count > 0) {
+				// closer ones will go off first
+				armedExplosives = armedExplosives.OrderBy(e => e.Position.DistanceToSquared(center)).ToList();
+				for (int i = 0; i < armedExplosives.Count; i++) {
+					var explosive = armedExplosives[i];
+					explosive.LightFuse(TicksBetweenTriggers * i);
+				}
+			} else {
+				Messages.Message("Detonator_notargets".Translate(), MessageSound.Standard);
+			}
+		}
+
+		public static List<Building_RemoteExplosive> FindArmedExplosivesInRange(IntVec3 center, float radius, RemoteChannel channel) {
+			var results = new List<Building_RemoteExplosive>();
+			var sample = Find.ListerBuildings.AllBuildingsColonistOfClass<Building_RemoteExplosive>();
+			foreach (var explosive in sample) {
+				if (explosive.IsArmed && explosive.CurrentChannel == channel && !explosive.FuseLit && TileIsInRange(explosive.Position, center, radius)) {
+					results.Add(explosive);
+				}
+			}
+			return results;
+		}
+
+		private static bool TileIsInRange(IntVec3 tile1, IntVec3 tile2, float maxDistance) {
+			return Mathf.Sqrt(Mathf.Pow(tile1.x - tile2.x, 2) + Mathf.Pow(tile1.z - tile2.z, 2)) <= maxDistance;
 		}
 
 		private static Texture2D GetUITextureForChannel(RemoteChannel channel) {
