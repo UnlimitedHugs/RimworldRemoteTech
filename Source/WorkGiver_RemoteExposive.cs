@@ -4,6 +4,7 @@ using Verse;
 using Verse.AI;
 
 namespace RemoteExplosives {
+	// Gives JobDriver_SwitchRemoteExplosive job to colonists
 	public class WorkGiver_RemoteExplosive : WorkGiver_Scanner {
 		
 		private const PathEndMode pathEndMode = PathEndMode.Touch;

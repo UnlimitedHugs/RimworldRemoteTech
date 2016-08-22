@@ -5,6 +5,8 @@ using Verse;
 using Verse.Sound;
 
 namespace RemoteExplosives {
+	// Created by the sealing foam canister. 
+	// Will spread a given number of times and turn into another building (wall) once time runs out.
 	public class Building_FoamBlob : Building {
 		private static readonly SoundDef spraySound = SoundDef.Named("RemoteFoamSpray");
 		private static readonly SoundDef solidifySound = SoundDef.Named("RemoteFoamSolidify");

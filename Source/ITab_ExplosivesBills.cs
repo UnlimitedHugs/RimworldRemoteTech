@@ -6,6 +6,8 @@ using UnityEngine;
 using Verse;
 
 namespace RemoteExplosives {
+	// A tab for a workbench that allows switching between using Steel and Components to make recipes.
+	// It works by displaying a different set of recipes depending on the setting.
 	public class ITab_ExplosivesBills : ITab_Bills {
 
 		private enum RecipeMode {

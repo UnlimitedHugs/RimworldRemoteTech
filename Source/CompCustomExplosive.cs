@@ -4,10 +4,7 @@ using Verse;
 using Verse.Sound;
 
 namespace RemoteExplosives {
-	/*
-	 * An explosive with a timer. Can be triggered silently, but will revert to the vanilla wick if it takes enough damage.
-	 */
-
+	// An explosive with a timer. Can be triggered silently, but will revert to the vanilla wick if it takes enough damage.
 	public class CompCustomExplosive : ThingComp {
 		private static readonly SoundDef WickStartSound = SoundDef.Named("MetalHitImportant");
 		private static readonly SoundDef WickLoopSound = SoundDef.Named("HissSmall");
@@ -61,7 +58,7 @@ namespace RemoteExplosives {
 
 		private void StartWickSustainer() {
 			WickStartSound.PlayOneShot(parent.Position);
-			SoundInfo info = SoundInfo.InWorld(parent, MaintenanceType.PerTick);
+			var info = SoundInfo.InWorld(parent, MaintenanceType.PerTick);
 			wickSoundSustainer = WickLoopSound.TrySpawnSustainer(info);
 		}
 
@@ -83,12 +80,12 @@ namespace RemoteExplosives {
 			}
 		}
 
-		public void StartWick(bool silent) {
+		public void StartWick(bool silent, int additionalWickTicks = 0) {
 			if (wickStarted && !silent) wickIsSilent = false;
 			if (wickStarted) return;
 			wickIsSilent = silent;
 			wickStarted = true;
-			wickTotalTicks = wickTicksLeft = ExplosiveProps.wickTicks.RandomInRange;
+			wickTotalTicks = wickTicksLeft = ExplosiveProps.wickTicks.RandomInRange + additionalWickTicks;
 			if (ExplosiveProps.explosiveDamageType != null) {
 				GenExplosion.NotifyNearbyPawnsOfDangerousExplosive(parent, ExplosiveProps.explosiveDamageType);
 			}

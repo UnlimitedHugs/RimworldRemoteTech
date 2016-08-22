@@ -2,9 +2,7 @@
 using Verse.Sound;
 
 namespace RemoteExplosives {
-	/**
-	 * A remote explosive with a custom wind-up sound.
-	 */
+	// A remote explosive with a custom wind-up sound.
 	public class Building_RemoteExplosiveEmp : Building_RemoteExplosive {
 		private static readonly SoundDef chargeSound = SoundDef.Named("RemoteEmpCharge");
 		private Sustainer chargeSoundSustainer;
@@ -13,11 +11,11 @@ namespace RemoteExplosives {
 			beepWhenLit = false;
 		}
 
-		public override void LightFuse() {
+		public override void LightFuse(int additionalWickTicks = 0) {
 			if(!FuseLit) {
 				chargeSoundSustainer = new Sustainer(chargeSound, SoundInfo.InWorld(Position, MaintenanceType.PerTick));
 			}
-			base.LightFuse();
+			base.LightFuse(additionalWickTicks);
 		}
 
 		public override void Tick() {

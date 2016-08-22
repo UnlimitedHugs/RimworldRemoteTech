@@ -58,6 +58,7 @@
     <Compile Include="Source\Building_RemoteExplosive.cs" />
     <Compile Include="Source\Building_RemoteExplosiveEmp.cs" />
     <Compile Include="Source\Building_FoamBlob.cs" />
+    <Compile Include="Source\Command_MouseOverDetector.cs" />
     <Compile Include="Source\CompChemicalExplosive.cs" />
     <Compile Include="Source\CompProperties_ChemicalExplosive.cs" />
     <Compile Include="Source\HediffCompProps_SeverityRecovery.cs" />
@@ -78,6 +79,7 @@
     <Compile Include="Source\CompRandomResourceLeaverProperties.cs" />
     <Compile Include="Source\JobDriver_InstallChannelsComponent.cs" />
     <Compile Include="Source\MapComponent_RemoteExplosivesInjector.cs" />
+    <Compile Include="Source\PortableDetonator.cs" />
     <Compile Include="Source\TraderStockInjectorDef.cs" />
     <Compile Include="Source\BuildingProperties_FoamBlob.cs" />
     <Compile Include="Source\ValueInterpolator.cs" />

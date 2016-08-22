@@ -4,6 +4,7 @@ using Verse;
 using Verse.AI;
 
 namespace RemoteExplosives {
+	// Calls a colonist to find a component and perform some work on a detonator table to unlock the usage of channels.
 	public class JobDriver_InstallChannelsComponent : JobDriver {
 		public static string JobDefName = "JobDef_InstallChannelsComponent";
 		private const TargetIndex TableInd = TargetIndex.A;

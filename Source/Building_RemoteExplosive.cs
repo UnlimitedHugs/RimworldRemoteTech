@@ -6,6 +6,9 @@ using Verse;
 using Verse.Sound;
 
 namespace RemoteExplosives {
+	// The base class for all remote explosives.
+	// Requires a CompCustomExplosive to work correctly. Can be armed and assigned to a channel.
+	// Will blink with an overlay texture when armed.
 	[StaticConstructorOnStartup]
 	public class Building_RemoteExplosive : Building, ISwitchable {
 		
@@ -53,9 +56,9 @@ namespace RemoteExplosives {
 			get { return currentChannel; }
 		}
 
-		public virtual void LightFuse() {
+		public virtual void LightFuse(int additionalWickTicks = 0) {
 			if(FuseLit) return;
-			comp.StartWick(true);
+			comp.StartWick(true, additionalWickTicks);
 		}
 
 		public override void PostMake() {
@@ -221,8 +224,8 @@ namespace RemoteExplosives {
 		private void DrawFlareOverlay(bool useStrong) {
 			ticksSinceFlare = 0;
 
-			Graphic overlay = useStrong ? flareOverlayStrong : flareOverlayNormal;
-			Matrix4x4 matrix = default(Matrix4x4);
+			var overlay = useStrong ? flareOverlayStrong : flareOverlayNormal;
+			var matrix = default(Matrix4x4);
 			var s = Vector3.one;
 			matrix.SetTRS(DrawPos + Altitudes.AltIncVect, Rotation.AsQuat, s);
 			Graphics.DrawMesh(MeshPool.plane10, matrix, overlay.MatAt(Rotation), 0);

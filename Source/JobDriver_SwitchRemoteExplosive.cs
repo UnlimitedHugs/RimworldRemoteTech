@@ -2,6 +2,8 @@
 using Verse.AI;
 
 namespace RemoteExplosives {
+	// Calls a colonist to flick a remote explosive.
+	// This includes both setting the armed state and the channel.
 	public class JobDriver_SwitchRemoteExplosive : JobDriver {
 		public static string JobDefName = "JobDef_SwitchRemoteExplosive";
 

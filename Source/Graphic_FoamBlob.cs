@@ -2,9 +2,7 @@
 using Verse;
 
 namespace RemoteExplosives {
-	/**
-	 * A Graphic_Single with scaling support
-	 */
+	// A Graphic_Single with scaling support
 	public class Graphic_FoamBlob : Graphic_Single {
 		public override void DrawWorker(Vector3 loc, Rot4 rot, ThingDef thingDef, Thing thing) {
 			var blob = (Building_FoamBlob)thing;

@@ -2,10 +2,9 @@
 using RimWorld;
 using Verse;
 using Verse.AI;
-/**
- * Used to trigger remote explosives
- */
+
 namespace RemoteExplosives {
+	// Gives JobDriver_DetonateRemoteExplosives job to colonists
 	public class WorkGiver_DetonatorTable : WorkGiver_Scanner {
 		
 		private const PathEndMode pathEndMode = PathEndMode.InteractionCell;

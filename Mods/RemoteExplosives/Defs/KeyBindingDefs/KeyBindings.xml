@@ -4,7 +4,7 @@
 	<KeyBindingDef>
 		<category>RemoteExplosivesDetonator</category>
 		<defName>RemoteTableDetonate</defName>
-		<label>Remote detonator: Detonate</label>
+		<label>Stationary detonator: Detonate</label>
 		<defaultKeyCodeA>Z</defaultKeyCodeA>
 	</KeyBindingDef>
 	
@@ -25,8 +25,16 @@
 	<KeyBindingDef>
 		<category>RemoteExplosives</category>
 		<defName>RemoteExplosiveAutoReplace</defName>
-		<label>Remote Explosive Auto Replace</label>
+		<label>Remote Explosive auto replace</label>
 		<defaultKeyCodeA>R</defaultKeyCodeA>
 	</KeyBindingDef>
+	
+	<KeyBindingDef>
+		<category>RemoteExplosivesTools</category>
+		<defName>PortableDetonatorDetonate</defName>
+		<label>Portable detonator: Detonate</label>
+		<defaultKeyCodeA>Z</defaultKeyCodeA>
+	</KeyBindingDef>	
+	
 	
 </KeyBindingDefs>
