@@ -3,7 +3,7 @@
 
   <RemoteExplosives.TraderStockInjectorDef>
     <defName>BulkGoods_inject</defName>
-    <traderDef>Orbital_Misc_BulkGoods</traderDef>
+    <traderDef>Orbital_BulkGoods</traderDef>
     <stockGenerators>
 	<!-- mining -->
       <li Class="StockGenerator_SingleDef">
@@ -32,7 +32,7 @@
 
   <RemoteExplosives.TraderStockInjectorDef>
     <defName>CombatSupplier_inject</defName>
-    <traderDef>Orbital_Misc_CombatSupplier</traderDef>
+    <traderDef>Orbital_CombatSupplier</traderDef>
     <stockGenerators>
 	<!-- combat -->
 	<li Class="StockGenerator_SingleDef">
@@ -93,7 +93,7 @@
 
   <RemoteExplosives.TraderStockInjectorDef>
     <defName>PirateMerchant_inject</defName>
-    <traderDef>Orbital_Misc_PirateMerchant</traderDef>
+    <traderDef>Orbital_PirateMerchant</traderDef>
     <stockGenerators>
 	 <!-- combat, cheap -->
 	 <li Class="StockGenerator_SingleDef">
@@ -141,7 +141,7 @@
   
   <RemoteExplosives.TraderStockInjectorDef>
     <defName>Exotic_inject</defName>
-    <traderDef>Orbital_Misc_Exotic</traderDef>
+    <traderDef>Orbital_Exotic</traderDef>
     <stockGenerators>
 		<li Class="StockGenerator_SingleDef">
 			<thingDef>RemoteChemicalCan</thingDef>

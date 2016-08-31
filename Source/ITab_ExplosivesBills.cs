@@ -29,7 +29,6 @@ namespace RemoteExplosives {
 		{
 			size = WinSize;
 			labelKey = "TabBills";
-			tutorHighlightTag = "TabBills";
 		}
 
 		protected override void FillTab() {
@@ -40,8 +39,7 @@ namespace RemoteExplosives {
 				modeButtonTooltip = "BillsTab_MaterialButton_tooltip".Translate();
 			}
 
-			ConceptDatabase.KnowledgeDemonstrated(ConceptDefOf.BillsTab, KnowledgeAmount.GuiFrame);
-			Rect canvasRect = new Rect(0f, 0f, WinSize.x, WinSize.y).ContractedBy(10f);
+			var canvasRect = new Rect(0f, 0f, WinSize.x, WinSize.y).ContractedBy(10f);
 
 			var buttonRect = new Rect(canvasRect.x + 160f, canvasRect.y, 170f, 29f);
 			TooltipHandler.TipRegion(buttonRect, modeButtonTooltip);
@@ -52,7 +50,7 @@ namespace RemoteExplosives {
 			Func<List<FloatMenuOption>> recipeOptionsMaker = delegate {
 				var list = new List<FloatMenuOption>();
 				for (int i = 0; i < SelTable.def.AllRecipes.Count; i++) {
-					RecipeDef recipe = SelTable.def.AllRecipes[i];
+					var recipe = SelTable.def.AllRecipes[i];
 					if(!recipe.AvailableNow) continue;
 					if(currentRecipeMode == RecipeMode.Components && IsInjectedSteelRecipe(recipe) || currentRecipeMode == RecipeMode.Steel && !IsInjectedSteelRecipe(recipe)) continue;
 					
@@ -60,7 +58,7 @@ namespace RemoteExplosives {
 						if (!Find.MapPawns.FreeColonists.Any(recipe.PawnSatisfiesSkillRequirements)) {
 							Bill.CreateNoPawnsWithSkillDialog(recipe);
 						}
-						Bill bill = recipe.MakeNewBill();
+						var bill = recipe.MakeNewBill();
 						SelTable.billStack.AddBill(bill);
 					}));
 				}

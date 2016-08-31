@@ -8,10 +8,10 @@
 		<makesSickThought>true</makesSickThought>
 		<chanceToCauseNoPain>1</chanceToCauseNoPain>
 		<vanillaLethalityChance>.1</vanillaLethalityChance>
+		<maxSeverity>2.5</maxSeverity>
 		<comps>
 			<li Class="RemoteExplosives.HediffCompProps_SeverityRecovery">
 				<compClass>RemoteExplosives.HediffComp_SeverityRecovery</compClass>
-				<maxSeverity>2.5</maxSeverity>
 				<severityRecoveryPerTick>
 					<min>0.0001</min>
 					<max>0.0003</max>
