@@ -23,8 +23,8 @@ namespace RemoteExplosives {
 					if (parent.Severity < 0) parent.Severity = 0;
 				}
 			}
-			if (parent.Severity > props.maxSeverity) {
-				parent.Severity = props.maxSeverity;
+			if (parent.Severity > parent.def.maxSeverity) {
+				parent.Severity = parent.def.maxSeverity;
 			}
 			lastSeenSeverity = parent.Severity;
 		}

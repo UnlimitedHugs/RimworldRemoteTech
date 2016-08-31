@@ -9,7 +9,6 @@
 		<useHitPoints>true</useHitPoints>
 		<selectable>true</selectable>
 		<altitudeLayer>Item</altitudeLayer>
-		<stackLimit>75</stackLimit>
 		<comps>
 			<li>
 				<compClass>CompForbiddable</compClass>
