@@ -7,10 +7,9 @@ using System.Linq;
 
 namespace RemoteExplosives {
 	// This is a catch-all for all tasks that are not attached to any building or item, but require ticking or execution at map load.
-	// Injectes trader stock generators, generates recipe copies for the workbench, controls the animation interpolator and runs the auto-replace watcher.
+	// Injects trader stock generators, generates recipe copies for the workbench, controls the animation interpolator, runs the scheduler and auto-replace watcher.
 	public class MapComponent_RemoteExplosivesInjector : MapComponent {
 		private readonly ThingCategoryDef explosivesItemCategory = ThingCategoryDef.Named("Explosives");
-		private readonly RecipeDef BasicRemoteBombRecipe = DefDatabase<RecipeDef>.GetNamed("MakeRemoteBomb");
 		private readonly MethodInfo objectCloneMethod = typeof(object).GetMethod("MemberwiseClone", BindingFlags.Instance | BindingFlags.NonPublic);
 		private readonly bool showDebugControls = false;
 
@@ -18,16 +17,25 @@ namespace RemoteExplosives {
 		
 		private const int ComponentValueInSteel = 40;
 
+		private bool MustPerformInjection {
+			get { return DefDatabase<TraderStockInjectorDef>.DefCount > 0; }
+		}
+
 		public MapComponent_RemoteExplosivesInjector() {
-			InjectTraderStocks();
-			InjectSteelRecipeVariants();
-			InitializeInterpolator();
+			if (MustPerformInjection) { // perform only once per def reload
+				InjectTraderStocks();
+				InjectSteelRecipeVariants();
+				InjectIEDComps();
+			}
 			EnsureComponentIsActive();
+			ValueInterpolator.Instance.Initialize(Time.realtimeSinceStartup);
+			CallbackScheduler.Instance.Initialize(Find.TickManager.TicksGame);
+			DistributedTickScheduler.Instance.Initialize(Find.TickManager.TicksGame);
 			replaceWatcher = new AutoReplaceWatcher();
 		}
 
 		public override void ExposeData() {
-			Scribe_Deep.LookDeep(ref replaceWatcher, "replaceWatcher", new object[0]);
+			Scribe_Deep.LookDeep(ref replaceWatcher, "replaceWatcher");
 			if(replaceWatcher == null) replaceWatcher = new AutoReplaceWatcher();
 		}
 
@@ -43,6 +51,9 @@ namespace RemoteExplosives {
 
 		public override void MapComponentTick() {
 			base.MapComponentTick();
+			var currentTick = Find.TickManager.TicksGame;
+			CallbackScheduler.Instance.Tick(currentTick);
+			DistributedTickScheduler.Instance.Tick(currentTick);
 			replaceWatcher.Tick();
 		}
 
@@ -60,7 +71,7 @@ namespace RemoteExplosives {
 				}
 			}
 			if(affectedTraders.Count>0) {
-				Log.Message(string.Format("[RemoteExplosives] Injected stock generators for {0} traders", affectedTraders.Count));
+				RemoteExplosivesUtility.Log(string.Format("Injected stock generators for {0} traders", affectedTraders.Count));
 			}
 
 			// Unless all defs are reloaded, we no longer need the injector defs
@@ -71,8 +82,6 @@ namespace RemoteExplosives {
 		 * Injects copies of explosives recipes, changing components into an equivalent amount of steel
 		 */
 		private void InjectSteelRecipeVariants() {
-			if(SteelRecipesInjected()) return;
-
 			int injectCount = 0;
 			foreach (var explosiveRecipe in GetAllExplosivesRecipes().ToList()) {
 				var variant = TryMakeRecipeVariantWithSteel(explosiveRecipe);
@@ -83,12 +92,23 @@ namespace RemoteExplosives {
 			}
 
 			if(injectCount>0) {
-				Log.Message(string.Format("[RemoteExplosives] Injected {0} alternate explosives recipes.", injectCount));
+				RemoteExplosivesUtility.Log(string.Format("Injected {0} alternate explosives recipes.", injectCount));
 			}
 		}
 
-		private void InitializeInterpolator() {
-			ValueInterpolator.Instance.Initialize(Time.realtimeSinceStartup);
+		/**
+		 * Add comps to vanilla IED's so that they can be triggered by the manual detonator
+		 */
+		private void InjectIEDComps() {
+			var ieds = new[] {
+				DefDatabase<ThingDef>.GetNamedSilentFail("TrapIEDBomb"),
+				DefDatabase<ThingDef>.GetNamedSilentFail("TrapIEDIncendiary")
+			};
+			foreach (var thingDef in ieds) {
+				if (thingDef == null) continue;
+				thingDef.comps.Add(new CompProperties_WiredDetonationReceiver());
+			}
+
 		}
 
 		/**
@@ -102,10 +122,6 @@ namespace RemoteExplosives {
 			});
 		}
 
-		private bool SteelRecipesInjected() {
-			return DefDatabase<RecipeDef>.GetNamedSilentFail(BasicRemoteBombRecipe.defName + RemoteExplosivesUtility.InjectedRecipeNameSuffix) != null;
-		}
-
 		private IEnumerable<RecipeDef> GetAllExplosivesRecipes() {
 			return DefDatabase<RecipeDef>.AllDefs.Where(d => {
 				var product = d.products.FirstOrDefault();
@@ -113,7 +129,7 @@ namespace RemoteExplosives {
 			});
 		} 
 		
-		// Will retrn null if recipe requires no components
+		// Will return null if recipe requires no components
 		private RecipeDef TryMakeRecipeVariantWithSteel(RecipeDef recipeOriginal) {
 			var recipeCopy = (RecipeDef)objectCloneMethod.Invoke(recipeOriginal, null);
 			recipeCopy.defName += RemoteExplosivesUtility.InjectedRecipeNameSuffix;

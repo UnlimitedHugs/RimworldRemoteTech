@@ -8,6 +8,7 @@
 Rapidly dissipates when under an open sky.</description>
 		<thingClass>RemoteExplosives.GasCloud_HediffGiver</thingClass>
 		<category>Ethereal</category>
+		<drawerType>RealtimeOnly</drawerType>
 		<graphicData>
 			<texPath>GasCloud</texPath>
 			<graphicClass>RemoteExplosives.Graphic_GasCloud</graphicClass>

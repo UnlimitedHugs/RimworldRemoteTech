@@ -2,9 +2,9 @@
 <JobDefs>
 	
 	<JobDef>
-		<defName>JobDef_DetonateRemoteExplosives</defName>
-		<driverClass>RemoteExplosives.JobDriver_DetonateRemoteExplosives</driverClass>
-		<reportString>Detonating remote explosives.</reportString>
+		<defName>JobDef_DetonateExplosives</defName>
+		<driverClass>RemoteExplosives.JobDriver_DetonateExplosives</driverClass>
+		<reportString>Detonating explosives.</reportString>
 	</JobDef>
 	
 	<JobDef>

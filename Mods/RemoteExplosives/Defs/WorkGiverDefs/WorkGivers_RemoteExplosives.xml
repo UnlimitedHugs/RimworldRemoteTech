@@ -1,50 +1,68 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <WorkGivers>
+	
+	<WorkGiverDef>
+		<defName>DetonateExplosives</defName>
+		<label>trigger detonator</label>
+		<giverClass>RemoteExplosives.WorkGiver_IPawnDetonateable</giverClass>
+		<workType>Flicker</workType>
+		<priorityInType>10</priorityInType>
+		<verb>detonate</verb>
+		<gerund>detonating</gerund>
+	</WorkGiverDef>
+	
+	<WorkGiverDef>
+		<defName>SwitchRemoteExplosive</defName>
+		<label>switch remote explosive</label>
+		<giverClass>RemoteExplosives.WorkGiver_RemoteExplosive</giverClass>
+		<workType>Flicker</workType>
+		<priorityInType>9</priorityInType>
+		<verb>switch</verb>
+		<gerund>switching</gerund>
+	</WorkGiverDef>
+	
+	<WorkGiverDef>
+		<defName>InstallChannelsComponent</defName>
+		<label>install detonator channels</label>
+		<giverClass>RemoteExplosives.WorkGiver_DetonatorTableChannels</giverClass>
+		<workType>Construction</workType>
+		<priorityInType>200</priorityInType>
+		<verb>install channel component</verb>
+		<gerund>installing channel component</gerund>
+	</WorkGiverDef>
+	
+	<WorkGiverDef>
+		<defName>DoBillsRemoteExplosivesBench</defName>
+		<label>assemble explosive</label>
+		<giverClass>WorkGiver_DoBill</giverClass>
+		<workType>Smithing</workType>
+		<priorityInType>60</priorityInType>
+		<fixedBillGiverDefs>
+			<li>RemoteExplosivesBench</li>
+		</fixedBillGiverDefs>
+		<verb>assemble explosive</verb>
+		<gerund>assembling explosive at</gerund>
+		<requiredCapacities>
+			<li>Manipulation</li>
+		</requiredCapacities>
+	</WorkGiverDef>
+	
+	<WorkGiverDef>
+		<defName>DoBillsCraftFire</defName>
+		<label>do bills at fireplace</label>
+		<giverClass>WorkGiver_DoBill</giverClass>
+		<workType>Crafting</workType>
+		<priorityInType>50</priorityInType>
+		<fixedBillGiverDefs>
+			<li>Campfire</li>
+			<li>FueledStove</li>
+		</fixedBillGiverDefs>
+		<verb>craft</verb>
+		<gerund>crafting at</gerund>
+		<requiredCapacities>
+			<li>Manipulation</li>
+		</requiredCapacities>
+		<prioritizeSustains>true</prioritizeSustains>
+	</WorkGiverDef>
 
-  <WorkGiverDef>
-    <defName>DetonateRemoteExplosives</defName>
-	<label>trigger remote detonator</label>
-    <giverClass>RemoteExplosives.WorkGiver_DetonatorTable</giverClass>
-    <workType>Flicker</workType>
-    <priorityInType>10</priorityInType>
-    <verb>detonate</verb>
-    <gerund>detonating</gerund>
-  </WorkGiverDef>
-  
-  <WorkGiverDef>
-    <defName>SwitchRemoteExplosive</defName>
-	<label>switch remote explosive</label>
-    <giverClass>RemoteExplosives.WorkGiver_RemoteExplosive</giverClass>
-    <workType>Flicker</workType>
-    <priorityInType>9</priorityInType>
-    <verb>switch</verb>
-    <gerund>switching</gerund>
-  </WorkGiverDef>
-
-  <WorkGiverDef>
-    <defName>InstallChannelsComponent</defName>
-	<label>install detonator channels</label>
-    <giverClass>RemoteExplosives.WorkGiver_DetonatorTableChannels</giverClass>
-    <workType>Construction</workType>
-    <priorityInType>200</priorityInType>
-    <verb>install channel component</verb>
-    <gerund>installing channel component</gerund>
-  </WorkGiverDef>
-  
-  <WorkGiverDef>
-    <defName>DoBillsRemoteExplosivesBench</defName>
-    <label>assemble explosive</label>
-    <giverClass>WorkGiver_DoBill</giverClass>
-    <workType>Smithing</workType>
-    <priorityInType>60</priorityInType>
-    <fixedBillGiverDefs>
-      <li>RemoteExplosivesBench</li>
-    </fixedBillGiverDefs>
-    <verb>assemble explosive</verb>
-    <gerund>assembling explosive at</gerund>
-    <requiredCapacities>
-      <li>Manipulation</li>
-    </requiredCapacities>
-  </WorkGiverDef>
-  
 </WorkGivers>

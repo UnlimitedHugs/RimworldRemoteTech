@@ -30,9 +30,15 @@
 		<thingCategories>
 			<li>Explosives</li>
 		</thingCategories>
-		
 	</ThingDef>
 	
+	<ThingDef Name="BaseExplosiveIngredient" ParentName="BaseExplosivePart" Abstract="True">
+		<thingCategories>
+			<li>ExplosivesIngredients</li>
+		</thingCategories>
+		<soundInteract>Standard_Drop</soundInteract>
+		<stackLimit>75</stackLimit>
+	</ThingDef>
 	
 	<ThingDef ParentName="BaseExplosivePart">
 		<defName>RemoteBomb</defName>
@@ -102,6 +108,8 @@ Place as a building from the Explosives menu to use.</description>
 				<compClass>RemoteExplosives.CompMiningExplosive</compClass>
 				<rockChunkChance>0.5</rockChunkChance>
 				<miningRadius>2.9</miningRadius>
+				<resourceBreakingEfficiency>.75</resourceBreakingEfficiency>
+				<woodBreakingEfficiency>.70</woodBreakingEfficiency>
 				<explosiveRadius>2.9</explosiveRadius>
 				<explosiveDamageType>Bomb</explosiveDamageType>
 				<explosiveExpandPerStackcount>0.5</explosiveExpandPerStackcount>
@@ -156,5 +164,62 @@ Place as a building from the Explosives menu to use.</description>
 			<MarketValue>180</MarketValue>
 		</statBases>
 	</ThingDef>
+
+	<ThingDef ParentName="BaseExplosivePart">
+		<defName>ExplosivePouch</defName>
+		<label>explosive pouch</label>
+		<description>A primitive explosive charge made from volatile powder mixture wrapped in animal leather.
+Place as a building from the Explosives menu to use.</description>
+		<graphicData>
+			<texPath>makeshift_explosive</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+		</graphicData>
+		<comps>
+			<li Class="CompProperties_Explosive">
+				<explosiveRadius>2.5</explosiveRadius>
+				<explosiveDamageType>FlameBomb</explosiveDamageType>
+				<explosiveExpandPerStackcount>0.4</explosiveExpandPerStackcount>
+				<startWickHitPointsPercent>0.3</startWickHitPointsPercent>
+				<wickTicks>
+					<min>10</min>
+					<max>30</max>
+				</wickTicks>
+			</li>
+		</comps>
+	</ThingDef>
 	
+	<ThingDef ParentName="BaseExplosiveIngredient">
+		<defName>Sparkpowder</defName>
+		<label>sparkpowder</label>
+		<description>Harvested from Sparkweed plants and specially preserved to prevent spontaneous combustion. Keep away from fire.</description>
+		<graphicData>
+			<texPath>spark_powder</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+		</graphicData>
+		<comps>
+			<li Class="CompProperties_Explosive">
+				<explosiveRadius>1</explosiveRadius>
+				<explosiveDamageType>Flame</explosiveDamageType>
+				<explosiveExpandPerStackcount>0.1</explosiveExpandPerStackcount>
+				<startWickHitPointsPercent>1</startWickHitPointsPercent>
+				<chanceNeverExplodeFromDamage>0.25</chanceNeverExplodeFromDamage>
+				<startWickOnDamageTaken>Flame</startWickOnDamageTaken>
+				<wickTicks>
+					<min>90</min>
+					<max>180</max>
+				</wickTicks>
+			</li>
+		</comps>
+	</ThingDef>
+	
+	<ThingDef ParentName="BaseExplosiveIngredient">
+		<defName>Charcoal</defName>
+		<label>charcoal</label>
+		<description>An efficient fuel made by burning wood in low-oxygen conditions. Becomes a great additive for explosives when crushed into powder.
+Can be made at a campfire or a fueled stove.</description>
+		<graphicData>
+			<texPath>charcoal</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+		</graphicData>
+	</ThingDef>
 </Defs>

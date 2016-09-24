@@ -1,13 +1,27 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ResearchProjectDefs>
-	
+
+	<ResearchProjectDef>
+		<defName>MakeshiftExplosives</defName>
+		<label>Makeshift Explosives</label>
+		<description>Allows you to make simple explosives out of renewable resources.
+Once researched: 
+- Sparkweed can be planted.
+- Charcoal can be made from wood logs at campfires and the fueled stove.
+- Explosive pouch can be made at a crafting spot or tailoring bench.
+- The manual detonator and detonator cord can be built to trigger the explosives.</description>
+		<baseCost>1000</baseCost>
+		<techLevel>Medieval</techLevel>
+		<prerequisites></prerequisites>
+	</ResearchProjectDef>
+
 	<ResearchProjectDef>
 		<defName>RemoteDetonator</defName>
 		<label>Remote Detonator</label>
-		<description>Allows you to build a console that detonates remote explosives, as well as a workbench to manifacture them.
+		<description>Allows you to build a console that detonates remote explosives, as well as a workbench to manufacture them.
 The explosives workshop can create mining explosives that can be deployed as Fracturing or Clearing charges.
 			
-Research Explosive IEDs or Incendiary IEDs to manifacture combat-grade remote explosives.</description>
+Research Explosive IEDs or Incendiary IEDs to manufacture combat-grade remote explosives.</description>
 		<baseCost>1500</baseCost>
 		<techLevel>Industrial</techLevel>
 		<prerequisites></prerequisites>
@@ -16,7 +30,7 @@ Research Explosive IEDs or Incendiary IEDs to manifacture combat-grade remote ex
 	<ResearchProjectDef>
 		<defName>RemoteExplosivesChannels</defName>
 		<label>Remote Explosives Channels</label>
-		<description>Unlocks the use of channel on your remote explosives and the detonator. Only explosives on the same channel as the detonator can be triggerd. This allows to set up multiple lines of explosive defenses.
+		<description>Unlocks the use of channel on your remote explosives and the detonator. Only explosives on the same channel as the detonator can be triggered. This allows to set up multiple lines of explosive defenses.
 The detonator must be upgraded with a component for this to work.</description>
 		<baseCost>750</baseCost>
 		<techLevel>Industrial</techLevel>
