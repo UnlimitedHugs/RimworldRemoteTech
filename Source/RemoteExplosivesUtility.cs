@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using RimWorld;
 using UnityEngine;
 using Verse;
 
@@ -12,6 +13,7 @@ namespace RemoteExplosives {
 
 		// how long it will take to trigger an additional explosive
 		private const int TicksBetweenTriggers = 2;
+		private const string logPrefix = "[RemoteExplosives] ";
 
 		private static readonly SoundDef UIChannelSound = SoundDef.Named("RemoteUIDialClick");
 		private static readonly ResearchProjectDef channelsResearchDef = ResearchProjectDef.Named("RemoteExplosivesChannels");
@@ -36,6 +38,14 @@ namespace RemoteExplosives {
 			White = 0,
 			Red = 1,
 			Green = 2
+		}
+
+		public static void Log(object message) {
+			Verse.Log.Message(logPrefix + message);
+		}
+
+		public static void Error(object message) {
+			Verse.Log.Error(logPrefix + message);
 		}
 
 		public static void UpdateSwitchDesignation(Thing thing) {
@@ -101,6 +111,21 @@ namespace RemoteExplosives {
 				}
 			}
 			return results;
+		}
+
+		public static FloatMenuOption TryMakeDetonatorFloatMenuOption(Pawn forPawn, Thing detonator, Action onActivated) {
+			if (!forPawn.Drafted) return null;
+			var entry = new FloatMenuOption {
+				action = onActivated,
+				autoTakeable = false,
+				Label = "Detonator_detonatenow".Translate(),
+			};
+			if (Find.Reservations.IsReserved(detonator, Faction.OfPlayer)) {
+				entry.Disabled = true;
+				var reservedByName = Find.Reservations.FirstReserverOf(detonator, Faction.OfPlayer).Name.ToStringShort;
+				entry.Label += " " + "Detonator_detonatenow_reserved".Translate(reservedByName);
+			}
+			return entry;
 		}
 
 		private static bool TileIsInRange(IntVec3 tile1, IntVec3 tile2, float maxDistance) {

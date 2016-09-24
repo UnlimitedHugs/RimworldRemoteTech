@@ -9,12 +9,12 @@ namespace RemoteExplosives {
 	// An explosive with high power against rocks. Will break rocks within the defined area.
 	public class CompMiningExplosive : CompCustomExplosive {
 		private static readonly SoundDef caveinEffect = SoundDef.Named("RemoteMiningCavein");
-		
+
 		private List<IntVec3> customArea;
 
 		public CompProperties_MiningExplosive MiningProps {
 			get {
-				return (CompProperties_MiningExplosive) props;
+				return (CompProperties_MiningExplosive)props;
 			}
 		}
 
@@ -25,43 +25,67 @@ namespace RemoteExplosives {
 		protected override void Detonate() {
 			base.Detonate();
 			var area = customArea;
-			if(area==null) {
+			if (area == null) {
 				var radius = Mathf.Clamp(Mathf.Round(MiningProps.miningRadius), 0, 25);
 				area = GenRadial.RadialCellsAround(parent.Position, radius, true).ToList();
 			}
-			var affectedMineables = new List<Thing>();
+			var affectedMineables = 0;
 			foreach (var pos in area) {
-				var thing = MineUtility.MineableInCell(pos);
-				if(thing!=null) affectedMineables.Add(thing);
-			}
-			foreach (var mineable in affectedMineables) {
-				var rockBuildingDef = mineable.def.building;
-				if(rockBuildingDef==null) continue;
-				if(rockBuildingDef.isResourceRock) {
-					var damage = mineable.MaxHitPoints*(1-MiningProps.resourceBreakingEfficiency);
-					mineable.TakeDamage(new DamageInfo(DamageDefOf.Bomb, (int)damage, parent)); // this affects the amount of ore drops
-					mineable.Destroy(DestroyMode.Kill);
-				} else if(rockBuildingDef.isNaturalRock) {
-					mineable.Destroy();
-					if (mineable.def.filthLeaving != null) {
-						FilthMaker.MakeFilth(mineable.Position, mineable.def.filthLeaving, Rand.RangeInclusive(1, 3));
-					}
-					if (rockBuildingDef.mineableThing != null && Rand.Value<MiningProps.rockChunkChance) {
-						Thing rockDrop = ThingMaker.MakeThing(rockBuildingDef.mineableThing);
-						if (rockDrop.def.stackLimit == 1) {
-							rockDrop.stackCount = 1;
+				var things = Find.ThingGrid.ThingsListAt(pos).ToArray(); // copy required because of collection modification
+				foreach (var thing in things) {
+					if (thing.def == null) continue;
+					if (thing.def.mineable) {
+						var rockBuildingDef = thing.def.building;
+						if (rockBuildingDef == null) continue;
+						if (rockBuildingDef.isResourceRock) {
+							// resource rocks
+							DamageResourceHolder(thing, MiningProps.resourceBreakingEfficiency);
+							thing.Destroy(DestroyMode.Kill);
+							affectedMineables++;
+						} else if (rockBuildingDef.isNaturalRock) {
+							// stone
+							thing.Destroy();
+							affectedMineables++;
+							if (thing.def.filthLeaving != null) {
+								FilthMaker.MakeFilth(thing.Position, thing.def.filthLeaving, Rand.RangeInclusive(1, 3));
+							}
+							if (rockBuildingDef.mineableThing != null && Rand.Value < MiningProps.rockChunkChance) {
+								var rockDrop = ThingMaker.MakeThing(rockBuildingDef.mineableThing);
+								if (rockDrop.def.stackLimit == 1) {
+									rockDrop.stackCount = 1;
+								} else {
+									rockDrop.stackCount = Mathf.CeilToInt(rockBuildingDef.mineableYield);
+								}
+								GenPlace.TryPlaceThing(rockDrop, thing.Position, ThingPlaceMode.Direct);
+							}
 						} else {
-							rockDrop.stackCount = Mathf.CeilToInt(rockBuildingDef.mineableYield);
+							// all other mineables
+							thing.Destroy(DestroyMode.Kill);
+							affectedMineables++;
 						}
-						GenPlace.TryPlaceThing(rockDrop, mineable.Position, ThingPlaceMode.Direct);
+					} else if (thing.def.plant != null && thing.def.plant.IsTree) {
+						// trees
+						var tree = (Plant) thing;
+						DamageResourceHolder(tree, MiningProps.woodBreakingEfficiency);
+						var yeild = tree.YieldNow();
+						tree.PlantCollected();
+						if (yeild > 0) {
+							var wood = ThingMaker.MakeThing(thing.def.plant.harvestedThingDef);
+							wood.stackCount = yeild;
+							GenPlace.TryPlaceThing(wood, thing.Position, ThingPlaceMode.Direct);
+						}
 					}
-				} else { 
-					// all other mineables
-					mineable.Destroy(DestroyMode.Kill);
 				}
 			}
-			if (affectedMineables.Count > 5)
+			if (affectedMineables > 5) {
 				caveinEffect.PlayOneShot(SoundInfo.InWorld(new TargetInfo(parent)));
+			}
+		}
+
+		// this affects the amount of ore drops
+		private void DamageResourceHolder(Thing thing, float efficiency) {
+			var damage = thing.MaxHitPoints * (1 - efficiency);
+			thing.TakeDamage(new DamageInfo(DamageDefOf.Bomb, (int)damage, parent));
 		}
 	}
 }

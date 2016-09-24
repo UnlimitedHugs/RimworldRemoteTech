@@ -5,7 +5,7 @@
 		<category>Building</category>
 		<soundImpactDefault>BulletImpactMetal</soundImpactDefault>
 		<selectable>true</selectable>
-		<drawerType>MapMeshAndRealTime</drawerType>
+		<drawerType>RealtimeOnly</drawerType>
 		<terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
 		<repairEffect>Repair</repairEffect>
 		<leaveResourcesWhenKilled>false</leaveResourcesWhenKilled>
@@ -41,12 +41,16 @@
 		<DefName>TableDetonator</DefName>
 		<label>remote detonator</label>
 		<ThingClass>RemoteExplosives.Building_DetonatorTable</ThingClass>
-		<Description>A transmitter to detonate armed explosives in range.</Description>
-		<graphicData>
+		<Description>A transmitter to detonate armed explosives in range.
+Right-click with a drafted colonist for better timing.</Description>
+		<graphicData Class="RemoteExplosives.SidedBaseGraphicData">
 			<texPath>detonator_table</texPath>
-			<graphicClass>Graphic_Single</graphicClass>
+			<graphicClass>RemoteExplosives.Graphic_SingleWithBase</graphicClass>
 			<shaderType>CutoutComplex</shaderType>
 			<drawSize>(2,1)</drawSize>
+			<baseFrontTexPath>BenchBase/base_front1x2</baseFrontTexPath>
+			<baseSideTexPath>BenchBase/base_side1x1</baseSideTexPath>
+			<baseOffset>(0, -0.1875)</baseOffset> <!-- 12 px / 64 px -->
 		</graphicData>
 		<castEdgeShadows>true</castEdgeShadows>
 		<staticSunShadowHeight>0.10</staticSunShadowHeight>
@@ -92,15 +96,18 @@
 		<ThingClass>Building_WorkTable</ThingClass>
 		<Description>An electric-powered station equipped for crafting remotely detonated explosives.
 Research different types of remote explosives to unlock available recipes.</Description>
-		<graphicData>
+		<graphicData Class="RemoteExplosives.SidedBaseGraphicData">
 			<texPath>explosives_crafting_bench</texPath>
-			<graphicClass>Graphic_Single</graphicClass>
+			<graphicClass>RemoteExplosives.Graphic_SingleWithBase</graphicClass>
 			<shaderType>CutoutComplex</shaderType>
 			<drawSize>(3,1)</drawSize>
 			<damageData>
 				<cornerTR>Damage/Corner</cornerTR>
 				<cornerBL>Damage/Corner</cornerBL>
 			</damageData>
+			<baseFrontTexPath>BenchBase/base_front1x3</baseFrontTexPath>
+			<baseSideTexPath>BenchBase/base_side1x1</baseSideTexPath>
+			<baseOffset>(0, -0.1875)</baseOffset>
 		</graphicData>
 		<castEdgeShadows>true</castEdgeShadows>
 		<staticSunShadowHeight>0.15</staticSunShadowHeight>
@@ -152,7 +159,141 @@ Research different types of remote explosives to unlock available recipes.</Desc
 		<researchPrerequisites><li>RemoteDetonator</li></researchPrerequisites>
 	</ThingDef>
 	
+	<ThingDef ParentName="BuildingBase">
+		<DefName>DetonatorManual</DefName>
+		<label>manual detonator</label>
+		<ThingClass>RemoteExplosives.Building_DetonatorManual</ThingClass>
+		<Description>A simple plunger-type detonator. When activated, sends a pulse along the attached detonator cord to all connected explosives, lighting their fuses.
+Right-click with a drafted colonist for better timing.</Description>
+		<graphicData>
+			<texPath>DetonatorManual</texPath>
+			<graphicClass>RemoteExplosives.Graphic_Variants</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+			<drawSize>(1,1)</drawSize>
+		</graphicData>
+		<CostList>
+			<WoodLog>30</WoodLog>
+			<Steel>20</Steel>
+		</CostList>
+		<AltitudeLayer>Building</AltitudeLayer>
+		<fillPercent>0.5</fillPercent>
+		<useHitPoints>True</useHitPoints>
+		<statBases>
+			<WorkToMake>1300</WorkToMake>
+			<MaxHitPoints>70</MaxHitPoints>
+			<Flammability>1.0</Flammability>
+		</statBases>
+		<Size>(1,1)</Size>
+		<constructEffect>ConstructWood</constructEffect>
+		<Passability>PassThroughOnly</Passability>
+		<pathCost>30</pathCost>
+		<hasInteractionCell>False</hasInteractionCell>
+		<minifiedDef>MinifiedFurniture</minifiedDef>
+		<researchPrerequisites><li>MakeshiftExplosives</li></researchPrerequisites>
+	</ThingDef>
+    
+	<ThingDef ParentName="BuildingBase">
+		<defName>DetonatorCord</defName>
+		<label>detonator cord</label>
+		<thingClass>RemoteExplosives.Building_DetonatorWire</thingClass>
+		<category>Building</category>
+		<drawerType>MapMeshOnly</drawerType>
+		<graphicData>
+			<texPath>DetCord/det_cord_Atlas</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<linkType>Basic</linkType>
+			<linkFlags>
+				<li>Custom2</li>
+			</linkFlags>
+			<damageData>
+				<rect>(0,0.35,1,0.3)</rect>
+			</damageData>
+		</graphicData>
+		<blueprintGraphicData>
+			<texPath>DetCord/det_cord_blueprint_atlas</texPath>
+		</blueprintGraphicData>
+		<uiIconPath>DetCord/det_cord_icon</uiIconPath>
+		<building>
+			<isInert>true</isInert>
+			<isEdifice>false</isEdifice>
+		</building>
+		<altitudeLayer>FloorEmplacement</altitudeLayer>
+		<passability>Standable</passability>
+		<leaveResourcesWhenKilled>false</leaveResourcesWhenKilled>
+		<statBases>
+			<MaxHitPoints>80</MaxHitPoints>
+			<WorkToMake>35</WorkToMake>
+			<Flammability>0.1</Flammability>
+			<Beauty>-2</Beauty>
+		</statBases>
+		<description>A special wire to connect the manual detonator to the explosives it should trigger. Can be placed under walls and other buildings.</description>
+		<placingDraggableDimensions>1</placingDraggableDimensions>
+		<costList>
+			<Steel>1</Steel>
+			<Sparkpowder>1</Sparkpowder>
+		</costList>
+		<placeWorkers>
+			<li>RemoteExplosives.PlaceWorker_DetonatorWire</li>
+		</placeWorkers>
+		<comps>
+			<li Class="RemoteExplosives.CompProperties_WiredDetonationTransmitter">
+				<signalDelayPerTile>1</signalDelayPerTile>
+			</li>
+		</comps>
+		<damageMultipliers>
+			<li>
+				<damageDef>Bomb</damageDef>
+				<multiplier>.1</multiplier>
+			</li>
+			<li>
+				<damageDef>FlameBomb</damageDef>
+				<multiplier>.1</multiplier>
+			</li>
+			<li>
+				<damageDef>Flame</damageDef>
+				<multiplier>.5</multiplier>
+			</li>
+		</damageMultipliers>
+		<rotatable>false</rotatable>
+		<selectable>true</selectable>
+		<neverMultiSelect>false</neverMultiSelect>
+		<researchPrerequisites><li>MakeshiftExplosives</li></researchPrerequisites>
+	</ThingDef>
+	
 	<!-- Combat explosives -->
+	
+	<ThingDef ParentName="RemoteExplosiveBase">
+		<defName>TrapMakeshiftBomb</defName>
+		<thingClass>Building</thingClass>
+		<label>makeshift explosive</label>
+		<graphicData>
+			<texPath>makeshift_explosive</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+		</graphicData>
+		<description>A primitive bomb made from explosive powder and animal leather.
+Craft at a crafting spot or tailoring bench.
+Detonate using a Manual Detonator and Detonator Cord.</description>
+		<costList>
+			<ExplosivePouch>1</ExplosivePouch>
+		</costList>
+		<constructEffect>ConstructDirt</constructEffect>
+		<comps>
+			<li Class="CompProperties_Explosive">
+				<explosiveRadius>2.1</explosiveRadius>
+				<explosiveDamageType>FlameBomb</explosiveDamageType>
+				<startWickHitPointsPercent>0.3</startWickHitPointsPercent>
+				<wickTicks>
+					<min>10</min>
+					<max>30</max>
+				</wickTicks>
+			</li>
+			<li Class="RemoteExplosives.CompProperties_WiredDetonationReceiver"/>
+		</comps>
+		<building>
+			<isTrap>true</isTrap>
+		</building>
+		<researchPrerequisites><li>MakeshiftExplosives</li></researchPrerequisites>
+	</ThingDef>
 	
 	<ThingDef ParentName="RemoteExplosiveBase">
 		<defName>TrapRemoteBomb</defName>
@@ -178,8 +319,10 @@ Arm, then detonate from the Remote Explosives Console.</description>
 					<max>40</max>
 				</wickTicks>
 			</li>
+			<li Class="RemoteExplosives.CompProperties_WiredDetonationReceiver"/>
 		</comps>
 		<building Class="RemoteExplosives.BuildingProperties_RemoteExplosive">
+			<isTrap>true</isTrap>
 			<startsArmed>false</startsArmed>
 		</building>
 	</ThingDef>
@@ -208,8 +351,10 @@ Arm, then detonate from the Remote Explosives Console.</description>
 					<max>40</max>
 				</wickTicks>
 			</li>
+			<li Class="RemoteExplosives.CompProperties_WiredDetonationReceiver"/>
 		</comps>
 		<building Class="RemoteExplosives.BuildingProperties_RemoteExplosive">
+			<isTrap>true</isTrap>
 			<startsArmed>false</startsArmed>
 		</building>
 	</ThingDef>
@@ -232,6 +377,7 @@ Arm, then detonate from the Remote Explosives Console.</description>
 		<killedLeavings>
 			<ChunkSlagGold>1</ChunkSlagGold>
 		</killedLeavings>
+		<specialDisplayRadius>6.5</specialDisplayRadius>
 		<comps>
 			<li Class="CompProperties_Explosive">
 				<compClass>RemoteExplosives.CompCustomExplosive</compClass>
@@ -244,8 +390,10 @@ Arm, then detonate from the Remote Explosives Console.</description>
 					<max>50</max>
 				</wickTicks>
 			</li>
+			<li Class="RemoteExplosives.CompProperties_WiredDetonationReceiver"/>
 		</comps>
 		<building Class="RemoteExplosives.BuildingProperties_RemoteExplosive">
+			<isTrap>true</isTrap>
 			<startsArmed>false</startsArmed>
 		</building>
 	</ThingDef>
@@ -273,6 +421,7 @@ Detonate from the Remote Explosives Console.</description>
 				<rockChunkChance>0.75</rockChunkChance>
 				<miningRadius>3.5</miningRadius>
 				<resourceBreakingEfficiency>.75</resourceBreakingEfficiency>
+				<woodBreakingEfficiency>.70</woodBreakingEfficiency>
 				<explosiveRadius>3.5</explosiveRadius>
 				<explosiveDamageType>Bomb</explosiveDamageType>
 				<startWickHitPointsPercent>0.2</startWickHitPointsPercent>
@@ -281,8 +430,10 @@ Detonate from the Remote Explosives Console.</description>
 					<max>150</max>
 				</wickTicks>
 			</li>
+			<li Class="RemoteExplosives.CompProperties_WiredDetonationReceiver"/>
 		</comps>
 		<building Class="RemoteExplosives.BuildingProperties_RemoteExplosive">
+			<isTrap>false</isTrap>
 			<startsArmed>true</startsArmed>
 		</building>
 	</ThingDef>
@@ -307,6 +458,7 @@ Detonate from the Remote Explosives Console.</description>
 				<rockChunkChance>0.05</rockChunkChance>
 				<miningRadius>4</miningRadius>
 				<resourceBreakingEfficiency>.75</resourceBreakingEfficiency>
+				<woodBreakingEfficiency>.70</woodBreakingEfficiency>
 				<explosiveRadius>3.9</explosiveRadius>
 				<explosiveDamageType>Bomb</explosiveDamageType>
 				<startWickHitPointsPercent>0.2</startWickHitPointsPercent>
@@ -315,8 +467,10 @@ Detonate from the Remote Explosives Console.</description>
 					<max>150</max>
 				</wickTicks>
 			</li>
+			<li Class="RemoteExplosives.CompProperties_WiredDetonationReceiver"/>
 		</comps>
 		<building Class="RemoteExplosives.BuildingProperties_RemoteExplosive">
+			<isTrap>false</isTrap>
 			<startsArmed>true</startsArmed>
 		</building>
 		<placeWorkers>
@@ -352,8 +506,10 @@ Arm, then detonate from the Remote Explosives Console.</description>
 				<spawnThingDef>WallFoamBlob</spawnThingDef>
 				<numFoamBlobs>5</numFoamBlobs>
 			</li>
+			<li Class="RemoteExplosives.CompProperties_WiredDetonationReceiver"/>
 		</comps>
 		<building Class="RemoteExplosives.BuildingProperties_RemoteExplosive">
+			<isTrap>true</isTrap>
 			<startsArmed>false</startsArmed>
 		</building>
 	</ThingDef>
@@ -384,9 +540,12 @@ Arm, then detonate from the Remote Explosives Console.</description>
 				<spawnThingDef>Gas_Sleeping</spawnThingDef>
 				<gasConcentration>80000</gasConcentration>
 			</li>
+			<li Class="RemoteExplosives.CompProperties_WiredDetonationReceiver"/>
 		</comps>
 		<building Class="RemoteExplosives.BuildingProperties_RemoteExplosive">
+			<isTrap>true</isTrap>
 			<startsArmed>false</startsArmed>
 		</building>
 	</ThingDef>
+	
 </ThingDefs>

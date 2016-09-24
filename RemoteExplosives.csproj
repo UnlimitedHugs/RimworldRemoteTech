@@ -50,7 +50,10 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Source\AutoReplaceWatcher.cs" />
+    <Compile Include="Source\BuildingProperties_DetonatorWire.cs" />
     <Compile Include="Source\BuildingProperties_RemoteExplosive.cs" />
+    <Compile Include="Source\Building_DetonatorManual.cs" />
+    <Compile Include="Source\Building_DetonatorWire.cs" />
     <Compile Include="Source\Building_FoamWall.cs" />
     <Compile Include="Source\Building_MiningExplosive.cs" />
     <Compile Include="Source\Building_DetonatorTable.cs" />
@@ -58,13 +61,27 @@
     <Compile Include="Source\Building_RemoteExplosive.cs" />
     <Compile Include="Source\Building_RemoteExplosiveEmp.cs" />
     <Compile Include="Source\Building_FoamBlob.cs" />
+    <Compile Include="Source\CallbackScheduler.cs" />
     <Compile Include="Source\Command_MouseOverDetector.cs" />
     <Compile Include="Source\CompChemicalExplosive.cs" />
+    <Compile Include="Source\CompDamagedByPawn.cs" />
+    <Compile Include="Source\CompPropertiesDamagedByPawn.cs" />
+    <Compile Include="Source\CompWiredDetonationTransmitter.cs" />
     <Compile Include="Source\CompProperties_ChemicalExplosive.cs" />
+    <Compile Include="Source\CompProperties_WiredDetonationTransmitter.cs" />
+    <Compile Include="Source\CompProperties_WiredDetonationReceiver.cs" />
+    <Compile Include="Source\CompWiredDetonationReceiver.cs" />
+    <Compile Include="Source\DamageWorker_FlameChance.cs" />
+    <Compile Include="Source\DistributedTickScheduler.cs" />
+    <Compile Include="Source\FlameChanceDamageDef.cs" />
+    <Compile Include="Source\IPawnDetonateable.cs" />
+    <Compile Include="Source\Graphic_SingleWithBase.cs" />
+    <Compile Include="Source\Graphic_Variants.cs" />
     <Compile Include="Source\HediffCompProps_SeverityRecovery.cs" />
     <Compile Include="Source\HediffComp_SeverityRecovery.cs" />
     <Compile Include="Source\HediffDef_NonLethal.cs" />
     <Compile Include="Source\Hediff_NonLethal.cs" />
+    <Compile Include="Source\IGraphicVariantProvider.cs" />
     <Compile Include="Source\MoteProperties_GasCloud_HediffGiver.cs" />
     <Compile Include="Source\GasCloud.cs" />
     <Compile Include="Source\GasCloud_HediffGiver.cs" />
@@ -79,18 +96,20 @@
     <Compile Include="Source\CompRandomResourceLeaverProperties.cs" />
     <Compile Include="Source\JobDriver_InstallChannelsComponent.cs" />
     <Compile Include="Source\MapComponent_RemoteExplosivesInjector.cs" />
+    <Compile Include="Source\PlaceWorker_DetonatorWire.cs" />
     <Compile Include="Source\PortableDetonator.cs" />
+    <Compile Include="Source\SidedBaseGraphicData.cs" />
     <Compile Include="Source\TraderStockInjectorDef.cs" />
     <Compile Include="Source\BuildingProperties_FoamBlob.cs" />
     <Compile Include="Source\ValueInterpolator.cs" />
     <Compile Include="Source\WorkGiver_DetonatorTableChannels.cs" />
     <Compile Include="Source\WorkGiver_RemoteExposive.cs" />
     <Compile Include="Source\ISwitchable.cs" />
-    <Compile Include="Source\JobDriver_DetonateRemoteExplosives.cs" />
+    <Compile Include="Source\JobDriver_DetonateExplosives.cs" />
     <Compile Include="Source\JobDriver_SwitchRemoteExplosive.cs" />
     <Compile Include="Source\PlaceWorker_MiningExplosiveSquare.cs" />
     <Compile Include="Source\RemoteExplosivesUtility.cs" />
-    <Compile Include="Source\WorkGiver_DetonatorTable.cs" />
+    <Compile Include="Source\WorkGiver_IPawnDetonateable.cs" />
     <Compile Include="Source\DisposablePrimitiveWrapper.cs" />
   </ItemGroup>
   <ItemGroup />

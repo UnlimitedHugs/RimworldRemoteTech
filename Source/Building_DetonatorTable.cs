@@ -10,7 +10,7 @@ namespace RemoteExplosives {
 	// Finds remote explosive charges in range and detonates them on command.
 	// Can be upgraded with a component to unlock the ability to use channels.
 	[StaticConstructorOnStartup]
-	public class Building_DetonatorTable : Building {
+	public class Building_DetonatorTable : Building, IPawnDetonateable {
 		private static readonly Texture2D UITex_Detonate = ContentFinder<Texture2D>.Get("UIDetonate");
 		private static readonly string DetonateButtonLabel = "DetonatorTable_detonate_label".Translate();
 		private static readonly string DetonateButtonDesc = "DetonatorTable_detonate_desc".Translate();
@@ -92,6 +92,10 @@ namespace RemoteExplosives {
 			UpdateNumArmedExplosivesInRange();
 		}
 
+		public bool UseInteractionCell {
+			get { return true; }
+		}
+
 		public bool WantsDetonation() {
 			return wantDetonation;
 		}
@@ -152,19 +156,9 @@ namespace RemoteExplosives {
 		// quick detonation option for drafted pawns
 		public override IEnumerable<FloatMenuOption> GetFloatMenuOptions(Pawn selPawn) {
 			lastSeenFloatMenuPawn = selPawn;
-			if (selPawn.Drafted) {
-				var entry = new FloatMenuOption {
-					action = FloatMenuDetonateNowAction,
-					autoTakeable = false,
-					Label = "DetonatorTable_detonatenow".Translate(),
-				};
-				if (Find.Reservations.IsReserved(this, Faction.OfPlayer)) {
-					entry.Disabled = true;
-					var reservedByName = Find.Reservations.FirstReserverOf(this, Faction.OfPlayer).Name.ToStringShort;
-					entry.Label += " " + string.Format("DetonatorTable_detonatenow_reserved".Translate(), reservedByName);
-				}
-				yield return entry;
-			}
+			var opt = RemoteExplosivesUtility.TryMakeDetonatorFloatMenuOption(selPawn, this, FloatMenuDetonateNowAction);
+			if (opt != null) yield return opt;
+
 			foreach (var option in base.GetFloatMenuOptions(selPawn)) {
 				yield return option;
 			}
@@ -173,7 +167,7 @@ namespace RemoteExplosives {
 		private void FloatMenuDetonateNowAction() {
 			if (lastSeenFloatMenuPawn == null) return;
 			if (!wantDetonation) wantDetonation = true;
-			var job = new Job(DefDatabase<JobDef>.GetNamed(JobDriver_DetonateRemoteExplosives.JobDefName), this);
+			var job = new Job(DefDatabase<JobDef>.GetNamed(JobDriver_DetonateExplosives.JobDefName), this);
 			lastSeenFloatMenuPawn.drafter.TakeOrderedJob(job);
 		}
 	}

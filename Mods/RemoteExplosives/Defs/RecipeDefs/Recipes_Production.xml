@@ -15,7 +15,7 @@
 		<soundWorking>Recipe_Machining</soundWorking>
 		<allowMixingIngredients>true</allowMixingIngredients>
 		<workAmount>1000</workAmount>
-		<targetCountAdjustment>5</targetCountAdjustment>
+		<targetCountAdjustment>1</targetCountAdjustment>
 		<ingredients>
 			<li>
 				<filter>
@@ -70,7 +70,7 @@
 		<soundWorking>Recipe_Machining</soundWorking>
 		<allowMixingIngredients>true</allowMixingIngredients>
 		<workAmount>1000</workAmount>
-		<targetCountAdjustment>5</targetCountAdjustment>
+		<targetCountAdjustment>1</targetCountAdjustment>
 		<ingredients>
 			<li>
 				<filter>
@@ -124,7 +124,7 @@
 		<soundWorking>Recipe_Machining</soundWorking>
 		<allowMixingIngredients>true</allowMixingIngredients>
 		<workAmount>1800</workAmount>
-		<targetCountAdjustment>5</targetCountAdjustment>
+		<targetCountAdjustment>1</targetCountAdjustment>
 		<ingredients>
 			<li>
 				<filter>
@@ -178,7 +178,7 @@
 		<soundWorking>Recipe_Machining</soundWorking>
 		<allowMixingIngredients>true</allowMixingIngredients>
 		<workAmount>1000</workAmount>
-		<targetCountAdjustment>5</targetCountAdjustment>
+		<targetCountAdjustment>1</targetCountAdjustment>
 		<ingredients>
 			<li>
 				<filter>
@@ -223,7 +223,7 @@
 		<soundWorking>Recipe_Machining</soundWorking>
 		<allowMixingIngredients>true</allowMixingIngredients>
 		<workAmount>1400</workAmount>
-		<targetCountAdjustment>5</targetCountAdjustment>
+		<targetCountAdjustment>1</targetCountAdjustment>
 		<ingredients>
 			<li>
 				<filter>
@@ -262,6 +262,101 @@
 		</products>
 		<workSkill>Crafting</workSkill>
 	</RecipeDef>
+
+	<RecipeDef>
+		<defName>MakeExplosivePouch</defName>
+		<label>make explosive pouch</label>
+		<description>Craft an explosive pouch.</description>
+		<jobString>Making explosive pouch.</jobString>
+		<recipeUsers>
+			<li>CraftingSpot</li>
+			<li>HandTailoringBench</li>
+			<li>ElectricTailoringBench</li>
+		</recipeUsers>
+		<researchPrerequisite>MakeshiftExplosives</researchPrerequisite>
+		<workSpeedStat>TailoringSpeed</workSpeedStat>
+		<workSkill>Crafting</workSkill>
+		<effectWorking>Cook</effectWorking>
+		<soundWorking>Recipe_Tailor</soundWorking>
+		<allowMixingIngredients>true</allowMixingIngredients>
+		<workAmount>1000</workAmount>
+		<targetCountAdjustment>1</targetCountAdjustment>
+		<ingredients>
+			<li>
+				<filter>
+					<categories>
+						<li>Leathers</li>
+					</categories>
+				</filter>
+				<count>12</count>
+			</li>
+			<li>
+				<filter>
+					<thingDefs>
+						<li>Sparkpowder</li>
+					</thingDefs>
+				</filter>
+				<count>9</count>
+			</li>
+			<li>
+				<filter>
+					<thingDefs>
+						<li>Charcoal</li>
+					</thingDefs>
+				</filter>
+				<count>15</count>
+			</li>
+		</ingredients>
+		<fixedIngredientFilter>
+			<categories>
+				<li>Leathers</li>
+			</categories>
+			<thingDefs>
+				<li>Sparkpowder</li>
+				<li>Charcoal</li>
+			</thingDefs>
+		</fixedIngredientFilter>
+		<products>
+			<ExplosivePouch>1</ExplosivePouch>
+		</products>
+	</RecipeDef>
+	
+	<RecipeDef>
+		<defName>MakeCharcoal</defName>
+		<label>make charcoal</label>
+		<description>Make charcoal from wood logs.</description>
+		<jobString>Making charcoal.</jobString>
+		<recipeUsers>
+			<li>Campfire</li>
+			<li>FueledStove</li>
+		</recipeUsers>
+		<researchPrerequisite>MakeshiftExplosives</researchPrerequisite>
+		<workSpeedStat>SmeltingSpeed</workSpeedStat>
+		<allowMixingIngredients>true</allowMixingIngredients>
+		<workAmount>500</workAmount>
+		<requiredGiverWorkType>Crafting</requiredGiverWorkType>
+		<effectWorking>Cremate</effectWorking>
+		<soundWorking>Recipe_Cremate</soundWorking>
+		<targetCountAdjustment>5</targetCountAdjustment>
+		<ingredients>
+			<li>
+				<filter>
+					<thingDefs>
+						<li>WoodLog</li>
+					</thingDefs>
+				</filter>
+				<count>5</count>
+			</li>
+		</ingredients>
+		<fixedIngredientFilter>
+			<thingDefs>
+				<li>WoodLog</li>
+			</thingDefs>
+		</fixedIngredientFilter>
+		<products>
+			<Charcoal>5</Charcoal>
+		</products>
+	</RecipeDef>
 	
 	<RecipeDef>
 		<defName>ExtractGoldFromSlag</defName>
@@ -295,4 +390,5 @@
 			<li>ElectricSmelter</li>
 		</recipeUsers>
 	</RecipeDef>
+
 </RecipeDefs>

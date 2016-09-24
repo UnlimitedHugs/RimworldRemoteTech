@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Defs>
-
+	
 	<DamageDef>
 		<defName>FoamWallRekt</defName>
 		<label>trapped</label>
@@ -10,5 +10,14 @@
 		<makesBlood>false</makesBlood>
 		<externalViolence>false</externalViolence>
 	</DamageDef>
-
+	
+	<DamageDef ParentName="Flame" Class="RemoteExplosives.FlameChanceDamageDef">
+		<defName>FlameBomb</defName>
+		<workerClass>RemoteExplosives.DamageWorker_FlameChance</workerClass>
+		<label>flame bomb</label>
+		<incapChanceMultiplier>1</incapChanceMultiplier>
+		<explosionDamage>50</explosionDamage>
+		<explosionHeatEnergyPerCell>10</explosionHeatEnergyPerCell>
+		<flameChance>0.3</flameChance>
+	</DamageDef>
 </Defs>

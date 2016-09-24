@@ -3,9 +3,16 @@
 	
 	<ThingCategoryDef>
         <defName>Explosives</defName>
-        <label>exposives</label>
+        <label>explosives</label>
         <parent>Manufactured</parent>
         <iconPath>explosive_part</iconPath>
+	</ThingCategoryDef>
+	
+	<ThingCategoryDef>
+        <defName>ExplosivesIngredients</defName>
+        <label>ingredients</label>
+        <parent>Explosives</parent>
+        <iconPath>charcoal</iconPath>
 	</ThingCategoryDef>
 	
 </ThingCategoryDefs>

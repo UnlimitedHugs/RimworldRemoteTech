@@ -4,8 +4,9 @@
 	<DetonatorTable_detonate_label>Detonate</DetonatorTable_detonate_label>
 	<DetonatorTable_detonate_desc>Detonates all armed remote explosives on the same channel in range.</DetonatorTable_detonate_desc>
 	<DetonatorTable_inrange>Armed explosives in range</DetonatorTable_inrange>
-	<DetonatorTable_detonatenow>Detonate explosives NOW</DetonatorTable_detonatenow>
-	<DetonatorTable_detonatenow_reserved>(reserved by {0})</DetonatorTable_detonatenow_reserved>
+	
+	<Detonator_detonatenow>Detonate explosives NOW</Detonator_detonatenow>
+	<Detonator_detonatenow_reserved>(reserved by {0})</Detonator_detonatenow_reserved>
 	
 	<RemoteExplosive_arm_label>Arm</RemoteExplosive_arm_label>
 	<RemoteExplosive_arm_desc>When armed, this explosive can be remotely detonated.</RemoteExplosive_arm_desc>
@@ -45,4 +46,7 @@
 	<PortableDetonator_broke_msg>The Portable Detonator ran out of battery power.</PortableDetonator_broke_msg>
 	
 	<Detonator_notargets>Cannot detonate- no armed explosives in range on this channel.</Detonator_notargets>
+	
+	<DetonatorManual_detonate_label>Detonate</DetonatorManual_detonate_label>
+	<DetonatorManual_detonate_desc>Detonates all explosives connected to the same detonator cord.</DetonatorManual_detonate_desc>
 </LanguageData>

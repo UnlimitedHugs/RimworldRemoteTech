@@ -5,5 +5,6 @@ namespace RemoteExplosives {
 		public float rockChunkChance = .5f;
 		public float miningRadius = 2f;
 		public float resourceBreakingEfficiency = .9f;
+		public float woodBreakingEfficiency = .5f;
 	}
 }

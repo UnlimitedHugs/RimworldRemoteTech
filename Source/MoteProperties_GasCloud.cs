@@ -24,7 +24,7 @@ namespace RemoteExplosives {
 		}
 
 		private void Assert(bool check, string errorMessage) {
-			if(!check) Log.Error("[RemoteExplosives] Invalid data in MoteProperties_GasCloud definition: "+errorMessage);
+			if(!check) RemoteExplosivesUtility.Error("Invalid data in MoteProperties_GasCloud definition: "+errorMessage);
 		}
 	}
 }

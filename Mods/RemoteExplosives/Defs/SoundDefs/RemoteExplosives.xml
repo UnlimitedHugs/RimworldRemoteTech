@@ -210,4 +210,28 @@
 		</subSounds>
 	</SoundDef>
 	
+	<SoundDef>
+		<defName>RemoteDetonatorLever</defName>  
+		<eventNames />  
+		<maxVoices>4</maxVoices>   
+		<maxSimultaneous>4</maxSimultaneous>  
+		<subSounds>
+			<li>
+				<grains>
+					<li Class="AudioGrain_Clip">
+						<clipPath>lever_cycle</clipPath>
+					</li>
+				</grains>     
+				<volumeRange>
+					<min>40</min>
+					<max>50</max>
+				</volumeRange>
+				<pitchRange>
+					<min>0.8</min>        
+					<max>1.2</max>
+				</pitchRange>
+			</li>   
+		</subSounds>
+	</SoundDef>
+	
 </DefPackage-SoundDef>
