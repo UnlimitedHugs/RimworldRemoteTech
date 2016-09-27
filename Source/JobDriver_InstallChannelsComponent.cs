@@ -11,7 +11,7 @@ namespace RemoteExplosives {
 		public const string JobDefName = "JobDef_InstallChannelsComponent";
 		private const TargetIndex TableInd = TargetIndex.A;
 		private const TargetIndex ComponentInd = TargetIndex.B;
-		private const int InstallWorkDuration = 250;
+		private const int InstallWorkDuration = 500;
 
 		protected override IEnumerable<Toil> MakeNewToils() {
 			AddFailCondition(JobHasFailed);
