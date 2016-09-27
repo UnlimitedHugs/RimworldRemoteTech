@@ -7,8 +7,10 @@ using Verse.AI;
 using Verse.Sound;
 
 namespace RemoteExplosives {
-	// Finds remote explosive charges in range and detonates them on command.
-	// Can be upgraded with a component to unlock the ability to use channels.
+	/*
+	 * Finds remote explosive charges in range and detonates them on command.
+	 * Can be upgraded with a component to unlock the ability to use channels.
+	 */
 	[StaticConstructorOnStartup]
 	public class Building_DetonatorTable : Building, IPawnDetonateable {
 		private static readonly Texture2D UITex_Detonate = ContentFinder<Texture2D>.Get("UIDetonate");

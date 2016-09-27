@@ -3,7 +3,9 @@ using Verse;
 using Verse.AI;
 
 namespace RemoteExplosives {
-	// Calls a colonist to a detonator to perform the detonation.
+	/* 
+	 * Calls a colonist to a detonator to perform the detonation.
+	 */
 	public class JobDriver_DetonateExplosives : JobDriver {
 		public const string JobDefName = "JobDef_DetonateExplosives";
 

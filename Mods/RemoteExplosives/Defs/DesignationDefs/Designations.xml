@@ -6,4 +6,11 @@
 		<targetType>Thing</targetType>
 		<designateCancelable>false</designateCancelable>
 	</DesignationDef>
+	
+	<DesignationDef>
+		<defName>DetonationCordDryOff</defName>
+		<texturePath>dry_off_designation</texturePath>
+		<targetType>Thing</targetType>
+		<designateCancelable>false</designateCancelable>
+	</DesignationDef>
 </DesignationDefs>

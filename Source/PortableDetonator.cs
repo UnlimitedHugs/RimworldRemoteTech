@@ -5,8 +5,10 @@ using Verse;
 using Verse.Sound;
 
 namespace RemoteExplosives {
-	// An apparel item to be worn by a colonist in the accessory (shield) slot.
-	// Provides the functionality of a detonator table with a limited number of uses.
+	/* 
+	 * An apparel item to be worn by a colonist in the accessory (shield) slot.
+	 * Provides the functionality of a detonator table with a limited number of uses.
+	 */
 	[StaticConstructorOnStartup]
 	public class PortableDetonator : Apparel {
 		private const int ActivationCooldownTicks = 30;

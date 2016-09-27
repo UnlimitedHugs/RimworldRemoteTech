@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+	
+	<ThingDef ParentName="MoteBase">
+		<defName>Mote_SpreadingSparks</defName>
+		<graphicData>
+			<texPath>Things/Mote/MicroSparks</texPath>
+			<shaderType>MoteGlow</shaderType>
+		</graphicData>
+		<altitudeLayer>MoteOverhead</altitudeLayer>
+		<mote>
+			<growthRate>3</growthRate>
+			<fadeInTime>0.1</fadeInTime>
+			<solidTime>0.1</solidTime>
+			<fadeOutTime>0.2</fadeOutTime>
+		</mote>
+	</ThingDef>
+	
+</Defs>

@@ -5,7 +5,9 @@ using Verse;
 using Verse.AI;
 
 namespace RemoteExplosives {
-	// Gives JobDriver_InstallChannelsComponent job to colonists
+	/* 
+	 * Gives JobDriver_InstallChannelsComponent job to colonists
+	 */
 	public class WorkGiver_DetonatorTableChannels : WorkGiver_Scanner {
 
 		private const PathEndMode pathEndMode = PathEndMode.InteractionCell;

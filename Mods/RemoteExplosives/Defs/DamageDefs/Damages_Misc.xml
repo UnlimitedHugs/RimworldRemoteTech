@@ -18,6 +18,6 @@
 		<incapChanceMultiplier>1</incapChanceMultiplier>
 		<explosionDamage>50</explosionDamage>
 		<explosionHeatEnergyPerCell>10</explosionHeatEnergyPerCell>
-		<flameChance>0.3</flameChance>
+		<flameChance>0.2</flameChance>
 	</DamageDef>
 </Defs>

@@ -2,7 +2,9 @@
 using Verse.Sound;
 
 namespace RemoteExplosives {
-	// A remote explosive that creates things on detonation.
+	/*
+	 * A remote explosive that creates things on detonation.
+	 */
 	public class CompChemicalExplosive : CompCustomExplosive {
 		private CompProperties_ChemicalExplosive customProps;
 

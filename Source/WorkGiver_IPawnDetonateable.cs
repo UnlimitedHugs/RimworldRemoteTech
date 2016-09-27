@@ -4,8 +4,10 @@ using Verse;
 using Verse.AI;
 
 namespace RemoteExplosives {
-	// Gives JobDriver_DetonateExplosives job to colonists
-	// Handles both the detonator table and the manual detonator
+	/* 
+	 * Gives JobDriver_DetonateExplosives job to colonists
+	 * Handles both the detonator table and the manual detonator
+	 */
 	public class WorkGiver_IPawnDetonateable : WorkGiver_Scanner {
 		public override ThingRequest PotentialWorkThingRequest {
 			get {

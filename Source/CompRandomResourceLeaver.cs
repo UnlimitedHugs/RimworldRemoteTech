@@ -1,7 +1,9 @@
 ﻿using Verse;
 
 namespace RemoteExplosives {
-	// Drops a random amount of a certain item on death.
+	/* 
+	 * Drops a random amount of a certain item on death.
+	 */
 	public class CompRandomResourceLeaver : ThingComp {
 		public override void PostDestroy(DestroyMode mode, bool wasSpawned) {
 			base.PostDestroy(mode, wasSpawned);

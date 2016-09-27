@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<Plants>
+<Defs>
 	
-	<ThingDef ParentName="PlantBase">
+	<ThingDef ParentName="PlantBase" Class="RemoteExplosives.SparkweedPlantDef">
 		<defName>PlantSparkweed</defName>
+		<thingClass>RemoteExplosives.Plant_Sparkweed</thingClass>
 		<label>sparkweed</label>
 		<description>A curious plant of unknown origin. Its stems contain a flammable orange powder that is released when the plant is disturbed. The powder ignites on contact with air, producing hot sparks that can set fire to the surrounding area.
 It is cultivated as a source of low-grade explosive and gunpowder.
 		</description>
 		<statBases>
-			<MaxHitPoints>120</MaxHitPoints>
+			<MaxHitPoints>80</MaxHitPoints>
 			<Beauty>1</Beauty>
 		</statBases>
 		<graphicData>
@@ -16,10 +17,11 @@ It is cultivated as a source of low-grade explosive and gunpowder.
 			<graphicClass>Graphic_Single</graphicClass>
 		</graphicData>
 		<selectable>true</selectable>
-		<pathCost>10</pathCost>
+		<pathCost>5</pathCost>
 		<ingestible>
 			<nutrition>0.05</nutrition>
 		</ingestible>
+
 		<plant>
 			<dieIfLeafless>true</dieIfLeafless>
 			<shootsSeeds>false</shootsSeeds>
@@ -42,6 +44,13 @@ It is cultivated as a source of low-grade explosive and gunpowder.
 				<max>1.4</max>
 			</visualSizeRange>
 		</plant>
+
+		<!-- Cannot use PlantProperties for these, as the field won't accept Class overrides for whatever reason -->
+		<detectEveryTicks>30</detectEveryTicks>
+		<minimumIgnitePlantGrowth>.2</minimumIgnitePlantGrowth>
+		<ignitePlantChance>.65</ignitePlantChance>
+		<ignitePawnChance>.1</ignitePawnChance>
+		<igniteEffecter>SparkweedIgnite</igniteEffecter>
 	</ThingDef>
 	
-</Plants>
+</Defs>

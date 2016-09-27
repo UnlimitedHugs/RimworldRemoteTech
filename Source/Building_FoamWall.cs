@@ -4,8 +4,10 @@ using Verse;
 using System.Linq;
 
 namespace RemoteExplosives {
-	// A wall that will kill and trap any pawns and items it is placed on.
-	// Contained items are dropped on destruction.
+	/* 
+	 * A wall that will kill and trap any pawns and items it is placed on.
+	 * Contained items are dropped on destruction.
+	 */
 	public class Building_FoamWall : Building {
 		private const string TrappedDamageDefName = "FoamWallRekt";
 		private bool justCreated;

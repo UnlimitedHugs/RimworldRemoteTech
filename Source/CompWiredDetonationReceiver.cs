@@ -2,20 +2,26 @@
 using Verse;
 
 namespace RemoteExplosives {
-	// Receives detonation signals from CompWiredDetonationTransmitter and light explosives attached to parent thing.
-	public class CompWiredDetonationReceiver : ThingComp {
-		public void RecieveSignal(int additionalWickTicks) {
+	/*
+	 * Receives detonation signals from CompWiredDetonationTransmitter and light explosives attached to parent thing.
+	 */
+	public class CompWiredDetonationReceiver : CompDetonationGridNode {
+		public void RecieveSignal(int delayTicks) {
 			var parentExplosive = parent as Building_RemoteExplosive;
 			if(parentExplosive!=null && !parentExplosive.IsArmed) return;
 		
 			var customExplosive = parent.GetComp<CompCustomExplosive>();
 			var vanillaExplosive = parent.GetComp<CompExplosive>();
 			if (customExplosive != null) {
-				customExplosive.StartWick(true, additionalWickTicks);
+				CallbackScheduler.Instance.ScheduleCallback(() => customExplosive.StartWick(true), delayTicks);
 			}		
 			if (vanillaExplosive != null) {
-				vanillaExplosive.StartWick();	
+				CallbackScheduler.Instance.ScheduleCallback(() => vanillaExplosive.StartWick(), delayTicks);	
 			}
+		}
+
+		public override void PrintForDetonationGrid(SectionLayer layer) {
+			PrintEndpoint(layer);
 		}
 	}
 }
