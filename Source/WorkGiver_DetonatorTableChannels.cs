@@ -49,12 +49,11 @@ namespace RemoteExplosives {
 		public override Job JobOnThing(Pawn pawn, Thing t) {
 			var table = t as Building_DetonatorTable;
 			if (table == null) return null;
-			if (table.WantChannelsComponent) {
-				var jobDef = DefDatabase<JobDef>.GetNamed(JobDriver_InstallChannelsComponent.JobDefName);
-				var component = FindInstallableComponent(pawn);
-				return new Job(jobDef, t, component) { maxNumToCarry = 1 };
-			}
-			return null;
+			if (!table.WantChannelsComponent) return null;
+			var component = FindInstallableComponent(pawn);
+			if (component == null) return null;
+			var jobDef = DefDatabase<JobDef>.GetNamed(JobDriver_InstallChannelsComponent.JobDefName);
+			return new Job(jobDef, t, component) { maxNumToCarry = 1 };
 		}
 
 		private Thing FindInstallableComponent(Pawn pawn) {
