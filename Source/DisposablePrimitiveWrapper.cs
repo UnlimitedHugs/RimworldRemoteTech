@@ -1,5 +1,7 @@
 ﻿namespace RemoteExplosives {
-	// Allows storing primitive types by reference. Allows explicit disposal to signal that the value is no longer in use. 
+	/* 
+	 * Allows storing primitive types by reference. Allows explicit disposal to signal that the value is no longer in use. 
+	 */
 	public class DisposablePrimitiveWrapper<T> where T : struct {
 		private T _t;
 

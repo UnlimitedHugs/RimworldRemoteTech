@@ -5,7 +5,9 @@ using Verse.AI;
 using Verse.Sound;
 
 namespace RemoteExplosives {
-	// Passes a detonation signal to the detonator wire when triggered by a colonist.
+	/* 
+	 * Initates a detonation signal carried by wire when triggered by a colonist.
+	 */
 	[StaticConstructorOnStartup]
 	public class Building_DetonatorManual : Building, IGraphicVariantProvider, IPawnDetonateable {
 		private static readonly Texture2D UITex_Detonate = ContentFinder<Texture2D>.Get("UItrigger");
@@ -42,19 +44,10 @@ namespace RemoteExplosives {
 			currentVariant = VisualVariant.PlungerDown;
 			plungerExpireTime = Time.realtimeSinceStartup + PlungerDownTime;
 			PlungerCycleSound.PlayOneShot(Position);
-			SendWireSignal();
+			var transmitterComp = GetComp<CompWiredDetonationSender>();
+			if(transmitterComp != null) transmitterComp.SendNewSignal();
 		}
-
-		private void SendWireSignal() {
-			var things = Find.ThingGrid.ThingsListAt(Position);
-			foreach (var thing in things) {
-				var comp = thing.TryGetComp<CompWiredDetonationTransmitter>();
-				if(comp == null) continue;
-				comp.SendNewSignal();
-				return;
-			}
-		}
-
+		
 		public override void ExposeData() {
 			base.ExposeData();
 			Scribe_Values.LookValue(ref wantDetonation, "wantDetonation", false);

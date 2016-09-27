@@ -6,9 +6,11 @@ using Verse;
 using Verse.Sound;
 
 namespace RemoteExplosives {
-	// The base class for all remote explosives.
-	// Requires a CompCustomExplosive to work correctly. Can be armed and assigned to a channel.
-	// Will blink with an overlay texture when armed.
+	/* 
+	 * The base class for all wireless remote explosives.
+	 * Requires a CompCustomExplosive to work correctly. Can be armed and assigned to a channel.
+	 * Will blink with an overlay texture when armed.
+	 */
 	[StaticConstructorOnStartup]
 	public class Building_RemoteExplosive : Building, ISwitchable {
 		
@@ -16,7 +18,6 @@ namespace RemoteExplosives {
 		private const string flareGraphicStrongPath = "mine_flare_strong";
 
 		private static readonly Texture2D UITex_Arm = ContentFinder<Texture2D>.Get("UIArm");
-		private static readonly Texture2D UITex_AutoReplace = ContentFinder<Texture2D>.Get("UIAutoReplace");
 		private static readonly Graphic flareOverlayNormal = GraphicDatabase.Get<Graphic_Single>(flareGraphicPath, ShaderDatabase.TransparentPostLight);
 		private static readonly Graphic flareOverlayStrong = GraphicDatabase.Get<Graphic_Single>(flareGraphicStrongPath, ShaderDatabase.TransparentPostLight);
 
@@ -26,21 +27,19 @@ namespace RemoteExplosives {
 
 		private static readonly string ArmButtonLabel = "RemoteExplosive_arm_label".Translate();
 		private static readonly string ArmButtonDesc = "RemoteExplosive_arm_desc".Translate();
-		private static readonly string AutoReplaceButtonLabel = "RemoteExplosive_autoReplace_label".Translate();
-		private static readonly string AutoReplaceButtonDesc = "RemoteExplosive_autoReplace_desc".Translate();
 
 		protected int ticksBetweenBlinksArmed = 100;
 		protected int ticksBetweenBlinksLit = 7;
 		protected bool beepWhenLit = true;
 
-		private CompCustomExplosive comp;
+		private CompCustomExplosive explosiveComp;
+		private CompAutoReplaceable replaceComp;
 
 		private bool desiredArmState;
 		private bool isArmed;
 		private int ticksSinceFlare;
 		private RemoteExplosivesUtility.RemoteChannel currentChannel;
 		private RemoteExplosivesUtility.RemoteChannel desiredChannel;
-		private bool autoReplace;
 
 		private bool justCreated;
 
@@ -49,7 +48,7 @@ namespace RemoteExplosives {
 		}
 
 		public bool FuseLit {
-			get { return comp.WickStarted; }
+			get { return explosiveComp.WickStarted; }
 		}
 
 		public RemoteExplosivesUtility.RemoteChannel CurrentChannel {
@@ -58,7 +57,7 @@ namespace RemoteExplosives {
 
 		public virtual void LightFuse(int additionalWickTicks = 0) {
 			if(FuseLit) return;
-			comp.StartWick(true, additionalWickTicks);
+			explosiveComp.StartWick(true, additionalWickTicks);
 		}
 
 		public override void PostMake() {
@@ -69,16 +68,17 @@ namespace RemoteExplosives {
 		public override void SpawnSetup() {
 			base.SpawnSetup();
 			flareOverlayStrong.drawSize = flareOverlayNormal.drawSize = def.graphicData.drawSize;
-			
-			comp = GetComp<CompCustomExplosive>();
+
 			RemoteExplosivesUtility.UpdateSwitchDesignation(this);
-			
+			explosiveComp = GetComp<CompCustomExplosive>();
+			replaceComp = GetComp<CompAutoReplaceable>();
+			if (replaceComp != null) replaceComp.DisableGizmoAutoDisplay();
+
 			if (justCreated) {
 				var customProps = def.building as BuildingProperties_RemoteExplosive;
 				if (customProps != null && customProps.startsArmed) {
 					Arm();
 				}
-				AutoReplaceWatcher.Instance.TryApplySavedSettings(this);
 				justCreated = false;
 			}
 		}
@@ -90,7 +90,6 @@ namespace RemoteExplosives {
 			Scribe_Values.LookValue(ref desiredArmState, "desiredArmState", false);
 			Scribe_Values.LookValue(ref currentChannel, "currentChannel", RemoteExplosivesUtility.RemoteChannel.White);
 			Scribe_Values.LookValue(ref desiredChannel, "desiredChannel", RemoteExplosivesUtility.RemoteChannel.White);
-			Scribe_Values.LookValue(ref autoReplace, "autoReplace", false);
 		}
 
 		public bool WantsSwitch() {
@@ -124,15 +123,11 @@ namespace RemoteExplosives {
 			currentChannel = desiredChannel = channel;
 		}
 
-		public void EnableAutoReplace() {
-			autoReplace = true;
-		}
-
 		public void Disarm() {
 			if (!IsArmed) return;
 			desiredArmState = false;
 			isArmed = false;
-			comp.StopWick();
+			explosiveComp.StopWick();
 		}
 
 		public override IEnumerable<Gizmo> GetGizmos() {
@@ -151,23 +146,11 @@ namespace RemoteExplosives {
 				yield return channelGizmo;
 			}
 
-			var replaceGizmo = new Command_Toggle {
-				toggleAction = ReplaceGizmoAction,
-				isActive = () => autoReplace,
-				icon = UITex_AutoReplace,
-				defaultLabel = AutoReplaceButtonLabel,
-				defaultDesc = AutoReplaceButtonDesc,
-				hotKey = KeyBindingDef.Named("RemoteExplosiveAutoReplace")
-			};
-			yield return replaceGizmo;
-			
+			if (replaceComp != null) yield return replaceComp.MakeGizmo();
+
 			foreach (var g in base.GetGizmos()) {
 				yield return g;
 			}
-		}
-
-		private void ReplaceGizmoAction() {
-			autoReplace = !autoReplace;
 		}
 
 		private void ChannelGizmoAction() {
@@ -187,7 +170,7 @@ namespace RemoteExplosives {
 			if (beepWhenLit && FuseLit && ticksSinceFlare == 1) {
 				// raise pitch with each beep
 				const float maxAdditionalPitch = .15f;
-				var pitchRamp = (1 - (comp.WickTicksLeft / (float)comp.WickTotalTicks)) * maxAdditionalPitch;
+				var pitchRamp = (1 - (explosiveComp.WickTicksLeft / (float)explosiveComp.WickTotalTicks)) * maxAdditionalPitch;
 				EmitBeep(1f + pitchRamp);
 			}
 		}
@@ -213,14 +196,7 @@ namespace RemoteExplosives {
 				}
 			}
 		}
-
-		public override void Destroy(DestroyMode mode = DestroyMode.Vanish) {
-			if (mode == DestroyMode.Kill && autoReplace) {
-				AutoReplaceWatcher.Instance.ScheduleReplacement(this);
-			}
-			base.Destroy(mode);
-		}
-
+		
 		private void DrawFlareOverlay(bool useStrong) {
 			ticksSinceFlare = 0;
 

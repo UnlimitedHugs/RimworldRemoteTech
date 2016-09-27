@@ -64,5 +64,19 @@
 		</requiredCapacities>
 		<prioritizeSustains>true</prioritizeSustains>
 	</WorkGiverDef>
+	
+	<WorkGiverDef>
+		<defName>DryOffDetonationCord</defName>
+		<label>dry off detonation cord</label>
+		<giverClass>RemoteExplosives.WorkGiver_DetonatorCord</giverClass>
+		<workType>Cleaning</workType>
+		<priorityInType>50</priorityInType>
+		<verb>dry off</verb>
+		<gerund>drying off</gerund>
+		<requiredCapacities>
+			<li>Manipulation</li>
+		</requiredCapacities>
+		<prioritizeSustains>true</prioritizeSustains>
+	</WorkGiverDef>
 
 </WorkGivers>

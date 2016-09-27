@@ -3,8 +3,10 @@ using UnityEngine;
 using Verse;
 
 namespace RemoteExplosives {
-	// A GasCloud that increases severity of a Hediff on pawns in the same tile.
-	// Supports apparel that will negate this effect.
+	/* 
+	 * A GasCloud that increases severity of a Hediff on pawns in the same tile.
+	 * Supports apparel that will negate this effect.
+	 */
 	public class GasCloud_HediffGiver : GasCloud {
 
 		private MoteProperties_GasCloud_HediffGiver gasProps;

@@ -2,7 +2,10 @@
 using Verse;
 
 namespace RemoteExplosives {
-	public class PlaceWorker_DetonatorWire : PlaceWorker {
+	/*
+	 * Allows detonator cord to be placed under existing structures
+	 */
+	public class PlaceWorker_DetonatorCord : PlaceWorker {
 		private readonly Type compType = typeof (CompWiredDetonationTransmitter);
 		
 		public override AcceptanceReport AllowsPlacing(BuildableDef checkingDef, IntVec3 loc, Rot4 rot) {

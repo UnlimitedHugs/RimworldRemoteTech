@@ -18,4 +18,10 @@
 		<driverClass>RemoteExplosives.JobDriver_InstallChannelsComponent</driverClass>
 		<reportString>Installing remote channels component.</reportString>
 	</JobDef>
+	
+	<JobDef>
+		<defName>JobDef_DryDetonationCord</defName>
+		<driverClass>RemoteExplosives.JobDriver_DryDetonationCord</driverClass>
+		<reportString>Drying off detonation cord.</reportString>
+	</JobDef>
 </JobDefs>

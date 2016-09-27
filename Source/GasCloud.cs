@@ -5,9 +5,11 @@ using UnityEngine;
 using Verse;
 
 namespace RemoteExplosives {
-	// A self-replicating Thing with a concentration property.
-	// Will spread in cardinal directions when the concentration is high enough, and loose concentration over time.
-	// See MoteProperties_GasCloud for settings.
+	/* 
+	 * A self-replicating Thing with a concentration property.
+	 * Will spread in cardinal directions when the concentration is high enough, and loose concentration over time.
+	 * See MoteProperties_GasCloud for settings.
+	 */
 	public class GasCloud : Thing {
 		private const float AlphaEasingDivider = 10f;
 		private const float SpreadingAnimationDuration = 1f;
@@ -21,7 +23,7 @@ namespace RemoteExplosives {
 		};
 
 		// uniformely distribute gas ticks to reduce per frame workload
-		private static int GlobalTickOffsetCounter;
+		private static int GlobalOffsetCounter;
 		private static readonly List<GasCloud> adjacentBuffer = new List<GasCloud>(4);
 		private static readonly List<IntVec3> positionBuffer = new List<IntVec3>(4);
 
@@ -37,10 +39,10 @@ namespace RemoteExplosives {
 		private DisposablePrimitiveWrapper<float> interpolatedOffsetY;
 		private DisposablePrimitiveWrapper<float> interpolatedScale;
 		private DisposablePrimitiveWrapper<float> interpolatedRotation;
-		private int gasTickOffset;
 
 		//saved fields
 		private float concentration;
+		private int gasTicksProcessed;
 		//
 
 		public float Concentration {
@@ -56,8 +58,7 @@ namespace RemoteExplosives {
 		public override void SpawnSetup() {
 			base.SpawnSetup();
 			gasProps = def.mote as MoteProperties_GasCloud;
-			gasTickOffset = ++GlobalTickOffsetCounter;
-			relativeZOrder = GlobalTickOffsetCounter % 100;
+			relativeZOrder = ++GlobalOffsetCounter % 80;
 			if (gasProps == null) throw new Exception("Missing required gas mote properties in " + def.defName);
 			var spreadingTransitionStarted = interpolatedOffsetX != null;
 			if (!spreadingTransitionStarted) {
@@ -71,11 +72,18 @@ namespace RemoteExplosives {
 				BeginScaleInterpolation();
 				BeginRotationInterpolation();
 			}
+			DistributedTickScheduler.Instance.RegisterTickability(GasTick, gasProps.GastickInterval);
+		}
+
+		public override void DeSpawn() {
+			base.DeSpawn();
+			DistributedTickScheduler.Instance.UnregisterTickability(GasTick, gasProps.GastickInterval);
 		}
 
 		public override void ExposeData() {
 			base.ExposeData();
 			Scribe_Values.LookValue(ref concentration, "concentration", 0);
+			Scribe_Values.LookValue(ref gasTicksProcessed, "ticks", 0);
 		}
 
 		public override void Draw() {
@@ -90,13 +98,7 @@ namespace RemoteExplosives {
 		public override string GetInspectString() {
 			return string.Format(ConcentrationLabelId.Translate(), string.Format("{0:n0}", concentration));
 		}
-
-		public override void Tick() {
-			var currentTick = Find.TickManager.TicksGame;
-			var tickIsGasTick = (currentTick + gasTickOffset) % gasProps.GastickInterval == 0;
-			if (tickIsGasTick) GasTick();
-		}
-
+		
 		public void ReceiveConcentration(float amount) {
 			concentration += amount;
 			if (concentration < 0) concentration = 0;
@@ -110,6 +112,7 @@ namespace RemoteExplosives {
 		}
 
 		public virtual void GasTick() {
+			gasTicksProcessed++;
 			// dissipate
 			var underRoof = Find.RoofGrid.Roofed(Position);
 			concentration -= underRoof ? gasProps.RoofedDissipation : gasProps.UnroofedDissipation;
@@ -119,8 +122,7 @@ namespace RemoteExplosives {
 			}
 			
 			//spread
-			var currentTick = Find.TickManager.TicksGame;
-			var gasTickFitForSpreading = (currentTick + gasTickOffset) % (gasProps.GastickInterval*gasProps.SpreadInterval) == 0;
+			var gasTickFitForSpreading = gasTicksProcessed % gasProps.SpreadInterval == 0;
 			if(gasTickFitForSpreading) {
 				TryCreateNewNeighbours();
 			}

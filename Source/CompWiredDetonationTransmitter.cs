@@ -1,26 +1,36 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using Verse;
 
 namespace RemoteExplosives {
 	// Transmits the wired detonation signal to signal receiver comps and transmitter comps on adjacent tiles. 
-	public class CompWiredDetonationTransmitter : ThingComp {
+	public class CompWiredDetonationTransmitter : CompDetonationGridNode {
+		public delegate bool AllowSignalPassage();
+
+		public AllowSignalPassage signalPassageTest;
 		private int lastSignalId;
 
-		public void SendNewSignal() {
-			RecieveSignal(Rand.Int, 0);
+		private CompProperties_WiredDetonationTransmitter CustomProps {
+			get {
+				if (!(props is CompProperties_WiredDetonationTransmitter)) throw new Exception("CompWiredDetonationTransmitter requires CompProperties_WiredDetonationTransmitter");
+				return props as CompProperties_WiredDetonationTransmitter;
+			}
 		}
 
-		private void RecieveSignal(int signalId, int sinalSteps) {
+		public override void PrintForDetonationGrid(SectionLayer layer) {
+			PrintConnection(layer);
+		}
+
+		public void RecieveSignal(int signalId, int sinalSteps) {
 			if (signalId == lastSignalId) return;
+			if (signalPassageTest != null && !signalPassageTest()) return;
 			lastSignalId = signalId;
 			PassSignalToReceivers(sinalSteps);
 			ConductSignalToNeighbours(signalId, sinalSteps);
 		}
 
 		private void PassSignalToReceivers(int sinalSteps) {
-			var transmitterProps = props as CompProperties_WiredDetonationTransmitter;
-			var delayPerTile = transmitterProps != null ? transmitterProps.signalDelayPerTile : 0;
-			var delayOnThisTile = Mathf.RoundToInt(sinalSteps * delayPerTile);
+			var delayOnThisTile = Mathf.RoundToInt(sinalSteps * CustomProps.signalDelayPerTile);
 			var thingsOnTile = Find.ThingGrid.ThingsListAtFast(parent.Position);
 			for (var i = 0; i < thingsOnTile.Count; i++) {
 				var comp = thingsOnTile[i].TryGetComp<CompWiredDetonationReceiver>();

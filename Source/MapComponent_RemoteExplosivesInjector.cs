@@ -6,8 +6,10 @@ using Verse;
 using System.Linq;
 
 namespace RemoteExplosives {
-	// This is a catch-all for all tasks that are not attached to any building or item, but require ticking or execution at map load.
-	// Injects trader stock generators, generates recipe copies for the workbench, controls the animation interpolator, runs the scheduler and auto-replace watcher.
+	/*
+	 * This is a catch-all for all tasks that are not attached to any building or item, but require ticking or execution at map load.
+	 * Injects trader stock generators, generates recipe copies for the workbench and forwards ticks and updates to other components.
+	 */
 	public class MapComponent_RemoteExplosivesInjector : MapComponent {
 		private readonly ThingCategoryDef explosivesItemCategory = ThingCategoryDef.Named("Explosives");
 		private readonly MethodInfo objectCloneMethod = typeof(object).GetMethod("MemberwiseClone", BindingFlags.Instance | BindingFlags.NonPublic);
@@ -107,6 +109,7 @@ namespace RemoteExplosives {
 			foreach (var thingDef in ieds) {
 				if (thingDef == null) continue;
 				thingDef.comps.Add(new CompProperties_WiredDetonationReceiver());
+				thingDef.comps.Add(new CompProperties_AutoReplaceable());
 			}
 
 		}
@@ -177,6 +180,16 @@ namespace RemoteExplosives {
 						cloud.ReceiveConcentration(concentration);
 						GenPlace.TryPlaceThing(cloud, cell, ThingPlaceMode.Direct);
 					}
+				});
+			}
+			if(Widgets.ButtonText(new Rect(10, 30, 50, 20), "Spark")) {
+				DebugTools.curTool = new DebugTool("Spark", () => {
+					EffecterDef.Named("SparkweedIgnite").Spawn().Trigger(Gen.MouseCell(), null);
+				});
+			}
+			if(Widgets.ButtonText(new Rect(10, 50, 50, 20), "Failure")) {
+				DebugTools.curTool = new DebugTool("Failure", () => {
+					EffecterDef.Named("DetCordFailure").Spawn().Trigger(Gen.MouseCell(), null);
 				});
 			}
 

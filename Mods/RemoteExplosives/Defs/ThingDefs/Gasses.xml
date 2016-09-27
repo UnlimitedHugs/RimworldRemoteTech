@@ -52,7 +52,7 @@ Rapidly dissipates when under an open sky.</description>
 			</immunizingApparelDefs>
 		</mote>
 		<isSaveable>true</isSaveable>
-		<tickerType>Normal</tickerType>
+		<tickerType>Never</tickerType>
 		<selectable>true</selectable>
 		<useHitPoints>false</useHitPoints>
 		<rotatable>false</rotatable>

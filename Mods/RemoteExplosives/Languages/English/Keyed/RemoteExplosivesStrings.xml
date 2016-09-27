@@ -49,4 +49,17 @@
 	
 	<DetonatorManual_detonate_label>Detonate</DetonatorManual_detonate_label>
 	<DetonatorManual_detonate_desc>Detonates all explosives connected to the same detonator cord.</DetonatorManual_detonate_desc>
+		
+	<Cord_inspect_wet>{0}% wet</Cord_inspect_wet>
+	<Cord_inspect_dry>Dry</Cord_inspect_dry>
+	<Cord_inspect_covered>covered</Cord_inspect_covered>
+	<Cord_inspect_exposed>exposed</Cord_inspect_exposed>
+	<Cord_dry_label>Dry off</Cord_dry_label>
+	<Cord_dry_desc>Calls a colonist to dry this cord section to prevent failures when it is used.</Cord_dry_desc>
+	
+	<Alert_cordFailure_label>Cord failure</Alert_cordFailure_label>
+	<Alert_cordFailure_desc>A detonator cord failed due to being wet and burned out.</Alert_cordFailure_desc>
+	
+	<CordDesignator_label>Det. cord select</CordDesignator_label>
+	<CordDesignator_desc>Selects only Detonator Cord placed in an area. Useful for maintenance and deconstruction. Hold Shift to add to current selection.</CordDesignator_desc>
 </LanguageData>

@@ -175,6 +175,9 @@ Right-click with a drafted colonist for better timing.</Description>
 			<WoodLog>30</WoodLog>
 			<Steel>20</Steel>
 		</CostList>
+		<comps>
+			<li Class="RemoteExplosives.CompProperties_WiredDetonationSender"/>
+		</comps>
 		<AltitudeLayer>Building</AltitudeLayer>
 		<fillPercent>0.5</fillPercent>
 		<useHitPoints>True</useHitPoints>
@@ -195,8 +198,9 @@ Right-click with a drafted colonist for better timing.</Description>
 	<ThingDef ParentName="BuildingBase">
 		<defName>DetonatorCord</defName>
 		<label>detonator cord</label>
-		<thingClass>RemoteExplosives.Building_DetonatorWire</thingClass>
-		<category>Building</category>
+		<description>A special wire used to connect the manual detonator to makeshift explosives, remote explosives and IEDs. Can be placed under walls and other buildings.
+Can fail if used while wet.</description>
+		<ThingClass>RemoteExplosives.Building_DetonatorCord</ThingClass>
 		<drawerType>MapMeshOnly</drawerType>
 		<graphicData>
 			<texPath>DetCord/det_cord_Atlas</texPath>
@@ -209,13 +213,21 @@ Right-click with a drafted colonist for better timing.</Description>
 				<rect>(0,0.35,1,0.3)</rect>
 			</damageData>
 		</graphicData>
+		<tickerType>Rare</tickerType>
 		<blueprintGraphicData>
 			<texPath>DetCord/det_cord_blueprint_atlas</texPath>
 		</blueprintGraphicData>
 		<uiIconPath>DetCord/det_cord_icon</uiIconPath>
-		<building>
+		<building Class="RemoteExplosives.BuildingProperties_DetonatorCord">
 			<isInert>true</isInert>
 			<isEdifice>false</isEdifice>
+			
+			<failureChanceWhenFullyWet>.015</failureChanceWhenFullyWet>
+			<daysToSelfDry>.8</daysToSelfDry>
+			<baseDryingTemperature>20</baseDryingTemperature>
+			<failureEffecter>DetCordFailure</failureEffecter>
+			<fireOnFailure>true</fireOnFailure>
+			<dryOffJobDurationTicks>80</dryOffJobDurationTicks>
 		</building>
 		<altitudeLayer>FloorEmplacement</altitudeLayer>
 		<passability>Standable</passability>
@@ -226,18 +238,17 @@ Right-click with a drafted colonist for better timing.</Description>
 			<Flammability>0.1</Flammability>
 			<Beauty>-2</Beauty>
 		</statBases>
-		<description>A special wire to connect the manual detonator to the explosives it should trigger. Can be placed under walls and other buildings.</description>
 		<placingDraggableDimensions>1</placingDraggableDimensions>
 		<costList>
 			<Steel>1</Steel>
 			<Sparkpowder>1</Sparkpowder>
 		</costList>
 		<placeWorkers>
-			<li>RemoteExplosives.PlaceWorker_DetonatorWire</li>
+			<li>RemoteExplosives.PlaceWorker_DetonatorCord</li>
 		</placeWorkers>
 		<comps>
 			<li Class="RemoteExplosives.CompProperties_WiredDetonationTransmitter">
-				<signalDelayPerTile>1</signalDelayPerTile>
+				<signalDelayPerTile>0.8</signalDelayPerTile> <!-- signal delay is calculated by the last transmitter before the receiver -->
 			</li>
 		</comps>
 		<damageMultipliers>
@@ -256,7 +267,7 @@ Right-click with a drafted colonist for better timing.</Description>
 		</damageMultipliers>
 		<rotatable>false</rotatable>
 		<selectable>true</selectable>
-		<neverMultiSelect>false</neverMultiSelect>
+		<neverMultiSelect>true</neverMultiSelect>
 		<researchPrerequisites><li>MakeshiftExplosives</li></researchPrerequisites>
 	</ThingDef>
 	
@@ -288,6 +299,9 @@ Detonate using a Manual Detonator and Detonator Cord.</description>
 				</wickTicks>
 			</li>
 			<li Class="RemoteExplosives.CompProperties_WiredDetonationReceiver"/>
+			<li Class="RemoteExplosives.CompProperties_AutoReplaceable">
+				<forbiddenForSeconds>30</forbiddenForSeconds>
+			</li>
 		</comps>
 		<building>
 			<isTrap>true</isTrap>
@@ -320,6 +334,7 @@ Arm, then detonate from the Remote Explosives Console.</description>
 				</wickTicks>
 			</li>
 			<li Class="RemoteExplosives.CompProperties_WiredDetonationReceiver"/>
+			<li Class="RemoteExplosives.CompProperties_AutoReplaceable"/>
 		</comps>
 		<building Class="RemoteExplosives.BuildingProperties_RemoteExplosive">
 			<isTrap>true</isTrap>
@@ -352,6 +367,7 @@ Arm, then detonate from the Remote Explosives Console.</description>
 				</wickTicks>
 			</li>
 			<li Class="RemoteExplosives.CompProperties_WiredDetonationReceiver"/>
+			<li Class="RemoteExplosives.CompProperties_AutoReplaceable"/>
 		</comps>
 		<building Class="RemoteExplosives.BuildingProperties_RemoteExplosive">
 			<isTrap>true</isTrap>
@@ -391,6 +407,7 @@ Arm, then detonate from the Remote Explosives Console.</description>
 				</wickTicks>
 			</li>
 			<li Class="RemoteExplosives.CompProperties_WiredDetonationReceiver"/>
+			<li Class="RemoteExplosives.CompProperties_AutoReplaceable"/>
 		</comps>
 		<building Class="RemoteExplosives.BuildingProperties_RemoteExplosive">
 			<isTrap>true</isTrap>
@@ -431,6 +448,7 @@ Detonate from the Remote Explosives Console.</description>
 				</wickTicks>
 			</li>
 			<li Class="RemoteExplosives.CompProperties_WiredDetonationReceiver"/>
+			<li Class="RemoteExplosives.CompProperties_AutoReplaceable"/>
 		</comps>
 		<building Class="RemoteExplosives.BuildingProperties_RemoteExplosive">
 			<isTrap>false</isTrap>
@@ -468,6 +486,7 @@ Detonate from the Remote Explosives Console.</description>
 				</wickTicks>
 			</li>
 			<li Class="RemoteExplosives.CompProperties_WiredDetonationReceiver"/>
+			<li Class="RemoteExplosives.CompProperties_AutoReplaceable"/>
 		</comps>
 		<building Class="RemoteExplosives.BuildingProperties_RemoteExplosive">
 			<isTrap>false</isTrap>
@@ -507,6 +526,7 @@ Arm, then detonate from the Remote Explosives Console.</description>
 				<numFoamBlobs>5</numFoamBlobs>
 			</li>
 			<li Class="RemoteExplosives.CompProperties_WiredDetonationReceiver"/>
+			<li Class="RemoteExplosives.CompProperties_AutoReplaceable"/>
 		</comps>
 		<building Class="RemoteExplosives.BuildingProperties_RemoteExplosive">
 			<isTrap>true</isTrap>
@@ -541,6 +561,7 @@ Arm, then detonate from the Remote Explosives Console.</description>
 				<gasConcentration>80000</gasConcentration>
 			</li>
 			<li Class="RemoteExplosives.CompProperties_WiredDetonationReceiver"/>
+			<li Class="RemoteExplosives.CompProperties_AutoReplaceable"/>
 		</comps>
 		<building Class="RemoteExplosives.BuildingProperties_RemoteExplosive">
 			<isTrap>true</isTrap>

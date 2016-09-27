@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace RemoteExplosives {
-	// A basic tweening dispatcher that interpolates multiple boxed floats over time. For use with animations.
+	/* 
+	 * A basic tweening dispatcher that interpolates multiple boxed floats over time. For use with animations.
+	 */
 	public class ValueInterpolator {
 		public enum InterpolationCurveType {
 			Linear,

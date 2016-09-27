@@ -2,7 +2,9 @@
 using Verse.Sound;
 
 namespace RemoteExplosives {
-	// A remote explosive with a custom wind-up sound.
+	/*
+	 * A remote explosive with a custom wind-up sound.
+	 */
 	public class Building_RemoteExplosiveEmp : Building_RemoteExplosive {
 		private static readonly SoundDef chargeSound = SoundDef.Named("RemoteEmpCharge");
 		private Sustainer chargeSoundSustainer;

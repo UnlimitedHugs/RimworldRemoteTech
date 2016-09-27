@@ -6,7 +6,9 @@ using UnityEngine;
 using Verse;
 
 namespace RemoteExplosives {
-	// A place for common functions and utilities used by the mod.
+	 /*
+	  * A place for common functions and utilities used by the mod.
+	  */
 	[StaticConstructorOnStartup]
 	public static class RemoteExplosivesUtility {
 		public const string InjectedRecipeNameSuffix = "Injected";
@@ -28,10 +30,14 @@ namespace RemoteExplosives {
 		private static readonly string ChannelDialLabelBase = "RemoteExplosive_channelChanger_label".Translate();
 		private static readonly string CurrenthannelLabelBase = "RemoteExplosive_currentChannel".Translate();
 
-		private static DesignationDef desigationDef;
-
+		private static DesignationDef switchDesigationDef;
 		public static DesignationDef SwitchDesigationDef {
-			get { return desigationDef ?? (desigationDef = DefDatabase<DesignationDef>.GetNamed("RemoteExplosiveSwitch")); }
+			get { return switchDesigationDef ?? (switchDesigationDef = DefDatabase<DesignationDef>.GetNamed("RemoteExplosiveSwitch")); }
+		}
+
+		private static DesignationDef dryDesigationDef;
+		public static DesignationDef DryOffDesigationDef {
+			get { return dryDesigationDef ?? (dryDesigationDef = DefDatabase<DesignationDef>.GetNamed("DetonationCordDryOff")); }
 		}
 
 		public enum RemoteChannel {

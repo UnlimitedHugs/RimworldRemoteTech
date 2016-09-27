@@ -4,7 +4,9 @@ using Verse;
 using Verse.Sound;
 
 namespace RemoteExplosives {
-	// An explosive with a timer. Can be triggered silently, but will revert to the vanilla wick if it takes enough damage.
+	/* 
+	 * An explosive with a timer. Can be triggered silently, but will revert to the vanilla wick if it takes enough damage.
+	 */
 	public class CompCustomExplosive : ThingComp {
 		private static readonly SoundDef WickStartSound = SoundDef.Named("MetalHitImportant");
 		private static readonly SoundDef WickLoopSound = SoundDef.Named("HissSmall");

@@ -3,7 +3,9 @@ using UnityEngine;
 using Verse;
 
 namespace RemoteExplosives {
-	// A simple Command_Action that reports back when the mouse is hovering over it.
+	/* 
+	 * A simple Command_Action that reports back when the mouse is hovering over it.
+	 */
 	public class Command_MouseOverDetector : Command_Action {
 		public Action mouseOverCallback;
 

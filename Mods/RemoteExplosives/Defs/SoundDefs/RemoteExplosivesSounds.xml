@@ -234,4 +234,52 @@
 		</subSounds>
 	</SoundDef>
 	
+	<SoundDef>
+		<defName>RemoteSparkweedIgnite</defName>  
+		<eventNames />  
+		<maxVoices>4</maxVoices>   
+		<maxSimultaneous>4</maxSimultaneous>  
+		<subSounds>
+			<li>
+				<grains>
+					<li Class="AudioGrain_Clip">
+						<clipPath>ignite</clipPath>
+					</li>
+				</grains>     
+				<volumeRange>
+					<min>15</min>
+					<max>25</max>
+				</volumeRange>
+				<pitchRange>
+					<min>0.8</min>        
+					<max>1.2</max>
+				</pitchRange>
+			</li>   
+		</subSounds>
+	</SoundDef>
+	
+	<SoundDef>
+		<defName>RemoteCableFailure</defName>  
+		<eventNames />  
+		<maxVoices>4</maxVoices>   
+		<maxSimultaneous>4</maxSimultaneous>  
+		<subSounds>
+			<li>
+				<grains>
+					<li Class="AudioGrain_Clip">
+						<clipPath>electric_zap</clipPath>
+					</li>
+				</grains>     
+				<volumeRange>
+					<min>20</min>
+					<max>25</max>
+				</volumeRange>
+				<pitchRange>
+					<min>0.9</min>        
+					<max>1.1</max>
+				</pitchRange>
+			</li>   
+		</subSounds>
+	</SoundDef>
+	
 </DefPackage-SoundDef>

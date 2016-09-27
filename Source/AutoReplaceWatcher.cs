@@ -3,10 +3,11 @@ using RimWorld;
 using Verse;
 
 namespace RemoteExplosives {
-	// Replaces exploded charges with new blueprints that are forbidden for 30 seconds
-	// stores settings to give to charges once they have been rebuilt
+	/* 
+	 * Replaces exploded charges with new blueprints that are forbidden for 30 seconds
+	 * stores settings to give to charges once they have been rebuilt
+	 */
 	public class AutoReplaceWatcher : IExposable {
-		private const int BlueprintsForbiddenForTicks = 1800;
 		private const int TicksBetweenSettingsPruning = 60;
 
 		private class ReplacementEntry : IExposable {
@@ -32,33 +33,40 @@ namespace RemoteExplosives {
 			Instance = this;
 		}
 
-		public void ScheduleReplacement(Building_RemoteExplosive explosive) {
-			//var canPlace = GenConstruct.CanPlaceBlueprintAt(explosive.def, explosive.Position, explosive.Rotation, false, explosive);
-			//if(!canPlace.Accepted) return;
-			var blueprint = GenConstruct.PlaceBlueprintForBuild(explosive.def, explosive.Position, explosive.Rotation, Faction.OfPlayer, null);
-			blueprint.SetForbidden(true, false);
+		public void ScheduleReplacement(CompAutoReplaceable replaceableComp) {
+			var building = replaceableComp.parent;
+			var blueprint = GenConstruct.PlaceBlueprintForBuild(building.def, replaceableComp.ParentPosition, replaceableComp.ParentRotation, Faction.OfPlayer, null);
 			var entry = new ReplacementEntry {
-				position = explosive.Position,
-				unforbidTick = Find.TickManager.TicksGame + BlueprintsForbiddenForTicks,
-				armed = explosive.IsArmed,
-				channel = explosive.CurrentChannel
+				position = replaceableComp.ParentPosition,
+				unforbidTick = Find.TickManager.TicksGame + replaceableComp.ForbiddenForTicks,
 			};
-			pendingForbiddenBlueprints.Add(entry);
+			var explosive = building as Building_RemoteExplosive;
+			if (explosive!=null) {
+				entry.armed = explosive.IsArmed;
+				entry.channel = explosive.CurrentChannel;
+			}
 			pendingSettings.Add(entry);
+			if (replaceableComp.ForbiddenForTicks > 0) {
+				blueprint.SetForbidden(true, false);
+				pendingForbiddenBlueprints.Add(entry);
+			}
 		}
 
-		public void TryApplySavedSettings(Building_RemoteExplosive explosive) {
+		public void TryApplySavedSettings(ThingWithComps explosive) {
 			for (int i = 0; i < pendingSettings.Count; i++) {
 				var entry = pendingSettings[i];
-				if (explosive.Position == entry.position) {
+				if (explosive.Position != entry.position) continue;
+				var remoteEx = explosive as Building_RemoteExplosive;
+				if (remoteEx != null) {
 					if (entry.armed) {
-						explosive.Arm();
+						remoteEx.Arm();
 					}
-					explosive.SetChannel(entry.channel);
-					explosive.EnableAutoReplace();
-					pendingSettings.RemoveAt(i);
-					break;
+					remoteEx.SetChannel(entry.channel);
 				}
+				var replaceComp = explosive.TryGetComp<CompAutoReplaceable>();
+				if(replaceComp!=null) replaceComp.AutoReplaceEnabled = true;
+				pendingSettings.RemoveAt(i);
+				break;
 			}
 		}
 
@@ -70,24 +78,28 @@ namespace RemoteExplosives {
 		}
 
 		public void ExposeData() {
-			Scribe_Collections.LookList(ref pendingSettings, "pendingSettings", LookMode.Deep, new object[0]);
-			Scribe_Collections.LookList(ref pendingForbiddenBlueprints, "pendingForbiddenBlueprints", LookMode.Deep, new object[0]);
+			Scribe_Collections.LookList(ref pendingSettings, "pendingSettings", LookMode.Deep);
+			Scribe_Collections.LookList(ref pendingForbiddenBlueprints, "pendingForbiddenBlueprints", LookMode.Deep);
 			if (pendingSettings == null) pendingSettings = new List<ReplacementEntry>();
 			if (pendingForbiddenBlueprints == null) pendingForbiddenBlueprints = new List<ReplacementEntry>();
 		}
 
 		private void UnforbidScheduledBlueprints() {
 			var currentTick = Find.TickManager.TicksGame;
-			while (pendingForbiddenBlueprints.Count > 0 && pendingForbiddenBlueprints[0].unforbidTick <= currentTick) {
-				var entry = pendingForbiddenBlueprints[0];
-				pendingForbiddenBlueprints.RemoveAt(0);
+			var anyHits = false;
+			for (int i = 0; i < pendingForbiddenBlueprints.Count; i++) {
+				var entry = pendingForbiddenBlueprints[i];
+				if(entry.unforbidTick > currentTick) continue;
 				var blueprint = Find.ThingGrid.ThingAt<Blueprint_Build>(entry.position);
 				if (blueprint != null) {
 					blueprint.SetForbidden(false, false);
 				}
+				anyHits = true;
 			}
+			if (anyHits) pendingForbiddenBlueprints.RemoveAll(e => e.unforbidTick <= currentTick);
 		}
 
+		// auto-placed blueprints may get cancelled
 		private void PruneSettingsEntries() {
 			for (int i = pendingSettings.Count - 1; i >= 0; i--) {
 				var entry = pendingSettings[i];
