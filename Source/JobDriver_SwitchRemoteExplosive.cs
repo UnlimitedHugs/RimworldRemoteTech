@@ -14,7 +14,7 @@ namespace RemoteExplosives {
 			var explosive = TargetThingA as Building_RemoteExplosive;
 			if (explosive == null) yield break;
 			yield return Toils_Reserve.Reserve(TargetIndex.A);
-			yield return Toils_Goto.GotoCell(TargetIndex.A, PathEndMode.InteractionCell);
+			yield return Toils_Goto.GotoCell(TargetIndex.A, PathEndMode.Touch);
 			yield return new Toil {
 				initAction = () => explosive.DoSwitch(),
 				defaultCompleteMode = ToilCompleteMode.Instant,
@@ -25,7 +25,7 @@ namespace RemoteExplosives {
 
 		private bool JobHasFailed() {
 			var explosive = TargetThingA as Building_RemoteExplosive;
-			return explosive == null || explosive.Destroyed || !explosive.WantsSwitch();
+			return explosive == null || !explosive.Spawned || !explosive.WantsSwitch();
 		}
 	}
 }
