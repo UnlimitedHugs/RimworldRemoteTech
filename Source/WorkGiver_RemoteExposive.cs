@@ -31,7 +31,7 @@ namespace RemoteExplosives {
 				&& !pawn.Downed
 				&& !pawn.IsBurning()
 				&& (t as Building_RemoteExplosive).WantsSwitch()
-				&& pawn.CanReserveAndReach(t, pathEndMode, Danger.Some);
+				&& pawn.CanReserveAndReach(t, pathEndMode, Danger.Deadly);
 		}
 
 		public override Job JobOnThing(Pawn pawn, Thing t) {
