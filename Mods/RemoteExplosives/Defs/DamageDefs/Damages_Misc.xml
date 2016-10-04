@@ -11,13 +11,25 @@
 		<externalViolence>false</externalViolence>
 	</DamageDef>
 	
-	<DamageDef ParentName="Flame" Class="RemoteExplosives.FlameChanceDamageDef">
+	<DamageDef Class="RemoteExplosives.FlameChanceDamageDef">
 		<defName>FlameBomb</defName>
 		<workerClass>RemoteExplosives.DamageWorker_FlameChance</workerClass>
 		<label>flame bomb</label>
 		<incapChanceMultiplier>1</incapChanceMultiplier>
+		<hasForcefulImpact>false</hasForcefulImpact>
+		<makesBlood>false</makesBlood>
+		<canInterruptJobs>false</canInterruptJobs>
+		<externalViolence>true</externalViolence>
+		<deathMessage>{0} has burned to death.</deathMessage>
+		<hediff>Burn</hediff>
+		<armorCategory>Heat</armorCategory>
+		<spreadOut>true</spreadOut>
+		<soundExplosion>Explosion_Flame</soundExplosion>
 		<explosionDamage>50</explosionDamage>
 		<explosionHeatEnergyPerCell>10</explosionHeatEnergyPerCell>
+		<explosionCellMote>Mote_BlastFlame</explosionCellMote>
+		<explosionColorCenter>(1, 0.7, 0.7)</explosionColorCenter>
+		<explosionColorEdge>(1, 1, 0.7)</explosionColorEdge>
 		<flameChance>0.2</flameChance>
 	</DamageDef>
 </Defs>
