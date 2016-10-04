@@ -1,7 +1,47 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ThingDefs>
 	
-	<ThingDef ParentName="HatMakeableBase">
+	<ThingDef Name="ApparelBase" Abstract="True">
+		<thingClass>Apparel</thingClass>
+		<category>Item</category>
+		<selectable>True</selectable>
+		<pathCost>10</pathCost>
+		<useHitPoints>True</useHitPoints>
+		<graphicData>
+			<onGroundRandomRotateAngle>35</onGroundRandomRotateAngle>
+		</graphicData>
+		<drawGUIOverlay>true</drawGUIOverlay>
+		<statBases>
+			<MaxHitPoints>100</MaxHitPoints>
+			<Flammability>1.0</Flammability>
+			<DeteriorationRate>2</DeteriorationRate>
+			<SellPriceFactor>0.5</SellPriceFactor>
+		</statBases>
+		<altitudeLayer>Item</altitudeLayer>
+		<alwaysHaulable>True</alwaysHaulable>
+		<tickerType>Never</tickerType>
+		<comps>
+			<li Class="CompProperties_Forbiddable"/>
+			<li><compClass>CompColorable</compClass></li>
+			<li><compClass>CompQuality</compClass></li>
+		</comps>
+	</ThingDef>
+	
+	<ThingDef Name="ApparelMakeableBase" ParentName="ApparelBase" Abstract="True">
+		<recipeMaker>
+			<workSpeedStat>TailoringSpeed</workSpeedStat>
+			<workSkill>Crafting</workSkill>
+			<effectWorking>Tailor</effectWorking>
+			<soundWorking>Recipe_Tailor</soundWorking>
+			<recipeUsers>
+				<li>ElectricTailoringBench</li>
+				<li>HandTailoringBench</li>
+			</recipeUsers>
+			<unfinishedThingDef>UnfinishedApparel</unfinishedThingDef>
+		</recipeMaker>
+	</ThingDef>
+	
+	<ThingDef ParentName="ApparelMakeableBase">
 		<defName>Apparel_GasMask</defName>
 		<label>gas mask</label>
 		<description>A mask that protects the wearer from toxic gasses and other air-borne contaminants.
@@ -21,6 +61,9 @@ The filters wear out fairly quickly, so it's recommended to wear this only when 
 			<ArmorRating_Blunt>0.05</ArmorRating_Blunt>
 			<ArmorRating_Sharp>0.05</ArmorRating_Sharp>
 		</statBases>
+		<thingCategories>
+			<li>Headgear</li>
+		</thingCategories>
 		<costList>
 			<Component>2</Component>
 			<Medicine>2</Medicine>
@@ -71,7 +114,7 @@ The filters wear out fairly quickly, so it's recommended to wear this only when 
 		<defName>Apparel_PortableDetonator</defName>
 		<label>portable remote detonator</label>
 		<description>A portable version of the detonator table for triggering remote explosives.
-Works only on the white channel, has limited range and runs on a non-rechargeable battery- but hey, you can almost fit it in your pocket. Not really, though.</description>
+Works only on the white channel, has limited range and runs on a non-rechargeable battery- but hey, you can almost fit it in your pocket. Almost.</description>
 		<graphicData>
 			<texPath>detonator_portable</texPath>
 			<graphicClass>Graphic_Single</graphicClass>
