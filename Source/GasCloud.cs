@@ -17,12 +17,11 @@ namespace RemoteExplosives {
 		private const string ConcentrationLabelId = "GasCloud_concentration_label";
 
 		public delegate bool TraversibilityTest(Building b, GasCloud g);
-		public static Dictionary<Type, TraversibilityTest> TraversibleBuildings = new Dictionary<Type, TraversibilityTest> {
+		public static readonly Dictionary<Type, TraversibilityTest> TraversibleBuildings = new Dictionary<Type, TraversibilityTest> {
 			{typeof(Building_Vent), (d,g)=> true },
 			{typeof(Building_Door), (d,g)=> ((Building_Door)d).Open }
 		};
 
-		// uniformely distribute gas ticks to reduce per frame workload
 		private static int GlobalOffsetCounter;
 		private static readonly List<GasCloud> adjacentBuffer = new List<GasCloud>(4);
 		private static readonly List<IntVec3> positionBuffer = new List<IntVec3>(4);
@@ -35,10 +34,10 @@ namespace RemoteExplosives {
 		private MoteProperties_GasCloud gasProps;
 		
 		private float interpolatedAlpha;
-		private DisposablePrimitiveWrapper<float> interpolatedOffsetX;
-		private DisposablePrimitiveWrapper<float> interpolatedOffsetY;
-		private DisposablePrimitiveWrapper<float> interpolatedScale;
-		private DisposablePrimitiveWrapper<float> interpolatedRotation;
+		private readonly InterpolatedValue interpolatedOffsetX;
+		private readonly InterpolatedValue interpolatedOffsetY;
+		private readonly InterpolatedValue interpolatedScale;
+		private readonly InterpolatedValue interpolatedRotation;
 
 		//saved fields
 		private float concentration;
@@ -55,23 +54,21 @@ namespace RemoteExplosives {
 			}
 		}
 
+		public GasCloud() {
+			interpolatedOffsetX = new InterpolatedValue();
+			interpolatedOffsetY = new InterpolatedValue();
+			interpolatedScale = new InterpolatedValue();
+			interpolatedRotation = new InterpolatedValue();
+		}
+
 		public override void SpawnSetup() {
 			base.SpawnSetup();
 			gasProps = def.mote as MoteProperties_GasCloud;
 			relativeZOrder = ++GlobalOffsetCounter % 80;
 			if (gasProps == null) throw new Exception("Missing required gas mote properties in " + def.defName);
-			var spreadingTransitionStarted = interpolatedOffsetX != null;
-			if (!spreadingTransitionStarted) {
-				interpolatedOffsetX = new DisposablePrimitiveWrapper<float>(0);
-				interpolatedOffsetY = new DisposablePrimitiveWrapper<float>(0);
-			}
-			interpolatedScale = new DisposablePrimitiveWrapper<float>(GetRandomGasScale());
-			interpolatedRotation = new DisposablePrimitiveWrapper<float>(GetRandomGasRotation());
-			if (gasProps.AnimationAmplitude > 0) {
-				if(!spreadingTransitionStarted) BeginOffsetInterpolation();
-				BeginScaleInterpolation();
-				BeginRotationInterpolation();
-			}
+			interpolatedScale.value = GetRandomGasScale();
+			interpolatedRotation.value = GetRandomGasRotation();
+			// uniformely distribute gas ticks to reduce per frame workload
 			DistributedTickScheduler.Instance.RegisterTickability(GasTick, gasProps.GastickInterval);
 		}
 
@@ -87,12 +84,42 @@ namespace RemoteExplosives {
 		}
 
 		public override void Draw() {
+			if (!Find.TickManager.Paused) {
+				UpdateInterpolatedValues();
+			}
 			var targetApha = Mathf.Min(1f, concentration / gasProps.FullAlphaConcentration);
 			spriteAlpha = interpolatedAlpha = DoAdditiveEasing(interpolatedAlpha, targetApha, AlphaEasingDivider, Time.deltaTime);
 			spriteOffset = new Vector2(interpolatedOffsetX, interpolatedOffsetY);
 			spriteScaleMultiplier = new Vector2(interpolatedScale, interpolatedScale);
 			spriteRotation = interpolatedRotation;
 			base.Draw();
+		}
+
+		private void UpdateInterpolatedValues() {
+			interpolatedOffsetX.Update();
+			interpolatedOffsetY.Update();
+			if (gasProps.AnimationAmplitude > 0) {
+				interpolatedScale.Update();
+				interpolatedRotation.Update();
+				if (interpolatedOffsetX.finished) {
+					// start offset interpolation
+					var newX = Rand.Range(-gasProps.AnimationAmplitude, gasProps.AnimationAmplitude);
+					var newY = Rand.Range(-gasProps.AnimationAmplitude, gasProps.AnimationAmplitude);
+					var duration = gasProps.AnimationPeriod.RandomInRange;
+					interpolatedOffsetX.StartInterpolation(newX, duration, InterpolationCurves.CubicEaseInOut);
+					interpolatedOffsetY.StartInterpolation(newY, duration, InterpolationCurves.CubicEaseInOut);
+				}
+				if (interpolatedScale.finished) {
+					// start scale interpolation
+					interpolatedScale.StartInterpolation(GetRandomGasScale(), gasProps.AnimationPeriod.RandomInRange, InterpolationCurves.CubicEaseInOut);
+				}
+				if (interpolatedRotation.finished) {
+					// start rotation interpolation
+					const float MaxRotationDelta = 90f;
+					var newRotation = interpolatedRotation.value + Rand.Range(-MaxRotationDelta, MaxRotationDelta)*gasProps.AnimationAmplitude;
+					interpolatedRotation.StartInterpolation(newRotation, gasProps.AnimationPeriod.RandomInRange, InterpolationCurves.CubicEaseInOut);
+				}
+			}
 		}
 
 		public override string GetInspectString() {
@@ -105,13 +132,13 @@ namespace RemoteExplosives {
 		}
 
 		public void BeginSpreadingTransition(GasCloud parentCloud, IntVec3 targetPosition) {
-			interpolatedOffsetX = new DisposablePrimitiveWrapper<float>(parentCloud.Position.x-targetPosition.x);
-			interpolatedOffsetY = new DisposablePrimitiveWrapper<float>(parentCloud.Position.z-targetPosition.z);
-			ValueInterpolator.Instance.InterpolateValue(interpolatedOffsetX, 0, SpreadingAnimationDuration, ValueInterpolator.InterpolationCurveType.QuinticEaseOut, OnSpreadingTransitionFinished);
-			ValueInterpolator.Instance.InterpolateValue(interpolatedOffsetY, 0, SpreadingAnimationDuration, ValueInterpolator.InterpolationCurveType.QuinticEaseOut);
+			interpolatedOffsetX.value = parentCloud.Position.x - targetPosition.x;
+			interpolatedOffsetY.value = parentCloud.Position.z - targetPosition.z;
+			interpolatedOffsetX.StartInterpolation(0, SpreadingAnimationDuration, InterpolationCurves.QuinticEaseOut);
+			interpolatedOffsetY.StartInterpolation(0, SpreadingAnimationDuration, InterpolationCurves.QuinticEaseOut);
 		}
 
-		public virtual void GasTick() {
+		protected virtual void GasTick() {
 			gasTicksProcessed++;
 			// dissipate
 			var underRoof = Find.RoofGrid.Roofed(Position);
@@ -134,39 +161,6 @@ namespace RemoteExplosives {
 
 			// balance concentration
 			ShareConcentrationWithMinorNeighbours();
-		}
-
-		public override void Destroy(DestroyMode mode = DestroyMode.Vanish) {
-			base.Destroy(mode);
-			interpolatedOffsetX.Dispose();
-			interpolatedOffsetY.Dispose();
-			interpolatedScale.Dispose();
-			interpolatedRotation.Dispose();
-		}
-
-		private void BeginOffsetInterpolation() {
-			if(!Spawned) return;
-			var newX = Rand.Range(-gasProps.AnimationAmplitude, gasProps.AnimationAmplitude);
-			var newY = Rand.Range(-gasProps.AnimationAmplitude, gasProps.AnimationAmplitude);
-			ValueInterpolator.Instance.InterpolateValue(interpolatedOffsetX, newX, gasProps.AnimationPeriod.RandomInRange, ValueInterpolator.InterpolationCurveType.CubicEaseInOut, BeginOffsetInterpolation);
-			ValueInterpolator.Instance.InterpolateValue(interpolatedOffsetY, newY, gasProps.AnimationPeriod.RandomInRange, ValueInterpolator.InterpolationCurveType.CubicEaseInOut);
-		}
-
-		private void BeginScaleInterpolation() {
-			if (!Spawned) return;
-			var newScale = GetRandomGasScale();
-			ValueInterpolator.Instance.InterpolateValue(interpolatedScale, newScale, gasProps.AnimationPeriod.RandomInRange, ValueInterpolator.InterpolationCurveType.CubicEaseInOut, BeginScaleInterpolation);
-		}
-
-		private void BeginRotationInterpolation() {
-			const float MaxRotationDelta = 90f;
-			if (!Spawned) return;
-			var newRotation = interpolatedRotation.Value + Rand.Range(-MaxRotationDelta, MaxRotationDelta) * gasProps.AnimationAmplitude;
-			ValueInterpolator.Instance.InterpolateValue(interpolatedRotation, newRotation, gasProps.AnimationPeriod.RandomInRange, ValueInterpolator.InterpolationCurveType.CubicEaseInOut, BeginRotationInterpolation);
-		}
-
-		private void OnSpreadingTransitionFinished() {
-			BeginOffsetInterpolation();
 		}
 
 		private float GetRandomGasScale() {

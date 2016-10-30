@@ -21,9 +21,7 @@ namespace RemoteExplosives {
 		private int ticksUntilHardened = -1;
 		private int numSpreadsLeft;
 		private int ticksUntilNextSpread;
-		[Unsaved]
-		private readonly DisposablePrimitiveWrapper<float> animationProgress = new DisposablePrimitiveWrapper<float>(1);
-		[Unsaved]
+		private readonly InterpolatedValue animationProgress = new InterpolatedValue { value = 1 };
 		public Vector2 spriteScaleMultiplier = new Vector2(1f, 1f);
 
 		private List<IntVec3> adjacentCells;
@@ -59,8 +57,8 @@ namespace RemoteExplosives {
 		}
 
 		private void PrimeSpawnAnimation() {
-			animationProgress.Value = 0f;
-			ValueInterpolator.Instance.InterpolateValue(animationProgress, 1f, animationDuration, ValueInterpolator.InterpolationCurveType.QuinticEaseOut);
+			animationProgress.value = 0;
+			animationProgress.StartInterpolation(1f, animationDuration, InterpolationCurves.QuinticEaseOut);
 		}
 
 		private void Harden() {
@@ -88,14 +86,7 @@ namespace RemoteExplosives {
 		}
 
 		public override void Draw() {
-			if (animationProgress < 1) {
-				var easedProgress = animationProgress;
-				const float delta = .5f * animationMagnitude;
-				var fixedScalar = easedProgress;
-				var xScalar = 1f + delta - delta * easedProgress;
-				var yScalar = (1f - delta) + delta * easedProgress;
-				spriteScaleMultiplier = new Vector2(fixedScalar * xScalar, fixedScalar * yScalar);
-			}
+			UpdateScale();
 			base.Draw();
 		}
 
@@ -103,11 +94,22 @@ namespace RemoteExplosives {
 			return string.Format("FoamBlob_solidify_progress".Translate(), 100-Mathf.Ceil((ticksUntilHardened / (float)foamProps.ticksToHarden.max) * 100));
 		}
 
+		// scale the sprite non-uniformly for a more interesting visual effect
+		private void UpdateScale() {
+			animationProgress.UpdateIfUnpaused();
+			var easedProgress = animationProgress.value;
+			const float delta = .5f * animationMagnitude;
+			var fixedScalar = easedProgress;
+			var xScalar = 1f + delta - delta * easedProgress;
+			var yScalar = (1f - delta) + delta * easedProgress;
+			spriteScaleMultiplier = new Vector2(fixedScalar * xScalar, fixedScalar * yScalar);
+		}
+
 		private void SpreadFoam() {
 			const int maxSearchDistance = 10;
-			var newFoam = ThingMaker.MakeThing(def);
 			var targetCell = TryFindNearestCellForNewBlob(Position, maxSearchDistance);
 			if(targetCell == Position) return;
+			var newFoam = ThingMaker.MakeThing(def);
 			GenPlace.TryPlaceThing(newFoam, targetCell, ThingPlaceMode.Direct);
 		}
 

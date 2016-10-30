@@ -21,13 +21,6 @@ namespace RemoteExplosives {
 			}
 		}
 
-		public override IEnumerable<Thing> PotentialWorkThingsGlobal(Pawn Pawn) {
-			var detonators = Find.ListerBuildings.AllBuildingsColonistOfClass<Building_DetonatorTable>();
-			foreach (var detonatorTable in detonators) {
-				yield return detonatorTable;
-			}
-		}
-
 		public override bool HasJobOnThing(Pawn pawn, Thing t) {
 			var table = t as Building_DetonatorTable;
 			if (table == null) return false;

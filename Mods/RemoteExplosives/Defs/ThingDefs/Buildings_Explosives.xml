@@ -170,6 +170,10 @@ Right-click with a drafted colonist for better timing.</Description>
 			<graphicClass>RemoteExplosives.Graphic_Variants</graphicClass>
 			<shaderType>CutoutComplex</shaderType>
 			<drawSize>(1,1)</drawSize>
+			<shadowData>
+				<volume>(.6, 0.5, .6)</volume>
+				<offset>(0, 0, -.2)</offset>
+			</shadowData>
 		</graphicData>
 		<CostList>
 			<WoodLog>30</WoodLog>
@@ -243,12 +247,21 @@ Can fail if used while wet.</description>
 			<Steel>1</Steel>
 			<Sparkpowder>1</Sparkpowder>
 		</costList>
+		<resourcesFractionWhenDeconstructed>0</resourcesFractionWhenDeconstructed>
 		<placeWorkers>
 			<li>RemoteExplosives.PlaceWorker_DetonatorCord</li>
 		</placeWorkers>
 		<comps>
 			<li Class="RemoteExplosives.CompProperties_WiredDetonationTransmitter">
 				<signalDelayPerTile>0.8</signalDelayPerTile> <!-- signal delay is calculated by the last transmitter before the receiver -->
+			</li>
+			<li Class="RemoteExplosives.CompProperties_RandomResourceLeaver">
+				<thingDef>Steel</thingDef>
+				<amountRange>
+					<min>0</min>
+					<max>1</max>
+				</amountRange>
+				<requiredDestroyMode>Deconstruct</requiredDestroyMode>
 			</li>
 		</comps>
 		<damageMultipliers>
@@ -280,6 +293,9 @@ Can fail if used while wet.</description>
 		<graphicData>
 			<texPath>makeshift_explosive</texPath>
 			<graphicClass>Graphic_Single</graphicClass>
+			<shadowData>
+				<volume>(.4, 0.15, .75)</volume>
+			</shadowData>
 		</graphicData>
 		<description>A primitive bomb made from explosive powder and animal leather.
 Craft at a crafting spot or tailoring bench.
@@ -315,6 +331,9 @@ Detonate using a Manual Detonator and Detonator Cord.</description>
 		<graphicData>
 			<texPath>remote_mine</texPath>
 			<graphicClass>Graphic_Single</graphicClass>
+			<shadowData>
+				<volume>(.6, 0.15, .6)</volume>
+			</shadowData>
 		</graphicData>
 		<description>An explosive canister with a radio trigger.
 Craft at the Explosives Workshop.
@@ -348,6 +367,9 @@ Arm, then detonate from the Remote Explosives Console.</description>
 		<graphicData>
 			<texPath>remote_mine_incendiary</texPath>
 			<graphicClass>Graphic_Single</graphicClass>
+			<shadowData>
+				<volume>(.6, 0.15, .6)</volume>
+			</shadowData>
 		</graphicData>
 		<description>A canister filled with flammable chemicals with a radio trigger.
 Craft at the Explosives Workshop.
@@ -382,6 +404,9 @@ Arm, then detonate from the Remote Explosives Console.</description>
 		<graphicData>
 			<texPath>mine_emp</texPath>
 			<graphicClass>Graphic_Single</graphicClass>
+			<shadowData>
+				<volume>(.6, 0.15, .6)</volume>
+			</shadowData>
 		</graphicData>
 		<description>A single-use electromagnetic pulse generator.
 Very powerful against mechanoids.
@@ -424,6 +449,9 @@ Arm, then detonate from the Remote Explosives Console.</description>
 		<graphicData>
 			<texPath>rock_explosive</texPath>
 			<graphicClass>Graphic_Single</graphicClass>
+			<shadowData>
+				<volume>(.35, 0.15, .7)</volume>
+			</shadowData>
 		</graphicData>
 		<description>A remote mining explosive that creates a lot of rock chunks.
 Requires a part crafted at the Explosives Workshop.
@@ -453,6 +481,7 @@ Detonate from the Remote Explosives Console.</description>
 		<building Class="RemoteExplosives.BuildingProperties_RemoteExplosive">
 			<isTrap>false</isTrap>
 			<startsArmed>true</startsArmed>
+			<blinkerIntervalLit>25</blinkerIntervalLit>
 		</building>
 	</ThingDef>
 	
@@ -462,7 +491,9 @@ Detonate from the Remote Explosives Console.</description>
 		<label>clearing explosive</label>
 		<graphicData>
 			<texPath>clear_explosive</texPath>
-			<graphicClass>Graphic_Single</graphicClass>
+			<graphicClass>Graphic_Single</graphicClass><shadowData>
+				<volume>(.35, 0.15, .7)</volume>
+			</shadowData>
 		</graphicData>
 		<description>A remote mining explosive that can clear a room-sized area without creating much rubble.
 Requires a part crafted at the Explosives Workshop.
@@ -491,9 +522,70 @@ Detonate from the Remote Explosives Console.</description>
 		<building Class="RemoteExplosives.BuildingProperties_RemoteExplosive">
 			<isTrap>false</isTrap>
 			<startsArmed>true</startsArmed>
+			<blinkerIntervalLit>25</blinkerIntervalLit>
 		</building>
 		<placeWorkers>
 			<li>RemoteExplosives.PlaceWorker_MiningExplosiveSquare</li>
+		</placeWorkers>
+	</ThingDef>
+	
+
+	<ThingDef ParentName="RemoteExplosiveBase">
+		<DefName>MiningChargeShaped</DefName>
+		<label>shaped charge</label>
+		<Description>A specialized explosive that focuses its power upwards to attempt to break thick overhead mountain roof. It must be applied from the edge of the thick roof to be effective.</Description>
+		<graphicData>
+			<texPath>shaped_charge</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<shadowData>
+				<volume>(.8, 0.5, .45)</volume>
+			</shadowData>
+		</graphicData>
+		<CostList>
+			<MiningExplosiveComponent>2</MiningExplosiveComponent>
+			<Plasteel>20</Plasteel>
+		</CostList>
+		<AltitudeLayer>Building</AltitudeLayer>
+		<fillPercent>0.5</fillPercent>
+		<useHitPoints>True</useHitPoints>
+		<statBases>
+			<WorkToMake>1700</WorkToMake>
+			<MaxHitPoints>120</MaxHitPoints>
+			<Flammability>1.0</Flammability>
+			<Beauty>-5</Beauty>
+		</statBases>
+		<Size>(1,1)</Size>
+		<constructEffect>ConstructMetal</constructEffect>
+		<Passability>PassThroughOnly</Passability>
+		<pathCost>60</pathCost>
+		<minifiedDef>MinifiedFurniture</minifiedDef>
+		<comps>
+			<li Class="RemoteExplosives.CompProperties_MiningExplosive">
+				<compClass>RemoteExplosives.CompRoofBreakerExplosive</compClass>
+				<rockChunkChance>0.5</rockChunkChance>
+				<miningRadius>2.1</miningRadius>
+				<resourceBreakingEfficiency>.3</resourceBreakingEfficiency>
+				<woodBreakingEfficiency>.1</woodBreakingEfficiency>
+				<explosiveRadius>2.1</explosiveRadius>
+				<explosiveDamageType>Bomb</explosiveDamageType>
+				<startWickHitPointsPercent>0.2</startWickHitPointsPercent>
+				<wickTicks>
+					<min>150</min>
+					<max>150</max>
+				</wickTicks>
+			</li>
+			<li Class="RemoteExplosives.CompProperties_WiredDetonationReceiver"/>
+		</comps>
+		<building Class="RemoteExplosives.BuildingProperties_RemoteExplosive">
+			<isTrap>false</isTrap>
+			<startsArmed>true</startsArmed>
+			<blinkerOffset>(0, 0, .15)</blinkerOffset>
+			<blinkerIntervalLit>25</blinkerIntervalLit>
+		</building>
+		<researchPrerequisites><li>RemoteRoofBreaking</li></researchPrerequisites>
+		<drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>
+		<placeWorkers>
+			<li>RemoteExplosives.PlaceWorker_RoofBreakerExplosive</li>
 		</placeWorkers>
 	</ThingDef>
 	
@@ -506,6 +598,9 @@ Detonate from the Remote Explosives Console.</description>
 		<graphicData>
 			<texPath>canister_foam</texPath>
 			<graphicClass>Graphic_Single</graphicClass>
+			<shadowData>
+				<volume>(.75, 0.15, .75)</volume>
+			</shadowData>
 		</graphicData>
 		<description>A remotely triggered canister that releases a rapidly hardening foam. 
 Craft at the Explosives Workshop.
@@ -541,6 +636,9 @@ Arm, then detonate from the Remote Explosives Console.</description>
 		<graphicData>
 			<texPath>canister_gas</texPath>
 			<graphicClass>Graphic_Single</graphicClass>
+			<shadowData>
+				<volume>(.75, 0.15, .75)</volume>
+			</shadowData>
 		</graphicData>
 		<description>A remotely triggered canister filled with sleeping gas. 
 Craft at the Explosives Workshop.

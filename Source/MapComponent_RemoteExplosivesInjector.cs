@@ -30,7 +30,6 @@ namespace RemoteExplosives {
 				InjectIEDComps();
 			}
 			EnsureComponentIsActive();
-			ValueInterpolator.Instance.Initialize(Time.realtimeSinceStartup);
 			CallbackScheduler.Instance.Initialize(Find.TickManager.TicksGame);
 			DistributedTickScheduler.Instance.Initialize(Find.TickManager.TicksGame);
 			replaceWatcher = new AutoReplaceWatcher();
@@ -39,11 +38,6 @@ namespace RemoteExplosives {
 		public override void ExposeData() {
 			Scribe_Deep.LookDeep(ref replaceWatcher, "replaceWatcher");
 			if(replaceWatcher == null) replaceWatcher = new AutoReplaceWatcher();
-		}
-
-		public override void MapComponentUpdate() {
-			base.MapComponentUpdate();
-			ValueInterpolator.Instance.Update(Time.realtimeSinceStartup);
 		}
 
 		public override void MapComponentOnGUI() {
@@ -170,7 +164,7 @@ namespace RemoteExplosives {
 		private void DrawDebugControls(){
 			if(Widgets.ButtonText(new Rect(10, 10, 50, 20), "Cloud")) {
 				DebugTools.curTool = new DebugTool("GasCloud placer", () => {
-					const float concentration = 100000;
+					const float concentration = 10000000;
 					var cell = Gen.MouseCell();
 					var cloud = Find.ThingGrid.ThingAt<GasCloud>(cell);
 					if(cloud!=null) {

@@ -13,11 +13,11 @@ namespace RemoteExplosives {
 			beepWhenLit = false;
 		}
 
-		public override void LightFuse(int additionalWickTicks = 0) {
+		public override void LightFuse() {
 			if(!FuseLit) {
 				chargeSoundSustainer = new Sustainer(chargeSound, SoundInfo.InWorld(Position, MaintenanceType.PerTick));
 			}
-			base.LightFuse(additionalWickTicks);
+			base.LightFuse();
 		}
 
 		public override void Tick() {

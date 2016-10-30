@@ -10,7 +10,7 @@ namespace RemoteExplosives {
 	 * An explosive with high power against rocks. Will break rocks within the defined area.
 	 */
 	public class CompMiningExplosive : CompCustomExplosive {
-		private static readonly SoundDef caveinEffect = SoundDef.Named("RemoteMiningCavein");
+		protected static readonly SoundDef CaveInSoundEffect = SoundDef.Named("RemoteMiningCavein");
 
 		private List<IntVec3> customArea;
 
@@ -80,7 +80,7 @@ namespace RemoteExplosives {
 				}
 			}
 			if (affectedMineables > 5) {
-				caveinEffect.PlayOneShot(SoundInfo.InWorld(new TargetInfo(parent)));
+				CaveInSoundEffect.PlayOneShot(SoundInfo.InWorld(new TargetInfo(parent)));
 			}
 		}
 
