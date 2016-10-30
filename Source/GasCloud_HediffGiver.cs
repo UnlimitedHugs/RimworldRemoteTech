@@ -1,4 +1,5 @@
 ﻿using System;
+using RimWorld;
 using UnityEngine;
 using Verse;
 
@@ -8,6 +9,8 @@ namespace RemoteExplosives {
 	 * Supports apparel that will negate this effect.
 	 */
 	public class GasCloud_HediffGiver : GasCloud {
+		private const int IncapGoodwillPenalty = 20;
+		private const int KillGoodwillPenalty = 50;
 
 		private MoteProperties_GasCloud_HediffGiver gasProps;
 
@@ -17,15 +20,24 @@ namespace RemoteExplosives {
 			if (gasProps == null) throw new Exception("Missing required gas mote properties in " + def.defName);
 		}
 
-		public override void GasTick() {
+		protected override void GasTick() {
  			base.GasTick();
 			var thingsOnTile = Find.ThingGrid.ThingsListAt(Position);
 			for (int i = 0; i < thingsOnTile.Count; i++) {
 				var pawn = thingsOnTile[i] as Pawn;
-				if (pawn == null || (gasProps.requiresFleshyPawn && !pawn.def.race.IsFlesh) || PawnHasImmunizingApparel(pawn)) continue;
+				if (pawn == null || pawn.Dead || (gasProps.requiresFleshyPawn && !pawn.def.race.IsFlesh) || PawnHasImmunizingApparel(pawn)) continue;
 				
 				var severityIncrease = gasProps.hediffSeverityPerGastick.RandomInRange * Mathf.Min(1, Concentration / gasProps.FullAlphaConcentration);
+				var wasDowned = pawn.Downed;
 				HealthUtility.AdjustSeverity(pawn, gasProps.hediffDef, severityIncrease);
+				// this should be refactored into applyDamage somehow, but for now this will do
+				if (pawn.Faction != null && pawn.Faction != Faction.OfPlayer) {
+					if (pawn.Dead) {
+						pawn.Faction.AffectGoodwillWith(Faction.OfPlayer, -KillGoodwillPenalty);
+					} else if (!wasDowned && pawn.Downed) {
+						pawn.Faction.AffectGoodwillWith(Faction.OfPlayer, -IncapGoodwillPenalty);	
+					}
+				}
 			}
 		}
 

@@ -3,7 +3,6 @@ using System.Text;
 using RimWorld;
 using UnityEngine;
 using Verse;
-using Verse.AI;
 using Verse.Sound;
 
 namespace RemoteExplosives {
@@ -28,8 +27,6 @@ namespace RemoteExplosives {
 		private int ticksSinceLastInspection;
 
 		private int numViableExplosives;
-
-		private Pawn lastSeenFloatMenuPawn;
 
 		private RemoteExplosivesUtility.RemoteChannel currentChannel;
 
@@ -98,10 +95,11 @@ namespace RemoteExplosives {
 			get { return true; }
 		}
 
-		public bool WantsDetonation() {
-			return wantDetonation;
+		public bool WantsDetonation {
+			get { return wantDetonation; }
+			set { wantDetonation = value; }
 		}
-		
+
 		public void InstallChannelsComponent() {
 			hasChannelsComponent = true;
 			wantChannelsComponent = false;
@@ -114,7 +112,6 @@ namespace RemoteExplosives {
 				return;
 			}
 			SoundDefOf.FlickSwitch.PlayOneShot(Position);
-
 			RemoteExplosivesUtility.LightArmedExplosivesInRange(Position, SignalRange, currentChannel);
 		}
 
@@ -157,20 +154,13 @@ namespace RemoteExplosives {
 
 		// quick detonation option for drafted pawns
 		public override IEnumerable<FloatMenuOption> GetFloatMenuOptions(Pawn selPawn) {
-			lastSeenFloatMenuPawn = selPawn;
-			var opt = RemoteExplosivesUtility.TryMakeDetonatorFloatMenuOption(selPawn, this, FloatMenuDetonateNowAction);
+			Log.Message(selPawn.ToString());
+			var opt = RemoteExplosivesUtility.TryMakeDetonatorFloatMenuOption(selPawn, this);
 			if (opt != null) yield return opt;
 
 			foreach (var option in base.GetFloatMenuOptions(selPawn)) {
 				yield return option;
 			}
-		}
-
-		private void FloatMenuDetonateNowAction() {
-			if (lastSeenFloatMenuPawn == null) return;
-			if (!wantDetonation) wantDetonation = true;
-			var job = new Job(DefDatabase<JobDef>.GetNamed(JobDriver_DetonateExplosives.JobDefName), this);
-			lastSeenFloatMenuPawn.drafter.TakeOrderedJob(job);
 		}
 	}
 }

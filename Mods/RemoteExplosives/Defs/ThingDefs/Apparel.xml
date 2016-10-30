@@ -70,6 +70,7 @@ The filters wear out fairly quickly, so it's recommended to wear this only when 
 			<Steel>40</Steel>
 		</costList>
 		<equippedStatOffsets>
+			<ToxicSensitivity>-0.80</ToxicSensitivity>
 			<ShootingAccuracy>-0.05</ShootingAccuracy>
 			<SocialImpact>-0.2</SocialImpact>
 		</equippedStatOffsets>

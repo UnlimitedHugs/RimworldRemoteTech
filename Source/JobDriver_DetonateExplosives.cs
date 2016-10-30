@@ -26,7 +26,7 @@ namespace RemoteExplosives {
 
 		private bool JobHasFailed() {
 			var detonator = TargetThingA as IPawnDetonateable;
-			return detonator == null || ((Building)detonator).Destroyed || !detonator.WantsDetonation();
+			return detonator == null || ((Building)detonator).Destroyed || !detonator.WantsDetonation;
 		}
 	}
 }

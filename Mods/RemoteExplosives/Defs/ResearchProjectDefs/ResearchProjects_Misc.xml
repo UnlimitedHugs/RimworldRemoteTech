@@ -64,5 +64,16 @@ Use in enclosed areas for best results.</description>
 		</prerequisites>
 	</ResearchProjectDef>
 	
+	<ResearchProjectDef>
+		<defName>RemoteRoofBreaking</defName>
+		<label>Mountain Roof Removal</label>
+		<description>The destructive power of mining explosives can be focused using strong composite materials. When aimed upwards, this allows to break even through thick mountain roof, as long as the charge is properly positioned.
+Allows the Shaped Charge to be built.</description>
+		<baseCost>1000</baseCost>
+		<techLevel>Industrial</techLevel>
+		<prerequisites>
+			<li>RemoteDetonator</li>
+		</prerequisites>
+	</ResearchProjectDef>
 	
 </ResearchProjectDefs>

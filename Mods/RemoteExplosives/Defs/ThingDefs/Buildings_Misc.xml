@@ -21,6 +21,10 @@
 			<graphicClass>RemoteExplosives.Graphic_FoamBlob</graphicClass>
 			<shaderType>CutoutComplex</shaderType>
 			<drawSize>(1.2,1.2)</drawSize>
+			<shadowData>
+				<volume>(.8, 1, .8)</volume>
+				<offset>(.5, 0, .5)</offset>
+			</shadowData>
 		</graphicData>
 		<drawerType>RealtimeOnly</drawerType>
 		<castEdgeShadows>false</castEdgeShadows>

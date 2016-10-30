@@ -9,12 +9,7 @@ namespace RemoteExplosives {
 	 * Handles both the detonator table and the manual detonator
 	 */
 	public class WorkGiver_IPawnDetonateable : WorkGiver_Scanner {
-		public override ThingRequest PotentialWorkThingRequest {
-			get {
-				return ThingRequest.ForGroup(ThingRequestGroup.BuildingArtificial);
-			}
-		}
-
+		
 		public override IEnumerable<Thing> PotentialWorkThingsGlobal(Pawn Pawn) {
 			var buildings = Find.ListerBuildings.allBuildingsColonist;
 			for (var i = 0; i < buildings.Count; i++) {
@@ -32,7 +27,7 @@ namespace RemoteExplosives {
 				!pawn.Dead
 				&& !pawn.Downed
 				&& !pawn.IsBurning()
-				&& detonator.WantsDetonation()
+				&& detonator.WantsDetonation
 				&& pawn.CanReserveAndReach(t, pathEndMode, Danger.Some);
 
 			return status;
@@ -41,7 +36,7 @@ namespace RemoteExplosives {
 		public override Job JobOnThing(Pawn pawn, Thing t) {
 			var detonator = t as IPawnDetonateable;
 			if(detonator == null) return null;
-			if (!detonator.WantsDetonation()) return null;
+			if (!detonator.WantsDetonation) return null;
 			var jobDef = DefDatabase<JobDef>.GetNamed(JobDriver_DetonateExplosives.JobDefName);
 			return new Job(jobDef, t);
 		}

@@ -1,7 +1,7 @@
 ﻿namespace RemoteExplosives {
 	public interface IPawnDetonateable {
 		bool UseInteractionCell { get; }
-		bool WantsDetonation();
+		bool WantsDetonation { get; set; }
 		void DoDetonation();
 	}
 }

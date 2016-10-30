@@ -69,6 +69,7 @@
     <Compile Include="Source\CompDetonationGridNode.cs" />
     <Compile Include="Source\CompProperties_AutoReplaceable.cs" />
     <Compile Include="Source\CompProperties_WiredDetonationSender.cs" />
+    <Compile Include="Source\CompRoofBreakerExplosive.cs" />
     <Compile Include="Source\CompWiredDetonationSender.cs" />
     <Compile Include="Source\CompWiredDetonationTransmitter.cs" />
     <Compile Include="Source\CompProperties_ChemicalExplosive.cs" />
@@ -79,6 +80,8 @@
     <Compile Include="Source\Designator_SelectDetonatorCord.cs" />
     <Compile Include="Source\DistributedTickScheduler.cs" />
     <Compile Include="Source\FlameChanceDamageDef.cs" />
+    <Compile Include="Source\InterpolatedValue.cs" />
+    <Compile Include="Source\InterpolationCurves.cs" />
     <Compile Include="Source\IPawnDetonateable.cs" />
     <Compile Include="Source\Graphic_SingleWithBase.cs" />
     <Compile Include="Source\Graphic_Variants.cs" />
@@ -99,10 +102,11 @@
     <Compile Include="Source\CompMiningExplosive.cs" />
     <Compile Include="Source\CompProperties_MiningExplosive.cs" />
     <Compile Include="Source\CompRandomResourceLeaver.cs" />
-    <Compile Include="Source\CompRandomResourceLeaverProperties.cs" />
+    <Compile Include="Source\CompProperties_RandomResourceLeaver.cs" />
     <Compile Include="Source\JobDriver_InstallChannelsComponent.cs" />
     <Compile Include="Source\MapComponent_RemoteExplosivesInjector.cs" />
     <Compile Include="Source\PlaceWorker_DetonatorCord.cs" />
+    <Compile Include="Source\PlaceWorker_RoofBreakerExplosive.cs" />
     <Compile Include="Source\SectionLayer_DetonationGrid.cs" />
     <Compile Include="Source\SparkweedPlantDef.cs" />
     <Compile Include="Source\Plant_Sparkweed.cs" />
@@ -110,7 +114,6 @@
     <Compile Include="Source\SidedBaseGraphicData.cs" />
     <Compile Include="Source\TraderStockInjectorDef.cs" />
     <Compile Include="Source\BuildingProperties_FoamBlob.cs" />
-    <Compile Include="Source\ValueInterpolator.cs" />
     <Compile Include="Source\WorkGiver_DetonatorCord.cs" />
     <Compile Include="Source\WorkGiver_DetonatorTableChannels.cs" />
     <Compile Include="Source\WorkGiver_RemoteExposive.cs" />
@@ -120,7 +123,6 @@
     <Compile Include="Source\PlaceWorker_MiningExplosiveSquare.cs" />
     <Compile Include="Source\RemoteExplosivesUtility.cs" />
     <Compile Include="Source\WorkGiver_IPawnDetonateable.cs" />
-    <Compile Include="Source\DisposablePrimitiveWrapper.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

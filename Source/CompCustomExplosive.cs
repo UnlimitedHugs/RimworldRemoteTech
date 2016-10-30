@@ -82,12 +82,12 @@ namespace RemoteExplosives {
 			}
 		}
 
-		public void StartWick(bool silent, int additionalWickTicks = 0) {
+		public void StartWick(bool silent) {
 			if (wickStarted && !silent) wickIsSilent = false;
 			if (wickStarted) return;
 			wickIsSilent = silent;
 			wickStarted = true;
-			wickTotalTicks = wickTicksLeft = ExplosiveProps.wickTicks.RandomInRange + additionalWickTicks;
+			wickTotalTicks = wickTicksLeft = ExplosiveProps.wickTicks.RandomInRange;
 			if (ExplosiveProps.explosiveDamageType != null) {
 				GenExplosion.NotifyNearbyPawnsOfDangerousExplosive(parent, ExplosiveProps.explosiveDamageType);
 			}

@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using Verse;
-using Verse.AI;
 using Verse.Sound;
 
 namespace RemoteExplosives {
@@ -28,15 +27,15 @@ namespace RemoteExplosives {
 		}
 
 		private float plungerExpireTime;
-		private Pawn lastSeenFloatMenuPawn;
 		private bool wantDetonation;
 
 		public bool UseInteractionCell {
 			get { return false; }
 		}
 
-		public bool WantsDetonation() {
-			return wantDetonation;
+		public bool WantsDetonation {
+			get { return wantDetonation; }
+			set { wantDetonation = value; }
 		}
 
 		public void DoDetonation() {
@@ -83,20 +82,12 @@ namespace RemoteExplosives {
 
 		// quick detonation option for drafted pawns
 		public override IEnumerable<FloatMenuOption> GetFloatMenuOptions(Pawn selPawn) {
-			lastSeenFloatMenuPawn = selPawn;
-			var opt = RemoteExplosivesUtility.TryMakeDetonatorFloatMenuOption(selPawn, this, FloatMenuDetonateNowAction);
+			var opt = RemoteExplosivesUtility.TryMakeDetonatorFloatMenuOption(selPawn, this);
 			if (opt != null) yield return opt;
 
 			foreach (var option in base.GetFloatMenuOptions(selPawn)) {
 				yield return option;
 			}
-		}
-
-		private void FloatMenuDetonateNowAction() {
-			if (lastSeenFloatMenuPawn == null) return;
-			if (!wantDetonation) wantDetonation = true;
-			var job = new Job(DefDatabase<JobDef>.GetNamed(JobDriver_DetonateExplosives.JobDefName), this);
-			lastSeenFloatMenuPawn.drafter.TakeOrderedJob(job);
 		}
 	}
 }

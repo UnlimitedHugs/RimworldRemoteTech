@@ -27,9 +27,7 @@ namespace RemoteExplosives {
 
 		private static readonly string ArmButtonLabel = "RemoteExplosive_arm_label".Translate();
 		private static readonly string ArmButtonDesc = "RemoteExplosive_arm_desc".Translate();
-
-		protected int ticksBetweenBlinksArmed = 100;
-		protected int ticksBetweenBlinksLit = 7;
+		
 		protected bool beepWhenLit = true;
 
 		private CompCustomExplosive explosiveComp;
@@ -43,6 +41,14 @@ namespace RemoteExplosives {
 
 		private bool justCreated;
 
+		private BuildingProperties_RemoteExplosive _customProps;
+		private BuildingProperties_RemoteExplosive CustomProps {
+			get {
+				if (_customProps == null) _customProps = (def.building as BuildingProperties_RemoteExplosive) ?? new BuildingProperties_RemoteExplosive();
+				return _customProps;
+			}
+		}
+
 		public bool IsArmed {
 			get { return isArmed; }
 		}
@@ -55,9 +61,9 @@ namespace RemoteExplosives {
 			get { return currentChannel; }
 		}
 
-		public virtual void LightFuse(int additionalWickTicks = 0) {
+		public virtual void LightFuse() {
 			if(FuseLit) return;
-			explosiveComp.StartWick(true, additionalWickTicks);
+			explosiveComp.StartWick(true);
 		}
 
 		public override void PostMake() {
@@ -73,10 +79,9 @@ namespace RemoteExplosives {
 			explosiveComp = GetComp<CompCustomExplosive>();
 			replaceComp = GetComp<CompAutoReplaceable>();
 			if (replaceComp != null) replaceComp.DisableGizmoAutoDisplay();
-
+			
 			if (justCreated) {
-				var customProps = def.building as BuildingProperties_RemoteExplosive;
-				if (customProps != null && customProps.startsArmed) {
+				if (CustomProps.startsArmed) {
 					Arm();
 				}
 				justCreated = false;
@@ -184,26 +189,24 @@ namespace RemoteExplosives {
 
 		public override void Draw() {
 			base.Draw();
-			if(isArmed) {
-				if(FuseLit) {
-					if(ticksSinceFlare>=ticksBetweenBlinksLit) {
-						DrawFlareOverlay(true);
-					}
-				} else if(IsArmed) {
-					if (ticksSinceFlare >= ticksBetweenBlinksArmed) {
-						DrawFlareOverlay(false);
-					}
+			if (!isArmed) return;
+			if (FuseLit) {
+				if (ticksSinceFlare >= CustomProps.blinkerIntervalLit) {
+					DrawFlareOverlay(true);
+				}
+			} else {
+				if (ticksSinceFlare >= CustomProps.blinkerIntervalArmed) {
+					DrawFlareOverlay(false);
 				}
 			}
 		}
-		
+
 		private void DrawFlareOverlay(bool useStrong) {
 			ticksSinceFlare = 0;
 
 			var overlay = useStrong ? flareOverlayStrong : flareOverlayNormal;
-			var matrix = default(Matrix4x4);
 			var s = Vector3.one;
-			matrix.SetTRS(DrawPos + Altitudes.AltIncVect, Rotation.AsQuat, s);
+			var matrix = Matrix4x4.TRS(DrawPos + Altitudes.AltIncVect + CustomProps.blinkerOffset, Rotation.AsQuat, s);
 			Graphics.DrawMesh(MeshPool.plane10, matrix, overlay.MatAt(Rotation), 0);
 		}
 

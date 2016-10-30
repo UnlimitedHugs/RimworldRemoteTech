@@ -10,13 +10,7 @@ namespace RemoteExplosives {
 	public class WorkGiver_RemoteExplosive : WorkGiver_Scanner {
 		
 		private const PathEndMode pathEndMode = PathEndMode.Touch;
-
-		public override ThingRequest PotentialWorkThingRequest {
-			get {
-				return ThingRequest.ForGroup(ThingRequestGroup.BuildingArtificial);
-			}
-		}
-
+		
 		public override IEnumerable<Thing> PotentialWorkThingsGlobal(Pawn Pawn) {
 			var exposives = Find.DesignationManager.DesignationsOfDef(RemoteExplosivesUtility.SwitchDesigationDef);
 			foreach (var exposive in exposives) {

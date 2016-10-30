@@ -11,27 +11,45 @@ namespace RemoteExplosives {
 		public const string JobDefName = "JobDef_InstallChannelsComponent";
 		private const TargetIndex TableInd = TargetIndex.A;
 		private const TargetIndex ComponentInd = TargetIndex.B;
-		private const int InstallWorkDuration = 500;
+		private const int InstallWorkAmount = 1500;
+
+		private float workLeft;
+
+		public override void ExposeData() {
+			base.ExposeData();
+			Scribe_Values.LookValue(ref workLeft, "workLeft", 0f);
+		}
 
 		protected override IEnumerable<Toil> MakeNewToils() {
 			AddFailCondition(JobHasFailed);
 			var table = TargetThingA as Building_DetonatorTable;
+			if(table == null) yield break;
 			yield return Toils_Reserve.Reserve(TableInd);
 			yield return Toils_Reserve.Reserve(ComponentInd);
 			yield return Toils_Goto.GotoCell(ComponentInd, PathEndMode.Touch);
 			yield return Toils_Haul.StartCarryThing(ComponentInd);
 			yield return Toils_Goto.GotoCell(TableInd, PathEndMode.InteractionCell);
-			yield return Toils_General.Wait(InstallWorkDuration).WithEffect(EffecterDefOf.ConstructMetal, TableInd).WithProgressBarToilDelay(ComponentInd, InstallWorkDuration);
-			yield return Toils_Reserve.Release(ComponentInd);
-			yield return new Toil {
-				initAction = ()=>{
-					if(table!=null && table.WantChannelsComponent) {
+			yield return Toils_Haul.PlaceHauledThingInCell(TableInd, null, false);
+			var toil = new Toil {
+				initAction = delegate {
+					workLeft = InstallWorkAmount;
+				},
+				tickAction = delegate {
+					var statValue = GetActor().GetStatValue(StatDefOf.ConstructionSpeed);
+					workLeft -= statValue;
+					if (workLeft > 0) return;
+					if (table.WantChannelsComponent) {
 						table.InstallChannelsComponent();
 					}
+					Find.Reservations.Release(TargetThingB, GetActor());
 					TargetThingB.Destroy();
-				},
-				defaultCompleteMode = ToilCompleteMode.Instant
+					ReadyForNextToil();
+				}
 			};
+			toil.WithEffect(EffecterDefOf.ConstructMetal, TableInd);
+			toil.WithProgressBar(TargetIndex.A, () => 1f - workLeft / InstallWorkAmount);
+			toil.defaultCompleteMode = ToilCompleteMode.Never;
+			yield return toil;
 			yield return Toils_Reserve.Release(TableInd);
 		}
 
