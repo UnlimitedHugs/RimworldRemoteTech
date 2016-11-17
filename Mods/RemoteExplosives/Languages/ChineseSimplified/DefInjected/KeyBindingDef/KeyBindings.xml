@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+
+	<RemoteTableDetonate.label>固定：引爆雷管</RemoteTableDetonate.label>
+
+	<RemoteExplosivesNextChannel.label>雷管、炸药：切换频道</RemoteExplosivesNextChannel.label>
+
+	<RemoteExplosiveArm.label>遥控炸药武装</RemoteExplosiveArm.label>
+
+	<RemoteExplosiveAutoReplace.label>遥控炸药自动更换</RemoteExplosiveAutoReplace.label>
+
+	<PortableDetonatorDetonate.label>便携式：引爆雷管</PortableDetonatorDetonate.label>
+
+</LanguageData>

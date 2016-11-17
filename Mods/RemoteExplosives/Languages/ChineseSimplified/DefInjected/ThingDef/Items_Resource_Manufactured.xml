@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+
+	<RemoteBomb.label>遥控炸药</RemoteBomb.label>
+
+	<RemoteBomb.description>具有遥控触发器的的炸药陷阱，从炸药模组菜单中作为一个建筑物来放置。</RemoteBomb.description>
+
+	<RemoteFireBomb.label>遥控燃烧炸药</RemoteFireBomb.label>
+
+	<RemoteFireBomb.description>装有可燃性化学物质的及无线触发器的罐子，从炸药模组菜单中作为一个建筑物来放置。</RemoteFireBomb.description>
+
+	<MiningExplosiveComponent.label>矿用炸药</MiningExplosiveComponent.label>
+
+	<MiningExplosiveComponent.description>遥控矿用炸药的主要组成部分，从炸药模组菜单中作为一个建筑物来放置。</MiningExplosiveComponent.description>
+
+	<RemoteEmpBomb.label>EMP遥控炸药</RemoteEmpBomb.label>
+
+	<RemoteEmpBomb.description>一种一次性使用的电磁脉冲发生器，从炸药模组菜单中作为一个建筑物来放置。</RemoteEmpBomb.description>
+
+	<RemoteChemicalCan.label>远程化学罐</RemoteChemicalCan.label>
+
+	<RemoteChemicalCan.description>一种用于化学品的遥控触发的罐子，从炸药模组菜单中作为一个建筑物来放置。</RemoteChemicalCan.description>
+
+	<ExplosivePouch.label>药袋</ExplosivePouch.label>
+
+	<ExplosivePouch.description>用动物皮包裹的挥发性粉末混合物制成的原始炸药，从炸药模组菜单中作为一个建筑物来放置。</ExplosivePouch.description>
+
+	<Sparkpowder.label>火花粉</Sparkpowder.label>
+
+	<Sparkpowder.description>收获火花草植物获得的作物，需特别保存以防自燃。远离火源。</Sparkpowder.description>
+
+	<Charcoal.label>木炭</Charcoal.label>
+
+	<Charcoal.description>在低氧条件下燃烧木材制成的高效燃料。粉碎成粉末时成为炸药的一大添加剂。可以在篝火或燃料炉制作。</Charcoal.description>
+
+</LanguageData>

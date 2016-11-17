@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+
+	<PortableDetonatorRange.label>雷管范围</PortableDetonatorRange.label>
+
+	<PortableDetonatorRange.description>便携式雷管的导火线可遍及范围。增加是更好的，直到你炸掉了一些你需要的东西。（滑稽）</PortableDetonatorRange.description>
+
+	<PortableDetonatorNumUses.label>雷管激活</PortableDetonatorNumUses.label>
+
+	<PortableDetonatorNumUses.description>便携式雷管在电池耗尽前的可激活次数。</PortableDetonatorNumUses.description>
+
+</LanguageData>

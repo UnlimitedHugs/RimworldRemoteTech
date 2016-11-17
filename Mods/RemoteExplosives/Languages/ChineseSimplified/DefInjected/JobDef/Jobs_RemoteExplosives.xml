@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+
+	<JobDef_DetonateExplosives.reportString>正在引爆炸药。</JobDef_DetonateExplosives.reportString>
+
+	<JobDef_SwitchRemoteExplosive.reportString>正在开启遥控炸药。</JobDef_SwitchRemoteExplosive.reportString>
+
+	<JobDef_InstallChannelsComponent.reportString>正在安装远程通道组件。</JobDef_InstallChannelsComponent.reportString>
+
+	<JobDef_DryDetonationCord.reportString>正在干燥导火索。</JobDef_DryDetonationCord.reportString>
+
+</LanguageData>

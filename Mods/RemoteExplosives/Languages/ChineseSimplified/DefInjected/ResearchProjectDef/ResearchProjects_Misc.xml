@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+
+	<MakeshiftExplosives.label>RE-简易炸药</MakeshiftExplosives.label>
+
+	<MakeshiftExplosives.description>允许你用可再生资源制作简易炸药。一旦研究：-可以种植火花草。 -篝火和燃料炉中用原木制作木炭。 -可以在一个制造点或裁剪台上制作爆炸带。 -可以建立手动炸药和雷管线来触发炸药。</MakeshiftExplosives.description>
+
+	<RemoteDetonator.label>RE-遥控引爆装置</RemoteDetonator.label>
+
+	<RemoteDetonator.description>允许你建立一个控制台来远程引爆用工作台生产的雷管，炸药工作台可以制造用于采矿和清理的炸药。 研究简易爆炸装置和简易燃烧爆炸装置来生产战斗级遥控炸药。</RemoteDetonator.description>
+
+	<RemoteExplosivesChannels.label>RE-遥控炸药渠道</RemoteExplosivesChannels.label>
+
+	<RemoteExplosivesChannels.description>开启遥控器上的炸药和雷管的使用渠道。只有通道相同的炸药引爆装置才可以触发。这允许你设置多条线的爆炸防御。对于这份工作遥控引爆装置是必须升级的一个组成部分。</RemoteExplosivesChannels.description>
+
+	<RemoteEmpMine.label>RE-遥控EMP炸药</RemoteEmpMine.label>
+
+	<RemoteEmpMine.description>允许你制造可被遥控起爆装置触发的EMP炸药。虽然十分昂贵，但当正确使用时他们可以对机器人的入侵造成毁灭性打击。</RemoteEmpMine.description>
+
+	<RemoteChemicals.label>RE-遥控化学气体罐</RemoteChemicals.label>
+
+	<RemoteChemicals.description>允许你制造化学专用的遥控触发罐。密封泡沫可以创建墙壁和密封通道，而催眠气体可以眩晕生物目标。最好在封闭区域中使用。</RemoteChemicals.description>
+
+	<RemoteRoofBreaking.label>RE-聚能炸药</RemoteRoofBreaking.label>
+
+	<RemoteRoofBreaking.description>聚能炸药集中使用高强度复合材料产生破坏力。当对准上方时，只要你放在正确的位置炸药也能够破坏很厚的山顶。 -允许建造聚能的炸药。</RemoteRoofBreaking.description>
+
+</LanguageData>

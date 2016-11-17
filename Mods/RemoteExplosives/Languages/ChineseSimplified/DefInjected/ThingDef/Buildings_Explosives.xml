@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+
+	<TableDetonator.label>遥控起爆器</TableDetonator.label>
+
+	<TableDetonator.Description>一个用来引爆信号范围内武装炸药的发射器。右键单击一个小人来取得更好的时机。</TableDetonator.Description>
+
+	<RemoteExplosivesBench.label>炸药工作台</RemoteExplosivesBench.label>
+
+	<RemoteExplosivesBench.Description>一种用于制造遥控引爆炸药的电动力站。研究不同类型的遥控炸药来解锁可用的选项。</RemoteExplosivesBench.Description>
+
+	<DetonatorManual.label>手动起爆装置</DetonatorManual.label>
+
+	<DetonatorManual.Description>一个简单的柱塞式起爆装置。当被激活时，照明的引信将沿着连接雷管线脉冲到所有连接的炸药。右键单击一个小人来取得更好的时机。</DetonatorManual.Description>
+
+	<DetonatorCord.label>导爆线</DetonatorCord.label>
+
+	<DetonatorCord.description>一种专用于连接手动起爆装置到简易炸药，遥控炸药和简易爆炸装置的线。可放置在墙壁和其他建筑物上。湿的时候可能会触发失败。</DetonatorCord.description>
+
+	<TrapMakeshiftBomb.label>简易炸药</TrapMakeshiftBomb.label>
+
+	<TrapMakeshiftBomb.description>由炸药粉末和动物皮制成的原始炸弹。在一个炸药工作台或裁剪台上制作。用手动起爆装置和导爆线来引爆。</TrapMakeshiftBomb.description>
+
+	<TrapRemoteBomb.label>遥控炸药</TrapRemoteBomb.label>
+
+	<TrapRemoteBomb.description>一种带有无线触发的炸药筒。在炸药工作台制造，远程控制台上触发。</TrapRemoteBomb.description>
+
+	<TrapRemoteIncendiary.label>遥控燃烧炸药</TrapRemoteIncendiary.label>
+
+	<TrapRemoteIncendiary.description>一个装有可燃性化学物质以及无线起爆装置的罐。在炸药工作台制造，远程控制台上触发。</TrapRemoteIncendiary.description>
+
+	<TrapRemoteEmp.label>遥控EMP炸药</TrapRemoteEmp.label>
+
+	<TrapRemoteEmp.description>一种一次性使用的电磁脉冲发生器。对机器人影响巨大。在炸药工作台制造，远程控制台上触发。</TrapRemoteEmp.description>
+
+	<MiningChargeChunks.label>爆裂炸药</MiningChargeChunks.label>
+
+	<MiningChargeChunks.description>一种制造大量岩石块的遥控采矿炸药。要求一部分在炸药工作台制造。远程控制台上触发。</MiningChargeChunks.description>
+
+	<MiningChargeClearing.label>聚能炸药</MiningChargeClearing.label>
+
+	<MiningChargeClearing.description>一种遥控矿用炸药，可以清除一个房间大小的区域而不会制造大量的瓦砾。要求一部分在炸药工作台制造。远程控制台上触发。</MiningChargeClearing.description>
+
+	<MiningChargeShaped.label>聚能炸药</MiningChargeShaped.label>
+
+	<MiningChargeShaped.Description>一种专门用于集中其能量击碎厚实山顶的炸药.它必须要用在厚实山顶的边缘处才会有效</MiningChargeShaped.Description>
+
+	<RemoteCanFoam.label>密封泡沫罐</RemoteCanFoam.label>
+
+	<RemoteCanFoam.description>一种远程触发的罐，释放一种迅速硬化的泡沫。在炸药工作台制造，远程控制台上触发。</RemoteCanFoam.description>
+
+	<RemoteCanSleepGas.label>催眠气体罐</RemoteCanSleepGas.label>
+
+	<RemoteCanSleepGas.description>一种充满了睡眠气体的遥控触发筒。在炸药工作台制造，远程控制台上触发。</RemoteCanSleepGas.description>
+
+</LanguageData>
