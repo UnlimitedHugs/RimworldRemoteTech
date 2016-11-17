@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+
+	<RemoteExplosives.label>遥控炸药</RemoteExplosives.label>
+
+	<RemoteExplosives.description>遥控爆炸物模组功能的快捷键。</RemoteExplosives.description>
+
+	<RemoteExplosivesDetonator.label>遥控炸药雷管</RemoteExplosivesDetonator.label>
+
+	<RemoteExplosivesDetonator.description>遥控炸药模组功能的快捷键。</RemoteExplosivesDetonator.description>
+
+	<RemoteExplosivesTools.label>遥控炸药工具</RemoteExplosivesTools.label>
+
+	<RemoteExplosivesTools.description>通过小人来激活遥控炸药的快捷键</RemoteExplosivesTools.description>
+
+</LanguageData>

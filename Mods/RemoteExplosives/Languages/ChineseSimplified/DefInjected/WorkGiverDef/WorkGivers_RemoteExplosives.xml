@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+
+	<DetonateExplosives.label>引爆雷管</DetonateExplosives.label>
+
+	<DetonateExplosives.verb>引爆</DetonateExplosives.verb>
+
+	<DetonateExplosives.gerund>引爆于</DetonateExplosives.gerund>
+
+	<SwitchRemoteExplosive.label>开启遥控炸药</SwitchRemoteExplosive.label>
+
+	<SwitchRemoteExplosive.verb>开启</SwitchRemoteExplosive.verb>
+
+	<SwitchRemoteExplosive.gerund>开启于</SwitchRemoteExplosive.gerund>
+
+	<InstallChannelsComponent.label>安装雷管渠道</InstallChannelsComponent.label>
+
+	<InstallChannelsComponent.verb>安装通道组件</InstallChannelsComponent.verb>
+
+	<InstallChannelsComponent.gerund>安装通道组件于</InstallChannelsComponent.gerund>
+
+	<DoBillsRemoteExplosivesBench.label>装配炸药</DoBillsRemoteExplosivesBench.label>
+
+	<DoBillsRemoteExplosivesBench.verb>装配炸药</DoBillsRemoteExplosivesBench.verb>
+
+	<DoBillsRemoteExplosivesBench.gerund>装配炸药于</DoBillsRemoteExplosivesBench.gerund>
+
+	<DoBillsCraftFire.label>在壁炉做清单</DoBillsCraftFire.label>
+
+	<DoBillsCraftFire.verb>制作</DoBillsCraftFire.verb>
+
+	<DoBillsCraftFire.gerund>制作于</DoBillsCraftFire.gerund>
+
+	<DryOffDetonationCord.label>干燥导爆索</DryOffDetonationCord.label>
+
+	<DryOffDetonationCord.verb>干燥</DryOffDetonationCord.verb>
+
+	<DryOffDetonationCord.gerund>干燥于</DryOffDetonationCord.gerund>
+
+</LanguageData>

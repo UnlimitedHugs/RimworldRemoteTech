@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+
+	<FoamWallRekt.label>被困</FoamWallRekt.label>
+
+	<FlameBomb.label>火焰炸弹</FlameBomb.label>
+
+	<FlameBomb.deathMessage>{ 0 }已被烧死。</FlameBomb.deathMessage>
+
+</LanguageData>
