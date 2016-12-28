@@ -23,7 +23,7 @@ namespace RemoteExplosives {
 		public override void ExplosionAffectCell(Explosion explosion, IntVec3 c, List<Thing> damagedThings, bool canThrowMotes) {
 			base.ExplosionAffectCell(explosion, c, damagedThings, canThrowMotes);
 			if (ShouldCreateFire()) {
-				FireUtility.TryStartFireIn(c, Rand.Range(0.2f, 0.6f));
+				FireUtility.TryStartFireIn(c, explosion.Map, Rand.Range(0.2f, 0.6f));
 			}
 		}
 

@@ -1,56 +1,65 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
+using HugsLib;
+using HugsLib.Settings;
+using HugsLib.Utils;
 using RimWorld;
 using UnityEngine;
 using Verse;
-using System.Linq;
 
 namespace RemoteExplosives {
-	/*
-	 * This is a catch-all for all tasks that are not attached to any building or item, but require ticking or execution at map load.
-	 * Injects trader stock generators, generates recipe copies for the workbench and forwards ticks and updates to other components.
+	/**
+	 * The hub of the mod.
+	 * Injects trader stock generators, generates recipe copies for the workbench and injects comps.
 	 */
-	public class MapComponent_RemoteExplosivesInjector : MapComponent {
-		private readonly ThingCategoryDef explosivesItemCategory = ThingCategoryDef.Named("Explosives");
-		private readonly MethodInfo objectCloneMethod = typeof(object).GetMethod("MemberwiseClone", BindingFlags.Instance | BindingFlags.NonPublic);
-		private readonly bool showDebugControls = false;
-
-		private AutoReplaceWatcher replaceWatcher;
-		
+	public class RemoteExplosivesController : ModBase {
 		private const int ComponentValueInSteel = 40;
+		private const int ForbiddenTimeoutSettingDefault = 30;
+		private const int ForbiddenTimeoutSettingIncrement = 5;
 
-		private bool MustPerformInjection {
-			get { return DefDatabase<TraderStockInjectorDef>.DefCount > 0; }
+		public static RemoteExplosivesController Instance { get; private set; }
+
+		private readonly ThingCategoryDef explosivesItemCategory = ThingCategoryDef.Named("Explosives");
+		private readonly MethodInfo objectCloneMethod = typeof (object).GetMethod("MemberwiseClone", BindingFlags.Instance | BindingFlags.NonPublic);
+		// ReSharper disable once ConvertToConstant.Local
+		private readonly bool showDebugControls = false;
+		private SettingHandle<bool> settingForbidReplaced;
+		private SettingHandle<int> settingForbidTimeout;
+
+		public override string ModIdentifier {
+			get { return "RemoteExplosives"; }
 		}
 
-		public MapComponent_RemoteExplosivesInjector() {
-			if (MustPerformInjection) { // perform only once per def reload
-				InjectTraderStocks();
-				InjectSteelRecipeVariants();
-				InjectIEDComps();
-			}
-			EnsureComponentIsActive();
-			CallbackScheduler.Instance.Initialize(Find.TickManager.TicksGame);
-			DistributedTickScheduler.Instance.Initialize(Find.TickManager.TicksGame);
-			replaceWatcher = new AutoReplaceWatcher();
+		public new ModLogger Logger {
+			get { return base.Logger; }
 		}
 
-		public override void ExposeData() {
-			Scribe_Deep.LookDeep(ref replaceWatcher, "replaceWatcher");
-			if(replaceWatcher == null) replaceWatcher = new AutoReplaceWatcher();
+		public int BlueprintForbidDuration {
+			get { return settingForbidReplaced ? settingForbidTimeout : 0; }
 		}
 
-		public override void MapComponentOnGUI() {
-			base.MapComponentOnGUI();
+		public RemoteExplosivesController() {
+			Instance = this;
+
+		}
+
+		public override void DefsLoaded() {
+			InjectTraderStocks();
+			InjectSteelRecipeVariants();
+			InjectIEDComps();
+			GetSettingsHandles();
+		}
+
+		private void GetSettingsHandles() {
+			settingForbidReplaced = Settings.GetHandle("forbidReplaced", "Setting_forbidReplaced_label".Translate(), "Setting_forbidReplaced_desc".Translate(), true);
+			settingForbidTimeout = Settings.GetHandle("forbidTimeout", "Setting_forbidTimeout_label".Translate(), "Setting_forbidTimeout_desc".Translate(), ForbiddenTimeoutSettingDefault, Validators.IntRangeValidator(0, 100000000));
+			settingForbidTimeout.SpinnerIncrement = ForbiddenTimeoutSettingIncrement;
+			settingForbidTimeout.VisibilityPredicate = () => settingForbidReplaced.Value;
+		}
+
+		public override void OnGUI() {
 			if (showDebugControls) DrawDebugControls();
-		}
-
-		public override void MapComponentTick() {
-			base.MapComponentTick();
-			var currentTick = Find.TickManager.TicksGame;
-			CallbackScheduler.Instance.Tick(currentTick);
-			DistributedTickScheduler.Instance.Tick(currentTick);
-			replaceWatcher.Tick();
 		}
 
 		/**
@@ -66,8 +75,8 @@ namespace RemoteExplosives {
 					injectorDef.traderDef.stockGenerators.Add(stockGenerator);
 				}
 			}
-			if(affectedTraders.Count>0) {
-				RemoteExplosivesUtility.Log(string.Format("Injected stock generators for {0} traders", affectedTraders.Count));
+			if (affectedTraders.Count > 0) {
+				Logger.Trace(string.Format("Injected stock generators for {0} traders", affectedTraders.Count));
 			}
 
 			// Unless all defs are reloaded, we no longer need the injector defs
@@ -87,8 +96,8 @@ namespace RemoteExplosives {
 				}
 			}
 
-			if(injectCount>0) {
-				RemoteExplosivesUtility.Log(string.Format("Injected {0} alternate explosives recipes.", injectCount));
+			if (injectCount > 0) {
+				Logger.Trace(string.Format("Injected {0} alternate explosives recipes.", injectCount));
 			}
 		}
 
@@ -108,27 +117,18 @@ namespace RemoteExplosives {
 
 		}
 
-		/**
-		 * This is a sneaky way to ensure the component is active even in games where the mod was not active at map creation
-		 */
-		private void EnsureComponentIsActive() {
-			LongEventHandler.ExecuteWhenFinished(() => {
-				var components = Find.Map.components;
-				if(components.Any(c => c is MapComponent_RemoteExplosivesInjector)) return;
-				Find.Map.components.Add(this);
-			});
-		}
-
 		private IEnumerable<RecipeDef> GetAllExplosivesRecipes() {
 			return DefDatabase<RecipeDef>.AllDefs.Where(d => {
 				var product = d.products.FirstOrDefault();
-				return product != null && product.thingDef!=null && product.thingDef.thingCategories!=null && product.thingDef.thingCategories.Contains(explosivesItemCategory);
+				return product != null && product.thingDef != null && product.thingDef.thingCategories != null && product.thingDef.thingCategories.Contains(explosivesItemCategory);
 			});
-		} 
-		
+		}
+
 		// Will return null if recipe requires no components
 		private RecipeDef TryMakeRecipeVariantWithSteel(RecipeDef recipeOriginal) {
-			var recipeCopy = (RecipeDef)objectCloneMethod.Invoke(recipeOriginal, null);
+			var recipeCopy = (RecipeDef) objectCloneMethod.Invoke(recipeOriginal, null);
+			recipeCopy.shortHash = 0;
+			InjectedDefHasher.GiveShortHasToDef(recipeCopy);
 			recipeCopy.defName += RemoteExplosivesUtility.InjectedRecipeNameSuffix;
 
 			var newFixedFilter = new ThingFilter();
@@ -154,36 +154,38 @@ namespace RemoteExplosives {
 			var steelFilter = new ThingFilter();
 			steelFilter.SetAllow(ThingDefOf.Steel, true);
 			var steelIngredient = new IngredientCount {filter = steelFilter};
-			steelIngredient.SetBaseCount(ComponentValueInSteel * numComponentsRequired);
+			steelIngredient.SetBaseCount(ComponentValueInSteel*numComponentsRequired);
 			newIngredientList.Add(steelIngredient);
 			recipeCopy.ingredients = newIngredientList;
 			recipeCopy.ResolveReferences();
 			return recipeCopy;
 		}
 
-		private void DrawDebugControls(){
-			if(Widgets.ButtonText(new Rect(10, 10, 50, 20), "Cloud")) {
+		private void DrawDebugControls() {
+			var map = Find.VisibleMap;
+			if(map == null) return;
+			if (Widgets.ButtonText(new Rect(10, 10, 50, 20), "Cloud")) {
 				DebugTools.curTool = new DebugTool("GasCloud placer", () => {
 					const float concentration = 10000000;
-					var cell = Gen.MouseCell();
-					var cloud = Find.ThingGrid.ThingAt<GasCloud>(cell);
-					if(cloud!=null) {
+					var cell = UI.MouseCell();
+					var cloud = map.thingGrid.ThingAt<GasCloud>(cell);
+					if (cloud != null) {
 						cloud.ReceiveConcentration(concentration);
 					} else {
-						cloud = (GasCloud)ThingMaker.MakeThing(ThingDef.Named("Gas_Sleeping"));
+						cloud = (GasCloud) ThingMaker.MakeThing(ThingDef.Named("Gas_Sleeping"));
 						cloud.ReceiveConcentration(concentration);
-						GenPlace.TryPlaceThing(cloud, cell, ThingPlaceMode.Direct);
+						GenPlace.TryPlaceThing(cloud, cell, map, ThingPlaceMode.Direct);
 					}
 				});
 			}
-			if(Widgets.ButtonText(new Rect(10, 30, 50, 20), "Spark")) {
+			if (Widgets.ButtonText(new Rect(10, 30, 50, 20), "Spark")) {
 				DebugTools.curTool = new DebugTool("Spark", () => {
-					EffecterDef.Named("SparkweedIgnite").Spawn().Trigger(Gen.MouseCell(), null);
+					EffecterDef.Named("SparkweedIgnite").Spawn().Trigger(new TargetInfo(UI.MouseCell(), map), null);
 				});
 			}
-			if(Widgets.ButtonText(new Rect(10, 50, 50, 20), "Failure")) {
+			if (Widgets.ButtonText(new Rect(10, 50, 50, 20), "Failure")) {
 				DebugTools.curTool = new DebugTool("Failure", () => {
-					EffecterDef.Named("DetCordFailure").Spawn().Trigger(Gen.MouseCell(), null);
+					EffecterDef.Named("DetWireFailure").Spawn().Trigger(new TargetInfo(UI.MouseCell(), map), null);
 				});
 			}
 

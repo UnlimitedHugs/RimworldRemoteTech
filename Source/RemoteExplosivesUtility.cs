@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using HugsLib;
+using HugsLib.Utils;
 using RimWorld;
 using UnityEngine;
 using Verse;
@@ -16,12 +18,11 @@ namespace RemoteExplosives {
 
 		// how long it will take to trigger an additional explosive
 		private const int TicksBetweenTriggers = 2;
-		private const string logPrefix = "[RemoteExplosives] ";
 
 		private static readonly SoundDef UIChannelSound = SoundDef.Named("RemoteUIDialClick");
 		private static readonly ResearchProjectDef channelsResearchDef = ResearchProjectDef.Named("RemoteExplosivesChannels");
 		private static readonly KeyBindingDef nextChannelKeybindingDef = KeyBindingDef.Named("RemoteExplosivesNextChannel");
-		private static readonly Texture2D[] UITex_Channels = new[] {
+		private static readonly Texture2D[] UITex_Channels = {
 			ContentFinder<Texture2D>.Get("UIChannel0"),
 			ContentFinder<Texture2D>.Get("UIChannel1"),
 			ContentFinder<Texture2D>.Get("UIChannel2")
@@ -38,7 +39,7 @@ namespace RemoteExplosives {
 
 		private static DesignationDef dryDesigationDef;
 		public static DesignationDef DryOffDesigationDef {
-			get { return dryDesigationDef ?? (dryDesigationDef = DefDatabase<DesignationDef>.GetNamed("DetonationCordDryOff")); }
+			get { return dryDesigationDef ?? (dryDesigationDef = DefDatabase<DesignationDef>.GetNamed("DetonatorWireDryOff")); }
 		}
 
 		public enum RemoteChannel {
@@ -47,23 +48,10 @@ namespace RemoteExplosives {
 			Green = 2
 		}
 
-		public static void Log(object message) {
-			Verse.Log.Message(logPrefix + message);
-		}
-
-		public static void Error(object message) {
-			Verse.Log.Error(logPrefix + message);
-		}
-
 		public static void UpdateSwitchDesignation(Thing thing) {
-			if(!(thing is ISwitchable)) return;
-			var flag = (thing as ISwitchable).WantsSwitch();
-			var designation = Find.DesignationManager.DesignationOn(thing, SwitchDesigationDef);
-			if (flag && designation == null) {
-				Find.DesignationManager.AddDesignation(new Designation(thing, SwitchDesigationDef));
-			} else if (!flag && designation != null) {
-				designation.Delete();
-			}
+			var switchable = thing as ISwitchable;
+			if(switchable == null) return;
+			thing.ToggleDesignation(SwitchDesigationDef, switchable.WantsSwitch());
 		}
 
 		public static bool ChannelsUnlocked() {
@@ -95,23 +83,23 @@ namespace RemoteExplosives {
 			return String.Format(CurrenthannelLabelBase, GetChannelName(currentChannnel));
 		}
 
-		public static void LightArmedExplosivesInRange(IntVec3 center, float radius, RemoteChannel channel) {
-			var armedExplosives = FindArmedExplosivesInRange(center, radius, channel);
+		public static void LightArmedExplosivesInRange(IntVec3 center, Map map, float radius, RemoteChannel channel) {
+			var armedExplosives = FindArmedExplosivesInRange(center, map, radius, channel);
 			if (armedExplosives.Count > 0) {
 				// closer ones will go off first
 				armedExplosives = armedExplosives.OrderBy(e => e.Position.DistanceToSquared(center)).ToList();
 				for (int i = 0; i < armedExplosives.Count; i++) {
 					var explosive = armedExplosives[i];
-					CallbackScheduler.Instance.ScheduleCallback(explosive.LightFuse, TicksBetweenTriggers*i);
+					HugsLibController.Instance.CallbackScheduler.ScheduleCallback(explosive.LightFuse, TicksBetweenTriggers*i);
 				}
 			} else {
 				Messages.Message("Detonator_notargets".Translate(), MessageSound.Standard);
 			}
 		}
 
-		public static List<Building_RemoteExplosive> FindArmedExplosivesInRange(IntVec3 center, float radius, RemoteChannel channel) {
+		public static List<Building_RemoteExplosive> FindArmedExplosivesInRange(IntVec3 center, Map map, float radius, RemoteChannel channel) {
 			var results = new List<Building_RemoteExplosive>();
-			var sample = Find.ListerBuildings.AllBuildingsColonistOfClass<Building_RemoteExplosive>();
+			var sample = map.listerBuildings.AllBuildingsColonistOfClass<Building_RemoteExplosive>();
 			foreach (var explosive in sample) {
 				if (explosive.IsArmed && explosive.CurrentChannel == channel && !explosive.FuseLit && TileIsInRange(explosive.Position, center, radius)) {
 					results.Add(explosive);
@@ -125,17 +113,17 @@ namespace RemoteExplosives {
 			if (pawn == null || detonatorThing == null || !pawn.IsColonistPlayerControlled || pawn.drafter == null) return null;
 			var entry = new FloatMenuOption {
 				action = () => {
-					if (!pawn.IsColonistPlayerControlled || !pawn.drafter.CanTakeOrderedJob()) return;
+					if (!pawn.IsColonistPlayerControlled || !pawn.jobs.CanTakeOrderedJob()) return;
 					if (!detonator.WantsDetonation) detonator.WantsDetonation = true;
 					var job = new Job(DefDatabase<JobDef>.GetNamed(JobDriver_DetonateExplosives.JobDefName), detonatorThing);
-					pawn.drafter.TakeOrderedJob(job);
+					pawn.jobs.TryTakeOrderedJob(job);
 				},
 				autoTakeable = false,
 				Label = "Detonator_detonatenow".Translate()
 			};
-			if (Find.Reservations.IsReserved(detonatorThing, Faction.OfPlayer)) {
+			if (pawn.Map.reservationManager.IsReserved(detonatorThing, Faction.OfPlayer)) {
 				entry.Disabled = true;
-				var reservedByName = Find.Reservations.FirstReserverOf(detonatorThing, Faction.OfPlayer).Name.ToStringShort;
+				var reservedByName = pawn.Map.reservationManager.FirstReserverOf(detonatorThing, Faction.OfPlayer).Name.ToStringShort;
 				entry.Label += " " + "Detonator_detonatenow_reserved".Translate(reservedByName);
 			}
 			return entry;
@@ -143,16 +131,16 @@ namespace RemoteExplosives {
 
 		// Determines if by being placed in the given cell the roof breaker has both a
 		// thick roof within its radius, and a thin roof/no roof adjacent to it
-		public static bool IsEffectiveRoofBreakerPlacement(float explosiveRadius, IntVec3 center) {
+		public static bool IsEffectiveRoofBreakerPlacement(float explosiveRadius, IntVec3 center, Map map) {
 			if (explosiveRadius <= 0) return false;
-			var roofGrid = Find.RoofGrid;
+			var roofGrid = map.roofGrid;
 			var cardinals = GenAdj.CardinalDirections;
 			var effectiveRadiusNumCells = GenRadial.NumCellsInRadius(explosiveRadius);
 			var adjacentWeakRoofFound = false;
 			var thickRoofInEffectiveRadius = false;
 			for (int i = 0; i < effectiveRadiusNumCells; i++) {
 				var radiusCell = center + GenRadial.RadialPattern[i];
-				if (!radiusCell.InBounds()) continue;
+				if (!radiusCell.InBounds(map)) continue;
 				var roof = roofGrid.RoofAt(radiusCell);
 				if (roof != null && roof.isThickRoof) {
 					thickRoofInEffectiveRadius = true;
@@ -160,7 +148,7 @@ namespace RemoteExplosives {
 				if (adjacentWeakRoofFound) continue;
 				for (int j = 0; j < cardinals.Length; j++) {
 					var cardinalCell = cardinals[j] + radiusCell;
-					if (!cardinalCell.InBounds()) continue;
+					if (!cardinalCell.InBounds(map)) continue;
 					var cardianalRoof = roofGrid.RoofAt(cardinalCell);
 					if (cardianalRoof == null || !cardianalRoof.isThickRoof) {
 						adjacentWeakRoofFound = true;

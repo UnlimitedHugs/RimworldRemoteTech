@@ -11,8 +11,8 @@ namespace RemoteExplosives {
 		
 		private const PathEndMode pathEndMode = PathEndMode.Touch;
 		
-		public override IEnumerable<Thing> PotentialWorkThingsGlobal(Pawn Pawn) {
-			var exposives = Find.DesignationManager.DesignationsOfDef(RemoteExplosivesUtility.SwitchDesigationDef);
+		public override IEnumerable<Thing> PotentialWorkThingsGlobal(Pawn pawn) {
+			var exposives = pawn.Map.designationManager.DesignationsOfDef(RemoteExplosivesUtility.SwitchDesigationDef);
 			foreach (var exposive in exposives) {
 				yield return exposive.target.Thing;
 			}

@@ -10,8 +10,8 @@ namespace RemoteExplosives {
 	 */
 	public class WorkGiver_IPawnDetonateable : WorkGiver_Scanner {
 		
-		public override IEnumerable<Thing> PotentialWorkThingsGlobal(Pawn Pawn) {
-			var buildings = Find.ListerBuildings.allBuildingsColonist;
+		public override IEnumerable<Thing> PotentialWorkThingsGlobal(Pawn pawn) {
+			var buildings = pawn.Map.listerBuildings.allBuildingsColonist;
 			for (var i = 0; i < buildings.Count; i++) {
 				var detonator = buildings[i] as IPawnDetonateable;
 				if (detonator != null) yield return buildings[i];

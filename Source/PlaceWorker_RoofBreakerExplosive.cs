@@ -18,7 +18,7 @@ namespace RemoteExplosives {
 		public override void DrawGhost(ThingDef def, IntVec3 center, Rot4 rot) {
 			var effectiveRadius = RemoteExplosivesUtility.TryGetExplosiveRadius(def);
 			if (effectiveRadius <= 0) return;
-			var roofGrid = Find.RoofGrid;
+			var roofGrid = Map.roofGrid;
 			effectiveRadiusCells.Clear();
 			overheadMountainCells.Clear();
 			var effectiveRadiusNumCells = GenRadial.NumCellsInRadius(effectiveRadius);
@@ -26,7 +26,7 @@ namespace RemoteExplosives {
 			// collect cells to display
 			for (int i = 0; i < roofDisplayRadiusNumCells; i++) {
 				var cell = center + GenRadial.RadialPattern[i];
-				if (!cell.InBounds()) continue;
+				if (!cell.InBounds(Map)) continue;
 				var roof = roofGrid.RoofAt(cell);
 				if (roof != null && roof.isThickRoof) {
 					overheadMountainCells.Add(cell);
@@ -36,8 +36,10 @@ namespace RemoteExplosives {
 					effectiveRadiusCells.Add(cell);
 				}
 			}
-			if(overheadMountainCells.Count>0) GenDraw.DrawFieldEdges(overheadMountainCells, Color.white);
-			var effectiveRadiusColor = RemoteExplosivesUtility.IsEffectiveRoofBreakerPlacement(effectiveRadius, center) ? EffectivePlacementColor : IneffectivePlacementColor;
+			if (overheadMountainCells.Count > 0 && Find.Selector.NumSelected <= 1) { // don't draw overlay when multple charges are selected
+				GenDraw.DrawFieldEdges(overheadMountainCells, Color.white);
+			}
+			var effectiveRadiusColor = RemoteExplosivesUtility.IsEffectiveRoofBreakerPlacement(effectiveRadius, center, Map) ? EffectivePlacementColor : IneffectivePlacementColor;
 			GenDraw.DrawFieldEdges(effectiveRadiusCells, effectiveRadiusColor);
 		}
 	}

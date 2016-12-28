@@ -32,9 +32,10 @@ namespace RemoteExplosives {
 			// perform chack only once per frame, cache result for other visible sections
 			if (Time.frameCount > lastCachedFrame) {
 				cachedVisible = false;
-				var designatorBuild = DesignatorManager.SelectedDesignator as Designator_Build;
+				var selectedDesignator = Find.DesignatorManager.SelectedDesignator;
+				var designatorBuild = selectedDesignator as Designator_Build;
 				var buildingDef = designatorBuild == null ? null : (designatorBuild.PlacingDef as ThingDef);
-				cachedVisible = buildingDef != null && DefHasGridComp(buildingDef);
+				cachedVisible = (buildingDef != null && DefHasGridComp(buildingDef)) || selectedDesignator is Designator_SelectDetonatorWire;
 				lastCachedFrame = Time.frameCount;
 			}
 			if(!cachedVisible) return;

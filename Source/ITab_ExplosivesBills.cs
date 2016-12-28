@@ -57,7 +57,8 @@ namespace RemoteExplosives {
 					if(currentRecipeMode == RecipeMode.Components && IsInjectedSteelRecipe(recipe) || currentRecipeMode == RecipeMode.Steel && !IsInjectedSteelRecipe(recipe)) continue;
 					
 					list.Add(new FloatMenuOption(recipe.LabelCap, delegate {
-						if (!Find.MapPawns.FreeColonists.Any(recipe.PawnSatisfiesSkillRequirements)) {
+						var map = Find.VisibleMap;
+						if (map == null || !map.mapPawns.FreeColonists.Any(recipe.PawnSatisfiesSkillRequirements)) {
 							Bill.CreateNoPawnsWithSkillDialog(recipe);
 						}
 						var bill = recipe.MakeNewBill();
@@ -66,7 +67,7 @@ namespace RemoteExplosives {
 				}
 				return list;
 			};
-			mouseoverBill = SelTable.billStack.DrawListing(canvasRect, recipeOptionsMaker, ref scrollPosition, ref viewHeight);
+			mouseoverBill = SelTable.billStack.DoListing(canvasRect, recipeOptionsMaker, ref scrollPosition, ref viewHeight);
 		}
 
 		public override void TabUpdate() {

@@ -5,29 +5,29 @@ using Verse;
 
 namespace RemoteExplosives {
 	/**
-	 * A designator that selects only detonation cord
+	 * A designator that selects only detonation wire
 	 */
 	[StaticConstructorOnStartup]
-	public class Designator_SelectDetonatorCord : Designator {
-		public static readonly Texture2D UISelectCord = ContentFinder<Texture2D>.Get("UISelectCord");
+	public class Designator_SelectDetonatorWire : Designator {
+		public static readonly Texture2D UISelectWire = ContentFinder<Texture2D>.Get("UISelectWire");
 		
-		public Designator_SelectDetonatorCord() {
+		public Designator_SelectDetonatorWire() {
 			hotKey = KeyBindingDefOf.Misc10;
-			icon = UISelectCord;
+			icon = UISelectWire;
 			useMouseIcon = true;
-			defaultLabel = "CordDesignator_label".Translate();
-			defaultDesc = "CordDesignator_desc".Translate();
+			defaultLabel = "WireDesignator_label".Translate();
+			defaultDesc = "WireDesignator_desc".Translate();
 			soundDragSustain = SoundDefOf.DesignateDragStandard;
 			soundDragChanged = SoundDefOf.DesignateDragStandardChanged;
 			soundSucceeded = SoundDefOf.ThingSelected;
 		}
 
 		public override string Label {
-			get { return "CordDesignator_label".Translate(); }
+			get { return "WireDesignator_label".Translate(); }
 		}
 
 		public override string Desc {
-			get { return "CordDesignator_desc".Translate(); }
+			get { return "WireDesignator_desc".Translate(); }
 		}
 
 		public override int DraggableDimensions {
@@ -39,10 +39,10 @@ namespace RemoteExplosives {
 		}
 
 		public override AcceptanceReport CanDesignateCell(IntVec3 loc) {
-			var contents = Find.ThingGrid.ThingsListAt(loc);
+			var contents = Map.thingGrid.ThingsListAt(loc);
 			if (contents != null) {
 				for (int i = 0; i < contents.Count; i++) {
-					if (contents[i] is Building_DetonatorCord) return true;
+					if (contents[i] is Building_DetonatorWire) return true;
 				}
 			}
 			return false;
@@ -51,6 +51,7 @@ namespace RemoteExplosives {
 		public override void DesignateSingleCell(IntVec3 c) {
 			if(!ShiftIsHeld()) Find.Selector.ClearSelection();
 			CellDesignate(c);
+			TryCloseArchitectMenu();
 		}
 
 		public override void DesignateMultiCell(IEnumerable<IntVec3> cells) {
@@ -58,20 +59,27 @@ namespace RemoteExplosives {
 			foreach (var cell in cells) {
 				CellDesignate(cell);
 			}
+			TryCloseArchitectMenu();
 		}
 
 		private void CellDesignate(IntVec3 cell) {
-			var contents = Find.ThingGrid.ThingsListAt(cell);
+			var contents = Map.thingGrid.ThingsListAt(cell);
 			var selector = Find.Selector;
 			if (contents != null) {
 				for (int i = 0; i < contents.Count; i++) {
 					var thing = contents[i];
-					if (thing is Building_DetonatorCord && !selector.SelectedObjects.Contains(thing)) {
+					if (thing is Building_DetonatorWire && !selector.SelectedObjects.Contains(thing)) {
 						selector.SelectedObjects.Add(thing);
 						SelectionDrawer.Notify_Selected(thing);
 					}
 				}
 			}
+		}
+
+		private void TryCloseArchitectMenu() {
+			if (Find.Selector.NumSelected == 0) return;
+			if (Find.MainTabsRoot.OpenTab != MainTabDefOf.Architect) return;
+			Find.MainTabsRoot.EscapeCurrentTab();
 		}
 
 		private bool ShiftIsHeld() {

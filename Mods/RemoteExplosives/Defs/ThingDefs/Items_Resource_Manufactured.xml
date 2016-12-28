@@ -63,7 +63,7 @@ Place as a building from the Explosives menu to use.</description>
 			</li>
 		</comps>
 		<statBases>
-			<MarketValue>125</MarketValue>
+			<MarketValue>80</MarketValue>
 		</statBases>
 	</ThingDef>
 	
@@ -90,7 +90,7 @@ Place as a building from the Explosives menu to use.</description>
 			</li>
 		</comps>
 		<statBases>
-			<MarketValue>125</MarketValue>
+			<MarketValue>80</MarketValue>
 		</statBases>
 	</ThingDef>
 	
@@ -108,8 +108,8 @@ Place as a building from the Explosives menu to use.</description>
 				<compClass>RemoteExplosives.CompMiningExplosive</compClass>
 				<rockChunkChance>0.5</rockChunkChance>
 				<miningRadius>2.9</miningRadius>
-				<resourceBreakingEfficiency>.75</resourceBreakingEfficiency>
-				<woodBreakingEfficiency>.70</woodBreakingEfficiency>
+				<resourceBreakingYield>.75</resourceBreakingYield>
+				<woodBreakingYield>.70</woodBreakingYield>
 				<explosiveRadius>2.9</explosiveRadius>
 				<explosiveDamageType>Bomb</explosiveDamageType>
 				<explosiveExpandPerStackcount>0.5</explosiveExpandPerStackcount>
@@ -121,7 +121,7 @@ Place as a building from the Explosives menu to use.</description>
 			</li>
 		</comps>
 		<statBases>
-			<MarketValue>100</MarketValue>
+			<MarketValue>65</MarketValue>
 		</statBases>
 	</ThingDef>
 	
@@ -161,7 +161,7 @@ Place as a building from the Explosives menu to use.</description>
 			</li>
 		</comps>
 		<statBases>
-			<MarketValue>180</MarketValue>
+			<MarketValue>150</MarketValue>
 		</statBases>
 	</ThingDef>
 

@@ -163,7 +163,7 @@ Research different types of remote explosives to unlock available recipes.</Desc
 		<DefName>DetonatorManual</DefName>
 		<label>manual detonator</label>
 		<ThingClass>RemoteExplosives.Building_DetonatorManual</ThingClass>
-		<Description>A simple plunger-type detonator. When activated, sends a pulse along the attached detonator cord to all connected explosives, lighting their fuses.
+		<Description>A simple plunger-type detonator. When activated, sends a pulse along the attached detonator wire to all connected explosives, lighting their fuses.
 Right-click with a drafted colonist for better timing.</Description>
 		<graphicData>
 			<texPath>DetonatorManual</texPath>
@@ -200,14 +200,14 @@ Right-click with a drafted colonist for better timing.</Description>
 	</ThingDef>
     
 	<ThingDef ParentName="BuildingBase">
-		<defName>DetonatorCord</defName>
-		<label>detonator cord</label>
+		<defName>DetonatorWire</defName>
+		<label>detonator wire</label>
 		<description>A special wire used to connect the manual detonator to makeshift explosives, remote explosives and IEDs. Can be placed under walls and other buildings.
 Can fail if used while wet.</description>
-		<ThingClass>RemoteExplosives.Building_DetonatorCord</ThingClass>
+		<ThingClass>RemoteExplosives.Building_DetonatorWire</ThingClass>
 		<drawerType>MapMeshOnly</drawerType>
 		<graphicData>
-			<texPath>DetCord/det_cord_Atlas</texPath>
+			<texPath>DetWire/det_wire_Atlas</texPath>
 			<graphicClass>Graphic_Single</graphicClass>
 			<linkType>Basic</linkType>
 			<linkFlags>
@@ -219,17 +219,17 @@ Can fail if used while wet.</description>
 		</graphicData>
 		<tickerType>Rare</tickerType>
 		<blueprintGraphicData>
-			<texPath>DetCord/det_cord_blueprint_atlas</texPath>
+			<texPath>DetWire/det_wire_blueprint_atlas</texPath>
 		</blueprintGraphicData>
-		<uiIconPath>DetCord/det_cord_icon</uiIconPath>
-		<building Class="RemoteExplosives.BuildingProperties_DetonatorCord">
+		<uiIconPath>DetWire/det_wire_icon</uiIconPath>
+		<building Class="RemoteExplosives.BuildingProperties_DetonatorWire">
 			<isInert>true</isInert>
 			<isEdifice>false</isEdifice>
 			
 			<failureChanceWhenFullyWet>.015</failureChanceWhenFullyWet>
 			<daysToSelfDry>.8</daysToSelfDry>
 			<baseDryingTemperature>20</baseDryingTemperature>
-			<failureEffecter>DetCordFailure</failureEffecter>
+			<failureEffecter>DetWireFailure</failureEffecter>
 			<fireOnFailure>true</fireOnFailure>
 			<dryOffJobDurationTicks>80</dryOffJobDurationTicks>
 		</building>
@@ -249,7 +249,7 @@ Can fail if used while wet.</description>
 		</costList>
 		<resourcesFractionWhenDeconstructed>0</resourcesFractionWhenDeconstructed>
 		<placeWorkers>
-			<li>RemoteExplosives.PlaceWorker_DetonatorCord</li>
+			<li>RemoteExplosives.PlaceWorker_DetonatorWire</li>
 		</placeWorkers>
 		<comps>
 			<li Class="RemoteExplosives.CompProperties_WiredDetonationTransmitter">
@@ -299,7 +299,7 @@ Can fail if used while wet.</description>
 		</graphicData>
 		<description>A primitive bomb made from explosive powder and animal leather.
 Craft at a crafting spot or tailoring bench.
-Detonate using a Manual Detonator and Detonator Cord.</description>
+Detonate using a Manual Detonator and Detonator Wire.</description>
 		<costList>
 			<ExplosivePouch>1</ExplosivePouch>
 		</costList>
@@ -315,9 +315,7 @@ Detonate using a Manual Detonator and Detonator Cord.</description>
 				</wickTicks>
 			</li>
 			<li Class="RemoteExplosives.CompProperties_WiredDetonationReceiver"/>
-			<li Class="RemoteExplosives.CompProperties_AutoReplaceable">
-				<forbiddenForSeconds>30</forbiddenForSeconds>
-			</li>
+			<li Class="RemoteExplosives.CompProperties_AutoReplaceable"/>
 		</comps>
 		<building>
 			<isTrap>true</isTrap>
@@ -465,8 +463,8 @@ Detonate from the Remote Explosives Console.</description>
 				<compClass>RemoteExplosives.CompMiningExplosive</compClass>
 				<rockChunkChance>0.75</rockChunkChance>
 				<miningRadius>3.5</miningRadius>
-				<resourceBreakingEfficiency>.75</resourceBreakingEfficiency>
-				<woodBreakingEfficiency>.70</woodBreakingEfficiency>
+				<resourceBreakingYield>.75</resourceBreakingYield>
+				<woodBreakingYield>.70</woodBreakingYield>
 				<explosiveRadius>3.5</explosiveRadius>
 				<explosiveDamageType>Bomb</explosiveDamageType>
 				<startWickHitPointsPercent>0.2</startWickHitPointsPercent>
@@ -506,8 +504,8 @@ Detonate from the Remote Explosives Console.</description>
 				<compClass>RemoteExplosives.CompMiningExplosive</compClass>
 				<rockChunkChance>0.05</rockChunkChance>
 				<miningRadius>4</miningRadius>
-				<resourceBreakingEfficiency>.75</resourceBreakingEfficiency>
-				<woodBreakingEfficiency>.70</woodBreakingEfficiency>
+				<resourceBreakingYield>.75</resourceBreakingYield>
+				<woodBreakingYield>.70</woodBreakingYield>
 				<explosiveRadius>3.9</explosiveRadius>
 				<explosiveDamageType>Bomb</explosiveDamageType>
 				<startWickHitPointsPercent>0.2</startWickHitPointsPercent>
@@ -564,8 +562,8 @@ Detonate from the Remote Explosives Console.</description>
 				<compClass>RemoteExplosives.CompRoofBreakerExplosive</compClass>
 				<rockChunkChance>0.5</rockChunkChance>
 				<miningRadius>2.1</miningRadius>
-				<resourceBreakingEfficiency>.3</resourceBreakingEfficiency>
-				<woodBreakingEfficiency>.1</woodBreakingEfficiency>
+				<resourceBreakingYield>.3</resourceBreakingYield>
+				<woodBreakingYield>.1</woodBreakingYield>
 				<explosiveRadius>2.1</explosiveRadius>
 				<explosiveDamageType>Bomb</explosiveDamageType>
 				<startWickHitPointsPercent>0.2</startWickHitPointsPercent>

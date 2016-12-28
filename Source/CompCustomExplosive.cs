@@ -59,14 +59,14 @@ namespace RemoteExplosives {
 		}
 
 		private void StartWickSustainer() {
-			WickStartSound.PlayOneShot(parent.Position);
-			var info = SoundInfo.InWorld(parent, MaintenanceType.PerTick);
+			WickStartSound.PlayOneShot(parent);
+			var info = SoundInfo.InMap(parent, MaintenanceType.PerTick);
 			wickSoundSustainer = WickLoopSound.TrySpawnSustainer(info);
 		}
 
 		public override void PostDraw() {
 			if (wickStarted && !wickIsSilent) {
-				OverlayDrawer.DrawOverlay(parent, OverlayTypes.BurningWick);
+				parent.Map.overlayDrawer.DrawOverlay(parent, OverlayTypes.BurningWick);
 			}
 		}
 
@@ -104,6 +104,7 @@ namespace RemoteExplosives {
 		protected virtual void Detonate() {
 			if (detonated) return;
 			detonated = true;
+			var map = parent.Map;
 			if (!parent.Destroyed) {
 				parent.Destroy(DestroyMode.Kill);
 			}
@@ -113,7 +114,7 @@ namespace RemoteExplosives {
 				if (parent.stackCount > 1 && exProps.explosiveExpandPerStackcount > 0f) {
 					num += Mathf.Sqrt((parent.stackCount - 1)*exProps.explosiveExpandPerStackcount);
 				}
-				GenExplosion.DoExplosion(parent.Position, num, exProps.explosiveDamageType, parent);
+				GenExplosion.DoExplosion(parent.Position, map, num, exProps.explosiveDamageType, parent);
 			}
 		}
 

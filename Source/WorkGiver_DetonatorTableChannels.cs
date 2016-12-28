@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using RimWorld;
 using Verse;
 using Verse.AI;
@@ -46,12 +45,12 @@ namespace RemoteExplosives {
 			var component = FindInstallableComponent(pawn);
 			if (component == null) return null;
 			var jobDef = DefDatabase<JobDef>.GetNamed(JobDriver_InstallChannelsComponent.JobDefName);
-			return new Job(jobDef, t, component) { maxNumToCarry = 1 };
+			return new Job(jobDef, t, component) { count = 1 };
 		}
 
 		private Thing FindInstallableComponent(Pawn pawn) {
 			Predicate<Thing> searchPredicate = thing => !thing.IsForbidden(pawn) && pawn.CanReserve(thing);
-			return GenClosest.ClosestThingReachable(pawn.Position, ThingRequest.ForDef(ThingDefOf.Component), PathEndMode.ClosestTouch, TraverseParms.For(pawn), maxComponentSearchDist, searchPredicate);
+			return GenClosest.ClosestThingReachable(pawn.Position, pawn.Map, ThingRequest.ForDef(ThingDefOf.Component), PathEndMode.ClosestTouch, TraverseParms.For(pawn), maxComponentSearchDist, searchPredicate);
 		}
 
 	}

@@ -9,7 +9,7 @@
 		<specialDesignatorClasses>
 			<li>Designator_Cancel</li>
 			<li>Designator_Deconstruct</li>
-			<li>RemoteExplosives.Designator_SelectDetonatorCord</li>
+			<li>RemoteExplosives.Designator_SelectDetonatorWire</li>
 		</specialDesignatorClasses>
 	</DesignationCategoryDef>
 	

@@ -7,7 +7,7 @@ namespace RemoteExplosives {
 	 */
 	public class Building_RemoteExplosiveEmp : Building_RemoteExplosive {
 		private static readonly SoundDef chargeSound = SoundDef.Named("RemoteEmpCharge");
-		private Sustainer chargeSoundSustainer;
+		private bool chargeSoundRequested;
 		
 		public Building_RemoteExplosiveEmp() {
 			beepWhenLit = false;
@@ -15,25 +15,17 @@ namespace RemoteExplosives {
 
 		public override void LightFuse() {
 			if(!FuseLit) {
-				chargeSoundSustainer = new Sustainer(chargeSound, SoundInfo.InWorld(Position, MaintenanceType.PerTick));
+				chargeSoundRequested = true;
 			}
 			base.LightFuse();
 		}
 
 		public override void Tick() {
 			base.Tick();
-			if (chargeSoundSustainer != null && FuseLit) {
-				chargeSoundSustainer.Maintain();
+			if (chargeSoundRequested) {
+				chargeSound.PlayOneShot(this);
+				chargeSoundRequested = false;
 			}
-		}
-
-		public override void Destroy(DestroyMode mode = DestroyMode.Vanish) {
-			base.Destroy(mode);
-			if (chargeSoundSustainer != null) {
-				chargeSoundSustainer.End();
-				chargeSoundSustainer = null;
-			}
-				
 		}
 	}
 }

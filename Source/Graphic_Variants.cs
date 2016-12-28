@@ -21,7 +21,7 @@ namespace RemoteExplosives {
 			}
 			var variantIndex = provider.GraphicVariant;
 			if (variantIndex < 0 || variantIndex > subGraphics.Length) {
-				RemoteExplosivesUtility.Error(string.Format("No material with index {0} available, as requested by {1}", variantIndex, thing.GetType()));
+				RemoteExplosivesController.Instance.Logger.Error(string.Format("No material with index {0} available, as requested by {1}", variantIndex, thing.GetType()));
 				return GetDefaultMat();
 			}
 			return subGraphics[variantIndex].MatSingleFor(thing);

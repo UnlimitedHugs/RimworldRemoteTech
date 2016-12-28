@@ -48,18 +48,23 @@
 	<Detonator_notargets>Cannot detonate- no armed explosives in range on this channel.</Detonator_notargets>
 	
 	<DetonatorManual_detonate_label>Detonate</DetonatorManual_detonate_label>
-	<DetonatorManual_detonate_desc>Detonates all explosives connected to the same detonator cord.</DetonatorManual_detonate_desc>
+	<DetonatorManual_detonate_desc>Detonates all explosives connected to the same detonator wire.</DetonatorManual_detonate_desc>
 		
-	<Cord_inspect_wet>{0}% wet</Cord_inspect_wet>
-	<Cord_inspect_dry>Dry</Cord_inspect_dry>
-	<Cord_inspect_covered>covered</Cord_inspect_covered>
-	<Cord_inspect_exposed>exposed</Cord_inspect_exposed>
-	<Cord_dry_label>Dry off</Cord_dry_label>
-	<Cord_dry_desc>Calls a colonist to dry this cord section to prevent failures when it is used.</Cord_dry_desc>
+	<Wire_inspect_wet>{0}% wet</Wire_inspect_wet>
+	<Wire_inspect_dry>Dry</Wire_inspect_dry>
+	<Wire_inspect_covered>covered</Wire_inspect_covered>
+	<Wire_inspect_exposed>exposed</Wire_inspect_exposed>
+	<Wire_dry_label>Dry off</Wire_dry_label>
+	<Wire_dry_desc>Calls a colonist to dry this wire section to prevent failures when it is used.</Wire_dry_desc>
 	
-	<Alert_cordFailure_label>Cord failure</Alert_cordFailure_label>
-	<Alert_cordFailure_desc>A detonator cord failed due to being wet and burned out.</Alert_cordFailure_desc>
+	<Alert_wireFailure_label>Wire failure</Alert_wireFailure_label>
+	<Alert_wireFailure_desc>A detonator wire failed due to being wet and burned out.</Alert_wireFailure_desc>
 	
-	<CordDesignator_label>Det. cord select</CordDesignator_label>
-	<CordDesignator_desc>Selects only Detonator Cord placed in an area. Useful for maintenance and deconstruction. Hold Shift to add to current selection.</CordDesignator_desc>
+	<WireDesignator_label>Det. wire select</WireDesignator_label>
+	<WireDesignator_desc>Selects only Detonator Wire placed in an area. Useful for maintenance and deconstruction. Hold Shift to add to current selection.</WireDesignator_desc>
+	
+	<Setting_forbidReplaced_label>Forbid auto-replaced blueprints</Setting_forbidReplaced_label>
+	<Setting_forbidReplaced_desc>When enabled, automatically placed blueprints will stay forbidden for a given number of seconds to keep colonists out of danger.</Setting_forbidReplaced_desc>
+	<Setting_forbidTimeout_label>Blueprints forbidden time</Setting_forbidTimeout_label>
+	<Setting_forbidTimeout_desc>How long an auto-replaced blueprint should stay forbidden (in seconds).</Setting_forbidTimeout_desc>
 </LanguageData>

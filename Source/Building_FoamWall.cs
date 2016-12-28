@@ -9,12 +9,11 @@ namespace RemoteExplosives {
 	 * Contained items are dropped on destruction.
 	 */
 	public class Building_FoamWall : Building {
-		private const string TrappedDamageDefName = "FoamWallRekt";
 		private bool justCreated;
 		private ThingContainer trappedInventory;
 
-		public override void SpawnSetup() {
-			base.SpawnSetup();
+		public override void SpawnSetup(Map map) {
+			base.SpawnSetup(map);
 			if(justCreated) {
 				var trappedThings = CrushThingsUnderWall(this);
 				if (trappedThings.Count == 0) return;
@@ -38,21 +37,20 @@ namespace RemoteExplosives {
 
 		public override void Destroy(DestroyMode mode = DestroyMode.Vanish) {
 			if(mode == DestroyMode.Kill && trappedInventory!=null) {
-				trappedInventory.TryDropAll(Position, ThingPlaceMode.Direct);
+				trappedInventory.TryDropAll(Position, Map, ThingPlaceMode.Direct);
 			}
 			base.Destroy(mode);
 		}
 
 		private List<Thing> CrushThingsUnderWall(Thing wall) {
-			var thingsList = Find.ThingGrid.ThingsListAt(wall.Position).Where(t => t != wall).ToList();
-			var damageDef = DefDatabase<DamageDef>.GetNamed(TrappedDamageDefName);
+			var thingsList = wall.Map.thingGrid.ThingsListAt(wall.Position).Where(t => t != wall).ToList();
 			foreach (var thing in thingsList) {
 				var pawn = thing as Pawn;
 				if (pawn != null && !pawn.RaceProps.IsMechanoid && !pawn.Dead) {
 					foreach (var activityGroup in pawn.RaceProps.body.GetActivityGroups(PawnCapacityDefOf.Breathing)) {
 						var parts = pawn.RaceProps.body.GetParts(PawnCapacityDefOf.Breathing, activityGroup);
 						foreach (var bodyPartRecord in parts) {
-							pawn.TakeDamage(new DamageInfo(damageDef, 9999, wall, new BodyPartDamageInfo(bodyPartRecord, false)));
+							pawn.TakeDamage(new DamageInfo(RemoteExplosivesDefOf.FoamWallRekt, 9999, -1f, wall, bodyPartRecord));
 						}
 					}
 					if(pawn.Dead && pawn.IsColonist) {
@@ -62,7 +60,7 @@ namespace RemoteExplosives {
 					thing.Destroy(DestroyMode.Kill);
 				}
 			}
-			return Find.ThingGrid.ThingsListAt(wall.Position).Where(t => t != wall && (t.def.category == ThingCategory.Item || t.def.category == ThingCategory.Pawn)).ToList();
+			return wall.Map.thingGrid.ThingsListAt(wall.Position).Where(t => t != wall && (t.def.category == ThingCategory.Item || t.def.category == ThingCategory.Pawn)).ToList();
 		}
 
 		public override string GetInspectString() {

@@ -111,8 +111,8 @@ namespace RemoteExplosives {
 				PlayNeedPowerEffect();
 				return;
 			}
-			SoundDefOf.FlickSwitch.PlayOneShot(Position);
-			RemoteExplosivesUtility.LightArmedExplosivesInRange(Position, SignalRange, currentChannel);
+			SoundDefOf.FlickSwitch.PlayOneShot(this);
+			RemoteExplosivesUtility.LightArmedExplosivesInRange(Position, Map, SignalRange, currentChannel);
 		}
 
 		public override void Tick() {
@@ -130,13 +130,13 @@ namespace RemoteExplosives {
 		}
 
 		private void PlayNeedPowerEffect() {
-			var info = SoundInfo.InWorld(this);
+			var info = SoundInfo.InMap(this);
 			info.volumeFactor = 3f;
 			SoundDefOf.PowerOffSmall.PlayOneShot(info);
 		}
 
 		private void UpdateNumArmedExplosivesInRange() {
-			numViableExplosives = RemoteExplosivesUtility.FindArmedExplosivesInRange(Position, SignalRange, currentChannel).Count;
+			numViableExplosives = RemoteExplosivesUtility.FindArmedExplosivesInRange(Position, Map, SignalRange, currentChannel).Count;
 		}
 
 		public override string GetInspectString(){
@@ -154,7 +154,6 @@ namespace RemoteExplosives {
 
 		// quick detonation option for drafted pawns
 		public override IEnumerable<FloatMenuOption> GetFloatMenuOptions(Pawn selPawn) {
-			Log.Message(selPawn.ToString());
 			var opt = RemoteExplosivesUtility.TryMakeDetonatorFloatMenuOption(selPawn, this);
 			if (opt != null) yield return opt;
 

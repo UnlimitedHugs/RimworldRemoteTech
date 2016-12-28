@@ -12,14 +12,7 @@ namespace RemoteExplosives {
 		private static readonly Texture2D UITex_AutoReplace = ContentFinder<Texture2D>.Get("UIAutoReplace");
 		private static readonly string AutoReplaceButtonLabel = "RemoteExplosive_autoReplace_label".Translate();
 		private static readonly string AutoReplaceButtonDesc = "RemoteExplosive_autoReplace_desc".Translate();
-
-		public int ForbiddenForTicks {
-			get {
-				var arProps = props is CompProperties_AutoReplaceable ? props as CompProperties_AutoReplaceable : new CompProperties_AutoReplaceable();
-				return Mathf.RoundToInt(arProps.forbiddenForSeconds * GenTicks.TicksPerRealSecond);
-			}
-		}
-
+		
 		private bool autoReplaceEnabled;
 		public bool AutoReplaceEnabled {
 			get { return autoReplaceEnabled; }
@@ -43,14 +36,14 @@ namespace RemoteExplosives {
 			ParentPosition = parent.Position;
 			ParentRotation = parent.Rotation;
 			if (!wasLoaded) {
-				AutoReplaceWatcher.Instance.TryApplySavedSettings(parent);
+				parent.Map.GetComponent<MapComponent_RemoteExplosives>().ReplaceWatcher.TryApplySavedSettings(parent);
 			}
 		}
 
-		public override void PostDestroy(DestroyMode mode, bool wasSpawned) {
-			base.PostDestroy(mode, wasSpawned);
+		public override void PostDestroy(DestroyMode mode, Map map) {
+			base.PostDestroy(mode, map);
 			if (AutoReplaceEnabled && mode == DestroyMode.Kill) {
-				AutoReplaceWatcher.Instance.ScheduleReplacement(this);
+				map.GetComponent<MapComponent_RemoteExplosives>().ReplaceWatcher.ScheduleReplacement(this);
 			}
 		}
 
@@ -71,7 +64,7 @@ namespace RemoteExplosives {
 			return replaceGizmo;
 		}
 
-		public override IEnumerable<Command> CompGetGizmosExtra() {
+		public override IEnumerable<Gizmo> CompGetGizmosExtra() {
 			if(autoDisplayGizmo) yield return MakeGizmo();
 		}
 

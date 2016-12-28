@@ -14,15 +14,16 @@ namespace RemoteExplosives {
 
 		private MoteProperties_GasCloud_HediffGiver gasProps;
 
-		public override void SpawnSetup() {
-			base.SpawnSetup();
+		public override void SpawnSetup(Map map) {
+			base.SpawnSetup(map);
 			gasProps = (MoteProperties_GasCloud_HediffGiver) def.mote;
 			if (gasProps == null) throw new Exception("Missing required gas mote properties in " + def.defName);
 		}
 
 		protected override void GasTick() {
  			base.GasTick();
-			var thingsOnTile = Find.ThingGrid.ThingsListAt(Position);
+			if(!Spawned) return;
+			var thingsOnTile = Map.thingGrid.ThingsListAt(Position);
 			for (int i = 0; i < thingsOnTile.Count; i++) {
 				var pawn = thingsOnTile[i] as Pawn;
 				if (pawn == null || pawn.Dead || (gasProps.requiresFleshyPawn && !pawn.def.race.IsFlesh) || PawnHasImmunizingApparel(pawn)) continue;

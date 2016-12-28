@@ -4,24 +4,24 @@ using Verse.AI;
 
 namespace RemoteExplosives {
 	/*
-	 * Calls a colonist to a marked detonation cord to dry it off
+	 * Calls a colonist to a marked detonation wire to dry it off
 	 */
-	public class JobDriver_DryDetonationCord : JobDriver {
-		public const string JobDefName = "JobDef_DryDetonationCord";
+	public class JobDriver_DryDetonatorWire : JobDriver {
+		public const string JobDefName = "JobDef_DryDetonatorWire";
 		private const string CleanEffecterDefName = "Clean";
 
 		protected override IEnumerable<Toil> MakeNewToils() {
 			AddFailCondition(JobHasFailed);
-			var cord = TargetThingA as Building_DetonatorCord;
-			if(cord == null) yield break;
+			var wire = TargetThingA as Building_DetonatorWire;
+			if(wire == null) yield break;
 			yield return Toils_Reserve.Reserve(TargetIndex.A);
 			yield return Toils_Goto.GotoCell(TargetIndex.A, PathEndMode.Touch);
-			var jobDuration = cord.DryOffJobDuration;
+			var jobDuration = wire.DryOffJobDuration;
 			yield return Toils_General.Wait(jobDuration).WithEffect(EffecterDef.Named(CleanEffecterDefName), TargetIndex.A).WithProgressBarToilDelay(TargetIndex.A, jobDuration);
 			yield return new Toil {
 				initAction = () => {
-					if (cord.WantDrying) {
-						cord.DryOff();
+					if (wire.WantDrying) {
+						wire.DryOff();
 					}
 				},
 				defaultCompleteMode = ToilCompleteMode.Instant
@@ -30,8 +30,8 @@ namespace RemoteExplosives {
 		}
 
 		private bool JobHasFailed() {
-			var cord = TargetThingA as Building_DetonatorCord;
-			return TargetThingA == null || TargetThingA.Destroyed || cord == null || !cord.WantDrying;
+			var wire = TargetThingA as Building_DetonatorWire;
+			return TargetThingA == null || TargetThingA.Destroyed || wire == null || !wire.WantDrying;
 		}
 	}
 }

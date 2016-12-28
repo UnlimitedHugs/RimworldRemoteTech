@@ -1,4 +1,5 @@
-﻿using RimWorld;
+﻿using HugsLib;
+using RimWorld;
 using Verse;
 
 namespace RemoteExplosives {
@@ -13,10 +14,10 @@ namespace RemoteExplosives {
 			var customExplosive = parent.GetComp<CompCustomExplosive>();
 			var vanillaExplosive = parent.GetComp<CompExplosive>();
 			if (customExplosive != null) {
-				CallbackScheduler.Instance.ScheduleCallback(() => customExplosive.StartWick(true), delayTicks);
+				HugsLibController.Instance.CallbackScheduler.ScheduleCallback(() => customExplosive.StartWick(true), delayTicks);
 			}		
 			if (vanillaExplosive != null) {
-				CallbackScheduler.Instance.ScheduleCallback(() => vanillaExplosive.StartWick(), delayTicks);	
+				HugsLibController.Instance.CallbackScheduler.ScheduleCallback(() => vanillaExplosive.StartWick(), delayTicks);	
 			}
 		}
 

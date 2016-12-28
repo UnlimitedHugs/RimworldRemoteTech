@@ -10,9 +10,6 @@ namespace RemoteExplosives {
 	 * Will spread a given number of times and turn into another building (wall) once time runs out.
 	 */
 	public class Building_FoamBlob : Building {
-		private static readonly SoundDef spraySound = SoundDef.Named("RemoteFoamSpray");
-		private static readonly SoundDef solidifySound = SoundDef.Named("RemoteFoamSolidify");
-		
 		private const float animationDuration = 1f;
 		private const float animationMagnitude = 1.5f;
 
@@ -27,13 +24,13 @@ namespace RemoteExplosives {
 		private List<IntVec3> adjacentCells;
 		private bool justCreated;
 
-		public override void SpawnSetup() {
-			base.SpawnSetup();
+		public override void SpawnSetup(Map map) {
+			base.SpawnSetup(map);
 			foamProps = (BuildingProperties_FoamBlob)def.building;
 			if(justCreated) {
 				SetFactionDirect(Faction.OfPlayer);
 				ticksUntilHardened = foamProps.ticksToHarden.RandomInRange;
-				spraySound.PlayOneShot(this);
+				RemoteExplosivesDefOf.RemoteFoamSpray.PlayOneShot(this);
 				PrimeSpawnAnimation();
 				justCreated = false;
 			}
@@ -62,11 +59,13 @@ namespace RemoteExplosives {
 		}
 
 		private void Harden() {
+			var pos = Position;
+			var map = Map;
 			Destroy();
 			var wallTile = ThingMaker.MakeThing(foamProps.hardenedDef);
 			wallTile.SetFactionDirect(Faction.OfPlayer);
-			GenPlace.TryPlaceThing(wallTile, Position, ThingPlaceMode.Direct);
-			solidifySound.PlayOneShot(this);
+			GenPlace.TryPlaceThing(wallTile, pos, map, ThingPlaceMode.Direct);
+			RemoteExplosivesDefOf.RemoteFoamSolidify.PlayOneShot(this);
 		}
 
 		public override void Tick() {
@@ -107,22 +106,22 @@ namespace RemoteExplosives {
 
 		private void SpreadFoam() {
 			const int maxSearchDistance = 10;
-			var targetCell = TryFindNearestCellForNewBlob(Position, maxSearchDistance);
+			var targetCell = TryFindNearestCellForNewBlob(Position, Map, maxSearchDistance);
 			if(targetCell == Position) return;
 			var newFoam = ThingMaker.MakeThing(def);
-			GenPlace.TryPlaceThing(newFoam, targetCell, ThingPlaceMode.Direct);
+			GenPlace.TryPlaceThing(newFoam, targetCell, Map, ThingPlaceMode.Direct);
 		}
 
 		// find a stadable cell that can be reached from the given position. Foam blobs count as traversable.
 		// vanilla closewalk stuff is no good, since foam must spread on an uniterrupted path
-		private IntVec3 TryFindNearestCellForNewBlob(IntVec3 originalPosition, int maxDistance) {
+		private IntVec3 TryFindNearestCellForNewBlob(IntVec3 originalPosition, Map map, int maxDistance) {
 			var cellQueue = new Queue<IntVec3>();
 			var visistedCells = new HashSet<IntVec3>();
 			cellQueue.Enqueue(originalPosition);
 			while (cellQueue.Count > 0) {
 				var cell = cellQueue.Dequeue();
-				var standable = cell.Standable();
-				var containsFoam = Find.ThingGrid.CellContains(cell, def);
+				var standable = cell.Standable(map);
+				var containsFoam = map.thingGrid.CellContains(cell, def);
 				if (standable) {
 					return cell;
 				} else if (containsFoam) {
