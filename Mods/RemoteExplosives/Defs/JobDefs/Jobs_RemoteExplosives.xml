@@ -20,8 +20,8 @@
 	</JobDef>
 	
 	<JobDef>
-		<defName>JobDef_DryDetonationCord</defName>
-		<driverClass>RemoteExplosives.JobDriver_DryDetonationCord</driverClass>
-		<reportString>Drying off detonation cord.</reportString>
+		<defName>JobDef_DryDetonatorWire</defName>
+		<driverClass>RemoteExplosives.JobDriver_DryDetonatorWire</driverClass>
+		<reportString>Drying off detonator wire.</reportString>
 	</JobDef>
 </JobDefs>

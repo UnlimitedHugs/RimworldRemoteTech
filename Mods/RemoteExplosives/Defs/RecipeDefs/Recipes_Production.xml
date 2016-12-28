@@ -20,7 +20,7 @@
 			<li>
 				<filter>
 					<thingDefs>
-						<li>ArtilleryShell</li>
+						<li>MortarShell</li>
 					</thingDefs>
 				</filter>
 				<count>1</count>
@@ -44,7 +44,7 @@
 		</ingredients>
 		<fixedIngredientFilter>
 			<thingDefs>
-				<li>ArtilleryShell</li>
+				<li>MortarShell</li>
 				<li>Component</li>
 				<li>Silver</li>
 			</thingDefs>
@@ -75,7 +75,7 @@
 			<li>
 				<filter>
 					<thingDefs>
-						<li>ArtilleryShell</li>
+						<li>MortarShell</li>
 					</thingDefs>
 				</filter>
 				<count>1</count>
@@ -99,7 +99,7 @@
 		</ingredients>
 		<fixedIngredientFilter>
 			<thingDefs>
-				<li>ArtilleryShell</li>
+				<li>MortarShell</li>
 				<li>Component</li>
 				<li>Silver</li>
 			</thingDefs>

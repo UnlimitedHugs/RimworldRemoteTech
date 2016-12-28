@@ -8,7 +8,7 @@
 	</DesignationDef>
 	
 	<DesignationDef>
-		<defName>DetonationCordDryOff</defName>
+		<defName>DetonatorWireDryOff</defName>
 		<texturePath>dry_off_designation</texturePath>
 		<targetType>Thing</targetType>
 		<designateCancelable>false</designateCancelable>

@@ -41,7 +41,7 @@ namespace RemoteExplosives {
 					if (table.WantChannelsComponent) {
 						table.InstallChannelsComponent();
 					}
-					Find.Reservations.Release(TargetThingB, GetActor());
+					Map.reservationManager.Release(TargetThingB, GetActor());
 					TargetThingB.Destroy();
 					ReadyForNextToil();
 				}

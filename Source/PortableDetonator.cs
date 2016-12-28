@@ -32,8 +32,8 @@ namespace RemoteExplosives {
 			justMade = true;
 		}
 
-		public override void SpawnSetup() {
-			base.SpawnSetup();
+		public override void SpawnSetup(Map map) {
+			base.SpawnSetup(map);
 			if (justMade) {
 				justMade = false;
 				numUsesLeft = MaxNumUses;
@@ -88,9 +88,9 @@ namespace RemoteExplosives {
 		private void OnGizmoActivation() {
 			if (lastActivationTick + ActivationCooldownTicks>=Find.TickManager.TicksGame) return;
 			lastActivationTick = Find.TickManager.TicksGame;
-			SoundDefOf.FlickSwitch.PlayOneShot(wearer.Position);
+			SoundDefOf.FlickSwitch.PlayOneShot(wearer);
 
-			RemoteExplosivesUtility.LightArmedExplosivesInRange(wearer.Position, SignalRange, RemoteExplosivesUtility.RemoteChannel.White);
+			RemoteExplosivesUtility.LightArmedExplosivesInRange(wearer.Position, wearer.Map, SignalRange, RemoteExplosivesUtility.RemoteChannel.White);
 			
 			numUsesLeft--;
 			if (numUsesLeft <= 0) {

@@ -6,8 +6,8 @@ namespace RemoteExplosives {
 	 */
 	[StaticConstructorOnStartup]
 	public abstract class CompDetonationGridNode : ThingComp {
-		private const string OverlayAtlasPath = "DetCord/det_cord_overlay_atlas";
-		private const string OverlayEndpointPath = "DetCord/connection_point_overlay";
+		private const string OverlayAtlasPath = "DetWire/det_wire_overlay_atlas";
+		private const string OverlayEndpointPath = "DetWire/connection_point_overlay";
 		private const LinkFlags OverlayAtlasLinkFlags = LinkFlags.Custom3;
 		private static readonly Graphic OverlayAtlasGraphic;
 		private static readonly Graphic OverlayEndpointGraphic;
@@ -25,14 +25,14 @@ namespace RemoteExplosives {
 			base.PostSpawnSetup();
 			if (parent is Building) {
 				cachedPosition = parent.Position;
-				Find.MapDrawer.MapMeshDirty(parent.Position, MapMeshFlag.Buildings);
+				parent.Map.mapDrawer.MapMeshDirty(parent.Position, MapMeshFlag.Buildings);
 			}
 		}
 
-		public override void PostDeSpawn() {
-			base.PostDeSpawn();
+		public override void PostDeSpawn(Map map) {
+			base.PostDeSpawn(map);
 			if (cachedPosition.IsValid) {
-				Find.MapDrawer.MapMeshDirty(cachedPosition, MapMeshFlag.Buildings);
+				map.mapDrawer.MapMeshDirty(cachedPosition, MapMeshFlag.Buildings);
 			}
 		}
 

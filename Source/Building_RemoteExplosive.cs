@@ -20,11 +20,7 @@ namespace RemoteExplosives {
 		private static readonly Texture2D UITex_Arm = ContentFinder<Texture2D>.Get("UIArm");
 		private static readonly Graphic flareOverlayNormal = GraphicDatabase.Get<Graphic_Single>(flareGraphicPath, ShaderDatabase.TransparentPostLight);
 		private static readonly Graphic flareOverlayStrong = GraphicDatabase.Get<Graphic_Single>(flareGraphicStrongPath, ShaderDatabase.TransparentPostLight);
-
-		private static readonly SoundDef armSound = SoundDef.Named("RemoteExplosiveArmed");
-		private static readonly SoundDef beepSound = SoundDef.Named("RemoteExplosiveBeep");
-		private static readonly SoundDef changeChannelSound = SoundDef.Named("RemoteChannelChange");
-
+		
 		private static readonly string ArmButtonLabel = "RemoteExplosive_arm_label".Translate();
 		private static readonly string ArmButtonDesc = "RemoteExplosive_arm_desc".Translate();
 		
@@ -44,7 +40,9 @@ namespace RemoteExplosives {
 		private BuildingProperties_RemoteExplosive _customProps;
 		private BuildingProperties_RemoteExplosive CustomProps {
 			get {
-				if (_customProps == null) _customProps = (def.building as BuildingProperties_RemoteExplosive) ?? new BuildingProperties_RemoteExplosive();
+				if (_customProps == null) {
+					_customProps = (def.building as BuildingProperties_RemoteExplosive) ?? new BuildingProperties_RemoteExplosive();
+				}
 				return _customProps;
 			}
 		}
@@ -71,8 +69,8 @@ namespace RemoteExplosives {
 			justCreated = true;
 		}
 
-		public override void SpawnSetup() {
-			base.SpawnSetup();
+		public override void SpawnSetup(Map map) {
+			base.SpawnSetup(map);
 			flareOverlayStrong.drawSize = flareOverlayNormal.drawSize = def.graphicData.drawSize;
 
 			RemoteExplosivesUtility.UpdateSwitchDesignation(this);
@@ -111,7 +109,7 @@ namespace RemoteExplosives {
 			}
 			if(desiredChannel!=currentChannel) {
 				currentChannel = desiredChannel;
-				changeChannelSound.PlayOneShot(SoundInfo.InWorld(this));
+				RemoteExplosivesDefOf.RemoteChannelChange.PlayOneShot(this);
 			}
 			RemoteExplosivesUtility.UpdateSwitchDesignation(this);
 		}
@@ -119,7 +117,7 @@ namespace RemoteExplosives {
 		public void Arm() {
 			if(IsArmed) return;
 			DrawFlareOverlay(true);
-			armSound.PlayOneShot(Position);
+			RemoteExplosivesDefOf.RemoteExplosiveArmed.PlayOneShot(this);
 			desiredArmState = true;
 			isArmed = true;
 		}
@@ -211,9 +209,9 @@ namespace RemoteExplosives {
 		}
 
 		private void EmitBeep(float pitch) {
-			var beepInfo = SoundInfo.InWorld(this);
+			var beepInfo = SoundInfo.InMap(this);
 			beepInfo.pitchFactor = pitch;
-			beepSound.PlayOneShot(beepInfo);
+			RemoteExplosivesDefOf.RemoteExplosiveBeep.PlayOneShot(beepInfo);
 		}
 
 		public override string GetInspectString() {

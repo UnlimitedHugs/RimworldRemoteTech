@@ -3,6 +3,7 @@
 	
 	<SoundDef>
 		<defName>RemoteExplosiveBeep</defName>  
+		<context>MapOnly</context>
 		<eventNames />  
 		<maxVoices>4</maxVoices>   
 		<maxSimultaneous>5</maxSimultaneous>  
@@ -23,6 +24,7 @@
 	
 	<SoundDef>
 		<defName>RemoteExplosiveArmed</defName>  
+		<context>MapOnly</context> 
 		<eventNames />  
 		<maxVoices>4</maxVoices>   
 		<maxSimultaneous>1</maxSimultaneous>  
@@ -43,6 +45,7 @@
 	
 	<SoundDef>
 		<defName>RemoteMiningCavein</defName>  
+		<context>MapOnly</context>
 		<eventNames />  
 		<maxVoices>3</maxVoices>   
 		<maxSimultaneous>3</maxSimultaneous>  
@@ -66,7 +69,8 @@
 	</SoundDef>
 	
 	<SoundDef>
-		<defName>RemoteEmpCharge</defName>  
+		<defName>RemoteEmpCharge</defName>   
+		<context>MapOnly</context>
 		<eventNames />  
 		<maxVoices>3</maxVoices>   
 		<maxSimultaneous>3</maxSimultaneous>  
@@ -91,6 +95,7 @@
 	
 	<SoundDef>
 		<defName>RemoteChannelChange</defName>  
+		<context>MapOnly</context>
 		<eventNames />  
 		<maxVoices>3</maxVoices>   
 		<maxSimultaneous>3</maxSimultaneous>  
@@ -140,6 +145,7 @@
 	
 	<SoundDef>
 		<defName>RemoteFoamSpray</defName>  
+		<context>MapOnly</context> 
 		<eventNames />  
 		<maxVoices>5</maxVoices>   
 		<maxSimultaneous>5</maxSimultaneous>  
@@ -164,6 +170,7 @@
 	
 	<SoundDef>
 		<defName>RemoteGlassBreak</defName>  
+		<context>MapOnly</context>
 		<eventNames />  
 		<maxVoices>4</maxVoices>   
 		<maxSimultaneous>4</maxSimultaneous>  
@@ -188,6 +195,7 @@
 	
 	<SoundDef>
 		<defName>RemoteFoamSolidify</defName>  
+		<context>MapOnly</context>
 		<eventNames />  
 		<maxVoices>4</maxVoices>   
 		<maxSimultaneous>4</maxSimultaneous>  
@@ -212,6 +220,7 @@
 	
 	<SoundDef>
 		<defName>RemoteDetonatorLever</defName>  
+		<context>MapOnly</context>
 		<eventNames />  
 		<maxVoices>4</maxVoices>   
 		<maxSimultaneous>4</maxSimultaneous>  
@@ -236,6 +245,7 @@
 	
 	<SoundDef>
 		<defName>RemoteSparkweedIgnite</defName>  
+		<context>MapOnly</context>
 		<eventNames />  
 		<maxVoices>4</maxVoices>   
 		<maxSimultaneous>4</maxSimultaneous>  
@@ -260,6 +270,7 @@
 	
 	<SoundDef>
 		<defName>RemoteCableFailure</defName>  
+		<context>MapOnly</context>
 		<eventNames />  
 		<maxVoices>4</maxVoices>   
 		<maxSimultaneous>4</maxSimultaneous>  

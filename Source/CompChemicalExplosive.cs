@@ -14,10 +14,11 @@ namespace RemoteExplosives {
 		}
 
 		protected override void Detonate() {
+			var map = parent.Map;
 			base.Detonate();
 			if (customProps.spawnThingDef == null) return;
 			var thing = ThingMaker.MakeThing(customProps.spawnThingDef);
-			GenPlace.TryPlaceThing(thing, parent.Position, ThingPlaceMode.Direct);
+			GenPlace.TryPlaceThing(thing, parent.Position, map, ThingPlaceMode.Direct);
 			if (thing is Building_FoamBlob) {
 				if (customProps.numFoamBlobs > 1) {
 					(thing as Building_FoamBlob).SetSpreadingCharges(customProps.numFoamBlobs - 1);
@@ -29,9 +30,9 @@ namespace RemoteExplosives {
 			}
 		}
 
-		public override void PostDestroy(DestroyMode mode, bool wasSpawned) {
-			base.PostDestroy(mode, wasSpawned);
-			if(wasSpawned && mode == DestroyMode.Kill && customProps.breakSound!=null) {
+		public override void PostDestroy(DestroyMode mode, Map map) {
+			base.PostDestroy(mode, map);
+			if (map != null && mode == DestroyMode.Kill && customProps.breakSound != null) {
 				customProps.breakSound.PlayOneShot(parent);
 			}
 		}

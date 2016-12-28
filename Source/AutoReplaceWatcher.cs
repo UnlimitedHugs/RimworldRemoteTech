@@ -4,11 +4,11 @@ using Verse;
 
 namespace RemoteExplosives {
 	/* 
-	 * Replaces exploded charges with new blueprints that are forbidden for 30 seconds
+	 * Replaces exploded charges with new blueprints that are forbidden for a set number of seconds
 	 * stores settings to give to charges once they have been rebuilt
 	 */
 	public class AutoReplaceWatcher : IExposable {
-		private const int TicksBetweenSettingsPruning = 60;
+		private const int TicksBetweenSettingsPruning = GenTicks.TicksPerRealSecond;
 
 		private class ReplacementEntry : IExposable {
 			public IntVec3 position;
@@ -24,21 +24,20 @@ namespace RemoteExplosives {
 			}
 		}
 
+		private Map map;
 		private List<ReplacementEntry> pendingSettings = new List<ReplacementEntry>();
 		private List<ReplacementEntry> pendingForbiddenBlueprints = new List<ReplacementEntry>(); // acts as a queue for lack of queue saving
-
-		public static AutoReplaceWatcher Instance { get; private set; }
-
-		public AutoReplaceWatcher() {
-			Instance = this;
+		
+		public void SetParentMap(Map parentMap) {
+			map = parentMap;
 		}
 
 		public void ScheduleReplacement(CompAutoReplaceable replaceableComp) {
 			var building = replaceableComp.parent;
-			var blueprint = GenConstruct.PlaceBlueprintForBuild(building.def, replaceableComp.ParentPosition, replaceableComp.ParentRotation, Faction.OfPlayer, null);
+			var blueprint = GenConstruct.PlaceBlueprintForBuild(building.def, replaceableComp.ParentPosition, map, replaceableComp.ParentRotation, Faction.OfPlayer, null);
 			var entry = new ReplacementEntry {
 				position = replaceableComp.ParentPosition,
-				unforbidTick = Find.TickManager.TicksGame + replaceableComp.ForbiddenForTicks,
+				unforbidTick = Find.TickManager.TicksGame + RemoteExplosivesController.Instance.BlueprintForbidDuration * GenTicks.TicksPerRealSecond
 			};
 			var explosive = building as Building_RemoteExplosive;
 			if (explosive!=null) {
@@ -46,7 +45,7 @@ namespace RemoteExplosives {
 				entry.channel = explosive.CurrentChannel;
 			}
 			pendingSettings.Add(entry);
-			if (replaceableComp.ForbiddenForTicks > 0) {
+			if (RemoteExplosivesController.Instance.BlueprintForbidDuration > 0) {
 				blueprint.SetForbidden(true, false);
 				pendingForbiddenBlueprints.Add(entry);
 			}
@@ -86,26 +85,31 @@ namespace RemoteExplosives {
 
 		private void UnforbidScheduledBlueprints() {
 			var currentTick = Find.TickManager.TicksGame;
-			var anyHits = false;
+			var anyEntriesExpired = false;
 			for (int i = 0; i < pendingForbiddenBlueprints.Count; i++) {
 				var entry = pendingForbiddenBlueprints[i];
 				if(entry.unforbidTick > currentTick) continue;
-				var blueprint = Find.ThingGrid.ThingAt<Blueprint_Build>(entry.position);
+				
+				var blueprint = map.thingGrid.ThingAt<Blueprint_Build>(entry.position);
 				if (blueprint != null) {
 					blueprint.SetForbidden(false, false);
 				}
-				anyHits = true;
+				
+				anyEntriesExpired = true;
 			}
-			if (anyHits) pendingForbiddenBlueprints.RemoveAll(e => e.unforbidTick <= currentTick);
+			if (anyEntriesExpired) pendingForbiddenBlueprints.RemoveAll(e => e.unforbidTick <= currentTick);
 		}
 
-		// auto-placed blueprints may get cancelled
+		// auto-placed blueprints may get cancelled. Clean entries up periodically
 		private void PruneSettingsEntries() {
 			for (int i = pendingSettings.Count - 1; i >= 0; i--) {
 				var entry = pendingSettings[i];
-				var containsBlueprint = Find.ThingGrid.ThingAt<Blueprint_Build>(entry.position) != null;
-				var edifice = Find.EdificeGrid[CellIndices.CellToIndex(entry.position)];
-				var containsBuildingFrame = edifice != null && edifice.def.IsFrame;
+				bool containsBlueprint = false, containsBuildingFrame = false;
+				if (map != null) {
+					containsBlueprint = map.thingGrid.ThingAt<Blueprint_Build>(entry.position) != null;
+					var edifice = map.edificeGrid[map.cellIndices.CellToIndex(entry.position)];
+					containsBuildingFrame = edifice != null && edifice.def.IsFrame;
+				}
 				if (!containsBlueprint && !containsBuildingFrame) {
 					pendingSettings.RemoveAt(i);
 				}

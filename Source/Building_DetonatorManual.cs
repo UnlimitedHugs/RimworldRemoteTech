@@ -12,7 +12,6 @@ namespace RemoteExplosives {
 		private static readonly Texture2D UITex_Detonate = ContentFinder<Texture2D>.Get("UItrigger");
 		private static readonly string DetonateButtonLabel = "DetonatorManual_detonate_label".Translate();
 		private static readonly string DetonateButtonDesc = "DetonatorManual_detonate_desc".Translate();
-		private static readonly SoundDef PlungerCycleSound = SoundDef.Named("RemoteDetonatorLever");
 
 		private enum VisualVariant {
 			PlungerUp = 0,
@@ -42,7 +41,7 @@ namespace RemoteExplosives {
 			wantDetonation = false;
 			currentVariant = VisualVariant.PlungerDown;
 			plungerExpireTime = Time.realtimeSinceStartup + PlungerDownTime;
-			PlungerCycleSound.PlayOneShot(Position);
+			RemoteExplosivesDefOf.RemoteDetonatorLever.PlayOneShot(new TargetInfo(Position, Map));
 			var transmitterComp = GetComp<CompWiredDetonationSender>();
 			if(transmitterComp != null) transmitterComp.SendNewSignal();
 		}

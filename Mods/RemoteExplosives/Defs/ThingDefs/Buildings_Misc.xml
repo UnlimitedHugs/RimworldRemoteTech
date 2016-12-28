@@ -123,6 +123,10 @@
 				<damageDef>Bullet</damageDef>
 				<multiplier>0.03</multiplier>
 			</li>
+			<li>
+				<damageDef>Mining</damageDef>
+				<multiplier>3</multiplier>
+			</li>
 		</damageMultipliers>
 	</ThingDef> 
 </ThingDefs>

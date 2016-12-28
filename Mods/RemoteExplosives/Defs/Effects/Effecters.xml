@@ -80,7 +80,7 @@
 	</EffecterDef>
 	
 	<EffecterDef>
-		<defName>DetCordFailure</defName>
+		<defName>DetWireFailure</defName>
 		<children>
 			<li>
 				<subEffecterClass>SubEffecter_SoundTriggered</subEffecterClass>

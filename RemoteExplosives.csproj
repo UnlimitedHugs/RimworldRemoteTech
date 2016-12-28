@@ -49,12 +49,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Source\Alert_DetonatorCordFailure.cs" />
+    <Compile Include="Source\Alert_DetonatorWireFailure.cs" />
     <Compile Include="Source\AutoReplaceWatcher.cs" />
-    <Compile Include="Source\BuildingProperties_DetonatorCord.cs" />
+    <Compile Include="Source\BuildingProperties_DetonatorWire.cs" />
     <Compile Include="Source\BuildingProperties_RemoteExplosive.cs" />
     <Compile Include="Source\Building_DetonatorManual.cs" />
-    <Compile Include="Source\Building_DetonatorCord.cs" />
+    <Compile Include="Source\Building_DetonatorWire.cs" />
     <Compile Include="Source\Building_FoamWall.cs" />
     <Compile Include="Source\Building_MiningExplosive.cs" />
     <Compile Include="Source\Building_DetonatorTable.cs" />
@@ -62,7 +62,6 @@
     <Compile Include="Source\Building_RemoteExplosive.cs" />
     <Compile Include="Source\Building_RemoteExplosiveEmp.cs" />
     <Compile Include="Source\Building_FoamBlob.cs" />
-    <Compile Include="Source\CallbackScheduler.cs" />
     <Compile Include="Source\Command_MouseOverDetector.cs" />
     <Compile Include="Source\CompAutoReplaceable.cs" />
     <Compile Include="Source\CompChemicalExplosive.cs" />
@@ -77,8 +76,7 @@
     <Compile Include="Source\CompProperties_WiredDetonationReceiver.cs" />
     <Compile Include="Source\CompWiredDetonationReceiver.cs" />
     <Compile Include="Source\DamageWorker_FlameChance.cs" />
-    <Compile Include="Source\Designator_SelectDetonatorCord.cs" />
-    <Compile Include="Source\DistributedTickScheduler.cs" />
+    <Compile Include="Source\Designator_SelectDetonatorWire.cs" />
     <Compile Include="Source\FlameChanceDamageDef.cs" />
     <Compile Include="Source\InterpolatedValue.cs" />
     <Compile Include="Source\InterpolationCurves.cs" />
@@ -90,7 +88,7 @@
     <Compile Include="Source\HediffDef_NonLethal.cs" />
     <Compile Include="Source\Hediff_NonLethal.cs" />
     <Compile Include="Source\IGraphicVariantProvider.cs" />
-    <Compile Include="Source\JobDriver_DryDetonationCord.cs" />
+    <Compile Include="Source\JobDriver_DryDetonatorWire.cs" />
     <Compile Include="Source\MoteProperties_GasCloud_HediffGiver.cs" />
     <Compile Include="Source\GasCloud.cs" />
     <Compile Include="Source\GasCloud_HediffGiver.cs" />
@@ -104,9 +102,11 @@
     <Compile Include="Source\CompRandomResourceLeaver.cs" />
     <Compile Include="Source\CompProperties_RandomResourceLeaver.cs" />
     <Compile Include="Source\JobDriver_InstallChannelsComponent.cs" />
-    <Compile Include="Source\MapComponent_RemoteExplosivesInjector.cs" />
-    <Compile Include="Source\PlaceWorker_DetonatorCord.cs" />
+    <Compile Include="Source\MapComponent_RemoteExplosives.cs" />
+    <Compile Include="Source\PlaceWorker_DetonatorWire.cs" />
     <Compile Include="Source\PlaceWorker_RoofBreakerExplosive.cs" />
+    <Compile Include="Source\RemoteExplosivesController.cs" />
+    <Compile Include="Source\RemoteExplosivesDefOf.cs" />
     <Compile Include="Source\SectionLayer_DetonationGrid.cs" />
     <Compile Include="Source\SparkweedPlantDef.cs" />
     <Compile Include="Source\Plant_Sparkweed.cs" />
@@ -114,7 +114,7 @@
     <Compile Include="Source\SidedBaseGraphicData.cs" />
     <Compile Include="Source\TraderStockInjectorDef.cs" />
     <Compile Include="Source\BuildingProperties_FoamBlob.cs" />
-    <Compile Include="Source\WorkGiver_DetonatorCord.cs" />
+    <Compile Include="Source\WorkGiver_DetonatorWire.cs" />
     <Compile Include="Source\WorkGiver_DetonatorTableChannels.cs" />
     <Compile Include="Source\WorkGiver_RemoteExposive.cs" />
     <Compile Include="Source\ISwitchable.cs" />
@@ -124,7 +124,17 @@
     <Compile Include="Source\RemoteExplosivesUtility.cs" />
     <Compile Include="Source\WorkGiver_IPawnDetonateable.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\HugsLibChecker\HugsLibChecker.csproj">
+      <Project>{a7dea100-952b-4516-b020-b66c8bcb4b50}</Project>
+      <Name>HugsLibChecker</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HugsLib\HugsLib.csproj">
+      <Project>{a5d9bd45-533c-4ca0-9298-8950a3da724c}</Project>
+      <Name>HugsLib</Name>
+      <Private>False</Private>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

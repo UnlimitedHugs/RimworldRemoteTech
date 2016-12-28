@@ -1,4 +1,5 @@
-﻿using Verse;
+﻿using System;
+using Verse;
 
 namespace RemoteExplosives {
 	/*
@@ -6,7 +7,8 @@ namespace RemoteExplosives {
 	 */
 	public class CompWiredDetonationSender : CompDetonationGridNode {
 		public void SendNewSignal() {
-			var thingsOnTile = Find.ThingGrid.ThingsListAtFast(parent.Position);
+			if (parent.Map == null) throw new Exception("null map");
+			var thingsOnTile = parent.Map.thingGrid.ThingsListAtFast(parent.Position);
 			for (var i = 0; i < thingsOnTile.Count; i++) {
 				var comp = thingsOnTile[i].TryGetComp<CompWiredDetonationTransmitter>();
 				if (comp == null) continue;

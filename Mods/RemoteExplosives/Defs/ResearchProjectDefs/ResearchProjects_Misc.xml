@@ -9,10 +9,12 @@ Once researched:
 - Sparkweed can be planted.
 - Charcoal can be made from wood logs at campfires and the fueled stove.
 - Explosive pouch can be made at a crafting spot or tailoring bench.
-- The manual detonator and detonator cord can be built to trigger the explosives.</description>
+- The manual detonator and detonator wire can be built to trigger the explosives.</description>
 		<baseCost>1000</baseCost>
 		<techLevel>Medieval</techLevel>
 		<prerequisites></prerequisites>
+		<researchViewX>13</researchViewX>
+		<researchViewY>0</researchViewY>
 	</ResearchProjectDef>
 
 	<ResearchProjectDef>
@@ -24,7 +26,11 @@ The explosives workshop can create mining explosives that can be deployed as Fra
 Research Explosive IEDs or Incendiary IEDs to manufacture combat-grade remote explosives.</description>
 		<baseCost>1500</baseCost>
 		<techLevel>Industrial</techLevel>
-		<prerequisites></prerequisites>
+		<prerequisites>
+			<li>MakeshiftExplosives</li>
+		</prerequisites>
+		<researchViewX>13</researchViewX>
+		<researchViewY>1</researchViewY>
 	</ResearchProjectDef>
 	
 	<ResearchProjectDef>
@@ -37,6 +43,8 @@ The detonator must be upgraded with a component for this to work.</description>
 		<prerequisites>
 			<li>RemoteDetonator</li>
 		</prerequisites>
+		<researchViewX>14</researchViewX>
+		<researchViewY>0</researchViewY>
 	</ResearchProjectDef>
 	
 	<ResearchProjectDef>
@@ -49,6 +57,8 @@ While expensive, they can be devastating against mechanoids when properly used.<
 		<prerequisites>
 			<li>RemoteDetonator</li>
 		</prerequisites>
+		<researchViewX>14</researchViewX>
+		<researchViewY>1</researchViewY>
 	</ResearchProjectDef>
 	
 	<ResearchProjectDef>
@@ -62,6 +72,8 @@ Use in enclosed areas for best results.</description>
 		<prerequisites>
 			<li>RemoteDetonator</li>
 		</prerequisites>
+		<researchViewX>15</researchViewX>
+		<researchViewY>0</researchViewY>
 	</ResearchProjectDef>
 	
 	<ResearchProjectDef>
@@ -74,6 +86,8 @@ Allows the Shaped Charge to be built.</description>
 		<prerequisites>
 			<li>RemoteDetonator</li>
 		</prerequisites>
+		<researchViewX>15</researchViewX>
+		<researchViewY>1</researchViewY>
 	</ResearchProjectDef>
 	
 </ResearchProjectDefs>

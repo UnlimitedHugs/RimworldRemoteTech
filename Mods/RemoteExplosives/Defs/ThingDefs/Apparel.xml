@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ThingDefs>
-	
+
 	<ThingDef Name="ApparelBase" Abstract="True">
 		<thingClass>Apparel</thingClass>
 		<category>Item</category>
@@ -22,11 +22,15 @@
 		<tickerType>Never</tickerType>
 		<comps>
 			<li Class="CompProperties_Forbiddable"/>
-			<li><compClass>CompColorable</compClass></li>
-			<li><compClass>CompQuality</compClass></li>
+			<li>
+				<compClass>CompColorable</compClass>
+			</li>
+			<li>
+				<compClass>CompQuality</compClass>
+			</li>
 		</comps>
 	</ThingDef>
-	
+
 	<ThingDef Name="ApparelMakeableBase" ParentName="ApparelBase" Abstract="True">
 		<recipeMaker>
 			<workSpeedStat>TailoringSpeed</workSpeedStat>
@@ -40,7 +44,7 @@
 			<unfinishedThingDef>UnfinishedApparel</unfinishedThingDef>
 		</recipeMaker>
 	</ThingDef>
-	
+
 	<ThingDef ParentName="ApparelMakeableBase">
 		<defName>Apparel_GasMask</defName>
 		<label>gas mask</label>
@@ -65,9 +69,9 @@ The filters wear out fairly quickly, so it's recommended to wear this only when 
 			<li>Headgear</li>
 		</thingCategories>
 		<costList>
+			<Steel>40</Steel>
 			<Component>2</Component>
 			<Medicine>2</Medicine>
-			<Steel>40</Steel>
 		</costList>
 		<equippedStatOffsets>
 			<ToxicSensitivity>-0.80</ToxicSensitivity>
@@ -109,7 +113,7 @@ The filters wear out fairly quickly, so it's recommended to wear this only when 
 			</options>
 		</colorGenerator>
 	</ThingDef>
-	
+
 	<ThingDef ParentName="ApparelBase">
 		<thingClass>RemoteExplosives.PortableDetonator</thingClass>
 		<defName>Apparel_PortableDetonator</defName>
@@ -156,5 +160,5 @@ Works only on the white channel, has limited range and runs on a non-rechargeabl
 			<commonality>0</commonality>
 		</apparel>
 	</ThingDef>
-	
+
 </ThingDefs>

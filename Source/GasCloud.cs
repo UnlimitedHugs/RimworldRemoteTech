@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using HugsLib;
 using RimWorld;
 using UnityEngine;
 using Verse;
@@ -50,7 +51,7 @@ namespace RemoteExplosives {
 
 		public bool IsBlocked {
 			get {
-				return !TileIsGasTraversible(Position, this);
+				return !TileIsGasTraversible(Position, Map, this);
 			}
 		}
 
@@ -61,20 +62,20 @@ namespace RemoteExplosives {
 			interpolatedRotation = new InterpolatedValue();
 		}
 
-		public override void SpawnSetup() {
-			base.SpawnSetup();
+		public override void SpawnSetup(Map map) {
+			base.SpawnSetup(map);
 			gasProps = def.mote as MoteProperties_GasCloud;
 			relativeZOrder = ++GlobalOffsetCounter % 80;
 			if (gasProps == null) throw new Exception("Missing required gas mote properties in " + def.defName);
 			interpolatedScale.value = GetRandomGasScale();
 			interpolatedRotation.value = GetRandomGasRotation();
 			// uniformely distribute gas ticks to reduce per frame workload
-			DistributedTickScheduler.Instance.RegisterTickability(GasTick, gasProps.GastickInterval);
+			HugsLibController.Instance.DistributedTicker.RegisterTickability(GasTick, gasProps.GastickInterval);
 		}
 
 		public override void DeSpawn() {
 			base.DeSpawn();
-			DistributedTickScheduler.Instance.UnregisterTickability(GasTick, gasProps.GastickInterval);
+			HugsLibController.Instance.DistributedTicker.UnregisterTickability(GasTick, gasProps.GastickInterval);
 		}
 
 		public override void ExposeData() {
@@ -141,7 +142,7 @@ namespace RemoteExplosives {
 		protected virtual void GasTick() {
 			gasTicksProcessed++;
 			// dissipate
-			var underRoof = Find.RoofGrid.Roofed(Position);
+			var underRoof = Map.roofGrid.Roofed(Position);
 			concentration -= underRoof ? gasProps.RoofedDissipation : gasProps.UnroofedDissipation;
 			if(concentration<=0) {
 				Destroy(DestroyMode.Kill);
@@ -185,7 +186,7 @@ namespace RemoteExplosives {
 			positionBuffer.Clear();
 			for (int i = 0; i < 4; i++) {
 				var adjPosition = GenAdj.CardinalDirections[i] + Position;
-				if(TileIsGasTraversible(adjPosition, this) && Find.ThingGrid.ThingAt<GasCloud>(adjPosition) == null) {
+				if(TileIsGasTraversible(adjPosition, Map, this) && Map.thingGrid.ThingAt<GasCloud>(adjPosition) == null) {
 					positionBuffer.Add(adjPosition);
 				}
 			}
@@ -197,7 +198,7 @@ namespace RemoteExplosives {
 			adjacentBuffer.Clear();
 			for (int i = 0; i < 4; i++) {
 				var adjPosition = GenAdj.CardinalDirections[i] + Position;
-				var cloud = Find.ThingGrid.ThingAt<GasCloud>(adjPosition);
+				var cloud = Map.thingGrid.ThingAt<GasCloud>(adjPosition);
 				if(cloud!=null) {
 					adjacentBuffer.Add(cloud);
 				}
@@ -249,15 +250,15 @@ namespace RemoteExplosives {
 				var targetPosition = viableCells[i];
 				var newCloud = (GasCloud)ThingMaker.MakeThing(def);
 				newCloud.BeginSpreadingTransition(this, targetPosition);
-				GenPlace.TryPlaceThing(newCloud, targetPosition, ThingPlaceMode.Direct);
+				GenPlace.TryPlaceThing(newCloud, targetPosition, Map, ThingPlaceMode.Direct);
 				spreadsLeft--;
 			}
 		}
 
-		private bool TileIsGasTraversible(IntVec3 pos, GasCloud sourceCloud) {
-			if (!pos.InBounds()) return false;
-			var edifice = Find.EdificeGrid[pos];
-			var walkable = Find.PathGrid.WalkableFast(pos);
+		private bool TileIsGasTraversible(IntVec3 pos, Map map, GasCloud sourceCloud) {
+			if (!pos.InBounds(map)) return false;
+			var edifice = map.edificeGrid[pos];
+			var walkable = map.pathGrid.WalkableFast(pos);
 			TraversibilityTest travTest = null;
 			if (edifice != null) TraversibleBuildings.TryGetValue(edifice.GetType(), out travTest);
 			return (walkable && travTest == null) || (travTest != null && travTest(edifice, sourceCloud));

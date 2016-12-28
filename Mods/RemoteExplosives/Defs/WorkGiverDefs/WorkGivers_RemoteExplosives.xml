@@ -66,9 +66,9 @@
 	</WorkGiverDef>
 	
 	<WorkGiverDef>
-		<defName>DryOffDetonationCord</defName>
-		<label>dry off detonation cord</label>
-		<giverClass>RemoteExplosives.WorkGiver_DetonatorCord</giverClass>
+		<defName>DryOffDetonatorWire</defName>
+		<label>dry off detonator wire</label>
+		<giverClass>RemoteExplosives.WorkGiver_DetonatorWire</giverClass>
 		<workType>Cleaning</workType>
 		<priorityInType>50</priorityInType>
 		<verb>dry off</verb>
