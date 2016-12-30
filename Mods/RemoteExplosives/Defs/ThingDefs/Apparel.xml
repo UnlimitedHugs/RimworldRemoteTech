@@ -157,7 +157,7 @@ Works only on the white channel, has limited range and runs on a non-rechargeabl
 			<layers>
 				<li>Accessory</li>
 			</layers>
-			<commonality>0</commonality>
+			<commonality>0.00001</commonality> <!-- turns out, setting this to zero causes problems -->
 		</apparel>
 	</ThingDef>
 
