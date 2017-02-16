@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ThingDefs>
-	
+
 	<ThingDef Name="BuildingMiscBase" Abstract="True">
 		<category>Building</category>
 		<soundImpactDefault>BulletImpactGround</soundImpactDefault>
@@ -10,7 +10,7 @@
 		<leaveResourcesWhenKilled>false</leaveResourcesWhenKilled>
 		<filthLeaving>BuildingRubble</filthLeaving>
 	</ThingDef>
-	
+
 	<ThingDef ParentName="BuildingMiscBase">
 		<DefName>WallFoamBlob</DefName>
 		<label>chemical foam</label>
@@ -55,7 +55,7 @@
 			<hardenedDef>FoamWall</hardenedDef>
 		</building>
 	</ThingDef>
-	
+
 	<ThingDef ParentName="BuildingMiscBase" Name="FoamWall">
 		<defName>FoamWall</defName>
 		<label>hardened foam wall</label>
@@ -129,4 +129,47 @@
 			</li>
 		</damageMultipliers>
 	</ThingDef> 
+
+	<ThingDef>
+		<defName>CollapsedRoofRocks</defName>
+		<graphicData>
+			<texPath>Things/Building/Natural/CollapsedRocks</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<linkType>None</linkType>
+			<drawSize>(3,3)</drawSize>
+		</graphicData>
+		<thingClass>Mineable</thingClass>
+		<description>Collapsed rocks, packed tightly enough to hold up a roof.</description>
+		<label>collapsed rocks</label>
+		<drawerType>MapMeshOnly</drawerType>
+		<category>Building</category>
+		<selectable>true</selectable>
+		<filthLeaving>RockRubble</filthLeaving>
+		<scatterableOnMapGen>false</scatterableOnMapGen>
+		<altitudeLayer>Building</altitudeLayer>
+		<passability>PassThroughOnly</passability>
+		<blockWind>true</blockWind>
+		<castEdgeShadows>true</castEdgeShadows>
+		<fillPercent>1</fillPercent>
+		<coversFloor>true</coversFloor>
+		<neverMultiSelect>false</neverMultiSelect>
+		<saveCompressible>false</saveCompressible>
+		<holdsRoof>true</holdsRoof>
+		<staticSunShadowHeight>1.0</staticSunShadowHeight>
+		<blockLight>true</blockLight>
+		<mineable>true</mineable>
+		<rotatable>true</rotatable>
+		<statBases>
+			<MaxHitPoints>500</MaxHitPoints>
+			<Flammability>0</Flammability>
+		</statBases>
+		<building>
+			<isInert>true</isInert>
+			<canBuildNonEdificesUnder>false</canBuildNonEdificesUnder>
+			<deconstructible>false</deconstructible>
+			<isNaturalRock>false</isNaturalRock>
+			<claimable>false</claimable>
+		</building>
+	</ThingDef>
+	
 </ThingDefs>

@@ -26,22 +26,21 @@ namespace RemoteExplosives {
 		}
 
 		protected override void Detonate() {
-			var map = parent.Map;
 			base.Detonate();
+			if (parentMap == null) return;
 			var area = customArea;
 			if (area == null) {
 				var radius = Mathf.Clamp(Mathf.Round(MiningProps.miningRadius), 0, 25);
-				area = GenRadial.RadialCellsAround(parent.Position, radius, true).ToList();
+				area = GenRadial.RadialCellsAround(parentPosition, radius, true).ToList();
 			}
-			var ownPosition = parent.Position;
 			var cellsByDistance = area.OrderBy(c => { // sort by distance from center
-				var rel = c - ownPosition;
+				var rel = c - parentPosition;
 				return Mathf.Pow(rel.x, 2f) + Mathf.Pow(rel.z, 2f);
 			});
 			var affectedMineables = 0;
 			var breakingPowerRemaining = MiningProps.breakingPower;
 			foreach (var pos in cellsByDistance) {
-				var things = map.thingGrid.ThingsListAt(pos).ToArray(); // copy required because of collection modification
+				var things = parentMap.thingGrid.ThingsListAt(pos).ToArray(); // copy required because of collection modification
 				foreach (var thing in things) {
 					if (TryAffectThing(thing, ref breakingPowerRemaining)) {
 						affectedMineables++;
@@ -52,7 +51,7 @@ namespace RemoteExplosives {
 				}
 			}
 			if (affectedMineables >= MinAffectedCellsToTriggerCaveinSound) {
-				CaveInSoundEffect.PlayOneShot(parent);
+				CaveInSoundEffect.PlayOneShot(new TargetInfo(parentPosition, parentMap));
 			}
 		}
 

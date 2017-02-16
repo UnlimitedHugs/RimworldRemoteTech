@@ -12,7 +12,7 @@
 	<RemoteExplosive_arm_desc>当准备时，这个炸药可以被远程触发。</RemoteExplosive_arm_desc>
 	
 	<RemoteExplosive_currentChannel>所在通道: {0}</RemoteExplosive_currentChannel>
-	<RemoteExplosive_channelChanger_label>{0} 通道</RemoteExplosive_channelChanger_label>
+	<RemoteExplosive_channelChanger_label>{0} 通道{1}</RemoteExplosive_channelChanger_label>
 	<RemoteExplosive_detonatorChannelChanger_desc>设置触发通道，只有在同一通道上的炸药才能引爆。</RemoteExplosive_detonatorChannelChanger_desc>
 	
 	<RemoteExplosive_autoReplace_label>自动更换</RemoteExplosive_autoReplace_label>

@@ -68,13 +68,14 @@ namespace RemoteExplosives {
 			return ("RemoteExplosive_channel" + ((int)channel)).Translate();
 		}
 
-		public static Command_Action MakeChannelGizmo(RemoteChannel currentChannel, Action activateCallback) {
+		public static Command_Action MakeChannelGizmo(RemoteChannel desiredChannel, RemoteChannel currentChannel, Action activateCallback) {
 			 return new Command_Action {
 				action = activateCallback,
-				icon = GetUITextureForChannel(currentChannel),
+				icon = GetUITextureForChannel(desiredChannel),
 				activateSound = UIChannelSound,
 				defaultDesc = ChannelDialDesc,
-				defaultLabel = String.Format(ChannelDialLabelBase, GetChannelName(currentChannel)),
+				defaultLabel = String.Format(ChannelDialLabelBase, GetChannelName(desiredChannel), 
+					desiredChannel!=currentChannel?"RemoteExplosive_channel_switching".Translate():""),
 				hotKey = nextChannelKeybindingDef
 			};
 		}
