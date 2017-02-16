@@ -47,7 +47,7 @@ namespace RemoteExplosives {
 		public override void DefsLoaded() {
 			InjectTraderStocks();
 			InjectSteelRecipeVariants();
-			InjectIEDComps();
+			InjectVanillaExplosivesComps();
 			GetSettingsHandles();
 		}
 
@@ -104,10 +104,11 @@ namespace RemoteExplosives {
 		/**
 		 * Add comps to vanilla IED's so that they can be triggered by the manual detonator
 		 */
-		private void InjectIEDComps() {
+		private void InjectVanillaExplosivesComps() {
 			var ieds = new[] {
 				DefDatabase<ThingDef>.GetNamedSilentFail("TrapIEDBomb"),
-				DefDatabase<ThingDef>.GetNamedSilentFail("TrapIEDIncendiary")
+				DefDatabase<ThingDef>.GetNamedSilentFail("TrapIEDIncendiary"),
+				DefDatabase<ThingDef>.GetNamedSilentFail("FirefoamPopper")
 			};
 			foreach (var thingDef in ieds) {
 				if (thingDef == null) continue;

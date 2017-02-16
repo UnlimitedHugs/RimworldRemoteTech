@@ -17,6 +17,9 @@ namespace RemoteExplosives {
 		private int wickTotalTicks;
 		private bool wickIsSilent;
 
+		protected Map parentMap;
+		protected IntVec3 parentPosition;
+
 		private CompProperties_Explosive ExplosiveProps {
 			get { return (CompProperties_Explosive)props; }
 		}
@@ -33,6 +36,13 @@ namespace RemoteExplosives {
 			get {
 				return Mathf.RoundToInt(ExplosiveProps.startWickHitPointsPercent * parent.MaxHitPoints);
 			}
+		}
+
+		public override void PostSpawnSetup() {
+			// cache map&position to allow charges destroyed in mass exposions to still be effective
+			base.PostSpawnSetup();
+			parentMap = parent.Map;
+			parentPosition = parent.Position;
 		}
 
 		public override void PostExposeData() {
@@ -104,7 +114,6 @@ namespace RemoteExplosives {
 		protected virtual void Detonate() {
 			if (detonated) return;
 			detonated = true;
-			var map = parent.Map;
 			if (!parent.Destroyed) {
 				parent.Destroy(DestroyMode.Kill);
 			}
@@ -114,7 +123,7 @@ namespace RemoteExplosives {
 				if (parent.stackCount > 1 && exProps.explosiveExpandPerStackcount > 0f) {
 					num += Mathf.Sqrt((parent.stackCount - 1)*exProps.explosiveExpandPerStackcount);
 				}
-				GenExplosion.DoExplosion(parent.Position, map, num, exProps.explosiveDamageType, parent);
+				GenExplosion.DoExplosion(parentPosition, parentMap, num, exProps.explosiveDamageType, parent);
 			}
 		}
 

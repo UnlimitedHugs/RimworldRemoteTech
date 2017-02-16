@@ -59,7 +59,7 @@ namespace RemoteExplosives {
 
 			if (RemoteExplosivesUtility.ChannelsUnlocked()) {
 				if (hasChannelsComponent) {
-					var channelGizmo = RemoteExplosivesUtility.MakeChannelGizmo(currentChannel, ChannelGizmoAction);
+					var channelGizmo = RemoteExplosivesUtility.MakeChannelGizmo(currentChannel, currentChannel, ChannelGizmoAction);
 					yield return channelGizmo;
 				} else {
 					var componentGizmo = new Command_Toggle {

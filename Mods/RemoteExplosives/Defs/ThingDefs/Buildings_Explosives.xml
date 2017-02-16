@@ -531,7 +531,7 @@ Detonate from the Remote Explosives Console.</description>
 	<ThingDef ParentName="RemoteExplosiveBase">
 		<DefName>MiningChargeShaped</DefName>
 		<label>shaped charge</label>
-		<Description>A specialized explosive that focuses its power upwards to attempt to break thick overhead mountain roof. It must be applied from the edge of the thick roof to be effective.</Description>
+		<Description>A specialized explosive that focuses its power upwards to attempt to break thick overhead mountain roof. It must be applied from the edge of the thick roof to be effective.\n\nThe white overlay shows nearby mountain roof, while the area around the charge is its effective radius. A green outline indicates that the charge is properly placed and will successfully break through the roof.</Description>
 		<graphicData>
 			<texPath>shaped_charge</texPath>
 			<graphicClass>Graphic_Single</graphicClass>

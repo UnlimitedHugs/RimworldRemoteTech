@@ -18,5 +18,8 @@ namespace RemoteExplosives {
 		
 		// work types
 		public static WorkTypeDef Cleaning;
+
+		// things
+		public static ThingDef CollapsedRoofRocks;
 	}
 }

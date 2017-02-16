@@ -65,6 +65,9 @@ namespace RemoteExplosives {
 						SelTable.billStack.AddBill(bill);
 					}));
 				}
+				if (list.Count == 0) {
+					list.Add(new FloatMenuOption("(no recipes - research required)", null));
+				}
 				return list;
 			};
 			mouseoverBill = SelTable.billStack.DoListing(canvasRect, recipeOptionsMaker, ref scrollPosition, ref viewHeight);

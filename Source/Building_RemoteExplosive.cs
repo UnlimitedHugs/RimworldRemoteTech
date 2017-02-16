@@ -145,7 +145,7 @@ namespace RemoteExplosives {
 			yield return armGizmo;
 
 			if (RemoteExplosivesUtility.ChannelsUnlocked()) {
-				var channelGizmo = RemoteExplosivesUtility.MakeChannelGizmo(desiredChannel, ChannelGizmoAction);
+				var channelGizmo = RemoteExplosivesUtility.MakeChannelGizmo(desiredChannel, currentChannel, ChannelGizmoAction);
 				yield return channelGizmo;
 			}
 
