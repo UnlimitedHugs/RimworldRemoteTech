@@ -1,52 +1,37 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <LanguageData>
 
-	<MakeRemoteBomb.label>制作遥控炸药</MakeRemoteBomb.label>
+  <MakeRemoteBomb.label>制作遥控炸药</MakeRemoteBomb.label>
+  <MakeRemoteBomb.description>制作可部署的遥控炸药。</MakeRemoteBomb.description>
+  <MakeRemoteBomb.jobString>正在可部署的制作遥控炸药</MakeRemoteBomb.jobString>
 
-	<MakeRemoteBomb.description>制造一个可放置遥控炸药。</MakeRemoteBomb.description>
+  <MakeRemoteFireBomb.label>制作遥控燃烧炸药</MakeRemoteFireBomb.label>
+  <MakeRemoteFireBomb.description>制作可部署的遥控燃烧炸药</MakeRemoteFireBomb.description>
+  <MakeRemoteFireBomb.jobString>正在制作可部署的遥控燃烧炸药</MakeRemoteFireBomb.jobString>
 
-	<MakeRemoteBomb.jobString>正在制造可放置遥控炸药。</MakeRemoteBomb.jobString>
+  <MakeRemoteEmpBomb.label>制作遥控EMP炸药</MakeRemoteEmpBomb.label>
+  <MakeRemoteEmpBomb.description>制作遥控EMP炸药。</MakeRemoteEmpBomb.description>
+  <MakeRemoteEmpBomb.jobString>正在制作遥控EMP炸药。</MakeRemoteEmpBomb.jobString>
 
-	<MakeRemoteFireBomb.label>制作远程燃烧炸药</MakeRemoteFireBomb.label>
+  <MakeMiningExplosiveComponent.label>制作采矿用炸药</MakeMiningExplosiveComponent.label>
+  <MakeMiningExplosiveComponent.description>制作采矿用炸药。</MakeMiningExplosiveComponent.description>
+  <MakeMiningExplosiveComponent.jobString>正在制作采矿用炸药。</MakeMiningExplosiveComponent.jobString>
 
-	<MakeRemoteFireBomb.description>制造一个可放置遥控燃烧炸药。</MakeRemoteFireBomb.description>
+  <MakeRemoteChemicalCan.label>制作遥控化学罐</MakeRemoteChemicalCan.label>
+  <MakeRemoteChemicalCan.description>制作遥控化学罐。</MakeRemoteChemicalCan.description>
+  <MakeRemoteChemicalCan.jobString>正在制作遥控化学罐。</MakeRemoteChemicalCan.jobString>
 
-	<MakeRemoteFireBomb.jobString>正在制造可放置的遥控燃烧炸药。</MakeRemoteFireBomb.jobString>
+  <MakeExplosivePouch.label>制作炸药包</MakeExplosivePouch.label>
+  <MakeExplosivePouch.description>制作炸药包。</MakeExplosivePouch.description>
+  <MakeExplosivePouch.jobString>正在制作炸药包。</MakeExplosivePouch.jobString>
 
-	<MakeRemoteEmpBomb.label>制作遥控EMP炸药</MakeRemoteEmpBomb.label>
+  <MakeCharcoal.label>制作木炭</MakeCharcoal.label>
+  <MakeCharcoal.description>将原木制成木炭。</MakeCharcoal.description>
+  <MakeCharcoal.jobString>正在制作木炭。</MakeCharcoal.jobString>
 
-	<MakeRemoteEmpBomb.description>制造一个遥控EMP炸药。</MakeRemoteEmpBomb.description>
+  <ExtractGoldFromSlag.label>从金块渣中提取黄金</ExtractGoldFromSlag.label>
+  <ExtractGoldFromSlag.description>用强热和电磁铁从金块渣中提取出黄金。</ExtractGoldFromSlag.description>
+  <ExtractGoldFromSlag.jobString>正在从金块渣中提取黄金。</ExtractGoldFromSlag.jobString>
 
-	<MakeRemoteEmpBomb.jobString>正在制造遥控EMP炸药。</MakeRemoteEmpBomb.jobString>
-
-	<MakeMiningExplosiveComponent.label>制作矿用炸药</MakeMiningExplosiveComponent.label>
-
-	<MakeMiningExplosiveComponent.description>制造一个矿用炸药。</MakeMiningExplosiveComponent.description>
-
-	<MakeMiningExplosiveComponent.jobString>正在制作矿用炸药。</MakeMiningExplosiveComponent.jobString>
-
-	<MakeRemoteChemicalCan.label>制作遥控化学罐</MakeRemoteChemicalCan.label>
-
-	<MakeRemoteChemicalCan.description>制造一个遥控化学罐。</MakeRemoteChemicalCan.description>
-
-	<MakeRemoteChemicalCan.jobString>正在制作遥控化学罐。</MakeRemoteChemicalCan.jobString>
-
-	<MakeExplosivePouch.label>制造炸药袋</MakeExplosivePouch.label>
-
-	<MakeExplosivePouch.description>制造一个炸药袋。</MakeExplosivePouch.description>
-
-	<MakeExplosivePouch.jobString>正在制造炸药袋。</MakeExplosivePouch.jobString>
-
-	<MakeCharcoal.label>制作木炭</MakeCharcoal.label>
-
-	<MakeCharcoal.description>将原木烧制成木炭。</MakeCharcoal.description>
-
-	<MakeCharcoal.jobString>正在烧制木炭。</MakeCharcoal.jobString>
-
-	<ExtractGoldFromSlag.label>从炉渣中提炼黄金</ExtractGoldFromSlag.label>
-
-	<ExtractGoldFromSlag.description>利用热量和强力的电磁体分离出有用的金属块。</ExtractGoldFromSlag.description>
-
-	<ExtractGoldFromSlag.jobString>正在从炉渣中提炼黄金。</ExtractGoldFromSlag.jobString>
 
 </LanguageData>

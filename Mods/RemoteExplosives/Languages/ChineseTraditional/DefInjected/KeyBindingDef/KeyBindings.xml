@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <RemoteTableDetonate.label>固定式起爆器：引爆</RemoteTableDetonate.label>
+  <RemoteExplosivesNextChannel.label>起爆器、炸藥：切換頻道</RemoteExplosivesNextChannel.label>
+  <RemoteExplosiveArm.label>遙控炸藥打開保險</RemoteExplosiveArm.label>
+  <RemoteExplosiveAutoReplace.label>遙控炸藥自動重置</RemoteExplosiveAutoReplace.label>
+  <PortableDetonatorDetonate.label>便攜式起爆器：引爆</PortableDetonatorDetonate.label>
+
+
+</LanguageData>

@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <RemoteBomb.label>遙控炸藥</RemoteBomb.label>
+  <RemoteBomb.description>安裝了遙控引爆器的爆炸陷阱。
+從「炸藥」菜單中建造時使用。</RemoteBomb.description>
+
+  <RemoteFireBomb.label>遙控燃燒炸藥</RemoteFireBomb.label>
+  <RemoteFireBomb.description>裝滿了可燃化學物質並安裝了無線電引爆器的罐體。
+從「炸藥」菜單中建造時使用。</RemoteFireBomb.description>
+
+  <MiningExplosiveComponent.label>礦用炸藥</MiningExplosiveComponent.label>
+  <MiningExplosiveComponent.description>遙控礦用炸藥的主要部件。
+從「炸藥」菜單中建造時使用。</MiningExplosiveComponent.description>
+
+  <RemoteEmpBomb.label>遙控EMP炸藥</RemoteEmpBomb.label>
+  <RemoteEmpBomb.description>一次性電磁脈衝發生器。
+從「炸藥」菜單中建造時使用。</RemoteEmpBomb.description>
+
+  <RemoteChemicalCan.label>遙控化學罐</RemoteChemicalCan.label>
+  <RemoteChemicalCan.description>用於化學物質遙控引爆罐體。
+從「炸藥」菜單中建造時使用。</RemoteChemicalCan.description>
+
+  <ExplosivePouch.label>炸藥包</ExplosivePouch.label>
+  <ExplosivePouch.description>用動物皮革包裹著炸藥製成的簡陋炸彈。
+從「炸藥」菜單中建造時使用。</ExplosivePouch.description>
+
+  <Sparkpowder.label>火花粉</Sparkpowder.label>
+  <Sparkpowder.description>收穫自火花草，需要特殊保存防止自然。遠離火源。</Sparkpowder.description>
+
+  <Charcoal.label>木炭</Charcoal.label>
+  <Charcoal.description>低氧條件下燃燒木材製成的高效燃料。研磨成粉末後作為炸藥的重要添加劑。
+可在篝火和燃料爐灶中製作。</Charcoal.description>
+
+
+</LanguageData>

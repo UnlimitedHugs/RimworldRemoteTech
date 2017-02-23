@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <RemoteExplosives.label>遙控炸藥</RemoteExplosives.label>
+  <RemoteExplosives.description>遙控炸藥（Remote Explosives）Mod的操作快捷鍵。</RemoteExplosives.description>
+
+  <RemoteExplosivesDetonator.label>遙控炸藥引爆器</RemoteExplosivesDetonator.label>
+  <RemoteExplosivesDetonator.description>遙控炸藥（Remote Explosives）Mod的操作快捷鍵。</RemoteExplosivesDetonator.description>
+
+  <RemoteExplosivesTools.label>遙控炸藥工具</RemoteExplosivesTools.label>
+  <RemoteExplosivesTools.description>激活單位攜帶的遙控炸藥（Remote Explosives）Mod的物品的快捷鍵。</RemoteExplosivesTools.description>
+
+
+</LanguageData>
