@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <Apparel_GasMask.label>防毒面具</Apparel_GasMask.label>
+  <Apparel_GasMask.description>可在有毒氣體和其他氣載污染物中保護穿戴者的面具。
+過濾器的損耗相當快，所以推薦只在必要時穿戴。</Apparel_GasMask.description>
+
+  <Apparel_PortableDetonator.label>便攜式遙控起爆器</Apparel_PortableDetonator.label>
+  <Apparel_PortableDetonator.description>用於起爆遙控炸藥的便攜式的起爆錶盤。
+僅工作於白色頻道，距離有限並使用非充電電池驅動——但是，嘿，你幾乎可以把它裝進口袋。幾乎。</Apparel_PortableDetonator.description>
+
+
+</LanguageData>

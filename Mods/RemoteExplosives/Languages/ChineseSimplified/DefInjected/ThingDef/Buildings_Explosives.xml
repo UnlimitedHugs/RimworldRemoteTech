@@ -1,56 +1,104 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <LanguageData>
 
-	<TableDetonator.label>遥控起爆器</TableDetonator.label>
+  <TableDetonator.label>遥控起爆器</TableDetonator.label>
+  <TableDetonator.description>用于引爆范围内已打开保险的炸药的信号发射器。
+为获得更好的时机，可以选择一位已征召的殖民者右击起爆器。</TableDetonator.description>
+  <TableDetonator_Blueprint.label>遥控起爆器（蓝图）</TableDetonator_Blueprint.label>
+  <TableDetonator_Blueprint_Install.label>遥控起爆器（蓝图）</TableDetonator_Blueprint_Install.label>
+  <TableDetonator_Frame.label>遥控起爆器（建造中）</TableDetonator_Frame.label>
 
-	<TableDetonator.Description>一个用来引爆信号范围内武装炸药的发射器。右键单击一个小人来取得更好的时机。</TableDetonator.Description>
+  <RemoteExplosivesBench.label>炸药工坊</RemoteExplosivesBench.label>
+  <RemoteExplosivesBench.description>电力驱动的工作站，配备了制作遥控引爆炸药的工具。
+研究不同种类的遥控炸药以解锁可用配方。</RemoteExplosivesBench.description>
+  <RemoteExplosivesBench_Blueprint.label>炸药工坊（蓝图）</RemoteExplosivesBench_Blueprint.label>
+  <RemoteExplosivesBench_Blueprint_Install.label>炸药工坊（蓝图）</RemoteExplosivesBench_Blueprint_Install.label>
+  <RemoteExplosivesBench_Frame.label>炸药工坊（建造中）</RemoteExplosivesBench_Frame.label>
 
-	<RemoteExplosivesBench.label>炸药工作台</RemoteExplosivesBench.label>
+  <DetonatorManual.label>手动起爆器</DetonatorManual.label>
+  <DetonatorManual.description>简单的柱塞式起爆器。激活后，会通过连接的起爆导线向所有已连接的炸药发出电流，点燃引信。
+为获得更好的时机，可以选择一位已征召的殖民者右击起爆器。</DetonatorManual.description>
+  <DetonatorManual_Blueprint.label>手动起爆器（蓝图）</DetonatorManual_Blueprint.label>
+  <DetonatorManual_Blueprint_Install.label>手动起爆器（蓝图）</DetonatorManual_Blueprint_Install.label>
+  <DetonatorManual_Frame.label>手动起爆器（建造中）</DetonatorManual_Frame.label>
 
-	<RemoteExplosivesBench.Description>一种用于制造遥控引爆炸药的电动力站。研究不同类型的遥控炸药来解锁可用的选项。</RemoteExplosivesBench.Description>
+  <DetonatorWire.label>起爆导线</DetonatorWire.label>
+  <DetonatorWire.description>用于将手动起爆器连接至简易炸药、遥控炸药和爆炸陷阱的特殊导线。可布置于墙体和其他建筑之下。
+雨天会失效。</DetonatorWire.description>
+  <DetonatorWire_Blueprint.label>起爆导线（蓝图）</DetonatorWire_Blueprint.label>
+  <DetonatorWire_Frame.label>起爆导线（建造中）</DetonatorWire_Frame.label>
 
-	<DetonatorManual.label>手动起爆装置</DetonatorManual.label>
 
-	<DetonatorManual.Description>一个简单的柱塞式起爆装置。当被激活时，照明的引信将沿着连接雷管线脉冲到所有连接的炸药。右键单击一个小人来取得更好的时机。</DetonatorManual.Description>
+  <!-- Combat explosives -->
 
-	<DetonatorCord.label>导爆线</DetonatorCord.label>
+  <TrapMakeshiftBomb.label>简易炸药</TrapMakeshiftBomb.label>
+  <TrapMakeshiftBomb.description>用炸药和动物皮革制成的简陋的炸弹。
+在手工工作区和裁缝桌制作。
+使用手动起爆器和起爆导线引爆。</TrapMakeshiftBomb.description>
+  <TrapMakeshiftBomb_Blueprint.label>简易炸药（蓝图）</TrapMakeshiftBomb_Blueprint.label>
+  <TrapMakeshiftBomb_Frame.label>简易炸药（建造中）</TrapMakeshiftBomb_Frame.label>
 
-	<DetonatorCord.description>一种专用于连接手动起爆装置到简易炸药，遥控炸药和简易爆炸装置的线。可放置在墙壁和其他建筑物上。湿的时候可能会触发失败。</DetonatorCord.description>
+  <TrapRemoteBomb.label>遥控爆炸炸弹</TrapRemoteBomb.label>
+  <TrapRemoteBomb.description>安装了无线电起爆器的炸药罐体。
+在炸药工坊制作。
+打开保险，然后用遥控起爆器引爆。</TrapRemoteBomb.description>
+  <TrapRemoteBomb_Blueprint.label>遥控爆炸炸弹（蓝图）</TrapRemoteBomb_Blueprint.label>
+  <TrapRemoteBomb_Frame.label>遥控爆炸炸弹（建造中）</TrapRemoteBomb_Frame.label>
 
-	<TrapMakeshiftBomb.label>简易炸药</TrapMakeshiftBomb.label>
+  <TrapRemoteIncendiary.label>遥控燃烧炸弹</TrapRemoteIncendiary.label>
+  <TrapRemoteIncendiary.description>装有可燃化学物质并安装了无线电起爆器的罐体。
+在炸药工坊制作。
+打开保险，然后用遥控起爆器引爆。</TrapRemoteIncendiary.description>
+  <TrapRemoteIncendiary_Blueprint.label>遥控燃烧炸弹（蓝图）</TrapRemoteIncendiary_Blueprint.label>
+  <TrapRemoteIncendiary_Frame.label>遥控燃烧炸弹（建造中）</TrapRemoteIncendiary_Frame.label>
 
-	<TrapMakeshiftBomb.description>由炸药粉末和动物皮制成的原始炸弹。在一个炸药工作台或裁剪台上制作。用手动起爆装置和导爆线来引爆。</TrapMakeshiftBomb.description>
+  <TrapRemoteEmp.label>遥控EMP炸弹</TrapRemoteEmp.label>
+  <TrapRemoteEmp.description>一次性电磁脉冲发生器。
+对机械体非常有效。
+在炸药工坊制作。
+打开保险，然后用遥控起爆器引爆。</TrapRemoteEmp.description>
+  <TrapRemoteEmp_Blueprint.label>遥控EMP炸弹（蓝图）</TrapRemoteEmp_Blueprint.label>
+  <TrapRemoteEmp_Frame.label>遥控EMP炸弹（建造中）</TrapRemoteEmp_Frame.label>
 
-	<TrapRemoteBomb.label>遥控炸药</TrapRemoteBomb.label>
 
-	<TrapRemoteBomb.description>一种带有无线触发的炸药筒。在炸药工作台制造，远程控制台上触发。</TrapRemoteBomb.description>
+  <!-- Mining explosives -->
 
-	<TrapRemoteIncendiary.label>遥控燃烧炸药</TrapRemoteIncendiary.label>
+  <MiningChargeChunks.label>断层炸药</MiningChargeChunks.label>
+  <MiningChargeChunks.description>遥控矿用炸药，可开采大量石块。
+所需部件在炸药工坊制作。
+后用遥控起爆器引爆。</MiningChargeChunks.description>
+  <MiningChargeChunks_Blueprint.label>断层炸药（蓝图）</MiningChargeChunks_Blueprint.label>
+  <MiningChargeChunks_Frame.label>断层炸药（建造中）</MiningChargeChunks_Frame.label>
 
-	<TrapRemoteIncendiary.description>一个装有可燃性化学物质以及无线起爆装置的罐。在炸药工作台制造，远程控制台上触发。</TrapRemoteIncendiary.description>
+  <MiningChargeClearing.label>清场炸药</MiningChargeClearing.label>
+  <MiningChargeClearing.description>遥控矿用炸药，可清理出一片房间大小的区域而不产生碎石。
+所需部件在炸药工坊制作。
+后用遥控起爆器引爆。</MiningChargeClearing.description>
+  <MiningChargeClearing_Blueprint.label>清场炸药（蓝图）</MiningChargeClearing_Blueprint.label>
+  <MiningChargeClearing_Frame.label>清场炸药（建造中）</MiningChargeClearing_Frame.label>
 
-	<TrapRemoteEmp.label>遥控EMP炸药</TrapRemoteEmp.label>
+  <MiningChargeShaped.label>聚能炸弹</MiningChargeShaped.label>
+  <MiningChargeShaped.description>将能量集中于上方破坏厚实山岩顶的专用炸药。必须应用于厚山岩顶边缘才能生效。\n\n白色区域表示附近的山岩顶，而炸弹周围的有色区域表示其有效半径。当轮廓转变为绿色则表示炸弹处于正确位置并能成功击穿厚岩顶。</MiningChargeShaped.description>
+  <MiningChargeShaped_Blueprint.label>聚能炸弹（蓝图）</MiningChargeShaped_Blueprint.label>
+  <MiningChargeShaped_Blueprint_Install.label>聚能炸弹（蓝图）</MiningChargeShaped_Blueprint_Install.label>
+  <MiningChargeShaped_Frame.label>聚能炸弹（建造中）</MiningChargeShaped_Frame.label>
 
-	<TrapRemoteEmp.description>一种一次性使用的电磁脉冲发生器。对机器人影响巨大。在炸药工作台制造，远程控制台上触发。</TrapRemoteEmp.description>
 
-	<MiningChargeChunks.label>爆裂炸药</MiningChargeChunks.label>
+  <!-- chemical explosives -->
 
-	<MiningChargeChunks.description>一种制造大量岩石块的遥控采矿炸药。要求一部分在炸药工作台制造。远程控制台上触发。</MiningChargeChunks.description>
+  <RemoteCanFoam.label>密封泡沫罐</RemoteCanFoam.label>
+  <RemoteCanFoam.description>遥控引爆罐体，可释放快速硬化泡沫。
+在炸药工坊制作。
+打开保险，然后用遥控起爆器引爆。</RemoteCanFoam.description>
+  <RemoteCanFoam_Blueprint.label>密封泡沫罐（蓝图）</RemoteCanFoam_Blueprint.label>
+  <RemoteCanFoam_Frame.label>密封泡沫罐（建造中）</RemoteCanFoam_Frame.label>
 
-	<MiningChargeClearing.label>聚能炸药</MiningChargeClearing.label>
+  <RemoteCanSleepGas.label>催眠瓦斯罐</RemoteCanSleepGas.label>
+  <RemoteCanSleepGas.description>充满了催眠瓦斯的遥控引爆罐体。
+在炸药工坊制作。
+打开保险，然后用遥控起爆器引爆。</RemoteCanSleepGas.description>
+  <RemoteCanSleepGas_Blueprint.label>催眠瓦斯罐（蓝图）</RemoteCanSleepGas_Blueprint.label>
+  <RemoteCanSleepGas_Frame.label>催眠瓦斯罐（建造中）</RemoteCanSleepGas_Frame.label>
 
-	<MiningChargeClearing.description>一种遥控矿用炸药，可以清除一个房间大小的区域而不会制造大量的瓦砾。要求一部分在炸药工作台制造。远程控制台上触发。</MiningChargeClearing.description>
-
-	<MiningChargeShaped.label>聚能炸药</MiningChargeShaped.label>
-
-	<MiningChargeShaped.Description>一种专门用于集中其能量击碎厚实山顶的炸药.它必须要用在厚实山顶的边缘处才会有效</MiningChargeShaped.Description>
-
-	<RemoteCanFoam.label>密封泡沫罐</RemoteCanFoam.label>
-
-	<RemoteCanFoam.description>一种远程触发的罐，释放一种迅速硬化的泡沫。在炸药工作台制造，远程控制台上触发。</RemoteCanFoam.description>
-
-	<RemoteCanSleepGas.label>催眠气体罐</RemoteCanSleepGas.label>
-
-	<RemoteCanSleepGas.description>一种充满了睡眠气体的遥控触发筒。在炸药工作台制造，远程控制台上触发。</RemoteCanSleepGas.description>
 
 </LanguageData>

@@ -1,12 +1,14 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <LanguageData>
 
-	<WallFoamBlob.label>化学泡沫</WallFoamBlob.label>
+  <WallFoamBlob.label>化学泡沫</WallFoamBlob.label>
+  <WallFoamBlob.description>固化后会变得比岩石还坚固。</WallFoamBlob.description>
 
-	<WallFoamBlob.Description>变得和石头一样硬。</WallFoamBlob.Description>
+  <FoamWall.label>硬化的泡沫墙</FoamWall.label>
+  <FoamWall.description>已固化的化学泡沫。极其坚固且不可燃。</FoamWall.description>
 
-	<FoamWall.label>硬化的泡沫墙</FoamWall.label>
+  <CollapsedRoofRocks.description>崩落的岩石，其强度足以支撑岩顶。</CollapsedRoofRocks.description>
+  <CollapsedRoofRocks.label>崩落的岩石。</CollapsedRoofRocks.label>
 
-	<FoamWall.description>凝固化学泡沫，非常坚韧和不易燃。</FoamWall.description>
 
 </LanguageData>

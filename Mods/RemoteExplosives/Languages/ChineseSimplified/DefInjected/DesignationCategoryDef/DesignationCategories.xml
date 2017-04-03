@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <LanguageData>
 
-	<RemoteExplosives.label>炸药</RemoteExplosives.label>
+  <RemoteExplosives.label>炸药</RemoteExplosives.label>
+  <RemoteExplosives.description>炸掉其它东西的物品。</RemoteExplosives.description>
 
-	<RemoteExplosives.description>炸掉其它东西的物品。</RemoteExplosives.description>
 
 </LanguageData>

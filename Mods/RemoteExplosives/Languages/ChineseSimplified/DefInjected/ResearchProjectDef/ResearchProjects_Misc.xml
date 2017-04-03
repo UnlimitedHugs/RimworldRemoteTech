@@ -1,28 +1,36 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <LanguageData>
 
-	<MakeshiftExplosives.label>RE-简易炸药</MakeshiftExplosives.label>
+  <MakeshiftExplosives.label>RE：简易炸药</MakeshiftExplosives.label>
+  <MakeshiftExplosives.description>让你可以使用可再生资源制作简易炸药。
+研究后： 
+- 可以种植「火化草」
+- 可以在篝火和燃料炉灶将原木制成「木炭」。
+- 可以在手工工作区和裁缝桌制作「炸药包」。
+- 可以建造用于起爆炸药的「手动起爆器」和「引爆导线」。</MakeshiftExplosives.description>
 
-	<MakeshiftExplosives.description>允许你用可再生资源制作简易炸药。一旦研究：-可以种植火花草。 -篝火和燃料炉中用原木制作木炭。 -可以在一个制造点或裁剪台上制作爆炸带。 -可以建立手动炸药和雷管线来触发炸药。</MakeshiftExplosives.description>
+  <RemoteDetonator.label>RE：遥控起爆器</RemoteDetonator.label>
+  <RemoteDetonator.description>让你可以建造「遥控起爆器」来起爆遥控炸药，以及用于制作炸药的「炸药工坊」。
+炸药工坊可制作「矿用炸药」，可部署为「断层炸药」或「清场炸药」。
 
-	<RemoteDetonator.label>RE-遥控引爆装置</RemoteDetonator.label>
+研究爆炸陷阱和燃烧陷阱后可以制作作战级遥控炸药。</RemoteDetonator.description>
 
-	<RemoteDetonator.description>允许你建立一个控制台来远程引爆用工作台生产的雷管，炸药工作台可以制造用于采矿和清理的炸药。 研究简易爆炸装置和简易燃烧爆炸装置来生产战斗级遥控炸药。</RemoteDetonator.description>
+  <RemoteExplosivesChannels.label>RE：遥控炸药频道</RemoteExplosivesChannels.label>
+  <RemoteExplosivesChannels.description>解锁用于遥控炸药和起爆器的频道。只有与起爆器频道相同的炸药才会被引爆。这使你可以设置多路炸药防御。
+起爆器必须用零件升级后才能以这种方式工作。</RemoteExplosivesChannels.description>
 
-	<RemoteExplosivesChannels.label>RE-遥控炸药渠道</RemoteExplosivesChannels.label>
+  <RemoteEmpMine.label>RE：遥控EMP炸药</RemoteEmpMine.label>
+  <RemoteEmpMine.description>解锁可用遥控起爆器引爆的EMP炸弹的制作。
+使用恰当的话，爆炸时会对机械体造成毁灭性打击。</RemoteEmpMine.description>
 
-	<RemoteExplosivesChannels.description>开启遥控器上的炸药和雷管的使用渠道。只有通道相同的炸药引爆装置才可以触发。这允许你设置多条线的爆炸防御。对于这份工作遥控引爆装置是必须升级的一个组成部分。</RemoteExplosivesChannels.description>
+  <RemoteChemicals.label>RE：遥控化学炸弹</RemoteChemicals.label>
+  <RemoteChemicals.description>解锁专用化学物质的遥控引爆罐体的制作。
+「密封泡沫」可制造墙体并堵住通道，而「催眠瓦斯」可使生物目标丧失行动能力。
+在密闭区域中使用能取得最好的效果。</RemoteChemicals.description>
 
-	<RemoteEmpMine.label>RE-遥控EMP炸药</RemoteEmpMine.label>
+  <RemoteRoofBreaking.label>RE：山顶清除</RemoteRoofBreaking.label>
+  <RemoteRoofBreaking.description>使用高强度的复合材料将矿用炸药的毁灭性能量聚集起来。只要炸弹正确放置并瞄准上方时，即使是厚实的山岩顶也能被破坏。
+解锁建造「聚能炸弹」。</RemoteRoofBreaking.description>
 
-	<RemoteEmpMine.description>允许你制造可被遥控起爆装置触发的EMP炸药。虽然十分昂贵，但当正确使用时他们可以对机器人的入侵造成毁灭性打击。</RemoteEmpMine.description>
-
-	<RemoteChemicals.label>RE-遥控化学气体罐</RemoteChemicals.label>
-
-	<RemoteChemicals.description>允许你制造化学专用的遥控触发罐。密封泡沫可以创建墙壁和密封通道，而催眠气体可以眩晕生物目标。最好在封闭区域中使用。</RemoteChemicals.description>
-
-	<RemoteRoofBreaking.label>RE-聚能炸药</RemoteRoofBreaking.label>
-
-	<RemoteRoofBreaking.description>聚能炸药集中使用高强度复合材料产生破坏力。当对准上方时，只要你放在正确的位置炸药也能够破坏很厚的山顶。 -允许建造聚能的炸药。</RemoteRoofBreaking.description>
 
 </LanguageData>

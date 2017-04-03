@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <DetonatorTable_detonate_label>引爆</DetonatorTable_detonate_label>
+  <DetonatorTable_detonate_desc>引爆所有範圍內相同頻道的已打開保險的遙控炸藥。</DetonatorTable_detonate_desc>
+  <DetonatorTable_inrange>範圍內已打開保險的炸藥</DetonatorTable_inrange>
+
+  <Detonator_detonatenow>立刻引爆炸藥</Detonator_detonatenow>
+  <Detonator_detonatenow_reserved>(已預留給{0})</Detonator_detonatenow_reserved>
+
+  <RemoteExplosive_arm_label>打開保險</RemoteExplosive_arm_label>
+  <RemoteExplosive_arm_desc>當打開保險後，該炸藥可被遙控引爆。</RemoteExplosive_arm_desc>
+
+  <RemoteExplosive_currentChannel>當前頻道：{0}</RemoteExplosive_currentChannel>
+  <RemoteExplosive_channelChanger_label>{0}頻道{1}</RemoteExplosive_channelChanger_label>
+  <RemoteExplosive_channel_switching>\n（切換中）</RemoteExplosive_channel_switching>
+  <RemoteExplosive_detonatorChannelChanger_desc>設置起爆器頻道。只有相同頻道的炸藥才能引爆。</RemoteExplosive_detonatorChannelChanger_desc>
+
+  <RemoteExplosive_autoReplace_label>自動重置</RemoteExplosive_autoReplace_label>
+  <RemoteExplosive_autoReplace_desc>啟用後，該炸藥會在被引爆後自動重新放置。</RemoteExplosive_autoReplace_desc>
+
+
+  <RemoteExplosive_channel0>白色</RemoteExplosive_channel0>
+  <RemoteExplosive_channel1>紅色</RemoteExplosive_channel1>
+  <RemoteExplosive_channel2>綠色</RemoteExplosive_channel2>
+
+  <DetonatorTable_component_label>安裝頻道</DetonatorTable_component_label>
+  <DetonatorTable_component_desc>安裝零件以允許在不同頻道中引爆炸藥。</DetonatorTable_component_desc>
+
+  <BillsTab_MaterialButton_label>材料：{0}</BillsTab_MaterialButton_label>
+  <BillsTab_MaterialButton_component_mode>電子零件</BillsTab_MaterialButton_component_mode>
+  <BillsTab_MaterialButton_steel_mode>鋼鐵</BillsTab_MaterialButton_steel_mode>
+  <BillsTab_MaterialButton_tooltip>設置新建清單使用的基本材料。</BillsTab_MaterialButton_tooltip>
+
+  <FoamBlob_solidify_progress>固化：{0}%</FoamBlob_solidify_progress>
+
+  <FoamWall_contents>內物：{0}</FoamWall_contents>
+  <FoamWall_death_message>{0}在固化中的泡沫牆內死亡。</FoamWall_death_message>
+
+  <GasCloud_concentration_label>濃度：{0}</GasCloud_concentration_label>
+
+  <HediffRecovery_status_label>恢復中</HediffRecovery_status_label>
+
+  <PortableDetonator_detonate_label>引爆炸藥</PortableDetonator_detonate_label>
+  <PortableDetonator_detonate_desc>引爆所有範圍內白色頻道的已打開保險的炸藥。</PortableDetonator_detonate_desc>
+  <PortableDetonator_detonate_uses>剩餘使用次數：{0}</PortableDetonator_detonate_uses>
+  <PortableDetonator_broke_msg>便攜式起爆器的電池電量耗盡了。</PortableDetonator_broke_msg>
+
+  <Detonator_notargets>無法引爆，範圍內此頻道無已打開保險的炸藥。</Detonator_notargets>
+
+  <DetonatorManual_detonate_label>引爆</DetonatorManual_detonate_label>
+  <DetonatorManual_detonate_desc>引爆所有鏈接到相同起爆導線的炸藥。</DetonatorManual_detonate_desc>
+
+  <Wire_inspect_wet>{0}%潮濕</Wire_inspect_wet>
+  <Wire_inspect_dry>乾燥</Wire_inspect_dry>
+  <Wire_inspect_covered>遮蓋</Wire_inspect_covered>
+  <Wire_inspect_exposed>裸露</Wire_inspect_exposed>
+  <Wire_dry_label>乾燥</Wire_dry_label>
+  <Wire_dry_desc>派一位殖民者乾燥這段導線，防止在使用時失效。</Wire_dry_desc>
+
+  <Alert_wireFailure_label>導線失效</Alert_wireFailure_label>
+  <Alert_wireFailure_desc>一條起爆導線因為受潮而失效並已燒毀。</Alert_wireFailure_desc>
+
+  <WireDesignator_label>選擇起爆導線</WireDesignator_label>
+  <WireDesignator_desc>只選擇佈置於區域內的起爆導線。對於維護和拆除非常實用。按住Shift可添加到當前選擇中。</WireDesignator_desc>
+
+  <Setting_forbidReplaced_label>禁止自動重置藍圖</Setting_forbidReplaced_label>
+  <Setting_forbidReplaced_desc>啟用後，自動重置的藍圖會有數秒鐘的禁止狀態，以讓殖民者遠離危險。</Setting_forbidReplaced_desc>
+  <Setting_forbidTimeout_label>藍圖禁止時間</Setting_forbidTimeout_label>
+  <Setting_forbidTimeout_desc>自動重置的藍圖禁止狀態的時長（秒）。</Setting_forbidTimeout_desc>
+</LanguageData>

@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <LanguageData>
 
-	<Explosives.label>炸药</Explosives.label>
+  <Explosives.label>炸药</Explosives.label>
+  <ExplosivesIngredients.label>成分</ExplosivesIngredients.label>
 
-	<ExplosivesIngredients.label>成分</ExplosivesIngredients.label>
 
 </LanguageData>

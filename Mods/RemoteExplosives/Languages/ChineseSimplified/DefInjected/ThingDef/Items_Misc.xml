@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <LanguageData>
 
-	<ChunkSlagGold.label>金渣块</ChunkSlagGold.label>
+  <ChunkSlagGold.label>金渣块</ChunkSlagGold.label>
+  <ChunkSlagGold.description>黄金和钢铁融化在一起的渣块。熔炼器可将之分离再利用。</ChunkSlagGold.description>
 
-	<ChunkSlagGold.description>一个黄金和钢铁熔化在一起的渣块，一个冶炼厂可能能够分开它们并重新利用。</ChunkSlagGold.description>
 
 </LanguageData>
