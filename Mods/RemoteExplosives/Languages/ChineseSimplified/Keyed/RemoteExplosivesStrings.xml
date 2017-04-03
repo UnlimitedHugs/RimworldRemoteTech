@@ -1,65 +1,71 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <LanguageData>
-	
-    <DetonatorTable_detonate_label>引爆</DetonatorTable_detonate_label>
-	<DetonatorTable_detonate_desc>引爆信号范围内同一信道的所有遥控炸药。</DetonatorTable_detonate_desc>
-	<DetonatorTable_inrange>信号范围内的武装炸药</DetonatorTable_inrange>
-	
-	<Detonator_detonatenow>现在引爆炸药</Detonator_detonatenow>
-	<Detonator_detonatenow_reserved>(reserved by {0})</Detonator_detonatenow_reserved>
-	
-	<RemoteExplosive_arm_label>准备</RemoteExplosive_arm_label>
-	<RemoteExplosive_arm_desc>当准备时，这个炸药可以被远程触发。</RemoteExplosive_arm_desc>
-	
-	<RemoteExplosive_currentChannel>所在通道: {0}</RemoteExplosive_currentChannel>
-	<RemoteExplosive_channelChanger_label>{0} 通道{1}</RemoteExplosive_channelChanger_label>
-	<RemoteExplosive_detonatorChannelChanger_desc>设置触发通道，只有在同一通道上的炸药才能引爆。</RemoteExplosive_detonatorChannelChanger_desc>
-	
-	<RemoteExplosive_autoReplace_label>自动更换</RemoteExplosive_autoReplace_label>
-	<RemoteExplosive_autoReplace_desc>如果启用，这种炸药将自动重新放置后被引爆。</RemoteExplosive_autoReplace_desc>
-	
-	
-	<RemoteExplosive_channel0>白色</RemoteExplosive_channel0>
-	<RemoteExplosive_channel1>红色</RemoteExplosive_channel1>
-	<RemoteExplosive_channel2>绿色</RemoteExplosive_channel2>
-	
-	<DetonatorTable_component_label>安装通道</DetonatorTable_component_label>
-	<DetonatorTable_component_desc>安装组件允许炸药在不同通道引爆。</DetonatorTable_component_desc>
-	
-	<BillsTab_MaterialButton_label>材料: {0}</BillsTab_MaterialButton_label>
-	<BillsTab_MaterialButton_component_mode>组件</BillsTab_MaterialButton_component_mode>
-	<BillsTab_MaterialButton_steel_mode>钢</BillsTab_MaterialButton_steel_mode>
-	<BillsTab_MaterialButton_tooltip>设置新基本材料菜单的创建。</BillsTab_MaterialButton_tooltip>
-	
-	<FoamBlob_solidify_progress>固化度: {0}%</FoamBlob_solidify_progress>
-	
-	<FoamWall_contents>含量: {0}</FoamWall_contents>
-	<FoamWall_death_message>{0} 窒息在泡沫墙里面.</FoamWall_death_message>
-	
-	<GasCloud_concentration_label>浓度: {0}</GasCloud_concentration_label>
-	
-	<HediffRecovery_status_label>恢复中</HediffRecovery_status_label>
-	
-	<PortableDetonator_detonate_label>引爆炸药</PortableDetonator_detonate_label>
-	<PortableDetonator_detonate_desc>引爆所有装备在白色通道上的炸药。</PortableDetonator_detonate_desc>
-	<PortableDetonator_detonate_uses>Uses left: {0}</PortableDetonator_detonate_uses>
-    <PortableDetonator_broke_msg>便携式雷管电量耗尽了。</PortableDetonator_broke_msg>
-	
-	<Detonator_notargets>不能没有武装的炸药引爆范围在这个频道。</Detonator_notargets>
-	
-	<DetonatorManual_detonate_label>引爆</DetonatorManual_detonate_label>
-	<DetonatorManual_detonate_desc>引爆所有连接在一起的炸药。</DetonatorManual_detonate_desc>
-		
-	<Cord_inspect_wet>{0}% wet</Cord_inspect_wet>
-	<Cord_inspect_dry>干</Cord_inspect_dry>
-	<Cord_inspect_covered>覆盖</Cord_inspect_covered>
-	<Cord_inspect_exposed>暴露的</Cord_inspect_exposed>
-	<Cord_dry_label>干了</Cord_dry_label>
-	<Cord_dry_desc>调用一个小人干燥这部分的线以防失效。</Cord_dry_desc>
-	
-	<Alert_cordFailure_label>导爆线故障</Alert_cordFailure_label>
-	<Alert_cordFailure_desc>由于潮湿或烧毁导致导爆线失效。</Alert_cordFailure_desc>
-	
-	<CordDesignator_label>检测线选择</CordDesignator_label>
-	<CordDesignator_desc>选择雷管线放置在一个地区。对于维修和拆解有帮助，移动添加到当前选择。</CordDesignator_desc>
+
+  <DetonatorTable_detonate_label>引爆</DetonatorTable_detonate_label>
+  <DetonatorTable_detonate_desc>引爆所有范围内相同频道的已打开保险的遥控炸药。</DetonatorTable_detonate_desc>
+  <DetonatorTable_inrange>范围内已打开保险的炸药</DetonatorTable_inrange>
+
+  <Detonator_detonatenow>立刻引爆炸药</Detonator_detonatenow>
+  <Detonator_detonatenow_reserved>(已预留给{0})</Detonator_detonatenow_reserved>
+
+  <RemoteExplosive_arm_label>打开保险</RemoteExplosive_arm_label>
+  <RemoteExplosive_arm_desc>当打开保险后，该炸药可被遥控引爆。</RemoteExplosive_arm_desc>
+
+  <RemoteExplosive_currentChannel>当前频道：{0}</RemoteExplosive_currentChannel>
+  <RemoteExplosive_channelChanger_label>{0}频道{1}</RemoteExplosive_channelChanger_label>
+  <RemoteExplosive_channel_switching>\n（切换中）</RemoteExplosive_channel_switching>
+  <RemoteExplosive_detonatorChannelChanger_desc>设置起爆器频道。只有相同频道的炸药才能引爆。</RemoteExplosive_detonatorChannelChanger_desc>
+
+  <RemoteExplosive_autoReplace_label>自动重置</RemoteExplosive_autoReplace_label>
+  <RemoteExplosive_autoReplace_desc>启用后，该炸药会在被引爆后自动重新放置。</RemoteExplosive_autoReplace_desc>
+
+
+  <RemoteExplosive_channel0>白色</RemoteExplosive_channel0>
+  <RemoteExplosive_channel1>红色</RemoteExplosive_channel1>
+  <RemoteExplosive_channel2>绿色</RemoteExplosive_channel2>
+
+  <DetonatorTable_component_label>安装频道</DetonatorTable_component_label>
+  <DetonatorTable_component_desc>安装零件以允许在不同频道中引爆炸药。</DetonatorTable_component_desc>
+
+  <BillsTab_MaterialButton_label>材料：{0}</BillsTab_MaterialButton_label>
+  <BillsTab_MaterialButton_component_mode>零部件</BillsTab_MaterialButton_component_mode>
+  <BillsTab_MaterialButton_steel_mode>钢铁</BillsTab_MaterialButton_steel_mode>
+  <BillsTab_MaterialButton_tooltip>设置新建清单使用的基本材料。</BillsTab_MaterialButton_tooltip>
+
+  <FoamBlob_solidify_progress>固化：{0}%</FoamBlob_solidify_progress>
+
+  <FoamWall_contents>内物：{0}</FoamWall_contents>
+  <FoamWall_death_message>{0}在固化中的泡沫墙内死亡。</FoamWall_death_message>
+
+  <GasCloud_concentration_label>浓度：{0}</GasCloud_concentration_label>
+
+  <HediffRecovery_status_label>恢复中</HediffRecovery_status_label>
+
+  <PortableDetonator_detonate_label>引爆炸药</PortableDetonator_detonate_label>
+  <PortableDetonator_detonate_desc>引爆所有范围内白色频道的已打开保险的炸药。</PortableDetonator_detonate_desc>
+  <PortableDetonator_detonate_uses>剩余使用次数：{0}</PortableDetonator_detonate_uses>
+  <PortableDetonator_broke_msg>便携式起爆器的电池电量耗尽了。</PortableDetonator_broke_msg>
+
+  <Detonator_notargets>无法引爆，范围内此频道无已打开保险的炸药。</Detonator_notargets>
+
+  <DetonatorManual_detonate_label>引爆</DetonatorManual_detonate_label>
+  <DetonatorManual_detonate_desc>引爆所有链接到相同起爆导线的炸药。</DetonatorManual_detonate_desc>
+
+  <Wire_inspect_wet>{0}%潮湿</Wire_inspect_wet>
+  <Wire_inspect_dry>干燥</Wire_inspect_dry>
+  <Wire_inspect_covered>遮盖</Wire_inspect_covered>
+  <Wire_inspect_exposed>裸露</Wire_inspect_exposed>
+  <Wire_dry_label>干燥</Wire_dry_label>
+  <Wire_dry_desc>派一位殖民者干燥这段导线，防止在使用时失效。</Wire_dry_desc>
+
+  <Alert_wireFailure_label>导线失效</Alert_wireFailure_label>
+  <Alert_wireFailure_desc>一条起爆导线因为受潮而失效并已烧毁。</Alert_wireFailure_desc>
+
+  <WireDesignator_label>选择起爆导线</WireDesignator_label>
+  <WireDesignator_desc>只选择布置于区域内的起爆导线。对于维护和拆除非常实用。按住Shift可添加到当前选择中。</WireDesignator_desc>
+
+  <Setting_forbidReplaced_label>禁止自动重置蓝图</Setting_forbidReplaced_label>
+  <Setting_forbidReplaced_desc>启用后，自动重置的蓝图会有数秒钟的禁止状态，以让殖民者远离危险。</Setting_forbidReplaced_desc>
+  <Setting_forbidTimeout_label>蓝图禁止时间</Setting_forbidTimeout_label>
+  <Setting_forbidTimeout_desc>自动重置的蓝图禁止状态的时长（秒）。</Setting_forbidTimeout_desc>
 </LanguageData>

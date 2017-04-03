@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <MakeshiftExplosives.label>RE：簡易炸藥</MakeshiftExplosives.label>
+  <MakeshiftExplosives.description>讓你可以使用可再生資源製作簡易炸藥。
+研究後： 
+- 可以種植「火化草」
+- 可以在篝火和燃料爐灶將原木製成「木炭」。
+- 可以在手工工作區和裁縫桌製作「炸藥包」。
+- 可以建造用於起爆炸藥的「手動起爆器」和「引爆導線」。</MakeshiftExplosives.description>
+
+  <RemoteDetonator.label>RE：遙控起爆器</RemoteDetonator.label>
+  <RemoteDetonator.description>讓你可以建造「遙控起爆器」來起爆遙控炸藥，以及用於製作炸藥的「炸藥工坊」。
+炸藥工坊可製作「礦用炸藥」，可部署為「斷層炸藥」或「清場炸藥」。
+
+研究地雷和燃燒地雷後可以製作作戰級遙控炸藥。</RemoteDetonator.description>
+
+  <RemoteExplosivesChannels.label>RE：遙控炸藥頻道</RemoteExplosivesChannels.label>
+  <RemoteExplosivesChannels.description>解鎖用於遙控炸藥和起爆器的頻道。只有與起爆器頻道相同的炸藥才會被引爆。這使你可以設置多路炸藥防禦。
+起爆器必須用零件升級後才能以這種方式工作。</RemoteExplosivesChannels.description>
+
+  <RemoteEmpMine.label>RE：遙控EMP炸藥</RemoteEmpMine.label>
+  <RemoteEmpMine.description>解鎖可用遙控起爆器引爆的EMP炸彈的製作。
+使用恰當的話，爆炸時會對機械體造成毀滅性打擊。</RemoteEmpMine.description>
+
+  <RemoteChemicals.label>RE：遙控化學炸彈</RemoteChemicals.label>
+  <RemoteChemicals.description>解鎖專用化學物質的遙控引爆罐體的製作。
+「密封泡沫」可製造牆體並堵住通道，而「催眠瓦斯」可使生物目標喪失行動能力。
+在密閉區域中使用能取得最好的效果。</RemoteChemicals.description>
+
+  <RemoteRoofBreaking.label>RE：山頂清除</RemoteRoofBreaking.label>
+  <RemoteRoofBreaking.description>使用高強度的複合材料將礦用炸藥的毀滅性能量聚集起來。只要炸彈正確放置並瞄準上方時，即使是厚實的山岩頂也能被破壞。
+解鎖建造「聚能炸彈」。</RemoteRoofBreaking.description>
+
+
+</LanguageData>

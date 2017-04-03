@@ -1,12 +1,13 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <LanguageData>
 
-	<Apparel_GasMask.label>防毒面具</Apparel_GasMask.label>
+  <Apparel_GasMask.label>防毒面具</Apparel_GasMask.label>
+  <Apparel_GasMask.description>可在有毒气体和其他气载污染物中保护穿戴者的面具。
+过滤器的损耗相当快，所以推荐只在必要时穿戴。</Apparel_GasMask.description>
 
-	<Apparel_GasMask.description>保护穿戴者免受有毒气体和其他空气污染物的面具。过滤器的损耗相当快，所以建议只在必要时刻穿戴。</Apparel_GasMask.description>
+  <Apparel_PortableDetonator.label>便携式遥控起爆器</Apparel_PortableDetonator.label>
+  <Apparel_PortableDetonator.description>用于起爆遥控炸药的便携式的起爆表盘。
+仅工作于白色频道，距离有限并使用非充电电池驱动——但是，嘿，你几乎可以把它装进口袋。几乎。</Apparel_PortableDetonator.description>
 
-	<Apparel_PortableDetonator.label>便携式遥控雷管</Apparel_PortableDetonator.label>
-
-	<Apparel_PortableDetonator.description>触发遥控炸药的雷管表便携版。只在白色通道，有限的范围内，并在一个非充电电池上运行-嘿，你几乎可以把它放在你的口袋里。几乎...（滑稽）</Apparel_PortableDetonator.description>
 
 </LanguageData>

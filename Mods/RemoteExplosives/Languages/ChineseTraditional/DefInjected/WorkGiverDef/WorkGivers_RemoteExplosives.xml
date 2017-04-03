@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <DetonateExplosives.label>觸發引爆器</DetonateExplosives.label>
+  <DetonateExplosives.verb>引爆</DetonateExplosives.verb>
+  <DetonateExplosives.gerund>引爆</DetonateExplosives.gerund>
+
+  <SwitchRemoteExplosive.label>開關遙控炸藥</SwitchRemoteExplosive.label>
+  <SwitchRemoteExplosive.verb>開關</SwitchRemoteExplosive.verb>
+  <SwitchRemoteExplosive.gerund>開關</SwitchRemoteExplosive.gerund>
+
+  <InstallChannelsComponent.label>安裝起爆器頻道</InstallChannelsComponent.label>
+  <InstallChannelsComponent.verb>安裝頻道零件</InstallChannelsComponent.verb>
+  <InstallChannelsComponent.gerund>安裝頻道零件</InstallChannelsComponent.gerund>
+
+  <DoBillsRemoteExplosivesBench.label>組裝炸藥</DoBillsRemoteExplosivesBench.label>
+  <DoBillsRemoteExplosivesBench.verb>組裝炸藥</DoBillsRemoteExplosivesBench.verb>
+  <DoBillsRemoteExplosivesBench.gerund>組裝炸藥</DoBillsRemoteExplosivesBench.gerund>
+
+  <DoBillsCraftFire.label>燒炭</DoBillsCraftFire.label>
+  <DoBillsCraftFire.verb>製作</DoBillsCraftFire.verb>
+  <DoBillsCraftFire.gerund>製作</DoBillsCraftFire.gerund>
+
+  <DryOffDetonatorWire.label>乾燥起爆導線</DryOffDetonatorWire.label>
+  <DryOffDetonatorWire.verb>乾燥</DryOffDetonatorWire.verb>
+  <DryOffDetonatorWire.gerund>乾燥</DryOffDetonatorWire.gerund>
+
+
+</LanguageData>

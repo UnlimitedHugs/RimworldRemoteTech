@@ -1,8 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <LanguageData>
 
-	<PlantSparkweed.label>火花草</PlantSparkweed.label>
+  <PlantSparkweed.label>火花草</PlantSparkweed.label>
+  <PlantSparkweed.description>来源未知的稀有植物。当被触碰时，其茎干还有可燃的橙色粉末。这种粉末接触空气会燃烧，产生极热的火化并点燃周围的区域。
+被栽培作为低级炸药和火药来源。</PlantSparkweed.description>
 
-	<PlantSparkweed.description>一种未知的植物。它的茎含有一种易燃的橙色粉末，当植物被干扰时释放出来。粉体接触空气后燃烧，产生热的火花会点燃了周边地区。它被耕作成低等级炸药和火药的来源。</PlantSparkweed.description>
 
 </LanguageData>
