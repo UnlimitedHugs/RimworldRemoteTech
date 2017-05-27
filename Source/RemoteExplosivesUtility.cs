@@ -114,7 +114,7 @@ namespace RemoteExplosives {
 			if (pawn == null || detonatorThing == null || !pawn.IsColonistPlayerControlled || pawn.drafter == null) return null;
 			var entry = new FloatMenuOption {
 				action = () => {
-					if (!pawn.IsColonistPlayerControlled || !pawn.jobs.CanTakeOrderedJob()) return;
+					if (!pawn.IsColonistPlayerControlled) return;
 					if (!detonator.WantsDetonation) detonator.WantsDetonation = true;
 					var job = new Job(DefDatabase<JobDef>.GetNamed(JobDriver_DetonateExplosives.JobDefName), detonatorThing);
 					pawn.jobs.TryTakeOrderedJob(job);
@@ -124,7 +124,7 @@ namespace RemoteExplosives {
 			};
 			if (pawn.Map.reservationManager.IsReserved(detonatorThing, Faction.OfPlayer)) {
 				entry.Disabled = true;
-				var reservedByName = pawn.Map.reservationManager.FirstReserverOf(detonatorThing, Faction.OfPlayer).Name.ToStringShort;
+				var reservedByName = pawn.Map.physicalInteractionReservationManager.FirstReserverOf(detonatorThing).Name.ToStringShort;
 				entry.Label += " " + "Detonator_detonatenow_reserved".Translate(reservedByName);
 			}
 			return entry;

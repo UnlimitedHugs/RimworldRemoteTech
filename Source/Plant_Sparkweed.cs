@@ -19,8 +19,8 @@ namespace RemoteExplosives {
 
 		private List<Pawn> touchingPawns = new List<Pawn>(1);
 		
-		public override void SpawnSetup(Map map) {
-			base.SpawnSetup(map);
+		public override void SpawnSetup(Map map, bool respawningAfterLoad) {
+			base.SpawnSetup(map, respawningAfterLoad);
 			HugsLibController.Instance.DistributedTicker.RegisterTickability(CustomTick, CustomDef.detectEveryTicks);
 		}
 
@@ -31,7 +31,7 @@ namespace RemoteExplosives {
 
 		public override void ExposeData() {
 			base.ExposeData();
-			Scribe_Collections.LookList(ref touchingPawns, "touchingPawns", LookMode.Reference);
+			Scribe_Collections.Look(ref touchingPawns, "touchingPawns", LookMode.Reference);
 			if (Scribe.mode == LoadSaveMode.LoadingVars && touchingPawns == null) {
 				touchingPawns = new List<Pawn>();
 			}

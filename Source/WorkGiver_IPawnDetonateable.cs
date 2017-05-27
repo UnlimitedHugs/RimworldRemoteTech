@@ -18,7 +18,7 @@ namespace RemoteExplosives {
 			}
 		}
 
-		public override bool HasJobOnThing(Pawn pawn, Thing t) {
+		public override bool HasJobOnThing(Pawn pawn, Thing t, bool forced = false) {
 			var detonator = t as IPawnDetonateable;
 			if (detonator == null) return false;
 
@@ -33,7 +33,7 @@ namespace RemoteExplosives {
 			return status;
 		}
 
-		public override Job JobOnThing(Pawn pawn, Thing t) {
+		public override Job JobOnThing(Pawn pawn, Thing t, bool forced = false) {
 			var detonator = t as IPawnDetonateable;
 			if(detonator == null) return null;
 			if (!detonator.WantsDetonation) return null;

@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
-using RimWorld;
-using Verse;
 using System.Linq;
+using Verse;
 
 namespace RemoteExplosives {
 	/* 
@@ -10,16 +9,20 @@ namespace RemoteExplosives {
 	 */
 	public class Building_FoamWall : Building {
 		private bool justCreated;
-		private ThingContainer trappedInventory;
+		private ThingOwner<Thing> trappedInventory;
 
-		public override void SpawnSetup(Map map) {
-			base.SpawnSetup(map);
+		public override void SpawnSetup(Map map, bool respawningAfterLoad) {
+			base.SpawnSetup(map, respawningAfterLoad);
 			if(justCreated) {
 				var trappedThings = CrushThingsUnderWall(this);
 				if (trappedThings.Count == 0) return;
-				if (trappedInventory == null) trappedInventory = new ThingContainer();
+				if (trappedInventory == null) trappedInventory = new ThingOwner<Thing>();
 				foreach (var trappedThing in trappedThings) {
-					trappedInventory.TryAdd(trappedThing);
+					if (trappedThing.holdingOwner != null) {
+						trappedThing.holdingOwner.TryTransferToContainer(trappedThing, trappedInventory);
+					} else {
+						trappedInventory.TryAdd(trappedThing);
+					}
 				}
 				justCreated = false;
 			}
@@ -32,11 +35,11 @@ namespace RemoteExplosives {
 
 		public override void ExposeData() {
 			base.ExposeData();
-			Scribe_Deep.LookDeep(ref trappedInventory, "trappedInventory", null);
+			Scribe_Deep.Look(ref trappedInventory, "trappedInventory", null);
 		}
 
 		public override void Destroy(DestroyMode mode = DestroyMode.Vanish) {
-			if(mode == DestroyMode.Kill && trappedInventory!=null) {
+			if(mode == DestroyMode.KillFinalize && trappedInventory!=null) {
 				trappedInventory.TryDropAll(Position, Map, ThingPlaceMode.Direct);
 			}
 			base.Destroy(mode);
@@ -47,17 +50,11 @@ namespace RemoteExplosives {
 			foreach (var thing in thingsList) {
 				var pawn = thing as Pawn;
 				if (pawn != null && !pawn.RaceProps.IsMechanoid && !pawn.Dead) {
-					foreach (var activityGroup in pawn.RaceProps.body.GetActivityGroups(PawnCapacityDefOf.Breathing)) {
-						var parts = pawn.RaceProps.body.GetParts(PawnCapacityDefOf.Breathing, activityGroup);
-						foreach (var bodyPartRecord in parts) {
-							pawn.TakeDamage(new DamageInfo(RemoteExplosivesDefOf.FoamWallRekt, 9999, -1f, wall, bodyPartRecord));
-						}
-					}
-					if(pawn.Dead && pawn.IsColonist) {
-						Messages.Message(string.Format("FoamWall_death_message".Translate(), pawn.NameStringShort), MessageSound.Negative);
+					foreach (var partRecord in pawn.RaceProps.body.GetPartsWithTag("BreathingSource")) {
+						pawn.TakeDamage(new DamageInfo(RemoteExplosivesDefOf.FoamWallRekt, 9999, -1f, wall, partRecord));
 					}
 				} else if (thing.def.plant != null) {
-					thing.Destroy(DestroyMode.Kill);
+					thing.Destroy(DestroyMode.KillFinalize);
 				}
 			}
 			return wall.Map.thingGrid.ThingsListAt(wall.Position).Where(t => t != wall && (t.def.category == ThingCategory.Item || t.def.category == ThingCategory.Pawn)).ToList();

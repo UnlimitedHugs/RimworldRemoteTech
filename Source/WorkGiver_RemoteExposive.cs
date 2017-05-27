@@ -12,13 +12,13 @@ namespace RemoteExplosives {
 		private const PathEndMode pathEndMode = PathEndMode.Touch;
 		
 		public override IEnumerable<Thing> PotentialWorkThingsGlobal(Pawn pawn) {
-			var exposives = pawn.Map.designationManager.DesignationsOfDef(RemoteExplosivesUtility.SwitchDesigationDef);
+			var exposives = pawn.Map.designationManager.SpawnedDesignationsOfDef(RemoteExplosivesUtility.SwitchDesigationDef);
 			foreach (var exposive in exposives) {
 				yield return exposive.target.Thing;
 			}
 		}
 
-		public override bool HasJobOnThing(Pawn pawn, Thing t) {
+		public override bool HasJobOnThing(Pawn pawn, Thing t, bool forced = false) {
 			if (!(t is Building_RemoteExplosive)) return false;
 			return
 				!pawn.Dead
@@ -28,7 +28,7 @@ namespace RemoteExplosives {
 				&& pawn.CanReserveAndReach(t, pathEndMode, Danger.Deadly);
 		}
 
-		public override Job JobOnThing(Pawn pawn, Thing t) {
+		public override Job JobOnThing(Pawn pawn, Thing t, bool forced = false) {
 			var jobDef = DefDatabase<JobDef>.GetNamed(JobDriver_SwitchRemoteExplosive.JobDefName);
 			return new Job(jobDef, t);
 		}

@@ -48,7 +48,7 @@ namespace RemoteExplosives {
 		
 		public override void ExposeData() {
 			base.ExposeData();
-			Scribe_Values.LookValue(ref wantDetonation, "wantDetonation", false);
+			Scribe_Values.Look(ref wantDetonation, "wantDetonation", false);
 		}
 
 		public override IEnumerable<Gizmo> GetGizmos() {

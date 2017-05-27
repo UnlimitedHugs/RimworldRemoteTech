@@ -35,7 +35,6 @@
 	<FoamBlob_solidify_progress>Solidifying: {0}%</FoamBlob_solidify_progress>
 	
 	<FoamWall_contents>Contents: {0}</FoamWall_contents>
-	<FoamWall_death_message>{0} died in a solidifying foam wall.</FoamWall_death_message>
 	
 	<GasCloud_concentration_label>Concentration: {0}</GasCloud_concentration_label>
 	

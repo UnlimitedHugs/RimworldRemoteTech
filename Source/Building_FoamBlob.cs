@@ -24,8 +24,8 @@ namespace RemoteExplosives {
 		private List<IntVec3> adjacentCells;
 		private bool justCreated;
 
-		public override void SpawnSetup(Map map) {
-			base.SpawnSetup(map);
+		public override void SpawnSetup(Map map, bool respawningAfterLoad) {
+			base.SpawnSetup(map, respawningAfterLoad);
 			foamProps = (BuildingProperties_FoamBlob)def.building;
 			if(justCreated) {
 				SetFactionDirect(Faction.OfPlayer);
@@ -43,9 +43,9 @@ namespace RemoteExplosives {
 
 		public override void ExposeData() {
 			base.ExposeData();
-			Scribe_Values.LookValue(ref ticksUntilHardened, "ticksUntilHardened", 0);
-			Scribe_Values.LookValue(ref numSpreadsLeft, "numSpreadsLeft", 0);
-			Scribe_Values.LookValue(ref ticksUntilNextSpread, "ticksUntilNextSpread", 0);
+			Scribe_Values.Look(ref ticksUntilHardened, "ticksUntilHardened", 0);
+			Scribe_Values.Look(ref numSpreadsLeft, "numSpreadsLeft", 0);
+			Scribe_Values.Look(ref ticksUntilNextSpread, "ticksUntilNextSpread", 0);
 		}
 
 		public void SetSpreadingCharges(int numCharges) {

@@ -32,8 +32,8 @@ namespace RemoteExplosives {
 			justMade = true;
 		}
 
-		public override void SpawnSetup(Map map) {
-			base.SpawnSetup(map);
+		public override void SpawnSetup(Map map, bool respawningAfterLoad) {
+			base.SpawnSetup(map, respawningAfterLoad);
 			if (justMade) {
 				justMade = false;
 				numUsesLeft = MaxNumUses;
@@ -42,7 +42,7 @@ namespace RemoteExplosives {
 
 		public override void ExposeData() {
 			base.ExposeData();
-			Scribe_Values.LookValue(ref numUsesLeft, "numUsesLeft", 0);
+			Scribe_Values.Look(ref numUsesLeft, "numUsesLeft", 0);
 		}
 
 		public override void DrawWornExtras() {
@@ -77,7 +77,7 @@ namespace RemoteExplosives {
 			if (!rangeOverlayVisible) return;
 			rangeOverlayVisible = false;
 			if (SignalRange <= GenRadial.MaxRadialPatternRadius) {
-				GenDraw.DrawRadiusRing(wearer.Position, SignalRange);
+				GenDraw.DrawRadiusRing(Wearer.Position, SignalRange);
 			}
 		}
 
@@ -88,14 +88,14 @@ namespace RemoteExplosives {
 		private void OnGizmoActivation() {
 			if (lastActivationTick + ActivationCooldownTicks>=Find.TickManager.TicksGame) return;
 			lastActivationTick = Find.TickManager.TicksGame;
-			SoundDefOf.FlickSwitch.PlayOneShot(wearer);
+			SoundDefOf.FlickSwitch.PlayOneShot(Wearer);
 
-			RemoteExplosivesUtility.LightArmedExplosivesInRange(wearer.Position, wearer.Map, SignalRange, RemoteExplosivesUtility.RemoteChannel.White);
+			RemoteExplosivesUtility.LightArmedExplosivesInRange(Wearer.Position, Wearer.Map, SignalRange, RemoteExplosivesUtility.RemoteChannel.White);
 			
 			numUsesLeft--;
 			if (numUsesLeft <= 0) {
-				Destroy(DestroyMode.Kill);
-				Messages.Message(DetonatorBrokeMessage, new TargetInfo(wearer), MessageSound.Negative);
+				Destroy(DestroyMode.KillFinalize);
+				Messages.Message(DetonatorBrokeMessage, new TargetInfo(Wearer), MessageSound.Negative);
 			}
 		}
 

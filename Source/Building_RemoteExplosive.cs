@@ -69,8 +69,8 @@ namespace RemoteExplosives {
 			justCreated = true;
 		}
 
-		public override void SpawnSetup(Map map) {
-			base.SpawnSetup(map);
+		public override void SpawnSetup(Map map, bool respawningAfterLoad) {
+			base.SpawnSetup(map, respawningAfterLoad);
 			flareOverlayStrong.drawSize = flareOverlayNormal.drawSize = def.graphicData.drawSize;
 
 			RemoteExplosivesUtility.UpdateSwitchDesignation(this);
@@ -88,11 +88,11 @@ namespace RemoteExplosives {
 
 		public override void ExposeData() {
 			base.ExposeData();
-			Scribe_Values.LookValue(ref isArmed, "isArmed", false);
-			Scribe_Values.LookValue(ref ticksSinceFlare, "ticksSinceFlare", 0);
-			Scribe_Values.LookValue(ref desiredArmState, "desiredArmState", false);
-			Scribe_Values.LookValue(ref currentChannel, "currentChannel", RemoteExplosivesUtility.RemoteChannel.White);
-			Scribe_Values.LookValue(ref desiredChannel, "desiredChannel", RemoteExplosivesUtility.RemoteChannel.White);
+			Scribe_Values.Look(ref isArmed, "isArmed", false);
+			Scribe_Values.Look(ref ticksSinceFlare, "ticksSinceFlare", 0);
+			Scribe_Values.Look(ref desiredArmState, "desiredArmState", false);
+			Scribe_Values.Look(ref currentChannel, "currentChannel", RemoteExplosivesUtility.RemoteChannel.White);
+			Scribe_Values.Look(ref desiredChannel, "desiredChannel", RemoteExplosivesUtility.RemoteChannel.White);
 		}
 
 		public bool WantsSwitch() {
@@ -150,6 +150,28 @@ namespace RemoteExplosives {
 			}
 
 			if (replaceComp != null) yield return replaceComp.MakeGizmo();
+
+			if (DebugSettings.godMode) {
+				yield return new Command_Action {
+					action = () => {
+						if (isArmed) {
+							Disarm();
+						} else {
+							Arm();
+						}
+					},
+					icon = UITex_Arm,
+					defaultLabel = "DEV: Toggle armed"
+				};
+				yield return new Command_Action {
+					action = () => { 
+						Arm();
+						LightFuse();
+					},
+					icon = Building_DetonatorTable.UITex_Detonate,
+					defaultLabel = "DEV: Detonate now"
+				};
+			}
 
 			foreach (var g in base.GetGizmos()) {
 				yield return g;
@@ -217,7 +239,6 @@ namespace RemoteExplosives {
 		public override string GetInspectString() {
 			var stringBuilder = new StringBuilder();
 			stringBuilder.Append(base.GetInspectString());
-			stringBuilder.AppendLine();
 			if (IsArmed) {
 				stringBuilder.Append("TrapArmed".Translate());
 			} else {

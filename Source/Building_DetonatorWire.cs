@@ -45,16 +45,16 @@ namespace RemoteExplosives {
 		private float wetness;
 		private bool wantDrying;
 
-		public override void SpawnSetup(Map map) {
-			base.SpawnSetup(map);
+		public override void SpawnSetup(Map map, bool respawningAfterLoad) {
+			base.SpawnSetup(map, respawningAfterLoad);
 			var comp = GetComp<CompWiredDetonationTransmitter>();
 			if (comp != null) comp.signalPassageTest = SignalPassageTest;
 		}
 
 		public override void ExposeData() {
 			base.ExposeData();
-			Scribe_Values.LookValue(ref wetness, "wetness", 0);
-			Scribe_Values.LookValue(ref wantDrying, "wantDrying", false);
+			Scribe_Values.Look(ref wetness, "wetness", 0);
+			Scribe_Values.Look(ref wantDrying, "wantDrying", false);
 		}
 
 		public override void TickRare() {
@@ -127,7 +127,7 @@ namespace RemoteExplosives {
 		private void DoFailure() {
 			if (CustomProps.failureEffecter != null) CustomProps.failureEffecter.Spawn().Trigger(new TargetInfo(Position, Map), null);
 			var map = Map;
-			Destroy(DestroyMode.Kill);
+			Destroy(DestroyMode.KillFinalize);
 			// try spawn fire in own or adjacent cell
 			var adjacents = GenAdj.CardinalDirections.ToList();
 			adjacents.Shuffle();

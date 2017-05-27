@@ -66,7 +66,7 @@ namespace RemoteExplosives {
 					// resource rocks
 					breakingPowerRemaining -= thing.HitPoints * MiningProps.resourceBreakingCost;
 					DamageResourceHolder(thing, MiningProps.resourceBreakingYield);
-					thing.Destroy(DestroyMode.Kill);
+					thing.Destroy(DestroyMode.KillFinalize);
 					affected = true;
 				} else if (rockBuildingDef.isNaturalRock) {
 					// stone
@@ -88,7 +88,7 @@ namespace RemoteExplosives {
 				} else {
 					// all other mineables
 					breakingPowerRemaining -= thing.HitPoints;
-					thing.Destroy(DestroyMode.Kill);
+					thing.Destroy(DestroyMode.KillFinalize);
 					affected = true;
 				}
 			} else if (thing.def.plant != null && thing.def.plant.IsTree) {

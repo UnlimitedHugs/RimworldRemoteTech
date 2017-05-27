@@ -20,7 +20,7 @@ namespace RemoteExplosives {
 		}
 
 		public override void ExposeData() {
-			Scribe_Deep.LookDeep(ref replaceWatcher, "replaceWatcher");
+			Scribe_Deep.Look(ref replaceWatcher, "replaceWatcher");
 			if(replaceWatcher == null) replaceWatcher = new AutoReplaceWatcher();
 			replaceWatcher.SetParentMap(map);
 		}

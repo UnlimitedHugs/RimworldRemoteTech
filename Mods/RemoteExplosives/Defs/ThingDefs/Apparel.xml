@@ -65,6 +65,7 @@ The filters wear out fairly quickly, so it's recommended to wear this only when 
 			<ArmorRating_Blunt>0.05</ArmorRating_Blunt>
 			<ArmorRating_Sharp>0.05</ArmorRating_Sharp>
 		</statBases>
+		<generateCommonality>.8</generateCommonality>
 		<thingCategories>
 			<li>Headgear</li>
 		</thingCategories>
@@ -86,7 +87,6 @@ The filters wear out fairly quickly, so it's recommended to wear this only when 
 			<layers>
 				<li>Overhead</li>
 			</layers>
-			<commonality>.8</commonality>
 			<tags>
 				<li>Outlander</li>
 				<li>Military</li>
@@ -131,6 +131,7 @@ Works only on the white channel, has limited range and runs on a non-rechargeabl
 			<PortableDetonatorRange>18</PortableDetonatorRange>
 			<PortableDetonatorNumUses>20</PortableDetonatorNumUses>
 		</statBases>
+		<generateCommonality>0.00001</generateCommonality>
 		<recipeMaker>
 			<workSpeedStat>SmithingSpeed</workSpeedStat>
 			<workSkill>Crafting</workSkill>
@@ -151,13 +152,13 @@ Works only on the white channel, has limited range and runs on a non-rechargeabl
 			<li>Apparel</li>
 		</thingCategories>
 		<apparel>
+			<careIfWornByCorpse>false</careIfWornByCorpse>
 			<bodyPartGroups>
-				<li>Torso</li>
+				<li>Waist</li>
 			</bodyPartGroups>
 			<layers>
-				<li>Accessory</li>
+				<li>Belt</li>
 			</layers>
-			<commonality>0.00001</commonality> <!-- turns out, setting this to zero causes problems -->
 		</apparel>
 	</ThingDef>
 

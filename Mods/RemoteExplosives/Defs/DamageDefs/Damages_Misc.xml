@@ -5,6 +5,8 @@
 		<defName>FoamWallRekt</defName>
 		<label>trapped</label>
 		<workerClass>DamageWorker_AddInjury</workerClass>
+		<hasForcefulImpact>false</hasForcefulImpact>
+		<deathMessage>{0} died in a solidifying foam wall.</deathMessage>
 		<hediff>Misc</hediff>
 		<harmsHealth>true</harmsHealth>
 		<makesBlood>false</makesBlood>
@@ -15,7 +17,6 @@
 		<defName>FlameBomb</defName>
 		<workerClass>RemoteExplosives.DamageWorker_FlameChance</workerClass>
 		<label>flame bomb</label>
-		<incapChanceMultiplier>1</incapChanceMultiplier>
 		<hasForcefulImpact>false</hasForcefulImpact>
 		<makesBlood>false</makesBlood>
 		<canInterruptJobs>false</canInterruptJobs>

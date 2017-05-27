@@ -10,8 +10,8 @@ namespace RemoteExplosives {
 		private float lastSeenSeverity;
 		private int cooldownTicksLeft;
 
-		public override void CompPostTick() {
-			base.CompPostTick();
+		public override void CompPostTick(ref float severityAdjustment) {
+			base.CompPostTick(ref severityAdjustment);
 			var recoProps = props as HediffCompProps_SeverityRecovery;
 			if (recoProps != null) {
 				if (cooldownTicksLeft > 0) {

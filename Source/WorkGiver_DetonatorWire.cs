@@ -17,20 +17,20 @@ namespace RemoteExplosives {
 		}
 
 		public override IEnumerable<Thing> PotentialWorkThingsGlobal(Pawn pawn) {
-			var designations = pawn.Map.designationManager.DesignationsOfDef(RemoteExplosivesUtility.DryOffDesigationDef);
+			var designations = pawn.Map.designationManager.SpawnedDesignationsOfDef(RemoteExplosivesUtility.DryOffDesigationDef);
 			foreach (var designation in designations) {
 				if(designation.target.Thing == null) continue;
 				yield return designation.target.Thing;
 			}
 		}
 
-		public override bool HasJobOnThing(Pawn pawn, Thing t) {
+		public override bool HasJobOnThing(Pawn pawn, Thing t, bool forced = false) {
 			var wire = t as Building_DetonatorWire;
 			if (wire == null) return false;
 			return wire.WantDrying && pawn.CanReserveAndReach(t, PathEndMode.Touch, Danger.Deadly);
 		}
 
-		public override Job JobOnThing(Pawn pawn, Thing t) {
+		public override Job JobOnThing(Pawn pawn, Thing t, bool forced = false) {
 			var wire = t as Building_DetonatorWire;
 			if (wire == null) return null;
 			if (!wire.WantDrying) return null;
