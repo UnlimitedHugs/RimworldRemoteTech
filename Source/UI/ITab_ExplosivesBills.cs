@@ -53,20 +53,26 @@ namespace RemoteExplosives {
 				var list = new List<FloatMenuOption>();
 				for (int i = 0; i < SelTable.def.AllRecipes.Count; i++) {
 					var recipe = SelTable.def.AllRecipes[i];
-					if(!recipe.AvailableNow) continue;
 					if(currentRecipeMode == RecipeMode.Components && IsInjectedSteelRecipe(recipe) || currentRecipeMode == RecipeMode.Steel && !IsInjectedSteelRecipe(recipe)) continue;
-					
-					list.Add(new FloatMenuOption(recipe.LabelCap, delegate {
+
+					var locked = recipe.researchPrerequisite != null && !recipe.AvailableNow;
+					string researchTip = "";
+					if (locked) {
+						researchTip = "BillsTab_ResearchRequired".Translate(recipe.researchPrerequisite.label);
+					}
+					var option = new FloatMenuOptionWithTooltip(recipe.LabelCap, delegate {
 						var map = Find.VisibleMap;
 						if (map == null || !map.mapPawns.FreeColonists.Any(recipe.PawnSatisfiesSkillRequirements)) {
 							Bill.CreateNoPawnsWithSkillDialog(recipe);
 						}
 						var bill = recipe.MakeNewBill();
 						SelTable.billStack.AddBill(bill);
-					}));
+					}, researchTip);
+					option.Disabled = locked;
+					list.Add(option);
 				}
 				if (list.Count == 0) {
-					list.Add(new FloatMenuOption("(no recipes - research required)", null));
+					list.Add(new FloatMenuOption("(no recipes)", null));
 				}
 				return list;
 			};

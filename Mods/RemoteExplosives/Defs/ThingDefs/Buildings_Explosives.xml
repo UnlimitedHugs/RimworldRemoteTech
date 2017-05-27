@@ -421,7 +421,7 @@ Arm, then detonate from the Remote Explosives Console.</description>
 			<li Class="CompProperties_Explosive">
 				<compClass>RemoteExplosives.CompCustomExplosive</compClass>
 				<explosiveRadius>6.5</explosiveRadius>
-				<explosiveDamageType>EMP</explosiveDamageType>
+				<explosiveDamageType>SuperEMP</explosiveDamageType>
 				<!-- will never be triggered by damage -->
 				<startWickHitPointsPercent>0</startWickHitPointsPercent>
 				<wickTicks>
