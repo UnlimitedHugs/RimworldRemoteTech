@@ -31,6 +31,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="0Harmony">
+      <HintPath>..\0Harmony.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="Assembly-CSharp">
       <HintPath>..\Assembly-CSharp.dll</HintPath>
       <Private>False</Private>
@@ -49,6 +53,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Source\Damage\DamageWorker_SuperEMP.cs" />
+    <Compile Include="Source\Damage\SuperEMPDamageDef.cs" />
     <Compile Include="Source\UI\Alert_DetonatorWireFailure.cs" />
     <Compile Include="Source\AutoReplaceWatcher.cs" />
     <Compile Include="Source\Building\BuildingProperties_DetonatorWire.cs" />
