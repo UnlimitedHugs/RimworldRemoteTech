@@ -95,6 +95,7 @@
     <Compile Include="Source\Graphic\Graphic_FoamBlob.cs" />
     <Compile Include="Source\Thing\MoteProperties_GasCloud.cs" />
     <Compile Include="Source\Graphic\Graphic_GasCloud.cs" />
+    <Compile Include="Source\UI\FloatMenuOptionWithTooltip.cs" />
     <Compile Include="Source\UI\ITab_ExplosivesBills.cs" />
     <Compile Include="Source\Comp\CompCustomExplosive.cs" />
     <Compile Include="Source\Comp\CompMiningExplosive.cs" />
