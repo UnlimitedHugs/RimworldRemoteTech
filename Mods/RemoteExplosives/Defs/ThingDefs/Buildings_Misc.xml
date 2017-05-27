@@ -42,6 +42,7 @@
 		<constructEffect>ConstructMetal</constructEffect>
 		<Passability>PassThroughOnly</Passability>
 		<pathCost>230</pathCost>
+		<pathCostIgnoreRepeat>false</pathCostIgnoreRepeat>
 		<tickerType>Normal</tickerType>
 		<building Class="RemoteExplosives.BuildingProperties_FoamBlob">
 			<ticksToHarden>

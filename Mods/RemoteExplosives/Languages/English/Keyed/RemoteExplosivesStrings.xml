@@ -31,11 +31,11 @@
 	<BillsTab_MaterialButton_component_mode>Components</BillsTab_MaterialButton_component_mode>
 	<BillsTab_MaterialButton_steel_mode>Steel</BillsTab_MaterialButton_steel_mode>
 	<BillsTab_MaterialButton_tooltip>Sets the base material that new bills are created with.</BillsTab_MaterialButton_tooltip>
+	<BillsTab_ResearchRequired>Research required: {0}</BillsTab_ResearchRequired>
 	
 	<FoamBlob_solidify_progress>Solidifying: {0}%</FoamBlob_solidify_progress>
 	
 	<FoamWall_contents>Contents: {0}</FoamWall_contents>
-	<FoamWall_death_message>{0} died in a solidifying foam wall.</FoamWall_death_message>
 	
 	<GasCloud_concentration_label>Concentration: {0}</GasCloud_concentration_label>
 	

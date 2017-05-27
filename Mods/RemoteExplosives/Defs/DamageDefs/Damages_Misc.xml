@@ -5,6 +5,8 @@
 		<defName>FoamWallRekt</defName>
 		<label>trapped</label>
 		<workerClass>DamageWorker_AddInjury</workerClass>
+		<hasForcefulImpact>false</hasForcefulImpact>
+		<deathMessage>{0} died in a solidifying foam wall.</deathMessage>
 		<hediff>Misc</hediff>
 		<harmsHealth>true</harmsHealth>
 		<makesBlood>false</makesBlood>
@@ -15,7 +17,6 @@
 		<defName>FlameBomb</defName>
 		<workerClass>RemoteExplosives.DamageWorker_FlameChance</workerClass>
 		<label>flame bomb</label>
-		<incapChanceMultiplier>1</incapChanceMultiplier>
 		<hasForcefulImpact>false</hasForcefulImpact>
 		<makesBlood>false</makesBlood>
 		<canInterruptJobs>false</canInterruptJobs>
@@ -32,4 +33,24 @@
 		<explosionColorEdge>(1, 1, 0.7)</explosionColorEdge>
 		<flameChance>0.2</flameChance>
 	</DamageDef>
+	
+	<DamageDef Class="RemoteExplosives.SuperEMPDamageDef">
+		<defName>SuperEMP</defName>
+		<label>EMP</label>
+		<externalViolence>true</externalViolence>
+		<deathMessage>{0} has been EMPed to death.</deathMessage>
+		<harmsHealth>false</harmsHealth>
+		<makesBlood>false</makesBlood>
+		<impactSoundType>Electric</impactSoundType>
+		<armorCategory>Electric</armorCategory>
+		<explosionDamage>75</explosionDamage>
+		<explosionSnowMeltAmount>0</explosionSnowMeltAmount>
+		<explosionCellMote>Mote_BlastEMP</explosionCellMote>
+		<explosionColorEdge>(1, 0.5, 0.5, 0.8)</explosionColorEdge>
+		<explosionInteriorMote>Mote_ElectricalSpark</explosionInteriorMote>
+		<soundExplosion>Explosion_EMP</soundExplosion>
+		<incapHealthThreshold>.3</incapHealthThreshold>
+		<incapChance>.3</incapChance>
+	</DamageDef>
+	
 </Defs>
