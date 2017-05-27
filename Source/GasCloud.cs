@@ -62,8 +62,8 @@ namespace RemoteExplosives {
 			interpolatedRotation = new InterpolatedValue();
 		}
 
-		public override void SpawnSetup(Map map) {
-			base.SpawnSetup(map);
+		public override void SpawnSetup(Map map, bool respawningAfterLoad) {
+			base.SpawnSetup(map, respawningAfterLoad);
 			gasProps = def.mote as MoteProperties_GasCloud;
 			relativeZOrder = ++GlobalOffsetCounter % 80;
 			if (gasProps == null) throw new Exception("Missing required gas mote properties in " + def.defName);
@@ -80,8 +80,8 @@ namespace RemoteExplosives {
 
 		public override void ExposeData() {
 			base.ExposeData();
-			Scribe_Values.LookValue(ref concentration, "concentration", 0);
-			Scribe_Values.LookValue(ref gasTicksProcessed, "ticks", 0);
+			Scribe_Values.Look(ref concentration, "concentration", 0);
+			Scribe_Values.Look(ref gasTicksProcessed, "ticks", 0);
 		}
 
 		public override void Draw() {
@@ -145,7 +145,7 @@ namespace RemoteExplosives {
 			var underRoof = Map.roofGrid.Roofed(Position);
 			concentration -= underRoof ? gasProps.RoofedDissipation : gasProps.UnroofedDissipation;
 			if(concentration<=0) {
-				Destroy(DestroyMode.Kill);
+				Destroy(DestroyMode.KillFinalize);
 				return;
 			}
 			

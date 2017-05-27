@@ -14,8 +14,8 @@ namespace RemoteExplosives {
 
 		private MoteProperties_GasCloud_HediffGiver gasProps;
 
-		public override void SpawnSetup(Map map) {
-			base.SpawnSetup(map);
+		public override void SpawnSetup(Map map, bool respawningAfterLoad) {
+			base.SpawnSetup(map, respawningAfterLoad);
 			gasProps = (MoteProperties_GasCloud_HediffGiver) def.mote;
 			if (gasProps == null) throw new Exception("Missing required gas mote properties in " + def.defName);
 		}

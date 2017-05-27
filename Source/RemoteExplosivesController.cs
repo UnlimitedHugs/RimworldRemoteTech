@@ -129,7 +129,7 @@ namespace RemoteExplosives {
 		private RecipeDef TryMakeRecipeVariantWithSteel(RecipeDef recipeOriginal) {
 			var recipeCopy = (RecipeDef) objectCloneMethod.Invoke(recipeOriginal, null);
 			recipeCopy.shortHash = 0;
-			InjectedDefHasher.GiveShortHasToDef(recipeCopy);
+			InjectedDefHasher.GiveShortHasToDef(recipeCopy, typeof(RecipeDef));
 			recipeCopy.defName += RemoteExplosivesUtility.InjectedRecipeNameSuffix;
 
 			var newFixedFilter = new ThingFilter();

@@ -38,19 +38,19 @@ namespace RemoteExplosives {
 			}
 		}
 
-		public override void PostSpawnSetup() {
+		public override void PostSpawnSetup(bool respawningAfterLoad) {
 			// cache map&position to allow charges destroyed in mass exposions to still be effective
-			base.PostSpawnSetup();
+			base.PostSpawnSetup(respawningAfterLoad);
 			parentMap = parent.Map;
 			parentPosition = parent.Position;
 		}
 
 		public override void PostExposeData() {
 			base.PostExposeData();
-			Scribe_Values.LookValue(ref wickStarted, "wickStarted", false);
-			Scribe_Values.LookValue(ref wickTicksLeft, "wickTicksLeft", 0);
-			Scribe_Values.LookValue(ref wickTotalTicks, "wickTotalTicks", 0);
-			Scribe_Values.LookValue(ref wickIsSilent, "wickIsSilent", false);
+			Scribe_Values.Look(ref wickStarted, "wickStarted", false);
+			Scribe_Values.Look(ref wickTicksLeft, "wickTicksLeft", 0);
+			Scribe_Values.Look(ref wickTotalTicks, "wickTotalTicks", 0);
+			Scribe_Values.Look(ref wickIsSilent, "wickIsSilent", false);
 		}
 
 		public override void CompTick() {
@@ -115,7 +115,7 @@ namespace RemoteExplosives {
 			if (detonated) return;
 			detonated = true;
 			if (!parent.Destroyed) {
-				parent.Destroy(DestroyMode.Kill);
+				parent.Destroy(DestroyMode.KillFinalize);
 			}
 			var exProps = ExplosiveProps;
 			if (exProps.explosiveDamageType != null) {

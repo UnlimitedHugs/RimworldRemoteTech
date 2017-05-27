@@ -32,7 +32,7 @@ namespace RemoteExplosives {
 
 		public override void PostDestroy(DestroyMode mode, Map map) {
 			base.PostDestroy(mode, map);
-			if (map != null && mode == DestroyMode.Kill && customProps.breakSound != null) {
+			if (map != null && mode == DestroyMode.KillFinalize && customProps.breakSound != null) {
 				customProps.breakSound.PlayOneShot(parent);
 			}
 		}

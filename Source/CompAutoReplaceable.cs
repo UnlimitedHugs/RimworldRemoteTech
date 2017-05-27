@@ -25,12 +25,12 @@ namespace RemoteExplosives {
 
 		public override void PostExposeData() {
 			base.PostExposeData();
-			Scribe_Values.LookValue(ref autoReplaceEnabled, "enabled", false);
+			Scribe_Values.Look(ref autoReplaceEnabled, "enabled", false);
 			if (Scribe.mode == LoadSaveMode.LoadingVars) wasLoaded = true;
 		}
 
-		public override void PostSpawnSetup() {
-			base.PostSpawnSetup();
+		public override void PostSpawnSetup(bool respawningAfterLoad) {
+			base.PostSpawnSetup(respawningAfterLoad);
 			if(parent.def == null || parent.def.category!= ThingCategory.Building) throw new Exception("CompAutoReplaceable used on non-building");
 			if(parent.def.MadeFromStuff) throw new Exception("Buildings made from Stuff not supported for auto-replacement");
 			ParentPosition = parent.Position;
@@ -42,7 +42,7 @@ namespace RemoteExplosives {
 
 		public override void PostDestroy(DestroyMode mode, Map map) {
 			base.PostDestroy(mode, map);
-			if (AutoReplaceEnabled && mode == DestroyMode.Kill) {
+			if (AutoReplaceEnabled && mode == DestroyMode.KillFinalize) {
 				map.GetComponent<MapComponent_RemoteExplosives>().ReplaceWatcher.ScheduleReplacement(this);
 			}
 		}

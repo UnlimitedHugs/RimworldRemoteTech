@@ -1,7 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ResearchProjectDefs>
-
-	<ResearchProjectDef>
+	<ResearchProjectDef Abstract="True" Name="ProjectBase">
+		<tab>RemoteExplosives</tab>
+	</ResearchProjectDef>
+	
+	<ResearchProjectDef ParentName="ProjectBase">
 		<defName>MakeshiftExplosives</defName>
 		<label>Makeshift Explosives</label>
 		<description>Allows you to make simple explosives out of renewable resources.
@@ -13,11 +16,11 @@ Once researched:
 		<baseCost>1000</baseCost>
 		<techLevel>Medieval</techLevel>
 		<prerequisites></prerequisites>
-		<researchViewX>13</researchViewX>
-		<researchViewY>0</researchViewY>
+		<researchViewX>0</researchViewX>
+		<researchViewY>2.5</researchViewY>
 	</ResearchProjectDef>
 
-	<ResearchProjectDef>
+	<ResearchProjectDef ParentName="ProjectBase">
 		<defName>RemoteDetonator</defName>
 		<label>Remote Detonator</label>
 		<description>Allows you to build a console that detonates remote explosives, as well as a workbench to manufacture them.
@@ -29,11 +32,11 @@ Research Explosive IEDs or Incendiary IEDs to manufacture combat-grade remote ex
 		<prerequisites>
 			<li>MakeshiftExplosives</li>
 		</prerequisites>
-		<researchViewX>13</researchViewX>
-		<researchViewY>1</researchViewY>
+		<researchViewX>1</researchViewX>
+		<researchViewY>2.5</researchViewY>
 	</ResearchProjectDef>
 	
-	<ResearchProjectDef>
+	<ResearchProjectDef ParentName="ProjectBase">
 		<defName>RemoteExplosivesChannels</defName>
 		<label>Remote Explosives Channels</label>
 		<description>Unlocks the use of channel on your remote explosives and the detonator. Only explosives on the same channel as the detonator can be triggered. This allows to set up multiple lines of explosive defenses.
@@ -43,11 +46,11 @@ The detonator must be upgraded with a component for this to work.</description>
 		<prerequisites>
 			<li>RemoteDetonator</li>
 		</prerequisites>
-		<researchViewX>14</researchViewX>
-		<researchViewY>0</researchViewY>
+		<researchViewX>2</researchViewX>
+		<researchViewY>1</researchViewY>
 	</ResearchProjectDef>
 	
-	<ResearchProjectDef>
+	<ResearchProjectDef ParentName="ProjectBase">
 		<defName>RemoteEmpMine</defName>
 		<label>Remote EMP Charge</label>
 		<description>Allows the creation of EMP charges that can be triggered with a remote detonator.
@@ -57,11 +60,11 @@ While expensive, they can be devastating against mechanoids when properly used.<
 		<prerequisites>
 			<li>RemoteDetonator</li>
 		</prerequisites>
-		<researchViewX>14</researchViewX>
-		<researchViewY>1</researchViewY>
+		<researchViewX>2</researchViewX>
+		<researchViewY>2</researchViewY>
 	</ResearchProjectDef>
 	
-	<ResearchProjectDef>
+	<ResearchProjectDef ParentName="ProjectBase">
 		<defName>RemoteChemicals</defName>
 		<label>Remote Chemical Charges</label>
 		<description>Allows the creation of remotely triggered canisters for specialized chemicals.
@@ -72,11 +75,11 @@ Use in enclosed areas for best results.</description>
 		<prerequisites>
 			<li>RemoteDetonator</li>
 		</prerequisites>
-		<researchViewX>15</researchViewX>
-		<researchViewY>0</researchViewY>
+		<researchViewX>2</researchViewX>
+		<researchViewY>3</researchViewY>
 	</ResearchProjectDef>
 	
-	<ResearchProjectDef>
+	<ResearchProjectDef ParentName="ProjectBase">
 		<defName>RemoteRoofBreaking</defName>
 		<label>Mountain Roof Removal</label>
 		<description>The destructive power of mining explosives can be focused using strong composite materials. When aimed upwards, this allows to break even through thick mountain roof, as long as the charge is properly positioned.
@@ -86,8 +89,8 @@ Allows the Shaped Charge to be built.</description>
 		<prerequisites>
 			<li>RemoteDetonator</li>
 		</prerequisites>
-		<researchViewX>15</researchViewX>
-		<researchViewY>1</researchViewY>
+		<researchViewX>2</researchViewX>
+		<researchViewY>4</researchViewY>
 	</ResearchProjectDef>
 	
 </ResearchProjectDefs>

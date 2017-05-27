@@ -12,7 +12,7 @@ namespace RemoteExplosives {
 	 */
 	[StaticConstructorOnStartup]
 	public class Building_DetonatorTable : Building, IPawnDetonateable {
-		private static readonly Texture2D UITex_Detonate = ContentFinder<Texture2D>.Get("UIDetonate");
+		internal static readonly Texture2D UITex_Detonate = ContentFinder<Texture2D>.Get("UIDetonate");
 		private static readonly string DetonateButtonLabel = "DetonatorTable_detonate_label".Translate();
 		private static readonly string DetonateButtonDesc = "DetonatorTable_detonate_desc".Translate();
 
@@ -40,10 +40,10 @@ namespace RemoteExplosives {
 		public override void ExposeData()
 		{
 			base.ExposeData();
-			Scribe_Values.LookValue(ref wantDetonation, "wantDetonation", false);
-			Scribe_Values.LookValue(ref currentChannel, "currentChannel", RemoteExplosivesUtility.RemoteChannel.White);
-			Scribe_Values.LookValue(ref hasChannelsComponent, "hasChannelsComponent", false);
-			Scribe_Values.LookValue(ref wantChannelsComponent, "wantChannelsComponent", false);
+			Scribe_Values.Look(ref wantDetonation, "wantDetonation", false);
+			Scribe_Values.Look(ref currentChannel, "currentChannel", RemoteExplosivesUtility.RemoteChannel.White);
+			Scribe_Values.Look(ref hasChannelsComponent, "hasChannelsComponent", false);
+			Scribe_Values.Look(ref wantChannelsComponent, "wantChannelsComponent", false);
 		}
 
 		public override IEnumerable<Gizmo> GetGizmos(){

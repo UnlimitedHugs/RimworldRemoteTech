@@ -10,9 +10,8 @@ namespace RemoteExplosives {
 
 		private List<IntVec3> affectedCells;
 
-
-		public override void SpawnSetup(Map map) {
-			base.SpawnSetup(map);
+		public override void SpawnSetup(Map map, bool respawningAfterLoad) {
+			base.SpawnSetup(map, respawningAfterLoad);
 			var comp = GetComp<CompMiningExplosive>();
 			if (comp != null) {
 				affectedCells = GetAffectedCellsAtPosition(Position, comp.MiningProps.miningRadius);

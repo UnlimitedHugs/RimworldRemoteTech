@@ -21,8 +21,8 @@ namespace RemoteExplosives {
 
 		private IntVec3 cachedPosition = IntVec3.Invalid;
 
-		public override void PostSpawnSetup() {
-			base.PostSpawnSetup();
+		public override void PostSpawnSetup(bool respawningAfterLoad) {
+			base.PostSpawnSetup(respawningAfterLoad);
 			if (parent is Building) {
 				cachedPosition = parent.Position;
 				parent.Map.mapDrawer.MapMeshDirty(parent.Position, MapMeshFlag.Buildings);

@@ -20,7 +20,7 @@ namespace RemoteExplosives {
 			}
 		}
 
-		public override bool HasJobOnThing(Pawn pawn, Thing t) {
+		public override bool HasJobOnThing(Pawn pawn, Thing t, bool forced = false) {
 			var table = t as Building_DetonatorTable;
 			if (table == null) return false;
 
@@ -38,7 +38,7 @@ namespace RemoteExplosives {
 			return status;
 		}
 
-		public override Job JobOnThing(Pawn pawn, Thing t) {
+		public override Job JobOnThing(Pawn pawn, Thing t, bool forced = false) {
 			var table = t as Building_DetonatorTable;
 			if (table == null) return null;
 			if (!table.WantChannelsComponent) return null;
