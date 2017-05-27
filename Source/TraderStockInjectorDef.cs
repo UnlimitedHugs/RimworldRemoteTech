@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿// ReSharper disable UnassignedField.Global
+using System.Collections.Generic;
 using RimWorld;
 using Verse;
 

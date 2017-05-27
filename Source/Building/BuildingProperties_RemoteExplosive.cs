@@ -1,4 +1,5 @@
-﻿using RimWorld;
+﻿// ReSharper disable UnassignedField.Global
+using RimWorld;
 using UnityEngine;
 
 namespace RemoteExplosives {

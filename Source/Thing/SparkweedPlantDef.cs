@@ -1,4 +1,5 @@
-﻿using Verse;
+﻿// ReSharper disable UnassignedField.Global
+using Verse;
 
 namespace RemoteExplosives {
 	public class SparkweedPlantDef : ThingDef {

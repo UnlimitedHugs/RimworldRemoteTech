@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using Harmony;
 using HugsLib;
 using HugsLib.Settings;
 using HugsLib.Utils;
@@ -40,7 +41,6 @@ namespace RemoteExplosives {
 
 		public RemoteExplosivesController() {
 			Instance = this;
-
 		}
 
 		public override void DefsLoaded() {
@@ -48,6 +48,13 @@ namespace RemoteExplosives {
 			InjectSteelRecipeVariants();
 			InjectVanillaExplosivesComps();
 			GetSettingsHandles();
+			PrepareReflection();
+		}
+
+		private void PrepareReflection() {
+			if (AccessTools.Method(typeof(Pawn_HealthTracker), "MakeDowned").MethodMatchesSignature(typeof(void), typeof(Pawn_HealthTracker), typeof(DamageDef), typeof(HediffDef))) {
+				Logger.Error("Could not reflect required members");
+			}
 		}
 
 		private void GetSettingsHandles() {
