@@ -8,7 +8,6 @@ namespace RemoteExplosives {
 	 * Calls a colonist to find a component and perform some work on a detonator table to unlock the usage of channels.
 	 */
 	public class JobDriver_InstallChannelsComponent : JobDriver {
-		public const string JobDefName = "JobDef_InstallChannelsComponent";
 		private const TargetIndex TableInd = TargetIndex.A;
 		private const TargetIndex ComponentInd = TargetIndex.B;
 		private const int InstallWorkAmount = 1500;

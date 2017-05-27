@@ -13,11 +13,11 @@ namespace RemoteExplosives {
 		}
 
 		public override bool ShouldSkip(Pawn pawn) {
-			return !pawn.workSettings.WorkIsActive(RemoteExplosivesDefOf.Cleaning);
+			return !pawn.workSettings.WorkIsActive(Resources.WorkType.Cleaning);
 		}
 
 		public override IEnumerable<Thing> PotentialWorkThingsGlobal(Pawn pawn) {
-			var designations = pawn.Map.designationManager.SpawnedDesignationsOfDef(RemoteExplosivesUtility.DryOffDesigationDef);
+			var designations = pawn.Map.designationManager.SpawnedDesignationsOfDef(Resources.Designation.DetonatorWireDryOff);
 			foreach (var designation in designations) {
 				if(designation.target.Thing == null) continue;
 				yield return designation.target.Thing;
@@ -34,7 +34,7 @@ namespace RemoteExplosives {
 			var wire = t as Building_DetonatorWire;
 			if (wire == null) return null;
 			if (!wire.WantDrying) return null;
-			var jobDef = DefDatabase<JobDef>.GetNamed(JobDriver_DryDetonatorWire.JobDefName);
+			var jobDef = Resources.Job.DryDetonatorWire;
 			return new Job(jobDef, t);
 		}
 	}

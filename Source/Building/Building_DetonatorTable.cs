@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Text;
 using RimWorld;
-using UnityEngine;
 using Verse;
 using Verse.Sound;
 
@@ -10,13 +9,10 @@ namespace RemoteExplosives {
 	 * Finds remote explosive charges in range and detonates them on command.
 	 * Can be upgraded with a component to unlock the ability to use channels.
 	 */
-	[StaticConstructorOnStartup]
 	public class Building_DetonatorTable : Building, IPawnDetonateable {
-		internal static readonly Texture2D UITex_Detonate = ContentFinder<Texture2D>.Get("UIDetonate");
 		private static readonly string DetonateButtonLabel = "DetonatorTable_detonate_label".Translate();
 		private static readonly string DetonateButtonDesc = "DetonatorTable_detonate_desc".Translate();
 
-		private static readonly Texture2D UITex_InstallComponent = ContentFinder<Texture2D>.Get("UIChannelComponent");
 		private static readonly string InstallComponentButtonLabel = "DetonatorTable_component_label".Translate();
 		private static readonly string InstallComponentButtonDesc = "DetonatorTable_component_desc".Translate();
 
@@ -50,10 +46,10 @@ namespace RemoteExplosives {
 			var detonateGizmo = new Command_Toggle {
 				toggleAction = DetonateGizmoAction,
 				isActive = () => wantDetonation,
-				icon = UITex_Detonate,
+				icon = Resources.Textures.UIDetonate,
 				defaultLabel = DetonateButtonLabel,
 				defaultDesc = DetonateButtonDesc,
-				hotKey = KeyBindingDef.Named("RemoteTableDetonate")
+				hotKey = Resources.KeyBinging.RemoteTableDetonate
 			};
 			yield return detonateGizmo;
 
@@ -65,7 +61,7 @@ namespace RemoteExplosives {
 					var componentGizmo = new Command_Toggle {
 						toggleAction = ComponentGizmoAction,
 						isActive = () => wantChannelsComponent,
-						icon = UITex_InstallComponent,
+						icon = Resources.Textures.UIChannelComponent,
 						defaultLabel = InstallComponentButtonLabel,
 						defaultDesc = InstallComponentButtonDesc
 					};

@@ -30,7 +30,7 @@ namespace RemoteExplosives {
 			if(justCreated) {
 				SetFactionDirect(Faction.OfPlayer);
 				ticksUntilHardened = foamProps.ticksToHarden.RandomInRange;
-				RemoteExplosivesDefOf.RemoteFoamSpray.PlayOneShot(this);
+				Resources.Sound.RemoteFoamSpray.PlayOneShot(this);
 				PrimeSpawnAnimation();
 				justCreated = false;
 			}
@@ -65,7 +65,7 @@ namespace RemoteExplosives {
 			var wallTile = ThingMaker.MakeThing(foamProps.hardenedDef);
 			wallTile.SetFactionDirect(Faction.OfPlayer);
 			GenPlace.TryPlaceThing(wallTile, pos, map, ThingPlaceMode.Direct);
-			RemoteExplosivesDefOf.RemoteFoamSolidify.PlayOneShot(this);
+			Resources.Sound.RemoteFoamSolidify.PlayOneShot(this);
 		}
 
 		public override void Tick() {

@@ -11,15 +11,7 @@ namespace RemoteExplosives {
 	 * Requires a CompCustomExplosive to work correctly. Can be armed and assigned to a channel.
 	 * Will blink with an overlay texture when armed.
 	 */
-	[StaticConstructorOnStartup]
 	public class Building_RemoteExplosive : Building, ISwitchable {
-		
-		private const string flareGraphicPath = "mine_flare";
-		private const string flareGraphicStrongPath = "mine_flare_strong";
-
-		private static readonly Texture2D UITex_Arm = ContentFinder<Texture2D>.Get("UIArm");
-		private static readonly Graphic flareOverlayNormal = GraphicDatabase.Get<Graphic_Single>(flareGraphicPath, ShaderDatabase.TransparentPostLight);
-		private static readonly Graphic flareOverlayStrong = GraphicDatabase.Get<Graphic_Single>(flareGraphicStrongPath, ShaderDatabase.TransparentPostLight);
 		
 		private static readonly string ArmButtonLabel = "RemoteExplosive_arm_label".Translate();
 		private static readonly string ArmButtonDesc = "RemoteExplosive_arm_desc".Translate();
@@ -71,7 +63,8 @@ namespace RemoteExplosives {
 
 		public override void SpawnSetup(Map map, bool respawningAfterLoad) {
 			base.SpawnSetup(map, respawningAfterLoad);
-			flareOverlayStrong.drawSize = flareOverlayNormal.drawSize = def.graphicData.drawSize;
+			
+			Resources.Graphics.FlareOverlayStrong.drawSize = Resources.Graphics.FlareOverlayNormal.drawSize = def.graphicData.drawSize;
 
 			RemoteExplosivesUtility.UpdateSwitchDesignation(this);
 			explosiveComp = GetComp<CompCustomExplosive>();
@@ -109,7 +102,7 @@ namespace RemoteExplosives {
 			}
 			if(desiredChannel!=currentChannel) {
 				currentChannel = desiredChannel;
-				RemoteExplosivesDefOf.RemoteChannelChange.PlayOneShot(this);
+				Resources.Sound.RemoteChannelChange.PlayOneShot(this);
 			}
 			RemoteExplosivesUtility.UpdateSwitchDesignation(this);
 		}
@@ -117,7 +110,7 @@ namespace RemoteExplosives {
 		public void Arm() {
 			if(IsArmed) return;
 			DrawFlareOverlay(true);
-			RemoteExplosivesDefOf.RemoteExplosiveArmed.PlayOneShot(this);
+			Resources.Sound.RemoteExplosiveArmed.PlayOneShot(this);
 			desiredArmState = true;
 			isArmed = true;
 		}
@@ -137,10 +130,10 @@ namespace RemoteExplosives {
 			var armGizmo = new Command_Toggle {
 				toggleAction = ArmGizmoAction,
 				isActive = () => desiredArmState,
-				icon = UITex_Arm,
+				icon = Resources.Textures.UIArm,
 				defaultLabel = ArmButtonLabel,
 				defaultDesc = ArmButtonDesc,
-				hotKey = KeyBindingDef.Named("RemoteExplosiveArm")
+				hotKey = Resources.KeyBinging.RemoteExplosiveArm
 			};
 			yield return armGizmo;
 
@@ -160,7 +153,7 @@ namespace RemoteExplosives {
 							Arm();
 						}
 					},
-					icon = UITex_Arm,
+					icon = Resources.Textures.UIArm,
 					defaultLabel = "DEV: Toggle armed"
 				};
 				yield return new Command_Action {
@@ -168,7 +161,7 @@ namespace RemoteExplosives {
 						Arm();
 						LightFuse();
 					},
-					icon = Building_DetonatorTable.UITex_Detonate,
+					icon = Resources.Textures.UIDetonate,
 					defaultLabel = "DEV: Detonate now"
 				};
 			}
@@ -224,7 +217,7 @@ namespace RemoteExplosives {
 		private void DrawFlareOverlay(bool useStrong) {
 			ticksSinceFlare = 0;
 
-			var overlay = useStrong ? flareOverlayStrong : flareOverlayNormal;
+			var overlay = useStrong ? Resources.Graphics.FlareOverlayStrong : Resources.Graphics.FlareOverlayNormal;
 			var s = Vector3.one;
 			var matrix = Matrix4x4.TRS(DrawPos + Altitudes.AltIncVect + CustomProps.blinkerOffset, Rotation.AsQuat, s);
 			Graphics.DrawMesh(MeshPool.plane10, matrix, overlay.MatAt(Rotation), 0);
@@ -233,7 +226,7 @@ namespace RemoteExplosives {
 		private void EmitBeep(float pitch) {
 			var beepInfo = SoundInfo.InMap(this);
 			beepInfo.pitchFactor = pitch;
-			RemoteExplosivesDefOf.RemoteExplosiveBeep.PlayOneShot(beepInfo);
+			Resources.Sound.RemoteExplosiveBeep.PlayOneShot(beepInfo);
 		}
 
 		public override string GetInspectString() {

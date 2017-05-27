@@ -37,7 +37,7 @@ namespace RemoteExplosives {
 			var detonator = t as IPawnDetonateable;
 			if(detonator == null) return null;
 			if (!detonator.WantsDetonation) return null;
-			var jobDef = DefDatabase<JobDef>.GetNamed(JobDriver_DetonateExplosives.JobDefName);
+			var jobDef = Resources.Job.DetonateExplosives;
 			return new Job(jobDef, t);
 		}
 	}

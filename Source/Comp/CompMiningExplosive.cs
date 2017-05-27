@@ -11,7 +11,6 @@ namespace RemoteExplosives {
 	 */
 	public class CompMiningExplosive : CompCustomExplosive {
 		private const int MinAffectedCellsToTriggerCaveinSound = 6;
-		protected static readonly SoundDef CaveInSoundEffect = SoundDef.Named("RemoteMiningCavein");
 
 		private List<IntVec3> customArea;
 
@@ -51,7 +50,7 @@ namespace RemoteExplosives {
 				}
 			}
 			if (affectedMineables >= MinAffectedCellsToTriggerCaveinSound) {
-				CaveInSoundEffect.PlayOneShot(new TargetInfo(parentPosition, parentMap));
+				Resources.Sound.RemoteMiningCavein.PlayOneShot(new TargetInfo(parentPosition, parentMap));
 			}
 		}
 

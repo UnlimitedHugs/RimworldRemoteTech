@@ -9,17 +9,13 @@ namespace RemoteExplosives {
 	 * An apparel item to be worn by a colonist in the accessory (shield) slot.
 	 * Provides the functionality of a detonator table with a limited number of uses.
 	 */
-	[StaticConstructorOnStartup]
 	public class PortableDetonator : Apparel {
 		private const int ActivationCooldownTicks = 30;
 
-		private static readonly Texture2D UITex_PortableDetonator = ContentFinder<Texture2D>.Get("UIDetonatorPortable");
 		private static readonly string DetonateButtonLabel = "PortableDetonator_detonate_label".Translate();
 		private static readonly string DetonateButtonDesc = "PortableDetonator_detonate_desc".Translate();
 		private static readonly string NumUsesLeftInspectMessage = "PortableDetonator_detonate_uses".Translate();
 		private static readonly string DetonatorBrokeMessage = "PortableDetonator_broke_msg".Translate();
-		private static readonly StatDef detonatorRangeStat = DefDatabase<StatDef>.GetNamed("PortableDetonatorRange");
-		private static readonly StatDef detonatorNumUsesStat = DefDatabase<StatDef>.GetNamed("PortableDetonatorNumUses");
 
 		private bool rangeOverlayVisible;
 		private int lastActivationTick; // prevents unintended double activations
@@ -58,19 +54,19 @@ namespace RemoteExplosives {
 			yield return new Command_MouseOverDetector {
 				action = OnGizmoActivation,
 				mouseOverCallback = OnMouseOverGizmo,
-				icon = UITex_PortableDetonator,
+				icon = Resources.Textures.UIDetonatorPortable,
 				defaultLabel = DetonateButtonLabel,
 				defaultDesc = DetonateButtonDesc + "\n" + GetInspectString(),
-				hotKey = KeyBindingDef.Named("PortableDetonatorDetonate")
+				hotKey = Resources.KeyBinging.PortableDetonatorDetonate
 			};
 		}
 
 		private int SignalRange {
-			get { return Mathf.RoundToInt(this.GetStatValue(detonatorRangeStat)); }
+			get { return Mathf.RoundToInt(this.GetStatValue(Resources.Stat.PortableDetonatorRange)); }
 		}
 
 		private int MaxNumUses {
-			get { return Mathf.RoundToInt(this.GetStatValue(detonatorNumUsesStat)); }
+			get { return Mathf.RoundToInt(this.GetStatValue(Resources.Stat.PortableDetonatorNumUses)); }
 		}
 
 		private void DrawRangeOverlay() {

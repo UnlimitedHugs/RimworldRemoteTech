@@ -1,15 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using UnityEngine;
 using Verse;
 
 namespace RemoteExplosives {
 	/*
 	 * Destroyed buildings with this comp will be replaced as blueprints by AutoReplaceWatcher
 	 */
-	[StaticConstructorOnStartup]
 	public class CompAutoReplaceable : ThingComp {
-		private static readonly Texture2D UITex_AutoReplace = ContentFinder<Texture2D>.Get("UIAutoReplace");
 		private static readonly string AutoReplaceButtonLabel = "RemoteExplosive_autoReplace_label".Translate();
 		private static readonly string AutoReplaceButtonDesc = "RemoteExplosive_autoReplace_desc".Translate();
 		
@@ -56,10 +53,10 @@ namespace RemoteExplosives {
 			var replaceGizmo = new Command_Toggle {
 				toggleAction = ReplaceGizmoAction,
 				isActive = () => AutoReplaceEnabled,
-				icon = UITex_AutoReplace,
+				icon = Resources.Textures.UIAutoReplace,
 				defaultLabel = AutoReplaceButtonLabel,
 				defaultDesc = AutoReplaceButtonDesc,
-				hotKey = KeyBindingDef.Named("RemoteExplosiveAutoReplace")
+				hotKey = Resources.KeyBinging.RemoteExplosiveAutoReplace
 			};
 			return replaceGizmo;
 		}

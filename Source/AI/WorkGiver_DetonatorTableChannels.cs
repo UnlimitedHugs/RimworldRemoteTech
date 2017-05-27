@@ -11,12 +11,10 @@ namespace RemoteExplosives {
 
 		private const PathEndMode pathEndMode = PathEndMode.InteractionCell;
 		private const int maxComponentSearchDist = 999;
-
-		private readonly ThingDef detonatorDef = ThingDef.Named("TableDetonator");
-
+		
 		public override ThingRequest PotentialWorkThingRequest {
 			get {
-				return ThingRequest.ForDef(detonatorDef);
+				return ThingRequest.ForDef(Resources.Thing.TableDetonator);
 			}
 		}
 
@@ -44,7 +42,7 @@ namespace RemoteExplosives {
 			if (!table.WantChannelsComponent) return null;
 			var component = FindInstallableComponent(pawn);
 			if (component == null) return null;
-			var jobDef = DefDatabase<JobDef>.GetNamed(JobDriver_InstallChannelsComponent.JobDefName);
+			var jobDef = Resources.Job.InstallChannelsComponent;
 			return new Job(jobDef, t, component) { count = 1 };
 		}
 
