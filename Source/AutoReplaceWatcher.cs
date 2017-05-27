@@ -17,10 +17,10 @@ namespace RemoteExplosives {
 			public RemoteExplosivesUtility.RemoteChannel channel;
 
 			public void ExposeData() {
-				Scribe_Values.LookValue(ref position, "position", new IntVec3());
-				Scribe_Values.LookValue(ref unforbidTick, "unforbidTick", 0);
-				Scribe_Values.LookValue(ref armed, "armed", false);
-				Scribe_Values.LookValue(ref channel, "channel", RemoteExplosivesUtility.RemoteChannel.White);
+				Scribe_Values.Look(ref position, "position", new IntVec3());
+				Scribe_Values.Look(ref unforbidTick, "unforbidTick", 0);
+				Scribe_Values.Look(ref armed, "armed", false);
+				Scribe_Values.Look(ref channel, "channel", RemoteExplosivesUtility.RemoteChannel.White);
 			}
 		}
 
@@ -77,8 +77,8 @@ namespace RemoteExplosives {
 		}
 
 		public void ExposeData() {
-			Scribe_Collections.LookList(ref pendingSettings, "pendingSettings", LookMode.Deep);
-			Scribe_Collections.LookList(ref pendingForbiddenBlueprints, "pendingForbiddenBlueprints", LookMode.Deep);
+			Scribe_Collections.Look(ref pendingSettings, "pendingSettings", LookMode.Deep);
+			Scribe_Collections.Look(ref pendingForbiddenBlueprints, "pendingForbiddenBlueprints", LookMode.Deep);
 			if (pendingSettings == null) pendingSettings = new List<ReplacementEntry>();
 			if (pendingForbiddenBlueprints == null) pendingForbiddenBlueprints = new List<ReplacementEntry>();
 		}

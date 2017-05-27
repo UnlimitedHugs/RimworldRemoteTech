@@ -19,29 +19,16 @@ namespace RemoteExplosives {
 		// how long it will take to trigger an additional explosive
 		private const int TicksBetweenTriggers = 2;
 
-		private static readonly SoundDef UIChannelSound = SoundDef.Named("RemoteUIDialClick");
-		private static readonly ResearchProjectDef channelsResearchDef = ResearchProjectDef.Named("RemoteExplosivesChannels");
-		private static readonly KeyBindingDef nextChannelKeybindingDef = KeyBindingDef.Named("RemoteExplosivesNextChannel");
 		private static readonly Texture2D[] UITex_Channels = {
-			ContentFinder<Texture2D>.Get("UIChannel0"),
-			ContentFinder<Texture2D>.Get("UIChannel1"),
-			ContentFinder<Texture2D>.Get("UIChannel2")
+			Resources.Textures.UIChannel0,
+			Resources.Textures.UIChannel1,
+			Resources.Textures.UIChannel2
 		};
 
 		private static readonly string ChannelDialDesc = "RemoteExplosive_detonatorChannelChanger_desc".Translate();
 		private static readonly string ChannelDialLabelBase = "RemoteExplosive_channelChanger_label".Translate();
 		private static readonly string CurrenthannelLabelBase = "RemoteExplosive_currentChannel".Translate();
 		
-		private static DesignationDef switchDesigationDef;
-		public static DesignationDef SwitchDesigationDef {
-			get { return switchDesigationDef ?? (switchDesigationDef = DefDatabase<DesignationDef>.GetNamed("RemoteExplosiveSwitch")); }
-		}
-
-		private static DesignationDef dryDesigationDef;
-		public static DesignationDef DryOffDesigationDef {
-			get { return dryDesigationDef ?? (dryDesigationDef = DefDatabase<DesignationDef>.GetNamed("DetonatorWireDryOff")); }
-		}
-
 		public enum RemoteChannel {
 			White = 0,
 			Red = 1,
@@ -51,11 +38,11 @@ namespace RemoteExplosives {
 		public static void UpdateSwitchDesignation(Thing thing) {
 			var switchable = thing as ISwitchable;
 			if(switchable == null) return;
-			thing.ToggleDesignation(SwitchDesigationDef, switchable.WantsSwitch());
+			thing.ToggleDesignation(Resources.Designation.RemoteExplosiveSwitch, switchable.WantsSwitch());
 		}
 
 		public static bool ChannelsUnlocked() {
-			return channelsResearchDef.IsFinished;
+			return Resources.Research.RemoteExplosivesChannels.IsFinished;
 		}
 
 		public static RemoteChannel GetNextChannel(RemoteChannel channel) {
@@ -72,11 +59,11 @@ namespace RemoteExplosives {
 			 return new Command_Action {
 				action = activateCallback,
 				icon = GetUITextureForChannel(desiredChannel),
-				activateSound = UIChannelSound,
+				activateSound = Resources.Sound.RemoteUIDialClick,
 				defaultDesc = ChannelDialDesc,
 				defaultLabel = String.Format(ChannelDialLabelBase, GetChannelName(desiredChannel), 
 					desiredChannel!=currentChannel?"RemoteExplosive_channel_switching".Translate():""),
-				hotKey = nextChannelKeybindingDef
+				hotKey = Resources.KeyBinging.RemoteExplosivesNextChannel
 			};
 		}
 
@@ -114,17 +101,17 @@ namespace RemoteExplosives {
 			if (pawn == null || detonatorThing == null || !pawn.IsColonistPlayerControlled || pawn.drafter == null) return null;
 			var entry = new FloatMenuOption {
 				action = () => {
-					if (!pawn.IsColonistPlayerControlled || !pawn.jobs.CanTakeOrderedJob()) return;
+					if (!pawn.IsColonistPlayerControlled) return;
 					if (!detonator.WantsDetonation) detonator.WantsDetonation = true;
-					var job = new Job(DefDatabase<JobDef>.GetNamed(JobDriver_DetonateExplosives.JobDefName), detonatorThing);
+					var job = new Job(Resources.Job.DetonateExplosives, detonatorThing);
 					pawn.jobs.TryTakeOrderedJob(job);
 				},
 				autoTakeable = false,
 				Label = "Detonator_detonatenow".Translate()
 			};
-			if (pawn.Map.reservationManager.IsReserved(detonatorThing, Faction.OfPlayer)) {
+			if (pawn.Map.reservationManager.IsReservedByAnyoneWhoseReservationsRespects(detonatorThing, pawn)) {
 				entry.Disabled = true;
-				var reservedByName = pawn.Map.reservationManager.FirstReserverOf(detonatorThing, Faction.OfPlayer).Name.ToStringShort;
+				var reservedByName = pawn.Map.reservationManager.FirstReserverWhoseReservationsRespects(detonatorThing, pawn).Name.ToStringShort;
 				entry.Label += " " + "Detonator_detonatenow_reserved".Translate(reservedByName);
 			}
 			return entry;
