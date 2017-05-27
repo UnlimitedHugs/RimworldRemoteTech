@@ -8,8 +8,6 @@ namespace RemoteExplosives {
 	 * An explosive with a timer. Can be triggered silently, but will revert to the vanilla wick if it takes enough damage.
 	 */
 	public class CompCustomExplosive : ThingComp {
-		private static readonly SoundDef WickStartSound = SoundDef.Named("MetalHitImportant");
-		private static readonly SoundDef WickLoopSound = SoundDef.Named("HissSmall");
 		private bool wickStarted;
 		private int wickTicksLeft;
 		private Sustainer wickSoundSustainer;
@@ -69,9 +67,9 @@ namespace RemoteExplosives {
 		}
 
 		private void StartWickSustainer() {
-			WickStartSound.PlayOneShot(parent);
+			SoundDefOf.MetalHitImportant.PlayOneShot(parent);
 			var info = SoundInfo.InMap(parent, MaintenanceType.PerTick);
-			wickSoundSustainer = WickLoopSound.TrySpawnSustainer(info);
+			wickSoundSustainer = SoundDefOf.HissSmall.TrySpawnSustainer(info);
 		}
 
 		public override void PostDraw() {

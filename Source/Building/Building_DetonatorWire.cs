@@ -12,15 +12,12 @@ namespace RemoteExplosives {
 	 * Will get wet during rain and have a chance to fail when used unless dried.
 	 */
 
-	[StaticConstructorOnStartup]
 	public class Building_DetonatorWire : Building {
 		private const float FreezeTemperature = -1f;
 		private const float WetWeatherThreshold = .5f;
 		private const float TicksPerDay = 60000;
 		private const float RareTicksPerDay = TicksPerDay/GenTicks.TickRareInterval;
 		private const float MaxWetness = 1f;
-
-		private static readonly Texture2D UITex_DryOff = ContentFinder<Texture2D>.Get("UIDryOff");
 
 		private BuildingProperties_DetonatorWire CustomProps {
 			get {
@@ -90,7 +87,7 @@ namespace RemoteExplosives {
 				yield return new Command_Toggle {
 					toggleAction = DryGizmoAction,
 					isActive = () => wantDrying,
-					icon = UITex_DryOff,
+					icon = Resources.Textures.UIDryOff,
 					defaultLabel = "Wire_dry_label".Translate(),
 					defaultDesc = "Wire_dry_desc".Translate(),
 					hotKey = KeyBindingDefOf.Misc1
@@ -144,7 +141,7 @@ namespace RemoteExplosives {
 		}
 
 		private void UpdateDesignation() {
-			this.ToggleDesignation(RemoteExplosivesUtility.DryOffDesigationDef, wantDrying);
+			this.ToggleDesignation(Resources.Designation.DetonatorWireDryOff, wantDrying);
 		}
 	}
 }

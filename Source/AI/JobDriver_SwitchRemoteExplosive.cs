@@ -7,8 +7,6 @@ namespace RemoteExplosives {
 	 * This includes both setting the armed state and the channel.
 	 */
 	public class JobDriver_SwitchRemoteExplosive : JobDriver {
-		public const string JobDefName = "JobDef_SwitchRemoteExplosive";
-
 		protected override IEnumerable<Toil> MakeNewToils() {
 			AddFailCondition(JobHasFailed);
 			var explosive = TargetThingA as Building_RemoteExplosive;

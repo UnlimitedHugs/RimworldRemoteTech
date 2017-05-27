@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿// ReSharper disable UnassignedField.Global
+using UnityEngine;
 using Verse;
 
 namespace RemoteExplosives {

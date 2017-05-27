@@ -20,7 +20,6 @@ namespace RemoteExplosives {
 
 		public static RemoteExplosivesController Instance { get; private set; }
 
-		private readonly ThingCategoryDef explosivesItemCategory = ThingCategoryDef.Named("Explosives");
 		private readonly MethodInfo objectCloneMethod = typeof (object).GetMethod("MemberwiseClone", BindingFlags.Instance | BindingFlags.NonPublic);
 		// ReSharper disable once ConvertToConstant.Local
 		private readonly bool showDebugControls = false;
@@ -106,9 +105,9 @@ namespace RemoteExplosives {
 		 */
 		private void InjectVanillaExplosivesComps() {
 			var ieds = new[] {
-				DefDatabase<ThingDef>.GetNamedSilentFail("TrapIEDBomb"),
-				DefDatabase<ThingDef>.GetNamedSilentFail("TrapIEDIncendiary"),
-				DefDatabase<ThingDef>.GetNamedSilentFail("FirefoamPopper")
+				GetDefWithWarning("TrapIEDBomb"),
+				GetDefWithWarning("TrapIEDIncendiary"),
+				GetDefWithWarning("FirefoamPopper")
 			};
 			foreach (var thingDef in ieds) {
 				if (thingDef == null) continue;
@@ -118,10 +117,16 @@ namespace RemoteExplosives {
 
 		}
 
+		private ThingDef GetDefWithWarning(string defName) {
+			var def = DefDatabase<ThingDef>.GetNamedSilentFail(defName);
+			if (def == null) Logger.Warning("Could not get ThingDef for Comp injection: " + defName);
+			return def;
+		}
+
 		private IEnumerable<RecipeDef> GetAllExplosivesRecipes() {
 			return DefDatabase<RecipeDef>.AllDefs.Where(d => {
 				var product = d.products.FirstOrDefault();
-				return product != null && product.thingDef != null && product.thingDef.thingCategories != null && product.thingDef.thingCategories.Contains(explosivesItemCategory);
+				return product != null && product.thingDef != null && product.thingDef.thingCategories != null && product.thingDef.thingCategories.Contains(Resources.ThingCategory.Explosives);
 			});
 		}
 
@@ -173,7 +178,7 @@ namespace RemoteExplosives {
 					if (cloud != null) {
 						cloud.ReceiveConcentration(concentration);
 					} else {
-						cloud = (GasCloud) ThingMaker.MakeThing(ThingDef.Named("Gas_Sleeping"));
+						cloud = (GasCloud) ThingMaker.MakeThing(Resources.Thing.Gas_Sleeping);
 						cloud.ReceiveConcentration(concentration);
 						GenPlace.TryPlaceThing(cloud, cell, map, ThingPlaceMode.Direct);
 					}
@@ -181,12 +186,12 @@ namespace RemoteExplosives {
 			}
 			if (Widgets.ButtonText(new Rect(10, 30, 50, 20), "Spark")) {
 				DebugTools.curTool = new DebugTool("Spark", () => {
-					EffecterDef.Named("SparkweedIgnite").Spawn().Trigger(new TargetInfo(UI.MouseCell(), map), null);
+					Resources.Effecter.SparkweedIgnite.Spawn().Trigger(new TargetInfo(UI.MouseCell(), map), null);
 				});
 			}
 			if (Widgets.ButtonText(new Rect(10, 50, 50, 20), "Failure")) {
 				DebugTools.curTool = new DebugTool("Failure", () => {
-					EffecterDef.Named("DetWireFailure").Spawn().Trigger(new TargetInfo(UI.MouseCell(), map), null);
+					Resources.Effecter.DetWireFailure.Spawn().Trigger(new TargetInfo(UI.MouseCell(), map), null);
 				});
 			}
 

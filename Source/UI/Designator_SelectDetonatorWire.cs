@@ -7,13 +7,11 @@ namespace RemoteExplosives {
 	/**
 	 * A designator that selects only detonation wire
 	 */
-	[StaticConstructorOnStartup]
 	public class Designator_SelectDetonatorWire : Designator {
-		public static readonly Texture2D UISelectWire = ContentFinder<Texture2D>.Get("UISelectWire");
 		
 		public Designator_SelectDetonatorWire() {
 			hotKey = KeyBindingDefOf.Misc10;
-			icon = UISelectWire;
+			icon = Resources.Textures.UISelectWire;
 			useMouseIcon = true;
 			defaultLabel = "WireDesignator_label".Translate();
 			defaultDesc = "WireDesignator_desc".Translate();

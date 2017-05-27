@@ -7,8 +7,6 @@ namespace RemoteExplosives {
 	 * Calls a colonist to a detonator to perform the detonation.
 	 */
 	public class JobDriver_DetonateExplosives : JobDriver {
-		public const string JobDefName = "JobDef_DetonateExplosives";
-
 		protected override IEnumerable<Toil> MakeNewToils(){
 			var detonator = TargetThingA as IPawnDetonateable;
 			if (detonator == null) yield break;

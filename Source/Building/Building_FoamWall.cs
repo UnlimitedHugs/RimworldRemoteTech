@@ -51,7 +51,7 @@ namespace RemoteExplosives {
 				var pawn = thing as Pawn;
 				if (pawn != null && !pawn.RaceProps.IsMechanoid && !pawn.Dead) {
 					foreach (var partRecord in pawn.RaceProps.body.GetPartsWithTag("BreathingSource")) {
-						pawn.TakeDamage(new DamageInfo(RemoteExplosivesDefOf.FoamWallRekt, 9999, -1f, wall, partRecord));
+						pawn.TakeDamage(new DamageInfo(Resources.Damage.FoamWallRekt, 9999, -1f, wall, partRecord));
 					}
 				} else if (thing.def.plant != null) {
 					thing.Destroy(DestroyMode.KillFinalize);

@@ -7,9 +7,7 @@ namespace RemoteExplosives {
 	/* 
 	 * Initates a detonation signal carried by wire when triggered by a colonist.
 	 */
-	[StaticConstructorOnStartup]
 	public class Building_DetonatorManual : Building, IGraphicVariantProvider, IPawnDetonateable {
-		private static readonly Texture2D UITex_Detonate = ContentFinder<Texture2D>.Get("UItrigger");
 		private static readonly string DetonateButtonLabel = "DetonatorManual_detonate_label".Translate();
 		private static readonly string DetonateButtonDesc = "DetonatorManual_detonate_desc".Translate();
 
@@ -41,7 +39,7 @@ namespace RemoteExplosives {
 			wantDetonation = false;
 			currentVariant = VisualVariant.PlungerDown;
 			plungerExpireTime = Time.realtimeSinceStartup + PlungerDownTime;
-			RemoteExplosivesDefOf.RemoteDetonatorLever.PlayOneShot(new TargetInfo(Position, Map));
+			Resources.Sound.RemoteDetonatorLever.PlayOneShot(new TargetInfo(Position, Map));
 			var transmitterComp = GetComp<CompWiredDetonationSender>();
 			if(transmitterComp != null) transmitterComp.SendNewSignal();
 		}
@@ -55,10 +53,10 @@ namespace RemoteExplosives {
 			var detonateGizmo = new Command_Toggle {
 				toggleAction = DetonateGizmoAction,
 				isActive = () => wantDetonation,
-				icon = UITex_Detonate,
+				icon = Resources.Textures.UITrigger,
 				defaultLabel = DetonateButtonLabel,
 				defaultDesc = DetonateButtonDesc,
-				hotKey = KeyBindingDef.Named("RemoteTableDetonate")
+				hotKey = Resources.KeyBinging.RemoteTableDetonate
 			};
 			yield return detonateGizmo;
 
