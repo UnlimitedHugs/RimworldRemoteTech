@@ -53,7 +53,7 @@ namespace RemoteExplosives {
 			var detonateGizmo = new Command_Toggle {
 				toggleAction = DetonateGizmoAction,
 				isActive = () => wantDetonation,
-				icon = Resources.Textures.UITrigger,
+				icon = Resources.Textures.UI_Trigger,
 				defaultLabel = DetonateButtonLabel,
 				defaultDesc = DetonateButtonDesc,
 				hotKey = Resources.KeyBinging.RemoteTableDetonate
