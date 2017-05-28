@@ -101,7 +101,7 @@ namespace RemoteExplosives {
 
 		[StaticConstructorOnStartup]
 		public static class Textures {
-			public static Texture2D UITrigger;
+			public static Texture2D UI_Trigger;
 			public static Texture2D UIDetonate;
 			public static Texture2D UIChannelComponent;
 			public static Texture2D UIDryOff;
