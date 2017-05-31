@@ -1,11 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <LanguageData>
 
-  <PortableDetonatorRange.label>Detonator range</PortableDetonatorRange.label>
-  <PortableDetonatorRange.description>How far the signal from a portable detonator will reach. Further is better, until you blow up something you didn't mean to.</PortableDetonatorRange.description>
+  <PortableDetonatorRange.label>起爆器範圍</PortableDetonatorRange.label>
+  <PortableDetonatorRange.description>便攜式起爆器的信號所能到達的距離。離遠點比較好，除非你想故意炸掉某樣东西。</PortableDetonatorRange.description>
 
-  <PortableDetonatorNumUses.label>Detonator activations</PortableDetonatorNumUses.label>
-  <PortableDetonatorNumUses.description>How many times a portable detonator can be activated before the battery runs dry.</PortableDetonatorNumUses.description>
+  <PortableDetonatorNumUses.label>起爆器激活次數</PortableDetonatorNumUses.label>
+  <PortableDetonatorNumUses.description>便攜式起爆器在電池耗盡前的可使用次數。</PortableDetonatorNumUses.description>
 
 
 </LanguageData>

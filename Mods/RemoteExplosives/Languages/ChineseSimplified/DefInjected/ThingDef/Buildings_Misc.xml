@@ -7,8 +7,8 @@
   <FoamWall.label>硬化的泡沫墙</FoamWall.label>
   <FoamWall.description>已固化的化学泡沫。极其坚固且不可燃。</FoamWall.description>
 
-  <CollapsedRoofRocks.description>崩落的岩石，其强度足以支撑岩顶。</CollapsedRoofRocks.description>
   <CollapsedRoofRocks.label>崩落的岩石。</CollapsedRoofRocks.label>
+  <CollapsedRoofRocks.description>崩落的岩石，其强度足以支撑岩顶。</CollapsedRoofRocks.description>
 
 
 </LanguageData>

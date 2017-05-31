@@ -31,11 +31,11 @@
   <BillsTab_MaterialButton_component_mode>電子零件</BillsTab_MaterialButton_component_mode>
   <BillsTab_MaterialButton_steel_mode>鋼鐵</BillsTab_MaterialButton_steel_mode>
   <BillsTab_MaterialButton_tooltip>設置新建清單使用的基本材料。</BillsTab_MaterialButton_tooltip>
+  <BillsTab_ResearchRequired>需要研究：{0}</BillsTab_ResearchRequired>
 
   <FoamBlob_solidify_progress>固化：{0}%</FoamBlob_solidify_progress>
 
   <FoamWall_contents>內物：{0}</FoamWall_contents>
-  <FoamWall_death_message>{0}在固化中的泡沫牆內死亡。</FoamWall_death_message>
 
   <GasCloud_concentration_label>濃度：{0}</GasCloud_concentration_label>
 
@@ -68,4 +68,5 @@
   <Setting_forbidReplaced_desc>啟用後，自動重置的藍圖會有數秒鐘的禁止狀態，以讓殖民者遠離危險。</Setting_forbidReplaced_desc>
   <Setting_forbidTimeout_label>藍圖禁止時間</Setting_forbidTimeout_label>
   <Setting_forbidTimeout_desc>自動重置的藍圖禁止狀態的時長（秒）。</Setting_forbidTimeout_desc>
+
 </LanguageData>
