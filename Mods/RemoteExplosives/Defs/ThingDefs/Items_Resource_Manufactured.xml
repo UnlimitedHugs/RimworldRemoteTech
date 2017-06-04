@@ -105,11 +105,7 @@ Place as a building from the Explosives menu to use.</description>
 		</graphicData>
 		<comps>
 			<li Class="RemoteExplosives.CompProperties_MiningExplosive">
-				<compClass>RemoteExplosives.CompMiningExplosive</compClass>
-				<rockChunkChance>0.5</rockChunkChance>
 				<miningRadius>2.9</miningRadius>
-				<resourceBreakingYield>.75</resourceBreakingYield>
-				<woodBreakingYield>.70</woodBreakingYield>
 				<explosiveRadius>2.9</explosiveRadius>
 				<explosiveDamageType>Bomb</explosiveDamageType>
 				<explosiveExpandPerStackcount>0.5</explosiveExpandPerStackcount>
@@ -122,6 +118,9 @@ Place as a building from the Explosives menu to use.</description>
 		</comps>
 		<statBases>
 			<MarketValue>65</MarketValue>
+			<ExplosiveChunkYield>.5</ExplosiveChunkYield>
+			<ExplosiveMiningYield>.75</ExplosiveMiningYield>
+			<ExplosiveWoodYield>.70</ExplosiveWoodYield>
 		</statBases>
 	</ThingDef>
 	

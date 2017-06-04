@@ -34,6 +34,9 @@
 			<MaxHitPoints>60</MaxHitPoints>
 			<WorkToMake>150</WorkToMake>
 			<Beauty>-4</Beauty>
+			<ExplosiveChunkYield>0</ExplosiveChunkYield>
+			<ExplosiveMiningYield>.75</ExplosiveMiningYield>
+			<ExplosiveWoodYield>.70</ExplosiveWoodYield>
 		</statBases>
 	</ThingDef>
 	
@@ -454,17 +457,16 @@ Arm, then detonate from the Remote Explosives Console.</description>
 		<description>A remote mining explosive that creates a lot of rock chunks.
 Requires a part crafted at the Explosives Workshop.
 Detonate from the Remote Explosives Console.</description>
+		<statBases>
+			<ExplosiveChunkYield>0.75</ExplosiveChunkYield>
+		</statBases>
 		<costList>
 			<MiningExplosiveComponent>1</MiningExplosiveComponent>
 		</costList>
 		<specialDisplayRadius>3.5</specialDisplayRadius>
 		<comps>
 			<li Class="RemoteExplosives.CompProperties_MiningExplosive">
-				<compClass>RemoteExplosives.CompMiningExplosive</compClass>
-				<rockChunkChance>0.75</rockChunkChance>
 				<miningRadius>3.5</miningRadius>
-				<resourceBreakingYield>.75</resourceBreakingYield>
-				<woodBreakingYield>.70</woodBreakingYield>
 				<explosiveRadius>3.5</explosiveRadius>
 				<explosiveDamageType>Bomb</explosiveDamageType>
 				<startWickHitPointsPercent>0.2</startWickHitPointsPercent>
@@ -496,16 +498,15 @@ Detonate from the Remote Explosives Console.</description>
 		<description>A remote mining explosive that can clear a room-sized area without creating much rubble.
 Requires a part crafted at the Explosives Workshop.
 Detonate from the Remote Explosives Console.</description>
+		<statBases>
+			<ExplosiveChunkYield>0.05</ExplosiveChunkYield>
+		</statBases>
 		<costList>
 			<MiningExplosiveComponent>1</MiningExplosiveComponent>
 		</costList>
 		<comps>
 			<li Class="RemoteExplosives.CompProperties_MiningExplosive">
-				<compClass>RemoteExplosives.CompMiningExplosive</compClass>
-				<rockChunkChance>0.05</rockChunkChance>
 				<miningRadius>4</miningRadius>
-				<resourceBreakingYield>.75</resourceBreakingYield>
-				<woodBreakingYield>.70</woodBreakingYield>
 				<explosiveRadius>3.9</explosiveRadius>
 				<explosiveDamageType>Bomb</explosiveDamageType>
 				<startWickHitPointsPercent>0.2</startWickHitPointsPercent>
@@ -551,6 +552,9 @@ Detonate from the Remote Explosives Console.</description>
 			<MaxHitPoints>120</MaxHitPoints>
 			<Flammability>1.0</Flammability>
 			<Beauty>-5</Beauty>
+			<ExplosiveChunkYield>.5</ExplosiveChunkYield>
+			<ExplosiveMiningYield>.3</ExplosiveMiningYield>
+			<ExplosiveWoodYield>.1</ExplosiveWoodYield>
 		</statBases>
 		<Size>(1,1)</Size>
 		<constructEffect>ConstructMetal</constructEffect>
@@ -560,10 +564,7 @@ Detonate from the Remote Explosives Console.</description>
 		<comps>
 			<li Class="RemoteExplosives.CompProperties_MiningExplosive">
 				<compClass>RemoteExplosives.CompRoofBreakerExplosive</compClass>
-				<rockChunkChance>0.5</rockChunkChance>
 				<miningRadius>2.1</miningRadius>
-				<resourceBreakingYield>.3</resourceBreakingYield>
-				<woodBreakingYield>.1</woodBreakingYield>
 				<explosiveRadius>2.1</explosiveRadius>
 				<explosiveDamageType>Bomb</explosiveDamageType>
 				<startWickHitPointsPercent>0.2</startWickHitPointsPercent>
