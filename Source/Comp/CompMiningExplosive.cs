@@ -61,11 +61,12 @@ namespace RemoteExplosives {
 			if (thing.def.mineable) {
 				var rockBuildingDef = thing.def.building;
 				if (rockBuildingDef == null) return false;
-				if (rockBuildingDef.isResourceRock) {
+				var mineable = thing as Mineable;
+				if (rockBuildingDef.isResourceRock && mineable != null) {
 					// resource rocks
 					breakingPowerRemaining -= thing.HitPoints * MiningProps.resourceBreakingCost;
 					DamageResourceHolder(thing, MiningProps.resourceBreakingYield);
-					thing.Destroy(DestroyMode.KillFinalize);
+					BreakMineableAndYieldResources(mineable);
 					affected = true;
 				} else if (rockBuildingDef.isNaturalRock) {
 					// stone
@@ -110,6 +111,34 @@ namespace RemoteExplosives {
 		private void DamageResourceHolder(Thing thing, float efficiency) {
 			var damage = thing.MaxHitPoints * (1 - efficiency);
 			thing.TakeDamage(new DamageInfo(DamageDefOf.Bomb, (int)damage, -1F, parent));
+		}
+
+		private void BreakMineableAndYieldResources(Mineable mineable) {
+			// swiped from Mineable.TrySpawnYield
+			// the vanilla system is hardcoded to work for pawns, so we implement our own copy
+			if (mineable == null || mineable.def == null || mineable.def.building == null || mineable.def.building.mineableThing == null) {
+				return;
+			}
+			var pos = mineable.Position;
+			var map = mineable.Map;
+			var hitPointsLeft = mineable.HitPoints;
+			mineable.Destroy(DestroyMode.KillFinalize);
+			// clean up the single-item stack left by the vanilla dropper
+			var vanillaDrop = map.thingGrid.ThingAt(pos, mineable.def.building.mineableThing);
+			if (vanillaDrop != null && !vanillaDrop.Destroyed) {
+				vanillaDrop.Destroy();
+			}
+			if (Rand.Value > mineable.def.building.mineableDropChance) {
+				return;
+			}
+			int yield = mineable.def.building.mineableYield;
+			var yieldMultiplier = (hitPointsLeft / (float)mineable.MaxHitPoints);
+			if (mineable.def.building.mineableYieldWasteable) {
+				yield = Mathf.Max(1, GenMath.RoundRandom(yield * yieldMultiplier));
+			}
+			var drop = ThingMaker.MakeThing(mineable.def.building.mineableThing);
+			drop.stackCount = yield;
+			GenSpawn.Spawn(drop, pos, map);
 		}
 	}
 }
