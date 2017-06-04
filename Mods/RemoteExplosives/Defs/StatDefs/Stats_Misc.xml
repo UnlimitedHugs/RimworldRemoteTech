@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+	<StatDef Name="BaseMiscStat" Abstract="True">
+		<category>Explosives</category>
+		<defaultBaseValue>0.0</defaultBaseValue>
+		<toStringStyle>PercentZero</toStringStyle>
+		<showIfUndefined>false</showIfUndefined>
+	</StatDef>
+
+	<StatDef ParentName="BaseMiscStat">
+		<defName>ExplosiveChunkYield</defName>
+		<label>fracturing efficiency</label>
+		<description>How efficient this explosive is at producing usable chunks when breaking stone.</description>
+		<defaultBaseValue>0.5</defaultBaseValue>
+		<maxValue>1</maxValue>
+		<minValue>0</minValue>
+	</StatDef>
+	
+	<StatDef ParentName="BaseMiscStat">
+		<defName>ExplosiveMiningYield</defName>
+		<label>mining yield</label>
+		<description>How efficient this explosive is at breaking resource-rich rocks.</description>
+		<defaultBaseValue>0.5</defaultBaseValue>
+		<maxValue>1</maxValue>
+		<minValue>0</minValue>
+	</StatDef>
+
+	<StatDef ParentName="BaseMiscStat">
+		<defName>ExplosiveWoodYield</defName>
+		<label>wood breaking yield</label>
+		<description>How efficient this explosive is at producing usable wood from destroyed trees. Explosive forestry is best forestry.</description>
+		<defaultBaseValue>0.5</defaultBaseValue>
+		<maxValue>1</maxValue>
+		<minValue>0</minValue>
+	</StatDef>
+</Defs>

@@ -41,7 +41,7 @@ namespace RemoteExplosives {
 			foreach (var pos in cellsByDistance) {
 				var things = parentMap.thingGrid.ThingsListAt(pos).ToArray(); // copy required because of collection modification
 				foreach (var thing in things) {
-					if (TryAffectThing(thing, ref breakingPowerRemaining)) {
+					if (TryAffectThing(thing, parent, ref breakingPowerRemaining)) {
 						affectedMineables++;
 					}
 				}
@@ -54,7 +54,7 @@ namespace RemoteExplosives {
 			}
 		}
 
-		private bool TryAffectThing(Thing thing, ref float breakingPowerRemaining) {
+		private bool TryAffectThing(Thing thing, Thing explosive, ref float breakingPowerRemaining) {
 			if (thing.def == null || thing.Map == null) return false;
 			var map = thing.Map;
 			var affected = false;
@@ -65,7 +65,7 @@ namespace RemoteExplosives {
 				if (rockBuildingDef.isResourceRock && mineable != null) {
 					// resource rocks
 					breakingPowerRemaining -= thing.HitPoints * MiningProps.resourceBreakingCost;
-					DamageResourceHolder(thing, MiningProps.resourceBreakingYield);
+					DamageResourceHolder(thing, explosive.GetStatValue(Resources.Stat.ExplosiveMiningYield));
 					BreakMineableAndYieldResources(mineable);
 					affected = true;
 				} else if (rockBuildingDef.isNaturalRock) {
@@ -76,7 +76,7 @@ namespace RemoteExplosives {
 					if (thing.def.filthLeaving != null) {
 						FilthMaker.MakeFilth(thing.Position, map, thing.def.filthLeaving, Rand.RangeInclusive(1, 3));
 					}
-					if (rockBuildingDef.mineableThing != null && Rand.Value < MiningProps.rockChunkChance) {
+					if (rockBuildingDef.mineableThing != null && Rand.Value < explosive.GetStatValue(Resources.Stat.ExplosiveChunkYield)) {
 						var rockDrop = ThingMaker.MakeThing(rockBuildingDef.mineableThing);
 						if (rockDrop.def.stackLimit == 1) {
 							rockDrop.stackCount = 1;
@@ -95,7 +95,7 @@ namespace RemoteExplosives {
 				// trees
 				breakingPowerRemaining -= thing.HitPoints * MiningProps.woodBreakingCost;
 				var tree = (Plant)thing;
-				DamageResourceHolder(tree, MiningProps.woodBreakingYield);
+				DamageResourceHolder(tree, explosive.GetStatValue(Resources.Stat.ExplosiveWoodYield));
 				var yeild = tree.YieldNow();
 				tree.PlantCollected();
 				if (yeild > 0) {

@@ -71,6 +71,9 @@ namespace RemoteExplosives {
 		public static class Stat {
 			public static StatDef PortableDetonatorRange;
 			public static StatDef PortableDetonatorNumUses;
+			public static StatDef ExplosiveChunkYield;
+			public static StatDef ExplosiveMiningYield;
+			public static StatDef ExplosiveWoodYield;
 		}
 
 		[DefOf]
