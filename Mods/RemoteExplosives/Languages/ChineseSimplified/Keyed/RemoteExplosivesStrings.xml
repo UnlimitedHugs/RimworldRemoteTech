@@ -31,11 +31,11 @@
   <BillsTab_MaterialButton_component_mode>零部件</BillsTab_MaterialButton_component_mode>
   <BillsTab_MaterialButton_steel_mode>钢铁</BillsTab_MaterialButton_steel_mode>
   <BillsTab_MaterialButton_tooltip>设置新建清单使用的基本材料。</BillsTab_MaterialButton_tooltip>
+  <BillsTab_ResearchRequired>需要研究：{0}</BillsTab_ResearchRequired>
 
   <FoamBlob_solidify_progress>固化：{0}%</FoamBlob_solidify_progress>
 
   <FoamWall_contents>内物：{0}</FoamWall_contents>
-  <FoamWall_death_message>{0}在固化中的泡沫墙内死亡。</FoamWall_death_message>
 
   <GasCloud_concentration_label>浓度：{0}</GasCloud_concentration_label>
 
@@ -68,4 +68,5 @@
   <Setting_forbidReplaced_desc>启用后，自动重置的蓝图会有数秒钟的禁止状态，以让殖民者远离危险。</Setting_forbidReplaced_desc>
   <Setting_forbidTimeout_label>蓝图禁止时间</Setting_forbidTimeout_label>
   <Setting_forbidTimeout_desc>自动重置的蓝图禁止状态的时长（秒）。</Setting_forbidTimeout_desc>
+
 </LanguageData>
