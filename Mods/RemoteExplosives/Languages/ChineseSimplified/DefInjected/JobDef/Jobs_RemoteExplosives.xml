@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <LanguageData>
 
-  <JobDef_DetonateExplosives.reportString>正在引爆炸药。</JobDef_DetonateExplosives.reportString>
-  <JobDef_SwitchRemoteExplosive.reportString>正在开关遥控炸药。</JobDef_SwitchRemoteExplosive.reportString>
-  <JobDef_InstallChannelsComponent.reportString>正在安装遥控频道零件。</JobDef_InstallChannelsComponent.reportString>
-  <JobDef_DryDetonatorWire.reportString>正在干燥起爆导线。</JobDef_DryDetonatorWire.reportString>
+  <DetonateExplosives.reportString>正在引爆炸药。</DetonateExplosives.reportString>
+  <SwitchRemoteExplosive.reportString>正在开关遥控炸药。</SwitchRemoteExplosive.reportString>
+  <InstallChannelsComponent.reportString>正在安装遥控频道零件。</InstallChannelsComponent.reportString>
+  <DryDetonatorWire.reportString>正在干燥起爆导线。</DryDetonatorWire.reportString>
 
 
 </LanguageData>

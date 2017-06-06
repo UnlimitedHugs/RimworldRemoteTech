@@ -1,11 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <LanguageData>
 
-  <PortableDetonatorRange.label>雷管范围</PortableDetonatorRange.label>
-  <PortableDetonatorRange.description>便携式雷管的导火线可遍及范围。增加是更好的，直到你炸掉了一些你需要的东西。（滑稽）</PortableDetonatorRange.description>
+  <PortableDetonatorRange.label>起爆器范围</PortableDetonatorRange.label>
+  <PortableDetonatorRange.description>便携式起爆器的信号所能达到的距离。离远点比较好，除非你想故意炸掉某样东西。</PortableDetonatorRange.description>
 
-  <PortableDetonatorNumUses.label>雷管激活</PortableDetonatorNumUses.label>
-  <PortableDetonatorNumUses.description>便携式雷管在电池耗尽前的可激活次数。</PortableDetonatorNumUses.description>
+  <PortableDetonatorNumUses.label>起爆器激活次数</PortableDetonatorNumUses.label>
+  <PortableDetonatorNumUses.description>便携式起爆器在电池耗尽前的可使用次数。</PortableDetonatorNumUses.description>
 
 
 </LanguageData>
