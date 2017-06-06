@@ -2,9 +2,13 @@
 <LanguageData>
 
   <FoamWallRekt.label>被困</FoamWallRekt.label>
+  <FoamWallRekt.deathMessage>{0}死于硬化的泡沫墙中。</FoamWallRekt.deathMessage>
 
   <FlameBomb.label>火焰炸弹</FlameBomb.label>
   <FlameBomb.deathMessage>{0}已被烧死。</FlameBomb.deathMessage>
+
+  <SuperEMP.label>EMP</SuperEMP.label>
+  <SuperEMP.deathMessage>{0}被EMP杀死了。</SuperEMP.deathMessage>
 
 
 </LanguageData>
