@@ -70,7 +70,10 @@ namespace RemoteExplosives {
 			interpolatedScale.value = GetRandomGasScale();
 			interpolatedRotation.value = GetRandomGasRotation();
 			// uniformely distribute gas ticks to reduce per frame workload
-			HugsLibController.Instance.DistributedTicker.RegisterTickability(GasTick, gasProps.GastickInterval);
+			// delay registration, because the HugsLib DistributedTicker is initailized during WorldLoaded. TODO: make a better fix.
+			LongEventHandler.ExecuteWhenFinished(() => {
+				HugsLibController.Instance.DistributedTicker.RegisterTickability(GasTick, gasProps.GastickInterval);
+			});
 		}
 
 		public override void DeSpawn() {
