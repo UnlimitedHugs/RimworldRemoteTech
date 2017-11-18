@@ -24,7 +24,7 @@
 			<li>
 				<label></label>
 				<minSeverity>0</minSeverity>
-				<everVisible>false</everVisible>
+				<becomeVisible>false</becomeVisible>
 				<capMods>
 					<li>
 						<capacity>Consciousness</capacity>

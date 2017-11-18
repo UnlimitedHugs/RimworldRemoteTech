@@ -8,7 +8,7 @@ namespace RemoteExplosives {
 	/// </summary>
 	public class DamageWorker_SuperEMP : DamageWorker {
 
-		public override float Apply(DamageInfo dinfo, Thing victim) {
+		public override DamageResult Apply(DamageInfo dinfo, Thing victim) {
 			var pawn = victim as Pawn;
 			// duplicate vanilla emp behaviour, since the original def is hardcoded
 			if (pawn != null && !pawn.RaceProps.IsFlesh && !pawn.health.Dead && !pawn.health.Downed) {

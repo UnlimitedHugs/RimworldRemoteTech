@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ResearchProjectDefs>
+<Defs>
+
 	<ResearchProjectDef Abstract="True" Name="ProjectBase">
 		<tab>RemoteExplosives</tab>
 	</ResearchProjectDef>
@@ -93,4 +94,4 @@ Allows the Shaped Charge to be built.</description>
 		<researchViewY>4</researchViewY>
 	</ResearchProjectDef>
 	
-</ResearchProjectDefs>
+</Defs>

@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
 
-<KeyBindingDefs>
 	<KeyBindingDef>
 		<category>RemoteExplosivesDetonator</category>
 		<defName>RemoteTableDetonate</defName>
@@ -36,5 +36,4 @@
 		<defaultKeyCodeA>Z</defaultKeyCodeA>
 	</KeyBindingDef>	
 	
-	
-</KeyBindingDefs>
+</Defs>

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<JobDefs>
+<Defs>
 	
 	<JobDef>
 		<defName>DetonateExplosives</defName>
@@ -24,4 +24,5 @@
 		<driverClass>RemoteExplosives.JobDriver_DryDetonatorWire</driverClass>
 		<reportString>Drying off detonator wire.</reportString>
 	</JobDef>
-</JobDefs>
+	
+</Defs>

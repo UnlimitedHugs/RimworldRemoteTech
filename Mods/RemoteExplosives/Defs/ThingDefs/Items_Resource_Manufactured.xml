@@ -221,4 +221,5 @@ Can be made at a campfire or a fueled stove.</description>
 			<graphicClass>Graphic_Single</graphicClass>
 		</graphicData>
 	</ThingDef>
+	
 </Defs>

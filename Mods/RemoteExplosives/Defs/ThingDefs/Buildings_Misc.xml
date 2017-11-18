@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ThingDefs>
+<Defs>
 
 	<ThingDef Name="BuildingMiscBase" Abstract="True">
 		<category>Building</category>
@@ -12,10 +12,10 @@
 	</ThingDef>
 
 	<ThingDef ParentName="BuildingMiscBase">
-		<DefName>WallFoamBlob</DefName>
+		<defName>WallFoamBlob</defName>
 		<label>chemical foam</label>
-		<ThingClass>RemoteExplosives.Building_FoamBlob</ThingClass>
-		<Description>Becomes tougher than rock as it solidifies.</Description>
+		<thingClass>RemoteExplosives.Building_FoamBlob</thingClass>
+		<description>Becomes tougher than rock as it solidifies.</description>
 		<graphicData>
 			<texPath>foam_blob</texPath>
 			<graphicClass>RemoteExplosives.Graphic_FoamBlob</graphicClass>
@@ -28,7 +28,7 @@
 		</graphicData>
 		<drawerType>RealtimeOnly</drawerType>
 		<castEdgeShadows>false</castEdgeShadows>
-		<AltitudeLayer>Building</AltitudeLayer>
+		<altitudeLayer>Building</altitudeLayer>
 		<fillPercent>0.5</fillPercent>
 		<coversFloor>false</coversFloor>
 		<useHitPoints>True</useHitPoints>
@@ -38,9 +38,9 @@
 			<Flammability>2.0</Flammability>
 			<Beauty>-20</Beauty>
 		</statBases>
-		<Size>(1,1)</Size>
+		<size>(1,1)</size>
 		<constructEffect>ConstructMetal</constructEffect>
-		<Passability>PassThroughOnly</Passability>
+		<passability>PassThroughOnly</passability>
 		<pathCost>230</pathCost>
 		<pathCostIgnoreRepeat>false</pathCostIgnoreRepeat>
 		<tickerType>Normal</tickerType>
@@ -173,4 +173,4 @@
 		</building>
 	</ThingDef>
 	
-</ThingDefs>
+</Defs>

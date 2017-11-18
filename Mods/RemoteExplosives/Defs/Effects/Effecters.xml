@@ -62,10 +62,10 @@
 					<min>0.9</min>
 					<max>1.1</max>
 				</scale>
-				<airtime>
+				<airTime>
 					<min>0.1</min>
 					<max>0.3</max>
-				</airtime>
+				</airTime>
 				<rotationRate>
 					<min>-240</min>
 					<max>240</max>
@@ -132,10 +132,10 @@
 					<min>0.15</min>
 					<max>0.25</max>
 				</scale>
-				<airtime>
+				<airTime>
 					<min>0.08</min>
 					<max>0.16</max>
-				</airtime>
+				</airTime>
 				<rotationRate>
 					<min>-240</min>
 					<max>240</max>

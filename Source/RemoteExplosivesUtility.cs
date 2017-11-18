@@ -78,10 +78,10 @@ namespace RemoteExplosives {
 				armedExplosives = armedExplosives.OrderBy(e => e.Position.DistanceToSquared(center)).ToList();
 				for (int i = 0; i < armedExplosives.Count; i++) {
 					var explosive = armedExplosives[i];
-					HugsLibController.Instance.CallbackScheduler.ScheduleCallback(explosive.LightFuse, TicksBetweenTriggers*i);
+					HugsLibController.Instance.TickDelayScheduler.ScheduleCallback(explosive.LightFuse, TicksBetweenTriggers*i, explosive);
 				}
 			} else {
-				Messages.Message("Detonator_notargets".Translate(), MessageSound.Standard);
+				Messages.Message("Detonator_notargets".Translate(), MessageTypeDefOf.RejectInput);
 			}
 		}
 
@@ -109,9 +109,9 @@ namespace RemoteExplosives {
 				autoTakeable = false,
 				Label = "Detonator_detonatenow".Translate()
 			};
-			if (pawn.Map.reservationManager.IsReservedByAnyoneWhoseReservationsRespects(detonatorThing, pawn)) {
+			if (pawn.Map.reservationManager.IsReservedAndRespected(detonatorThing, pawn)) {
 				entry.Disabled = true;
-				var reservedByName = pawn.Map.reservationManager.FirstReserverWhoseReservationsRespects(detonatorThing, pawn).Name.ToStringShort;
+				var reservedByName = pawn.Map.reservationManager.FirstRespectedReserver(detonatorThing, pawn).Name.ToStringShort;
 				entry.Label += " " + "Detonator_detonatenow_reserved".Translate(reservedByName);
 			}
 			return entry;
