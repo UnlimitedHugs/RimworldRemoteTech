@@ -2,7 +2,7 @@
 <Defs>
 	
 	<DesignationCategoryDef>
-		<DefName>RemoteExplosives</DefName>
+		<defName>RemoteExplosives</defName>
 		<label>explosives</label>
 		<description>Things for blowing up other things.</description>
 		<order>10</order>

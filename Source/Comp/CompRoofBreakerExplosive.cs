@@ -32,7 +32,7 @@ namespace RemoteExplosives {
 					anyThickRoofAffected = true;
 					map.roofGrid.SetRoof(cell, null);
 					var roofCell = cell;
-					HugsLibController.Instance.CallbackScheduler.ScheduleCallback(() => { // delay collapse for more interesting visual effect
+					HugsLibController.Instance.TickDelayScheduler.ScheduleCallback(() => { // delay collapse for more interesting visual effect
 						CollapseRockOnCell(roofCell, map);
 						SoundDefOf.RoofCollapse.PlayOneShot(new TargetInfo(roofCell, map));
 					}, CollapseDelay.RandomInRange);

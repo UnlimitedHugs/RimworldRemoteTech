@@ -7,7 +7,7 @@ namespace RemoteExplosives {
 	 * Like the Flame damage worker, but makes a roll against the chance defined in the def, to see if it should crate fire.
 	 */
 	public class DamageWorker_FlameChance : DamageWorker_AddInjury {
-		public override float Apply(DamageInfo dinfo, Thing victim) {
+		public override DamageResult Apply(DamageInfo dinfo, Thing victim) {
 			if (ShouldCreateFire()) {
 				if (!dinfo.InstantOldInjury) {
 					victim.TryAttachFire(Rand.Range(0.15f, 0.25f));

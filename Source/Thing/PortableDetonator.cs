@@ -19,19 +19,12 @@ namespace RemoteExplosives {
 
 		private bool rangeOverlayVisible;
 		private int lastActivationTick; // prevents unintended double activations
-		private bool justMade;
 
 		private int numUsesLeft;
-
-		public override void PostMake() {
-			base.PostMake();
-			justMade = true;
-		}
-
+		
 		public override void SpawnSetup(Map map, bool respawningAfterLoad) {
 			base.SpawnSetup(map, respawningAfterLoad);
-			if (justMade) {
-				justMade = false;
+			if (!respawningAfterLoad) {
 				numUsesLeft = MaxNumUses;
 			}
 		}
@@ -91,7 +84,7 @@ namespace RemoteExplosives {
 			numUsesLeft--;
 			if (numUsesLeft <= 0) {
 				Destroy(DestroyMode.KillFinalize);
-				Messages.Message(DetonatorBrokeMessage, new TargetInfo(Wearer), MessageSound.Negative);
+				Messages.Message(DetonatorBrokeMessage, new TargetInfo(Wearer), MessageTypeDefOf.NeutralEvent);
 			}
 		}
 

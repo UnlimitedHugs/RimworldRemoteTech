@@ -21,12 +21,7 @@ namespace RemoteExplosives {
 		
 		public override void SpawnSetup(Map map, bool respawningAfterLoad) {
 			base.SpawnSetup(map, respawningAfterLoad);
-			HugsLibController.Instance.DistributedTicker.RegisterTickability(CustomTick, CustomDef.detectEveryTicks);
-		}
-
-		public override void DeSpawn() {
-			base.DeSpawn();
-			HugsLibController.Instance.DistributedTicker.UnregisterTickability(CustomTick, CustomDef.detectEveryTicks);
+			HugsLibController.Instance.DistributedTicker.RegisterTickability(CustomTick, CustomDef.detectEveryTicks, this);
 		}
 
 		public override void ExposeData() {
