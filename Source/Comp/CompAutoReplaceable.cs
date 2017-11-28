@@ -22,7 +22,7 @@ namespace RemoteExplosives {
 
 		public override void PostExposeData() {
 			base.PostExposeData();
-			Scribe_Values.Look(ref autoReplaceEnabled, "enabled", false);
+			Scribe_Values.Look(ref autoReplaceEnabled, "enabled");
 			if (Scribe.mode == LoadSaveMode.LoadingVars) wasLoaded = true;
 		}
 

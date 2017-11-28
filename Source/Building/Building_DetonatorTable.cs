@@ -36,10 +36,10 @@ namespace RemoteExplosives {
 		public override void ExposeData()
 		{
 			base.ExposeData();
-			Scribe_Values.Look(ref wantDetonation, "wantDetonation", false);
-			Scribe_Values.Look(ref currentChannel, "currentChannel", RemoteExplosivesUtility.RemoteChannel.White);
-			Scribe_Values.Look(ref hasChannelsComponent, "hasChannelsComponent", false);
-			Scribe_Values.Look(ref wantChannelsComponent, "wantChannelsComponent", false);
+			Scribe_Values.Look(ref wantDetonation, "wantDetonation");
+			Scribe_Values.Look(ref currentChannel, "currentChannel");
+			Scribe_Values.Look(ref hasChannelsComponent, "hasChannelsComponent");
+			Scribe_Values.Look(ref wantChannelsComponent, "wantChannelsComponent");
 		}
 
 		public override IEnumerable<Gizmo> GetGizmos(){

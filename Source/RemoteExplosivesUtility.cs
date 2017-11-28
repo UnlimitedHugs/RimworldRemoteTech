@@ -27,7 +27,7 @@ namespace RemoteExplosives {
 
 		private static readonly string ChannelDialDesc = "RemoteExplosive_detonatorChannelChanger_desc".Translate();
 		private static readonly string ChannelDialLabelBase = "RemoteExplosive_channelChanger_label".Translate();
-		private static readonly string CurrenthannelLabelBase = "RemoteExplosive_currentChannel".Translate();
+		private static readonly string CurrentChannelLabelBase = "RemoteExplosive_currentChannel".Translate();
 		
 		public enum RemoteChannel {
 			White = 0,
@@ -67,8 +67,8 @@ namespace RemoteExplosives {
 			};
 		}
 
-		public static string GetCurrentChannelInspectString(RemoteChannel currentChannnel) {
-			return String.Format(CurrenthannelLabelBase, GetChannelName(currentChannnel));
+		public static string GetCurrentChannelInspectString(RemoteChannel currentChannel) {
+			return String.Format(CurrentChannelLabelBase, GetChannelName(currentChannel));
 		}
 
 		public static void LightArmedExplosivesInRange(IntVec3 center, Map map, float radius, RemoteChannel channel) {
@@ -137,8 +137,8 @@ namespace RemoteExplosives {
 				for (int j = 0; j < cardinals.Length; j++) {
 					var cardinalCell = cardinals[j] + radiusCell;
 					if (!cardinalCell.InBounds(map)) continue;
-					var cardianalRoof = roofGrid.RoofAt(cardinalCell);
-					if (cardianalRoof == null || !cardianalRoof.isThickRoof) {
+					var cardinalRoof = roofGrid.RoofAt(cardinalCell);
+					if (cardinalRoof == null || !cardinalRoof.isThickRoof) {
 						adjacentWeakRoofFound = true;
 						break;
 					}

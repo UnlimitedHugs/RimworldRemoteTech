@@ -7,7 +7,7 @@ namespace RemoteExplosives {
 	 * Receives detonation signals from CompWiredDetonationTransmitter and light explosives attached to parent thing.
 	 */
 	public class CompWiredDetonationReceiver : CompDetonationGridNode {
-		public void RecieveSignal(int delayTicks) {
+		public void ReceiveSignal(int delayTicks) {
 			var parentExplosive = parent as Building_RemoteExplosive;
 			if(parentExplosive!=null && !parentExplosive.IsArmed) return;
 		

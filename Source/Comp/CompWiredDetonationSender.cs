@@ -12,7 +12,7 @@ namespace RemoteExplosives {
 			for (var i = 0; i < thingsOnTile.Count; i++) {
 				var comp = thingsOnTile[i].TryGetComp<CompWiredDetonationTransmitter>();
 				if (comp == null) continue;
-				comp.RecieveSignal(Rand.Int, 0);
+				comp.ReceiveSignal(Rand.Int, 0);
 			}
 		}
 

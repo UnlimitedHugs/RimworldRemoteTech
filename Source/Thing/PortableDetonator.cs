@@ -31,7 +31,7 @@ namespace RemoteExplosives {
 
 		public override void ExposeData() {
 			base.ExposeData();
-			Scribe_Values.Look(ref numUsesLeft, "numUsesLeft", 0);
+			Scribe_Values.Look(ref numUsesLeft, "numUsesLeft");
 		}
 
 		public override void DrawWornExtras() {

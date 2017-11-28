@@ -69,7 +69,7 @@ namespace RemoteExplosives {
 			if (gasProps == null) throw new Exception("Missing required gas mote properties in " + def.defName);
 			interpolatedScale.value = GetRandomGasScale();
 			interpolatedRotation.value = GetRandomGasRotation();
-			// uniformely distribute gas ticks to reduce per frame workload
+			// uniformly distribute gas ticks to reduce per frame workload
 			// wait for next tick to avoid registering while DistributedTickScheduler is mid-tick
 			HugsLibController.Instance.TickDelayScheduler.ScheduleCallback(() =>
 				HugsLibController.Instance.DistributedTicker.RegisterTickability(GasTick, gasProps.GastickInterval, this)
@@ -86,8 +86,8 @@ namespace RemoteExplosives {
 			if (!Find.TickManager.Paused) {
 				UpdateInterpolatedValues();
 			}
-			var targetApha = Mathf.Min(1f, concentration / gasProps.FullAlphaConcentration);
-			spriteAlpha = interpolatedAlpha = DoAdditiveEasing(interpolatedAlpha, targetApha, AlphaEasingDivider, Time.deltaTime);
+			var targetAlpha = Mathf.Min(1f, concentration / gasProps.FullAlphaConcentration);
+			spriteAlpha = interpolatedAlpha = DoAdditiveEasing(interpolatedAlpha, targetAlpha, AlphaEasingDivider, Time.deltaTime);
 			spriteOffset = new Vector2(interpolatedOffsetX, interpolatedOffsetY);
 			spriteScaleMultiplier = new Vector2(interpolatedScale, interpolatedScale);
 			spriteRotation = interpolatedRotation;
@@ -150,16 +150,16 @@ namespace RemoteExplosives {
 			//spread
 			var gasTickFitForSpreading = gasTicksProcessed % gasProps.SpreadInterval == 0;
 			if(gasTickFitForSpreading) {
-				TryCreateNewNeighbours();
+				TryCreateNewNeighbors();
 			}
 
 			// if filled in
 			if(IsBlocked) {
-				ForcePushConcentrationToNeighbours();
+				ForcePushConcentrationToNeighbors();
 			}
 
 			// balance concentration
-			ShareConcentrationWithMinorNeighbours();
+			ShareConcentrationWithMinorNeighbors();
 		}
 
 		private float GetRandomGasScale() {
@@ -172,15 +172,15 @@ namespace RemoteExplosives {
 
 		// this is just a "current + difference / divider", but adjusted for frame rate
 		private float DoAdditiveEasing(float currentValue, float targetValue, float easingDivider, float frameDeltaTime) {
-			const float nominalFramerate = 60f;
-			var dividerMultiplier = frameDeltaTime == 0 ? 0 : (1f / nominalFramerate) / frameDeltaTime;
+			const float nominalFrameRate = 60f;
+			var dividerMultiplier = frameDeltaTime == 0 ? 0 : (1f / nominalFrameRate) / frameDeltaTime;
 			easingDivider *= dividerMultiplier;
 			if (easingDivider < 1) easingDivider = 1;
 			var easingStep = (targetValue - currentValue) / easingDivider;
 			return currentValue + easingStep;
 		}
 
-		private List<IntVec3> GetSpreadableAdacentCells() {
+		private List<IntVec3> GetSpreadableAdjacentCells() {
 			positionBuffer.Clear();
 			for (int i = 0; i < 4; i++) {
 				var adjPosition = GenAdj.CardinalDirections[i] + Position;
@@ -204,45 +204,45 @@ namespace RemoteExplosives {
 			return adjacentBuffer;
 		}
 
-		private void ShareConcentrationWithMinorNeighbours() {
-			var neighbours = GetAdjacentGasClouds();
-			var numSharingNeighbours = 0;
-			for (int i = 0; i < neighbours.Count; i++) {
-				var neighbour = neighbours[i];
-				if (neighbour.Concentration >= concentration || neighbour.IsBlocked) {
-					neighbours[i] = null;
+		private void ShareConcentrationWithMinorNeighbors() {
+			var neighbors = GetAdjacentGasClouds();
+			var numSharingNeighbors = 0;
+			for (int i = 0; i < neighbors.Count; i++) {
+				var neighbor = neighbors[i];
+				if (neighbor.Concentration >= concentration || neighbor.IsBlocked) {
+					neighbors[i] = null;
 				} else {
-					numSharingNeighbours++;
+					numSharingNeighbors++;
 				}
 			}
-			if (numSharingNeighbours > 0) {
-				for (int i = 0; i < neighbours.Count; i++) {
-					var neighbour = neighbours[i];
-					if (neighbour == null) continue;
-					var neighbourConcentration = neighbour.concentration > 0 ? neighbour.Concentration : 1;
-					var amountToShare = ((concentration - neighbourConcentration)/(numSharingNeighbours+1))*gasProps.SpreadAmountMultiplier;
-					neighbour.ReceiveConcentration(amountToShare);
+			if (numSharingNeighbors > 0) {
+				for (int i = 0; i < neighbors.Count; i++) {
+					var neighbor = neighbors[i];
+					if (neighbor == null) continue;
+					var neighborConcentration = neighbor.concentration > 0 ? neighbor.Concentration : 1;
+					var amountToShare = ((concentration - neighborConcentration)/(numSharingNeighbors+1))*gasProps.SpreadAmountMultiplier;
+					neighbor.ReceiveConcentration(amountToShare);
 					concentration -= amountToShare;
 				}
 
 			}
 		}
 
-		private void ForcePushConcentrationToNeighbours() {
-			var neighbours = GetAdjacentGasClouds();
-			for (int i = 0; i < neighbours.Count; i++) {
-				var neighbour = neighbours[i];
-				if (neighbour.IsBlocked) continue;
-				var pushAmount = concentration/neighbours.Count;
-				neighbour.ReceiveConcentration(pushAmount);
+		private void ForcePushConcentrationToNeighbors() {
+			var neighbors = GetAdjacentGasClouds();
+			for (int i = 0; i < neighbors.Count; i++) {
+				var neighbor = neighbors[i];
+				if (neighbor.IsBlocked) continue;
+				var pushAmount = concentration/neighbors.Count;
+				neighbor.ReceiveConcentration(pushAmount);
 				concentration -= pushAmount;
 			}
 		}
 
-		private void TryCreateNewNeighbours() {
+		private void TryCreateNewNeighbors() {
 			var spreadsLeft = Mathf.FloorToInt(concentration / gasProps.SpreadMinConcentration);
 			if (spreadsLeft <= 0) return;
-			var viableCells = GetSpreadableAdacentCells();
+			var viableCells = GetSpreadableAdjacentCells();
 			for (int i = 0; i < viableCells.Count; i++) {
 				if (spreadsLeft <= 0) break;
 				var targetPosition = viableCells[i];
