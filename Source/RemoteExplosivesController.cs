@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Text;
 using Harmony;
 using HugsLib;
 using HugsLib.Settings;
@@ -123,8 +122,9 @@ namespace RemoteExplosives {
 					thingDef.comps.Add(new CompProperties_WiredDetonationReceiver());
 					thingDef.comps.Add(new CompProperties_AutoReplaceable());
 				}
+				ThingDefOf.PassiveCooler.comps.Add(new CompProperties_AutoReplaceable {applyOnVanish = true});
 			} catch (Exception e) {
-				Logger.Error("Exception while injecting comps into defs: "+e);
+				Logger.Error("Exception while injecting comps into defs: " + e);
 			}
 		}
 
