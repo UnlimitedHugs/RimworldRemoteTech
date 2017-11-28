@@ -68,7 +68,8 @@
 			<graphicClass>Graphic_Appearances</graphicClass>
 			<linkType>CornerFiller</linkType>
 			<linkFlags>
-				<li>Custom1</li>
+				<li>Wall</li>
+				<li>Rock</li>
 			</linkFlags>
 			<damageData>
 				<cornerTL>Damage/Corner</cornerTL>
