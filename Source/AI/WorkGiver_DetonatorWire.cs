@@ -12,10 +12,6 @@ namespace RemoteExplosives {
 			get { return PathEndMode.ClosestTouch; }
 		}
 
-		public override bool ShouldSkip(Pawn pawn) {
-			return !pawn.workSettings.WorkIsActive(Resources.WorkType.Cleaning);
-		}
-
 		public override IEnumerable<Thing> PotentialWorkThingsGlobal(Pawn pawn) {
 			var designations = pawn.Map.designationManager.SpawnedDesignationsOfDef(Resources.Designation.DetonatorWireDryOff);
 			foreach (var designation in designations) {

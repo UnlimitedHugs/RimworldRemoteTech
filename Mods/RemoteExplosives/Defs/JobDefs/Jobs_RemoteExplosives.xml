@@ -25,4 +25,10 @@
 		<reportString>Drying off detonator wire.</reportString>
 	</JobDef>
 	
+	<JobDef>
+		<defName>SmoothFoamWall</defName>
+		<driverClass>RemoteExplosives.JobDriver_SmoothFoamWall</driverClass>
+		<reportString>Smoothing foam wall.</reportString>
+	</JobDef>
+	
 </Defs>

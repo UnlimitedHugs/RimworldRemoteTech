@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using HugsLib.Utils;
 using RimWorld;
 using Verse;
 
@@ -11,9 +13,17 @@ namespace RemoteExplosives {
 	public class Building_FoamWall : Mineable, IThingHolder {
 		private bool justCreated;
 		private ThingOwner<Thing> trappedInventory;
+		private BuildingProperties_FoamWall wallProps;
+		private ThingDef smoothingReplacementDef;
+
+		public int SmoothWorkAmount {
+			get { return wallProps.smoothWorkAmount; }
+		}
 
 		public override void SpawnSetup(Map map, bool respawningAfterLoad) {
 			base.SpawnSetup(map, respawningAfterLoad);
+			wallProps = def.building as BuildingProperties_FoamWall;
+			if (wallProps == null) throw new Exception("Building_FoamWall requires BuildingProperties_FoamWall: " + def.defName);
 			if(justCreated) {
 				var trappedThings = CrushThingsUnderWall(this);
 				if (trappedThings.Count == 0) return;
@@ -41,13 +51,49 @@ namespace RemoteExplosives {
 		public override void ExposeData() {
 			base.ExposeData();
 			Scribe_Deep.Look(ref trappedInventory, "trappedInventory", null);
+			Scribe_Defs.Look(ref smoothingReplacementDef, "smoothingDef");
 		}
 
 		public override void Destroy(DestroyMode mode) {
-			if(mode == DestroyMode.KillFinalize && trappedInventory!=null) {
+			if(mode == DestroyMode.KillFinalize && trappedInventory != null) {
 				trappedInventory.TryDropAll(Position, Map, ThingPlaceMode.Direct);
 			}
 			base.Destroy(mode);
+		}
+
+		public override IEnumerable<Gizmo> GetGizmos() {
+			foreach (var gizmo in base.GetGizmos()) {
+				yield return gizmo;
+			}
+			if (wallProps.smoothVariants.Count > 0) {
+				yield return new Command_Action {
+					icon = Resources.Textures.WallSmoothMenuIcon,
+					action = () => Find.WindowStack.Add(new FloatMenu(new List<FloatMenuOption>(
+						wallProps.smoothVariants.Select(wallDef => new FloatMenuOption(wallDef.label.CapitalizeFirst(), () => {
+							var selectedWalls = Find.Selector.SelectedObjects.OfType<Building_FoamWall>().Where(o => o.def == def);
+							foreach (var wall in selectedWalls) {
+								wall.smoothingReplacementDef = wallDef;
+								wall.ToggleDesignation(Resources.Designation.FoamWallSmooth, true);	
+							}
+						}))
+					))),
+					defaultLabel = "FoamWall_smoothAction_label".Translate(),
+					defaultDesc = "FoamWall_smoothAction_desc".Translate()
+				};
+			}
+		}
+
+		public void ApplySmoothing() {
+			if (smoothingReplacementDef != null) {
+				var map = Map;
+				Destroy(DestroyMode.Vanish);
+				var wallTile = GenSpawn.Spawn(smoothingReplacementDef, Position, map);
+				wallTile.SetFactionDirect(Faction.OfPlayer);
+				var foamWall = wallTile as Building_FoamWall;
+				if (foamWall != null) {
+					foamWall.trappedInventory = trappedInventory;
+				}
+			}
 		}
 
 		private List<Thing> CrushThingsUnderWall(Thing wall) {

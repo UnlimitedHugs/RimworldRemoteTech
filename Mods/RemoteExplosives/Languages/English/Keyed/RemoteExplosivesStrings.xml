@@ -36,6 +36,8 @@
 	<FoamBlob_solidify_progress>Solidifying: {0}%</FoamBlob_solidify_progress>
 	
 	<FoamWall_contents>Contents: {0}</FoamWall_contents>
+	<FoamWall_smoothAction_label>Smooth</FoamWall_smoothAction_label>
+	<FoamWall_smoothAction_desc>Smooth this wall to make it more presentable and usable as an interior wall.</FoamWall_smoothAction_desc>
 	
 	<GasCloud_concentration_label>Concentration: {0}</GasCloud_concentration_label>
 	
