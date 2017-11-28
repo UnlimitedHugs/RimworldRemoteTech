@@ -202,12 +202,7 @@ Right-click with a drafted colonist for better timing.</description>
 		<researchPrerequisites><li>MakeshiftExplosives</li></researchPrerequisites>
 	</ThingDef>
     
-	<ThingDef ParentName="BuildingBase">
-		<defName>DetonatorWire</defName>
-		<label>detonator wire</label>
-		<description>A special wire used to connect the manual detonator to makeshift explosives, remote explosives and IEDs. Can be placed under walls and other buildings.
-Can fail if used while wet.</description>
-		<thingClass>RemoteExplosives.Building_DetonatorWire</thingClass>
+	<ThingDef ParentName="BuildingBase" Name="DetWireBase" Abstract="True">
 		<drawerType>MapMeshOnly</drawerType>
 		<graphicData>
 			<texPath>DetWire/det_wire_Atlas</texPath>
@@ -225,10 +220,12 @@ Can fail if used while wet.</description>
 			<texPath>DetWire/det_wire_blueprint_atlas</texPath>
 		</blueprintGraphicData>
 		<uiIconPath>DetWire/det_wire_icon</uiIconPath>
+		<altitudeLayer>FloorEmplacement</altitudeLayer>
+		<passability>Standable</passability>
+		<leaveResourcesWhenKilled>false</leaveResourcesWhenKilled>
 		<building Class="RemoteExplosives.BuildingProperties_DetonatorWire">
 			<isInert>true</isInert>
 			<isEdifice>false</isEdifice>
-			
 			<failureChanceWhenFullyWet>.015</failureChanceWhenFullyWet>
 			<daysToSelfDry>.8</daysToSelfDry>
 			<baseDryingTemperature>20</baseDryingTemperature>
@@ -236,9 +233,6 @@ Can fail if used while wet.</description>
 			<fireOnFailure>true</fireOnFailure>
 			<dryOffJobDurationTicks>80</dryOffJobDurationTicks>
 		</building>
-		<altitudeLayer>FloorEmplacement</altitudeLayer>
-		<passability>Standable</passability>
-		<leaveResourcesWhenKilled>false</leaveResourcesWhenKilled>
 		<statBases>
 			<MaxHitPoints>80</MaxHitPoints>
 			<WorkToMake>35</WorkToMake>
@@ -246,27 +240,10 @@ Can fail if used while wet.</description>
 			<Beauty>-2</Beauty>
 		</statBases>
 		<placingDraggableDimensions>1</placingDraggableDimensions>
-		<costList>
-			<Steel>1</Steel>
-			<Sparkpowder>1</Sparkpowder>
-		</costList>
 		<resourcesFractionWhenDeconstructed>0</resourcesFractionWhenDeconstructed>
 		<placeWorkers>
 			<li>RemoteExplosives.PlaceWorker_DetonatorWire</li>
 		</placeWorkers>
-		<comps>
-			<li Class="RemoteExplosives.CompProperties_WiredDetonationTransmitter">
-				<signalDelayPerTile>0.8</signalDelayPerTile> <!-- signal delay is calculated by the last transmitter before the receiver -->
-			</li>
-			<li Class="RemoteExplosives.CompProperties_RandomResourceLeaver">
-				<thingDef>Steel</thingDef>
-				<amountRange>
-					<min>0</min>
-					<max>1</max>
-				</amountRange>
-				<requiredDestroyMode>Deconstruct</requiredDestroyMode>
-			</li>
-		</comps>
 		<damageMultipliers>
 			<li>
 				<damageDef>Bomb</damageDef>
@@ -284,7 +261,68 @@ Can fail if used while wet.</description>
 		<rotatable>false</rotatable>
 		<selectable>true</selectable>
 		<neverMultiSelect>true</neverMultiSelect>
-		<researchPrerequisites><li>MakeshiftExplosives</li></researchPrerequisites>
+		<researchPrerequisites>
+			<li>MakeshiftExplosives</li>
+		</researchPrerequisites>
+	</ThingDef>
+	
+	<ThingDef ParentName="DetWireBase">
+		<defName>DetonatorWire</defName>
+		<label>detonator wire</label>
+		<description>A special wire used to connect the manual detonator to makeshift explosives, remote explosives and IEDs. Can be placed under walls and other buildings.
+Can fail if used while wet.</description>
+		<thingClass>RemoteExplosives.Building_DetonatorWire</thingClass>
+		<costList>
+			<Steel>1</Steel>
+			<Sparkpowder>1</Sparkpowder>
+		</costList>
+		<comps>
+			<li Class="RemoteExplosives.CompProperties_WiredDetonationTransmitter">
+				<signalDelayPerTile>0.8</signalDelayPerTile> <!-- signal delay is calculated by the last transmitter before the receiver -->
+			</li>
+			<li Class="RemoteExplosives.CompProperties_RandomResourceLeaver">
+				<thingDef>Steel</thingDef>
+				<amountRange>
+					<min>0</min>
+					<max>1</max>
+				</amountRange>
+				<requiredDestroyMode>Deconstruct</requiredDestroyMode>
+			</li>
+		</comps>
+	</ThingDef>
+	
+	<ThingDef ParentName="DetWireBase">
+		<defName>ImprovedDetonatorWire</defName>
+		<label>improved detonator wire</label>
+		<description>An improved version of the detonator wire for use with the manual detonator. Tougher, fully waterproof, and with a much lower signal transmission delay. 
+Can be placed under walls and other buildings.</description>
+		<thingClass>Building</thingClass>
+		<graphicData>
+			<color>(.61, 0.86, .86)</color>
+		</graphicData>
+		<statBases>
+			<MaxHitPoints>120</MaxHitPoints>
+		</statBases>
+		<costList>
+			<Plasteel>1</Plasteel>
+			<Sparkpowder>1</Sparkpowder>
+		</costList>
+		<comps>
+			<li Class="RemoteExplosives.CompProperties_WiredDetonationTransmitter">
+				<signalDelayPerTile>0.3</signalDelayPerTile>
+			</li>
+			<li Class="RemoteExplosives.CompProperties_RandomResourceLeaver">
+				<thingDef>Plasteel</thingDef>
+				<amountRange>
+					<min>0</min>
+					<max>1</max>
+				</amountRange>
+				<requiredDestroyMode>Deconstruct</requiredDestroyMode>
+			</li>
+		</comps>
+		<researchPrerequisites>
+			<li>ImprovedDetWire</li>
+		</researchPrerequisites>
 	</ThingDef>
 	
 	<!-- Combat explosives -->
