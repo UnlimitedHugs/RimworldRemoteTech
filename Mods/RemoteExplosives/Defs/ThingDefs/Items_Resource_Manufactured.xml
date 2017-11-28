@@ -213,13 +213,16 @@ Place as a building from the Explosives menu to use.</description>
 	
 	<ThingDef ParentName="BaseExplosiveIngredient">
 		<defName>Charcoal</defName>
-		<label>charcoal</label>
+		<label>crushed charcoal</label>
 		<description>An efficient fuel made by burning wood in low-oxygen conditions. Becomes a great additive for explosives when crushed into powder.
 Can be made at a campfire or a fueled stove.</description>
 		<graphicData>
 			<texPath>charcoal</texPath>
 			<graphicClass>Graphic_Single</graphicClass>
 		</graphicData>
+		<statBases>
+			<Flammability>3.0</Flammability>
+		</statBases>
 	</ThingDef>
 	
 </Defs>
