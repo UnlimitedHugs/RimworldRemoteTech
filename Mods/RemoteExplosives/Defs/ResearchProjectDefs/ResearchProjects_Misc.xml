@@ -20,6 +20,19 @@ Once researched:
 		<researchViewX>0</researchViewX>
 		<researchViewY>2.5</researchViewY>
 	</ResearchProjectDef>
+	
+	<ResearchProjectDef ParentName="ProjectBase">
+		<defName>ImprovedDetWire</defName>
+		<label>Improved detonator wire</label>
+		<description>Unlocks the improved detonator wire. Fully waterproof, and with much faster signal transmission.</description>
+		<baseCost>500</baseCost>
+		<techLevel>Industrial</techLevel>
+		<prerequisites>
+			<li>MakeshiftExplosives</li>
+		</prerequisites>
+		<researchViewX>0</researchViewX>
+		<researchViewY>3.5</researchViewY>
+	</ResearchProjectDef>
 
 	<ResearchProjectDef ParentName="ProjectBase">
 		<defName>RemoteDetonator</defName>
