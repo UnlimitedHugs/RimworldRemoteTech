@@ -9,7 +9,7 @@
 		<recipeUsers>
 			<li>RemoteExplosivesBench</li>
 		</recipeUsers>
-		<researchPrerequisite>IEDBomb</researchPrerequisite>
+		<researchPrerequisite>IEDs</researchPrerequisite>
 		<workSpeedStat>SmithingSpeed</workSpeedStat>
 		<effectWorking>Cook</effectWorking>
 		<soundWorking>Recipe_Machining</soundWorking>
@@ -20,7 +20,7 @@
 			<li>
 				<filter>
 					<thingDefs>
-						<li>MortarShell</li>
+						<li>Shell_HighExplosive</li>
 					</thingDefs>
 				</filter>
 				<count>1</count>
@@ -44,7 +44,7 @@
 		</ingredients>
 		<fixedIngredientFilter>
 			<thingDefs>
-				<li>MortarShell</li>
+				<li>Shell_HighExplosive</li>
 				<li>Component</li>
 				<li>Silver</li>
 			</thingDefs>
@@ -75,7 +75,7 @@
 			<li>
 				<filter>
 					<thingDefs>
-						<li>MortarShell</li>
+						<li>Shell_Incendiary</li>
 					</thingDefs>
 				</filter>
 				<count>1</count>
@@ -99,7 +99,7 @@
 		</ingredients>
 		<fixedIngredientFilter>
 			<thingDefs>
-				<li>MortarShell</li>
+				<li>Shell_Incendiary</li>
 				<li>Component</li>
 				<li>Silver</li>
 			</thingDefs>

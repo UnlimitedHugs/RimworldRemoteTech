@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using RimWorld;
 using Verse;
 
 namespace RemoteExplosives {
@@ -7,7 +8,7 @@ namespace RemoteExplosives {
 	 * A wall that will kill and trap any pawns and items it is placed on.
 	 * Contained items are dropped on destruction.
 	 */
-	public class Building_FoamWall : Building {
+	public class Building_FoamWall : Mineable, IThingHolder {
 		private bool justCreated;
 		private ThingOwner<Thing> trappedInventory;
 
@@ -16,16 +17,20 @@ namespace RemoteExplosives {
 			if(justCreated) {
 				var trappedThings = CrushThingsUnderWall(this);
 				if (trappedThings.Count == 0) return;
-				if (trappedInventory == null) trappedInventory = new ThingOwner<Thing>();
+				if (trappedInventory == null) trappedInventory = new ThingOwner<Thing>(this, false);
 				foreach (var trappedThing in trappedThings) {
-					if (trappedThing.holdingOwner != null) {
-						trappedThing.holdingOwner.TryTransferToContainer(trappedThing, trappedInventory);
-					} else {
-						trappedInventory.TryAdd(trappedThing);
-					}
+					trappedInventory.TryAdd(trappedThing.SplitOff(trappedThing.stackCount));
 				}
 				justCreated = false;
 			}
+		}
+
+		public ThingOwner GetDirectlyHeldThings() {
+			return trappedInventory;
+		}
+
+		public void GetChildHolders(List<IThingHolder> outChildren) {
+			ThingOwnerUtility.AppendThingHoldersFromThings(outChildren, GetDirectlyHeldThings());
 		}
 
 		public override void PostMake() {
@@ -38,7 +43,7 @@ namespace RemoteExplosives {
 			Scribe_Deep.Look(ref trappedInventory, "trappedInventory", null);
 		}
 
-		public override void Destroy(DestroyMode mode = DestroyMode.Vanish) {
+		public override void Destroy(DestroyMode mode) {
 			if(mode == DestroyMode.KillFinalize && trappedInventory!=null) {
 				trappedInventory.TryDropAll(Position, Map, ThingPlaceMode.Direct);
 			}

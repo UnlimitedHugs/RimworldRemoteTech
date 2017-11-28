@@ -109,7 +109,6 @@
 		<mineable>true</mineable>
 		<building>
 			<isInert>true</isInert>
-			<ignoreNeedsPower>true</ignoreNeedsPower>
 			<isNaturalRock>false</isNaturalRock>
 			<canBuildNonEdificesUnder>false</canBuildNonEdificesUnder>
 			<deconstructible>false</deconstructible>

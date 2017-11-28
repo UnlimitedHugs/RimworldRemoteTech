@@ -70,13 +70,16 @@ namespace RemoteExplosives {
 			interpolatedScale.value = GetRandomGasScale();
 			interpolatedRotation.value = GetRandomGasRotation();
 			// uniformely distribute gas ticks to reduce per frame workload
-			HugsLibController.Instance.DistributedTicker.RegisterTickability(GasTick, gasProps.GastickInterval, this);
+			// wait for next tick to avoid registering while DistributedTickScheduler is mid-tick
+			HugsLibController.Instance.TickDelayScheduler.ScheduleCallback(() =>
+				HugsLibController.Instance.DistributedTicker.RegisterTickability(GasTick, gasProps.GastickInterval, this)
+			, 1, this);
 		}
 
 		public override void ExposeData() {
 			base.ExposeData();
-			Scribe_Values.Look(ref concentration, "concentration", 0);
-			Scribe_Values.Look(ref gasTicksProcessed, "ticks", 0);
+			Scribe_Values.Look(ref concentration, "concentration");
+			Scribe_Values.Look(ref gasTicksProcessed, "ticks");
 		}
 
 		public override void Draw() {
@@ -243,8 +246,9 @@ namespace RemoteExplosives {
 			for (int i = 0; i < viableCells.Count; i++) {
 				if (spreadsLeft <= 0) break;
 				var targetPosition = viableCells[i];
+				// place on next Normal tick. We cannot register while DistributedTickScheduler is ticking
 				var newCloud = (GasCloud)ThingMaker.MakeThing(def);
-				newCloud.BeginSpreadingTransition(this, targetPosition);
+				newCloud.BeginSpreadingTransition(this, targetPosition);	
 				GenPlace.TryPlaceThing(newCloud, targetPosition, Map, ThingPlaceMode.Direct);
 				spreadsLeft--;
 			}
