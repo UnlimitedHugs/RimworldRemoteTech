@@ -81,11 +81,11 @@ namespace RemoteExplosives {
 
 		public override void ExposeData() {
 			base.ExposeData();
-			Scribe_Values.Look(ref isArmed, "isArmed", false);
-			Scribe_Values.Look(ref ticksSinceFlare, "ticksSinceFlare", 0);
-			Scribe_Values.Look(ref desiredArmState, "desiredArmState", false);
-			Scribe_Values.Look(ref currentChannel, "currentChannel", RemoteExplosivesUtility.RemoteChannel.White);
-			Scribe_Values.Look(ref desiredChannel, "desiredChannel", RemoteExplosivesUtility.RemoteChannel.White);
+			Scribe_Values.Look(ref isArmed, "isArmed");
+			Scribe_Values.Look(ref ticksSinceFlare, "ticksSinceFlare");
+			Scribe_Values.Look(ref desiredArmState, "desiredArmState");
+			Scribe_Values.Look(ref currentChannel, "currentChannel");
+			Scribe_Values.Look(ref desiredChannel, "desiredChannel");
 		}
 
 		public bool WantsSwitch() {

@@ -13,18 +13,18 @@ namespace RemoteExplosives {
 
 		protected override IEnumerable<Toil> MakeNewToils() {
 			AddFailCondition(JobHasFailed);
-			var explosive = TargetThingA as Building_RemoteExplosive;
-			if (explosive == null) yield break;
+			var switchable = TargetThingA as ISwitchable;
+			if (switchable == null) yield break;
 			yield return Toils_Goto.GotoCell(TargetIndex.A, PathEndMode.Touch);
 			yield return new Toil {
-				initAction = () => explosive.DoSwitch(),
+				initAction = () => switchable.DoSwitch(),
 				defaultCompleteMode = ToilCompleteMode.Instant
 			};
 		}
 
 		private bool JobHasFailed() {
-			var explosive = TargetThingA as Building_RemoteExplosive;
-			return explosive == null || !explosive.Spawned || !explosive.WantsSwitch();
+			var switchable = TargetThingA as ISwitchable;
+			return switchable == null || !TargetThingA.Spawned || !switchable.WantsSwitch();
 		}
 	}
 }

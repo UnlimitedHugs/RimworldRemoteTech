@@ -17,7 +17,7 @@ namespace RemoteExplosives {
 			instance = this;
 		}
 		
-		public void ReportFailue(Fire createdFire) {
+		public void ReportFailure(Fire createdFire) {
 			expireTick = (int) (Find.TickManager.TicksGame + AutoExpireInSeconds*GenTicks.TicksPerRealSecond);
 			wireFire = createdFire;
 		}

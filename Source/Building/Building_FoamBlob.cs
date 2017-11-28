@@ -43,9 +43,9 @@ namespace RemoteExplosives {
 
 		public override void ExposeData() {
 			base.ExposeData();
-			Scribe_Values.Look(ref ticksUntilHardened, "ticksUntilHardened", 0);
-			Scribe_Values.Look(ref numSpreadsLeft, "numSpreadsLeft", 0);
-			Scribe_Values.Look(ref ticksUntilNextSpread, "ticksUntilNextSpread", 0);
+			Scribe_Values.Look(ref ticksUntilHardened, "ticksUntilHardened");
+			Scribe_Values.Look(ref numSpreadsLeft, "numSpreadsLeft");
+			Scribe_Values.Look(ref ticksUntilNextSpread, "ticksUntilNextSpread");
 		}
 
 		public void SetSpreadingCharges(int numCharges) {
@@ -112,11 +112,11 @@ namespace RemoteExplosives {
 			GenPlace.TryPlaceThing(newFoam, targetCell, Map, ThingPlaceMode.Direct);
 		}
 
-		// find a stadable cell that can be reached from the given position. Foam blobs count as traversable.
-		// vanilla closewalk stuff is no good, since foam must spread on an uniterrupted path
+		// find a standable cell that can be reached from the given position. Foam blobs count as traversible.
+		// vanilla closewalk stuff is no good, since foam must spread on an uninterrupted path
 		private IntVec3 TryFindNearestCellForNewBlob(IntVec3 originalPosition, Map map, int maxDistance) {
 			var cellQueue = new Queue<IntVec3>();
-			var visistedCells = new HashSet<IntVec3>();
+			var visitedCells = new HashSet<IntVec3>();
 			cellQueue.Enqueue(originalPosition);
 			while (cellQueue.Count > 0) {
 				var cell = cellQueue.Dequeue();
@@ -126,11 +126,11 @@ namespace RemoteExplosives {
 					return cell;
 				} else if (containsFoam) {
 					foreach (var adjacentCell in GetRandomizedAdjacentCellsCardinalFirst(cell)) {
-						if (Mathf.Sqrt(adjacentCell.DistanceToSquared(originalPosition)) > maxDistance || visistedCells.Contains(adjacentCell)) continue;
+						if (Mathf.Sqrt(adjacentCell.DistanceToSquared(originalPosition)) > maxDistance || visitedCells.Contains(adjacentCell)) continue;
 						cellQueue.Enqueue(adjacentCell);
 					}
 				}
-				visistedCells.Add(cell);
+				visitedCells.Add(cell);
 			}
 			return originalPosition;
 		}

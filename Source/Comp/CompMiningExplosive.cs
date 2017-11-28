@@ -10,7 +10,7 @@ namespace RemoteExplosives {
 	 * An explosive with high power against rocks. Will break rocks within the defined area.
 	 */
 	public class CompMiningExplosive : CompCustomExplosive {
-		private const int MinAffectedCellsToTriggerCaveinSound = 6;
+		private const int MinAffectedCellsToTriggerCaveInSound = 6;
 
 		private List<IntVec3> customArea;
 
@@ -49,7 +49,7 @@ namespace RemoteExplosives {
 					break;
 				}
 			}
-			if (affectedMineables >= MinAffectedCellsToTriggerCaveinSound) {
+			if (affectedMineables >= MinAffectedCellsToTriggerCaveInSound) {
 				Resources.Sound.RemoteMiningCavein.PlayOneShot(new TargetInfo(parentPosition, parentMap));
 			}
 		}
@@ -96,11 +96,11 @@ namespace RemoteExplosives {
 				breakingPowerRemaining -= thing.HitPoints * MiningProps.woodBreakingCost;
 				var tree = (Plant)thing;
 				DamageResourceHolder(tree, explosive.GetStatValue(Resources.Stat.ExplosiveWoodYield));
-				var yeild = tree.YieldNow();
+				var yield = tree.YieldNow();
 				tree.PlantCollected();
-				if (yeild > 0) {
+				if (yield > 0) {
 					var wood = ThingMaker.MakeThing(thing.def.plant.harvestedThingDef);
-					wood.stackCount = yeild;
+					wood.stackCount = yield;
 					GenPlace.TryPlaceThing(wood, thing.Position, map, ThingPlaceMode.Direct);
 				}
 			}

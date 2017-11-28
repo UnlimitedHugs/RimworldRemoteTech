@@ -38,7 +38,7 @@ namespace RemoteExplosives {
 					effectiveRadiusCells.Add(cell);
 				}
 			}
-			if (overheadMountainCells.Count > 0 && Find.Selector.NumSelected <= 1) { // don't draw overlay when multple charges are selected
+			if (overheadMountainCells.Count > 0 && Find.Selector.NumSelected <= 1) { // don't draw overlay when multiple charges are selected
 				GenDraw.DrawFieldEdges(overheadMountainCells, Color.white);
 			}
 			var effectiveRadiusColor = RemoteExplosivesUtility.IsEffectiveRoofBreakerPlacement(effectiveRadius, center, map) ? EffectivePlacementColor : IneffectivePlacementColor;

@@ -37,7 +37,7 @@ namespace RemoteExplosives {
 		}
 
 		public override void PostSpawnSetup(bool respawningAfterLoad) {
-			// cache map&position to allow charges destroyed in mass exposions to still be effective
+			// cache map&position to allow charges destroyed in mass explosions to still be effective
 			base.PostSpawnSetup(respawningAfterLoad);
 			parentMap = parent.Map;
 			parentPosition = parent.Position;
@@ -45,10 +45,10 @@ namespace RemoteExplosives {
 
 		public override void PostExposeData() {
 			base.PostExposeData();
-			Scribe_Values.Look(ref wickStarted, "wickStarted", false);
-			Scribe_Values.Look(ref wickTicksLeft, "wickTicksLeft", 0);
-			Scribe_Values.Look(ref wickTotalTicks, "wickTotalTicks", 0);
-			Scribe_Values.Look(ref wickIsSilent, "wickIsSilent", false);
+			Scribe_Values.Look(ref wickStarted, "wickStarted");
+			Scribe_Values.Look(ref wickTicksLeft, "wickTicksLeft");
+			Scribe_Values.Look(ref wickTotalTicks, "wickTotalTicks");
+			Scribe_Values.Look(ref wickIsSilent, "wickIsSilent");
 		}
 
 		public override void CompTick() {

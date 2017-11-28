@@ -63,7 +63,7 @@ namespace RemoteExplosives {
 						var brain = pawn.health.hediffSet.GetBrain();
 						dinfo = new DamageInfo(DamageDefOf.Crush, 99999, -1f, null, brain);
 					} else {
-						dinfo = new DamageInfo(DamageDefOf.Crush, 99999, -1f);
+						dinfo = new DamageInfo(DamageDefOf.Crush, 99999);
 						dinfo.SetBodyRegion(BodyPartHeight.Top, BodyPartDepth.Outside);
 					}
 					thing.TakeDamage(dinfo);
