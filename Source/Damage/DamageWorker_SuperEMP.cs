@@ -4,13 +4,13 @@ using Verse;
 
 namespace RemoteExplosives {
 	/// <summary>
-	/// Enchanced EMP damage with custom duration and the ability to incapacitate a mechanical pawn at low health
+	/// Enhanced EMP damage with custom duration and the ability to incapacitate a mechanical pawn at low health
 	/// </summary>
 	public class DamageWorker_SuperEMP : DamageWorker {
 
-		public override float Apply(DamageInfo dinfo, Thing victim) {
+		public override DamageResult Apply(DamageInfo dinfo, Thing victim) {
 			var pawn = victim as Pawn;
-			// duplicate vanilla emp behaviour, since the original def is hardcoded
+			// duplicate vanilla emp behavior, since the original def is hardcoded
 			if (pawn != null && !pawn.RaceProps.IsFlesh && !pawn.health.Dead && !pawn.health.Downed) {
 				var empDef = def as SuperEMPDamageDef ?? new SuperEMPDamageDef();
 				if (pawn.stances != null && pawn.stances.stunner != null) {

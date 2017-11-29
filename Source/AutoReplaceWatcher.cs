@@ -17,10 +17,10 @@ namespace RemoteExplosives {
 			public RemoteExplosivesUtility.RemoteChannel channel;
 
 			public void ExposeData() {
-				Scribe_Values.Look(ref position, "position", new IntVec3());
-				Scribe_Values.Look(ref unforbidTick, "unforbidTick", 0);
-				Scribe_Values.Look(ref armed, "armed", false);
-				Scribe_Values.Look(ref channel, "channel", RemoteExplosivesUtility.RemoteChannel.White);
+				Scribe_Values.Look(ref position, "position");
+				Scribe_Values.Look(ref unforbidTick, "unforbidTick");
+				Scribe_Values.Look(ref armed, "armed");
+				Scribe_Values.Look(ref channel, "channel");
 			}
 		}
 

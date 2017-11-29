@@ -29,7 +29,7 @@ namespace RemoteExplosives {
 		}
 
 
-		override internal List<IntVec3> GetAffectedCellsAtPosition(IntVec3 position, float radius) {
+		internal override List<IntVec3> GetAffectedCellsAtPosition(IntVec3 position, float radius) {
 			return GetAffectedCellsSquareAtPosition(position, radius);
 		}
 	}

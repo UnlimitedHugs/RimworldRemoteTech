@@ -29,7 +29,7 @@ namespace RemoteExplosives {
 		}
 
 		public override void DrawLayer() {
-			// perform chack only once per frame, cache result for other visible sections
+			// perform check only once per frame, cache result for other visible sections
 			if (Time.frameCount > lastCachedFrame) {
 				cachedVisible = false;
 				var selectedDesignator = Find.DesignatorManager.SelectedDesignator;

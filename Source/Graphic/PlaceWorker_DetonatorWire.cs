@@ -8,8 +8,8 @@ namespace RemoteExplosives {
 	public class PlaceWorker_DetonatorWire : PlaceWorker {
 		private readonly Type compType = typeof (CompWiredDetonationTransmitter);
 		
-		public override AcceptanceReport AllowsPlacing(BuildableDef checkingDef, IntVec3 loc, Rot4 rot, Thing thingToIgnore = null) {
-			var thingList = loc.GetThingList(Map);
+		public override AcceptanceReport AllowsPlacing(BuildableDef checkingDef, IntVec3 loc, Rot4 rot, Map map, Thing thingToIgnore = null) {
+			var thingList = loc.GetThingList(map);
 			for (var i = 0; i < thingList.Count; i++) {
 				var thingOnTile = thingList[i];
 				if (thingOnTile.def == null) return false;

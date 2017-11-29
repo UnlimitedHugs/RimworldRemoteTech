@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ThingDefs>
+<Defs>
 	
 	<ThingDef Name="BuildingBase" Abstract="True">
 		<category>Building</category>
@@ -41,11 +41,11 @@
 	</ThingDef>
 	
 	<ThingDef ParentName="BuildingBase">
-		<DefName>TableDetonator</DefName>
+		<defName>TableDetonator</defName>
 		<label>remote detonator</label>
-		<ThingClass>RemoteExplosives.Building_DetonatorTable</ThingClass>
-		<Description>A transmitter to detonate armed explosives in range.
-Right-click with a drafted colonist for better timing.</Description>
+		<thingClass>RemoteExplosives.Building_DetonatorTable</thingClass>
+		<description>A transmitter to detonate armed explosives in range.
+Right-click with a drafted colonist for better timing.</description>
 		<graphicData Class="RemoteExplosives.SidedBaseGraphicData">
 			<texPath>detonator_table</texPath>
 			<graphicClass>RemoteExplosives.Graphic_SingleWithBase</graphicClass>
@@ -57,12 +57,12 @@ Right-click with a drafted colonist for better timing.</Description>
 		</graphicData>
 		<castEdgeShadows>true</castEdgeShadows>
 		<staticSunShadowHeight>0.10</staticSunShadowHeight>
-		<CostList>
+		<costList>
 			<Component>2</Component>
 			<Steel>20</Steel>
 			<Silver>10</Silver>
-		</CostList>
-		<AltitudeLayer>Building</AltitudeLayer>
+		</costList>
+		<altitudeLayer>Building</altitudeLayer>
 		<fillPercent>0.5</fillPercent>
 		<useHitPoints>True</useHitPoints>
 		<statBases>
@@ -71,9 +71,9 @@ Right-click with a drafted colonist for better timing.</Description>
 			<Flammability>1.0</Flammability>
 			<Beauty>3</Beauty>
 		</statBases>
-		<Size>(2,1)</Size>
+		<size>(2,1)</size>
 		<constructEffect>ConstructMetal</constructEffect>
-		<Passability>PassThroughOnly</Passability>
+		<passability>PassThroughOnly</passability>
 		<pathCost>60</pathCost>
 		<hasInteractionCell>True</hasInteractionCell>
 		<interactionCellOffset>(1,0,-1)</interactionCellOffset>
@@ -94,11 +94,11 @@ Right-click with a drafted colonist for better timing.</Description>
 	</ThingDef>
 	
 	<ThingDef ParentName="BuildingBase">
-		<DefName>RemoteExplosivesBench</DefName>
+		<defName>RemoteExplosivesBench</defName>
 		<label>explosives workshop</label>
-		<ThingClass>Building_WorkTable</ThingClass>
-		<Description>An electric-powered station equipped for crafting remotely detonated explosives.
-Research different types of remote explosives to unlock available recipes.</Description>
+		<thingClass>Building_WorkTable</thingClass>
+		<description>An electric-powered station equipped for crafting remotely detonated explosives.
+Research different types of remote explosives to unlock available recipes.</description>
 		<graphicData Class="RemoteExplosives.SidedBaseGraphicData">
 			<texPath>explosives_crafting_bench</texPath>
 			<graphicClass>RemoteExplosives.Graphic_SingleWithBase</graphicClass>
@@ -114,13 +114,13 @@ Research different types of remote explosives to unlock available recipes.</Desc
 		</graphicData>
 		<castEdgeShadows>true</castEdgeShadows>
 		<staticSunShadowHeight>0.15</staticSunShadowHeight>
-		<CostList>
+		<costList>
 			<Steel>65</Steel>
 			<Silver>200</Silver>
 			<Component>3</Component>
-		</CostList>
+		</costList>
 		<constructEffect>ConstructMetal</constructEffect>
-		<AltitudeLayer>Building</AltitudeLayer>
+		<altitudeLayer>Building</altitudeLayer>
 		<fillPercent>0.5</fillPercent>
 		<useHitPoints>True</useHitPoints>
 		<statBases>
@@ -129,9 +129,9 @@ Research different types of remote explosives to unlock available recipes.</Desc
 			<Flammability>1.0</Flammability>
 			<Cleanliness>-3</Cleanliness>
 		</statBases>
-		<Size>(3,1)</Size>
+		<size>(3,1)</size>
 		<terrainAffordanceNeeded>Heavy</terrainAffordanceNeeded>
-		<Passability>PassThroughOnly</Passability>
+		<passability>PassThroughOnly</passability>
 		<pathCost>70</pathCost>
 		<hasInteractionCell>True</hasInteractionCell>
 		<interactionCellOffset>(0,0,-1)</interactionCellOffset>
@@ -163,11 +163,11 @@ Research different types of remote explosives to unlock available recipes.</Desc
 	</ThingDef>
 	
 	<ThingDef ParentName="BuildingBase">
-		<DefName>DetonatorManual</DefName>
+		<defName>DetonatorManual</defName>
 		<label>manual detonator</label>
-		<ThingClass>RemoteExplosives.Building_DetonatorManual</ThingClass>
-		<Description>A simple plunger-type detonator. When activated, sends a pulse along the attached detonator wire to all connected explosives, lighting their fuses.
-Right-click with a drafted colonist for better timing.</Description>
+		<thingClass>RemoteExplosives.Building_DetonatorManual</thingClass>
+		<description>A simple plunger-type detonator. When activated, sends a pulse along the attached detonator wire to all connected explosives, lighting their fuses.
+Right-click with a drafted colonist for better timing.</description>
 		<graphicData>
 			<texPath>DetonatorManual</texPath>
 			<graphicClass>RemoteExplosives.Graphic_Variants</graphicClass>
@@ -178,14 +178,14 @@ Right-click with a drafted colonist for better timing.</Description>
 				<offset>(0, 0, -.2)</offset>
 			</shadowData>
 		</graphicData>
-		<CostList>
+		<costList>
 			<WoodLog>30</WoodLog>
 			<Steel>20</Steel>
-		</CostList>
+		</costList>
 		<comps>
 			<li Class="RemoteExplosives.CompProperties_WiredDetonationSender"/>
 		</comps>
-		<AltitudeLayer>Building</AltitudeLayer>
+		<altitudeLayer>Building</altitudeLayer>
 		<fillPercent>0.5</fillPercent>
 		<useHitPoints>True</useHitPoints>
 		<statBases>
@@ -193,21 +193,16 @@ Right-click with a drafted colonist for better timing.</Description>
 			<MaxHitPoints>70</MaxHitPoints>
 			<Flammability>1.0</Flammability>
 		</statBases>
-		<Size>(1,1)</Size>
+		<size>(1,1)</size>
 		<constructEffect>ConstructWood</constructEffect>
-		<Passability>PassThroughOnly</Passability>
+		<passability>PassThroughOnly</passability>
 		<pathCost>30</pathCost>
 		<hasInteractionCell>False</hasInteractionCell>
 		<minifiedDef>MinifiedFurniture</minifiedDef>
 		<researchPrerequisites><li>MakeshiftExplosives</li></researchPrerequisites>
 	</ThingDef>
     
-	<ThingDef ParentName="BuildingBase">
-		<defName>DetonatorWire</defName>
-		<label>detonator wire</label>
-		<description>A special wire used to connect the manual detonator to makeshift explosives, remote explosives and IEDs. Can be placed under walls and other buildings.
-Can fail if used while wet.</description>
-		<ThingClass>RemoteExplosives.Building_DetonatorWire</ThingClass>
+	<ThingDef ParentName="BuildingBase" Name="DetWireBase" Abstract="True">
 		<drawerType>MapMeshOnly</drawerType>
 		<graphicData>
 			<texPath>DetWire/det_wire_Atlas</texPath>
@@ -225,10 +220,12 @@ Can fail if used while wet.</description>
 			<texPath>DetWire/det_wire_blueprint_atlas</texPath>
 		</blueprintGraphicData>
 		<uiIconPath>DetWire/det_wire_icon</uiIconPath>
+		<altitudeLayer>FloorEmplacement</altitudeLayer>
+		<passability>Standable</passability>
+		<leaveResourcesWhenKilled>false</leaveResourcesWhenKilled>
 		<building Class="RemoteExplosives.BuildingProperties_DetonatorWire">
 			<isInert>true</isInert>
 			<isEdifice>false</isEdifice>
-			
 			<failureChanceWhenFullyWet>.015</failureChanceWhenFullyWet>
 			<daysToSelfDry>.8</daysToSelfDry>
 			<baseDryingTemperature>20</baseDryingTemperature>
@@ -236,9 +233,6 @@ Can fail if used while wet.</description>
 			<fireOnFailure>true</fireOnFailure>
 			<dryOffJobDurationTicks>80</dryOffJobDurationTicks>
 		</building>
-		<altitudeLayer>FloorEmplacement</altitudeLayer>
-		<passability>Standable</passability>
-		<leaveResourcesWhenKilled>false</leaveResourcesWhenKilled>
 		<statBases>
 			<MaxHitPoints>80</MaxHitPoints>
 			<WorkToMake>35</WorkToMake>
@@ -246,27 +240,10 @@ Can fail if used while wet.</description>
 			<Beauty>-2</Beauty>
 		</statBases>
 		<placingDraggableDimensions>1</placingDraggableDimensions>
-		<costList>
-			<Steel>1</Steel>
-			<Sparkpowder>1</Sparkpowder>
-		</costList>
 		<resourcesFractionWhenDeconstructed>0</resourcesFractionWhenDeconstructed>
 		<placeWorkers>
 			<li>RemoteExplosives.PlaceWorker_DetonatorWire</li>
 		</placeWorkers>
-		<comps>
-			<li Class="RemoteExplosives.CompProperties_WiredDetonationTransmitter">
-				<signalDelayPerTile>0.8</signalDelayPerTile> <!-- signal delay is calculated by the last transmitter before the receiver -->
-			</li>
-			<li Class="RemoteExplosives.CompProperties_RandomResourceLeaver">
-				<thingDef>Steel</thingDef>
-				<amountRange>
-					<min>0</min>
-					<max>1</max>
-				</amountRange>
-				<requiredDestroyMode>Deconstruct</requiredDestroyMode>
-			</li>
-		</comps>
 		<damageMultipliers>
 			<li>
 				<damageDef>Bomb</damageDef>
@@ -284,7 +261,68 @@ Can fail if used while wet.</description>
 		<rotatable>false</rotatable>
 		<selectable>true</selectable>
 		<neverMultiSelect>true</neverMultiSelect>
-		<researchPrerequisites><li>MakeshiftExplosives</li></researchPrerequisites>
+		<researchPrerequisites>
+			<li>MakeshiftExplosives</li>
+		</researchPrerequisites>
+	</ThingDef>
+	
+	<ThingDef ParentName="DetWireBase">
+		<defName>DetonatorWire</defName>
+		<label>detonator wire</label>
+		<description>A special wire used to connect the manual detonator to makeshift explosives, remote explosives and IEDs. Can be placed under walls and other buildings.
+Can fail if used while wet.</description>
+		<thingClass>RemoteExplosives.Building_DetonatorWire</thingClass>
+		<costList>
+			<Steel>1</Steel>
+			<Sparkpowder>1</Sparkpowder>
+		</costList>
+		<comps>
+			<li Class="RemoteExplosives.CompProperties_WiredDetonationTransmitter">
+				<signalDelayPerTile>0.8</signalDelayPerTile> <!-- signal delay is calculated by the last transmitter before the receiver -->
+			</li>
+			<li Class="RemoteExplosives.CompProperties_RandomResourceLeaver">
+				<thingDef>Steel</thingDef>
+				<amountRange>
+					<min>0</min>
+					<max>1</max>
+				</amountRange>
+				<requiredDestroyMode>Deconstruct</requiredDestroyMode>
+			</li>
+		</comps>
+	</ThingDef>
+	
+	<ThingDef ParentName="DetWireBase">
+		<defName>ImprovedDetonatorWire</defName>
+		<label>improved detonator wire</label>
+		<description>An improved version of the detonator wire for use with the manual detonator. Tougher, fully waterproof, and with a much lower signal transmission delay. 
+Can be placed under walls and other buildings.</description>
+		<thingClass>Building</thingClass>
+		<graphicData>
+			<color>(.61, 0.86, .86)</color>
+		</graphicData>
+		<statBases>
+			<MaxHitPoints>120</MaxHitPoints>
+		</statBases>
+		<costList>
+			<Plasteel>1</Plasteel>
+			<Sparkpowder>1</Sparkpowder>
+		</costList>
+		<comps>
+			<li Class="RemoteExplosives.CompProperties_WiredDetonationTransmitter">
+				<signalDelayPerTile>0.3</signalDelayPerTile>
+			</li>
+			<li Class="RemoteExplosives.CompProperties_RandomResourceLeaver">
+				<thingDef>Plasteel</thingDef>
+				<amountRange>
+					<min>0</min>
+					<max>1</max>
+				</amountRange>
+				<requiredDestroyMode>Deconstruct</requiredDestroyMode>
+			</li>
+		</comps>
+		<researchPrerequisites>
+			<li>ImprovedDetWire</li>
+		</researchPrerequisites>
 	</ThingDef>
 	
 	<!-- Combat explosives -->
@@ -530,9 +568,9 @@ Detonate from the Remote Explosives Console.</description>
 	
 
 	<ThingDef ParentName="RemoteExplosiveBase">
-		<DefName>MiningChargeShaped</DefName>
+		<defName>MiningChargeShaped</defName>
 		<label>shaped charge</label>
-		<Description>A specialized explosive that focuses its power upwards to attempt to break thick overhead mountain roof. It must be applied from the edge of the thick roof to be effective.\n\nThe white overlay shows nearby mountain roof, while the area around the charge is its effective radius. A green outline indicates that the charge is properly placed and will successfully break through the roof.</Description>
+		<description>A specialized explosive that focuses its power upwards to attempt to break thick overhead mountain roof. It must be applied from the edge of the thick roof to be effective.\n\nThe white overlay shows nearby mountain roof, while the area around the charge is its effective radius. A green outline indicates that the charge is properly placed and will successfully break through the roof.</description>
 		<graphicData>
 			<texPath>shaped_charge</texPath>
 			<graphicClass>Graphic_Single</graphicClass>
@@ -540,11 +578,11 @@ Detonate from the Remote Explosives Console.</description>
 				<volume>(.8, 0.5, .45)</volume>
 			</shadowData>
 		</graphicData>
-		<CostList>
+		<costList>
 			<MiningExplosiveComponent>2</MiningExplosiveComponent>
 			<Plasteel>20</Plasteel>
-		</CostList>
-		<AltitudeLayer>Building</AltitudeLayer>
+		</costList>
+		<altitudeLayer>Building</altitudeLayer>
 		<fillPercent>0.5</fillPercent>
 		<useHitPoints>True</useHitPoints>
 		<statBases>
@@ -556,9 +594,9 @@ Detonate from the Remote Explosives Console.</description>
 			<ExplosiveMiningYield>.3</ExplosiveMiningYield>
 			<ExplosiveWoodYield>.1</ExplosiveWoodYield>
 		</statBases>
-		<Size>(1,1)</Size>
+		<size>(1,1)</size>
 		<constructEffect>ConstructMetal</constructEffect>
-		<Passability>PassThroughOnly</Passability>
+		<passability>PassThroughOnly</passability>
 		<pathCost>60</pathCost>
 		<minifiedDef>MinifiedFurniture</minifiedDef>
 		<comps>
@@ -666,4 +704,4 @@ Arm, then detonate from the Remote Explosives Console.</description>
 		</building>
 	</ThingDef>
 	
-</ThingDefs>
+</Defs>

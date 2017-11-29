@@ -3,7 +3,7 @@ using Verse;
 
 namespace RemoteExplosives {
 	/**
-	 * A graphic that can change apprearance between multiple graphics, current variant is specified by IGraphicVariantProvider
+	 * A graphic that can change appearance between multiple graphics, current variant is specified by IGraphicVariantProvider
 	 */
 	public class Graphic_Variants : Graphic_Collection {
 		public override Material MatSingle {

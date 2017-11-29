@@ -32,7 +32,7 @@ namespace RemoteExplosives {
 					anyThickRoofAffected = true;
 					map.roofGrid.SetRoof(cell, null);
 					var roofCell = cell;
-					HugsLibController.Instance.CallbackScheduler.ScheduleCallback(() => { // delay collapse for more interesting visual effect
+					HugsLibController.Instance.TickDelayScheduler.ScheduleCallback(() => { // delay collapse for more interesting visual effect
 						CollapseRockOnCell(roofCell, map);
 						SoundDefOf.RoofCollapse.PlayOneShot(new TargetInfo(roofCell, map));
 					}, CollapseDelay.RandomInRange);
@@ -63,7 +63,7 @@ namespace RemoteExplosives {
 						var brain = pawn.health.hediffSet.GetBrain();
 						dinfo = new DamageInfo(DamageDefOf.Crush, 99999, -1f, null, brain);
 					} else {
-						dinfo = new DamageInfo(DamageDefOf.Crush, 99999, -1f);
+						dinfo = new DamageInfo(DamageDefOf.Crush, 99999);
 						dinfo.SetBodyRegion(BodyPartHeight.Top, BodyPartDepth.Outside);
 					}
 					thing.TakeDamage(dinfo);

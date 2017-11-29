@@ -18,3 +18,4 @@ Version.cpp
 TestCases/bin/
 TestCases/obj/
 build.js
+*.tmp

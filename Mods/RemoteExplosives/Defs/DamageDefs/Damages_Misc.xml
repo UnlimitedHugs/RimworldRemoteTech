@@ -31,6 +31,7 @@
 		<explosionCellMote>Mote_BlastFlame</explosionCellMote>
 		<explosionColorCenter>(1, 0.7, 0.7)</explosionColorCenter>
 		<explosionColorEdge>(1, 1, 0.7)</explosionColorEdge>
+		<combatLogRules>Damage_Flame</combatLogRules>
 		<flameChance>0.2</flameChance>
 	</DamageDef>
 	
@@ -46,9 +47,10 @@
 		<explosionDamage>75</explosionDamage>
 		<explosionSnowMeltAmount>0</explosionSnowMeltAmount>
 		<explosionCellMote>Mote_BlastEMP</explosionCellMote>
-		<explosionColorEdge>(1, 0.5, 0.5, 0.8)</explosionColorEdge>
+		<explosionColorEdge>(0.8, 0.8, 0.8, 0.8)</explosionColorEdge>
 		<explosionInteriorMote>Mote_ElectricalSpark</explosionInteriorMote>
 		<soundExplosion>Explosion_EMP</soundExplosion>
+		<combatLogRules>Damage_EMP</combatLogRules>
 		<incapHealthThreshold>.3</incapHealthThreshold>
 		<incapChance>.3</incapChance>
 	</DamageDef>

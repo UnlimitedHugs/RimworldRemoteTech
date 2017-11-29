@@ -5,7 +5,7 @@ using Verse.Sound;
 
 namespace RemoteExplosives {
 	/* 
-	 * Initates a detonation signal carried by wire when triggered by a colonist.
+	 * Initiates a detonation signal carried by wire when triggered by a colonist.
 	 */
 	public class Building_DetonatorManual : Building, IGraphicVariantProvider, IPawnDetonateable {
 		private static readonly string DetonateButtonLabel = "DetonatorManual_detonate_label".Translate();
@@ -46,7 +46,7 @@ namespace RemoteExplosives {
 		
 		public override void ExposeData() {
 			base.ExposeData();
-			Scribe_Values.Look(ref wantDetonation, "wantDetonation", false);
+			Scribe_Values.Look(ref wantDetonation, "wantDetonation");
 		}
 
 		public override IEnumerable<Gizmo> GetGizmos() {

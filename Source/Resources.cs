@@ -38,6 +38,7 @@ namespace RemoteExplosives {
 			public static JobDef DryDetonatorWire;
 			public static JobDef SwitchRemoteExplosive;
 			public static JobDef DetonateExplosives;
+			public static JobDef SmoothFoamWall;
 		}
 
 		[DefOf]
@@ -65,6 +66,7 @@ namespace RemoteExplosives {
 		public static class Designation {
 			public static DesignationDef RemoteExplosiveSwitch;
 			public static DesignationDef DetonatorWireDryOff;
+			public static DesignationDef FoamWallSmooth;
 		}
 
 		[DefOf]
@@ -116,8 +118,11 @@ namespace RemoteExplosives {
 			public static Texture2D UIDetonatorPortable;
 			public static Texture2D UISelectWire;
 
+			public static readonly Texture2D WallSmoothMenuIcon = ContentFinder<Texture2D>.Get("Things/Building/Linked/WallSmooth_MenuIcon");
+
 			static Textures() {
 				foreach (var fieldInfo in typeof(Textures).GetFields(HugsLibUtility.AllBindingFlags)) {
+					if (fieldInfo.IsInitOnly) continue;
 					fieldInfo.SetValue(null, ContentFinder<Texture2D>.Get(fieldInfo.Name));
 				}
 			}

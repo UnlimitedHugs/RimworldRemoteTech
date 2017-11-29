@@ -8,7 +8,6 @@ namespace RemoteExplosives {
 	 * A designator that selects only detonation wire
 	 */
 	public class Designator_SelectDetonatorWire : Designator {
-		
 		public Designator_SelectDetonatorWire() {
 			hotKey = KeyBindingDefOf.Misc10;
 			icon = Resources.Textures.UISelectWire;
@@ -40,7 +39,7 @@ namespace RemoteExplosives {
 			var contents = Map.thingGrid.ThingsListAt(loc);
 			if (contents != null) {
 				for (int i = 0; i < contents.Count; i++) {
-					if (contents[i] is Building_DetonatorWire) return true;
+					if (IsWire(contents[i])) return true;
 				}
 			}
 			return false;
@@ -60,13 +59,17 @@ namespace RemoteExplosives {
 			TryCloseArchitectMenu();
 		}
 
+		private bool IsWire(Thing t) {
+			return t.def != null && t.def.building is BuildingProperties_DetonatorWire;
+		}
+
 		private void CellDesignate(IntVec3 cell) {
 			var contents = Map.thingGrid.ThingsListAt(cell);
 			var selector = Find.Selector;
 			if (contents != null) {
 				for (int i = 0; i < contents.Count; i++) {
 					var thing = contents[i];
-					if (thing is Building_DetonatorWire && !selector.SelectedObjects.Contains(thing)) {
+					if (IsWire(thing) && !selector.SelectedObjects.Contains(thing)) {
 						selector.SelectedObjects.Add(thing);
 						SelectionDrawer.Notify_Selected(thing);
 					}

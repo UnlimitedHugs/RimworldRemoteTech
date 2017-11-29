@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ThingDefs>
+<Defs>
 
 	<ThingDef Name="BuildingMiscBase" Abstract="True">
 		<category>Building</category>
@@ -12,10 +12,10 @@
 	</ThingDef>
 
 	<ThingDef ParentName="BuildingMiscBase">
-		<DefName>WallFoamBlob</DefName>
+		<defName>WallFoamBlob</defName>
 		<label>chemical foam</label>
-		<ThingClass>RemoteExplosives.Building_FoamBlob</ThingClass>
-		<Description>Becomes tougher than rock as it solidifies.</Description>
+		<thingClass>RemoteExplosives.Building_FoamBlob</thingClass>
+		<description>Becomes tougher than rock as it solidifies.</description>
 		<graphicData>
 			<texPath>foam_blob</texPath>
 			<graphicClass>RemoteExplosives.Graphic_FoamBlob</graphicClass>
@@ -28,7 +28,7 @@
 		</graphicData>
 		<drawerType>RealtimeOnly</drawerType>
 		<castEdgeShadows>false</castEdgeShadows>
-		<AltitudeLayer>Building</AltitudeLayer>
+		<altitudeLayer>Building</altitudeLayer>
 		<fillPercent>0.5</fillPercent>
 		<coversFloor>false</coversFloor>
 		<useHitPoints>True</useHitPoints>
@@ -38,9 +38,9 @@
 			<Flammability>2.0</Flammability>
 			<Beauty>-20</Beauty>
 		</statBases>
-		<Size>(1,1)</Size>
+		<size>(1,1)</size>
 		<constructEffect>ConstructMetal</constructEffect>
-		<Passability>PassThroughOnly</Passability>
+		<passability>PassThroughOnly</passability>
 		<pathCost>230</pathCost>
 		<pathCostIgnoreRepeat>false</pathCostIgnoreRepeat>
 		<tickerType>Normal</tickerType>
@@ -57,18 +57,16 @@
 		</building>
 	</ThingDef>
 
-	<ThingDef ParentName="BuildingMiscBase" Name="FoamWall">
-		<defName>FoamWall</defName>
-		<label>hardened foam wall</label>
+	<ThingDef ParentName="BuildingMiscBase" Abstract="True" Name="FoamWallBase">
 		<thingClass>RemoteExplosives.Building_FoamWall</thingClass>
 		<category>Building</category>
-		<description>Solidified chemical foam. Extremely tough and non-flammable.</description>
 		<graphicData>
 			<texPath>FoamWall</texPath>
-			<graphicClass>Graphic_Appearances</graphicClass>
+			<graphicClass>Graphic_Single</graphicClass>
 			<linkType>CornerFiller</linkType>
 			<linkFlags>
-				<li>Custom1</li>
+				<li>Wall</li>
+				<li>Rock</li>
 			</linkFlags>
 			<damageData>
 				<cornerTL>Damage/Corner</cornerTL>
@@ -102,14 +100,13 @@
 		<tickerType>Never</tickerType>
 		<rotatable>false</rotatable>
 		<selectable>true</selectable>
-		<neverMultiSelect>true</neverMultiSelect>
+		<neverMultiSelect>false</neverMultiSelect>
 		<terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
 		<holdsRoof>true</holdsRoof>
-		<saveCompressible>true</saveCompressible>
+		<saveCompressible>false</saveCompressible>
 		<mineable>true</mineable>
-		<building>
+		<building Class="RemoteExplosives.BuildingProperties_FoamWall">
 			<isInert>true</isInert>
-			<ignoreNeedsPower>true</ignoreNeedsPower>
 			<isNaturalRock>false</isNaturalRock>
 			<canBuildNonEdificesUnder>false</canBuildNonEdificesUnder>
 			<deconstructible>false</deconstructible>
@@ -129,8 +126,51 @@
 				<multiplier>3</multiplier>
 			</li>
 		</damageMultipliers>
-	</ThingDef> 
+	</ThingDef>
+	
+	<ThingDef ParentName="FoamWallBase">
+		<defName>FoamWall</defName>
+		<label>hardened foam wall</label>
+		<description>Solidified chemical foam. Extremely tough and non-flammable.</description>
+		<graphicData>
+			<texPath>FoamWall/foam_wall_Atlas_Smooth</texPath>
+		</graphicData>
+		<statBases>
+			<Beauty>-10</Beauty>
+		</statBases>
+		<building Class="RemoteExplosives.BuildingProperties_FoamWall">
+			<smoothWorkAmount>1000</smoothWorkAmount>
+			<smoothVariants>
+				<li>FoamWallSmooth</li>
+				<li>FoamWallBricks</li>
+			</smoothVariants>
+		</building>
+	</ThingDef>
+	
+	<ThingDef ParentName="FoamWallBase">
+		<defName>FoamWallSmooth</defName>
+		<label>smooth foam wall</label>
+		<description>Solidified chemical foam. Made a bit more presentable by smoothing the surface.</description>
+		<graphicData>
+			<texPath>Things/Building/Linked/Wall/Wall_Atlas_Smooth</texPath>
+		</graphicData>
+		<statBases>
+			<Beauty>0</Beauty>
+		</statBases>
+	</ThingDef>
 
+	<ThingDef ParentName="FoamWallBase">
+		<defName>FoamWallBricks</defName>
+		<label>chiseled foam wall</label>
+		<description>Solidified chemical foam. Made a bit more presentable by carving a brick pattern into the surface.</description>
+		<graphicData>
+			<texPath>Things/Building/Linked/Wall/Wall_Atlas_Bricks</texPath>
+		</graphicData>
+		<statBases>
+			<Beauty>0</Beauty>
+		</statBases>
+	</ThingDef>
+	
 	<ThingDef>
 		<defName>CollapsedRoofRocks</defName>
 		<graphicData>
@@ -173,4 +213,4 @@
 		</building>
 	</ThingDef>
 	
-</ThingDefs>
+</Defs>

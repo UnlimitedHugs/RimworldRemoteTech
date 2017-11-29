@@ -6,7 +6,7 @@ namespace RemoteExplosives {
 	 * A Graphic_Single with scaling support
 	 */
 	public class Graphic_FoamBlob : Graphic_Single {
-		public override void DrawWorker(Vector3 loc, Rot4 rot, ThingDef thingDef, Thing thing) {
+		public override void DrawWorker(Vector3 loc, Rot4 rot, ThingDef thingDef, Thing thing, float extraRotation) {
 			var blob = (Building_FoamBlob)thing;
 			var scaleMultiplier = blob.spriteScaleMultiplier;
 			var meshScale = new Vector2(drawSize.x * scaleMultiplier.x, drawSize.y * scaleMultiplier.y);
@@ -20,7 +20,7 @@ namespace RemoteExplosives {
 			Graphics.DrawMesh(MeshPool.plane10, matrix, material, 0);
 
 			if (ShadowGraphic != null) {
-				ShadowGraphic.DrawWorker(thing.Position.ToVector3(), thing.Rotation, thing.def, thing);
+				ShadowGraphic.DrawWorker(thing.Position.ToVector3(), thing.Rotation, thing.def, thing, extraRotation);
 			}
 		}
 	}

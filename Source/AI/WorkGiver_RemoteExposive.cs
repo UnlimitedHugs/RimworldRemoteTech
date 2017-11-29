@@ -12,19 +12,19 @@ namespace RemoteExplosives {
 		private const PathEndMode pathEndMode = PathEndMode.Touch;
 		
 		public override IEnumerable<Thing> PotentialWorkThingsGlobal(Pawn pawn) {
-			var exposives = pawn.Map.designationManager.SpawnedDesignationsOfDef(Resources.Designation.RemoteExplosiveSwitch);
-			foreach (var exposive in exposives) {
-				yield return exposive.target.Thing;
+			var explosives = pawn.Map.designationManager.SpawnedDesignationsOfDef(Resources.Designation.RemoteExplosiveSwitch);
+			foreach (var explosive in explosives) {
+				yield return explosive.target.Thing;
 			}
 		}
 
 		public override bool HasJobOnThing(Pawn pawn, Thing t, bool forced = false) {
-			if (!(t is Building_RemoteExplosive)) return false;
+			if (!(t is ISwitchable)) return false;
 			return
 				!pawn.Dead
 				&& !pawn.Downed
 				&& !pawn.IsBurning()
-				&& (t as Building_RemoteExplosive).WantsSwitch()
+				&& (t as ISwitchable).WantsSwitch()
 				&& pawn.CanReserveAndReach(t, pathEndMode, Danger.Deadly);
 		}
 
