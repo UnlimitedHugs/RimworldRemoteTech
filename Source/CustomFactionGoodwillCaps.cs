@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using HugsLib.Utils;
 using RimWorld;
+using UnityEngine;
 using Verse;
 
 namespace RemoteExplosives {
@@ -11,6 +12,7 @@ namespace RemoteExplosives {
 	/// </summary>
 	public class CustomFactionGoodwillCaps : UtilityWorldObject {
 		public const float DefaultMinNegativeGoodwill = -100f;
+		public const float NegativeGoodwillCap = -5000f;
 
 		private Dictionary<int, float> goodwillCaps = new Dictionary<int, float>();
 
@@ -20,7 +22,7 @@ namespace RemoteExplosives {
 		}
 
 		public void SetMinNegativeGoodwill(Faction faction, float minGoodwill) {
-			goodwillCaps[faction.loadID] = minGoodwill;
+			goodwillCaps[faction.loadID] = Mathf.Max(NegativeGoodwillCap, minGoodwill);
 		}
 
 		public float GetMinNegativeGoodwill(Faction faction) {
