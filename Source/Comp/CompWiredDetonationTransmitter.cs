@@ -21,34 +21,34 @@ namespace RemoteExplosives {
 			PrintConnection(layer);
 		}
 
-		public void RecieveSignal(int signalId, int sinalSteps) {
+		public void ReceiveSignal(int signalId, int signalSteps) {
 			if (signalId == lastSignalId) return;
 			if (signalPassageTest != null && !signalPassageTest()) return;
 			lastSignalId = signalId;
-			PassSignalToReceivers(sinalSteps);
-			ConductSignalToNeighbours(signalId, sinalSteps);
+			PassSignalToReceivers(signalSteps);
+			ConductSignalToNeighbors(signalId, signalSteps);
 		}
 
-		private void PassSignalToReceivers(int sinalSteps) {
+		private void PassSignalToReceivers(int signalSteps) {
 			if (parent.Map == null) throw new Exception("null map");
-			var delayOnThisTile = Mathf.RoundToInt(sinalSteps * CustomProps.signalDelayPerTile);
+			var delayOnThisTile = Mathf.RoundToInt(signalSteps * CustomProps.signalDelayPerTile);
 			var thingsOnTile = parent.Map.thingGrid.ThingsListAtFast(parent.Position);
 			for (var i = 0; i < thingsOnTile.Count; i++) {
 				var comp = thingsOnTile[i].TryGetComp<CompWiredDetonationReceiver>();
 				if (comp == null) continue;
-				comp.RecieveSignal(delayOnThisTile);
+				comp.ReceiveSignal(delayOnThisTile);
 			}
 		}
 
-		private void ConductSignalToNeighbours(int signalId, int sinalSteps) {
+		private void ConductSignalToNeighbors(int signalId, int signalSteps) {
 			if (parent.Map == null) throw new Exception("null map");
-			var neighbours = GenAdj.CardinalDirectionsAround;
-			for (var i = 0; i < neighbours.Length; i++) {
-				var tileThings = parent.Map.thingGrid.ThingsListAtFast(neighbours[i] + parent.Position);
+			var neighbors = GenAdj.CardinalDirectionsAround;
+			for (var i = 0; i < neighbors.Length; i++) {
+				var tileThings = parent.Map.thingGrid.ThingsListAtFast(neighbors[i] + parent.Position);
 				for (int j = 0; j < tileThings.Count; j++) {
 					var comp = tileThings[j].TryGetComp<CompWiredDetonationTransmitter>();
 					if (comp == null) continue;
-					comp.RecieveSignal(signalId, sinalSteps+1);
+					comp.ReceiveSignal(signalId, signalSteps+1);
 				}
 			}
 		}

@@ -16,15 +16,17 @@ namespace RemoteExplosives {
 
 		public override void ExposeData() {
 			base.ExposeData();
-			Scribe_Values.Look(ref workLeft, "workLeft", 0f);
+			Scribe_Values.Look(ref workLeft, "workLeft");
+		}
+
+		public override bool TryMakePreToilReservations() {
+			return pawn.Reserve(job.GetTarget(TableInd), job) && pawn.Reserve(job.GetTarget(ComponentInd), job);
 		}
 
 		protected override IEnumerable<Toil> MakeNewToils() {
 			AddFailCondition(JobHasFailed);
 			var table = TargetThingA as Building_DetonatorTable;
 			if(table == null) yield break;
-			yield return Toils_Reserve.Reserve(TableInd);
-			yield return Toils_Reserve.Reserve(ComponentInd);
 			yield return Toils_Goto.GotoCell(ComponentInd, PathEndMode.Touch);
 			yield return Toils_Haul.StartCarryThing(ComponentInd);
 			yield return Toils_Goto.GotoCell(TableInd, PathEndMode.InteractionCell);
@@ -40,7 +42,7 @@ namespace RemoteExplosives {
 					if (table.WantChannelsComponent) {
 						table.InstallChannelsComponent();
 					}
-					Map.reservationManager.Release(TargetThingB, GetActor());
+					Map.reservationManager.Release(TargetThingB, pawn, job);
 					TargetThingB.Destroy();
 					ReadyForNextToil();
 				}
@@ -49,7 +51,6 @@ namespace RemoteExplosives {
 			toil.WithProgressBar(TargetIndex.A, () => 1f - workLeft / InstallWorkAmount);
 			toil.defaultCompleteMode = ToilCompleteMode.Never;
 			yield return toil;
-			yield return Toils_Reserve.Release(TableInd);
 		}
 
 		private bool JobHasFailed() {

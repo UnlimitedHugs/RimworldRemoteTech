@@ -1,4 +1,5 @@
 ﻿using System;
+using HugsLib.Utils;
 using RimWorld;
 using UnityEngine;
 using Verse;
@@ -9,7 +10,7 @@ namespace RemoteExplosives {
 	 * Supports apparel that will negate this effect.
 	 */
 	public class GasCloud_HediffGiver : GasCloud {
-		private const int IncapGoodwillPenalty = 20;
+		private const int IncapGoodwillPenalty = 20; // successful map exit gain is 15
 		private const int KillGoodwillPenalty = 50;
 
 		private MoteProperties_GasCloud_HediffGiver gasProps;
@@ -34,12 +35,21 @@ namespace RemoteExplosives {
 				// this should be refactored into applyDamage somehow, but for now this will do
 				if (pawn.Faction != null && pawn.Faction != Faction.OfPlayer) {
 					if (pawn.Dead) {
-						pawn.Faction.AffectGoodwillWith(Faction.OfPlayer, -KillGoodwillPenalty);
+						ApplyGoodwillPenalty(pawn.Faction, KillGoodwillPenalty);
 					} else if (!wasDowned && pawn.Downed) {
-						pawn.Faction.AffectGoodwillWith(Faction.OfPlayer, -IncapGoodwillPenalty);	
+						ApplyGoodwillPenalty(pawn.Faction, IncapGoodwillPenalty);
 					}
 				}
 			}
+		}
+
+		private void ApplyGoodwillPenalty(Faction faction, int goodwillLoss) {
+			var goodwillBefore = faction.PlayerGoodwill;
+			// ensure that faction goodwill drops below the usual cap- relevant when gassing large groups
+			if (goodwillBefore - goodwillLoss < CustomFactionGoodwillCaps.DefaultMinNegativeGoodwill) {
+				UtilityWorldObjectManager.GetUtilityWorldObject<CustomFactionGoodwillCaps>().SetMinNegativeGoodwill(faction, goodwillBefore - goodwillLoss);	
+			}
+			faction.AffectGoodwillWith(Faction.OfPlayer, -goodwillLoss);
 		}
 
 		private bool PawnHasImmunizingApparel(Pawn pawn) {

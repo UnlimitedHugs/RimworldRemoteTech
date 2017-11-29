@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using Harmony;
@@ -111,17 +112,20 @@ namespace RemoteExplosives {
 		 * Add comps to vanilla IED's so that they can be triggered by the manual detonator
 		 */
 		private void InjectVanillaExplosivesComps() {
-			var ieds = new[] {
-				GetDefWithWarning("TrapIEDBomb"),
-				GetDefWithWarning("TrapIEDIncendiary"),
-				GetDefWithWarning("FirefoamPopper")
-			};
-			foreach (var thingDef in ieds) {
-				if (thingDef == null) continue;
-				thingDef.comps.Add(new CompProperties_WiredDetonationReceiver());
-				thingDef.comps.Add(new CompProperties_AutoReplaceable());
+			try {
+				var ieds = new List<ThingDef> {
+					GetDefWithWarning("FirefoamPopper")
+				};
+				ieds.AddRange(DefDatabase<ThingDef>.AllDefs.Where(d => d != null && d.thingClass == typeof(Building_TrapExplosive)));
+				foreach (var thingDef in ieds) {
+					if (thingDef == null) continue;
+					thingDef.comps.Add(new CompProperties_WiredDetonationReceiver());
+					thingDef.comps.Add(new CompProperties_AutoReplaceable());
+				}
+				ThingDefOf.PassiveCooler.comps.Add(new CompProperties_AutoReplaceable {applyOnVanish = true});
+			} catch (Exception e) {
+				Logger.Error("Exception while injecting comps into defs: " + e);
 			}
-
 		}
 
 		private ThingDef GetDefWithWarning(string defName) {
@@ -141,7 +145,7 @@ namespace RemoteExplosives {
 		private RecipeDef TryMakeRecipeVariantWithSteel(RecipeDef recipeOriginal) {
 			var recipeCopy = (RecipeDef) objectCloneMethod.Invoke(recipeOriginal, null);
 			recipeCopy.shortHash = 0;
-			InjectedDefHasher.GiveShortHasToDef(recipeCopy, typeof(RecipeDef));
+			InjectedDefHasher.GiveShortHashToDef(recipeCopy, typeof(RecipeDef));
 			recipeCopy.defName += RemoteExplosivesUtility.InjectedRecipeNameSuffix;
 
 			var newFixedFilter = new ThingFilter();

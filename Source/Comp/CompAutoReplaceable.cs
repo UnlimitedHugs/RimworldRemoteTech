@@ -22,7 +22,7 @@ namespace RemoteExplosives {
 
 		public override void PostExposeData() {
 			base.PostExposeData();
-			Scribe_Values.Look(ref autoReplaceEnabled, "enabled", false);
+			Scribe_Values.Look(ref autoReplaceEnabled, "enabled");
 			if (Scribe.mode == LoadSaveMode.LoadingVars) wasLoaded = true;
 		}
 
@@ -39,7 +39,9 @@ namespace RemoteExplosives {
 
 		public override void PostDestroy(DestroyMode mode, Map map) {
 			base.PostDestroy(mode, map);
-			if (AutoReplaceEnabled && mode == DestroyMode.KillFinalize) {
+			var replaceProps = props as CompProperties_AutoReplaceable;
+			var applyOnVanish = replaceProps != null ? replaceProps.applyOnVanish : false;
+			if (AutoReplaceEnabled && (mode == DestroyMode.KillFinalize || (applyOnVanish && mode == DestroyMode.Vanish))) {
 				map.GetComponent<MapComponent_RemoteExplosives>().ReplaceWatcher.ScheduleReplacement(this);
 			}
 		}

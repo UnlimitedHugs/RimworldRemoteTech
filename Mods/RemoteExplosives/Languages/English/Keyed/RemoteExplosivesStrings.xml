@@ -17,7 +17,7 @@
 	<RemoteExplosive_detonatorChannelChanger_desc>Sets the channel of the detonator. Only explosives on the same channel can be detonated.</RemoteExplosive_detonatorChannelChanger_desc>
 	
 	<RemoteExplosive_autoReplace_label>Auto replace</RemoteExplosive_autoReplace_label>
-	<RemoteExplosive_autoReplace_desc>If enabled, this explosive will be automatically re-placed after being detonated.</RemoteExplosive_autoReplace_desc>
+	<RemoteExplosive_autoReplace_desc>If enabled, this building will be automatically re-placed after being destroyed.</RemoteExplosive_autoReplace_desc>
 	
 	
 	<RemoteExplosive_channel0>White</RemoteExplosive_channel0>
@@ -36,6 +36,8 @@
 	<FoamBlob_solidify_progress>Solidifying: {0}%</FoamBlob_solidify_progress>
 	
 	<FoamWall_contents>Contents: {0}</FoamWall_contents>
+	<FoamWall_smoothAction_label>Smooth</FoamWall_smoothAction_label>
+	<FoamWall_smoothAction_desc>Smooth this wall to make it more presentable and usable as an interior wall.</FoamWall_smoothAction_desc>
 	
 	<GasCloud_concentration_label>Concentration: {0}</GasCloud_concentration_label>
 	

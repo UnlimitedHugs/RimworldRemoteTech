@@ -50,8 +50,8 @@ namespace RemoteExplosives {
 
 		public override void ExposeData() {
 			base.ExposeData();
-			Scribe_Values.Look(ref wetness, "wetness", 0);
-			Scribe_Values.Look(ref wantDrying, "wantDrying", false);
+			Scribe_Values.Look(ref wetness, "wetness");
+			Scribe_Values.Look(ref wantDrying, "wantDrying");
 		}
 
 		public override void TickRare() {
@@ -137,7 +137,7 @@ namespace RemoteExplosives {
 				created = map.thingGrid.ThingAt<Fire>(candidatePos);
 				if (created != null) break;
 			}
-			Alert_DetonatorWireFailure.Instance.ReportFailue(created);
+			Alert_DetonatorWireFailure.Instance.ReportFailure(created);
 		}
 
 		private void UpdateDesignation() {

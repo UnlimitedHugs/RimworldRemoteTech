@@ -20,9 +20,9 @@ namespace RemoteExplosives {
 			}
 		}
 
-		public override void DrawWorker(Vector3 loc, Rot4 rot, ThingDef thingDef, Thing thing) {
+		public override void DrawWorker(Vector3 loc, Rot4 rot, ThingDef thingDef, Thing thing, float extraRotation) {
 			if (baseData == null) {
-				base.DrawWorker(loc, rot, thingDef, thing);
+				base.DrawWorker(loc, rot, thingDef, thing, extraRotation);
 				return;
 			}
 			
@@ -37,7 +37,7 @@ namespace RemoteExplosives {
 			var material = MatAt(rot, thing);
 			Graphics.DrawMesh(mesh, loc, rotation, material, 0);
 			if (ShadowGraphic != null) {
-				ShadowGraphic.DrawWorker(loc, rot, thingDef, thing);
+				ShadowGraphic.DrawWorker(loc, rot, thingDef, thing, extraRotation);
 			}
 		}
 

@@ -8,7 +8,7 @@ namespace RemoteExplosives {
 	public class Graphic_GasCloud : Graphic_Collection {
 		private const float DistinctAlphaLevels = 128f;
 
-		public override void DrawWorker(Vector3 loc, Rot4 rot, ThingDef thingDef, Thing thing) {
+		public override void DrawWorker(Vector3 loc, Rot4 rot, ThingDef thingDef, Thing thing, float extraRotation) {
 			var cloud = (GasCloud)thing;
 			// round alpha to avoid creating too many new materials
 			var alpha = Mathf.Round(cloud.spriteAlpha * DistinctAlphaLevels) / DistinctAlphaLevels;

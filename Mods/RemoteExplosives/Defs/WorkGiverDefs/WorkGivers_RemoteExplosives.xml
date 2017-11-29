@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<WorkGivers>
+<Defs>
 	
 	<WorkGiverDef>
 		<defName>DetonateExplosives</defName>
@@ -78,5 +78,19 @@
 		</requiredCapacities>
 		<prioritizeSustains>true</prioritizeSustains>
 	</WorkGiverDef>
+	
+	<WorkGiverDef>
+		<defName>SmoothFoamWall</defName>
+		<label>smooth foam wall</label>
+		<giverClass>RemoteExplosives.WorkGiver_FoamWall</giverClass>
+		<workType>Construction</workType>
+		<priorityInType>8</priorityInType>
+		<verb>smooth foam wall</verb>
+		<gerund>smoothing</gerund>
+		<requiredCapacities>
+			<li>Manipulation</li>
+		</requiredCapacities>
+		<prioritizeSustains>true</prioritizeSustains>
+	</WorkGiverDef>
 
-</WorkGivers>
+</Defs>

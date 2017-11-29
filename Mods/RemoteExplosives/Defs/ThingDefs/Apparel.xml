@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ThingDefs>
+<Defs>
 
 	<ThingDef Name="ApparelBase" Abstract="True">
 		<thingClass>Apparel</thingClass>
@@ -83,7 +83,7 @@ The filters wear out fairly quickly, so it's recommended to wear this only when 
 			<bodyPartGroups>
 				<li>FullHead</li>
 			</bodyPartGroups>
-			<worngraphicPath>GasMask/GasMask</worngraphicPath>
+			<wornGraphicPath>GasMask/GasMask</wornGraphicPath>
 			<layers>
 				<li>Overhead</li>
 			</layers>
@@ -162,4 +162,4 @@ Works only on the white channel, has limited range and runs on a non-rechargeabl
 		</apparel>
 	</ThingDef>
 
-</ThingDefs>
+</Defs>
