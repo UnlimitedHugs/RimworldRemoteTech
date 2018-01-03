@@ -29,7 +29,6 @@ namespace RemoteExplosives {
 		public override void PostSpawnSetup(bool respawningAfterLoad) {
 			base.PostSpawnSetup(respawningAfterLoad);
 			if(parent.def == null || parent.def.category!= ThingCategory.Building) throw new Exception("CompAutoReplaceable used on non-building");
-			if(parent.def.MadeFromStuff) throw new Exception("Buildings made from Stuff not supported for auto-replacement");
 			ParentPosition = parent.Position;
 			ParentRotation = parent.Rotation;
 			if (!wasLoaded) {

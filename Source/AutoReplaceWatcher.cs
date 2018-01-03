@@ -34,7 +34,12 @@ namespace RemoteExplosives {
 
 		public void ScheduleReplacement(CompAutoReplaceable replaceableComp) {
 			var building = replaceableComp.parent;
-			var blueprint = GenConstruct.PlaceBlueprintForBuild(building.def, replaceableComp.ParentPosition, map, replaceableComp.ParentRotation, Faction.OfPlayer, null);
+			if (building == null || building.def == null) return;
+			if (building.Stuff == null && building.def.MadeFromStuff) {
+				RemoteExplosivesController.Instance.Logger.Warning("Could not schedule {0} auto-replacement due to Stuff discrepancy.", building);
+				return;
+			}
+			var blueprint = GenConstruct.PlaceBlueprintForBuild(building.def, replaceableComp.ParentPosition, map, replaceableComp.ParentRotation, Faction.OfPlayer, building.Stuff);
 			var entry = new ReplacementEntry {
 				position = replaceableComp.ParentPosition,
 				unforbidTick = Find.TickManager.TicksGame + RemoteExplosivesController.Instance.BlueprintForbidDuration * GenTicks.TicksPerRealSecond
