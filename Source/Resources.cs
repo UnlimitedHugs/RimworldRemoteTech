@@ -48,6 +48,7 @@ namespace RemoteExplosives {
 			public static ThingDef Gas_Sleeping;
 			public static ThingDef FoamWallSmooth;
 			public static ThingDef FoamWallBricks;
+			public static ThingDef PlantSparkweed;
 		}
 
 		[DefOf]
