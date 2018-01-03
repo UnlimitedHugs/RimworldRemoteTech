@@ -46,6 +46,8 @@ namespace RemoteExplosives {
 			public static ThingDef TableDetonator;
 			public static ThingDef CollapsedRoofRocks;
 			public static ThingDef Gas_Sleeping;
+			public static ThingDef FoamWallSmooth;
+			public static ThingDef FoamWallBricks;
 		}
 
 		[DefOf]
