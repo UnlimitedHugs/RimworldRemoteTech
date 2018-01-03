@@ -50,6 +50,15 @@ namespace RemoteExplosives {
 			InjectVanillaExplosivesComps();
 			GetSettingsHandles();
 			PrepareReflection();
+			RemoveFoamWallsFromMeteoritePool();
+		}
+
+		private void RemoveFoamWallsFromMeteoritePool() {
+			// smoothed foam walls are mineable, but should not appear in a meteorite drop
+			ItemCollectionGenerator_Meteorite.mineables.Remove(Resources.Thing.FoamWallSmooth);
+			ItemCollectionGenerator_Meteorite.mineables.Remove(Resources.Thing.FoamWallBricks);
+			// same for our passable collapsed rock
+			ItemCollectionGenerator_Meteorite.mineables.Remove(Resources.Thing.CollapsedRoofRocks);
 		}
 
 		private void PrepareReflection() {

@@ -35,7 +35,7 @@ namespace RemoteExplosives {
 		public void ScheduleReplacement(CompAutoReplaceable replaceableComp) {
 			var building = replaceableComp.parent;
 			if (building == null || building.def == null) return;
-			if (building.Stuff == null && building.def.MadeFromStuff) {
+			if ((building.Stuff == null && building.def.MadeFromStuff) || (building.Stuff != null && !building.def.MadeFromStuff)) {
 				RemoteExplosivesController.Instance.Logger.Warning("Could not schedule {0} auto-replacement due to Stuff discrepancy.", building);
 				return;
 			}
