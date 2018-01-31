@@ -21,12 +21,10 @@ namespace RemoteExplosives {
 		private int lastActivationTick; // prevents unintended double activations
 
 		private int numUsesLeft;
-		
-		public override void SpawnSetup(Map map, bool respawningAfterLoad) {
-			base.SpawnSetup(map, respawningAfterLoad);
-			if (!respawningAfterLoad) {
-				numUsesLeft = MaxNumUses;
-			}
+
+		public override void PostMake() {
+			base.PostMake();
+			numUsesLeft = MaxNumUses;
 		}
 
 		public override void ExposeData() {
