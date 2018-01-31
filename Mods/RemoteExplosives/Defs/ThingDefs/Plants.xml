@@ -85,6 +85,9 @@ It is cultivated as a source of low-grade explosive and gunpowder.
 		<ignitePlantChance>.65</ignitePlantChance>
 		<ignitePawnChance>.1</ignitePawnChance>
 		<igniteEffecter>SparkweedIgnite</igniteEffecter>
+		<ignitionSuppressorThings>
+			<li>FilthFireFoam</li>
+		</ignitionSuppressorThings>
 	</ThingDef>
 
 </Defs>
