@@ -77,6 +77,20 @@ While expensive, they can be devastating against mechanoids when properly used.<
 		<researchViewX>2</researchViewX>
 		<researchViewY>2</researchViewY>
 	</ResearchProjectDef>
+
+	<ResearchProjectDef ParentName="ProjectBase">
+		<defName>RemoteRoofBreaking</defName>
+		<label>Mountain Roof Removal</label>
+		<description>The destructive power of mining explosives can be focused using strong composite materials. When aimed upwards, this allows to break even through thick mountain roof, as long as the charge is properly positioned.
+Allows the Shaped Charge to be built.</description>
+		<baseCost>1000</baseCost>
+		<techLevel>Industrial</techLevel>
+		<prerequisites>
+			<li>RemoteDetonator</li>
+		</prerequisites>
+		<researchViewX>2</researchViewX>
+		<researchViewY>3</researchViewY>
+	</ResearchProjectDef>
 	
 	<ResearchProjectDef ParentName="ProjectBase">
 		<defName>RemoteChemicals</defName>
@@ -90,20 +104,20 @@ Use in enclosed areas for best results.</description>
 			<li>RemoteDetonator</li>
 		</prerequisites>
 		<researchViewX>2</researchViewX>
-		<researchViewY>3</researchViewY>
+		<researchViewY>4</researchViewY>
 	</ResearchProjectDef>
 	
 	<ResearchProjectDef ParentName="ProjectBase">
-		<defName>RemoteRoofBreaking</defName>
-		<label>Mountain Roof Removal</label>
-		<description>The destructive power of mining explosives can be focused using strong composite materials. When aimed upwards, this allows to break even through thick mountain roof, as long as the charge is properly positioned.
-Allows the Shaped Charge to be built.</description>
-		<baseCost>1000</baseCost>
+		<defName>RemoteGasVent</defName>
+		<label>Gas Vent</label>
+		<description>While sleeping gas is a powerful tool, it can be difficult to move once deployed. The gas vent comes to the rescue- it allows to push gas between rooms and can be used to create gas distribution pathways.
+Allows the Gas Vent to be built.</description>
+		<baseCost>800</baseCost>
 		<techLevel>Industrial</techLevel>
 		<prerequisites>
-			<li>RemoteDetonator</li>
+			<li>RemoteChemicals</li>
 		</prerequisites>
-		<researchViewX>2</researchViewX>
+		<researchViewX>3</researchViewX>
 		<researchViewY>4</researchViewY>
 	</ResearchProjectDef>
 	

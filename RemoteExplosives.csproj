@@ -56,6 +56,9 @@
     <Compile Include="Source\AI\WorkGiver_FoamWall.cs" />
     <Compile Include="Source\AI\JobDriver_SmoothFoamWall.cs" />
     <Compile Include="Source\Building\BuildingProperties_FoamWall.cs" />
+    <Compile Include="Source\Building\BuildingProperties_GasVent.cs" />
+    <Compile Include="Source\Building\Building_GasVent.cs" />
+    <Compile Include="Source\Building\PlaceWorker_GasVent.cs" />
     <Compile Include="Source\CustomFactionGoodwillCaps.cs" />
     <Compile Include="Source\Damage\DamageWorker_SuperEMP.cs" />
     <Compile Include="Source\Damage\SuperEMPDamageDef.cs" />

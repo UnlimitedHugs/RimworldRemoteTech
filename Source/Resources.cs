@@ -120,6 +120,7 @@ namespace RemoteExplosives {
 			public static Texture2D UIChannel2;
 			public static Texture2D UIDetonatorPortable;
 			public static Texture2D UISelectWire;
+			public static Texture2D gas_vent_arrow;
 
 			public static readonly Texture2D WallSmoothMenuIcon = ContentFinder<Texture2D>.Get("Things/Building/Linked/WallSmooth_MenuIcon");
 

@@ -76,4 +76,6 @@
 	<Setting_autoArmMining_desc>When enabled, mining explosives will be automatically armed when they are deployed.</Setting_autoArmMining_desc>
 	<Setting_autoArmUtility_label>Auto-arm utility explosives</Setting_autoArmUtility_label>
 	<Setting_autoArmUtility_desc>When enabled, utility explosives will be automatically armed when they are deployed.</Setting_autoArmUtility_desc>
+	
+	<GasVent_blocked>Blocked</GasVent_blocked>
 </LanguageData>
