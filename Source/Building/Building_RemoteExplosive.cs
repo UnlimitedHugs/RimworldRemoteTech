@@ -6,6 +6,10 @@ using Verse;
 using Verse.Sound;
 
 namespace RemoteExplosives {
+	public enum RemoteExplosiveType {
+		Combat, Mining, Utility
+	}
+
 	/* 
 	 * The base class for all wireless remote explosives.
 	 * Requires a CompCustomExplosive to work correctly. Can be armed and assigned to a channel.
@@ -72,7 +76,9 @@ namespace RemoteExplosives {
 			if (replaceComp != null) replaceComp.DisableGizmoAutoDisplay();
 			
 			if (justCreated) {
-				if (CustomProps.startsArmed) {
+				if (CustomProps.explosiveType == RemoteExplosiveType.Combat && RemoteExplosivesController.Instance.SettingAutoArmCombat ||
+					CustomProps.explosiveType == RemoteExplosiveType.Mining && RemoteExplosivesController.Instance.SettingAutoArmMining ||
+					CustomProps.explosiveType == RemoteExplosiveType.Utility && RemoteExplosivesController.Instance.SettingAutoArmUtility) {
 					Arm();
 				}
 				justCreated = false;

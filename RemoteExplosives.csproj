@@ -61,6 +61,8 @@
     <Compile Include="Source\Damage\SuperEMPDamageDef.cs" />
     <Compile Include="Source\Patches\Faction_AffectGoodwillWith_Patch.cs" />
     <Compile Include="Source\Patches\CultivatedPlants_DeterminePlantDef_Patch.cs" />
+    <Compile Include="Source\Patches\GenLeaving_GetLeaveCalculator_Patch.cs" />
+    <Compile Include="Source\Thing\FullDeconstructionRefund.cs" />
     <Compile Include="Source\UI\Alert_DetonatorWireFailure.cs" />
     <Compile Include="Source\AutoReplaceWatcher.cs" />
     <Compile Include="Source\Building\BuildingProperties_DetonatorWire.cs" />

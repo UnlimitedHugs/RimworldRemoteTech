@@ -53,11 +53,15 @@ namespace RemoteExplosives {
 			if(Growth<CustomDef.minimumIgnitePlantGrowth) return;
 			var doEffects = false;
 			if (Rand.Range(0f, 1f) < CustomDef.ignitePlantChance) {
-				FireUtility.TryStartFireIn(Position, Map, Rand.Range(0.15f, 0.4f));
+				if (!BlockedByIgnitionSuppressor()) {
+					FireUtility.TryStartFireIn(Position, Map, Rand.Range(0.15f, 0.4f));
+				}
 				doEffects = true;
 			}
 			if (Rand.Range(0f, 1f) < CustomDef.ignitePawnChance) {
-				pawn.TryAttachFire(Rand.Range(0.15f, 0.25f));
+				if (!BlockedByIgnitionSuppressor()) {
+					pawn.TryAttachFire(Rand.Range(0.15f, 0.25f));
+				}
 				doEffects = true;
 			}
 			if (doEffects) {
@@ -65,5 +69,20 @@ namespace RemoteExplosives {
 			}
 		}
 
+		private bool BlockedByIgnitionSuppressor() {
+			var thingsInCell = Map.thingGrid.ThingsListAt(Position);
+			for (var i = 0; i < thingsInCell.Count; i++) {
+				var thing = thingsInCell[i];
+				if (CustomDef.ignitionSuppressorThings.Contains(thing.def)) {
+					// degrade firefoam
+					var filth = thing as Filth;
+					if (filth != null) {
+						filth.ThinFilth();
+					}
+					return true;
+				}
+			}
+			return false;
+		}
 	}
 }

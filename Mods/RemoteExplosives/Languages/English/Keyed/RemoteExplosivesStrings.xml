@@ -70,4 +70,10 @@
 	<Setting_forbidReplaced_desc>When enabled, automatically placed blueprints will stay forbidden for a given number of seconds to keep colonists out of danger.</Setting_forbidReplaced_desc>
 	<Setting_forbidTimeout_label>Blueprints forbidden time</Setting_forbidTimeout_label>
 	<Setting_forbidTimeout_desc>How long an auto-replaced blueprint should stay forbidden (in seconds).</Setting_forbidTimeout_desc>
+	<Setting_autoArmCombat_label>Auto-arm combat explosives</Setting_autoArmCombat_label>
+	<Setting_autoArmCombat_desc>When enabled, combat explosives will be automatically armed when they are deployed.</Setting_autoArmCombat_desc>
+	<Setting_autoArmMining_label>Auto-arm mining explosives</Setting_autoArmMining_label>
+	<Setting_autoArmMining_desc>When enabled, mining explosives will be automatically armed when they are deployed.</Setting_autoArmMining_desc>
+	<Setting_autoArmUtility_label>Auto-arm utility explosives</Setting_autoArmUtility_label>
+	<Setting_autoArmUtility_desc>When enabled, utility explosives will be automatically armed when they are deployed.</Setting_autoArmUtility_desc>
 </LanguageData>
