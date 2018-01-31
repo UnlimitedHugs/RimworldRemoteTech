@@ -23,14 +23,14 @@ Once researched:
 	
 	<ResearchProjectDef ParentName="ProjectBase">
 		<defName>ImprovedDetWire</defName>
-		<label>Improved detonator wire</label>
+		<label>Improved Detonator Wire</label>
 		<description>Unlocks the improved detonator wire. Fully waterproof, and with much faster signal transmission.</description>
 		<baseCost>500</baseCost>
 		<techLevel>Industrial</techLevel>
 		<prerequisites>
 			<li>MakeshiftExplosives</li>
 		</prerequisites>
-		<researchViewX>0</researchViewX>
+		<researchViewX>1</researchViewX>
 		<researchViewY>3.5</researchViewY>
 	</ResearchProjectDef>
 
