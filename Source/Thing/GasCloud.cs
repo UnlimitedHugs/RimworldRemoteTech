@@ -33,6 +33,8 @@ namespace RemoteExplosives {
 		public float spriteRotation;
 		public int relativeZOrder; // to avoid z fighting among clouds
 		private MoteProperties_GasCloud gasProps;
+		private string cachedMouseoverLabel;
+		private float mouseoverLabelCacheTime;
 		
 		private float interpolatedAlpha;
 		private readonly InterpolatedValue interpolatedOffsetX;
@@ -124,7 +126,21 @@ namespace RemoteExplosives {
 		public override string GetInspectString() {
 			return string.Format(ConcentrationLabelId.Translate(), string.Format("{0:n0}", concentration));
 		}
-		
+
+		public override string LabelMouseover {
+			get {
+				if (cachedMouseoverLabel == null || mouseoverLabelCacheTime < Time.realtimeSinceStartup - .5f) {
+					if (concentration >= 1000) {
+						cachedMouseoverLabel = string.Format("{0} ({1:F1}K)", LabelCap, concentration / 1000);
+					} else {
+						cachedMouseoverLabel = string.Format("{0} ({1:F0})", LabelCap, concentration);
+					}
+					mouseoverLabelCacheTime = Time.realtimeSinceStartup;
+				}
+				return cachedMouseoverLabel;
+			}
+		}
+
 		public void ReceiveConcentration(float amount) {
 			concentration += amount;
 			if (concentration < 0) concentration = 0;

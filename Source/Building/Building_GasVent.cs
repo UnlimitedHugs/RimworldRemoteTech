@@ -90,7 +90,7 @@ namespace RemoteExplosives {
 		}
 
 		private void ValidateRooms() {
-			if (targetCell.Impassable(Map) || sourceCell.Impassable(Map)) {
+			if (targetCell.Impassable(Map) || sourceCell.Impassable(Map) || !Map.regionAndRoomUpdater.Enabled) {
 				roomsAreValid = false;
 			} else {
 				targetRoom = GridsUtility.GetRoom(Position + IntVec3.North.RotatedBy(Rotation), Map);

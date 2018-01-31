@@ -53,7 +53,7 @@ Rapidly dissipates when under an open sky.</description>
 		</mote>
 		<isSaveable>true</isSaveable>
 		<tickerType>Never</tickerType>
-		<selectable>true</selectable>
+		<selectable>false</selectable>
 		<useHitPoints>false</useHitPoints>
 		<rotatable>false</rotatable>
 	</ThingDef>
