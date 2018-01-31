@@ -24,6 +24,9 @@
 			<WorkToMake>150</WorkToMake>
 			<Beauty>-4</Beauty>
 		</statBases>
+		<modExtensions>
+			<li Class="RemoteExplosives.FullDeconstructionRefund"/>
+		</modExtensions>
 	</ThingDef>
 	
 	<ThingDef Name="MiningExplosiveBase" ParentName="BuildingBase" Abstract="True">
@@ -38,6 +41,9 @@
 			<ExplosiveMiningYield>.75</ExplosiveMiningYield>
 			<ExplosiveWoodYield>.70</ExplosiveWoodYield>
 		</statBases>
+		<modExtensions>
+			<li Class="RemoteExplosives.FullDeconstructionRefund"/>
+		</modExtensions>
 	</ThingDef>
 	
 	<ThingDef ParentName="BuildingBase">
@@ -583,6 +589,7 @@ Detonate from the Remote Explosives Console.</description>
 			<MiningExplosiveComponent>2</MiningExplosiveComponent>
 			<Plasteel>20</Plasteel>
 		</costList>
+		<resourcesFractionWhenDeconstructed>0.75</resourcesFractionWhenDeconstructed>
 		<altitudeLayer>Building</altitudeLayer>
 		<fillPercent>0.5</fillPercent>
 		<useHitPoints>True</useHitPoints>
@@ -625,6 +632,7 @@ Detonate from the Remote Explosives Console.</description>
 		<placeWorkers>
 			<li>RemoteExplosives.PlaceWorker_RoofBreakerExplosive</li>
 		</placeWorkers>
+		<modExtensions></modExtensions>
 	</ThingDef>
 	
 	<!-- chemical explosives -->
