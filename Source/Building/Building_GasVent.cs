@@ -4,6 +4,9 @@ using Verse;
 
 namespace RemoteExplosives {
 	public class Building_GasVent : Building {
+		// improves draining of the last view points from source room
+		private const float MinSourceConcentration = 3f;
+
 		private Room targetRoom;
 		private Room sourceRoom;
 		private IntVec3 targetCell;
@@ -38,7 +41,7 @@ namespace RemoteExplosives {
 				var sourceCloud = RemoteExplosivesUtility.TryFindGasCloudAt(Map, sourceCell);
 				if (sourceCloud != null) {
 					// move only whole units of concentration
-					moveBuffer += Mathf.Min(sourceCloud.Concentration, ventProps.gasPushedPerSecond / GenTicks.TicksPerRealSecond);
+					moveBuffer += Mathf.Min(sourceCloud.Concentration - MinSourceConcentration, ventProps.gasPushedPerSecond / GenTicks.TicksPerRealSecond);
 					if (moveBuffer > 1) {
 						var moveAmount = Mathf.FloorToInt(moveBuffer);
 						RemoteExplosivesUtility.DeployGas(Map, targetCell, sourceCloud.def, moveAmount);
