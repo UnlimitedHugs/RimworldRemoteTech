@@ -397,7 +397,7 @@ Arm, then detonate from the Remote Explosives Console.</description>
 		</comps>
 		<building Class="RemoteExplosives.BuildingProperties_RemoteExplosive">
 			<isTrap>true</isTrap>
-			<startsArmed>false</startsArmed>
+			<explosiveType>Combat</explosiveType>
 		</building>
 	</ThingDef>
 	
@@ -433,7 +433,7 @@ Arm, then detonate from the Remote Explosives Console.</description>
 		</comps>
 		<building Class="RemoteExplosives.BuildingProperties_RemoteExplosive">
 			<isTrap>true</isTrap>
-			<startsArmed>false</startsArmed>
+			<explosiveType>Combat</explosiveType>
 		</building>
 	</ThingDef>
 	
@@ -476,7 +476,7 @@ Arm, then detonate from the Remote Explosives Console.</description>
 		</comps>
 		<building Class="RemoteExplosives.BuildingProperties_RemoteExplosive">
 			<isTrap>true</isTrap>
-			<startsArmed>false</startsArmed>
+			<explosiveType>Combat</explosiveType>
 		</building>
 	</ThingDef>
 	
@@ -519,7 +519,7 @@ Detonate from the Remote Explosives Console.</description>
 		</comps>
 		<building Class="RemoteExplosives.BuildingProperties_RemoteExplosive">
 			<isTrap>false</isTrap>
-			<startsArmed>true</startsArmed>
+			<explosiveType>Mining</explosiveType>
 			<blinkerIntervalLit>25</blinkerIntervalLit>
 		</building>
 	</ThingDef>
@@ -559,7 +559,7 @@ Detonate from the Remote Explosives Console.</description>
 		</comps>
 		<building Class="RemoteExplosives.BuildingProperties_RemoteExplosive">
 			<isTrap>false</isTrap>
-			<startsArmed>true</startsArmed>
+			<explosiveType>Mining</explosiveType>
 			<blinkerIntervalLit>25</blinkerIntervalLit>
 		</building>
 		<placeWorkers>
@@ -616,7 +616,7 @@ Detonate from the Remote Explosives Console.</description>
 		</comps>
 		<building Class="RemoteExplosives.BuildingProperties_RemoteExplosive">
 			<isTrap>false</isTrap>
-			<startsArmed>true</startsArmed>
+			<explosiveType>Mining</explosiveType>
 			<blinkerOffset>(0, 0, .15)</blinkerOffset>
 			<blinkerIntervalLit>25</blinkerIntervalLit>
 		</building>
@@ -663,7 +663,7 @@ Arm, then detonate from the Remote Explosives Console.</description>
 		</comps>
 		<building Class="RemoteExplosives.BuildingProperties_RemoteExplosive">
 			<isTrap>true</isTrap>
-			<startsArmed>false</startsArmed>
+			<explosiveType>Utility</explosiveType>
 		</building>
 	</ThingDef>
 	
@@ -701,7 +701,7 @@ Arm, then detonate from the Remote Explosives Console.</description>
 		</comps>
 		<building Class="RemoteExplosives.BuildingProperties_RemoteExplosive">
 			<isTrap>true</isTrap>
-			<startsArmed>false</startsArmed>
+			<explosiveType>Utility</explosiveType>
 		</building>
 	</ThingDef>
 	
