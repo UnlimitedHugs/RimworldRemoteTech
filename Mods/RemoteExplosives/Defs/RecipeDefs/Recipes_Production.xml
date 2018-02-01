@@ -209,11 +209,11 @@
 		<workSkill>Crafting</workSkill>
 	</RecipeDef>  
 	
-	<RecipeDef>
+	<RecipeDef Name="BaseChemicalCan">
 		<defName>MakeRemoteChemicalCan</defName>
-		<label>make remote chemical canister</label>
-		<description>Craft a remote chemical canister.</description>
-		<jobString>Making remote chemical canister.</jobString>
+		<label>make sealing foam canister</label>
+		<description>Craft a sealing foam canister.</description>
+		<jobString>Making sealing foam canister.</jobString>
 		<recipeUsers>
 			<li>RemoteExplosivesBench</li>
 		</recipeUsers>
@@ -263,6 +263,17 @@
 		<workSkill>Crafting</workSkill>
 	</RecipeDef>
 
+	<RecipeDef ParentName="BaseChemicalCan">
+		<defName>RemoteSleepingGasCan</defName>
+		<label>make sleeping gas canister</label>
+		<description>Craft a canister containing sleeping gas.</description>
+		<jobString>Making sleeping gas canister.</jobString>
+		<researchPrerequisite>RemoteSleepingGas</researchPrerequisite>
+		<products>
+			<RemoteSleepingGasCan>1</RemoteSleepingGasCan>
+		</products>
+	</RecipeDef>
+	
 	<RecipeDef>
 		<defName>MakeExplosivePouch</defName>
 		<label>make explosive pouch</label>

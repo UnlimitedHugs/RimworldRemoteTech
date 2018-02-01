@@ -690,7 +690,7 @@ Arm, then detonate from the Remote Explosives Console.</description>
 Craft at the Explosives Workshop.
 Arm, then detonate from the Remote Explosives Console.</description>
 		<costList>
-			<RemoteChemicalCan>1</RemoteChemicalCan>
+			<RemoteSleepingGasCan>1</RemoteSleepingGasCan>
 		</costList>
 		<comps>
 			<li Class="RemoteExplosives.CompProperties_ChemicalExplosive">

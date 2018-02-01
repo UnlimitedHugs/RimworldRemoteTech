@@ -61,7 +61,48 @@ The detonator must be upgraded with a component for this to work.</description>
 			<li>RemoteDetonator</li>
 		</prerequisites>
 		<researchViewX>2</researchViewX>
-		<researchViewY>1</researchViewY>
+		<researchViewY>.5</researchViewY>
+	</ResearchProjectDef>
+
+	<ResearchProjectDef ParentName="ProjectBase">
+		<defName>RemoteChemicals</defName>
+		<label>Sealing Foam</label>
+		<description>Allows the creation of remotely triggered canisters that contain sealing foam. The foam hardens into exceptionally tough walls that are great for sealing off passages and constructing durable defenses.</description>
+		<baseCost>900</baseCost>
+		<techLevel>Industrial</techLevel>
+		<prerequisites>
+			<li>RemoteDetonator</li>
+		</prerequisites>
+		<researchViewX>2</researchViewX>
+		<researchViewY>1.5</researchViewY>
+	</ResearchProjectDef>
+	
+	<ResearchProjectDef ParentName="ProjectBase">
+		<defName>RemoteSleepingGas</defName>
+		<label>Sleeping Gas</label>
+		<description>Allows the creation of remotely triggered canisters that contain sleeping gas. Used for disabling biological targets without killing them.
+Use in enclosed areas for best results.</description>
+		<baseCost>900</baseCost>
+		<techLevel>Industrial</techLevel>
+		<prerequisites>
+			<li>RemoteDetonator</li>
+		</prerequisites>
+		<researchViewX>2</researchViewX>
+		<researchViewY>2.5</researchViewY>
+	</ResearchProjectDef>
+	
+	<ResearchProjectDef ParentName="ProjectBase">
+		<defName>RemoteGasVent</defName>
+		<label>Gas Vent</label>
+		<description>While sleeping gas is a powerful tool, it can be difficult to move once deployed. The gas vent comes to the rescue- it allows to push gas between rooms and can be used to create gas distribution pathways.
+Allows the Gas Vent to be built.</description>
+		<baseCost>800</baseCost>
+		<techLevel>Industrial</techLevel>
+		<prerequisites>
+			<li>RemoteSleepingGas</li>
+		</prerequisites>
+		<researchViewX>3</researchViewX>
+		<researchViewY>2.5</researchViewY>
 	</ResearchProjectDef>
 	
 	<ResearchProjectDef ParentName="ProjectBase">
@@ -75,7 +116,7 @@ While expensive, they can be devastating against mechanoids when properly used.<
 			<li>RemoteDetonator</li>
 		</prerequisites>
 		<researchViewX>2</researchViewX>
-		<researchViewY>2</researchViewY>
+		<researchViewY>3.5</researchViewY>
 	</ResearchProjectDef>
 
 	<ResearchProjectDef ParentName="ProjectBase">
@@ -89,36 +130,7 @@ Allows the Shaped Charge to be built.</description>
 			<li>RemoteDetonator</li>
 		</prerequisites>
 		<researchViewX>2</researchViewX>
-		<researchViewY>3</researchViewY>
-	</ResearchProjectDef>
-	
-	<ResearchProjectDef ParentName="ProjectBase">
-		<defName>RemoteChemicals</defName>
-		<label>Remote Chemical Charges</label>
-		<description>Allows the creation of remotely triggered canisters for specialized chemicals.
-The sealing foam can create walls and seal passages, while the sleeping gas can disable biological targets.
-Use in enclosed areas for best results.</description>
-		<baseCost>1800</baseCost>
-		<techLevel>Industrial</techLevel>
-		<prerequisites>
-			<li>RemoteDetonator</li>
-		</prerequisites>
-		<researchViewX>2</researchViewX>
-		<researchViewY>4</researchViewY>
-	</ResearchProjectDef>
-	
-	<ResearchProjectDef ParentName="ProjectBase">
-		<defName>RemoteGasVent</defName>
-		<label>Gas Vent</label>
-		<description>While sleeping gas is a powerful tool, it can be difficult to move once deployed. The gas vent comes to the rescue- it allows to push gas between rooms and can be used to create gas distribution pathways.
-Allows the Gas Vent to be built.</description>
-		<baseCost>800</baseCost>
-		<techLevel>Industrial</techLevel>
-		<prerequisites>
-			<li>RemoteChemicals</li>
-		</prerequisites>
-		<researchViewX>3</researchViewX>
-		<researchViewY>4</researchViewY>
+		<researchViewY>4.5</researchViewY>
 	</ResearchProjectDef>
 	
 </Defs>
