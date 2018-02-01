@@ -194,6 +194,7 @@ Place as a building from the Explosives menu to use.</description>
 		<graphicData>
 			<texPath>spark_powder</texPath>
 			<graphicClass>Graphic_Single</graphicClass>
+			<drawSize>(.8, .8)</drawSize>
 		</graphicData>
 		<comps>
 			<li Class="CompProperties_Explosive">
