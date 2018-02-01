@@ -123,17 +123,14 @@ namespace RemoteExplosives {
 			}
 		}
 
-		public override string GetInspectString() {
-			return string.Format(ConcentrationLabelId.Translate(), string.Format("{0:n0}", concentration));
-		}
-
 		public override string LabelMouseover {
 			get {
 				if (cachedMouseoverLabel == null || mouseoverLabelCacheTime < Time.realtimeSinceStartup - .5f) {
+					var effectivenessPercent = Mathf.Clamp01(Concentration / gasProps.FullAlphaConcentration) * 100f;
 					if (concentration >= 1000) {
-						cachedMouseoverLabel = string.Format("{0} ({1:F1}K)", LabelCap, concentration / 1000);
+						cachedMouseoverLabel = "GasCloud_statusReadout_high".Translate(LabelCap, concentration / 1000, effectivenessPercent);
 					} else {
-						cachedMouseoverLabel = string.Format("{0} ({1:F0})", LabelCap, concentration);
+						cachedMouseoverLabel = "GasCloud_statusReadout_low".Translate(LabelCap, concentration, effectivenessPercent);
 					}
 					mouseoverLabelCacheTime = Time.realtimeSinceStartup;
 				}
