@@ -192,6 +192,33 @@ Place as a building from the Explosives menu to use.</description>
 			<MarketValue>150</MarketValue>
 		</statBases>
 	</ThingDef>
+	
+	<ThingDef ParentName="BaseExplosivePart">
+		<defName>RemoteRefinedSleepingGasCan</defName>
+		<label>refined sleeping gas canister</label>
+		<description>A remotely triggered canister filled with refined sleeping gas. Significantly more potent than common sleeping gas.
+Place as a building from the Explosives menu to use.</description>
+		<graphicData>
+			<texPath>canister_gas_refined</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+		</graphicData>
+		<comps>
+			<li Class="RemoteExplosives.CompProperties_ChemicalExplosive">
+				<compClass>RemoteExplosives.CompChemicalExplosive</compClass>
+				<wickTicks>
+					<min>50</min>
+					<max>50</max>
+				</wickTicks>
+				<startWickHitPointsPercent>.2</startWickHitPointsPercent>
+				<breakSound>RemoteGlassBreak</breakSound>
+				<spawnThingDef>Gas_SleepingRefined</spawnThingDef>
+				<gasConcentration>80000</gasConcentration>
+			</li>
+		</comps>
+		<statBases>
+			<MarketValue>300</MarketValue>
+		</statBases>
+	</ThingDef>
 
 	<ThingDef ParentName="BaseExplosivePart">
 		<defName>ExplosivePouch</defName>

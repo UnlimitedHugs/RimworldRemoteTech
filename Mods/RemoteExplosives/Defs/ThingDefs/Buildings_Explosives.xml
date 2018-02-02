@@ -713,4 +713,46 @@ Arm, then detonate from the Remote Explosives Console.</description>
 		</building>
 	</ThingDef>
 	
+	
+	<ThingDef ParentName="RemoteExplosiveBase">
+		<defName>RemoteCanSleepGasRefined</defName>
+		<label>refined sleeping gas can</label>
+		<thingClass>RemoteExplosives.Building_RemoteExplosive</thingClass>
+		<graphicData>
+			<texPath>canister_gas_refined</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<shadowData>
+				<volume>(.75, 0.15, .75)</volume>
+			</shadowData>
+		</graphicData>
+		<description>A remotely triggered canister filled with refined sleeping gas. Significantly more potent than common sleeping gas. 
+Craft at the Explosives Workshop.
+Arm, then detonate from the Remote Explosives Console.</description>
+		<costList>
+			<RemoteRefinedSleepingGasCan>1</RemoteRefinedSleepingGasCan>
+		</costList>
+		<comps>
+			<li Class="RemoteExplosives.CompProperties_ChemicalExplosive">
+				<compClass>RemoteExplosives.CompChemicalExplosive</compClass>
+				<wickTicks>
+					<min>50</min>
+					<max>50</max>
+				</wickTicks>
+				<startWickHitPointsPercent>.2</startWickHitPointsPercent>
+				<breakSound>RemoteGlassBreak</breakSound>
+				<spawnThingDef>Gas_SleepingRefined</spawnThingDef>
+				<gasConcentration>80000</gasConcentration>
+			</li>
+			<li Class="RemoteExplosives.CompProperties_WiredDetonationReceiver"/>
+			<li Class="RemoteExplosives.CompProperties_AutoReplaceable"/>
+		</comps>
+		<building Class="RemoteExplosives.BuildingProperties_RemoteExplosive">
+			<isTrap>true</isTrap>
+			<explosiveType>Utility</explosiveType>
+		</building>
+		<researchPrerequisites>
+			<li>RemoteRefinedSleepingGas</li>
+		</researchPrerequisites>
+	</ThingDef>
+	
 </Defs>

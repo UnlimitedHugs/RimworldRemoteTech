@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Defs>
 	
-	<ThingDef>
+	<ThingDef Name="BaseSleepingGas">
 		<defName>Gas_Sleeping</defName>
 		<label>sleeping gas cloud</label>
 		<description>Knocks out living organisms after enough exposure.
@@ -14,7 +14,7 @@ Rapidly dissipates when under an open sky.</description>
 			<graphicClass>RemoteExplosives.Graphic_GasCloud</graphicClass>
 			<shaderType>Mote</shaderType>
 			<drawSize>(1.3,1.3)</drawSize>
-			<color>(0.8, 0.6 , 1, 1)</color>
+			<color>(204, 153, 255)</color>
 		</graphicData>
 		<altitudeLayer>MoteOverhead</altitudeLayer>
 		<mote Class="RemoteExplosives.MoteProperties_GasCloud_HediffGiver">
@@ -58,4 +58,17 @@ Rapidly dissipates when under an open sky.</description>
 		<rotatable>false</rotatable>
 	</ThingDef>
 	
+	<ThingDef ParentName="BaseSleepingGas">
+		<defName>Gas_SleepingRefined</defName>
+		<label>refined sleeping gas cloud</label>
+		<graphicData>
+			<color>(255, 102, 161)</color>
+		</graphicData>
+		<mote Class="RemoteExplosives.MoteProperties_GasCloud_HediffGiver">
+			<hediffSeverityPerGastick>
+				<min>0.008</min>
+				<max>0.014</max>
+			</hediffSeverityPerGastick>
+		</mote>
+	</ThingDef>
 </Defs>
