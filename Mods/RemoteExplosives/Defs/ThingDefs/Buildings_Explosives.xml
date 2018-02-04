@@ -21,7 +21,7 @@
 		<tickerType>Normal</tickerType>
 		<statBases>
 			<MaxHitPoints>60</MaxHitPoints>
-			<WorkToMake>150</WorkToMake>
+			<WorkToBuild>150</WorkToBuild>
 			<Beauty>-4</Beauty>
 		</statBases>
 		<modExtensions>
@@ -35,7 +35,7 @@
 		<tickerType>Normal</tickerType>
 		<statBases>
 			<MaxHitPoints>60</MaxHitPoints>
-			<WorkToMake>150</WorkToMake>
+			<WorkToBuild>150</WorkToBuild>
 			<Beauty>-4</Beauty>
 			<ExplosiveChunkYield>0</ExplosiveChunkYield>
 			<ExplosiveMiningYield>.75</ExplosiveMiningYield>
@@ -72,7 +72,7 @@ Right-click with a drafted colonist for better timing.</description>
 		<fillPercent>0.5</fillPercent>
 		<useHitPoints>True</useHitPoints>
 		<statBases>
-			<WorkToMake>2500</WorkToMake>
+			<WorkToBuild>2500</WorkToBuild>
 			<MaxHitPoints>180</MaxHitPoints>
 			<Flammability>1.0</Flammability>
 			<Beauty>3</Beauty>
@@ -130,7 +130,7 @@ Research different types of remote explosives to unlock available recipes.</desc
 		<fillPercent>0.5</fillPercent>
 		<useHitPoints>True</useHitPoints>
 		<statBases>
-			<WorkToMake>2500</WorkToMake>
+			<WorkToBuild>2500</WorkToBuild>
 			<MaxHitPoints>150</MaxHitPoints>
 			<Flammability>1.0</Flammability>
 			<Cleanliness>-3</Cleanliness>
@@ -195,7 +195,7 @@ Right-click with a drafted colonist for better timing.</description>
 		<fillPercent>0.5</fillPercent>
 		<useHitPoints>True</useHitPoints>
 		<statBases>
-			<WorkToMake>1300</WorkToMake>
+			<WorkToBuild>1300</WorkToBuild>
 			<MaxHitPoints>70</MaxHitPoints>
 			<Flammability>1.0</Flammability>
 		</statBases>
@@ -242,7 +242,7 @@ Right-click with a drafted colonist for better timing.</description>
 		</building>
 		<statBases>
 			<MaxHitPoints>80</MaxHitPoints>
-			<WorkToMake>35</WorkToMake>
+			<WorkToBuild>35</WorkToBuild>
 			<Flammability>0.1</Flammability>
 			<Beauty>-2</Beauty>
 		</statBases>
@@ -360,7 +360,7 @@ Can be placed under walls and other buildings.</description>
 		<fillPercent>0.1</fillPercent>
 		<useHitPoints>True</useHitPoints>
 		<statBases>
-			<WorkToMake>400</WorkToMake>
+			<WorkToBuild>400</WorkToBuild>
 			<MaxHitPoints>100</MaxHitPoints>
 			<Flammability>0.2</Flammability>
 			<Beauty>-4</Beauty>
@@ -654,7 +654,7 @@ Detonate from the Remote Explosives Console.</description>
 		<fillPercent>0.5</fillPercent>
 		<useHitPoints>True</useHitPoints>
 		<statBases>
-			<WorkToMake>1700</WorkToMake>
+			<WorkToBuild>1700</WorkToBuild>
 			<MaxHitPoints>120</MaxHitPoints>
 			<Flammability>1.0</Flammability>
 			<Beauty>-5</Beauty>
