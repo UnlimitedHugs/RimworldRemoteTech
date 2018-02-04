@@ -332,6 +332,66 @@ Can be placed under walls and other buildings.</description>
 		</researchPrerequisites>
 	</ThingDef>
 	
+	<ThingDef ParentName="BuildingBase">
+		<defName>DetonatorWireCrossing</defName>
+		<label>detonator wire crossing</label>
+		<thingClass>Building</thingClass>
+		<description>Allows two detonator wires to cross without causing signal transmission between them.
+		Waterproof.</description>
+		<drawerType>MapMeshOnly</drawerType>
+		<graphicData>
+			<texPath>det_wire_crossing</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<drawSize>(1.1, 1.1)</drawSize>
+			<linkFlags>
+				<li>Custom2</li>
+			</linkFlags>
+		</graphicData>
+		<uiIconPath>det_wire_crossing</uiIconPath>
+		<building Class="RemoteExplosives.BuildingProperties_DetonatorWire">
+			<isInert>true</isInert>
+			<isEdifice>true</isEdifice>
+			<canPlaceOverWall>false</canPlaceOverWall>
+		</building>
+		<costList>
+			<Steel>20</Steel>
+		</costList>
+		<altitudeLayer>Building</altitudeLayer>
+		<fillPercent>0.1</fillPercent>
+		<useHitPoints>True</useHitPoints>
+		<statBases>
+			<WorkToMake>400</WorkToMake>
+			<MaxHitPoints>100</MaxHitPoints>
+			<Flammability>0.2</Flammability>
+			<Beauty>-4</Beauty>
+		</statBases>
+		<placeWorkers>
+			<li>RemoteExplosives.PlaceWorker_DetWireReplacer</li>
+		</placeWorkers>
+		<damageMultipliers>
+			<li>
+				<damageDef>Bomb</damageDef>
+				<multiplier>.1</multiplier>
+			</li>
+			<li>
+				<damageDef>FlameBomb</damageDef>
+				<multiplier>.1</multiplier>
+			</li>
+			<li>
+				<damageDef>Flame</damageDef>
+				<multiplier>.5</multiplier>
+			</li>
+		</damageMultipliers>
+		<constructEffect>ConstructMetal</constructEffect>
+		<passability>PassThroughOnly</passability>
+		<pathCost>10</pathCost>
+		<comps>
+			<li Class="RemoteExplosives.CompProperties_WiredDetonationCrossing"/>
+			<li Class="RemoteExplosives.CompProperties_LinkGridMember"/>
+		</comps>
+		<researchPrerequisites><li>ImprovedDetWire</li></researchPrerequisites>
+	</ThingDef>
+	
 	<!-- Combat explosives -->
 	
 	<ThingDef ParentName="RemoteExplosiveBase">
