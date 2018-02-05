@@ -14,8 +14,7 @@ namespace RemoteExplosives {
 	public class GasCloud : Thing {
 		private const float AlphaEasingDivider = 10f;
 		private const float SpreadingAnimationDuration = 1f;
-
-		private const string ConcentrationLabelId = "GasCloud_concentration_label";
+		private const float DisplacingConcentrationFraction = .33f;
 
 		public delegate bool TraversibilityTest(Building b, GasCloud g);
 		public static readonly Dictionary<Type, TraversibilityTest> TraversibleBuildings = new Dictionary<Type, TraversibilityTest> {
@@ -33,6 +32,9 @@ namespace RemoteExplosives {
 		public float spriteRotation;
 		public int relativeZOrder; // to avoid z fighting among clouds
 		private MoteProperties_GasCloud gasProps;
+		private string cachedMouseoverLabel;
+		private float mouseoverLabelCacheTime;
+		private bool needsInitialFill;
 		
 		private float interpolatedAlpha;
 		private readonly InterpolatedValue interpolatedOffsetX;
@@ -121,10 +123,21 @@ namespace RemoteExplosives {
 			}
 		}
 
-		public override string GetInspectString() {
-			return string.Format(ConcentrationLabelId.Translate(), string.Format("{0:n0}", concentration));
+		public override string LabelMouseover {
+			get {
+				if (cachedMouseoverLabel == null || mouseoverLabelCacheTime < Time.realtimeSinceStartup - .5f) {
+					var effectivenessPercent = Mathf.Clamp01(Concentration / gasProps.FullAlphaConcentration) * 100f;
+					if (concentration >= 1000) {
+						cachedMouseoverLabel = "GasCloud_statusReadout_high".Translate(LabelCap, concentration / 1000, effectivenessPercent);
+					} else {
+						cachedMouseoverLabel = "GasCloud_statusReadout_low".Translate(LabelCap, concentration, effectivenessPercent);
+					}
+					mouseoverLabelCacheTime = Time.realtimeSinceStartup;
+				}
+				return cachedMouseoverLabel;
+			}
 		}
-		
+
 		public void ReceiveConcentration(float amount) {
 			concentration += amount;
 			if (concentration < 0) concentration = 0;
@@ -184,20 +197,31 @@ namespace RemoteExplosives {
 			positionBuffer.Clear();
 			for (int i = 0; i < 4; i++) {
 				var adjPosition = GenAdj.CardinalDirections[i] + Position;
-				if(TileIsGasTraversible(adjPosition, Map, this) && Map.thingGrid.ThingAt<GasCloud>(adjPosition) == null) {
-					positionBuffer.Add(adjPosition);
+				if (TileIsGasTraversible(adjPosition, Map, this)) {
+					var neighborThings = Map.thingGrid.ThingsListAtFast(adjPosition);
+					var anyPreventingClouds = false;
+					for (int j = 0; j < neighborThings.Count; j++) {
+						var cloud = neighborThings[j] as GasCloud;
+						// check if a cloud of same type already exists or another type of cloud is too concentrated to expand into
+						if (cloud != null && (cloud.def == def || cloud.concentration > concentration * DisplacingConcentrationFraction)) {
+							anyPreventingClouds = true;
+						}
+					}
+					if (!anyPreventingClouds) {
+						positionBuffer.Add(adjPosition);	
+					}
 				}
 			}
 			positionBuffer.Shuffle();
 			return positionBuffer;
 		}
 
-		private List<GasCloud> GetAdjacentGasClouds() {
+		private List<GasCloud> GetAdjacentGasCloudsOfSameDef() {
 			adjacentBuffer.Clear();
 			for (int i = 0; i < 4; i++) {
 				var adjPosition = GenAdj.CardinalDirections[i] + Position;
-				var cloud = Map.thingGrid.ThingAt<GasCloud>(adjPosition);
-				if(cloud!=null) {
+				var cloud = adjPosition.GetFirstThing(Map, def) as GasCloud;
+				if(cloud != null) {
 					adjacentBuffer.Add(cloud);
 				}
 			}
@@ -205,11 +229,12 @@ namespace RemoteExplosives {
 		}
 
 		private void ShareConcentrationWithMinorNeighbors() {
-			var neighbors = GetAdjacentGasClouds();
+			var neighbors = GetAdjacentGasCloudsOfSameDef();
 			var numSharingNeighbors = 0;
 			for (int i = 0; i < neighbors.Count; i++) {
 				var neighbor = neighbors[i];
-				if (neighbor.Concentration >= concentration || neighbor.IsBlocked) {
+				// do not push to a blocked cloud, unless it's one we created this tick
+				if (neighbor.Concentration >= concentration || (!neighbor.needsInitialFill && neighbor.IsBlocked)) {
 					neighbors[i] = null;
 				} else {
 					numSharingNeighbors++;
@@ -222,6 +247,7 @@ namespace RemoteExplosives {
 					var neighborConcentration = neighbor.concentration > 0 ? neighbor.Concentration : 1;
 					var amountToShare = ((concentration - neighborConcentration)/(numSharingNeighbors+1))*gasProps.SpreadAmountMultiplier;
 					neighbor.ReceiveConcentration(amountToShare);
+					neighbor.needsInitialFill = false;
 					concentration -= amountToShare;
 				}
 
@@ -229,7 +255,7 @@ namespace RemoteExplosives {
 		}
 
 		private void ForcePushConcentrationToNeighbors() {
-			var neighbors = GetAdjacentGasClouds();
+			var neighbors = GetAdjacentGasCloudsOfSameDef();
 			for (int i = 0; i < neighbors.Count; i++) {
 				var neighbor = neighbors[i];
 				if (neighbor.IsBlocked) continue;
@@ -248,6 +274,7 @@ namespace RemoteExplosives {
 				var targetPosition = viableCells[i];
 				// place on next Normal tick. We cannot register while DistributedTickScheduler is ticking
 				var newCloud = (GasCloud)ThingMaker.MakeThing(def);
+				newCloud.needsInitialFill = true;
 				newCloud.BeginSpreadingTransition(this, targetPosition);	
 				GenPlace.TryPlaceThing(newCloud, targetPosition, Map, ThingPlaceMode.Direct);
 				spreadsLeft--;
@@ -255,12 +282,26 @@ namespace RemoteExplosives {
 		}
 
 		private bool TileIsGasTraversible(IntVec3 pos, Map map, GasCloud sourceCloud) {
-			if (!pos.InBounds(map)) return false;
-			var edifice = map.edificeGrid[pos];
-			var walkable = map.pathGrid.WalkableFast(pos);
-			TraversibilityTest travTest = null;
-			if (edifice != null) TraversibleBuildings.TryGetValue(edifice.GetType(), out travTest);
-			return (walkable && travTest == null) || (travTest != null && travTest(edifice, sourceCloud));
+			if (!pos.InBounds(map) || !map.pathGrid.WalkableFast(pos)) return false;
+			var thingList = map.thingGrid.ThingsListAtFast(pos);
+			for (var i = 0; i < thingList.Count; i++) {
+				var thing = thingList[i];
+				// check for conditionally traversible buildings
+				var building = thing as Building;
+				if (building != null) {
+					TraversibilityTest travTest;
+					TraversibleBuildings.TryGetValue(building.GetType(), out travTest);
+					if (travTest != null && !travTest(building, sourceCloud)) {
+						return false;
+					}
+				}
+				// check for more concentrated gasses of a different def
+				var cloud = thing as GasCloud;
+				if (cloud != null && cloud.def != sourceCloud.def && sourceCloud.concentration < cloud.concentration) {
+					return false;
+				}
+			}
+			return true;
 		}
 	}
 }

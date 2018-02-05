@@ -100,6 +100,7 @@ namespace RemoteExplosives {
 			public static readonly Graphic FlareOverlayStrong = GraphicDatabase.Get<Graphic_Single>("mine_flare_strong", ShaderDatabase.TransparentPostLight);
 			public static readonly Graphic DetWireOverlayAtlas = GraphicDatabase.Get<Graphic_Single>("DetWire/det_wire_overlay_atlas", ShaderDatabase.MetaOverlay);
 			public static readonly Graphic DetWireOverlayEndpoint = GraphicDatabase.Get<Graphic_Single>("DetWire/connection_point_overlay", ShaderDatabase.MetaOverlay);
+			public static readonly Graphic DetWireOverlayCrossing = GraphicDatabase.Get<Graphic_Single>("DetWire/crossing_overlay", ShaderDatabase.MetaOverlay);
 
 			static Graphics() {
 				DetWireOverlayAtlas = GraphicUtility.WrapLinked(DetWireOverlayAtlas, LinkDrawerType.Basic);
@@ -120,6 +121,7 @@ namespace RemoteExplosives {
 			public static Texture2D UIChannel2;
 			public static Texture2D UIDetonatorPortable;
 			public static Texture2D UISelectWire;
+			public static Texture2D gas_vent_arrow;
 
 			public static readonly Texture2D WallSmoothMenuIcon = ContentFinder<Texture2D>.Get("Things/Building/Linked/WallSmooth_MenuIcon");
 

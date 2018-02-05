@@ -56,6 +56,17 @@
     <Compile Include="Source\AI\WorkGiver_FoamWall.cs" />
     <Compile Include="Source\AI\JobDriver_SmoothFoamWall.cs" />
     <Compile Include="Source\Building\BuildingProperties_FoamWall.cs" />
+    <Compile Include="Source\Building\BuildingProperties_GasVent.cs" />
+    <Compile Include="Source\Building\Building_GasVent.cs" />
+    <Compile Include="Source\Building\PlaceWorker_GasVent.cs" />
+    <Compile Include="Source\Building\PlaceWorker_DetWireReplacer.cs" />
+    <Compile Include="Source\Comp\CompLinkGridMember.cs" />
+    <Compile Include="Source\Comp\CompProperties_LinkGridMember.cs" />
+    <Compile Include="Source\Comp\CompProperties_WiredDetonationCrossing.cs" />
+    <Compile Include="Source\Comp\CompProperties_WiredDetonationTransmitter.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Source\Comp\CompWiredDetonationCrossing.cs" />
     <Compile Include="Source\CustomFactionGoodwillCaps.cs" />
     <Compile Include="Source\Damage\DamageWorker_SuperEMP.cs" />
     <Compile Include="Source\Damage\SuperEMPDamageDef.cs" />
@@ -86,7 +97,6 @@
     <Compile Include="Source\Comp\CompWiredDetonationSender.cs" />
     <Compile Include="Source\Comp\CompWiredDetonationTransmitter.cs" />
     <Compile Include="Source\Comp\CompProperties_ChemicalExplosive.cs" />
-    <Compile Include="Source\Comp\CompProperties_WiredDetonationTransmitter.cs" />
     <Compile Include="Source\Comp\CompProperties_WiredDetonationReceiver.cs" />
     <Compile Include="Source\Comp\CompWiredDetonationReceiver.cs" />
     <Compile Include="Source\Damage\DamageWorker_FlameChance.cs" />
@@ -118,8 +128,8 @@
     <Compile Include="Source\Comp\CompProperties_RandomResourceLeaver.cs" />
     <Compile Include="Source\AI\JobDriver_InstallChannelsComponent.cs" />
     <Compile Include="Source\MapComponent_RemoteExplosives.cs" />
-    <Compile Include="Source\Graphic\PlaceWorker_DetonatorWire.cs" />
-    <Compile Include="Source\Graphic\PlaceWorker_RoofBreakerExplosive.cs" />
+    <Compile Include="Source\Building\PlaceWorker_DetonatorWire.cs" />
+    <Compile Include="Source\Building\PlaceWorker_RoofBreakerExplosive.cs" />
     <Compile Include="Source\RemoteExplosivesController.cs" />
     <Compile Include="Source\Resources.cs" />
     <Compile Include="Source\Graphic\SectionLayer_DetonationGrid.cs" />
@@ -135,7 +145,7 @@
     <Compile Include="Source\AI\ISwitchable.cs" />
     <Compile Include="Source\AI\JobDriver_DetonateExplosives.cs" />
     <Compile Include="Source\AI\JobDriver_SwitchRemoteExplosive.cs" />
-    <Compile Include="Source\Graphic\PlaceWorker_MiningExplosiveSquare.cs" />
+    <Compile Include="Source\Building\PlaceWorker_MiningExplosiveSquare.cs" />
     <Compile Include="Source\RemoteExplosivesUtility.cs" />
     <Compile Include="Source\AI\WorkGiver_IPawnDetonateable.cs" />
   </ItemGroup>

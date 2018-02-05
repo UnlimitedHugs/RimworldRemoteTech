@@ -21,7 +21,7 @@
 		<tickerType>Normal</tickerType>
 		<statBases>
 			<MaxHitPoints>60</MaxHitPoints>
-			<WorkToMake>150</WorkToMake>
+			<WorkToBuild>150</WorkToBuild>
 			<Beauty>-4</Beauty>
 		</statBases>
 		<modExtensions>
@@ -35,7 +35,7 @@
 		<tickerType>Normal</tickerType>
 		<statBases>
 			<MaxHitPoints>60</MaxHitPoints>
-			<WorkToMake>150</WorkToMake>
+			<WorkToBuild>150</WorkToBuild>
 			<Beauty>-4</Beauty>
 			<ExplosiveChunkYield>0</ExplosiveChunkYield>
 			<ExplosiveMiningYield>.75</ExplosiveMiningYield>
@@ -72,7 +72,7 @@ Right-click with a drafted colonist for better timing.</description>
 		<fillPercent>0.5</fillPercent>
 		<useHitPoints>True</useHitPoints>
 		<statBases>
-			<WorkToMake>2500</WorkToMake>
+			<WorkToBuild>2500</WorkToBuild>
 			<MaxHitPoints>180</MaxHitPoints>
 			<Flammability>1.0</Flammability>
 			<Beauty>3</Beauty>
@@ -130,7 +130,7 @@ Research different types of remote explosives to unlock available recipes.</desc
 		<fillPercent>0.5</fillPercent>
 		<useHitPoints>True</useHitPoints>
 		<statBases>
-			<WorkToMake>2500</WorkToMake>
+			<WorkToBuild>2500</WorkToBuild>
 			<MaxHitPoints>150</MaxHitPoints>
 			<Flammability>1.0</Flammability>
 			<Cleanliness>-3</Cleanliness>
@@ -195,7 +195,7 @@ Right-click with a drafted colonist for better timing.</description>
 		<fillPercent>0.5</fillPercent>
 		<useHitPoints>True</useHitPoints>
 		<statBases>
-			<WorkToMake>1300</WorkToMake>
+			<WorkToBuild>1300</WorkToBuild>
 			<MaxHitPoints>70</MaxHitPoints>
 			<Flammability>1.0</Flammability>
 		</statBases>
@@ -242,7 +242,7 @@ Right-click with a drafted colonist for better timing.</description>
 		</building>
 		<statBases>
 			<MaxHitPoints>80</MaxHitPoints>
-			<WorkToMake>35</WorkToMake>
+			<WorkToBuild>35</WorkToBuild>
 			<Flammability>0.1</Flammability>
 			<Beauty>-2</Beauty>
 		</statBases>
@@ -330,6 +330,66 @@ Can be placed under walls and other buildings.</description>
 		<researchPrerequisites>
 			<li>ImprovedDetWire</li>
 		</researchPrerequisites>
+	</ThingDef>
+	
+	<ThingDef ParentName="BuildingBase">
+		<defName>DetonatorWireCrossing</defName>
+		<label>detonator wire crossing</label>
+		<thingClass>Building</thingClass>
+		<description>Allows two detonator wires to cross without causing signal transmission between them.
+		Waterproof.</description>
+		<drawerType>MapMeshOnly</drawerType>
+		<graphicData>
+			<texPath>det_wire_crossing</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<drawSize>(1.1, 1.1)</drawSize>
+			<linkFlags>
+				<li>Custom2</li>
+			</linkFlags>
+		</graphicData>
+		<uiIconPath>det_wire_crossing</uiIconPath>
+		<building Class="RemoteExplosives.BuildingProperties_DetonatorWire">
+			<isInert>true</isInert>
+			<isEdifice>true</isEdifice>
+			<canPlaceOverWall>false</canPlaceOverWall>
+		</building>
+		<costList>
+			<Steel>20</Steel>
+		</costList>
+		<altitudeLayer>Building</altitudeLayer>
+		<fillPercent>0.1</fillPercent>
+		<useHitPoints>True</useHitPoints>
+		<statBases>
+			<WorkToBuild>400</WorkToBuild>
+			<MaxHitPoints>100</MaxHitPoints>
+			<Flammability>0.2</Flammability>
+			<Beauty>-4</Beauty>
+		</statBases>
+		<placeWorkers>
+			<li>RemoteExplosives.PlaceWorker_DetWireReplacer</li>
+		</placeWorkers>
+		<damageMultipliers>
+			<li>
+				<damageDef>Bomb</damageDef>
+				<multiplier>.1</multiplier>
+			</li>
+			<li>
+				<damageDef>FlameBomb</damageDef>
+				<multiplier>.1</multiplier>
+			</li>
+			<li>
+				<damageDef>Flame</damageDef>
+				<multiplier>.5</multiplier>
+			</li>
+		</damageMultipliers>
+		<constructEffect>ConstructMetal</constructEffect>
+		<passability>PassThroughOnly</passability>
+		<pathCost>10</pathCost>
+		<comps>
+			<li Class="RemoteExplosives.CompProperties_WiredDetonationCrossing"/>
+			<li Class="RemoteExplosives.CompProperties_LinkGridMember"/>
+		</comps>
+		<researchPrerequisites><li>ImprovedDetWire</li></researchPrerequisites>
 	</ThingDef>
 	
 	<!-- Combat explosives -->
@@ -594,7 +654,7 @@ Detonate from the Remote Explosives Console.</description>
 		<fillPercent>0.5</fillPercent>
 		<useHitPoints>True</useHitPoints>
 		<statBases>
-			<WorkToMake>1700</WorkToMake>
+			<WorkToBuild>1700</WorkToBuild>
 			<MaxHitPoints>120</MaxHitPoints>
 			<Flammability>1.0</Flammability>
 			<Beauty>-5</Beauty>
@@ -690,7 +750,7 @@ Arm, then detonate from the Remote Explosives Console.</description>
 Craft at the Explosives Workshop.
 Arm, then detonate from the Remote Explosives Console.</description>
 		<costList>
-			<RemoteChemicalCan>1</RemoteChemicalCan>
+			<RemoteSleepingGasCan>1</RemoteSleepingGasCan>
 		</costList>
 		<comps>
 			<li Class="RemoteExplosives.CompProperties_ChemicalExplosive">
@@ -711,6 +771,48 @@ Arm, then detonate from the Remote Explosives Console.</description>
 			<isTrap>true</isTrap>
 			<explosiveType>Utility</explosiveType>
 		</building>
+	</ThingDef>
+	
+	
+	<ThingDef ParentName="RemoteExplosiveBase">
+		<defName>RemoteCanSleepGasRefined</defName>
+		<label>refined sleeping gas can</label>
+		<thingClass>RemoteExplosives.Building_RemoteExplosive</thingClass>
+		<graphicData>
+			<texPath>canister_gas_refined</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<shadowData>
+				<volume>(.75, 0.15, .75)</volume>
+			</shadowData>
+		</graphicData>
+		<description>A remotely triggered canister filled with refined sleeping gas. Significantly more potent than common sleeping gas. 
+Craft at the Explosives Workshop.
+Arm, then detonate from the Remote Explosives Console.</description>
+		<costList>
+			<RemoteRefinedSleepingGasCan>1</RemoteRefinedSleepingGasCan>
+		</costList>
+		<comps>
+			<li Class="RemoteExplosives.CompProperties_ChemicalExplosive">
+				<compClass>RemoteExplosives.CompChemicalExplosive</compClass>
+				<wickTicks>
+					<min>50</min>
+					<max>50</max>
+				</wickTicks>
+				<startWickHitPointsPercent>.2</startWickHitPointsPercent>
+				<breakSound>RemoteGlassBreak</breakSound>
+				<spawnThingDef>Gas_SleepingRefined</spawnThingDef>
+				<gasConcentration>80000</gasConcentration>
+			</li>
+			<li Class="RemoteExplosives.CompProperties_WiredDetonationReceiver"/>
+			<li Class="RemoteExplosives.CompProperties_AutoReplaceable"/>
+		</comps>
+		<building Class="RemoteExplosives.BuildingProperties_RemoteExplosive">
+			<isTrap>true</isTrap>
+			<explosiveType>Utility</explosiveType>
+		</building>
+		<researchPrerequisites>
+			<li>RemoteRefinedSleepingGas</li>
+		</researchPrerequisites>
 	</ThingDef>
 	
 </Defs>

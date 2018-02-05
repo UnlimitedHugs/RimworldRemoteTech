@@ -67,7 +67,7 @@ namespace RemoteExplosives {
 						}
 						var bill = recipe.MakeNewBill();
 						SelTable.billStack.AddBill(bill);
-					}, researchTip);
+					}, researchTip, MenuOptionPriority.Default, null, null, 29f, rect => Widgets.InfoCardButton(rect.x + 5f, rect.y + (rect.height - 24f) / 2f, recipe));
 					option.Disabled = locked;
 					list.Add(option);
 				}

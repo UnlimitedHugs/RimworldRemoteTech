@@ -141,11 +141,11 @@ Place as a building from the Explosives menu to use.</description>
 	
 	<ThingDef ParentName="BaseExplosivePart">
 		<defName>RemoteChemicalCan</defName>
-		<label>remote chemical canister</label>
-		<description>A remotely triggered canister for chemicals.
+		<label>sealing foam canister</label>
+		<description>A remotely triggered canister containing sealing foam.
 Place as a building from the Explosives menu to use.</description>
 		<graphicData>
-			<texPath>chemical_canister</texPath>
+			<texPath>canister_foam</texPath>
 			<graphicClass>Graphic_Single</graphicClass>
 		</graphicData>
 		<comps>
@@ -155,12 +155,68 @@ Place as a building from the Explosives menu to use.</description>
 					<min>50</min>
 					<max>50</max>
 				</wickTicks>
-				<startWickHitPointsPercent>0</startWickHitPointsPercent>
+				<startWickHitPointsPercent>.2</startWickHitPointsPercent>
 				<breakSound>RemoteGlassBreak</breakSound>
+				<spawnThingDef>WallFoamBlob</spawnThingDef>
+				<numFoamBlobs>5</numFoamBlobs>
 			</li>
 		</comps>
 		<statBases>
 			<MarketValue>150</MarketValue>
+		</statBases>
+	</ThingDef>
+	
+	<ThingDef ParentName="BaseExplosivePart">
+		<defName>RemoteSleepingGasCan</defName>
+		<label>sleeping gas canister</label>
+		<description>A remotely triggered canister containing sleeping gas.
+Place as a building from the Explosives menu to use.</description>
+		<graphicData>
+			<texPath>canister_gas</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+		</graphicData>
+		<comps>
+			<li Class="RemoteExplosives.CompProperties_ChemicalExplosive">
+				<compClass>RemoteExplosives.CompChemicalExplosive</compClass>
+				<wickTicks>
+					<min>50</min>
+					<max>50</max>
+				</wickTicks>
+				<startWickHitPointsPercent>.2</startWickHitPointsPercent>
+				<breakSound>RemoteGlassBreak</breakSound>
+				<spawnThingDef>Gas_Sleeping</spawnThingDef>
+				<gasConcentration>80000</gasConcentration>
+			</li>
+		</comps>
+		<statBases>
+			<MarketValue>150</MarketValue>
+		</statBases>
+	</ThingDef>
+	
+	<ThingDef ParentName="BaseExplosivePart">
+		<defName>RemoteRefinedSleepingGasCan</defName>
+		<label>refined sleeping gas canister</label>
+		<description>A remotely triggered canister filled with refined sleeping gas. Significantly more potent than common sleeping gas.
+Place as a building from the Explosives menu to use.</description>
+		<graphicData>
+			<texPath>canister_gas_refined</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+		</graphicData>
+		<comps>
+			<li Class="RemoteExplosives.CompProperties_ChemicalExplosive">
+				<compClass>RemoteExplosives.CompChemicalExplosive</compClass>
+				<wickTicks>
+					<min>50</min>
+					<max>50</max>
+				</wickTicks>
+				<startWickHitPointsPercent>.2</startWickHitPointsPercent>
+				<breakSound>RemoteGlassBreak</breakSound>
+				<spawnThingDef>Gas_SleepingRefined</spawnThingDef>
+				<gasConcentration>80000</gasConcentration>
+			</li>
+		</comps>
+		<statBases>
+			<MarketValue>300</MarketValue>
 		</statBases>
 	</ThingDef>
 
@@ -194,6 +250,7 @@ Place as a building from the Explosives menu to use.</description>
 		<graphicData>
 			<texPath>spark_powder</texPath>
 			<graphicClass>Graphic_Single</graphicClass>
+			<drawSize>(.8, .8)</drawSize>
 		</graphicData>
 		<comps>
 			<li Class="CompProperties_Explosive">
