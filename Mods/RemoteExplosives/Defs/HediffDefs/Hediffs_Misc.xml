@@ -16,7 +16,7 @@
 					<min>0.0001</min>
 					<max>0.0003</max>
 				</severityRecoveryPerTick>
-				<cooldownAfterSeverityIncrease>50</cooldownAfterSeverityIncrease>
+				<cooldownAfterSeverityIncrease>300</cooldownAfterSeverityIncrease>
 				<severityIncreaseDetectionThreshold>0.002</severityIncreaseDetectionThreshold>
 			</li>
 		</comps>

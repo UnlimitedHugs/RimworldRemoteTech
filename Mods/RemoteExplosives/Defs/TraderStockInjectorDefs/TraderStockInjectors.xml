@@ -146,8 +146,15 @@
 			<li Class="StockGenerator_SingleDef">
 				<thingDef>RemoteChemicalCan</thingDef>
 				<countRange>
-					<min>4</min>
-					<max>12</max>
+					<min>2</min>
+					<max>8</max>
+				</countRange>
+			</li>
+			<li Class="StockGenerator_SingleDef">
+				<thingDef>RemoteRefinedSleepingGasCan</thingDef>
+				<countRange>
+					<min>2</min>
+					<max>8</max>
 				</countRange>
 			</li>
 		</stockGenerators>

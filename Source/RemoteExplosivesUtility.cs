@@ -156,6 +156,33 @@ namespace RemoteExplosives {
 			}
 			return 0;
 		}
+
+		public static GasCloud TryFindGasCloudAt(Map map, IntVec3 pos, ThingDef matchingDef = null) {
+			if (!pos.InBounds(map)) return null;
+			var thingList = map.thingGrid.ThingsListAtFast(map.cellIndices.CellToIndex(pos));
+			for (int i = 0; i < thingList.Count; ++i) {
+				var cloud = thingList[i] as GasCloud;
+				if (cloud != null && (matchingDef == null || cloud.def == matchingDef)) return cloud;
+			}
+			return null;
+		}
+
+		public static void DeployGas(Map map, IntVec3 pos, ThingDef gasDef, int amount) {
+			if (gasDef == null) {
+				RemoteExplosivesController.Instance.Logger.Error("Tried to deploy null GasDef: " + Environment.StackTrace);
+				return;
+			}
+			var cloud = TryFindGasCloudAt(map, pos, gasDef);
+			if (cloud == null) {
+				cloud = ThingMaker.MakeThing(gasDef) as GasCloud;
+				if (cloud == null) {
+					RemoteExplosivesController.Instance.Logger.Error(string.Format("Deployed thing was not a GasCloud: {0}", gasDef));
+					return;
+				}
+				GenPlace.TryPlaceThing(cloud, pos, map, ThingPlaceMode.Direct);
+			}
+			cloud.ReceiveConcentration(amount);
+		}
 		
 		private static bool TileIsInRange(IntVec3 tile1, IntVec3 tile2, float maxDistance) {
 			return Mathf.Sqrt(Mathf.Pow(tile1.x - tile2.x, 2) + Mathf.Pow(tile1.z - tile2.z, 2)) <= maxDistance;

@@ -39,7 +39,8 @@
 	<FoamWall_smoothAction_label>Smooth</FoamWall_smoothAction_label>
 	<FoamWall_smoothAction_desc>Smooth this wall to make it more presentable and usable as an interior wall.</FoamWall_smoothAction_desc>
 	
-	<GasCloud_concentration_label>Concentration: {0}</GasCloud_concentration_label>
+	<GasCloud_statusReadout_high>{0} ({1:F1}K, {2:F0}% effect)</GasCloud_statusReadout_high>
+	<GasCloud_statusReadout_low>{0} ({1:F0}, {2:F0}% effect)</GasCloud_statusReadout_low>
 	
 	<HediffRecovery_status_label>recovering</HediffRecovery_status_label>
 	
@@ -76,4 +77,6 @@
 	<Setting_autoArmMining_desc>When enabled, mining explosives will be automatically armed when they are deployed.</Setting_autoArmMining_desc>
 	<Setting_autoArmUtility_label>Auto-arm utility explosives</Setting_autoArmUtility_label>
 	<Setting_autoArmUtility_desc>When enabled, utility explosives will be automatically armed when they are deployed.</Setting_autoArmUtility_desc>
+	
+	<GasVent_blocked>Blocked</GasVent_blocked>
 </LanguageData>
