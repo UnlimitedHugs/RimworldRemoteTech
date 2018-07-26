@@ -19,7 +19,7 @@ namespace RemoteExplosives {
 			Scribe_Values.Look(ref workLeft, "workLeft");
 		}
 
-		public override bool TryMakePreToilReservations() {
+		public override bool TryMakePreToilReservations(bool errorOnFailed) {
 			return pawn.Reserve(job.GetTarget(TableInd), job) && pawn.Reserve(job.GetTarget(ComponentInd), job);
 		}
 

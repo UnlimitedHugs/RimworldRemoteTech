@@ -19,7 +19,7 @@
 		<randomizeRotationOnSpawn>true</randomizeRotationOnSpawn>
 		<designateHaulable>true</designateHaulable>
 		<stackLimit>1</stackLimit>
-		<tradeability>Never</tradeability>
+		<tradeability>None</tradeability>
 	</ThingDef>
 	
 	<ThingDef ParentName="ChunkBase">
@@ -30,6 +30,9 @@
 			<texPath>gold_slag</texPath>
 			<graphicClass>Graphic_Single</graphicClass>
 		</graphicData>
+		<statBases>
+			<Mass>10</Mass>
+		</statBases>
 		<soundDrop>ChunkSlag_Drop</soundDrop>
 		<thingCategories>
 			<li>Chunks</li>

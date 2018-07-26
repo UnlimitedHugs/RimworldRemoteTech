@@ -3,12 +3,12 @@
 
 	<ThingDef Name="BuildingMiscBase" Abstract="True">
 		<category>Building</category>
-		<soundImpactDefault>BulletImpactGround</soundImpactDefault>
+		<soundImpactDefault>BulletImpact_Ground</soundImpactDefault>
 		<selectable>true</selectable>
 		<drawerType>MapMeshAndRealTime</drawerType>
 		<terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
 		<leaveResourcesWhenKilled>false</leaveResourcesWhenKilled>
-		<filthLeaving>BuildingRubble</filthLeaving>
+		<filthLeaving>Filth_RubbleBuilding</filthLeaving>
 	</ThingDef>
 
 	<ThingDef ParentName="BuildingMiscBase">
@@ -79,9 +79,6 @@
 				<edgeRight>Damage/Edge</edgeRight>
 			</damageData>
 		</graphicData>
-		<blueprintGraphicData>
-			<texPath>Things/Building/Linked/Wall_Blueprint_Atlas</texPath>
-		</blueprintGraphicData>
 		<uiIconPath>FoamWall/foam_wall_icon</uiIconPath>
 		<statBases>
 			<MaxHitPoints>8500</MaxHitPoints>
@@ -111,6 +108,9 @@
 			<canBuildNonEdificesUnder>false</canBuildNonEdificesUnder>
 			<deconstructible>false</deconstructible>
 			<repairable>false</repairable>
+			<blueprintGraphicData>
+				<texPath>Things/Building/Linked/Wall_Blueprint_Atlas</texPath>
+			</blueprintGraphicData>
 		</building>
 		<damageMultipliers>
 			<li>
@@ -185,7 +185,7 @@
 		<drawerType>MapMeshOnly</drawerType>
 		<category>Building</category>
 		<selectable>true</selectable>
-		<filthLeaving>RockRubble</filthLeaving>
+		<filthLeaving>Filth_RubbleRock</filthLeaving>
 		<scatterableOnMapGen>false</scatterableOnMapGen>
 		<altitudeLayer>Building</altitudeLayer>
 		<passability>PassThroughOnly</passability>
@@ -233,7 +233,7 @@ Tip: switches can be used to toggle vents remotely, as well as in groups.</descr
 		</graphicData>
 		<costList>
 			<Steel>40</Steel>
-			<Component>2</Component>
+			<ComponentIndustrial>2</ComponentIndustrial>
 		</costList>
 		<constructEffect>ConstructMetal</constructEffect>
 		<altitudeLayer>Building</altitudeLayer>
@@ -257,7 +257,7 @@ Tip: switches can be used to toggle vents remotely, as well as in groups.</descr
 		<comps>
 			<li Class="CompProperties_Power">
 				<compClass>CompPowerTrader</compClass>
-				<startElectricalFires>false</startElectricalFires>
+				<shortCircuitInRain>false</shortCircuitInRain>
 				<basePowerConsumption>50</basePowerConsumption>
 			</li>
 			<li Class="CompProperties_Flickable"/>

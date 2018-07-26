@@ -15,8 +15,8 @@ namespace RemoteExplosives {
 			base.Init(req);
 			baseData = data as SidedBaseGraphicData;
 			if (baseData != null) {
-				baseMatFront = MaterialPool.MatFrom(new MaterialRequest(baseData.BaseFrontTex, ShaderDatabase.ShaderFromType(baseData.shaderType), baseData.color));
-				baseMatSide = MaterialPool.MatFrom(new MaterialRequest(baseData.BaseSideTex, ShaderDatabase.ShaderFromType(baseData.shaderType), baseData.color));
+				baseMatFront = MaterialPool.MatFrom(new MaterialRequest(baseData.BaseFrontTex, baseData.shaderType.Shader, baseData.color));
+				baseMatSide = MaterialPool.MatFrom(new MaterialRequest(baseData.BaseSideTex, baseData.shaderType.Shader, baseData.color));
 			}
 		}
 

@@ -14,8 +14,8 @@ namespace RemoteExplosives {
 			useMouseIcon = true;
 			defaultLabel = "WireDesignator_label".Translate();
 			defaultDesc = "WireDesignator_desc".Translate();
-			soundDragSustain = SoundDefOf.DesignateDragStandard;
-			soundDragChanged = SoundDefOf.DesignateDragStandardChanged;
+			soundDragSustain = SoundDefOf.Designate_DragStandard;
+			soundDragChanged = SoundDefOf.Designate_DragStandard_Changed;
 			soundSucceeded = SoundDefOf.ThingSelected;
 		}
 

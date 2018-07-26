@@ -5,7 +5,7 @@
 		<defName>DetonateExplosives</defName>
 		<label>trigger detonator</label>
 		<giverClass>RemoteExplosives.WorkGiver_IPawnDetonateable</giverClass>
-		<workType>Flicker</workType>
+		<workType>BasicWorker</workType>
 		<priorityInType>10</priorityInType>
 		<verb>detonate</verb>
 		<gerund>detonating</gerund>
@@ -15,7 +15,7 @@
 		<defName>SwitchRemoteExplosive</defName>
 		<label>switch remote explosive</label>
 		<giverClass>RemoteExplosives.WorkGiver_RemoteExplosive</giverClass>
-		<workType>Flicker</workType>
+		<workType>BasicWorker</workType>
 		<priorityInType>9</priorityInType>
 		<verb>switch</verb>
 		<gerund>switching</gerund>

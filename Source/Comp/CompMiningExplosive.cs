@@ -110,7 +110,7 @@ namespace RemoteExplosives {
 		// this affects the amount of ore drops
 		private void DamageResourceHolder(Thing thing, float efficiency) {
 			var damage = thing.MaxHitPoints * (1 - efficiency);
-			thing.TakeDamage(new DamageInfo(DamageDefOf.Bomb, (int)damage, -1F, parent));
+			thing.TakeDamage(new DamageInfo(DamageDefOf.Bomb, (int)damage, 0F, -1F, parent));
 		}
 
 		private void BreakMineableAndYieldResources(Mineable mineable) {

@@ -12,8 +12,8 @@ namespace RemoteExplosives {
 			Tooltip = tooltip;
 		}
 
-		public override bool DoGUI(Rect rect, bool colonistOrdering) {
-			var result = base.DoGUI(rect, colonistOrdering);
+		public override bool DoGUI(Rect rect, bool colonistOrdering, FloatMenu floatMenu) {
+			var result = base.DoGUI(rect, colonistOrdering, floatMenu);
 			if (!Tooltip.text.NullOrEmpty() || Tooltip.textGetter != null) {
 				TooltipHandler.TipRegion(rect, Tooltip);
 			}

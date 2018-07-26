@@ -7,7 +7,7 @@ namespace RemoteExplosives {
 	 * Calls a colonist to a detonator to perform the detonation.
 	 */
 	public class JobDriver_DetonateExplosives : JobDriver {
-		public override bool TryMakePreToilReservations() {
+		public override bool TryMakePreToilReservations(bool errorOnFailed) {
 			return pawn.Reserve(job.targetA, job);
 		}
 

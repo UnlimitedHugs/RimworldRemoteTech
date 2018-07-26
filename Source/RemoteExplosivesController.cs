@@ -59,10 +59,10 @@ namespace RemoteExplosives {
 
 		private void RemoveFoamWallsFromMeteoritePool() {
 			// smoothed foam walls are mineable, but should not appear in a meteorite drop
-			ItemCollectionGenerator_Meteorite.mineables.Remove(Resources.Thing.FoamWallSmooth);
-			ItemCollectionGenerator_Meteorite.mineables.Remove(Resources.Thing.FoamWallBricks);
+			ThingSetMaker_Meteorite.nonSmoothedMineables.Remove(Resources.Thing.FoamWallSmooth);
+			ThingSetMaker_Meteorite.nonSmoothedMineables.Remove(Resources.Thing.FoamWallBricks);
 			// same for our passable collapsed rock
-			ItemCollectionGenerator_Meteorite.mineables.Remove(Resources.Thing.CollapsedRoofRocks);
+			ThingSetMaker_Meteorite.nonSmoothedMineables.Remove(Resources.Thing.CollapsedRoofRocks);
 		}
 
 		private void PrepareReflection() {
@@ -166,7 +166,7 @@ namespace RemoteExplosives {
 
 			var newFixedFilter = new ThingFilter();
 			foreach (var allowedThingDef in recipeOriginal.fixedIngredientFilter.AllowedThingDefs) {
-				if (allowedThingDef == ThingDefOf.Component) continue;
+				if (allowedThingDef == ThingDefOf.ComponentIndustrial) continue;
 				newFixedFilter.SetAllow(allowedThingDef, true);
 			}
 			newFixedFilter.SetAllow(ThingDefOf.Steel, true);
@@ -176,7 +176,7 @@ namespace RemoteExplosives {
 			float numComponentsRequired = 0;
 			var newIngredientList = new List<IngredientCount>(recipeOriginal.ingredients);
 			foreach (var ingredientCount in newIngredientList) {
-				if (ingredientCount.filter.Allows(ThingDefOf.Component)) {
+				if (ingredientCount.filter.Allows(ThingDefOf.ComponentIndustrial)) {
 					numComponentsRequired = ingredientCount.GetBaseCount();
 					newIngredientList.Remove(ingredientCount);
 					break;
@@ -195,7 +195,7 @@ namespace RemoteExplosives {
 		}
 
 		private void DrawDebugControls() {
-			var map = Find.VisibleMap;
+			var map = Find.CurrentMap;
 			if(map == null) return;
 			if (Widgets.ButtonText(new Rect(10, 10, 50, 20), "Cloud")) {
 				DebugTools.curTool = new DebugTool("GasCloud placer", () => {

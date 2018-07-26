@@ -64,6 +64,7 @@ Place as a building from the Explosives menu to use.</description>
 		</comps>
 		<statBases>
 			<MarketValue>80</MarketValue>
+			<Mass>3</Mass>
 		</statBases>
 	</ThingDef>
 	
@@ -91,6 +92,7 @@ Place as a building from the Explosives menu to use.</description>
 		</comps>
 		<statBases>
 			<MarketValue>80</MarketValue>
+			<Mass>3</Mass>
 		</statBases>
 	</ThingDef>
 	
@@ -121,6 +123,7 @@ Place as a building from the Explosives menu to use.</description>
 			<ExplosiveChunkYield>.5</ExplosiveChunkYield>
 			<ExplosiveMiningYield>.75</ExplosiveMiningYield>
 			<ExplosiveWoodYield>.70</ExplosiveWoodYield>
+			<Mass>3</Mass>
 		</statBases>
 	</ThingDef>
 	
@@ -136,6 +139,7 @@ Place as a building from the Explosives menu to use.</description>
 		<statBases>
 			<MaxHitPoints>120</MaxHitPoints>
 			<MarketValue>360</MarketValue>
+			<Mass>5</Mass>
 		</statBases>
 	</ThingDef>
 	
@@ -163,6 +167,7 @@ Place as a building from the Explosives menu to use.</description>
 		</comps>
 		<statBases>
 			<MarketValue>150</MarketValue>
+			<Mass>2</Mass>
 		</statBases>
 	</ThingDef>
 	
@@ -190,6 +195,7 @@ Place as a building from the Explosives menu to use.</description>
 		</comps>
 		<statBases>
 			<MarketValue>150</MarketValue>
+			<Mass>2</Mass>
 		</statBases>
 	</ThingDef>
 	
@@ -217,6 +223,7 @@ Place as a building from the Explosives menu to use.</description>
 		</comps>
 		<statBases>
 			<MarketValue>300</MarketValue>
+			<Mass>2</Mass>
 		</statBases>
 	</ThingDef>
 
@@ -241,6 +248,9 @@ Place as a building from the Explosives menu to use.</description>
 				</wickTicks>
 			</li>
 		</comps>
+		<statBases>
+			<Mass>4</Mass>
+		</statBases>
 	</ThingDef>
 	
 	<ThingDef ParentName="BaseExplosiveIngredient">
@@ -266,6 +276,9 @@ Place as a building from the Explosives menu to use.</description>
 				</wickTicks>
 			</li>
 		</comps>
+		<statBases>
+			<Mass>.1</Mass>
+		</statBases>
 	</ThingDef>
 	
 	<ThingDef ParentName="BaseExplosiveIngredient">
@@ -279,6 +292,7 @@ Can be made at a campfire or a fueled stove.</description>
 		</graphicData>
 		<statBases>
 			<Flammability>3.0</Flammability>
+			<Mass>.1</Mass>
 		</statBases>
 	</ThingDef>
 	

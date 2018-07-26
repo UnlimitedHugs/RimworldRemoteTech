@@ -7,7 +7,7 @@ namespace RemoteExplosives {
 	 * This includes both setting the armed state and the channel.
 	 */
 	public class JobDriver_SwitchRemoteExplosive : JobDriver {
-		public override bool TryMakePreToilReservations() {
+		public override bool TryMakePreToilReservations(bool errorOnFailed) {
 			return pawn.Reserve(job.targetA, job);
 		}
 

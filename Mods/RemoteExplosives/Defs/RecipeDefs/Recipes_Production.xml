@@ -28,7 +28,7 @@
 			<li>
 				<filter>
 					<thingDefs>
-						<li>Component</li>
+						<li>ComponentIndustrial</li>
 					</thingDefs>
 				</filter>
 				<count>1</count>
@@ -45,7 +45,7 @@
 		<fixedIngredientFilter>
 			<thingDefs>
 				<li>Shell_HighExplosive</li>
-				<li>Component</li>
+				<li>ComponentIndustrial</li>
 				<li>Silver</li>
 			</thingDefs>
 		</fixedIngredientFilter>
@@ -64,7 +64,7 @@
 		<recipeUsers>
 			<li>RemoteExplosivesBench</li>
 		</recipeUsers>
-		<researchPrerequisite>IEDIncendiary</researchPrerequisite>
+		<researchPrerequisite>IEDs</researchPrerequisite>
 		<workSpeedStat>SmithingSpeed</workSpeedStat>
 		<effectWorking>Cook</effectWorking>
 		<soundWorking>Recipe_Machining</soundWorking>
@@ -83,7 +83,7 @@
 			<li>
 				<filter>
 					<thingDefs>
-						<li>Component</li>
+						<li>ComponentIndustrial</li>
 					</thingDefs>
 				</filter>
 				<count>1</count>
@@ -100,7 +100,7 @@
 		<fixedIngredientFilter>
 			<thingDefs>
 				<li>Shell_Incendiary</li>
-				<li>Component</li>
+				<li>ComponentIndustrial</li>
 				<li>Silver</li>
 			</thingDefs>
 		</fixedIngredientFilter>
@@ -129,7 +129,7 @@
 			<li>
 				<filter>
 					<thingDefs>
-						<li>Component</li>
+						<li>ComponentIndustrial</li>
 					</thingDefs>
 				</filter>
 				<count>1</count>
@@ -153,7 +153,7 @@
 		</ingredients>
 		<fixedIngredientFilter>
 			<thingDefs>
-				<li>Component</li>
+				<li>ComponentIndustrial</li>
 				<li>Silver</li>
 				<li>Gold</li>
 			</thingDefs>
@@ -183,7 +183,7 @@
 			<li>
 				<filter>
 					<thingDefs>
-						<li>Component</li>
+						<li>ComponentIndustrial</li>
 					</thingDefs>
 				</filter>
 				<count>1</count>
@@ -199,7 +199,7 @@
 		</ingredients>
 		<fixedIngredientFilter>
 			<thingDefs>
-				<li>Component</li>
+				<li>ComponentIndustrial</li>
 				<li>Silver</li>
 			</thingDefs>
 		</fixedIngredientFilter>
@@ -228,7 +228,7 @@
 			<li>
 				<filter>
 					<thingDefs>
-						<li>Component</li>
+						<li>ComponentIndustrial</li>
 					</thingDefs>
 				</filter>
 				<count>1</count>
@@ -244,7 +244,7 @@
 			<li>
 				<filter>
 					<thingDefs>
-						<li>HerbalMedicine</li>
+						<li>MedicineHerbal</li>
 					</thingDefs>
 				</filter>
 				<count>2</count>
@@ -252,9 +252,9 @@
 		</ingredients>
 		<fixedIngredientFilter>
 			<thingDefs>
-				<li>Component</li>
+				<li>ComponentIndustrial</li>
 				<li>Silver</li>
-				<li>HerbalMedicine</li>
+				<li>MedicineHerbal</li>
 			</thingDefs>
 		</fixedIngredientFilter>
 		<products>
@@ -296,7 +296,7 @@
 			<li>
 				<filter>
 					<thingDefs>
-						<li>Component</li>
+						<li>ComponentIndustrial</li>
 					</thingDefs>
 				</filter>
 				<count>1</count>
@@ -312,7 +312,7 @@
 			<li>
 				<filter>
 					<thingDefs>
-						<li>Medicine</li>
+						<li>MedicineIndustrial</li>
 					</thingDefs>
 				</filter>
 				<count>2</count>
@@ -320,9 +320,9 @@
 		</ingredients>
 		<fixedIngredientFilter>
 			<thingDefs>
-				<li>Component</li>
+				<li>ComponentIndustrial</li>
 				<li>Silver</li>
-				<li>Medicine</li>
+				<li>MedicineIndustrial</li>
 			</thingDefs>
 		</fixedIngredientFilter>
 		<products>

@@ -11,7 +11,7 @@ namespace RemoteExplosives {
 	public class JobDriver_SmoothFoamWall : JobDriver {
 		private float workLeft;
 
-		public override bool TryMakePreToilReservations() {
+		public override bool TryMakePreToilReservations(bool errorOnFailed) {
 			return pawn.Reserve(job.targetA, job);
 		}
 

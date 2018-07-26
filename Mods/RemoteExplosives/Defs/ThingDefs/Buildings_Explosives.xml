@@ -3,13 +3,13 @@
 	
 	<ThingDef Name="BuildingBase" Abstract="True">
 		<category>Building</category>
-		<soundImpactDefault>BulletImpactMetal</soundImpactDefault>
+		<soundImpactDefault>MetalHitImportant</soundImpactDefault>
 		<selectable>true</selectable>
 		<drawerType>RealtimeOnly</drawerType>
 		<terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
 		<repairEffect>Repair</repairEffect>
 		<leaveResourcesWhenKilled>false</leaveResourcesWhenKilled>
-		<filthLeaving>BuildingRubble</filthLeaving>
+		<filthLeaving>Filth_RubbleBuilding</filthLeaving>
 		<designationCategory>RemoteExplosives</designationCategory>
 	</ThingDef>
 	
@@ -64,10 +64,13 @@ Right-click with a drafted colonist for better timing.</description>
 		<castEdgeShadows>true</castEdgeShadows>
 		<staticSunShadowHeight>0.10</staticSunShadowHeight>
 		<costList>
-			<Component>2</Component>
+			<ComponentIndustrial>2</ComponentIndustrial>
 			<Steel>20</Steel>
 			<Silver>10</Silver>
 		</costList>
+		<thingCategories>
+			<li>Buildings</li>
+		</thingCategories>
 		<altitudeLayer>Building</altitudeLayer>
 		<fillPercent>0.5</fillPercent>
 		<useHitPoints>True</useHitPoints>
@@ -76,6 +79,7 @@ Right-click with a drafted colonist for better timing.</description>
 			<MaxHitPoints>180</MaxHitPoints>
 			<Flammability>1.0</Flammability>
 			<Beauty>3</Beauty>
+			<Mass>15</Mass>
 		</statBases>
 		<size>(2,1)</size>
 		<constructEffect>ConstructMetal</constructEffect>
@@ -85,12 +89,12 @@ Right-click with a drafted colonist for better timing.</description>
 		<interactionCellOffset>(1,0,-1)</interactionCellOffset>
 		<surfaceType>Item</surfaceType>
 		<specialDisplayRadius>35</specialDisplayRadius>
-		<minifiedDef>MinifiedFurniture</minifiedDef>
+		<minifiedDef>MinifiedThing</minifiedDef>
 		<tickerType>Normal</tickerType>
 		<comps>
 			<li Class="CompProperties_Power">
 				<compClass>CompPowerTrader</compClass>
-				<startElectricalFires>false</startElectricalFires>
+				<shortCircuitInRain>false</shortCircuitInRain>
 				<basePowerConsumption>200</basePowerConsumption>
 			</li>
 			<li Class="CompProperties_Flickable"/>
@@ -123,8 +127,11 @@ Research different types of remote explosives to unlock available recipes.</desc
 		<costList>
 			<Steel>65</Steel>
 			<Silver>200</Silver>
-			<Component>3</Component>
+			<ComponentIndustrial>3</ComponentIndustrial>
 		</costList>
+		<thingCategories>
+			<li>Buildings</li>
+		</thingCategories>
 		<constructEffect>ConstructMetal</constructEffect>
 		<altitudeLayer>Building</altitudeLayer>
 		<fillPercent>0.5</fillPercent>
@@ -134,6 +141,7 @@ Research different types of remote explosives to unlock available recipes.</desc
 			<MaxHitPoints>150</MaxHitPoints>
 			<Flammability>1.0</Flammability>
 			<Cleanliness>-3</Cleanliness>
+			<Mass>50</Mass>
 		</statBases>
 		<size>(3,1)</size>
 		<terrainAffordanceNeeded>Heavy</terrainAffordanceNeeded>
@@ -142,7 +150,7 @@ Research different types of remote explosives to unlock available recipes.</desc
 		<hasInteractionCell>True</hasInteractionCell>
 		<interactionCellOffset>(0,0,-1)</interactionCellOffset>
 		<surfaceType>Item</surfaceType>
-		<minifiedDef>MinifiedFurniture</minifiedDef>
+		<minifiedDef>MinifiedThing</minifiedDef>
 		<inspectorTabs>
 			<li>RemoteExplosives.ITab_ExplosivesBills</li>
 		</inspectorTabs>
@@ -152,7 +160,7 @@ Research different types of remote explosives to unlock available recipes.</desc
 		<comps>
 			<li Class="CompProperties_Power">
 				<compClass>CompPowerTrader</compClass>
-				<startElectricalFires>true</startElectricalFires>
+				<shortCircuitInRain>true</shortCircuitInRain>
 				<basePowerConsumption>180</basePowerConsumption>
 			</li>
 			<li Class="CompProperties_Flickable"/>
@@ -188,6 +196,9 @@ Right-click with a drafted colonist for better timing.</description>
 			<WoodLog>30</WoodLog>
 			<Steel>20</Steel>
 		</costList>
+		<thingCategories>
+			<li>Buildings</li>
+		</thingCategories>
 		<comps>
 			<li Class="RemoteExplosives.CompProperties_WiredDetonationSender"/>
 		</comps>
@@ -198,13 +209,14 @@ Right-click with a drafted colonist for better timing.</description>
 			<WorkToBuild>1300</WorkToBuild>
 			<MaxHitPoints>70</MaxHitPoints>
 			<Flammability>1.0</Flammability>
+			<Mass>8</Mass>
 		</statBases>
 		<size>(1,1)</size>
 		<constructEffect>ConstructWood</constructEffect>
 		<passability>PassThroughOnly</passability>
 		<pathCost>30</pathCost>
 		<hasInteractionCell>False</hasInteractionCell>
-		<minifiedDef>MinifiedFurniture</minifiedDef>
+		<minifiedDef>MinifiedThing</minifiedDef>
 		<researchPrerequisites><li>MakeshiftExplosives</li></researchPrerequisites>
 	</ThingDef>
     
@@ -222,9 +234,6 @@ Right-click with a drafted colonist for better timing.</description>
 			</damageData>
 		</graphicData>
 		<tickerType>Rare</tickerType>
-		<blueprintGraphicData>
-			<texPath>DetWire/det_wire_blueprint_atlas</texPath>
-		</blueprintGraphicData>
 		<uiIconPath>DetWire/det_wire_icon</uiIconPath>
 		<altitudeLayer>FloorEmplacement</altitudeLayer>
 		<passability>Standable</passability>
@@ -239,6 +248,9 @@ Right-click with a drafted colonist for better timing.</description>
 			<failureEffecter>DetWireFailure</failureEffecter>
 			<fireOnFailure>true</fireOnFailure>
 			<dryOffJobDurationTicks>80</dryOffJobDurationTicks>
+			<blueprintGraphicData>
+				<texPath>DetWire/det_wire_blueprint_atlas</texPath>
+			</blueprintGraphicData>
 		</building>
 		<statBases>
 			<MaxHitPoints>80</MaxHitPoints>
@@ -649,6 +661,9 @@ Detonate from the Remote Explosives Console.</description>
 			<MiningExplosiveComponent>2</MiningExplosiveComponent>
 			<Plasteel>20</Plasteel>
 		</costList>
+		<thingCategories>
+			<li>Buildings</li>
+		</thingCategories>
 		<resourcesFractionWhenDeconstructed>0.75</resourcesFractionWhenDeconstructed>
 		<altitudeLayer>Building</altitudeLayer>
 		<fillPercent>0.5</fillPercent>
@@ -661,12 +676,13 @@ Detonate from the Remote Explosives Console.</description>
 			<ExplosiveChunkYield>.5</ExplosiveChunkYield>
 			<ExplosiveMiningYield>.3</ExplosiveMiningYield>
 			<ExplosiveWoodYield>.1</ExplosiveWoodYield>
+			<Mass>20</Mass>
 		</statBases>
 		<size>(1,1)</size>
 		<constructEffect>ConstructMetal</constructEffect>
 		<passability>PassThroughOnly</passability>
 		<pathCost>60</pathCost>
-		<minifiedDef>MinifiedFurniture</minifiedDef>
+		<minifiedDef>MinifiedThing</minifiedDef>
 		<comps>
 			<li Class="RemoteExplosives.CompProperties_MiningExplosive">
 				<compClass>RemoteExplosives.CompRoofBreakerExplosive</compClass>

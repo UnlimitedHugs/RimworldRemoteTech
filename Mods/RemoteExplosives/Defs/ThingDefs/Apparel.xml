@@ -64,6 +64,7 @@ The filters wear out fairly quickly, so it's recommended to wear this only when 
 			<MarketValue>160</MarketValue>
 			<ArmorRating_Blunt>0.05</ArmorRating_Blunt>
 			<ArmorRating_Sharp>0.05</ArmorRating_Sharp>
+			<Mass>1</Mass>
 		</statBases>
 		<generateCommonality>.8</generateCommonality>
 		<thingCategories>
@@ -71,12 +72,12 @@ The filters wear out fairly quickly, so it's recommended to wear this only when 
 		</thingCategories>
 		<costList>
 			<Steel>40</Steel>
-			<Component>2</Component>
-			<Medicine>2</Medicine>
+			<ComponentIndustrial>2</ComponentIndustrial>
+			<MedicineIndustrial>2</MedicineIndustrial>
 		</costList>
 		<equippedStatOffsets>
 			<ToxicSensitivity>-0.80</ToxicSensitivity>
-			<ShootingAccuracy>-0.05</ShootingAccuracy>
+			<ShootingAccuracyPawn>-0.05</ShootingAccuracyPawn>
 			<SocialImpact>-0.2</SocialImpact>
 		</equippedStatOffsets>
 		<apparel>
@@ -130,6 +131,7 @@ Works only on the white channel, has limited range and runs on a non-rechargeabl
 			<MarketValue>300</MarketValue>
 			<PortableDetonatorRange>18</PortableDetonatorRange>
 			<PortableDetonatorNumUses>20</PortableDetonatorNumUses>
+			<Mass>1</Mass>
 		</statBases>
 		<generateCommonality>0.00001</generateCommonality>
 		<recipeMaker>
@@ -144,7 +146,7 @@ Works only on the white channel, has limited range and runs on a non-rechargeabl
 			<researchPrerequisite>RemoteDetonator</researchPrerequisite>
 		</recipeMaker>
 		<costList>
-			<Component>2</Component>
+			<ComponentIndustrial>2</ComponentIndustrial>
 			<Silver>8</Silver>
 			<Steel>40</Steel>
 		</costList>

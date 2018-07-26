@@ -61,7 +61,7 @@ namespace RemoteExplosives {
 						researchTip = "BillsTab_ResearchRequired".Translate(recipe.researchPrerequisite.label);
 					}
 					var option = new FloatMenuOptionWithTooltip(recipe.LabelCap, delegate {
-						var map = Find.VisibleMap;
+						var map = Find.CurrentMap;
 						if (map == null || !map.mapPawns.FreeColonists.Any(recipe.PawnSatisfiesSkillRequirements)) {
 							Bill.CreateNoPawnsWithSkillDialog(recipe);
 						}

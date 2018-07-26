@@ -34,7 +34,7 @@ namespace RemoteExplosives {
 					var roofCell = cell;
 					HugsLibController.Instance.TickDelayScheduler.ScheduleCallback(() => { // delay collapse for more interesting visual effect
 						CollapseRockOnCell(roofCell, map);
-						SoundDefOf.RoofCollapse.PlayOneShot(new TargetInfo(roofCell, map));
+						SoundDefOf.Roof_Collapse.PlayOneShot(new TargetInfo(roofCell, map));
 					}, CollapseDelay.RandomInRange);
 				}
 			}
@@ -56,12 +56,12 @@ namespace RemoteExplosives {
 				var thingList = cell.GetThingList(map);
 				for (int j = thingList.Count - 1; j >= 0; j--) {
 					var thing = thingList[j];
-					map.roofCollapseBuffer.Notify_Crushed(thing);
+					//map.roofCollapseBuffer.Notify_Crushed(thing);
 					var pawn = thing as Pawn;
 					DamageInfo dinfo;
 					if (pawn != null) {
 						var brain = pawn.health.hediffSet.GetBrain();
-						dinfo = new DamageInfo(DamageDefOf.Crush, 99999, -1f, null, brain);
+						dinfo = new DamageInfo(DamageDefOf.Crush, 99999, 1F, -1f, null, brain);
 					} else {
 						dinfo = new DamageInfo(DamageDefOf.Crush, 99999);
 						dinfo.SetBodyRegion(BodyPartHeight.Top, BodyPartDepth.Outside);

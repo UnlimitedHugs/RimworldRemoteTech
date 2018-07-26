@@ -128,7 +128,7 @@ namespace RemoteExplosives {
 		private void PlayNeedPowerEffect() {
 			var info = SoundInfo.InMap(this);
 			info.volumeFactor = 3f;
-			SoundDefOf.PowerOffSmall.PlayOneShot(info);
+			SoundDefOf.Power_OffSmall.PlayOneShot(info);
 		}
 
 		private void UpdateNumArmedExplosivesInRange() {

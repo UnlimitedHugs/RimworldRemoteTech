@@ -41,11 +41,11 @@
 		<thingClass>RemoteExplosives.Plant_Sparkweed</thingClass>
 		<label>sparkweed</label>
 		<description>A curious plant of unknown origin. Its stems contain a flammable orange powder that is released when the plant is disturbed. The powder ignites on contact with air, producing hot sparks that can set fire to the surrounding area.
-It is cultivated as a source of low-grade explosive and gunpowder.
-		</description>
+It is cultivated as a source of low-grade explosive and gunpowder.</description>
 		<statBases>
 			<MaxHitPoints>80</MaxHitPoints>
 			<Beauty>1</Beauty>
+			<Nutrition>0.05</Nutrition>
 		</statBases>
 		<graphicData>
 			<texPath>sparkweed</texPath>
@@ -53,13 +53,9 @@ It is cultivated as a source of low-grade explosive and gunpowder.
 		</graphicData>
 		<selectable>true</selectable>
 		<pathCost>7</pathCost>
-		<ingestible>
-			<nutrition>0.05</nutrition>
-		</ingestible>
 
 		<plant>
 			<dieIfLeafless>true</dieIfLeafless>
-			<reproduces>false</reproduces>
 			<harvestTag>Standard</harvestTag>
 			<harvestedThingDef>Sparkpowder</harvestedThingDef>
 			<harvestYield>6</harvestYield>
@@ -86,7 +82,7 @@ It is cultivated as a source of low-grade explosive and gunpowder.
 		<ignitePawnChance>.1</ignitePawnChance>
 		<igniteEffecter>SparkweedIgnite</igniteEffecter>
 		<ignitionSuppressorThings>
-			<li>FilthFireFoam</li>
+			<li>Filth_FireFoam</li>
 		</ignitionSuppressorThings>
 	</ThingDef>
 

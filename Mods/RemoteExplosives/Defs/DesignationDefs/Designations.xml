@@ -16,7 +16,7 @@
 	
 	<DesignationDef>
 		<defName>FoamWallSmooth</defName>
-		<texturePath>Designations/SmoothFloor</texturePath>
+		<texturePath>Designations/SmoothSurface</texturePath>
 		<targetType>Thing</targetType>
 		<designateCancelable>true</designateCancelable>
 	</DesignationDef>

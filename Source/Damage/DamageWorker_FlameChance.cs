@@ -9,7 +9,7 @@ namespace RemoteExplosives {
 	public class DamageWorker_FlameChance : DamageWorker_AddInjury {
 		public override DamageResult Apply(DamageInfo dinfo, Thing victim) {
 			if (ShouldCreateFire()) {
-				if (!dinfo.InstantOldInjury) {
+				if (!dinfo.InstantPermanentInjury) {
 					victim.TryAttachFire(Rand.Range(0.15f, 0.25f));
 				}
 				var pawn = victim as Pawn;

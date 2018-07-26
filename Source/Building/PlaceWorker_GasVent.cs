@@ -6,8 +6,8 @@ namespace RemoteExplosives {
 		private readonly Color DefaultArrowColor = Color.white;
 		private readonly Color BlockedArrowColor = Color.red;
 
-		public override void DrawGhost(ThingDef def, IntVec3 center, Rot4 rot) {
-			var map = Find.VisibleMap;
+		public override void DrawGhost(ThingDef def, IntVec3 center, Rot4 rot, Color ghostCol) {
+			var map = Find.CurrentMap;
 			if (map == null) return;
 			var targetCell = center + IntVec3Utility.RotatedBy(IntVec3.North, rot);
 			var sourceCell = center + IntVec3Utility.RotatedBy(IntVec3.South, rot);

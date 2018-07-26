@@ -11,11 +11,9 @@
 		<parts>
 			<li Class="StatPart_Quality">
 				<factorAwful>0.65</factorAwful>
-				<factorShoddy>0.75</factorShoddy>
 				<factorPoor>0.9</factorPoor>
 				<factorNormal>1</factorNormal>
 				<factorGood>1.05</factorGood>
-				<factorSuperior>1.1</factorSuperior>
 				<factorExcellent>1.15</factorExcellent>
 				<factorMasterwork>1.2</factorMasterwork>
 				<factorLegendary>1.25</factorLegendary>
@@ -33,11 +31,9 @@
 		<parts>
 			<li Class="StatPart_Quality">
 				<factorAwful>0.7</factorAwful>
-				<factorShoddy>0.8</factorShoddy>
 				<factorPoor>0.9</factorPoor>
 				<factorNormal>1</factorNormal>
 				<factorGood>1.25</factorGood>
-				<factorSuperior>1.5</factorSuperior>
 				<factorExcellent>2</factorExcellent>
 				<factorMasterwork>2.5</factorMasterwork>
 				<factorLegendary>3</factorLegendary>

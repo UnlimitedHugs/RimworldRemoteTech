@@ -49,7 +49,7 @@ namespace RemoteExplosives {
 			if (goodwillBefore - goodwillLoss < CustomFactionGoodwillCaps.DefaultMinNegativeGoodwill) {
 				UtilityWorldObjectManager.GetUtilityWorldObject<CustomFactionGoodwillCaps>().SetMinNegativeGoodwill(faction, goodwillBefore - goodwillLoss);	
 			}
-			faction.AffectGoodwillWith(Faction.OfPlayer, -goodwillLoss);
+			faction.TryAffectGoodwillWith(Faction.OfPlayer, -goodwillLoss);
 		}
 
 		private bool PawnHasImmunizingApparel(Pawn pawn) {

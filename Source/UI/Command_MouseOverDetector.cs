@@ -9,12 +9,12 @@ namespace RemoteExplosives {
 	public class Command_MouseOverDetector : Command_Action {
 		public Action mouseOverCallback;
 
-		public override GizmoResult GizmoOnGUI(Vector2 topLeft) {
-			var rect = new Rect(topLeft.x, topLeft.y, Width, Height);
-			if (Mouse.IsOver(rect) && mouseOverCallback!=null) {
+		public override GizmoResult GizmoOnGUI(Vector2 topLeft, float maxWidth) {
+			var rect = new Rect(topLeft.x, topLeft.y, GetWidth(maxWidth), Height);
+			if (Mouse.IsOver(rect) && mouseOverCallback != null) {
 				mouseOverCallback();
 			}
-			return base.GizmoOnGUI(topLeft);
+			return base.GizmoOnGUI(topLeft, maxWidth);
 		}
 	}
 }

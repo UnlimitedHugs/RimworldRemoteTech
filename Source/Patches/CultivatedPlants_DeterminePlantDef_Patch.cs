@@ -12,7 +12,7 @@ namespace RemoteExplosives.Patches {
 		[HarmonyPostfix]
 		public static void ReplaceSparkweedWithPotatoes(ref ThingDef __result) {
 			if (__result == Resources.Thing.PlantSparkweed) {
-				__result = ThingDefOf.PlantPotato;
+				__result = ThingDefOf.Plant_Potato;
 			}
 		}
 	}

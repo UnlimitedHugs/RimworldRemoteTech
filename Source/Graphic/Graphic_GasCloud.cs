@@ -14,7 +14,7 @@ namespace RemoteExplosives {
 			var alpha = Mathf.Round(cloud.spriteAlpha * DistinctAlphaLevels) / DistinctAlphaLevels;
 			var materialColor = new Color(color.r, color.g, color.b, color.a*alpha);
 			var subGraphicId = (cloud.relativeZOrder + thing.Position.x + thing.Position.y) % subGraphics.Length;
-			var defaultMat = subGraphics[subGraphicId].MatSide;
+			var defaultMat = subGraphics[subGraphicId].MatSingle;
 			var material = MaterialPool.MatFrom(new MaterialRequest((Texture2D)defaultMat.mainTexture, defaultMat.shader, materialColor));
 			var drawPos = cloud.DrawPos;
 			var altitude = Altitudes.AltitudeFor(thing.def.altitudeLayer) + Altitudes.AltInc * cloud.relativeZOrder;

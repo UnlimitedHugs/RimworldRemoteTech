@@ -15,10 +15,10 @@ namespace RemoteExplosives {
 		private static readonly List<IntVec3> effectiveRadiusCells = new List<IntVec3>();
 		private static readonly List<IntVec3> overheadMountainCells = new List<IntVec3>();
 
-		public override void DrawGhost(ThingDef def, IntVec3 center, Rot4 rot) {
+		public override void DrawGhost(ThingDef def, IntVec3 center, Rot4 rot, Color ghostCol) {
 			var effectiveRadius = RemoteExplosivesUtility.TryGetExplosiveRadius(def);
 			if (effectiveRadius <= 0) return;
-			var map = Find.VisibleMap;
+			var map = Find.CurrentMap;
 			if(map == null) return;
 			var roofGrid = map.roofGrid;
 			effectiveRadiusCells.Clear();

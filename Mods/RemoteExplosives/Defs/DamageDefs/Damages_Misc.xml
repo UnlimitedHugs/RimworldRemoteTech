@@ -21,12 +21,18 @@
 		<makesBlood>false</makesBlood>
 		<canInterruptJobs>false</canInterruptJobs>
 		<externalViolence>true</externalViolence>
+		<isExplosive>true</isExplosive>
 		<deathMessage>{0} has burned to death.</deathMessage>
 		<hediff>Burn</hediff>
+		<harmAllLayersUntilOutside>true</harmAllLayersUntilOutside>
 		<armorCategory>Heat</armorCategory>
-		<spreadOut>true</spreadOut>
 		<soundExplosion>Explosion_Flame</soundExplosion>
-		<explosionDamage>50</explosionDamage>
+		<defaultStoppingPower>0.3</defaultStoppingPower>
+		<defaultArmorPenetration>0.05</defaultArmorPenetration>
+		<explosionAffectOutsidePartsOnly>true</explosionAffectOutsidePartsOnly>
+		<explosionPlantDamageFactor>2</explosionPlantDamageFactor>
+		<explosionBuildingDamageFactor>1.5</explosionBuildingDamageFactor>
+		<defaultDamage>50</defaultDamage>
 		<explosionHeatEnergyPerCell>10</explosionHeatEnergyPerCell>
 		<explosionCellMote>Mote_BlastFlame</explosionCellMote>
 		<explosionColorCenter>(1, 0.7, 0.7)</explosionColorCenter>
@@ -43,8 +49,7 @@
 		<harmsHealth>false</harmsHealth>
 		<makesBlood>false</makesBlood>
 		<impactSoundType>Electric</impactSoundType>
-		<armorCategory>Electric</armorCategory>
-		<explosionDamage>75</explosionDamage>
+		<defaultDamage>75</defaultDamage>
 		<explosionSnowMeltAmount>0</explosionSnowMeltAmount>
 		<explosionCellMote>Mote_BlastEMP</explosionCellMote>
 		<explosionColorEdge>(0.8, 0.8, 0.8, 0.8)</explosionColorEdge>
