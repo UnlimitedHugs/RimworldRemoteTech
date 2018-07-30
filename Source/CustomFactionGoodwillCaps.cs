@@ -11,21 +11,21 @@ namespace RemoteExplosives {
 	/// release them, and end up with net positive faction goodwill in the end.
 	/// </summary>
 	public class CustomFactionGoodwillCaps : UtilityWorldObject {
-		public const float DefaultMinNegativeGoodwill = -100f;
-		public const float NegativeGoodwillCap = -5000f;
+		public const int DefaultMinNegativeGoodwill = -100;
+		public const int NegativeGoodwillCap = -5000;
 
-		private Dictionary<int, float> goodwillCaps = new Dictionary<int, float>();
+		private Dictionary<int, int> goodwillCaps = new Dictionary<int, int>();
 
 		public override void ExposeData() {
 			base.ExposeData();
 			Scribe_Collections.Look(ref goodwillCaps, "goodwillCaps", LookMode.Value, LookMode.Value);
 		}
 
-		public void SetMinNegativeGoodwill(Faction faction, float minGoodwill) {
+		public void SetMinNegativeGoodwill(Faction faction, int minGoodwill) {
 			goodwillCaps[faction.loadID] = Mathf.Max(NegativeGoodwillCap, minGoodwill);
 		}
 
-		public float GetMinNegativeGoodwill(Faction faction) {
+		public int GetMinNegativeGoodwill(Faction faction) {
 			var factionId = faction.loadID;
 			if (goodwillCaps.ContainsKey(factionId)) {
 				return goodwillCaps[factionId];

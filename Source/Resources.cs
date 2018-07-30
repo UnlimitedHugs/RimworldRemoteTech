@@ -116,9 +116,9 @@ namespace RemoteExplosives {
 			public static Texture2D UIDryOff;
 			public static Texture2D UIArm;
 			public static Texture2D UIAutoReplace;
-			public static Texture2D UIChannel0;
-			public static Texture2D UIChannel1;
-			public static Texture2D UIChannel2;
+			public static Texture2D UIChannelBasic1;
+			public static Texture2D UIChannelBasic2;
+			public static Texture2D UIChannelBasic3;
 			public static Texture2D UIDetonatorPortable;
 			public static Texture2D UISelectWire;
 			public static Texture2D gas_vent_arrow;

@@ -28,8 +28,8 @@ namespace RemoteExplosives {
 		private bool desiredArmState;
 		private bool isArmed;
 		private int ticksSinceFlare;
-		private RemoteExplosivesUtility.RemoteChannel currentChannel;
-		private RemoteExplosivesUtility.RemoteChannel desiredChannel;
+		private int currentChannel = 1;
+		private int desiredChannel = 1;
 
 		private bool justCreated;
 
@@ -51,7 +51,7 @@ namespace RemoteExplosives {
 			get { return explosiveComp.WickStarted; }
 		}
 
-		public RemoteExplosivesUtility.RemoteChannel CurrentChannel {
+		public int CurrentChannel {
 			get { return currentChannel; }
 		}
 
@@ -121,7 +121,7 @@ namespace RemoteExplosives {
 			isArmed = true;
 		}
 
-		public void SetChannel(RemoteExplosivesUtility.RemoteChannel channel) {
+		public void SetChannel(int channel) {
 			currentChannel = desiredChannel = channel;
 		}
 

@@ -24,7 +24,7 @@ namespace RemoteExplosives {
 
 		private int numViableExplosives;
 
-		private RemoteExplosivesUtility.RemoteChannel currentChannel;
+		private int currentChannel = 1;
 
 		private bool hasChannelsComponent;
 

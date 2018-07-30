@@ -12,17 +12,12 @@
 	<RemoteExplosive_arm_desc>When armed, this explosive can be remotely detonated.</RemoteExplosive_arm_desc>
 	
 	<RemoteExplosive_currentChannel>Current channel: {0}</RemoteExplosive_currentChannel>
-	<RemoteExplosive_channelChanger_label>{0} channel{1}</RemoteExplosive_channelChanger_label>
+	<RemoteExplosive_channelChanger_label>Channel {0}{1}</RemoteExplosive_channelChanger_label>
 	<RemoteExplosive_channel_switching> (switching)</RemoteExplosive_channel_switching>
 	<RemoteExplosive_detonatorChannelChanger_desc>Sets the channel of the detonator. Only explosives on the same channel can be detonated.</RemoteExplosive_detonatorChannelChanger_desc>
 	
 	<RemoteExplosive_autoReplace_label>Auto replace</RemoteExplosive_autoReplace_label>
 	<RemoteExplosive_autoReplace_desc>If enabled, this building will be automatically re-placed after being destroyed.</RemoteExplosive_autoReplace_desc>
-	
-	
-	<RemoteExplosive_channel0>White</RemoteExplosive_channel0>
-	<RemoteExplosive_channel1>Red</RemoteExplosive_channel1>
-	<RemoteExplosive_channel2>Green</RemoteExplosive_channel2>
 	
 	<DetonatorTable_component_label>Install channels</DetonatorTable_component_label>
 	<DetonatorTable_component_desc>Install a component to allow detonating explosives on different channels.</DetonatorTable_component_desc>

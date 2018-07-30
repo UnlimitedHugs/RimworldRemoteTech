@@ -14,7 +14,7 @@ namespace RemoteExplosives {
 			public IntVec3 position;
 			public int unforbidTick;
 			public bool armed;
-			public RemoteExplosivesUtility.RemoteChannel channel;
+			public int channel;
 
 			public void ExposeData() {
 				Scribe_Values.Look(ref position, "position");
