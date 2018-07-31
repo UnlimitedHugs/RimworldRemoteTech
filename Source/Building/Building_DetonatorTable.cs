@@ -16,25 +16,25 @@ namespace RemoteExplosives {
 		private static readonly string InstallComponentButtonLabel = "DetonatorTable_component_label".Translate();
 		private static readonly string InstallComponentButtonDesc = "DetonatorTable_component_desc".Translate();
 
-		private const int FindExplosivesEveryTicks = 120;
+		private const int FindExplosivesEveryTicks = 30;
 
 		private bool wantDetonation;
 
-		private int ticksSinceLastInspection;
+		private int lastInspectionTick;
 
-		private int numViableExplosives;
+		private Dictionary<int, List<Building_RemoteExplosive>> explosivesInRange;
 
 		private int currentChannel = 1;
 
 		private bool hasChannelsComponent;
 
 		private bool wantChannelsComponent;
+
 		public bool WantChannelsComponent {
 			get { return wantChannelsComponent; }
 		}
 
-		public override void ExposeData()
-		{
+		public override void ExposeData() {
 			base.ExposeData();
 			Scribe_Values.Look(ref wantDetonation, "wantDetonation");
 			Scribe_Values.Look(ref currentChannel, "currentChannel");
@@ -42,7 +42,7 @@ namespace RemoteExplosives {
 			Scribe_Values.Look(ref wantChannelsComponent, "wantChannelsComponent");
 		}
 
-		public override IEnumerable<Gizmo> GetGizmos(){
+		public override IEnumerable<Gizmo> GetGizmos() {
 			var detonateGizmo = new Command_Toggle {
 				toggleAction = DetonateGizmoAction,
 				isActive = () => wantDetonation,
@@ -53,20 +53,20 @@ namespace RemoteExplosives {
 			};
 			yield return detonateGizmo;
 
-			if (RemoteExplosivesUtility.ChannelsUnlocked()) {
-				if (hasChannelsComponent) {
-					var channelGizmo = RemoteExplosivesUtility.MakeChannelGizmo(currentChannel, currentChannel, ChannelGizmoAction);
+			if (hasChannelsComponent) {
+				var channelGizmo = RemoteExplosivesUtility.GetChannelGizmo(currentChannel, currentChannel, ChannelGizmoAction, RemoteExplosivesUtility.GetChannelsUnlockLevel(), explosivesInRange);
+				if (channelGizmo != null) {
 					yield return channelGizmo;
-				} else {
-					var componentGizmo = new Command_Toggle {
-						toggleAction = ComponentGizmoAction,
-						isActive = () => wantChannelsComponent,
-						icon = Resources.Textures.UIChannelComponent,
-						defaultLabel = InstallComponentButtonLabel,
-						defaultDesc = InstallComponentButtonDesc
-					};
-					yield return componentGizmo;
 				}
+			} else if (RemoteExplosivesUtility.GetChannelsUnlockLevel() > RemoteExplosivesUtility.ChannelType.None) {
+				var componentGizmo = new Command_Toggle {
+					toggleAction = ComponentGizmoAction,
+					isActive = () => wantChannelsComponent,
+					icon = Resources.Textures.UIChannelComponent,
+					defaultLabel = InstallComponentButtonLabel,
+					defaultDesc = InstallComponentButtonDesc
+				};
+				yield return componentGizmo;
 			}
 
 			foreach (var g in base.GetGizmos()) {
@@ -82,9 +82,9 @@ namespace RemoteExplosives {
 			wantDetonation = !wantDetonation;
 		}
 
-		private void ChannelGizmoAction() {
-			currentChannel = RemoteExplosivesUtility.GetNextChannel(currentChannel);
-			UpdateNumArmedExplosivesInRange();
+		private void ChannelGizmoAction(int selectedChannel) {
+			currentChannel = selectedChannel;
+			UpdateArmedExplosivesInRange();
 		}
 
 		public bool UseInteractionCell {
@@ -103,22 +103,12 @@ namespace RemoteExplosives {
 
 		public void DoDetonation() {
 			wantDetonation = false;
-			if(!GetComp<CompPowerTrader>().PowerOn) {
+			if (!GetComp<CompPowerTrader>().PowerOn) {
 				PlayNeedPowerEffect();
 				return;
 			}
 			SoundDefOf.FlickSwitch.PlayOneShot(this);
 			RemoteExplosivesUtility.LightArmedExplosivesInRange(Position, Map, SignalRange, currentChannel);
-		}
-
-		public override void Tick() {
-			base.Tick();
-			// find explosives in range
-			ticksSinceLastInspection++;
-			if (ticksSinceLastInspection>=FindExplosivesEveryTicks) {
-				ticksSinceLastInspection = 0;
-				UpdateNumArmedExplosivesInRange();
-			}
 		}
 
 		private float SignalRange {
@@ -131,17 +121,26 @@ namespace RemoteExplosives {
 			SoundDefOf.Power_OffSmall.PlayOneShot(info);
 		}
 
-		private void UpdateNumArmedExplosivesInRange() {
-			numViableExplosives = RemoteExplosivesUtility.FindArmedExplosivesInRange(Position, Map, SignalRange, currentChannel).Count;
+		private void UpdateArmedExplosivesInRange() {
+			lastInspectionTick = GenTicks.TicksGame;
+			explosivesInRange = RemoteExplosivesUtility.FindArmedExplosivesInRange(Position, Map, SignalRange);
 		}
 
-		public override string GetInspectString(){
+		public override string GetInspectString() {
+			// update channel contents
+			if (lastInspectionTick + FindExplosivesEveryTicks < GenTicks.TicksGame) {
+				UpdateArmedExplosivesInRange();
+			}
+			// assemble info string
 			var stringBuilder = new StringBuilder();
 			stringBuilder.Append(base.GetInspectString());
-			stringBuilder.AppendLine();
-			stringBuilder.Append("DetonatorTable_inrange".Translate());
-			stringBuilder.Append(": " + numViableExplosives);
-			if(RemoteExplosivesUtility.ChannelsUnlocked()) {
+			if (explosivesInRange != null) {
+				explosivesInRange.TryGetValue(currentChannel, out List<Building_RemoteExplosive> list);
+				stringBuilder.AppendLine();
+				stringBuilder.Append("DetonatorTable_inrange".Translate());
+				stringBuilder.Append(": " + (list?.Count).GetValueOrDefault());
+			}
+			if (RemoteExplosivesUtility.GetChannelsUnlockLevel() > RemoteExplosivesUtility.ChannelType.None) {
 				stringBuilder.AppendLine();
 				stringBuilder.Append(RemoteExplosivesUtility.GetCurrentChannelInspectString(currentChannel));
 			}

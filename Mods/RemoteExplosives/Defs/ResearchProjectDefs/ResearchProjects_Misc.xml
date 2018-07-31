@@ -64,6 +64,20 @@ The detonator must be upgraded with a component for this to work.</description>
 		<researchViewX>2</researchViewX>
 		<researchViewY>.5</researchViewY>
 	</ResearchProjectDef>
+	
+	<ResearchProjectDef ParentName="ProjectBase">
+		<defName>RemoteExplosivesChannelsAdvanced</defName>
+		<label>Advanced Channels</label>
+		<description>Advances in signal transmission allow the use of 8 channels for remote explosives. The detonator also gains the ability to identify the types of charges present on each channel.
+The detonator must be upgraded with an advanced component for this to work.</description>
+		<baseCost>1500</baseCost>
+		<techLevel>Industrial</techLevel>
+		<prerequisites>
+			<li>RemoteExplosivesChannels</li>
+		</prerequisites>
+		<researchViewX>3</researchViewX>
+		<researchViewY>.5</researchViewY>
+	</ResearchProjectDef>
 
 	<ResearchProjectDef ParentName="ProjectBase">
 		<defName>RemoteChemicals</defName>

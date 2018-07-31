@@ -15,43 +15,36 @@ namespace RemoteExplosives {
 	[StaticConstructorOnStartup]
 	public static class RemoteExplosivesUtility {
 		public const string InjectedRecipeNameSuffix = "Injected";
-
 		// how long it will take to trigger an additional explosive
 		private const int TicksBetweenTriggers = 2;
 
-		private static readonly Texture2D[] UITex_ChannelsBasic = {
-			Resources.Textures.UIChannelBasic1,
-			Resources.Textures.UIChannelBasic2,
-			Resources.Textures.UIChannelBasic3
-		};
+		public enum ChannelType {
+			None, Basic, Advanced
+		}
 
-		private static readonly string ChannelDialDesc = "RemoteExplosive_detonatorChannelChanger_desc".Translate();
-		
 		public static void UpdateSwitchDesignation(Thing thing) {
 			var switchable = thing as ISwitchable;
 			if(switchable == null) return;
 			thing.ToggleDesignation(Resources.Designation.RemoteExplosiveSwitch, switchable.WantsSwitch());
 		}
 
-		public static bool ChannelsUnlocked() {
-			return Resources.Research.RemoteExplosivesChannels.IsFinished;
+		public static ChannelType GetChannelsUnlockLevel() {
+			if (Resources.Research.RemoteExplosivesChannelsAdvanced.IsFinished) {
+				return ChannelType.Advanced;
+			} else if (Resources.Research.RemoteExplosivesChannels.IsFinished) {
+				return ChannelType.Basic;
+			}
+			return ChannelType.None;
 		}
 
-		public static int GetNextChannel(int channel) {
-			const int totalChannels = 3;
-			return Mathf.Clamp((channel+1)%(totalChannels+1), 1, totalChannels);
-		}
-
-		public static Command_Action MakeChannelGizmo(int desiredChannel, int currentChannel, Action activateCallback) {
-			return new Command_Action {
-				action = activateCallback,
-				icon = UITex_ChannelsBasic[Mathf.Clamp(desiredChannel - 1, 0, UITex_ChannelsBasic.Length - 1)],
-				activateSound = Resources.Sound.RemoteUIDialClick,
-				defaultDesc = ChannelDialDesc,
-				defaultLabel = "RemoteExplosive_channelChanger_label".Translate(desiredChannel,
-					desiredChannel != currentChannel ? "RemoteExplosive_channel_switching".Translate() : ""),
-				hotKey = Resources.KeyBinging.RemoteExplosivesNextChannel
-			};
+		public static Gizmo GetChannelGizmo(int desiredChannel, int currentChannel, Action<int> activateCallback, ChannelType gizmoType, Dictionary<int, List<Building_RemoteExplosive>> channelPopulation = null) {
+			var switching = desiredChannel != currentChannel;
+			if (gizmoType == ChannelType.Basic) {
+				return new Command_ChannelsBasic(desiredChannel, switching, activateCallback);
+			} else if (gizmoType == ChannelType.Advanced) {
+				return new Command_ChannelsKeypad(desiredChannel, switching, activateCallback, channelPopulation);
+			}
+			return null;
 		}
 
 		public static string GetCurrentChannelInspectString(int currentChannel) {
@@ -59,8 +52,9 @@ namespace RemoteExplosives {
 		}
 
 		public static void LightArmedExplosivesInRange(IntVec3 center, Map map, float radius, int channel) {
-			var armedExplosives = FindArmedExplosivesInRange(center, map, radius, channel);
-			if (armedExplosives.Count > 0) {
+			FindArmedExplosivesInRange(center, map, radius)
+				.TryGetValue(channel,out List<Building_RemoteExplosive> armedExplosives);
+			if (armedExplosives != null) {
 				// closer ones will go off first
 				armedExplosives = armedExplosives.OrderBy(e => e.Position.DistanceToSquared(center)).ToList();
 				for (int i = 0; i < armedExplosives.Count; i++) {
@@ -72,12 +66,17 @@ namespace RemoteExplosives {
 			}
 		}
 
-		public static List<Building_RemoteExplosive> FindArmedExplosivesInRange(IntVec3 center, Map map, float radius, int channel) {
-			var results = new List<Building_RemoteExplosive>();
+		public static Dictionary<int, List<Building_RemoteExplosive>> FindArmedExplosivesInRange(IntVec3 center, Map map, float radius) {
+			var results = new Dictionary<int, List<Building_RemoteExplosive>>();
 			var sample = map.listerBuildings.AllBuildingsColonistOfClass<Building_RemoteExplosive>();
 			foreach (var explosive in sample) {
-				if (explosive.IsArmed && explosive.CurrentChannel == channel && !explosive.FuseLit && TileIsInRange(explosive.Position, center, radius)) {
-					results.Add(explosive);
+				if (explosive.IsArmed && !explosive.FuseLit && TileIsInRange(explosive.Position, center, radius)) {
+					results.TryGetValue(explosive.CurrentChannel, out List<Building_RemoteExplosive> list);
+					if (list == null) {
+						list = new List<Building_RemoteExplosive>();
+						results[explosive.CurrentChannel] = list;
+					}
+					list.Add(explosive);
 				}
 			}
 			return results;

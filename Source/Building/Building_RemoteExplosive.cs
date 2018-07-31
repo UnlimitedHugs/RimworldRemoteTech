@@ -143,8 +143,8 @@ namespace RemoteExplosives {
 			};
 			yield return armGizmo;
 
-			if (RemoteExplosivesUtility.ChannelsUnlocked()) {
-				var channelGizmo = RemoteExplosivesUtility.MakeChannelGizmo(desiredChannel, currentChannel, ChannelGizmoAction);
+			var channelGizmo = RemoteExplosivesUtility.GetChannelGizmo(desiredChannel, currentChannel, ChannelGizmoAction, RemoteExplosivesUtility.GetChannelsUnlockLevel());
+			if (channelGizmo != null) {
 				yield return channelGizmo;
 			}
 
@@ -177,8 +177,8 @@ namespace RemoteExplosives {
 			}
 		}
 
-		private void ChannelGizmoAction() {
-			desiredChannel = RemoteExplosivesUtility.GetNextChannel(desiredChannel);
+		private void ChannelGizmoAction(int selectedChannel) {
+			desiredChannel = selectedChannel;
 			RemoteExplosivesUtility.UpdateSwitchDesignation(this);
 		}
 
@@ -239,11 +239,11 @@ namespace RemoteExplosives {
 			var stringBuilder = new StringBuilder();
 			stringBuilder.Append(base.GetInspectString());
 			if (IsArmed) {
-				stringBuilder.Append("TrapArmed".Translate());
+				stringBuilder.Append("RemoteExplosive_armed".Translate());
 			} else {
-				stringBuilder.Append("TrapNotArmed".Translate());
+				stringBuilder.Append("RemoteExplosive_notArmed".Translate());
 			}
-			if (RemoteExplosivesUtility.ChannelsUnlocked()) {
+			if (RemoteExplosivesUtility.GetChannelsUnlockLevel() > RemoteExplosivesUtility.ChannelType.None) {
 				stringBuilder.AppendLine();
 				stringBuilder.Append(RemoteExplosivesUtility.GetCurrentChannelInspectString(currentChannel));
 			}

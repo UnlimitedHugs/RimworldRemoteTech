@@ -86,6 +86,8 @@
     <Compile Include="Source\Building\Building_RemoteExplosive.cs" />
     <Compile Include="Source\Building\Building_RemoteExplosiveEmp.cs" />
     <Compile Include="Source\Building\Building_FoamBlob.cs" />
+    <Compile Include="Source\UI\Command_ChannelsBasic.cs" />
+    <Compile Include="Source\UI\Command_ChannelsKeypad.cs" />
     <Compile Include="Source\UI\Command_MouseOverDetector.cs" />
     <Compile Include="Source\Comp\CompAutoReplaceable.cs" />
     <Compile Include="Source\Comp\CompChemicalExplosive.cs" />
