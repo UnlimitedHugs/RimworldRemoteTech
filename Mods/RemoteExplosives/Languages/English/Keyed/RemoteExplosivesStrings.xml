@@ -17,7 +17,7 @@
 	<RemoteExplosive_channelChanger_label>Channel {0}{1}</RemoteExplosive_channelChanger_label>
 	<RemoteExplosive_channel_switching> (switching)</RemoteExplosive_channel_switching>
 	<RemoteExplosive_detonatorChannelChanger_desc>Sets the detonation channel. Only explosives on the same channel can be detonated.</RemoteExplosive_detonatorChannelChanger_desc>
-	<RemoteExplosive_channelKeypad_buttonTip>{0}\nShift-click selects all.</RemoteExplosive_channelKeypad_buttonTip>
+	<RemoteExplosive_channelKeypad_buttonTip>{0}\n&lt;color=#888888&gt;Shift-click selects all.&lt;/color&gt;</RemoteExplosive_channelKeypad_buttonTip>
 	
 	<RemoteExplosive_autoReplace_label>Auto replace</RemoteExplosive_autoReplace_label>
 	<RemoteExplosive_autoReplace_desc>If enabled, this building will be automatically re-placed after being destroyed.</RemoteExplosive_autoReplace_desc>

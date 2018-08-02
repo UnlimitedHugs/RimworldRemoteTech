@@ -80,12 +80,12 @@ namespace RemoteExplosives {
 
 		public override void PostPostApplyDamage(DamageInfo dinfo, float totalDamageDealt) {
 			if (parent.HitPoints <= 0) {
-				if (dinfo.Def.externalViolence) {
+				if (dinfo.Def.ExternalViolenceFor(parent)) {
 					Detonate();
 				}
 			} else if (wickStarted && (dinfo.Def == DamageDefOf.Stun || (wickIsSilent && dinfo.Def == DamageDefOf.EMP))) { // silent wick can be stopped by EMP
 				StopWick();
-			} else if (!wickStarted && StartWickThreshold!=0 && parent.HitPoints <= StartWickThreshold && dinfo.Def.externalViolence) {
+			} else if (!wickStarted && StartWickThreshold!=0 && parent.HitPoints <= StartWickThreshold && dinfo.Def.ExternalViolenceFor(parent)) {
 				StartWick(false);
 			}
 		}
