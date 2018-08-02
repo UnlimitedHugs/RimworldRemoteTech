@@ -2,7 +2,7 @@
 <Defs>
 	
 	<DamageDef>
-		<defName>FoamWallRekt</defName>
+		<defName>rxFoamWallStuck</defName>
 		<label>trapped</label>
 		<workerClass>DamageWorker_AddInjury</workerClass>
 		<hasForcefulImpact>false</hasForcefulImpact>
@@ -14,7 +14,7 @@
 	</DamageDef>
 	
 	<DamageDef Class="RemoteExplosives.FlameChanceDamageDef">
-		<defName>FlameBomb</defName>
+		<defName>rxFlameBomb</defName>
 		<workerClass>RemoteExplosives.DamageWorker_FlameChance</workerClass>
 		<label>flame bomb</label>
 		<hasForcefulImpact>false</hasForcefulImpact>
@@ -42,7 +42,7 @@
 	</DamageDef>
 	
 	<DamageDef Class="RemoteExplosives.SuperEMPDamageDef">
-		<defName>SuperEMP</defName>
+		<defName>rxSuperEMP</defName>
 		<label>EMP</label>
 		<externalViolence>true</externalViolence>
 		<deathMessage>{0} has been EMPed to death.</deathMessage>

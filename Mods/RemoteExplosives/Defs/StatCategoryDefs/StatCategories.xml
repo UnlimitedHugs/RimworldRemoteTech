@@ -2,8 +2,8 @@
 <Defs>
 
 	<StatCategoryDef>
-		<defName>Explosives</defName>
-		<label>Explosives</label>
+		<defName>rxExplosives</defName>
+		<label>rxExplosives</label>
 		<displayOrder>20</displayOrder>
 		<displayAllByDefault>true</displayAllByDefault>
 	</StatCategoryDef>

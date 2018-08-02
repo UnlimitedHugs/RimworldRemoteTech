@@ -108,7 +108,7 @@ namespace RemoteExplosives {
 			}
 			if(desiredChannel!=currentChannel) {
 				currentChannel = desiredChannel;
-				Resources.Sound.RemoteChannelChange.PlayOneShot(this);
+				Resources.Sound.rxChannelChange.PlayOneShot(this);
 			}
 			RemoteExplosivesUtility.UpdateSwitchDesignation(this);
 		}
@@ -116,7 +116,7 @@ namespace RemoteExplosives {
 		public void Arm() {
 			if(IsArmed) return;
 			DrawFlareOverlay(true);
-			Resources.Sound.RemoteExplosiveArmed.PlayOneShot(this);
+			Resources.Sound.rxArmed.PlayOneShot(this);
 			desiredArmState = true;
 			isArmed = true;
 		}
@@ -139,7 +139,7 @@ namespace RemoteExplosives {
 				icon = Resources.Textures.UIArm,
 				defaultLabel = ArmButtonLabel,
 				defaultDesc = ArmButtonDesc,
-				hotKey = Resources.KeyBinging.RemoteExplosiveArm
+				hotKey = Resources.KeyBinging.rxArm
 			};
 			yield return armGizmo;
 
@@ -232,7 +232,7 @@ namespace RemoteExplosives {
 		private void EmitBeep(float pitch) {
 			var beepInfo = SoundInfo.InMap(this);
 			beepInfo.pitchFactor = pitch;
-			Resources.Sound.RemoteExplosiveBeep.PlayOneShot(beepInfo);
+			Resources.Sound.rxBeep.PlayOneShot(beepInfo);
 		}
 
 		public override string GetInspectString() {

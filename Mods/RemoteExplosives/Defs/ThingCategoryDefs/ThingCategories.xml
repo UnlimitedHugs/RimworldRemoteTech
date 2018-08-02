@@ -2,16 +2,16 @@
 <Defs>
 	
 	<ThingCategoryDef>
-        <defName>Explosives</defName>
+        <defName>rxExplosives</defName>
         <label>explosives</label>
         <parent>Manufactured</parent>
         <iconPath>explosive_part</iconPath>
 	</ThingCategoryDef>
 	
 	<ThingCategoryDef>
-        <defName>ExplosivesIngredients</defName>
+        <defName>rxExplosivesIngredients</defName>
         <label>ingredients</label>
-        <parent>Explosives</parent>
+        <parent>rxExplosives</parent>
         <iconPath>charcoal</iconPath>
 	</ThingCategoryDef>
 	

@@ -2,31 +2,31 @@
 <Defs>
 	
 	<JobDef>
-		<defName>DetonateExplosives</defName>
+		<defName>rxDetonateExplosives</defName>
 		<driverClass>RemoteExplosives.JobDriver_DetonateExplosives</driverClass>
 		<reportString>Detonating explosives.</reportString>
 	</JobDef>
 	
 	<JobDef>
-		<defName>SwitchRemoteExplosive</defName>
+		<defName>rxSwitchRemoteExplosives</defName>
 		<driverClass>RemoteExplosives.JobDriver_SwitchRemoteExplosive</driverClass>
 		<reportString>Switching remote explosive.</reportString>
 	</JobDef>
 	
 	<JobDef>
-		<defName>InstallChannelsComponent</defName>
+		<defName>rxInstallChannelsComponent</defName>
 		<driverClass>RemoteExplosives.JobDriver_InstallChannelsComponent</driverClass>
 		<reportString>Installing remote channels component.</reportString>
 	</JobDef>
 	
 	<JobDef>
-		<defName>DryDetonatorWire</defName>
+		<defName>rxDryDetonatorWire</defName>
 		<driverClass>RemoteExplosives.JobDriver_DryDetonatorWire</driverClass>
 		<reportString>Drying off detonator wire.</reportString>
 	</JobDef>
 	
 	<JobDef>
-		<defName>SmoothFoamWall</defName>
+		<defName>rxSmoothFoamWall</defName>
 		<driverClass>RemoteExplosives.JobDriver_SmoothFoamWall</driverClass>
 		<reportString>Smoothing foam wall.</reportString>
 	</JobDef>

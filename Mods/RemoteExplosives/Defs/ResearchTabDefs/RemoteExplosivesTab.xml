@@ -2,7 +2,7 @@
 <Defs>
 
 	<ResearchTabDef>
-		<defName>RemoteExplosives</defName>
+		<defName>rxRemoteExplosives</defName>
 		<label>Remote Explosives</label>
 	</ResearchTabDef>
 

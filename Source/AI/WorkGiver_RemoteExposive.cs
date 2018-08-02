@@ -12,7 +12,7 @@ namespace RemoteExplosives {
 		private const PathEndMode pathEndMode = PathEndMode.Touch;
 		
 		public override IEnumerable<Thing> PotentialWorkThingsGlobal(Pawn pawn) {
-			var explosives = pawn.Map.designationManager.SpawnedDesignationsOfDef(Resources.Designation.RemoteExplosiveSwitch);
+			var explosives = pawn.Map.designationManager.SpawnedDesignationsOfDef(Resources.Designation.rxRemoteExplosiveSwitch);
 			foreach (var explosive in explosives) {
 				yield return explosive.target.Thing;
 			}
@@ -29,7 +29,7 @@ namespace RemoteExplosives {
 		}
 
 		public override Job JobOnThing(Pawn pawn, Thing t, bool forced = false) {
-			var jobDef = Resources.Job.SwitchRemoteExplosive;
+			var jobDef = Resources.Job.rxSwitchRemoteExplosives;
 			return new Job(jobDef, t);
 		}
 	}

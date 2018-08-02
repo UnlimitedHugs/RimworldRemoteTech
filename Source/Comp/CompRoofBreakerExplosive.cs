@@ -39,13 +39,13 @@ namespace RemoteExplosives {
 				}
 			}
 			if (anyThickRoofAffected) {
-				Resources.Sound.RemoteMiningCavein.PlayOneShot(new TargetInfo(position, map));
+				Resources.Sound.rxMiningCavein.PlayOneShot(new TargetInfo(position, map));
 			}
 		}
 
 		private void CollapseRockOnCell(IntVec3 cell, Map map) {
 			CrushThingsUnderCollapsingRock(cell, map);
-			var rock = GenSpawn.Spawn(Resources.Thing.CollapsedRoofRocks, cell, map);
+			var rock = GenSpawn.Spawn(Resources.Thing.rxCollapsedRoofRocks, cell, map);
 			if (rock.def.rotatable) {
 				rock.Rotation = Rot4.Random;
 			}

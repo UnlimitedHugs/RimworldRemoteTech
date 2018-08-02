@@ -25,13 +25,13 @@ namespace RemoteExplosives {
 		public static void UpdateSwitchDesignation(Thing thing) {
 			var switchable = thing as ISwitchable;
 			if(switchable == null) return;
-			thing.ToggleDesignation(Resources.Designation.RemoteExplosiveSwitch, switchable.WantsSwitch());
+			thing.ToggleDesignation(Resources.Designation.rxRemoteExplosiveSwitch, switchable.WantsSwitch());
 		}
 
 		public static ChannelType GetChannelsUnlockLevel() {
-			if (Resources.Research.RemoteExplosivesChannelsAdvanced.IsFinished) {
+			if (Resources.Research.rxChannelsAdvanced.IsFinished) {
 				return ChannelType.Advanced;
-			} else if (Resources.Research.RemoteExplosivesChannels.IsFinished) {
+			} else if (Resources.Research.rxChannels.IsFinished) {
 				return ChannelType.Basic;
 			}
 			return ChannelType.None;
@@ -88,7 +88,7 @@ namespace RemoteExplosives {
 			var entry = new FloatMenuOption("Detonator_detonatenow".Translate(), () => {
 				if (!pawn.IsColonistPlayerControlled) return;
 				if (!detonator.WantsDetonation) detonator.WantsDetonation = true;
-				var job = new Job(Resources.Job.DetonateExplosives, detonatorThing);
+				var job = new Job(Resources.Job.rxDetonateExplosives, detonatorThing);
 				pawn.jobs.TryTakeOrderedJob(job);
 			});
 			if (pawn.Map.reservationManager.IsReservedAndRespected(detonatorThing, pawn)) {

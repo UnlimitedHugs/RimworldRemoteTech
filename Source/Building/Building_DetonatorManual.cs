@@ -39,7 +39,7 @@ namespace RemoteExplosives {
 			wantDetonation = false;
 			currentVariant = VisualVariant.PlungerDown;
 			plungerExpireTime = Time.realtimeSinceStartup + PlungerDownTime;
-			Resources.Sound.RemoteDetonatorLever.PlayOneShot(new TargetInfo(Position, Map));
+			Resources.Sound.rxDetonatorLever.PlayOneShot(new TargetInfo(Position, Map));
 			var transmitterComp = GetComp<CompWiredDetonationSender>();
 			if(transmitterComp != null) transmitterComp.SendNewSignal();
 		}
@@ -56,7 +56,7 @@ namespace RemoteExplosives {
 				icon = Resources.Textures.UI_Trigger,
 				defaultLabel = DetonateButtonLabel,
 				defaultDesc = DetonateButtonDesc,
-				hotKey = Resources.KeyBinging.RemoteTableDetonate
+				hotKey = Resources.KeyBinging.rxRemoteTableDetonate
 			};
 			yield return detonateGizmo;
 

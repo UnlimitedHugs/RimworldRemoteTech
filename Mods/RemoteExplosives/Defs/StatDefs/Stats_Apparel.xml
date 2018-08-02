@@ -2,7 +2,7 @@
 <Defs>
 
 	<StatDef>
-		<defName>PortableDetonatorRange</defName>
+		<defName>rxPortableDetonatorRange</defName>
 		<label>Detonator range</label>
 		<description>How far the signal from a portable detonator will reach. Further is better, until you blow up something you didn't mean to.</description>
 		<category>Apparel</category>
@@ -22,7 +22,7 @@
 	</StatDef>
 	
 	<StatDef>
-		<defName>PortableDetonatorNumUses</defName>
+		<defName>rxPortableDetonatorNumUses</defName>
 		<label>Detonator activations</label>
 		<description>How many times a portable detonator can be activated before the battery runs dry.</description>
 		<category>Apparel</category>

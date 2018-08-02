@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Defs>
 	<HediffDef Class="RemoteExplosives.HediffDef_NonLethal">
-		<defName>SleepingGas</defName>
+		<defName>rxSleepingGas</defName>
 		<hediffClass>RemoteExplosives.Hediff_NonLethal</hediffClass>
 		<defaultLabelColor>(0.7, 0.1 , 1)</defaultLabelColor>
 		<label>sleeping gas</label>

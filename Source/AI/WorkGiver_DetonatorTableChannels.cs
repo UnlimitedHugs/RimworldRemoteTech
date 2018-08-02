@@ -14,7 +14,7 @@ namespace RemoteExplosives {
 		
 		public override ThingRequest PotentialWorkThingRequest {
 			get {
-				return ThingRequest.ForDef(Resources.Thing.TableDetonator);
+				return ThingRequest.ForDef(Resources.Thing.rxTableDetonator);
 			}
 		}
 
@@ -42,7 +42,7 @@ namespace RemoteExplosives {
 			if (!table.WantChannelsComponent) return null;
 			var component = FindInstallableComponent(pawn);
 			if (component == null) return null;
-			var jobDef = Resources.Job.InstallChannelsComponent;
+			var jobDef = Resources.Job.rxInstallChannelsComponent;
 			return new Job(jobDef, t, component) { count = 1 };
 		}
 

@@ -11,86 +11,81 @@ namespace RemoteExplosives {
 	public static class Resources {
 		[DefOf]
 		public static class Sound {
-			public static SoundDef RemoteDetonatorLever;
-			public static SoundDef RemoteFoamSpray;
-			public static SoundDef RemoteFoamSolidify;
-			public static SoundDef RemoteExplosiveArmed;
-			public static SoundDef RemoteExplosiveBeep;
-			public static SoundDef RemoteChannelChange;
-			public static SoundDef RemoteUIDialClick;
-			public static SoundDef RemoteEmpCharge;
-			public static SoundDef RemoteMiningCavein;
+			public static SoundDef rxDetonatorLever;
+			public static SoundDef rxFoamSpray;
+			public static SoundDef rxFoamSolidify;
+			public static SoundDef rxArmed;
+			public static SoundDef rxBeep;
+			public static SoundDef rxChannelChange;
+			public static SoundDef rxDialClick;
+			public static SoundDef rxEmpCharge;
+			public static SoundDef rxMiningCavein;
 		}
 
 		[DefOf]
 		public static class Damage {
-			public static DamageDef FoamWallRekt;
-		}
-
-		[DefOf]
-		public static class WorkType {
-			public static WorkTypeDef Cleaning;
+			public static DamageDef rxFoamWallStuck;
 		}
 
 		[DefOf]
 		public static class Job {
-			public static JobDef InstallChannelsComponent;
-			public static JobDef DryDetonatorWire;
-			public static JobDef SwitchRemoteExplosive;
-			public static JobDef DetonateExplosives;
-			public static JobDef SmoothFoamWall;
+			public static JobDef rxInstallChannelsComponent;
+			public static JobDef rxDryDetonatorWire;
+			public static JobDef rxSwitchRemoteExplosives;
+			public static JobDef rxDetonateExplosives;
+			public static JobDef rxSmoothFoamWall;
 		}
 
 		[DefOf]
 		public static class Thing {
-			public static ThingDef TableDetonator;
-			public static ThingDef CollapsedRoofRocks;
-			public static ThingDef Gas_Sleeping;
-			public static ThingDef FoamWallSmooth;
-			public static ThingDef FoamWallBricks;
-			public static ThingDef PlantSparkweed;
+			public static ThingDef rxTableDetonator;
+			public static ThingDef rxCollapsedRoofRocks;
+			public static ThingDef rxGas_Sleeping;
+			public static ThingDef rxFoamWallSmooth;
+			public static ThingDef rxFoamWallBricks;
+			public static ThingDef rxPlantSparkweed;
 		}
 
 		[DefOf]
 		public static class Research {
-			public static ResearchProjectDef RemoteExplosivesChannels;
-			public static ResearchProjectDef RemoteExplosivesChannelsAdvanced;
+			public static ResearchProjectDef rxChannels;
+			public static ResearchProjectDef rxChannelsAdvanced;
 		}
 
 		[DefOf]
 		public static class KeyBinging {
-			public static KeyBindingDef RemoteExplosivesNextChannel;
-			public static KeyBindingDef RemoteTableDetonate;
-			public static KeyBindingDef RemoteExplosiveArm;
-			public static KeyBindingDef RemoteExplosiveAutoReplace;
-			public static KeyBindingDef PortableDetonatorDetonate;
+			public static KeyBindingDef rxNextChannel;
+			public static KeyBindingDef rxRemoteTableDetonate;
+			public static KeyBindingDef rxArm;
+			public static KeyBindingDef rxAutoReplace;
+			public static KeyBindingDef rxPortableDetonatorDetonate;
 		}
 
 		[DefOf]
 		public static class Designation {
-			public static DesignationDef RemoteExplosiveSwitch;
-			public static DesignationDef DetonatorWireDryOff;
-			public static DesignationDef FoamWallSmooth;
+			public static DesignationDef rxRemoteExplosiveSwitch;
+			public static DesignationDef rxDetonatorWireDryOff;
+			public static DesignationDef rxFoamWallSmooth;
 		}
 
 		[DefOf]
 		public static class Stat {
-			public static StatDef PortableDetonatorRange;
-			public static StatDef PortableDetonatorNumUses;
-			public static StatDef ExplosiveChunkYield;
-			public static StatDef ExplosiveMiningYield;
-			public static StatDef ExplosiveWoodYield;
+			public static StatDef rxPortableDetonatorRange;
+			public static StatDef rxPortableDetonatorNumUses;
+			public static StatDef rxExplosiveChunkYield;
+			public static StatDef rxExplosiveMiningYield;
+			public static StatDef rxExplosiveWoodYield;
 		}
 
 		[DefOf]
 		public static class Effecter {
-			public static EffecterDef SparkweedIgnite;
-			public static EffecterDef DetWireFailure;
+			public static EffecterDef rxSparkweedIgnite;
+			public static EffecterDef rxDetWireFailure;
 		}
 
 		[DefOf]
 		public static class ThingCategory {
-			public static ThingCategoryDef Explosives;
+			public static ThingCategoryDef rxExplosives;
 		}
 
 		[StaticConstructorOnStartup]

@@ -19,10 +19,10 @@ namespace RemoteExplosives {
 			this.selectedChannel = selectedChannel;
 			this.activateCallback = activateCallback;
 			icon = UITex_ChannelsBasic[Mathf.Clamp(selectedChannel - 1, 0, UITex_ChannelsBasic.Length - 1)];
-			activateSound = Resources.Sound.RemoteUIDialClick;
+			activateSound = Resources.Sound.rxDialClick;
 			defaultDesc = "RemoteExplosive_detonatorChannelChanger_desc".Translate();
 			defaultLabel = GetLabelForChannel(selectedChannel, switching);
-			hotKey = Resources.KeyBinging.RemoteExplosivesNextChannel;
+			hotKey = Resources.KeyBinging.rxNextChannel;
 		}
 
 		public override void ProcessInput(Event ev) {

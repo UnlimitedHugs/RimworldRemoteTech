@@ -49,7 +49,7 @@ namespace RemoteExplosives {
 				icon = Resources.Textures.UIDetonate,
 				defaultLabel = DetonateButtonLabel,
 				defaultDesc = DetonateButtonDesc,
-				hotKey = Resources.KeyBinging.RemoteTableDetonate
+				hotKey = Resources.KeyBinging.rxRemoteTableDetonate
 			};
 			yield return detonateGizmo;
 

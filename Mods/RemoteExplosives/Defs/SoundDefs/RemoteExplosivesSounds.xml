@@ -2,7 +2,7 @@
 <Defs>
 	
 	<SoundDef>
-		<defName>RemoteExplosiveBeep</defName>  
+		<defName>rxBeep</defName>  
 		<context>MapOnly</context>
 		<eventNames />  
 		<maxVoices>4</maxVoices>   
@@ -23,7 +23,7 @@
 	</SoundDef>
 	
 	<SoundDef>
-		<defName>RemoteExplosiveArmed</defName>  
+		<defName>rxArmed</defName>  
 		<context>MapOnly</context> 
 		<eventNames />  
 		<maxVoices>4</maxVoices>   
@@ -44,7 +44,7 @@
 	</SoundDef>
 	
 	<SoundDef>
-		<defName>RemoteMiningCavein</defName>  
+		<defName>rxMiningCavein</defName>  
 		<context>MapOnly</context>
 		<eventNames />  
 		<maxVoices>3</maxVoices>   
@@ -69,7 +69,7 @@
 	</SoundDef>
 	
 	<SoundDef>
-		<defName>RemoteEmpCharge</defName>   
+		<defName>rxEmpCharge</defName>   
 		<context>MapOnly</context>
 		<eventNames />  
 		<maxVoices>3</maxVoices>   
@@ -94,7 +94,7 @@
 	</SoundDef>
 	
 	<SoundDef>
-		<defName>RemoteChannelChange</defName>  
+		<defName>rxChannelChange</defName>  
 		<context>MapOnly</context>
 		<eventNames />  
 		<maxVoices>3</maxVoices>   
@@ -119,7 +119,7 @@
 	</SoundDef>
 	
 	<SoundDef>
-		<defName>RemoteUIDialClick</defName>  
+		<defName>rxDialClick</defName>  
 		<eventNames />  
 		<maxVoices>3</maxVoices>   
 		<maxSimultaneous>3</maxSimultaneous>  
@@ -144,7 +144,7 @@
 	</SoundDef>
 	
 	<SoundDef>
-		<defName>RemoteFoamSpray</defName>  
+		<defName>rxFoamSpray</defName>  
 		<context>MapOnly</context> 
 		<eventNames />  
 		<maxVoices>5</maxVoices>   
@@ -169,7 +169,7 @@
 	</SoundDef>
 	
 	<SoundDef>
-		<defName>RemoteGlassBreak</defName>  
+		<defName>rxGlassBreak</defName>  
 		<context>MapOnly</context>
 		<eventNames />  
 		<maxVoices>4</maxVoices>   
@@ -194,7 +194,7 @@
 	</SoundDef>
 	
 	<SoundDef>
-		<defName>RemoteFoamSolidify</defName>  
+		<defName>rxFoamSolidify</defName>  
 		<context>MapOnly</context>
 		<eventNames />  
 		<maxVoices>4</maxVoices>   
@@ -219,7 +219,7 @@
 	</SoundDef>
 	
 	<SoundDef>
-		<defName>RemoteDetonatorLever</defName>  
+		<defName>rxDetonatorLever</defName>  
 		<context>MapOnly</context>
 		<eventNames />  
 		<maxVoices>4</maxVoices>   
@@ -244,7 +244,7 @@
 	</SoundDef>
 	
 	<SoundDef>
-		<defName>RemoteSparkweedIgnite</defName>  
+		<defName>rxSparkweedIgnite</defName>  
 		<context>MapOnly</context>
 		<eventNames />  
 		<maxVoices>4</maxVoices>   
@@ -269,7 +269,7 @@
 	</SoundDef>
 	
 	<SoundDef>
-		<defName>RemoteCableFailure</defName>  
+		<defName>rxCableFailure</defName>  
 		<context>MapOnly</context>
 		<eventNames />  
 		<maxVoices>4</maxVoices>   

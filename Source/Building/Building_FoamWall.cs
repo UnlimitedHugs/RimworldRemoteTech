@@ -73,7 +73,7 @@ namespace RemoteExplosives {
 							var selectedWalls = Find.Selector.SelectedObjects.OfType<Building_FoamWall>().Where(o => o.def == def);
 							foreach (var wall in selectedWalls) {
 								wall.smoothingReplacementDef = wallDef;
-								wall.ToggleDesignation(Resources.Designation.FoamWallSmooth, true);	
+								wall.ToggleDesignation(Resources.Designation.rxFoamWallSmooth, true);	
 							}
 						}))
 					))),
@@ -102,7 +102,7 @@ namespace RemoteExplosives {
 				var pawn = thing as Pawn;
 				if (pawn != null && !pawn.RaceProps.IsMechanoid && !pawn.Dead) {
 					foreach (var partRecord in pawn.RaceProps.body.GetPartsWithTag(BodyPartTagDefOf.BreathingSource)) {
-						pawn.TakeDamage(new DamageInfo(Resources.Damage.FoamWallRekt, 9999, 0f, -1f, wall, partRecord));
+						pawn.TakeDamage(new DamageInfo(Resources.Damage.rxFoamWallStuck, 9999, 0f, -1f, wall, partRecord));
 					}
 				} else if (thing.def.plant != null) {
 					thing.Destroy(DestroyMode.KillFinalize);

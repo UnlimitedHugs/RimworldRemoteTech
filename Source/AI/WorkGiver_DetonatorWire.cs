@@ -13,7 +13,7 @@ namespace RemoteExplosives {
 		}
 
 		public override IEnumerable<Thing> PotentialWorkThingsGlobal(Pawn pawn) {
-			var designations = pawn.Map.designationManager.SpawnedDesignationsOfDef(Resources.Designation.DetonatorWireDryOff);
+			var designations = pawn.Map.designationManager.SpawnedDesignationsOfDef(Resources.Designation.rxDetonatorWireDryOff);
 			foreach (var designation in designations) {
 				if(designation.target.Thing == null) continue;
 				yield return designation.target.Thing;
@@ -30,7 +30,7 @@ namespace RemoteExplosives {
 			var wire = t as Building_DetonatorWire;
 			if (wire == null) return null;
 			if (!wire.WantDrying) return null;
-			var jobDef = Resources.Job.DryDetonatorWire;
+			var jobDef = Resources.Job.rxDryDetonatorWire;
 			return new Job(jobDef, t);
 		}
 	}

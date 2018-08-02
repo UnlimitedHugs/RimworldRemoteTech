@@ -50,7 +50,7 @@ namespace RemoteExplosives {
 				}
 			}
 			if (affectedMineables >= MinAffectedCellsToTriggerCaveInSound) {
-				Resources.Sound.RemoteMiningCavein.PlayOneShot(new TargetInfo(parentPosition, parentMap));
+				Resources.Sound.rxMiningCavein.PlayOneShot(new TargetInfo(parentPosition, parentMap));
 			}
 		}
 
@@ -65,7 +65,7 @@ namespace RemoteExplosives {
 				if (rockBuildingDef.isResourceRock && mineable != null) {
 					// resource rocks
 					breakingPowerRemaining -= thing.HitPoints * MiningProps.resourceBreakingCost;
-					DamageResourceHolder(thing, explosive.GetStatValue(Resources.Stat.ExplosiveMiningYield));
+					DamageResourceHolder(thing, explosive.GetStatValue(Resources.Stat.rxExplosiveMiningYield));
 					BreakMineableAndYieldResources(mineable);
 					affected = true;
 				} else if (rockBuildingDef.isNaturalRock) {
@@ -76,7 +76,7 @@ namespace RemoteExplosives {
 					if (thing.def.filthLeaving != null) {
 						FilthMaker.MakeFilth(thing.Position, map, thing.def.filthLeaving, Rand.RangeInclusive(1, 3));
 					}
-					if (rockBuildingDef.mineableThing != null && Rand.Value < explosive.GetStatValue(Resources.Stat.ExplosiveChunkYield)) {
+					if (rockBuildingDef.mineableThing != null && Rand.Value < explosive.GetStatValue(Resources.Stat.rxExplosiveChunkYield)) {
 						var rockDrop = ThingMaker.MakeThing(rockBuildingDef.mineableThing);
 						if (rockDrop.def.stackLimit == 1) {
 							rockDrop.stackCount = 1;
@@ -95,7 +95,7 @@ namespace RemoteExplosives {
 				// trees
 				breakingPowerRemaining -= thing.HitPoints * MiningProps.woodBreakingCost;
 				var tree = (Plant)thing;
-				DamageResourceHolder(tree, explosive.GetStatValue(Resources.Stat.ExplosiveWoodYield));
+				DamageResourceHolder(tree, explosive.GetStatValue(Resources.Stat.rxExplosiveWoodYield));
 				var yield = tree.YieldNow();
 				tree.PlantCollected();
 				if (yield > 0) {

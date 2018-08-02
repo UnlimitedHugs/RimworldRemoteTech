@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Defs>
 
-	<ThingDef Name="ApparelBase" Abstract="True">
+	<ThingDef Name="rxApparelBase" Abstract="True">
 		<thingClass>Apparel</thingClass>
 		<category>Item</category>
 		<selectable>True</selectable>
@@ -31,7 +31,7 @@
 		</comps>
 	</ThingDef>
 
-	<ThingDef Name="ApparelMakeableBase" ParentName="ApparelBase" Abstract="True">
+	<ThingDef Name="rxApparelMakeableBase" ParentName="rxApparelBase" Abstract="True">
 		<recipeMaker>
 			<workSpeedStat>TailoringSpeed</workSpeedStat>
 			<workSkill>Crafting</workSkill>
@@ -45,8 +45,8 @@
 		</recipeMaker>
 	</ThingDef>
 
-	<ThingDef ParentName="ApparelMakeableBase">
-		<defName>Apparel_GasMask</defName>
+	<ThingDef ParentName="rxApparelMakeableBase">
+		<defName>rxApparel_GasMask</defName>
 		<label>gas mask</label>
 		<description>A mask that protects the wearer from toxic gasses and other air-borne contaminants.
 The filters wear out fairly quickly, so it's recommended to wear this only when necessary.</description>
@@ -115,9 +115,9 @@ The filters wear out fairly quickly, so it's recommended to wear this only when 
 		</colorGenerator>
 	</ThingDef>
 
-	<ThingDef ParentName="ApparelBase">
+	<ThingDef ParentName="rxApparelBase">
+		<defName>rxApparel_PortableDetonator</defName>
 		<thingClass>RemoteExplosives.PortableDetonator</thingClass>
-		<defName>Apparel_PortableDetonator</defName>
 		<label>portable remote detonator</label>
 		<description>A portable version of the detonator table for triggering remote explosives.
 Works only on the white channel, has limited range and runs on a non-rechargeable battery- but hey, you can almost fit it in your pocket. Almost.</description>
@@ -129,8 +129,8 @@ Works only on the white channel, has limited range and runs on a non-rechargeabl
 			<WorkToMake>3000</WorkToMake>
 			<MaxHitPoints>80</MaxHitPoints>
 			<MarketValue>300</MarketValue>
-			<PortableDetonatorRange>18</PortableDetonatorRange>
-			<PortableDetonatorNumUses>20</PortableDetonatorNumUses>
+			<rxPortableDetonatorRange>18</rxPortableDetonatorRange>
+			<rxPortableDetonatorNumUses>20</rxPortableDetonatorNumUses>
 			<Mass>1</Mass>
 		</statBases>
 		<generateCommonality>0.00001</generateCommonality>
@@ -140,10 +140,10 @@ Works only on the white channel, has limited range and runs on a non-rechargeabl
 			<effectWorking>Smith</effectWorking>
 			<soundWorking>Recipe_Machining</soundWorking>
 			<recipeUsers>
-				<li>RemoteExplosivesBench</li>
+				<li>rxBench</li>
 			</recipeUsers>
 			<unfinishedThingDef>UnfinishedComponent</unfinishedThingDef>
-			<researchPrerequisite>RemoteDetonator</researchPrerequisite>
+			<researchPrerequisite>rxRemoteDetonator</researchPrerequisite>
 		</recipeMaker>
 		<costList>
 			<ComponentIndustrial>2</ComponentIndustrial>

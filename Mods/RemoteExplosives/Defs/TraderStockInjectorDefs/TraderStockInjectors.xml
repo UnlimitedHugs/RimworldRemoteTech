@@ -2,12 +2,12 @@
 <Defs>
 
 	<RemoteExplosives.TraderStockInjectorDef>
-		<defName>BulkGoods_inject</defName>
+		<defName>rxBulkGoods_inject</defName>
 		<traderDef>Orbital_BulkGoods</traderDef>
 		<stockGenerators>
 			<!-- mining -->
 			<li Class="StockGenerator_SingleDef">
-				<thingDef>MiningExplosiveComponent</thingDef>
+				<thingDef>rxMiningExplosiveComponent</thingDef>
 				<countRange>
 					<min>3</min>
 					<max>12</max>
@@ -17,11 +17,11 @@
 	</RemoteExplosives.TraderStockInjectorDef>
 
 	<RemoteExplosives.TraderStockInjectorDef>
-		<defName>BulkCaravan_inject</defName>
+		<defName>rxBulkCaravan_inject</defName>
 		<traderDef>Caravan_Outlander_BulkGoods</traderDef>
 		<stockGenerators>
 			<li Class="StockGenerator_SingleDef">
-				<thingDef>MiningExplosiveComponent</thingDef>
+				<thingDef>rxMiningExplosiveComponent</thingDef>
 				<countRange>
 					<min>2</min>
 					<max>4</max>
@@ -31,19 +31,19 @@
 	</RemoteExplosives.TraderStockInjectorDef>
 
 	<RemoteExplosives.TraderStockInjectorDef>
-		<defName>CombatSupplier_inject</defName>
+		<defName>rxCombatSupplier_inject</defName>
 		<traderDef>Orbital_CombatSupplier</traderDef>
 		<stockGenerators>
 			<!-- combat -->
 			<li Class="StockGenerator_SingleDef">
-				<thingDef>RemoteBomb</thingDef>
+				<thingDef>rxRemoteBomb</thingDef>
 				<countRange>
 					<min>5</min>
 					<max>15</max>
 				</countRange>
 			</li>
 			<li Class="StockGenerator_SingleDef">
-				<thingDef>RemoteFireBomb</thingDef>
+				<thingDef>rxRemoteFireBomb</thingDef>
 				<countRange>
 					<min>5</min>
 					<max>10</max>
@@ -51,7 +51,7 @@
 			</li>
 			<!-- emp -->
 			<li Class="StockGenerator_SingleDef">
-				<thingDef>RemoteEmpBomb</thingDef>
+				<thingDef>rxRemoteEmpBomb</thingDef>
 				<countRange>
 					<min>1</min>
 					<max>4</max>
@@ -61,19 +61,19 @@
 	</RemoteExplosives.TraderStockInjectorDef>
 
 	<RemoteExplosives.TraderStockInjectorDef>
-		<defName>CombatSupplierCaravan_inject</defName>
+		<defName>rxCombatSupplierCaravan_inject</defName>
 		<traderDef>Caravan_Outlander_CombatSupplier</traderDef>
 		<stockGenerators>
 			<!-- combat -->
 			<li Class="StockGenerator_SingleDef">
-				<thingDef>RemoteBomb</thingDef>
+				<thingDef>rxRemoteBomb</thingDef>
 				<countRange>
 					<min>2</min>
 					<max>5</max>
 				</countRange>
 			</li>
 			<li Class="StockGenerator_SingleDef">
-				<thingDef>RemoteFireBomb</thingDef>
+				<thingDef>rxRemoteFireBomb</thingDef>
 				<countRange>
 					<min>1</min>
 					<max>4</max>
@@ -81,7 +81,7 @@
 			</li>
 			<!-- emp -->
 			<li Class="StockGenerator_SingleDef">
-				<thingDef>RemoteEmpBomb</thingDef>
+				<thingDef>rxRemoteEmpBomb</thingDef>
 				<price>Expensive</price>
 				<countRange>
 					<min>1</min>
@@ -92,12 +92,12 @@
 	</RemoteExplosives.TraderStockInjectorDef>
 
 	<RemoteExplosives.TraderStockInjectorDef>
-		<defName>PirateMerchant_inject</defName>
+		<defName>rxPirateMerchant_inject</defName>
 		<traderDef>Orbital_PirateMerchant</traderDef>
 		<stockGenerators>
 			<!-- combat, cheap -->
 			<li Class="StockGenerator_SingleDef">
-				<thingDef>RemoteBomb</thingDef>
+				<thingDef>rxRemoteBomb</thingDef>
 				<price>Cheap</price>
 				<countRange>
 					<min>0</min>
@@ -105,7 +105,7 @@
 				</countRange>
 			</li>
 			<li Class="StockGenerator_SingleDef">
-				<thingDef>RemoteFireBomb</thingDef>
+				<thingDef>rxRemoteFireBomb</thingDef>
 				<price>Cheap</price>
 				<countRange>
 					<min>0</min>
@@ -116,12 +116,12 @@
 	</RemoteExplosives.TraderStockInjectorDef>
 
 	<RemoteExplosives.TraderStockInjectorDef>
-		<defName>PirateCaravan_inject</defName>
+		<defName>rxPirateCaravan_inject</defName>
 		<traderDef>Caravan_Outlander_PirateMerchant</traderDef>
 		<stockGenerators>
 			<!-- combat, cheap -->
 			<li Class="StockGenerator_SingleDef">
-				<thingDef>RemoteBomb</thingDef>
+				<thingDef>rxRemoteBomb</thingDef>
 				<price>Cheap</price>
 				<countRange>
 					<min>0</min>
@@ -129,7 +129,7 @@
 				</countRange>
 			</li>
 			<li Class="StockGenerator_SingleDef">
-				<thingDef>RemoteFireBomb</thingDef>
+				<thingDef>rxRemoteFireBomb</thingDef>
 				<price>Cheap</price>
 				<countRange>
 					<min>0</min>
@@ -140,18 +140,18 @@
 	</RemoteExplosives.TraderStockInjectorDef>
 
 	<RemoteExplosives.TraderStockInjectorDef>
-		<defName>Exotic_inject</defName>
+		<defName>rxExotic_inject</defName>
 		<traderDef>Orbital_Exotic</traderDef>
 		<stockGenerators>
 			<li Class="StockGenerator_SingleDef">
-				<thingDef>RemoteChemicalCan</thingDef>
+				<thingDef>rxRemoteFoamCan</thingDef>
 				<countRange>
 					<min>2</min>
 					<max>8</max>
 				</countRange>
 			</li>
 			<li Class="StockGenerator_SingleDef">
-				<thingDef>RemoteRefinedSleepingGasCan</thingDef>
+				<thingDef>rxRemoteRefinedSleepingGasCan</thingDef>
 				<countRange>
 					<min>2</min>
 					<max>8</max>

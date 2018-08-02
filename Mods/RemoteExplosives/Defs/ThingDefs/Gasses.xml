@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Defs>
 	
-	<ThingDef Name="BaseSleepingGas">
-		<defName>Gas_Sleeping</defName>
+	<ThingDef Name="rxBaseSleepingGas">
+		<defName>rxGas_Sleeping</defName>
 		<label>sleeping gas cloud</label>
 		<description>Knocks out living organisms after enough exposure.
 Rapidly dissipates when under an open sky.</description>
@@ -40,14 +40,14 @@ Rapidly dissipates when under an open sky.</description>
 				<max>6</max>
 			</AnimationPeriod> 
 			
-			<hediffDef>SleepingGas</hediffDef>
+			<hediffDef>rxSleepingGas</hediffDef>
 			<hediffSeverityPerGastick>
 				<min>0.005</min>
 				<max>0.010</max>
 			</hediffSeverityPerGastick>
 			<requiresFleshyPawn>true</requiresFleshyPawn>
 			<immunizingApparelDefs>
-				<li>Apparel_GasMask</li>
+				<li>rxApparel_GasMask</li>
 				<li>Apparel_PowerArmorHelmet</li>
 			</immunizingApparelDefs>
 		</mote>
@@ -58,8 +58,8 @@ Rapidly dissipates when under an open sky.</description>
 		<rotatable>false</rotatable>
 	</ThingDef>
 	
-	<ThingDef ParentName="BaseSleepingGas">
-		<defName>Gas_SleepingRefined</defName>
+	<ThingDef ParentName="rxBaseSleepingGas">
+		<defName>rxGas_SleepingRefined</defName>
 		<label>refined sleeping gas cloud</label>
 		<graphicData>
 			<color>(255, 102, 161)</color>

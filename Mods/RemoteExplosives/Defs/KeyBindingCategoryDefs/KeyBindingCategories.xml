@@ -2,7 +2,7 @@
 
 <Defs>
 	<KeyBindingCategoryDef>
-		<defName>RemoteExplosives</defName>
+		<defName>rxRemoteExplosives</defName>
 		<label>Remote Explosives</label>
 		<description>Shortcuts for actions in the Remote Explosives mod.</description>
 		<checkForConflicts>
@@ -12,7 +12,7 @@
 	</KeyBindingCategoryDef>
 	
     <KeyBindingCategoryDef>
-		<defName>RemoteExplosivesDetonator</defName>
+		<defName>rxDetonator</defName>
 		<label>Remote Explosives Detonator</label>
 		<description>Shortcuts for actions in the Remote Explosives mod.</description>
 		<checkForConflicts>
@@ -22,7 +22,7 @@
 	</KeyBindingCategoryDef>
 	
     <KeyBindingCategoryDef>
-		<defName>RemoteExplosivesTools</defName>
+		<defName>rxTools</defName>
 		<label>Remote Explosives Tools</label>
 		<description>Shortcuts for activation of Remote Explosives items worn by pawns.</description>
 		<checkForConflicts>

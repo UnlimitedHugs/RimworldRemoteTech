@@ -2,7 +2,7 @@
 <Defs>
 	
 	<WorkGiverDef>
-		<defName>DetonateExplosives</defName>
+		<defName>rxDetonateExplosives</defName>
 		<label>trigger detonator</label>
 		<giverClass>RemoteExplosives.WorkGiver_IPawnDetonateable</giverClass>
 		<workType>BasicWorker</workType>
@@ -12,7 +12,7 @@
 	</WorkGiverDef>
 	
 	<WorkGiverDef>
-		<defName>SwitchRemoteExplosive</defName>
+		<defName>rxSwitchRemoteExplosives</defName>
 		<label>switch remote explosive</label>
 		<giverClass>RemoteExplosives.WorkGiver_RemoteExplosive</giverClass>
 		<workType>BasicWorker</workType>
@@ -22,7 +22,7 @@
 	</WorkGiverDef>
 	
 	<WorkGiverDef>
-		<defName>InstallChannelsComponent</defName>
+		<defName>rxInstallChannelsComponent</defName>
 		<label>install detonator channels</label>
 		<giverClass>RemoteExplosives.WorkGiver_DetonatorTableChannels</giverClass>
 		<workType>Construction</workType>
@@ -32,13 +32,13 @@
 	</WorkGiverDef>
 	
 	<WorkGiverDef>
-		<defName>DoBillsRemoteExplosivesBench</defName>
+		<defName>rxDoBillsBench</defName>
 		<label>assemble explosive</label>
 		<giverClass>WorkGiver_DoBill</giverClass>
 		<workType>Smithing</workType>
 		<priorityInType>60</priorityInType>
 		<fixedBillGiverDefs>
-			<li>RemoteExplosivesBench</li>
+			<li>rxBench</li>
 		</fixedBillGiverDefs>
 		<verb>assemble explosive</verb>
 		<gerund>assembling explosive at</gerund>
@@ -48,7 +48,7 @@
 	</WorkGiverDef>
 	
 	<WorkGiverDef>
-		<defName>DoBillsCraftFire</defName>
+		<defName>rxDoBillsCraftFire</defName>
 		<label>do bills at fireplace</label>
 		<giverClass>WorkGiver_DoBill</giverClass>
 		<workType>Crafting</workType>
@@ -66,7 +66,7 @@
 	</WorkGiverDef>
 	
 	<WorkGiverDef>
-		<defName>DryOffDetonatorWire</defName>
+		<defName>rxDryOffDetonatorWire</defName>
 		<label>dry off detonator wire</label>
 		<giverClass>RemoteExplosives.WorkGiver_DetonatorWire</giverClass>
 		<workType>Cleaning</workType>
@@ -80,7 +80,7 @@
 	</WorkGiverDef>
 	
 	<WorkGiverDef>
-		<defName>SmoothFoamWall</defName>
+		<defName>rxSmoothFoamWall</defName>
 		<label>smooth foam wall</label>
 		<giverClass>RemoteExplosives.WorkGiver_FoamWall</giverClass>
 		<workType>Construction</workType>

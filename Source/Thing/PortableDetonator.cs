@@ -48,16 +48,16 @@ namespace RemoteExplosives {
 				icon = Resources.Textures.UIDetonatorPortable,
 				defaultLabel = DetonateButtonLabel,
 				defaultDesc = DetonateButtonDesc + "\n" + GetInspectString(),
-				hotKey = Resources.KeyBinging.PortableDetonatorDetonate
+				hotKey = Resources.KeyBinging.rxPortableDetonatorDetonate
 			};
 		}
 
 		private int SignalRange {
-			get { return Mathf.RoundToInt(this.GetStatValue(Resources.Stat.PortableDetonatorRange)); }
+			get { return Mathf.RoundToInt(this.GetStatValue(Resources.Stat.rxPortableDetonatorRange)); }
 		}
 
 		private int MaxNumUses {
-			get { return Mathf.RoundToInt(this.GetStatValue(Resources.Stat.PortableDetonatorNumUses)); }
+			get { return Mathf.RoundToInt(this.GetStatValue(Resources.Stat.rxPortableDetonatorNumUses)); }
 		}
 
 		private void DrawRangeOverlay() {

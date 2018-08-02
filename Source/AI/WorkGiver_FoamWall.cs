@@ -9,7 +9,7 @@ namespace RemoteExplosives {
 	 */
 	public class WorkGiver_FoamWall : WorkGiver_Scanner {
 		public override IEnumerable<Thing> PotentialWorkThingsGlobal(Pawn pawn) {
-			var designations = pawn.Map.designationManager.SpawnedDesignationsOfDef(Resources.Designation.FoamWallSmooth);
+			var designations = pawn.Map.designationManager.SpawnedDesignationsOfDef(Resources.Designation.rxFoamWallSmooth);
 			foreach (var designation in designations) {
 				if(designation.target.Thing == null) continue;
 				yield return designation.target.Thing;
@@ -19,7 +19,7 @@ namespace RemoteExplosives {
 		public override Job JobOnThing(Pawn pawn, Thing t, bool forced = false) {
 			var wall = t as Building_FoamWall;
 			if (wall == null || !wall.Spawned || !pawn.CanReserveAndReach(t, PathEndMode.Touch, Danger.Deadly)) return null;
-			return new Job(Resources.Job.SmoothFoamWall, t);
+			return new Job(Resources.Job.rxSmoothFoamWall, t);
 		}
 	}
 }

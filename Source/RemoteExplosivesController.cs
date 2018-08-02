@@ -59,10 +59,10 @@ namespace RemoteExplosives {
 
 		private void RemoveFoamWallsFromMeteoritePool() {
 			// smoothed foam walls are mineable, but should not appear in a meteorite drop
-			ThingSetMaker_Meteorite.nonSmoothedMineables.Remove(Resources.Thing.FoamWallSmooth);
-			ThingSetMaker_Meteorite.nonSmoothedMineables.Remove(Resources.Thing.FoamWallBricks);
+			ThingSetMaker_Meteorite.nonSmoothedMineables.Remove(Resources.Thing.rxFoamWallSmooth);
+			ThingSetMaker_Meteorite.nonSmoothedMineables.Remove(Resources.Thing.rxFoamWallBricks);
 			// same for our passable collapsed rock
-			ThingSetMaker_Meteorite.nonSmoothedMineables.Remove(Resources.Thing.CollapsedRoofRocks);
+			ThingSetMaker_Meteorite.nonSmoothedMineables.Remove(Resources.Thing.rxCollapsedRoofRocks);
 		}
 
 		private void PrepareReflection() {
@@ -153,7 +153,7 @@ namespace RemoteExplosives {
 		private IEnumerable<RecipeDef> GetAllExplosivesRecipes() {
 			return DefDatabase<RecipeDef>.AllDefs.Where(d => {
 				var product = d.products.FirstOrDefault();
-				return product != null && product.thingDef != null && product.thingDef.thingCategories != null && product.thingDef.thingCategories.Contains(Resources.ThingCategory.Explosives);
+				return product != null && product.thingDef != null && product.thingDef.thingCategories != null && product.thingDef.thingCategories.Contains(Resources.ThingCategory.rxExplosives);
 			});
 		}
 
@@ -205,7 +205,7 @@ namespace RemoteExplosives {
 					if (cloud != null) {
 						cloud.ReceiveConcentration(concentration);
 					} else {
-						cloud = (GasCloud) ThingMaker.MakeThing(Resources.Thing.Gas_Sleeping);
+						cloud = (GasCloud) ThingMaker.MakeThing(Resources.Thing.rxGas_Sleeping);
 						cloud.ReceiveConcentration(concentration);
 						GenPlace.TryPlaceThing(cloud, cell, map, ThingPlaceMode.Direct);
 					}
@@ -213,12 +213,12 @@ namespace RemoteExplosives {
 			}
 			if (Widgets.ButtonText(new Rect(10, 30, 50, 20), "Spark")) {
 				DebugTools.curTool = new DebugTool("Spark", () => {
-					Resources.Effecter.SparkweedIgnite.Spawn().Trigger(new TargetInfo(UI.MouseCell(), map), null);
+					Resources.Effecter.rxSparkweedIgnite.Spawn().Trigger(new TargetInfo(UI.MouseCell(), map), null);
 				});
 			}
 			if (Widgets.ButtonText(new Rect(10, 50, 50, 20), "Failure")) {
 				DebugTools.curTool = new DebugTool("Failure", () => {
-					Resources.Effecter.DetWireFailure.Spawn().Trigger(new TargetInfo(UI.MouseCell(), map), null);
+					Resources.Effecter.rxDetWireFailure.Spawn().Trigger(new TargetInfo(UI.MouseCell(), map), null);
 				});
 			}
 

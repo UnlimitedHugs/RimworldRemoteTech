@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Defs>
 	
-	<ThingDef Name="ChunkBase" Abstract="True">
+	<ThingDef Name="rxChunkBase" Abstract="True">
 		<category>Item</category>
 		<thingClass>Thing</thingClass>
 		<altitudeLayer>Item</altitudeLayer>
@@ -22,8 +22,8 @@
 		<tradeability>None</tradeability>
 	</ThingDef>
 	
-	<ThingDef ParentName="ChunkBase">
-		<defName>ChunkSlagGold</defName>
+	<ThingDef ParentName="rxChunkBase">
+		<defName>rxChunkSlagGold</defName>
 		<label>gold slag chunk</label>
 		<description>A chunk of gold and steel melted together. A smelter might be able to separate them for reuse.</description>
 		<graphicData>

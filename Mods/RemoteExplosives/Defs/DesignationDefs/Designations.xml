@@ -1,21 +1,21 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Defs>
 	<DesignationDef>
-		<defName>RemoteExplosiveSwitch</defName>
+		<defName>rxRemoteExplosiveSwitch</defName>
 		<texturePath>Designations/Flick</texturePath>
 		<targetType>Thing</targetType>
 		<designateCancelable>false</designateCancelable>
 	</DesignationDef>
 	
 	<DesignationDef>
-		<defName>DetonatorWireDryOff</defName>
+		<defName>rxDetonatorWireDryOff</defName>
 		<texturePath>dry_off_designation</texturePath>
 		<targetType>Thing</targetType>
 		<designateCancelable>false</designateCancelable>
 	</DesignationDef>
 	
 	<DesignationDef>
-		<defName>FoamWallSmooth</defName>
+		<defName>rxFoamWallSmooth</defName>
 		<texturePath>Designations/SmoothSurface</texturePath>
 		<targetType>Thing</targetType>
 		<designateCancelable>true</designateCancelable>

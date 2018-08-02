@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Defs>
 
-	<ThingDef Name="BuildingMiscBase" Abstract="True">
+	<ThingDef Name="rxBuildingMiscBase" Abstract="True">
 		<category>Building</category>
 		<soundImpactDefault>BulletImpact_Ground</soundImpactDefault>
 		<selectable>true</selectable>
@@ -11,8 +11,8 @@
 		<filthLeaving>Filth_RubbleBuilding</filthLeaving>
 	</ThingDef>
 
-	<ThingDef ParentName="BuildingMiscBase">
-		<defName>WallFoamBlob</defName>
+	<ThingDef ParentName="rxBuildingMiscBase">
+		<defName>rxWallFoamBlob</defName>
 		<label>chemical foam</label>
 		<thingClass>RemoteExplosives.Building_FoamBlob</thingClass>
 		<description>Becomes tougher than rock as it solidifies.</description>
@@ -53,15 +53,15 @@
 				<min>10</min>
 				<max>15</max>
 			</ticksBetweenSpreading>
-			<hardenedDef>FoamWall</hardenedDef>
+			<hardenedDef>rxFoamWall</hardenedDef>
 		</building>
 	</ThingDef>
 
-	<ThingDef ParentName="BuildingMiscBase" Abstract="True" Name="FoamWallBase">
+	<ThingDef ParentName="rxBuildingMiscBase" Abstract="True" Name="rxFoamWallBase">
 		<thingClass>RemoteExplosives.Building_FoamWall</thingClass>
 		<category>Building</category>
 		<graphicData>
-			<texPath>FoamWall</texPath>
+			<texPath>rxFoamWall</texPath>
 			<graphicClass>Graphic_Single</graphicClass>
 			<linkType>CornerFiller</linkType>
 			<linkFlags>
@@ -128,8 +128,8 @@
 		</damageMultipliers>
 	</ThingDef>
 	
-	<ThingDef ParentName="FoamWallBase">
-		<defName>FoamWall</defName>
+	<ThingDef ParentName="rxFoamWallBase">
+		<defName>rxFoamWall</defName>
 		<label>hardened foam wall</label>
 		<description>Solidified chemical foam. Extremely tough and non-flammable.</description>
 		<graphicData>
@@ -141,14 +141,14 @@
 		<building Class="RemoteExplosives.BuildingProperties_FoamWall">
 			<smoothWorkAmount>1000</smoothWorkAmount>
 			<smoothVariants>
-				<li>FoamWallSmooth</li>
-				<li>FoamWallBricks</li>
+				<li>rxFoamWallSmooth</li>
+				<li>rxFoamWallBricks</li>
 			</smoothVariants>
 		</building>
 	</ThingDef>
 	
-	<ThingDef ParentName="FoamWallBase">
-		<defName>FoamWallSmooth</defName>
+	<ThingDef ParentName="rxFoamWallBase">
+		<defName>rxFoamWallSmooth</defName>
 		<label>smooth foam wall</label>
 		<description>Solidified chemical foam. Made a bit more presentable by smoothing the surface.</description>
 		<graphicData>
@@ -159,8 +159,8 @@
 		</statBases>
 	</ThingDef>
 
-	<ThingDef ParentName="FoamWallBase">
-		<defName>FoamWallBricks</defName>
+	<ThingDef ParentName="rxFoamWallBase">
+		<defName>rxFoamWallBricks</defName>
 		<label>chiseled foam wall</label>
 		<description>Solidified chemical foam. Made a bit more presentable by carving a brick pattern into the surface.</description>
 		<graphicData>
@@ -172,7 +172,7 @@
 	</ThingDef>
 	
 	<ThingDef>
-		<defName>CollapsedRoofRocks</defName>
+		<defName>rxCollapsedRoofRocks</defName>
 		<graphicData>
 			<texPath>Things/Building/Natural/CollapsedRocks</texPath>
 			<graphicClass>Graphic_Single</graphicClass>
@@ -213,13 +213,13 @@
 		</building>
 	</ThingDef>
 	
-	<ThingDef ParentName="BuildingMiscBase">
-		<defName>rx_GasVent</defName>
+	<ThingDef ParentName="rxBuildingMiscBase">
+		<defName>rxGasVent</defName>
 		<label>gas vent</label>
 		<thingClass>RemoteExplosives.Building_GasVent</thingClass>
 		<description>Pushes gasses from one side to the other when powered. Also equalizes heat like a regular vent when powered.
 Tip: switches can be used to toggle vents remotely, as well as in groups.</description>
-		<designationCategory>RemoteExplosives</designationCategory>
+		<designationCategory>rxRemoteExplosives</designationCategory>
 		<graphicData>
 			<graphicClass>Graphic_Multi</graphicClass>
 			<texPath>GasVent/GasVent</texPath>
@@ -268,7 +268,7 @@ Tip: switches can be used to toggle vents remotely, as well as in groups.</descr
 		</placeWorkers>
 		<drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>
 		<researchPrerequisites>
-			<li>RemoteGasVent</li>
+			<li>rxGasVent</li>
 		</researchPrerequisites>
 	</ThingDef>
 	

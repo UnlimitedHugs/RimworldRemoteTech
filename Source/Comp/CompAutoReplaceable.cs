@@ -57,7 +57,7 @@ namespace RemoteExplosives {
 				icon = Resources.Textures.UIAutoReplace,
 				defaultLabel = AutoReplaceButtonLabel,
 				defaultDesc = AutoReplaceButtonDesc,
-				hotKey = Resources.KeyBinging.RemoteExplosiveAutoReplace
+				hotKey = Resources.KeyBinging.rxAutoReplace
 			};
 			return replaceGizmo;
 		}

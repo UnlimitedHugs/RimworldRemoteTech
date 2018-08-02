@@ -21,7 +21,7 @@ namespace RemoteExplosives {
 		public override void Tick() {
 			base.Tick();
 			if (chargeSoundRequested) {
-				Resources.Sound.RemoteEmpCharge.PlayOneShot(this);
+				Resources.Sound.rxEmpCharge.PlayOneShot(this);
 				chargeSoundRequested = false;
 			}
 		}

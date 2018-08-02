@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Defs>
 	
-	<ThingDef Name="BaseExplosivePart" Abstract="True">
+	<ThingDef Name="rxBaseExplosivePart" Abstract="True">
 		<thingClass>ThingWithComps</thingClass>
 		<label>unspecified resource</label>
 		<category>Item</category>
@@ -28,20 +28,20 @@
 			<DeteriorationRate>0</DeteriorationRate>
 		</statBases>
 		<thingCategories>
-			<li>Explosives</li>
+			<li>rxExplosives</li>
 		</thingCategories>
 	</ThingDef>
 	
-	<ThingDef Name="BaseExplosiveIngredient" ParentName="BaseExplosivePart" Abstract="True">
+	<ThingDef Name="rxBaseExplosiveIngredient" ParentName="rxBaseExplosivePart" Abstract="True">
 		<thingCategories>
-			<li>ExplosivesIngredients</li>
+			<li>rxExplosivesIngredients</li>
 		</thingCategories>
 		<soundInteract>Standard_Drop</soundInteract>
 		<stackLimit>75</stackLimit>
 	</ThingDef>
 	
-	<ThingDef ParentName="BaseExplosivePart">
-		<defName>RemoteBomb</defName>
+	<ThingDef ParentName="rxBaseExplosivePart">
+		<defName>rxRemoteBomb</defName>
 		<label>remote explosive</label>
 		<description>Explosive trap with a remote trigger.
 Place as a building from the Explosives menu to use.</description>
@@ -68,8 +68,8 @@ Place as a building from the Explosives menu to use.</description>
 		</statBases>
 	</ThingDef>
 	
-	<ThingDef ParentName="BaseExplosivePart">
-		<defName>RemoteFireBomb</defName>
+	<ThingDef ParentName="rxBaseExplosivePart">
+		<defName>rxRemoteFireBomb</defName>
 		<label>incendiary remote explosive</label>
 		<description>A canister filled with flammable chemicals with a radio trigger.
 Place as a building from the Explosives menu to use.</description>
@@ -96,8 +96,8 @@ Place as a building from the Explosives menu to use.</description>
 		</statBases>
 	</ThingDef>
 	
-	<ThingDef ParentName="BaseExplosivePart">
-		<defName>MiningExplosiveComponent</defName>
+	<ThingDef ParentName="rxBaseExplosivePart">
+		<defName>rxMiningExplosiveComponent</defName>
 		<label>mining explosive</label>
 		<description>The main part of a remote mining explosive.
 Place as a building from the Explosives menu to use.</description>
@@ -120,15 +120,15 @@ Place as a building from the Explosives menu to use.</description>
 		</comps>
 		<statBases>
 			<MarketValue>65</MarketValue>
-			<ExplosiveChunkYield>.5</ExplosiveChunkYield>
-			<ExplosiveMiningYield>.75</ExplosiveMiningYield>
-			<ExplosiveWoodYield>.70</ExplosiveWoodYield>
+			<rxExplosiveChunkYield>.5</rxExplosiveChunkYield>
+			<rxExplosiveMiningYield>.75</rxExplosiveMiningYield>
+			<rxExplosiveWoodYield>.70</rxExplosiveWoodYield>
 			<Mass>3</Mass>
 		</statBases>
 	</ThingDef>
 	
-	<ThingDef ParentName="BaseExplosivePart">
-		<defName>RemoteEmpBomb</defName>
+	<ThingDef ParentName="rxBaseExplosivePart">
+		<defName>rxRemoteEmpBomb</defName>
 		<label>EMP remote explosive</label>
 		<description>A single-use electromagnetic pulse generator.
 Place as a building from the Explosives menu to use.</description>
@@ -143,8 +143,8 @@ Place as a building from the Explosives menu to use.</description>
 		</statBases>
 	</ThingDef>
 	
-	<ThingDef ParentName="BaseExplosivePart">
-		<defName>RemoteChemicalCan</defName>
+	<ThingDef ParentName="rxBaseExplosivePart">
+		<defName>rxRemoteFoamCan</defName>
 		<label>sealing foam canister</label>
 		<description>A remotely triggered canister containing sealing foam.
 Place as a building from the Explosives menu to use.</description>
@@ -160,8 +160,8 @@ Place as a building from the Explosives menu to use.</description>
 					<max>50</max>
 				</wickTicks>
 				<startWickHitPointsPercent>.2</startWickHitPointsPercent>
-				<breakSound>RemoteGlassBreak</breakSound>
-				<spawnThingDef>WallFoamBlob</spawnThingDef>
+				<breakSound>rxGlassBreak</breakSound>
+				<spawnThingDef>rxWallFoamBlob</spawnThingDef>
 				<numFoamBlobs>5</numFoamBlobs>
 			</li>
 		</comps>
@@ -171,8 +171,8 @@ Place as a building from the Explosives menu to use.</description>
 		</statBases>
 	</ThingDef>
 	
-	<ThingDef ParentName="BaseExplosivePart">
-		<defName>RemoteSleepingGasCan</defName>
+	<ThingDef ParentName="rxBaseExplosivePart">
+		<defName>rxRemoteSleepingGasCan</defName>
 		<label>sleeping gas canister</label>
 		<description>A remotely triggered canister containing sleeping gas.
 Place as a building from the Explosives menu to use.</description>
@@ -188,8 +188,8 @@ Place as a building from the Explosives menu to use.</description>
 					<max>50</max>
 				</wickTicks>
 				<startWickHitPointsPercent>.2</startWickHitPointsPercent>
-				<breakSound>RemoteGlassBreak</breakSound>
-				<spawnThingDef>Gas_Sleeping</spawnThingDef>
+				<breakSound>rxGlassBreak</breakSound>
+				<spawnThingDef>rxGas_Sleeping</spawnThingDef>
 				<gasConcentration>80000</gasConcentration>
 			</li>
 		</comps>
@@ -199,8 +199,8 @@ Place as a building from the Explosives menu to use.</description>
 		</statBases>
 	</ThingDef>
 	
-	<ThingDef ParentName="BaseExplosivePart">
-		<defName>RemoteRefinedSleepingGasCan</defName>
+	<ThingDef ParentName="rxBaseExplosivePart">
+		<defName>rxRemoteRefinedSleepingGasCan</defName>
 		<label>refined sleeping gas canister</label>
 		<description>A remotely triggered canister filled with refined sleeping gas. Significantly more potent than common sleeping gas.
 Place as a building from the Explosives menu to use.</description>
@@ -216,8 +216,8 @@ Place as a building from the Explosives menu to use.</description>
 					<max>50</max>
 				</wickTicks>
 				<startWickHitPointsPercent>.2</startWickHitPointsPercent>
-				<breakSound>RemoteGlassBreak</breakSound>
-				<spawnThingDef>Gas_SleepingRefined</spawnThingDef>
+				<breakSound>rxGlassBreak</breakSound>
+				<spawnThingDef>rxGas_SleepingRefined</spawnThingDef>
 				<gasConcentration>80000</gasConcentration>
 			</li>
 		</comps>
@@ -227,8 +227,8 @@ Place as a building from the Explosives menu to use.</description>
 		</statBases>
 	</ThingDef>
 
-	<ThingDef ParentName="BaseExplosivePart">
-		<defName>ExplosivePouch</defName>
+	<ThingDef ParentName="rxBaseExplosivePart">
+		<defName>rxExplosivePouch</defName>
 		<label>explosive pouch</label>
 		<description>A primitive explosive charge made from volatile powder mixture wrapped in animal leather.
 Place as a building from the Explosives menu to use.</description>
@@ -239,7 +239,7 @@ Place as a building from the Explosives menu to use.</description>
 		<comps>
 			<li Class="CompProperties_Explosive">
 				<explosiveRadius>2.5</explosiveRadius>
-				<explosiveDamageType>FlameBomb</explosiveDamageType>
+				<explosiveDamageType>rxFlameBomb</explosiveDamageType>
 				<explosiveExpandPerStackcount>0.4</explosiveExpandPerStackcount>
 				<startWickHitPointsPercent>0.3</startWickHitPointsPercent>
 				<wickTicks>
@@ -253,9 +253,9 @@ Place as a building from the Explosives menu to use.</description>
 		</statBases>
 	</ThingDef>
 	
-	<ThingDef ParentName="BaseExplosiveIngredient">
-		<defName>Sparkpowder</defName>
-		<label>sparkpowder</label>
+	<ThingDef ParentName="rxBaseExplosiveIngredient">
+		<defName>rxSparkpowder</defName>
+		<label>rxSparkpowder</label>
 		<description>Harvested from Sparkweed plants and specially preserved to prevent spontaneous combustion. Keep away from fire.</description>
 		<graphicData>
 			<texPath>spark_powder</texPath>
@@ -281,8 +281,8 @@ Place as a building from the Explosives menu to use.</description>
 		</statBases>
 	</ThingDef>
 	
-	<ThingDef ParentName="BaseExplosiveIngredient">
-		<defName>Charcoal</defName>
+	<ThingDef ParentName="rxBaseExplosiveIngredient">
+		<defName>rxCharcoal</defName>
 		<label>crushed charcoal</label>
 		<description>An efficient fuel made by burning wood in low-oxygen conditions. Becomes a great additive for explosives when crushed into powder.
 Can be made at a campfire or a fueled stove.</description>

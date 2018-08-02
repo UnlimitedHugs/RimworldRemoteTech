@@ -11,7 +11,7 @@ namespace RemoteExplosives.Patches {
 	internal class CultivatedPlants_DeterminePlantDef_Patch {
 		[HarmonyPostfix]
 		public static void ReplaceSparkweedWithPotatoes(ref ThingDef __result) {
-			if (__result == Resources.Thing.PlantSparkweed) {
+			if (__result == Resources.Thing.rxPlantSparkweed) {
 				__result = ThingDefOf.Plant_Potato;
 			}
 		}

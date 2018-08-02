@@ -23,7 +23,7 @@ namespace RemoteExplosives {
 		protected override IEnumerable<Toil> MakeNewToils() {
 			var wall = TargetThingA as Building_FoamWall;
 			if (wall == null) yield break;
-			this.FailOn(() => !wall.Spawned || !wall.HasDesignation(Resources.Designation.FoamWallSmooth));
+			this.FailOn(() => !wall.Spawned || !wall.HasDesignation(Resources.Designation.rxFoamWallSmooth));
 			yield return Toils_Goto.GotoCell(TargetIndex.A, PathEndMode.Touch);
 			var doWork = new Toil {
 				initAction = delegate {
@@ -37,7 +37,7 @@ namespace RemoteExplosives {
 					doWork.actor.skills.Learn(SkillDefOf.Construction, 0.11f);
 				}
 				if (workLeft <= 0f) {
-					wall.ToggleDesignation(Resources.Designation.FoamWallSmooth, false);
+					wall.ToggleDesignation(Resources.Designation.rxFoamWallSmooth, false);
 					wall.ApplySmoothing();
 					EndJobWith(JobCondition.Succeeded);
 				}

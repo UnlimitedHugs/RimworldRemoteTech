@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Defs>
 	
-	<ThingDef Name="MoteBase" Abstract="True">
+	<ThingDef Name="rxMoteBase" Abstract="True">
 		<thingClass>MoteThrown</thingClass>
 		<label>Mote</label>
 		<category>Mote</category>
@@ -16,8 +16,8 @@
 		<rotatable>false</rotatable>
 	</ThingDef>
 	
-	<ThingDef ParentName="MoteBase">
-		<defName>Mote_SpreadingSparks</defName>
+	<ThingDef ParentName="rxMoteBase">
+		<defName>rxMote_SpreadingSparks</defName>
 		<graphicData>
 			<texPath>Things/Mote/MicroSparks</texPath>
 			<shaderType>MoteGlow</shaderType>

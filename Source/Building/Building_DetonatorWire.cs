@@ -141,7 +141,7 @@ namespace RemoteExplosives {
 		}
 
 		private void UpdateDesignation() {
-			this.ToggleDesignation(Resources.Designation.DetonatorWireDryOff, wantDrying);
+			this.ToggleDesignation(Resources.Designation.rxDetonatorWireDryOff, wantDrying);
 		}
 	}
 }
