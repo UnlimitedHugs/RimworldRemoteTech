@@ -31,34 +31,6 @@ namespace RemoteExplosives {
 			}
 		}
 
-		private string Description {
-			get {
-				var s = new StringBuilder("Upgrade_descriptionEffects".Translate());
-				s.AppendLine();
-				if (Props.effectDescription != null) {
-					s.AppendLine(Props.effectDescription);
-				} else {
-					for (var i = 0; i < Props.statModifiers.Count; i++) {
-						var effect = Props.statModifiers[i];
-						s.Append(effect.stat.LabelCap);
-						s.Append(": ");
-						s.AppendLine(effect.ToStringAsFactor);
-					}
-				}
-				if (Props.costList.Count > 0) {
-					s.AppendLine();
-					s.AppendLine("Upgrade_descriptionCost".Translate());
-					for (var i = 0; i < Props.costList.Count; i++) {
-						var thingCount = Props.costList[i];
-						s.Append(thingCount.thingDef.LabelCap);
-						s.Append(": x");
-						s.AppendLine(thingCount.count.ToString());
-					}
-				}
-				return s.ToString().TrimEnd();
-			}
-		}
-
 		// saved
 		private bool complete;
 		private float workDone;
@@ -67,6 +39,10 @@ namespace RemoteExplosives {
 
 		public CompUpgrade() {
 			ingredients = new ThingOwner<Thing>(this);
+		}
+
+		public override string GetDescriptionPart() {
+			return Props.GetDescriptionPart(parent.def);
 		}
 
 		public override void PostSpawnSetup(bool respawningAfterLoad) {
@@ -97,7 +73,7 @@ namespace RemoteExplosives {
 			if (!complete && CompletedPrerequisites) {
 				yield return new Command_Toggle {
 					defaultLabel = "Upgrade_labelPrefix".Translate(Props.label),
-					defaultDesc = Description,
+					defaultDesc = $"{Props.EffectDescription}\n{Props.MaterialsDescription}",
 					toggleAction = () => {
 						wantsWork = !wantsWork;
 						if (!wantsWork) ingredients.TryDropAll(parent.Position, parent.Map, ThingPlaceMode.Near);

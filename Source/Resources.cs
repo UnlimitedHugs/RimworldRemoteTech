@@ -70,6 +70,11 @@ namespace RemoteExplosives {
 		}
 
 		[DefOf]
+		public static class StatCategory {
+			public static StatCategoryDef rxUpgrades;
+		}
+
+		[DefOf]
 		public static class Stat {
 			public static StatDef rxPortableDetonatorRange;
 			public static StatDef rxPortableDetonatorNumUses;

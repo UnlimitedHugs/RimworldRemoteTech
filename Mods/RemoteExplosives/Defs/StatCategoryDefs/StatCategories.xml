@@ -3,8 +3,15 @@
 
 	<StatCategoryDef>
 		<defName>rxExplosives</defName>
-		<label>rxExplosives</label>
+		<label>Explosives</label>
 		<displayOrder>20</displayOrder>
+		<displayAllByDefault>true</displayAllByDefault>
+	</StatCategoryDef>
+	
+	<StatCategoryDef>
+		<defName>rxUpgrades</defName>
+		<label>Upgrades</label>
+		<displayOrder>30</displayOrder>
 		<displayAllByDefault>true</displayAllByDefault>
 	</StatCategoryDef>
 

@@ -80,8 +80,11 @@
 	
 	<Upgrade_statModifierCategory>Completed upgrades</Upgrade_statModifierCategory>
 	<Upgrade_labelPrefix>Upgrade: {0}</Upgrade_labelPrefix>
-	<Upgrade_descriptionEffects>Effects:</Upgrade_descriptionEffects>
-	<Upgrade_descriptionCost>Required materials:</Upgrade_descriptionCost>
+	<Upgrade_descriptionEffects>Effects: </Upgrade_descriptionEffects>
+	<Upgrade_descriptionCost>Required materials: </Upgrade_descriptionCost>
+	<Upgrade_prerequisites>Prerequisites: </Upgrade_prerequisites>
+	<Upgrade_prerequisitesResearch>research ({0})</Upgrade_prerequisitesResearch>
+	<Upgrade_prerequisitesUpgrade>upgrade ({0})</Upgrade_prerequisitesUpgrade>
 	<Upgrade_workProgress>Work progress: {0:F0}%</Upgrade_workProgress>
 	<Upgrade_deliveredIngredients>Stored things: {0}</Upgrade_deliveredIngredients>
 	<Upgrade_installedUpgrades>Installed upgrades: </Upgrade_installedUpgrades>
