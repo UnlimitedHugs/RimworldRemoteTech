@@ -4,6 +4,9 @@ using Verse;
 using Verse.AI;
 
 namespace RemoteExplosives {
+	/// <summary>
+	/// Calls a colonist to bring in needed materials and performs some work on a Thing to unlock one of its CompUpgrade
+	/// </summary>
 	public class JobDriver_InstallUpgrade : JobDriver {
 		public override bool TryMakePreToilReservations(bool errorOnFailed) {
 			return pawn.Reserve(job.targetA, job);

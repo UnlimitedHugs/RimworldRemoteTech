@@ -4,6 +4,10 @@ using Verse;
 using Verse.AI;
 
 namespace RemoteExplosives {
+	/// <summary>
+	/// Provides JobDriver_InstallUpgrade to colonists, based on things that have upgrade designation.
+	/// The designation is applied by CompUpgrade using the toggle gizmo.
+	/// </summary>
 	public class WorkGiver_InstallUpgrade : WorkGiver_Scanner {
 		private const int maxIngredientSearchDist = 999;
 

@@ -7,6 +7,11 @@ using UnityEngine;
 using Verse;
 
 namespace RemoteExplosives {
+	/// <summary>
+	/// A universal upgrade that modifies stats on the thing it is applied to in exchange for building materials.
+	/// Displays a toggle gizmo and requires a pawn to perform work to bring in materials and complete the upgrade.
+	/// Just add a CompProperties_Upgrade to your ThingDef to use, everything else is handled automatically.
+	/// </summary>
 	public class CompUpgrade : ThingComp, IThingHolder {
 		public CompProperties_Upgrade Props {
 			get { return props as CompProperties_Upgrade ?? new CompProperties_Upgrade(); }

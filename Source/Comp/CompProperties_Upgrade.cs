@@ -10,13 +10,21 @@ using Verse;
 
 namespace RemoteExplosives {
 	public class CompProperties_Upgrade : CompProperties {
+		// a readable identifier for the player
 		public string label;
+		// an internal identifier to be used during saving, referencing from code, and specifying dependencies for other upgrades
 		public string referenceId;
+		// a description of what this upgrade does. Used when no stats are modified
 		public string effectDescription;
+		// multipliers to stats that will come into effect once the upgrade has been completed
 		public List<StatModifier> statModifiers = new List<StatModifier>(0);
+		// an optional list of materials required for the upgrade
 		public List<ThingDefCountClass> costList = new List<ThingDefCountClass>(0);
+		// number of ticks to complete the upgrade work. Reduced by construction skill
 		public int workAmount = 1000;
+		// optional research project that will allow this upgrade to be installed
 		public ResearchProjectDef researchPrerequisite;
+		// optional referenceId of another upgrade on the same thing that must be installed before this upgrade can be installed
 		public string prerequisiteUpgradeId;
 
 		private string _effectDescription;

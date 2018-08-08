@@ -3,8 +3,12 @@ using RimWorld;
 using Verse;
 
 namespace RemoteExplosives {
+	/// <summary>
+	/// Required for CompUpgrade to modify arbitrary stats.
+	/// This is automatically added to StatDefs that have been found to be used in a CompProperties_Upgrade.
+	/// </summary>
+	/// <see cref="RemoteExplosivesController.InjectUpgradeableStatParts"/>
 	public class StatPart_Upgradeable : StatPart {
-		
 		public override void TransformValue(StatRequest req, ref float val) {
 			if (req.Thing is ThingWithComps tcomps) {
 				for (var i = 0; i < tcomps.AllComps.Count; i++) {
