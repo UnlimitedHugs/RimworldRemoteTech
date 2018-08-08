@@ -34,6 +34,7 @@ namespace RemoteExplosives {
 			public static JobDef rxSwitchRemoteExplosives;
 			public static JobDef rxDetonateExplosives;
 			public static JobDef rxSmoothFoamWall;
+			public static JobDef rxInstallUpgrade;
 		}
 
 		[DefOf]
@@ -66,6 +67,7 @@ namespace RemoteExplosives {
 			public static DesignationDef rxRemoteExplosiveSwitch;
 			public static DesignationDef rxDetonatorWireDryOff;
 			public static DesignationDef rxFoamWallSmooth;
+			public static DesignationDef rxInstallUpgrade;
 		}
 
 		[DefOf]
@@ -118,6 +120,7 @@ namespace RemoteExplosives {
 			public static Texture2D UIChannelKeypadAtlas;
 			public static Texture2D UIDetonatorPortable;
 			public static Texture2D UISelectWire;
+			public static Texture2D UIUpgrade;
 			public static Texture2D gas_vent_arrow;
 
 			public static readonly Texture2D WallSmoothMenuIcon = ContentFinder<Texture2D>.Get("Things/Building/Linked/WallSmooth_MenuIcon");

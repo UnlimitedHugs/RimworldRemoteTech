@@ -31,4 +31,10 @@
 		<reportString>Smoothing foam wall.</reportString>
 	</JobDef>
 	
+	<JobDef>
+		<defName>rxInstallUpgrade</defName>
+		<driverClass>RemoteExplosives.JobDriver_InstallUpgrade</driverClass>
+		<reportString>Installing upgrade.</reportString>
+	</JobDef>
+	
 </Defs>

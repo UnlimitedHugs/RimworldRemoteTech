@@ -52,8 +52,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Source\AI\JobDriver_InstallUpgrade.cs" />
     <Compile Include="Source\AI\WorkGiver_FoamWall.cs" />
     <Compile Include="Source\AI\JobDriver_SmoothFoamWall.cs" />
+    <Compile Include="Source\AI\WorkGiver_InstallUpgrade.cs" />
     <Compile Include="Source\Building\BuildingProperties_FoamWall.cs" />
     <Compile Include="Source\Building\BuildingProperties_GasVent.cs" />
     <Compile Include="Source\Building\Building_GasVent.cs" />
@@ -61,11 +63,14 @@
     <Compile Include="Source\Building\PlaceWorker_DetWireReplacer.cs" />
     <Compile Include="Source\Comp\CompLinkGridMember.cs" />
     <Compile Include="Source\Comp\CompProperties_LinkGridMember.cs" />
+    <Compile Include="Source\Comp\CompProperties_Upgrade.cs" />
     <Compile Include="Source\Comp\CompProperties_WiredDetonationCrossing.cs" />
     <Compile Include="Source\Comp\CompProperties_WiredDetonationTransmitter.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Source\Comp\CompUpgrade.cs" />
     <Compile Include="Source\Comp\CompWiredDetonationCrossing.cs" />
+    <Compile Include="Source\Comp\StatPart_Upgradeable.cs" />
     <Compile Include="Source\CustomFactionGoodwillCaps.cs" />
     <Compile Include="Source\Damage\DamageWorker_SuperEMP.cs" />
     <Compile Include="Source\Damage\SuperEMPDamageDef.cs" />

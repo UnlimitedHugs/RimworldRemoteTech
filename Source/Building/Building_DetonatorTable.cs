@@ -127,6 +127,7 @@ namespace RemoteExplosives {
 		}
 
 		public override string GetInspectString() {
+			if (!Spawned) return string.Empty;
 			// update channel contents
 			if (lastInspectionTick + FindExplosivesEveryTicks < GenTicks.TicksGame) {
 				UpdateArmedExplosivesInRange();

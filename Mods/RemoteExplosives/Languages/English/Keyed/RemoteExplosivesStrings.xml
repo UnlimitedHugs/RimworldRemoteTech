@@ -77,4 +77,12 @@
 	<Setting_autoArmUtility_desc>When enabled, utility explosives will be automatically armed when they are deployed.</Setting_autoArmUtility_desc>
 	
 	<GasVent_blocked>Blocked</GasVent_blocked>
+	
+	<Upgrade_statModifierCategory>Completed upgrades</Upgrade_statModifierCategory>
+	<Upgrade_labelPrefix>Upgrade: {0}</Upgrade_labelPrefix>
+	<Upgrade_descriptionEffects>Effects:</Upgrade_descriptionEffects>
+	<Upgrade_descriptionCost>Required materials:</Upgrade_descriptionCost>
+	<Upgrade_workProgress>Work progress: {0:F0}%</Upgrade_workProgress>
+	<Upgrade_deliveredIngredients>Stored things: {0}</Upgrade_deliveredIngredients>
+	<Upgrade_installedUpgrades>Installed upgrades: </Upgrade_installedUpgrades>
 </LanguageData>

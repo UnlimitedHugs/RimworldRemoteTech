@@ -32,6 +32,16 @@
 	</WorkGiverDef>
 	
 	<WorkGiverDef>
+		<defName>rxInstallUpgrade</defName>
+		<label>install upgrade</label>
+		<giverClass>RemoteExplosives.WorkGiver_InstallUpgrade</giverClass>
+		<workType>Construction</workType>
+		<priorityInType>200</priorityInType>
+		<verb>install upgrade</verb>
+		<gerund>installing upgrade</gerund>
+	</WorkGiverDef>
+	
+	<WorkGiverDef>
 		<defName>rxDoBillsBench</defName>
 		<label>assemble explosive</label>
 		<giverClass>WorkGiver_DoBill</giverClass>

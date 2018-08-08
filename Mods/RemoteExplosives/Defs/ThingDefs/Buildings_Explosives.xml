@@ -99,6 +99,27 @@ Right-click with a drafted colonist for better timing.</description>
 			</li>
 			<li Class="CompProperties_Flickable"/>
 			<li Class="CompProperties_Breakdownable"/>
+			<li Class="RemoteExplosives.CompProperties_Upgrade">
+				<label>Built-in fuel</label>
+				<statModifiers>
+					<Flammability>2</Flammability>
+				</statModifiers>
+				<workAmount>500</workAmount>
+				<costList>
+					<Steel>100</Steel>
+					<ComponentIndustrial>2</ComponentIndustrial>
+				</costList>
+			</li>
+			<li Class="RemoteExplosives.CompProperties_Upgrade">
+				<label>Fancy trim</label>
+				<statModifiers>
+					<Beauty>10</Beauty>
+				</statModifiers>
+				<workAmount>200</workAmount>
+				<costList>
+					<WoodLog>20</WoodLog>
+				</costList>
+			</li>
 		</comps>
 		<researchPrerequisites><li>rxRemoteDetonator</li></researchPrerequisites>
 	</ThingDef>

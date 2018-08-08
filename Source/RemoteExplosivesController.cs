@@ -52,6 +52,7 @@ namespace RemoteExplosives {
 			InjectTraderStocks();
 			InjectSteelRecipeVariants();
 			InjectVanillaExplosivesComps();
+			InjectUpgradeableStatParts();
 			GetSettingsHandles();
 			PrepareReflection();
 			RemoveFoamWallsFromMeteoritePool();
@@ -141,6 +142,31 @@ namespace RemoteExplosives {
 				ThingDefOf.PassiveCooler.comps.Add(new CompProperties_AutoReplaceable {applyOnVanish = true});
 			} catch (Exception e) {
 				Logger.Error("Exception while injecting comps into defs: " + e);
+			}
+		}
+
+		/**
+		 * Add StatPart_Upgradeable to all stats that are used in any CompProperties_Upgrade
+		 */
+		private void InjectUpgradeableStatParts() {
+			var relevantStats = new HashSet<StatDef>();
+			var allThings = DefDatabase<ThingDef>.AllDefs.ToArray();
+			for (var i = 0; i < allThings.Length; i++) {
+				var def = allThings[i];
+				if (def.comps.Count > 0) {
+					for (int j = 0; j < def.comps.Count; j++) {
+						var comp = def.comps[j];
+						if (comp is CompProperties_Upgrade upgradeProps) {
+							foreach (var upgradeProp in upgradeProps.statModifiers) {
+								relevantStats.Add(upgradeProp.stat);
+							}
+						}
+					}
+				}
+			}
+			foreach (var stat in relevantStats) {
+				var parts = stat.parts ?? (stat.parts = new List<StatPart>());
+				parts.Add(new StatPart_Upgradeable {parentStat = stat});
 			}
 		}
 

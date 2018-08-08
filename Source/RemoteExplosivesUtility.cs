@@ -165,7 +165,18 @@ namespace RemoteExplosives {
 			}
 			cloud.ReceiveConcentration(amount);
 		}
-		
+
+		public static CompUpgrade TryGetFirstUpgradeableComp(Thing t) {
+			if (t is ThingWithComps comps) {
+				for (var i = 0; i < comps.AllComps.Count; i++) {
+					if (comps.AllComps[i] is CompUpgrade comp && comp.WantsWork) {
+						return comp;
+					}
+				}
+			}
+			return null;
+		}
+
 		private static bool TileIsInRange(IntVec3 tile1, IntVec3 tile2, float maxDistance) {
 			return Mathf.Sqrt(Mathf.Pow(tile1.x - tile2.x, 2) + Mathf.Pow(tile1.z - tile2.z, 2)) <= maxDistance;
 		}

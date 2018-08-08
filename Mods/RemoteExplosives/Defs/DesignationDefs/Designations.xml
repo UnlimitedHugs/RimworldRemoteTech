@@ -20,4 +20,11 @@
 		<targetType>Thing</targetType>
 		<designateCancelable>true</designateCancelable>
 	</DesignationDef>
+	
+	<DesignationDef>
+		<defName>rxInstallUpgrade</defName>
+		<texturePath>upgrade_designation</texturePath>
+		<targetType>Thing</targetType>
+		<designateCancelable>false</designateCancelable>
+	</DesignationDef>
 </Defs>
