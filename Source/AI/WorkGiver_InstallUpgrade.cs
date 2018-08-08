@@ -14,7 +14,7 @@ namespace RemoteExplosives {
 		public override Job JobOnThing(Pawn pawn, Thing t, bool forced = false) {
 			var thing = t as ThingWithComps;
 			if (thing == null) return null;
-			var comp = RemoteExplosivesUtility.TryGetFirstUpgradeableComp(t);
+			var comp = t.FirstUpgradeableComp();
 			if (comp == null) return null;
 			var missingIngredient = comp.TryGetNextMissingIngredient();
 
@@ -31,7 +31,7 @@ namespace RemoteExplosives {
 			var candidates = pawn.Map.designationManager.SpawnedDesignationsOfDef(Resources.Designation.rxInstallUpgrade);
 			foreach (var des in candidates) {
 				var designatedThing = des.target.Thing;
-				if ((RemoteExplosivesUtility.TryGetFirstUpgradeableComp(designatedThing)?.WantsWork).GetValueOrDefault() && pawn.CanReserve(designatedThing)) {
+				if ((designatedThing.FirstUpgradeableComp()?.WantsWork).GetValueOrDefault() && pawn.CanReserve(designatedThing)) {
 					yield return designatedThing;
 				}
 			}

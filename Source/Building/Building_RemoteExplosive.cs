@@ -90,8 +90,8 @@ namespace RemoteExplosives {
 			Scribe_Values.Look(ref isArmed, "isArmed");
 			Scribe_Values.Look(ref ticksSinceFlare, "ticksSinceFlare");
 			Scribe_Values.Look(ref desiredArmState, "desiredArmState");
-			Scribe_Values.Look(ref currentChannel, "currentChannel");
-			Scribe_Values.Look(ref desiredChannel, "desiredChannel");
+			Scribe_Values.Look(ref currentChannel, "currentChannel", 1);
+			Scribe_Values.Look(ref desiredChannel, "desiredChannel", 1);
 		}
 
 		public bool WantsSwitch() {

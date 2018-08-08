@@ -29,7 +29,6 @@ namespace RemoteExplosives {
 
 		[DefOf]
 		public static class Job {
-			public static JobDef rxInstallChannelsComponent;
 			public static JobDef rxDryDetonatorWire;
 			public static JobDef rxSwitchRemoteExplosives;
 			public static JobDef rxDetonateExplosives;
@@ -110,7 +109,6 @@ namespace RemoteExplosives {
 		public static class Textures {
 			public static Texture2D UI_Trigger;
 			public static Texture2D UIDetonate;
-			public static Texture2D UIChannelComponent;
 			public static Texture2D UIDryOff;
 			public static Texture2D UIArm;
 			public static Texture2D UIAutoReplace;

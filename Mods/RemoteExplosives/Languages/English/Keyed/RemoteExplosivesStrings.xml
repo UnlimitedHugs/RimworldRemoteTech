@@ -43,7 +43,7 @@
 	<HediffRecovery_status_label>recovering</HediffRecovery_status_label>
 	
 	<PortableDetonator_detonate_label>Detonate explosives</PortableDetonator_detonate_label>
-	<PortableDetonator_detonate_desc>Detonates all armed explosives in range on the white channel.</PortableDetonator_detonate_desc>
+	<PortableDetonator_detonate_desc>Detonates all armed explosives in range on channel 1.</PortableDetonator_detonate_desc>
 	<PortableDetonator_detonate_uses>Uses left: {0}</PortableDetonator_detonate_uses>
 	<PortableDetonator_broke_msg>The Portable Detonator ran out of battery power.</PortableDetonator_broke_msg>
 	

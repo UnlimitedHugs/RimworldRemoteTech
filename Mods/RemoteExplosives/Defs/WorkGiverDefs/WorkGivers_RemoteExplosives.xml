@@ -22,16 +22,6 @@
 	</WorkGiverDef>
 	
 	<WorkGiverDef>
-		<defName>rxInstallChannelsComponent</defName>
-		<label>install detonator channels</label>
-		<giverClass>RemoteExplosives.WorkGiver_DetonatorTableChannels</giverClass>
-		<workType>Construction</workType>
-		<priorityInType>200</priorityInType>
-		<verb>install channel component</verb>
-		<gerund>installing channel component</gerund>
-	</WorkGiverDef>
-	
-	<WorkGiverDef>
 		<defName>rxInstallUpgrade</defName>
 		<label>install upgrade</label>
 		<giverClass>RemoteExplosives.WorkGiver_InstallUpgrade</giverClass>

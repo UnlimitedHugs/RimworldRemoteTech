@@ -1,9 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using UnityEngine;
 using Verse;
 
 namespace RemoteExplosives {
+	[StaticConstructorOnStartup]
 	public class Command_ChannelsBasic : Command {
 		private readonly int selectedChannel;
 		private readonly Action<int> activateCallback;

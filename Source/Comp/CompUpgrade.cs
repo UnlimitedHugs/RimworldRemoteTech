@@ -23,6 +23,13 @@ namespace RemoteExplosives {
 		public bool WantsWork {
 			get { return wantsWork && !complete; }
 		}
+		
+		private bool CompletedPrerequisites {
+			get {
+				return (Props.researchPrerequisite == null || Props.researchPrerequisite.IsFinished)
+						&& (Props.prerequisiteUpgradeId == null || parent.IsUpgradeCompleted(Props.prerequisiteUpgradeId));
+			}
+		}
 
 		private string Description {
 			get {
@@ -77,19 +84,23 @@ namespace RemoteExplosives {
 
 		public override void PostExposeData() {
 			base.PostExposeData();
+			Scribe.EnterNode("CompUpgrade_" + Props.referenceId);
 			Scribe_Values.Look(ref complete, "complete");
 			Scribe_Values.Look(ref workDone, "workDone");
 			Scribe_Values.Look(ref wantsWork, "wantsWork");
 			Scribe_Deep.Look(ref ingredients, "ingredients", this);
+			if(ingredients == null) ingredients = new ThingOwner<Thing>(this);
+			Scribe.ExitNode();
 		}
 
 		public override IEnumerable<Gizmo> CompGetGizmosExtra() {
-			if (!complete) {
+			if (!complete && CompletedPrerequisites) {
 				yield return new Command_Toggle {
 					defaultLabel = "Upgrade_labelPrefix".Translate(Props.label),
 					defaultDesc = Description,
 					toggleAction = () => {
 						wantsWork = !wantsWork;
+						if (!wantsWork) ingredients.TryDropAll(parent.Position, parent.Map, ThingPlaceMode.Near);
 						UpdateDesignation();
 					},
 					isActive = () => wantsWork,

@@ -14,12 +14,6 @@
 	</JobDef>
 	
 	<JobDef>
-		<defName>rxInstallChannelsComponent</defName>
-		<driverClass>RemoteExplosives.JobDriver_InstallChannelsComponent</driverClass>
-		<reportString>Installing remote channels component.</reportString>
-	</JobDef>
-	
-	<JobDef>
 		<defName>rxDryDetonatorWire</defName>
 		<driverClass>RemoteExplosives.JobDriver_DryDetonatorWire</driverClass>
 		<reportString>Drying off detonator wire.</reportString>

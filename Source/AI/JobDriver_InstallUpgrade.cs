@@ -10,13 +10,13 @@ namespace RemoteExplosives {
 		}
 
 		protected override IEnumerable<Toil> MakeNewToils() {
-			var upgrade = RemoteExplosivesUtility.TryGetFirstUpgradeableComp(TargetThingA);
+			var upgrade = TargetThingA.FirstUpgradeableComp();
 			if (upgrade == null) {
 				EndJobWith(JobCondition.Incompletable);
 				yield break;
 			}
 			AddFailCondition(() => {
-				var comp = RemoteExplosivesUtility.TryGetFirstUpgradeableComp(TargetThingA);
+				var comp = TargetThingA.FirstUpgradeableComp();
 				return comp == null || !comp.parent.Spawned || !comp.WantsWork;
 			});
 			this.FailOnDestroyedNullOrForbidden(TargetIndex.A);

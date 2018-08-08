@@ -166,7 +166,7 @@ namespace RemoteExplosives {
 			cloud.ReceiveConcentration(amount);
 		}
 
-		public static CompUpgrade TryGetFirstUpgradeableComp(Thing t) {
+		public static CompUpgrade FirstUpgradeableComp(this Thing t) {
 			if (t is ThingWithComps comps) {
 				for (var i = 0; i < comps.AllComps.Count; i++) {
 					if (comps.AllComps[i] is CompUpgrade comp && comp.WantsWork) {
@@ -177,6 +177,22 @@ namespace RemoteExplosives {
 			return null;
 		}
 
+		public static CompUpgrade TryGetUpgrade(this Thing t, string upgradeReferenceId) {
+			if (t is ThingWithComps comps) {
+				for (var i = 0; i < comps.AllComps.Count; i++) {
+					if (comps.AllComps[i] is CompUpgrade comp && comp.Props.referenceId == upgradeReferenceId) {
+						return comp;
+					}
+				}
+			}
+			return null;
+		}
+
+		public static bool IsUpgradeCompleted(this Thing t, string upgradeReferenceId) {
+			var upgrade = t.TryGetUpgrade(upgradeReferenceId);
+			return upgrade != null && upgrade.Complete;
+		}
+		
 		private static bool TileIsInRange(IntVec3 tile1, IntVec3 tile2, float maxDistance) {
 			return Mathf.Sqrt(Mathf.Pow(tile1.x - tile2.x, 2) + Mathf.Pow(tile1.z - tile2.z, 2)) <= maxDistance;
 		}

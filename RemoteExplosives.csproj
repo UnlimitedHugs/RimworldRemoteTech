@@ -34,6 +34,7 @@
     <Reference Include="0Harmony, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\0Harmony.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Assembly-CSharp-1.0">
       <HintPath>..\Assembly-CSharp-1.0.dll</HintPath>
@@ -132,7 +133,6 @@
     <Compile Include="Source\Comp\CompProperties_MiningExplosive.cs" />
     <Compile Include="Source\Comp\CompRandomResourceLeaver.cs" />
     <Compile Include="Source\Comp\CompProperties_RandomResourceLeaver.cs" />
-    <Compile Include="Source\AI\JobDriver_InstallChannelsComponent.cs" />
     <Compile Include="Source\MapComponent_RemoteExplosives.cs" />
     <Compile Include="Source\Building\PlaceWorker_DetonatorWire.cs" />
     <Compile Include="Source\Building\PlaceWorker_RoofBreakerExplosive.cs" />
@@ -146,7 +146,6 @@
     <Compile Include="Source\TraderStockInjectorDef.cs" />
     <Compile Include="Source\Building\BuildingProperties_FoamBlob.cs" />
     <Compile Include="Source\AI\WorkGiver_DetonatorWire.cs" />
-    <Compile Include="Source\AI\WorkGiver_DetonatorTableChannels.cs" />
     <Compile Include="Source\AI\WorkGiver_RemoteExposive.cs" />
     <Compile Include="Source\AI\ISwitchable.cs" />
     <Compile Include="Source\AI\JobDriver_DetonateExplosives.cs" />

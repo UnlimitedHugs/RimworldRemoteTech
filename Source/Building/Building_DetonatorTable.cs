@@ -13,33 +13,27 @@ namespace RemoteExplosives {
 		private static readonly string DetonateButtonLabel = "DetonatorTable_detonate_label".Translate();
 		private static readonly string DetonateButtonDesc = "DetonatorTable_detonate_desc".Translate();
 
-		private static readonly string InstallComponentButtonLabel = "DetonatorTable_component_label".Translate();
-		private static readonly string InstallComponentButtonDesc = "DetonatorTable_component_desc".Translate();
-
+		private const string ChannelsBasicUpgradeId = "ChannelsBasic";
+		private const string ChannelsAdvancedUpgradeId = "ChannelsAdvanced";
 		private const int FindExplosivesEveryTicks = 30;
 
 		private bool wantDetonation;
-
 		private int lastInspectionTick;
-
 		private Dictionary<int, List<Building_RemoteExplosive>> explosivesInRange;
-
 		private int currentChannel = 1;
-
-		private bool hasChannelsComponent;
-
-		private bool wantChannelsComponent;
-
-		public bool WantChannelsComponent {
-			get { return wantChannelsComponent; }
-		}
+		private CompUpgrade channelsBasic;
+		private CompUpgrade channelsAdvanced;
 
 		public override void ExposeData() {
 			base.ExposeData();
 			Scribe_Values.Look(ref wantDetonation, "wantDetonation");
-			Scribe_Values.Look(ref currentChannel, "currentChannel");
-			Scribe_Values.Look(ref hasChannelsComponent, "hasChannelsComponent");
-			Scribe_Values.Look(ref wantChannelsComponent, "wantChannelsComponent");
+			Scribe_Values.Look(ref currentChannel, "currentChannel", 1);
+		}
+
+		public override void SpawnSetup(Map map, bool respawningAfterLoad) {
+			base.SpawnSetup(map, respawningAfterLoad);
+			channelsBasic = this.TryGetUpgrade(ChannelsBasicUpgradeId);
+			channelsAdvanced = this.TryGetUpgrade(ChannelsAdvancedUpgradeId);
 		}
 
 		public override IEnumerable<Gizmo> GetGizmos() {
@@ -53,29 +47,21 @@ namespace RemoteExplosives {
 			};
 			yield return detonateGizmo;
 
-			if (hasChannelsComponent) {
-				var channelGizmo = RemoteExplosivesUtility.GetChannelGizmo(currentChannel, currentChannel, ChannelGizmoAction, RemoteExplosivesUtility.GetChannelsUnlockLevel(), explosivesInRange);
+			var channelsLevel = RemoteExplosivesUtility.ChannelType.None;
+			if (channelsAdvanced != null && channelsAdvanced.Complete) {
+				channelsLevel = RemoteExplosivesUtility.ChannelType.Advanced;
+			} else if (channelsBasic != null && channelsBasic.Complete) {
+				channelsLevel = RemoteExplosivesUtility.ChannelType.Basic;
+			}
+			if (channelsLevel != RemoteExplosivesUtility.ChannelType.None) {
+				var channelGizmo = RemoteExplosivesUtility.GetChannelGizmo(currentChannel, currentChannel, ChannelGizmoAction, channelsLevel, explosivesInRange);
 				if (channelGizmo != null) {
 					yield return channelGizmo;
 				}
-			} else if (RemoteExplosivesUtility.GetChannelsUnlockLevel() > RemoteExplosivesUtility.ChannelType.None) {
-				var componentGizmo = new Command_Toggle {
-					toggleAction = ComponentGizmoAction,
-					isActive = () => wantChannelsComponent,
-					icon = Resources.Textures.UIChannelComponent,
-					defaultLabel = InstallComponentButtonLabel,
-					defaultDesc = InstallComponentButtonDesc
-				};
-				yield return componentGizmo;
 			}
-
 			foreach (var g in base.GetGizmos()) {
 				yield return g;
 			}
-		}
-
-		private void ComponentGizmoAction() {
-			wantChannelsComponent = !wantChannelsComponent;
 		}
 
 		private void DetonateGizmoAction() {
@@ -94,11 +80,6 @@ namespace RemoteExplosives {
 		public bool WantsDetonation {
 			get { return wantDetonation; }
 			set { wantDetonation = value; }
-		}
-
-		public void InstallChannelsComponent() {
-			hasChannelsComponent = true;
-			wantChannelsComponent = false;
 		}
 
 		public void DoDetonation() {

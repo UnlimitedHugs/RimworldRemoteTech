@@ -120,7 +120,7 @@ The filters wear out fairly quickly, so it's recommended to wear this only when 
 		<thingClass>RemoteExplosives.PortableDetonator</thingClass>
 		<label>portable remote detonator</label>
 		<description>A portable version of the detonator table for triggering remote explosives.
-Works only on the white channel, has limited range and runs on a non-rechargeable battery- but hey, you can almost fit it in your pocket. Almost.</description>
+Works only on channel 1, has limited range and runs on a non-rechargeable battery- but hey, you can almost fit it in your pocket. Almost.</description>
 		<graphicData>
 			<texPath>detonator_portable</texPath>
 			<graphicClass>Graphic_Single</graphicClass>
