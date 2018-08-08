@@ -21,8 +21,12 @@ namespace RemoteExplosives {
 			var status =
 				!pawn.Dead && !pawn.Downed && !pawn.IsBurning()
 				&& !comp.parent.Destroyed && !comp.parent.IsBurning()
-				&& pawn.CanReserveAndReach(t, PathEndMode.InteractionCell, Danger.Deadly)
-				&& missingIngredient.Count == 0 || TryFindHaulableOfDef(pawn, missingIngredient.ThingDef) != null;
+				&& pawn.CanReserveAndReach(t, PathEndMode.InteractionCell, Danger.Deadly);
+
+			if (status && missingIngredient.Count > 0 && TryFindHaulableOfDef(pawn, missingIngredient.ThingDef) == null) {
+				JobFailReason.Is("Upgrade_missingMaterials".Translate(missingIngredient.Count, missingIngredient.ThingDef.LabelCap));
+				status = false;
+			}
 
 			return status ? new Job(Resources.Job.rxInstallUpgrade, t) : null;
 		}

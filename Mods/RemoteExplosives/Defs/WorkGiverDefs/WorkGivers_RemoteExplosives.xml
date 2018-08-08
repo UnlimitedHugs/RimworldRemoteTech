@@ -27,8 +27,8 @@
 		<giverClass>RemoteExplosives.WorkGiver_InstallUpgrade</giverClass>
 		<workType>Construction</workType>
 		<priorityInType>200</priorityInType>
-		<verb>install upgrade</verb>
-		<gerund>installing upgrade</gerund>
+		<verb>upgrade</verb>
+		<gerund>upgrading</gerund>
 	</WorkGiverDef>
 	
 	<WorkGiverDef>
