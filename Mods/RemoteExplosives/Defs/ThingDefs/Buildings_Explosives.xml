@@ -80,6 +80,7 @@ Right-click with a drafted colonist for better timing.</description>
 			<Flammability>1.0</Flammability>
 			<Beauty>3</Beauty>
 			<Mass>15</Mass>
+			<rxPowerConsumption>200</rxPowerConsumption>
 		</statBases>
 		<size>(2,1)</size>
 		<constructEffect>ConstructMetal</constructEffect>
@@ -93,9 +94,8 @@ Right-click with a drafted colonist for better timing.</description>
 		<tickerType>Normal</tickerType>
 		<comps>
 			<li Class="CompProperties_Power">
-				<compClass>CompPowerTrader</compClass>
+				<compClass>RemoteExplosives.CompStatPower</compClass>
 				<shortCircuitInRain>false</shortCircuitInRain>
-				<basePowerConsumption>200</basePowerConsumption>
 			</li>
 			<li Class="CompProperties_Flickable"/>
 			<li Class="CompProperties_Breakdownable"/>
@@ -118,6 +118,22 @@ Right-click with a drafted colonist for better timing.</description>
 				<prerequisiteUpgradeId>ChannelsBasic</prerequisiteUpgradeId>
 				<costList>
 					<ComponentSpacer>1</ComponentSpacer>
+				</costList>
+			</li>
+			<li Class="RemoteExplosives.CompProperties_Upgrade">
+				<label>Built-in power</label>
+				<referenceId>AutonomousPower</referenceId>
+				<workAmount>2500</workAmount>
+				<effectDescription>Makes the detonator fully independent from the power grid by powering it with a built-in RTG cell.</effectDescription>
+				<researchPrerequisite>MicroelectronicsBasics</researchPrerequisite>
+				<statModifiers>
+					<Mass>2</Mass>
+					<rxPowerConsumption>0</rxPowerConsumption>
+				</statModifiers>
+				<costList>
+					<Uranium>10</Uranium>
+					<Plasteel>30</Plasteel>
+					<Steel>50</Steel>
 				</costList>
 			</li>
 		</comps>

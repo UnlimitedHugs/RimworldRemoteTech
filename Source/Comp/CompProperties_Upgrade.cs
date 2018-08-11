@@ -34,7 +34,9 @@ namespace RemoteExplosives {
 					var s = new StringBuilder("Upgrade_descriptionEffects".Translate());
 					if (effectDescription != null) {
 						s.Append(effectDescription);
-					} else {
+					}
+					if(statModifiers.Count > 0) {
+						if (effectDescription != null) s.AppendLine();
 						for (var i = 0; i < statModifiers.Count; i++) {
 							var effect = statModifiers[i];
 							s.Append(effect.stat.LabelCap);

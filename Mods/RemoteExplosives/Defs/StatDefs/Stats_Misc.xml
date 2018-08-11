@@ -33,4 +33,13 @@
 		<maxValue>1</maxValue>
 		<minValue>0</minValue>
 	</StatDef>
+
+	<StatDef ParentName="rxBaseMiscStat">
+		<defName>rxPowerConsumption</defName>
+		<label>power consumption</label>
+		<description>The amount of power consumed by this building. Produces power when the value is negative.</description>
+		<category>Building</category>
+		<toStringStyle>FloatMaxOne</toStringStyle>
+		<defaultBaseValue>0</defaultBaseValue>
+	</StatDef>
 </Defs>

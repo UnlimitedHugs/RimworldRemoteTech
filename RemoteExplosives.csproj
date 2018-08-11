@@ -69,6 +69,7 @@
     <Compile Include="Source\Comp\CompProperties_WiredDetonationTransmitter.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Source\Comp\CompStatPower.cs" />
     <Compile Include="Source\Comp\CompUpgrade.cs" />
     <Compile Include="Source\Comp\CompWiredDetonationCrossing.cs" />
     <Compile Include="Source\Comp\StatPart_Upgradeable.cs" />
