@@ -139,6 +139,54 @@ Right-click with a drafted colonist for better timing.</description>
 		</comps>
 		<researchPrerequisites><li>rxRemoteDetonator</li></researchPrerequisites>
 	</ThingDef>
+
+	<ThingDef ParentName="rxBuildingBase">
+		<defName>rxRadioMast</defName>
+		<label>radio mast</label>
+		<thingClass>Building</thingClass>
+		<description>Extends the range of detonators, provided that the mast is within their range. Masts connect to each other, as well, making it possible to cover even large maps with a single detonator.</description>
+		<graphicData>
+			<texPath>radio_mast</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+			<drawSize>(1.2,2.4)</drawSize>
+			<damageData>
+				<cornerTR>Damage/Corner</cornerTR>
+				<cornerBL>Damage/Corner</cornerBL>
+			</damageData>
+			<shadowData>
+				<volume>(.4, 2, .4)</volume>
+				<offset>(0, 0, -.8)</offset>
+			</shadowData>
+		</graphicData>
+		<costList>
+			<Steel>100</Steel>
+			<Silver>200</Silver>
+			<ComponentIndustrial>3</ComponentIndustrial>
+		</costList>
+		<constructEffect>ConstructMetal</constructEffect>
+		<altitudeLayer>BuildingOnTop</altitudeLayer>
+		<fillPercent>0.5</fillPercent>
+		<useHitPoints>True</useHitPoints>
+		<statBases>
+			<WorkToBuild>3500</WorkToBuild>
+			<MaxHitPoints>250</MaxHitPoints>
+			<Flammability>.5</Flammability>
+			<Cleanliness>-10</Cleanliness>
+		</statBases>
+		<size>(1,2)</size>
+		<terrainAffordanceNeeded>Heavy</terrainAffordanceNeeded>
+		<passability>Impassable</passability>
+		<comps>
+			<li Class="CompProperties_Power">
+				<compClass>CompPowerTrader</compClass>
+				<shortCircuitInRain>false</shortCircuitInRain>
+				<basePowerConsumption>500</basePowerConsumption>
+			</li>
+			<li Class="CompProperties_Flickable"/>
+		</comps>
+		<researchPrerequisites><li>rxRemoteDetonator</li></researchPrerequisites>
+	</ThingDef>
 	
 	<ThingDef ParentName="rxBuildingBase">
 		<defName>rxBench</defName>
@@ -192,7 +240,6 @@ Research different types of remote explosives to unlock available recipes.</desc
 			<li>RemoteExplosives.ITab_ExplosivesBills</li>
 		</inspectorTabs>
 		<building>
-			<spawnedConceptLearnOpportunity>BillsTab</spawnedConceptLearnOpportunity>
 		</building>
 		<comps>
 			<li Class="CompProperties_Power">
@@ -867,5 +914,5 @@ Arm, then detonate from the Remote Explosives Console.</description>
 			<li>rxRefinedSleepingGas</li>
 		</researchPrerequisites>
 	</ThingDef>
-	
+
 </Defs>

@@ -76,6 +76,8 @@
     <Compile Include="Source\CustomFactionGoodwillCaps.cs" />
     <Compile Include="Source\Damage\DamageWorker_SuperEMP.cs" />
     <Compile Include="Source\Damage\SuperEMPDamageDef.cs" />
+    <Compile Include="Source\Graphic\GraphicData_Offset.cs" />
+    <Compile Include="Source\Graphic\Graphic_Offset.cs" />
     <Compile Include="Source\Patches\Faction_AffectGoodwillWith_Patch.cs" />
     <Compile Include="Source\Patches\CultivatedPlants_DeterminePlantDef_Patch.cs" />
     <Compile Include="Source\Patches\GenLeaving_GetLeaveCalculator_Patch.cs" />
