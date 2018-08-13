@@ -13,6 +13,8 @@ namespace RemoteExplosives {
 	/// Just add a CompProperties_Upgrade to your ThingDef to use, everything else is handled automatically.
 	/// </summary>
 	public class CompUpgrade : ThingComp, IThingHolder {
+		public static readonly string UpgradeCompleteSignal = "UpgradeComplete";
+
 		public CompProperties_Upgrade Props {
 			get { return props as CompProperties_Upgrade ?? new CompProperties_Upgrade(); }
 		}
@@ -140,6 +142,7 @@ namespace RemoteExplosives {
 				complete = true;
 				ingredients.ClearAndDestroyContents();
 				UpdateDesignation();
+				parent.BroadcastCompSignal(UpgradeCompleteSignal);
 			}
 		}
 

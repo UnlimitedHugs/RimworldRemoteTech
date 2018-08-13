@@ -60,8 +60,12 @@
     <Compile Include="Source\Building\BuildingProperties_FoamWall.cs" />
     <Compile Include="Source\Building\BuildingProperties_GasVent.cs" />
     <Compile Include="Source\Building\Building_GasVent.cs" />
+    <Compile Include="Source\Building\Building_RadioMast.cs" />
+    <Compile Include="Source\Building\ISelectedThingPlaceWorker.cs" />
+    <Compile Include="Source\Building\PlaceWorker_DetonatorRadius.cs" />
     <Compile Include="Source\Building\PlaceWorker_GasVent.cs" />
     <Compile Include="Source\Building\PlaceWorker_DetWireReplacer.cs" />
+    <Compile Include="Source\Building\PlaceWorker_ShowWirelessDetonationGridConnections.cs" />
     <Compile Include="Source\Comp\CompLinkGridMember.cs" />
     <Compile Include="Source\Comp\CompProperties_LinkGridMember.cs" />
     <Compile Include="Source\Comp\CompProperties_Upgrade.cs" />
@@ -69,15 +73,15 @@
     <Compile Include="Source\Comp\CompProperties_WiredDetonationTransmitter.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Source\Comp\CompProperties_WirelessDetonationGridNode.cs" />
     <Compile Include="Source\Comp\CompStatPower.cs" />
     <Compile Include="Source\Comp\CompUpgrade.cs" />
     <Compile Include="Source\Comp\CompWiredDetonationCrossing.cs" />
+    <Compile Include="Source\Comp\CompWirelessDetonationGridNode.cs" />
     <Compile Include="Source\Comp\StatPart_Upgradeable.cs" />
     <Compile Include="Source\CustomFactionGoodwillCaps.cs" />
     <Compile Include="Source\Damage\DamageWorker_SuperEMP.cs" />
     <Compile Include="Source\Damage\SuperEMPDamageDef.cs" />
-    <Compile Include="Source\Graphic\GraphicData_Offset.cs" />
-    <Compile Include="Source\Graphic\Graphic_Offset.cs" />
     <Compile Include="Source\Patches\Faction_AffectGoodwillWith_Patch.cs" />
     <Compile Include="Source\Patches\CultivatedPlants_DeterminePlantDef_Patch.cs" />
     <Compile Include="Source\Patches\GenLeaving_GetLeaveCalculator_Patch.cs" />

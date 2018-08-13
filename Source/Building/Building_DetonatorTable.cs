@@ -64,6 +64,11 @@ namespace RemoteExplosives {
 			}
 		}
 
+		public override void DrawExtraSelectionOverlays() {
+			base.DrawExtraSelectionOverlays();
+			RemoteExplosivesUtility.DrawSelectedThingPlaceWorkerFor(this);
+		}
+
 		private void DetonateGizmoAction() {
 			wantDetonation = !wantDetonation;
 		}
@@ -93,7 +98,7 @@ namespace RemoteExplosives {
 		}
 
 		private float SignalRange {
-			get { return def.specialDisplayRadius; }
+			get { return this.GetStatValue(Resources.Stat.rxSignalRange); }
 		}
 
 		private void PlayNeedPowerEffect() {

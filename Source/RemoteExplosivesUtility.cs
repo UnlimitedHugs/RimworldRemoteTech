@@ -130,11 +130,11 @@ namespace RemoteExplosives {
 		}
 
 		public static float TryGetExplosiveRadius(ThingDef def) {
-			if (def == null || def.comps == null) return 0;
+			if (def?.comps == null) return 0;
 			for (int i = 0; i < def.comps.Count; i++) {
-				var props = def.comps[i] as CompProperties_Explosive;
-				if (props == null) continue;
-				return props.explosiveRadius;
+				if (def.comps[i] is CompProperties_Explosive props) {
+					return props.explosiveRadius;
+				}
 			}
 			return 0;
 		}
@@ -191,6 +191,15 @@ namespace RemoteExplosives {
 		public static bool IsUpgradeCompleted(this Thing t, string upgradeReferenceId) {
 			var upgrade = t.TryGetUpgrade(upgradeReferenceId);
 			return upgrade != null && upgrade.Complete;
+		}
+
+		public static void DrawSelectedThingPlaceWorkerFor(Thing t) {
+			if (t?.def.placeWorkers != null) {
+				for (var i = 0; i < t.def.placeWorkers.Count; i++) {
+					var worker = t.def.PlaceWorkers[i] as ISelectedThingPlaceWorker;
+					worker?.DrawGhostForSelected(t);
+				}
+			}
 		}
 		
 		private static bool TileIsInRange(IntVec3 tile1, IntVec3 tile2, float maxDistance) {

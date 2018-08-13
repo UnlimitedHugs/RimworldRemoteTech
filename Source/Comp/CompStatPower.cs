@@ -1,4 +1,5 @@
-﻿using RimWorld;
+﻿using HugsLib.Utils;
+using RimWorld;
 using Verse;
 
 namespace RemoteExplosives {
@@ -10,6 +11,12 @@ namespace RemoteExplosives {
 
 		private float StatPowerConsumption {
 			get { return parent.GetStatValue(Resources.Stat.rxPowerConsumption); }
+		}
+
+		public override void PostSpawnSetup(bool respawningAfterLoad) {
+			base.PostSpawnSetup(respawningAfterLoad);
+			SetUpPowerVars();
+			Tracer.Trace(this, PowerOutput);
 		}
 
 		public override void SetUpPowerVars() {

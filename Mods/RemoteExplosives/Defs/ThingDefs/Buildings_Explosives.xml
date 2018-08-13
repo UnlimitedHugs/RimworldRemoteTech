@@ -81,6 +81,7 @@ Right-click with a drafted colonist for better timing.</description>
 			<Beauty>3</Beauty>
 			<Mass>15</Mass>
 			<rxPowerConsumption>200</rxPowerConsumption>
+			<rxSignalRange>35</rxSignalRange>
 		</statBases>
 		<size>(2,1)</size>
 		<constructEffect>ConstructMetal</constructEffect>
@@ -89,15 +90,21 @@ Right-click with a drafted colonist for better timing.</description>
 		<hasInteractionCell>True</hasInteractionCell>
 		<interactionCellOffset>(1,0,-1)</interactionCellOffset>
 		<surfaceType>Item</surfaceType>
-		<specialDisplayRadius>35</specialDisplayRadius>
 		<minifiedDef>MinifiedThing</minifiedDef>
 		<tickerType>Normal</tickerType>
+		<placeWorkers>
+			<li>RemoteExplosives.PlaceWorker_DetonatorRadius</li>
+			<li>RemoteExplosives.PlaceWorker_ShowWirelessDetonationGridConnections</li>
+		</placeWorkers>
 		<comps>
 			<li Class="CompProperties_Power">
 				<compClass>RemoteExplosives.CompStatPower</compClass>
 				<shortCircuitInRain>false</shortCircuitInRain>
 			</li>
 			<li Class="CompProperties_Flickable"/>
+			<li Class="RemoteExplosives.CompProperties_WirelessDetonationGridNode">
+				<endpoint>true</endpoint>
+			</li>
 			<li Class="CompProperties_Breakdownable"/>
 			<li Class="RemoteExplosives.CompProperties_Upgrade">
 				<label>Basic channels</label>
@@ -143,7 +150,7 @@ Right-click with a drafted colonist for better timing.</description>
 	<ThingDef ParentName="rxBuildingBase">
 		<defName>rxRadioMast</defName>
 		<label>radio mast</label>
-		<thingClass>Building</thingClass>
+		<thingClass>RemoteExplosives.Building_RadioMast</thingClass>
 		<description>Extends the range of detonators, provided that the mast is within their range. Masts connect to each other, as well, making it possible to cover even large maps with a single detonator.</description>
 		<graphicData>
 			<texPath>radio_mast</texPath>
@@ -159,32 +166,42 @@ Right-click with a drafted colonist for better timing.</description>
 				<offset>(0, 0, -.8)</offset>
 			</shadowData>
 		</graphicData>
-		<costList>
-			<Steel>100</Steel>
-			<Silver>200</Silver>
-			<ComponentIndustrial>3</ComponentIndustrial>
-		</costList>
-		<constructEffect>ConstructMetal</constructEffect>
-		<altitudeLayer>BuildingOnTop</altitudeLayer>
-		<fillPercent>0.5</fillPercent>
-		<useHitPoints>True</useHitPoints>
 		<statBases>
 			<WorkToBuild>3500</WorkToBuild>
 			<MaxHitPoints>250</MaxHitPoints>
 			<Flammability>.5</Flammability>
 			<Cleanliness>-10</Cleanliness>
+			<rxPowerConsumption>300</rxPowerConsumption>
+			<rxSignalRange>35</rxSignalRange>
 		</statBases>
+		<costList>
+			<Steel>100</Steel>
+			<Silver>200</Silver>
+			<ComponentIndustrial>3</ComponentIndustrial>
+		</costList>
+		<placeWorkers>
+			<li>RemoteExplosives.PlaceWorker_DetonatorRadius</li>
+			<li>PlaceWorker_NotUnderRoof</li>
+			<li>RemoteExplosives.PlaceWorker_ShowWirelessDetonationGridConnections</li>
+		</placeWorkers>
+		<constructEffect>ConstructMetal</constructEffect>
+		<altitudeLayer>BuildingOnTop</altitudeLayer>
+		<fillPercent>0.5</fillPercent>
+		<useHitPoints>True</useHitPoints>
 		<size>(1,2)</size>
 		<terrainAffordanceNeeded>Heavy</terrainAffordanceNeeded>
 		<passability>Impassable</passability>
 		<comps>
 			<li Class="CompProperties_Power">
-				<compClass>CompPowerTrader</compClass>
+				<compClass>RemoteExplosives.CompStatPower</compClass>
 				<shortCircuitInRain>false</shortCircuitInRain>
-				<basePowerConsumption>500</basePowerConsumption>
 			</li>
 			<li Class="CompProperties_Flickable"/>
+			<li Class="RemoteExplosives.CompProperties_WirelessDetonationGridNode"/>
 		</comps>
+		<building>
+			<allowAutoroof>false</allowAutoroof>
+		</building>
 		<researchPrerequisites><li>rxRemoteDetonator</li></researchPrerequisites>
 	</ThingDef>
 	

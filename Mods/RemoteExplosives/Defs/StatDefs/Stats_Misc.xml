@@ -42,4 +42,13 @@
 		<toStringStyle>FloatMaxOne</toStringStyle>
 		<defaultBaseValue>0</defaultBaseValue>
 	</StatDef>
+	
+	<StatDef ParentName="rxBaseMiscStat">
+		<defName>rxSignalRange</defName>
+		<label>detonator signal range</label>
+		<description>The radius in which a detonator is able to detect and detonate remote explosives.</description>
+		<category>Building</category>
+		<toStringStyle>FloatMaxOne</toStringStyle>
+		<defaultBaseValue>0</defaultBaseValue>
+	</StatDef>
 </Defs>

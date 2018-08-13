@@ -77,6 +77,7 @@ namespace RemoteExplosives {
 			public static StatDef rxExplosiveMiningYield;
 			public static StatDef rxExplosiveWoodYield;
 			public static StatDef rxPowerConsumption;
+			public static StatDef rxSignalRange;
 		}
 
 		[DefOf]
