@@ -11,14 +11,14 @@ namespace RemoteExplosives {
 		private const int ButtonSize = 31;
 
 		private readonly Action<int> activateCallback;
-		private readonly Dictionary<int, List<Building_RemoteExplosive>> channelPopulation;
+		private readonly Dictionary<int, List<IWirelessDetonationReceiver>> channelPopulation;
 		private readonly int selectedChannel;
 		private readonly bool switching;
 
 		private int overChannel;
 		private List<Command_ChannelsKeypad> groupedKeypads;
 
-		public Command_ChannelsKeypad(int selectedChannel, bool switching, Action<int> activateCallback, Dictionary<int, List<Building_RemoteExplosive>> channelPopulation) : base(selectedChannel, switching, activateCallback) {
+		public Command_ChannelsKeypad(int selectedChannel, bool switching, Action<int> activateCallback, Dictionary<int, List<IWirelessDetonationReceiver>> channelPopulation) : base(selectedChannel, switching, activateCallback) {
 			this.selectedChannel = selectedChannel;
 			this.switching = switching;
 			this.activateCallback = activateCallback;
@@ -65,7 +65,8 @@ namespace RemoteExplosives {
 					if (channelIsPopulated) {
 						// list number of charges of each type on this channel
 						var tipText = channelPopulation[channel]
-							.GroupBy(x => x.LabelCapNoCount)
+							.Select(r => r.LabelNoCount)
+							.GroupBy(s => s)
 							.OrderByDescending(g => g.Count())
 							.Select(g => $"{g.Count()}x {g.Key}")
 							.Join("\n");
@@ -115,11 +116,14 @@ namespace RemoteExplosives {
 		}
 
 		private void TrySelectChargesOnChannel(int channel) {
-			List<Building_RemoteExplosive> charges = null;
+			List<IWirelessDetonationReceiver> charges = null;
 			channelPopulation?.TryGetValue(channel, out charges);
 			if (charges != null) {
 				Find.Selector.ClearSelection();
-				charges.ForEach(t => Find.Selector.Select(t));
+				charges.ForEach(t => {
+					if (t is Thing) Find.Selector.Select(t);
+					if (t is ThingComp tc) Find.Selector.Select(tc.parent);
+				});
 			}
 		}
 

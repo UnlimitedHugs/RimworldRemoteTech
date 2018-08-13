@@ -162,6 +162,11 @@ Works only on channel 1, has limited range and runs on a non-rechargeable batter
 				<li>Belt</li>
 			</layers>
 		</apparel>
+		<comps>
+			<li Class="RemoteExplosives.CompProperties_WirelessDetonationGridNode">
+				<endpoint>true</endpoint>
+			</li>
+		</comps>
 	</ThingDef>
 
 </Defs>

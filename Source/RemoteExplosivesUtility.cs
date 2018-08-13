@@ -37,7 +37,7 @@ namespace RemoteExplosives {
 			return ChannelType.None;
 		}
 
-		public static Gizmo GetChannelGizmo(int desiredChannel, int currentChannel, Action<int> activateCallback, ChannelType gizmoType, Dictionary<int, List<Building_RemoteExplosive>> channelPopulation = null) {
+		public static Gizmo GetChannelGizmo(int desiredChannel, int currentChannel, Action<int> activateCallback, ChannelType gizmoType, Dictionary<int, List<IWirelessDetonationReceiver>> channelPopulation = null) {
 			var switching = desiredChannel != currentChannel;
 			if (gizmoType == ChannelType.Basic) {
 				return new Command_ChannelsBasic(desiredChannel, switching, activateCallback);
@@ -51,32 +51,34 @@ namespace RemoteExplosives {
 			return "RemoteExplosive_currentChannel".Translate(currentChannel);
 		}
 
-		public static void LightArmedExplosivesInRange(IntVec3 center, Map map, float radius, int channel) {
-			FindArmedExplosivesInRange(center, map, radius)
-				.TryGetValue(channel,out List<Building_RemoteExplosive> armedExplosives);
-			if (armedExplosives != null) {
-				// closer ones will go off first
-				armedExplosives = armedExplosives.OrderBy(e => e.Position.DistanceToSquared(center)).ToList();
-				for (int i = 0; i < armedExplosives.Count; i++) {
-					var explosive = armedExplosives[i];
-					HugsLibController.Instance.TickDelayScheduler.ScheduleCallback(explosive.LightFuse, TicksBetweenTriggers*i, explosive);
-				}
-			} else {
-				Messages.Message("Detonator_notargets".Translate(), MessageTypeDefOf.RejectInput);
+		public static void LightArmedExplosivesInNetworkRange(ThingWithComps origin, int channel) {
+			var comp = origin.GetComp<CompWirelessDetonationGridNode>();
+			if (comp == null) throw new Exception("Missing CompWirelessDetonationGridNode on sender");
+			var sample = comp.FindReceiversInNetworkRange().Where(pair => pair.Receiver.CurrentChannel == channel);
+			// closer ones to their transmitters will go off first. This is used to simulate a bit of signal delay
+			var sortedByDistance = sample.OrderBy(pair => pair.Transmitter.parent.Position.DistanceToSquared(pair.Receiver.Position)).Select(pair => pair.Receiver);
+			int counter = 0;
+			foreach (var receiver in sortedByDistance) {
+				HugsLibController.Instance.TickDelayScheduler.ScheduleCallback(() => {
+					if (receiver.CanReceiveSignal) receiver.ReceiveSignal(origin);
+				}, TicksBetweenTriggers * 10 * counter++, origin);
 			}
+			if(counter == 0) Messages.Message("Detonator_notargets".Translate(), MessageTypeDefOf.RejectInput);
 		}
 
-		public static Dictionary<int, List<Building_RemoteExplosive>> FindArmedExplosivesInRange(IntVec3 center, Map map, float radius) {
-			var results = new Dictionary<int, List<Building_RemoteExplosive>>();
-			var sample = map.listerBuildings.AllBuildingsColonistOfClass<Building_RemoteExplosive>();
-			foreach (var explosive in sample) {
-				if (explosive.IsArmed && !explosive.FuseLit && TileIsInRange(explosive.Position, center, radius)) {
-					results.TryGetValue(explosive.CurrentChannel, out List<Building_RemoteExplosive> list);
+		public static Dictionary<int, List<IWirelessDetonationReceiver>> FindArmedExplosivesInNetworkRange(ThingWithComps origin) {
+			var comp = origin.GetComp<CompWirelessDetonationGridNode>();
+			if (comp == null) throw new Exception("Missing CompWirelessDetonationGridNode on sender");
+			var results = new Dictionary<int, List<IWirelessDetonationReceiver>>();
+			var sample = comp.FindReceiversInNetworkRange();
+			foreach (var pair in sample) {
+				if (pair.Receiver.CanReceiveSignal) {
+					results.TryGetValue(pair.Receiver.CurrentChannel, out List<IWirelessDetonationReceiver> list);
 					if (list == null) {
-						list = new List<Building_RemoteExplosive>();
-						results[explosive.CurrentChannel] = list;
+						list = new List<IWirelessDetonationReceiver>();
+						results[pair.Receiver.CurrentChannel] = list;
 					}
-					list.Add(explosive);
+					list.Add(pair.Receiver);
 				}
 			}
 			return results;

@@ -77,7 +77,7 @@ namespace RemoteExplosives {
 			lastActivationTick = Find.TickManager.TicksGame;
 			SoundDefOf.FlickSwitch.PlayOneShot(Wearer);
 
-			RemoteExplosivesUtility.LightArmedExplosivesInRange(Wearer.Position, Wearer.Map, SignalRange, 1);
+			RemoteExplosivesUtility.LightArmedExplosivesInNetworkRange(this, 1);
 			
 			numUsesLeft--;
 			if (numUsesLeft <= 0) {

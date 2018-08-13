@@ -138,7 +138,7 @@ Right-click with a drafted colonist for better timing.</description>
 					<rxPowerConsumption>0</rxPowerConsumption>
 				</statModifiers>
 				<costList>
-					<Uranium>10</Uranium>
+					<Uranium>50</Uranium>
 					<Plasteel>30</Plasteel>
 					<Steel>50</Steel>
 				</costList>
@@ -171,7 +171,7 @@ Right-click with a drafted colonist for better timing.</description>
 			<MaxHitPoints>250</MaxHitPoints>
 			<Flammability>.5</Flammability>
 			<Cleanliness>-10</Cleanliness>
-			<rxPowerConsumption>300</rxPowerConsumption>
+			<rxPowerConsumption>200</rxPowerConsumption>
 			<rxSignalRange>35</rxSignalRange>
 		</statBases>
 		<costList>
@@ -197,6 +197,7 @@ Right-click with a drafted colonist for better timing.</description>
 				<shortCircuitInRain>false</shortCircuitInRain>
 			</li>
 			<li Class="CompProperties_Flickable"/>
+			<li Class="CompProperties_Breakdownable"/>
 			<li Class="RemoteExplosives.CompProperties_WirelessDetonationGridNode"/>
 		</comps>
 		<building>

@@ -19,7 +19,7 @@ namespace RemoteExplosives {
 
 		private bool wantDetonation;
 		private int lastInspectionTick;
-		private Dictionary<int, List<Building_RemoteExplosive>> explosivesInRange;
+		private Dictionary<int, List<IWirelessDetonationReceiver>> explosivesInRange;
 		private int currentChannel = 1;
 		private CompUpgrade channelsBasic;
 		private CompUpgrade channelsAdvanced;
@@ -94,7 +94,7 @@ namespace RemoteExplosives {
 				return;
 			}
 			SoundDefOf.FlickSwitch.PlayOneShot(this);
-			RemoteExplosivesUtility.LightArmedExplosivesInRange(Position, Map, SignalRange, currentChannel);
+			RemoteExplosivesUtility.LightArmedExplosivesInNetworkRange(this, currentChannel);
 		}
 
 		private float SignalRange {
@@ -109,7 +109,7 @@ namespace RemoteExplosives {
 
 		private void UpdateArmedExplosivesInRange() {
 			lastInspectionTick = GenTicks.TicksGame;
-			explosivesInRange = RemoteExplosivesUtility.FindArmedExplosivesInRange(Position, Map, SignalRange);
+			explosivesInRange = RemoteExplosivesUtility.FindArmedExplosivesInNetworkRange(this);
 		}
 
 		public override string GetInspectString() {
@@ -122,7 +122,7 @@ namespace RemoteExplosives {
 			var stringBuilder = new StringBuilder();
 			stringBuilder.Append(base.GetInspectString());
 			if (explosivesInRange != null) {
-				explosivesInRange.TryGetValue(currentChannel, out List<Building_RemoteExplosive> list);
+				explosivesInRange.TryGetValue(currentChannel, out List<IWirelessDetonationReceiver> list);
 				stringBuilder.AppendLine();
 				stringBuilder.Append("DetonatorTable_inrange".Translate());
 				stringBuilder.Append(": " + (list?.Count).GetValueOrDefault());

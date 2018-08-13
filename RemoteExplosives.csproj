@@ -62,6 +62,7 @@
     <Compile Include="Source\Building\Building_GasVent.cs" />
     <Compile Include="Source\Building\Building_RadioMast.cs" />
     <Compile Include="Source\Building\ISelectedThingPlaceWorker.cs" />
+    <Compile Include="Source\Building\IWirelessDetonationReceiver.cs" />
     <Compile Include="Source\Building\PlaceWorker_DetonatorRadius.cs" />
     <Compile Include="Source\Building\PlaceWorker_GasVent.cs" />
     <Compile Include="Source\Building\PlaceWorker_DetWireReplacer.cs" />
@@ -85,6 +86,7 @@
     <Compile Include="Source\Patches\Faction_AffectGoodwillWith_Patch.cs" />
     <Compile Include="Source\Patches\CultivatedPlants_DeterminePlantDef_Patch.cs" />
     <Compile Include="Source\Patches\GenLeaving_GetLeaveCalculator_Patch.cs" />
+    <Compile Include="Source\Patches\ThingDef_ConnectToPower_Patch.cs" />
     <Compile Include="Source\Thing\FullDeconstructionRefund.cs" />
     <Compile Include="Source\UI\Alert_DetonatorWireFailure.cs" />
     <Compile Include="Source\AutoReplaceWatcher.cs" />

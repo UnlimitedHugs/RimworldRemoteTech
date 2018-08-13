@@ -16,7 +16,6 @@ namespace RemoteExplosives {
 		public override void PostSpawnSetup(bool respawningAfterLoad) {
 			base.PostSpawnSetup(respawningAfterLoad);
 			SetUpPowerVars();
-			Tracer.Trace(this, PowerOutput);
 		}
 
 		public override void SetUpPowerVars() {

@@ -82,6 +82,10 @@ namespace RemoteExplosives {
 					defaultLabel = "Upgrade_labelPrefix".Translate(Props.label),
 					defaultDesc = $"{Props.EffectDescription}\n{Props.MaterialsDescription}",
 					toggleAction = () => {
+						if (Prefs.DevMode && HugsLibUtility.ShiftIsHeld) {
+							CompleteUpgrade();
+							return;
+						}
 						wantsWork = !wantsWork;
 						if (!wantsWork) ingredients.TryDropAll(parent.Position, parent.Map, ThingPlaceMode.Near);
 						UpdateDesignation();
@@ -138,11 +142,8 @@ namespace RemoteExplosives {
 
 		public void DoWork(float workAmount) {
 			workDone += workAmount;
-			if (!complete && workDone >= Props.workAmount) {
-				complete = true;
-				ingredients.ClearAndDestroyContents();
-				UpdateDesignation();
-				parent.BroadcastCompSignal(UpgradeCompleteSignal);
+			if (workDone >= Props.workAmount) {
+				CompleteUpgrade();
 			}
 		}
 
@@ -171,6 +172,14 @@ namespace RemoteExplosives {
 
 		public ThingOwner GetDirectlyHeldThings() {
 			return ingredients;
+		}
+
+		private void CompleteUpgrade() {
+			if (complete) return;
+			complete = true;
+			ingredients.ClearAndDestroyContents();
+			UpdateDesignation();
+			parent.BroadcastCompSignal(UpgradeCompleteSignal);
 		}
 
 		private void UpdateDesignation() {

@@ -15,7 +15,7 @@ namespace RemoteExplosives {
 	 * Requires a CompCustomExplosive to work correctly. Can be armed and assigned to a channel.
 	 * Will blink with an overlay texture when armed.
 	 */
-	public class Building_RemoteExplosive : Building, ISwitchable {
+	public class Building_RemoteExplosive : Building, ISwitchable, IWirelessDetonationReceiver {
 		
 		private static readonly string ArmButtonLabel = "RemoteExplosive_arm_label".Translate();
 		private static readonly string ArmButtonDesc = "RemoteExplosive_arm_desc".Translate();
@@ -30,8 +30,11 @@ namespace RemoteExplosives {
 		private int ticksSinceFlare;
 		private int currentChannel = 1;
 		private int desiredChannel = 1;
-
 		private bool justCreated;
+
+		public bool CanReceiveSignal {
+			get { return IsArmed && !FuseLit; }
+		}
 
 		private BuildingProperties_RemoteExplosive _customProps;
 		private BuildingProperties_RemoteExplosive CustomProps {
@@ -95,7 +98,7 @@ namespace RemoteExplosives {
 		}
 
 		public bool WantsSwitch() {
-			return isArmed != desiredArmState || currentChannel!=desiredChannel;
+			return isArmed != desiredArmState || currentChannel != desiredChannel;
 		}
 
 		public void DoSwitch() {
@@ -177,16 +180,6 @@ namespace RemoteExplosives {
 			}
 		}
 
-		private void ChannelGizmoAction(int selectedChannel) {
-			desiredChannel = selectedChannel;
-			RemoteExplosivesUtility.UpdateSwitchDesignation(this);
-		}
-
-		private void ArmGizmoAction() {
-			desiredArmState = !desiredArmState;
-			RemoteExplosivesUtility.UpdateSwitchDesignation(this);
-		}
-
 		public override void Tick() {
 			base.Tick();
 			ticksSinceFlare++;
@@ -220,21 +213,6 @@ namespace RemoteExplosives {
 			}
 		}
 
-		private void DrawFlareOverlay(bool useStrong) {
-			ticksSinceFlare = 0;
-
-			var overlay = useStrong ? Resources.Graphics.FlareOverlayStrong : Resources.Graphics.FlareOverlayNormal;
-			var s = Vector3.one;
-			var matrix = Matrix4x4.TRS(DrawPos + Altitudes.AltIncVect + CustomProps.blinkerOffset, Rotation.AsQuat, s);
-			Graphics.DrawMesh(MeshPool.plane10, matrix, overlay.MatAt(Rotation), 0);
-		}
-
-		private void EmitBeep(float pitch) {
-			var beepInfo = SoundInfo.InMap(this);
-			beepInfo.pitchFactor = pitch;
-			Resources.Sound.rxBeep.PlayOneShot(beepInfo);
-		}
-
 		public override string GetInspectString() {
 			var stringBuilder = new StringBuilder();
 			stringBuilder.Append(base.GetInspectString());
@@ -250,5 +228,33 @@ namespace RemoteExplosives {
 			return stringBuilder.ToString();
 		}
 
+		public void ReceiveSignal(Thing sender) {
+			LightFuse();
+		}
+
+		private void ChannelGizmoAction(int selectedChannel) {
+			desiredChannel = selectedChannel;
+			RemoteExplosivesUtility.UpdateSwitchDesignation(this);
+		}
+
+		private void ArmGizmoAction() {
+			desiredArmState = !desiredArmState;
+			RemoteExplosivesUtility.UpdateSwitchDesignation(this);
+		}
+
+		private void DrawFlareOverlay(bool useStrong) {
+			ticksSinceFlare = 0;
+
+			var overlay = useStrong ? Resources.Graphics.FlareOverlayStrong : Resources.Graphics.FlareOverlayNormal;
+			var s = Vector3.one;
+			var matrix = Matrix4x4.TRS(DrawPos + Altitudes.AltIncVect + CustomProps.blinkerOffset, Rotation.AsQuat, s);
+			Graphics.DrawMesh(MeshPool.plane10, matrix, overlay.MatAt(Rotation), 0);
+		}
+
+		private void EmitBeep(float pitch) {
+			var beepInfo = SoundInfo.InMap(this);
+			beepInfo.pitchFactor = pitch;
+			Resources.Sound.rxBeep.PlayOneShot(beepInfo);
+		}
 	}
 }
