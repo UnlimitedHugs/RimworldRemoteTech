@@ -194,16 +194,15 @@ namespace RemoteExplosives {
 			var upgrade = t.TryGetUpgrade(upgradeReferenceId);
 			return upgrade != null && upgrade.Complete;
 		}
-
-		public static void DrawSelectedThingPlaceWorkerFor(Thing t) {
-			if (t?.def.placeWorkers != null) {
-				for (var i = 0; i < t.def.placeWorkers.Count; i++) {
-					var worker = t.def.PlaceWorkers[i] as ISelectedThingPlaceWorker;
-					worker?.DrawGhostForSelected(t);
-				}
-			}
-		}
 		
+		public static void DrawFlareOverlay(Graphic overlay, Vector3 drawPos, GraphicData_Blinker props, float alpha = 1f) {
+			var color = new Color(props.blinkerColor.r, props.blinkerColor.g, props.blinkerColor.b, props.blinkerColor.a * alpha);
+			var flareMat = overlay.MatSingle;
+			var material = MaterialPool.MatFrom(new MaterialRequest((Texture2D)flareMat.mainTexture, flareMat.shader, color));
+			var matrix = Matrix4x4.TRS(drawPos + Altitudes.AltIncVect + props.blinkerOffset, Quaternion.identity, props.blinkerScale);
+			Graphics.DrawMesh(MeshPool.plane10, matrix, material, 0);
+		}
+
 		private static bool TileIsInRange(IntVec3 tile1, IntVec3 tile2, float maxDistance) {
 			return Mathf.Sqrt(Mathf.Pow(tile1.x - tile2.x, 2) + Mathf.Pow(tile1.z - tile2.z, 2)) <= maxDistance;
 		}

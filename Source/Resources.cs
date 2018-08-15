@@ -95,8 +95,8 @@ namespace RemoteExplosives {
 		public static class Graphics {
 			private const LinkFlags OverlayAtlasLinkFlags = LinkFlags.Custom3;
 
-			public static readonly Graphic FlareOverlayNormal = GraphicDatabase.Get<Graphic_Single>("mine_flare", ShaderDatabase.TransparentPostLight);
-			public static readonly Graphic FlareOverlayStrong = GraphicDatabase.Get<Graphic_Single>("mine_flare_strong", ShaderDatabase.TransparentPostLight);
+			public static readonly Graphic FlareOverlayNormal = GraphicDatabase.Get<Graphic_Single>("mine_flare", ShaderDatabase.WorldOverlayAdditive);
+			public static readonly Graphic FlareOverlayStrong = GraphicDatabase.Get<Graphic_Single>("mine_flare_strong", ShaderDatabase.WorldOverlayAdditive);
 			public static readonly Graphic DetWireOverlayAtlas = GraphicDatabase.Get<Graphic_Single>("DetWire/det_wire_overlay_atlas", ShaderDatabase.MetaOverlay);
 			public static readonly Graphic DetWireOverlayEndpoint = GraphicDatabase.Get<Graphic_Single>("DetWire/connection_point_overlay", ShaderDatabase.MetaOverlay);
 			public static readonly Graphic DetWireOverlayCrossing = GraphicDatabase.Get<Graphic_Single>("DetWire/crossing_overlay", ShaderDatabase.MetaOverlay);
@@ -104,6 +104,7 @@ namespace RemoteExplosives {
 			static Graphics() {
 				DetWireOverlayAtlas = GraphicUtility.WrapLinked(DetWireOverlayAtlas, LinkDrawerType.Basic);
 				DetWireOverlayAtlas.data = new GraphicData { linkFlags = OverlayAtlasLinkFlags };
+				FlareOverlayNormal.drawSize = FlareOverlayStrong.drawSize = Vector2.one;
 			}
 		}
 

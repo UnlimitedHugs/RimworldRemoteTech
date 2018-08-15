@@ -83,10 +83,12 @@
     <Compile Include="Source\CustomFactionGoodwillCaps.cs" />
     <Compile Include="Source\Damage\DamageWorker_SuperEMP.cs" />
     <Compile Include="Source\Damage\SuperEMPDamageDef.cs" />
+    <Compile Include="Source\Graphic\GraphicData_Blinker.cs" />
     <Compile Include="Source\Patches\Faction_AffectGoodwillWith_Patch.cs" />
     <Compile Include="Source\Patches\CultivatedPlants_DeterminePlantDef_Patch.cs" />
     <Compile Include="Source\Patches\GenLeaving_GetLeaveCalculator_Patch.cs" />
     <Compile Include="Source\Patches\ThingDef_ConnectToPower_Patch.cs" />
+    <Compile Include="Source\Patches\Thing_DrawExtraSelectionOverlays_Patch.cs" />
     <Compile Include="Source\Thing\FullDeconstructionRefund.cs" />
     <Compile Include="Source\UI\Alert_DetonatorWireFailure.cs" />
     <Compile Include="Source\AutoReplaceWatcher.cs" />

@@ -10,22 +10,35 @@ namespace RemoteExplosives {
 	/// Represents a node that can connect to other node-buildings in signal range and recursively form a network.
 	/// </summary>
 	public class CompWirelessDetonationGridNode : ThingComp {
-		public struct TransmitterReceiverPair : IEquatable<TransmitterReceiverPair> {
+		public struct TransmitterReceiverPair {
 			public readonly CompWirelessDetonationGridNode Transmitter;
 			public readonly IWirelessDetonationReceiver Receiver;
 			public TransmitterReceiverPair(CompWirelessDetonationGridNode transmitter, IWirelessDetonationReceiver receiver) {
 				Transmitter = transmitter;
 				Receiver = receiver;
 			}
+		}
+		// order-invariant node pair
+		public struct NetworkGraphLink : IEquatable<NetworkGraphLink> {
+			public readonly CompWirelessDetonationGridNode First;
+			public readonly CompWirelessDetonationGridNode Second;
+			public readonly bool CanTraverse;
+			public NetworkGraphLink(CompWirelessDetonationGridNode first, CompWirelessDetonationGridNode second, bool canTraverse) {
+				First = first;
+				Second = second;
+				CanTraverse = canTraverse;
+			}
 			public override bool Equals(object obj) {
-				if (!(obj is TransmitterReceiverPair pair)) return false;
+				if (!(obj is NetworkGraphLink pair)) return false;
 				return Equals(pair);
 			}
-			public bool Equals(TransmitterReceiverPair other) {
-				return Receiver == other.Receiver;
+			public bool Equals(NetworkGraphLink other) {
+				return First == other.First && Second == other.Second || First == other.Second && Second == other.First;
 			}
 			public override int GetHashCode() {
-				return Receiver != null ? Receiver.GetHashCode() : 0;
+				var one = First != null ? First.GetHashCode() : 0;
+				var two = Second != null ? Second.GetHashCode() : 0;
+				return Gen.HashCombineInt(one < two ? one : two, one < two ? two : one); 
 			}
 		}
 
@@ -33,6 +46,23 @@ namespace RemoteExplosives {
 
 		// allows to do a global reset of all adjacency caches
 		private static int globalRecacheId;
+
+		public static IEnumerable<CompWirelessDetonationGridNode> GetPotentialNeighborsFor(ThingDef def, IntVec3 pos, Map map) {
+			var radius = def.GetStatValueAbstract(Resources.Stat.rxSignalRange);
+			if (radius > 0f) {
+				var endpoint = (def.GetCompProperties<CompProperties_WirelessDetonationGridNode>()?.endpoint).GetValueOrDefault();
+				var candidates = map.listerBuildings.allBuildingsColonist;
+				for (var i = 0; i < candidates.Count; i++) {
+					CompWirelessDetonationGridNode comp;
+					if (candidates[i] is ThingWithComps building
+						&& (comp = building.GetComp<CompWirelessDetonationGridNode>()) != null
+						&& building.Position.DistanceTo(pos) <= Mathf.Min(radius, comp.Radius)
+						&& (endpoint == false || !comp.Props.endpoint)) {
+						yield return comp;
+					}
+				}
+			}
+		}
 
 		public CompProperties_WirelessDetonationGridNode Props {
 			get { return props as CompProperties_WirelessDetonationGridNode; }
@@ -42,7 +72,7 @@ namespace RemoteExplosives {
 			get { return powerComp == null || powerComp.PowerOn; }
 		}
 
-		private float Radius {
+		public float Radius {
 			get { return parent.GetStatValue(Resources.Stat.rxSignalRange); }
 		}
 
@@ -74,7 +104,7 @@ namespace RemoteExplosives {
 		public IEnumerable<TransmitterReceiverPair> FindReceiversInNetworkRange() {
 			var receivers = new HashSet<IWirelessDetonationReceiver>();
 			var transmitters = new HashSet<CompWirelessDetonationGridNode>();
-			foreach (var transmitter in GetAllConnectedNodes()) {
+			foreach (var transmitter in GetReachableNetworkNodes()) {
 				foreach (var receiver in transmitter.FindReceiversInNodeRange()) {
 					transmitters.Add(transmitter);
 					receivers.Add(receiver);
@@ -109,7 +139,24 @@ namespace RemoteExplosives {
 			}
 		}
 
-		public IEnumerable<CompWirelessDetonationGridNode> GetAllConnectedNodes() {
+		public IEnumerable<NetworkGraphLink> GetAllNetworkLinks() {
+			var links = new HashSet<NetworkGraphLink>();
+			TraverseNetwork(false, null, l => links.Add(l));
+			return links;
+		}
+
+		public IEnumerable<CompWirelessDetonationGridNode> GetReachableNetworkNodes() {
+			var nodes = new HashSet<CompWirelessDetonationGridNode>();
+			TraverseNetwork(true, n => nodes.Add(n));
+			return nodes;
+		}
+
+		public List<CompWirelessDetonationGridNode> GetAdjacentNodes() {
+			RecacheAdjacentNodesIfNeeded();
+			return adjacentNodes;
+		}
+
+		public void TraverseNetwork(bool reachableOnly, Action<CompWirelessDetonationGridNode> nodeCallback, Action<NetworkGraphLink> linkCallback = null) {
 			var nodes = new HashSet<CompWirelessDetonationGridNode>();
 			var queue = new Queue<CompWirelessDetonationGridNode>();
 			queue.Enqueue(this);
@@ -117,18 +164,18 @@ namespace RemoteExplosives {
 				var comp = queue.Dequeue();
 				// don't walk through endpoints, unless we're starting from one
 				if (nodes.Add(comp) && (comp == this || !comp.Props.endpoint)) {
+					nodeCallback?.Invoke(comp);
 					var compAdjacent = comp.GetAdjacentNodes();
 					for (var i = 0; i < compAdjacent.Count; i++) {
-						queue.Enqueue(compAdjacent[i]);
+						var adjacent = compAdjacent[i];
+						var canTraverse = comp.CanTransmit && adjacent.CanTransmit;
+						if (canTraverse || !reachableOnly) {
+							linkCallback?.Invoke(new NetworkGraphLink(comp, adjacent, canTraverse));
+							queue.Enqueue(adjacent);
+						}
 					}
 				}
 			}
-			return nodes;
-		}
-
-		public List<CompWirelessDetonationGridNode> GetAdjacentNodes() {
-			RecacheAdjacentNodesIfNeeded();
-			return adjacentNodes;
 		}
 
 		private void RecacheAdjacentNodesIfNeeded() {
@@ -140,15 +187,14 @@ namespace RemoteExplosives {
 				adjacentNodes = adjacentNodes ?? new List<CompWirelessDetonationGridNode>();
 				adjacentNodes.Clear();
 				lastRecacheTick = Find.TickManager.TicksGame;
-				if (CanTransmit) {
-					var candidates = map.listerBuildings.allBuildingsColonist;
-					for (var i = 0; i < candidates.Count; i++) {
-						CompWirelessDetonationGridNode comp;
-						if (candidates[i] is ThingWithComps building
-							&& building != parent
-							&& (comp = building.GetComp<CompWirelessDetonationGridNode>()) != null
-							&& comp.CanTransmit
-							&& building.Position.DistanceTo(center) <= radius
+				var candidates = map.listerBuildings.allBuildingsColonist;
+				for (var i = 0; i < candidates.Count; i++) {
+					CompWirelessDetonationGridNode comp;
+					if (candidates[i] is ThingWithComps building 
+						&& building != parent 
+						&& (comp = building.GetComp<CompWirelessDetonationGridNode>()) != null) {
+						var mutualMaxRange = Mathf.Min(radius, comp.Radius);
+						if (building.Position.DistanceTo(center) <= mutualMaxRange
 							&& (Props.endpoint == false || Props.endpoint != comp.Props.endpoint)) {
 							adjacentNodes.Add(comp);
 						}

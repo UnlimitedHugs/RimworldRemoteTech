@@ -79,8 +79,8 @@ namespace RemoteExplosives {
 		public override IEnumerable<Gizmo> CompGetGizmosExtra() {
 			if (!complete && CompletedPrerequisites) {
 				yield return new Command_Toggle {
-					defaultLabel = "Upgrade_labelPrefix".Translate(Props.label),
-					defaultDesc = $"{Props.EffectDescription}\n{Props.MaterialsDescription}",
+					defaultLabel = Props.label,
+					defaultDesc = $"<b>{"Upgrade_labelPrefix".Translate(Props.label)}</b>\n{Props.EffectDescription}\n{Props.MaterialsDescription}",
 					toggleAction = () => {
 						if (Prefs.DevMode && HugsLibUtility.ShiftIsHeld) {
 							CompleteUpgrade();

@@ -64,11 +64,6 @@ namespace RemoteExplosives {
 			}
 		}
 
-		public override void DrawExtraSelectionOverlays() {
-			base.DrawExtraSelectionOverlays();
-			RemoteExplosivesUtility.DrawSelectedThingPlaceWorkerFor(this);
-		}
-
 		private void DetonateGizmoAction() {
 			wantDetonation = !wantDetonation;
 		}

@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Text;
 using RimWorld;
-using UnityEngine;
 using Verse;
 using Verse.Sound;
 
@@ -30,7 +29,6 @@ namespace RemoteExplosives {
 		private int ticksSinceFlare;
 		private int currentChannel = 1;
 		private int desiredChannel = 1;
-		private bool justCreated;
 
 		public bool CanReceiveSignal {
 			get { return IsArmed && !FuseLit; }
@@ -44,6 +42,10 @@ namespace RemoteExplosives {
 				}
 				return _customProps;
 			}
+		}
+
+		private GraphicData_Blinker BlinkerData {
+			get { return Graphic.data as GraphicData_Blinker; }
 		}
 
 		public bool IsArmed {
@@ -63,28 +65,20 @@ namespace RemoteExplosives {
 			explosiveComp.StartWick(true);
 		}
 
-		public override void PostMake() {
-			base.PostMake();
-			justCreated = true;
-		}
-
 		public override void SpawnSetup(Map map, bool respawningAfterLoad) {
 			base.SpawnSetup(map, respawningAfterLoad);
-			
-			Resources.Graphics.FlareOverlayStrong.drawSize = Resources.Graphics.FlareOverlayNormal.drawSize = def.graphicData.drawSize;
-
 			RemoteExplosivesUtility.UpdateSwitchDesignation(this);
 			explosiveComp = GetComp<CompCustomExplosive>();
 			replaceComp = GetComp<CompAutoReplaceable>();
 			if (replaceComp != null) replaceComp.DisableGizmoAutoDisplay();
-			
-			if (justCreated) {
+			if(CustomProps == null) RemoteExplosivesController.Instance.Logger.Error($"{nameof(Building_RemoteExplosive)} needs {nameof(BuildingProperties_RemoteExplosive)} in def {def.defName}");
+			if(BlinkerData == null) RemoteExplosivesController.Instance.Logger.Error($"{nameof(Building_RemoteExplosive)} needs {nameof(GraphicData_Blinker)} in def {def.defName}");
+			if (!respawningAfterLoad && CustomProps != null) {
 				if (CustomProps.explosiveType == RemoteExplosiveType.Combat && RemoteExplosivesController.Instance.SettingAutoArmCombat ||
 					CustomProps.explosiveType == RemoteExplosiveType.Mining && RemoteExplosivesController.Instance.SettingAutoArmMining ||
 					CustomProps.explosiveType == RemoteExplosiveType.Utility && RemoteExplosivesController.Instance.SettingAutoArmUtility) {
 					Arm();
 				}
-				justCreated = false;
 			}
 		}
 
@@ -203,11 +197,11 @@ namespace RemoteExplosives {
 			base.Draw();
 			if (!isArmed) return;
 			if (FuseLit) {
-				if (ticksSinceFlare >= CustomProps.blinkerIntervalLit) {
+				if (ticksSinceFlare >= BlinkerData.blinkerIntervalActive) {
 					DrawFlareOverlay(true);
 				}
 			} else {
-				if (ticksSinceFlare >= CustomProps.blinkerIntervalArmed) {
+				if (ticksSinceFlare >= BlinkerData.blinkerIntervalNormal) {
 					DrawFlareOverlay(false);
 				}
 			}
@@ -244,11 +238,8 @@ namespace RemoteExplosives {
 
 		private void DrawFlareOverlay(bool useStrong) {
 			ticksSinceFlare = 0;
-
 			var overlay = useStrong ? Resources.Graphics.FlareOverlayStrong : Resources.Graphics.FlareOverlayNormal;
-			var s = Vector3.one;
-			var matrix = Matrix4x4.TRS(DrawPos + Altitudes.AltIncVect + CustomProps.blinkerOffset, Rotation.AsQuat, s);
-			Graphics.DrawMesh(MeshPool.plane10, matrix, overlay.MatAt(Rotation), 0);
+			RemoteExplosivesUtility.DrawFlareOverlay(overlay, DrawPos, BlinkerData);
 		}
 
 		private void EmitBeep(float pitch) {

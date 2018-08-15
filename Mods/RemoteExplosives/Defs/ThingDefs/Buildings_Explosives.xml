@@ -19,6 +19,11 @@
 		<drawerType>RealtimeOnly</drawerType>
 		<rotatable>false</rotatable>
 		<tickerType>Normal</tickerType>
+		<graphicData Class="RemoteExplosives.GraphicData_Blinker">
+			<graphicClass>Graphic_Single</graphicClass>
+			<blinkerOffset>(0, 0, .15)</blinkerOffset>
+			<blinkerColor>(1, 0, 0)</blinkerColor>
+		</graphicData>
 		<statBases>
 			<MaxHitPoints>60</MaxHitPoints>
 			<WorkToBuild>150</WorkToBuild>
@@ -33,6 +38,12 @@
 		<altitudeLayer>Building</altitudeLayer>
 		<rotatable>false</rotatable>
 		<tickerType>Normal</tickerType>
+		<graphicData Class="RemoteExplosives.GraphicData_Blinker">
+			<graphicClass>Graphic_Single</graphicClass>
+			<blinkerOffset>(0, 0, .15)</blinkerOffset>
+			<blinkerColor>(1, 0, 0)</blinkerColor>
+			<blinkerIntervalActive>25</blinkerIntervalActive>
+		</graphicData>
 		<statBases>
 			<MaxHitPoints>60</MaxHitPoints>
 			<WorkToBuild>150</WorkToBuild>
@@ -96,6 +107,7 @@ Right-click with a drafted colonist for better timing.</description>
 			<li>RemoteExplosives.PlaceWorker_DetonatorRadius</li>
 			<li>RemoteExplosives.PlaceWorker_ShowWirelessDetonationGridConnections</li>
 		</placeWorkers>
+		<drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>
 		<comps>
 			<li Class="CompProperties_Power">
 				<compClass>RemoteExplosives.CompStatPower</compClass>
@@ -152,7 +164,7 @@ Right-click with a drafted colonist for better timing.</description>
 		<label>radio mast</label>
 		<thingClass>RemoteExplosives.Building_RadioMast</thingClass>
 		<description>Extends the range of detonators, provided that the mast is within their range. Masts connect to each other, as well, making it possible to cover even large maps with a single detonator.</description>
-		<graphicData>
+		<graphicData Class="RemoteExplosives.GraphicData_Blinker">
 			<texPath>radio_mast</texPath>
 			<graphicClass>Graphic_Single</graphicClass>
 			<shaderType>CutoutComplex</shaderType>
@@ -165,6 +177,10 @@ Right-click with a drafted colonist for better timing.</description>
 				<volume>(.4, 2, .4)</volume>
 				<offset>(0, 0, -.8)</offset>
 			</shadowData>
+			<blinkerOffset>(-.08, 0, 1.25)</blinkerOffset>
+			<blinkerScale>(.4, 1, .4)</blinkerScale>
+			<blinkerColor>(0, 1, 0)</blinkerColor>
+			<blinkerIntervalNormal>60</blinkerIntervalNormal>
 		</graphicData>
 		<statBases>
 			<WorkToBuild>3500</WorkToBuild>
@@ -184,6 +200,7 @@ Right-click with a drafted colonist for better timing.</description>
 			<li>PlaceWorker_NotUnderRoof</li>
 			<li>RemoteExplosives.PlaceWorker_ShowWirelessDetonationGridConnections</li>
 		</placeWorkers>
+		<drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>
 		<constructEffect>ConstructMetal</constructEffect>
 		<altitudeLayer>BuildingOnTop</altitudeLayer>
 		<fillPercent>0.5</fillPercent>
@@ -512,7 +529,7 @@ Can be placed under walls and other buildings.</description>
 		<defName>rxExplosivePouchPlaced</defName>
 		<thingClass>Building</thingClass>
 		<label>makeshift explosive</label>
-		<graphicData>
+		<graphicData Class="RemoteExplosives.GraphicData_Blinker">
 			<texPath>makeshift_explosive</texPath>
 			<graphicClass>Graphic_Single</graphicClass>
 			<shadowData>
@@ -548,7 +565,7 @@ Detonate using a Manual Detonator and Detonator Wire.</description>
 	<ThingDef ParentName="rxRemoteExplosiveBase">
 		<defName>rxRemoteBombPlaced</defName>
 		<label>remote explosive charge</label>
-		<graphicData>
+		<graphicData Class="RemoteExplosives.GraphicData_Blinker">
 			<texPath>remote_mine</texPath>
 			<graphicClass>Graphic_Single</graphicClass>
 			<shadowData>
@@ -584,7 +601,7 @@ Arm, then detonate from the Remote Explosives Console.</description>
 	<ThingDef ParentName="rxRemoteExplosiveBase">
 		<defName>rxRemoteFireBombPlaced</defName>
 		<label>remote incendiary charge</label>
-		<graphicData>
+		<graphicData Class="RemoteExplosives.GraphicData_Blinker">
 			<texPath>remote_mine_incendiary</texPath>
 			<graphicClass>Graphic_Single</graphicClass>
 			<shadowData>
@@ -621,7 +638,7 @@ Arm, then detonate from the Remote Explosives Console.</description>
 		<defName>rxRemoteEmpBombPlaced</defName>
 		<label>remote EMP charge</label>
 		<thingClass>RemoteExplosives.Building_RemoteExplosiveEmp</thingClass>
-		<graphicData>
+		<graphicData Class="RemoteExplosives.GraphicData_Blinker">
 			<texPath>mine_emp</texPath>
 			<graphicClass>Graphic_Single</graphicClass>
 			<shadowData>
@@ -666,7 +683,7 @@ Arm, then detonate from the Remote Explosives Console.</description>
 		<defName>rxMiningChargeChunks</defName>
 		<thingClass>RemoteExplosives.Building_MiningExplosive</thingClass>
 		<label>fracturing explosive</label>
-		<graphicData>
+		<graphicData Class="RemoteExplosives.GraphicData_Blinker">
 			<texPath>rock_explosive</texPath>
 			<graphicClass>Graphic_Single</graphicClass>
 			<shadowData>
@@ -700,7 +717,6 @@ Detonate from the Remote Explosives Console.</description>
 		<building Class="RemoteExplosives.BuildingProperties_RemoteExplosive">
 			<isTrap>false</isTrap>
 			<explosiveType>Mining</explosiveType>
-			<blinkerIntervalLit>25</blinkerIntervalLit>
 		</building>
 	</ThingDef>
 	
@@ -708,7 +724,7 @@ Detonate from the Remote Explosives Console.</description>
 		<defName>rxMiningChargeClearing</defName>
 		<thingClass>RemoteExplosives.Building_MiningExplosiveSquare</thingClass>
 		<label>clearing explosive</label>
-		<graphicData>
+		<graphicData Class="RemoteExplosives.GraphicData_Blinker">
 			<texPath>clear_explosive</texPath>
 			<graphicClass>Graphic_Single</graphicClass><shadowData>
 				<volume>(.35, 0.15, .7)</volume>
@@ -740,7 +756,6 @@ Detonate from the Remote Explosives Console.</description>
 		<building Class="RemoteExplosives.BuildingProperties_RemoteExplosive">
 			<isTrap>false</isTrap>
 			<explosiveType>Mining</explosiveType>
-			<blinkerIntervalLit>25</blinkerIntervalLit>
 		</building>
 		<placeWorkers>
 			<li>RemoteExplosives.PlaceWorker_MiningExplosiveSquare</li>
@@ -752,7 +767,7 @@ Detonate from the Remote Explosives Console.</description>
 		<defName>rxMiningChargeShaped</defName>
 		<label>shaped charge</label>
 		<description>A specialized explosive that focuses its power upwards to attempt to break thick overhead mountain roof. It must be applied from the edge of the thick roof to be effective.\n\nThe white overlay shows nearby mountain roof, while the area around the charge is its effective radius. A green outline indicates that the charge is properly placed and will successfully break through the roof.</description>
-		<graphicData>
+		<graphicData Class="RemoteExplosives.GraphicData_Blinker">
 			<texPath>shaped_charge</texPath>
 			<graphicClass>Graphic_Single</graphicClass>
 			<shadowData>
@@ -802,8 +817,6 @@ Detonate from the Remote Explosives Console.</description>
 		<building Class="RemoteExplosives.BuildingProperties_RemoteExplosive">
 			<isTrap>false</isTrap>
 			<explosiveType>Mining</explosiveType>
-			<blinkerOffset>(0, 0, .15)</blinkerOffset>
-			<blinkerIntervalLit>25</blinkerIntervalLit>
 		</building>
 		<researchPrerequisites><li>rxRoofBreaking</li></researchPrerequisites>
 		<drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>
@@ -819,7 +832,7 @@ Detonate from the Remote Explosives Console.</description>
 		<defName>rxRemoteFoamCanPlaced</defName>
 		<label>sealing foam can</label>
 		<thingClass>RemoteExplosives.Building_RemoteExplosive</thingClass>
-		<graphicData>
+		<graphicData Class="RemoteExplosives.GraphicData_Blinker">
 			<texPath>canister_foam</texPath>
 			<graphicClass>Graphic_Single</graphicClass>
 			<shadowData>
@@ -857,7 +870,7 @@ Arm, then detonate from the Remote Explosives Console.</description>
 		<defName>rxRemoteSleepingGasCanPlaced</defName>
 		<label>sleeping gas can</label>
 		<thingClass>RemoteExplosives.Building_RemoteExplosive</thingClass>
-		<graphicData>
+		<graphicData Class="RemoteExplosives.GraphicData_Blinker">
 			<texPath>canister_gas</texPath>
 			<graphicClass>Graphic_Single</graphicClass>
 			<shadowData>
@@ -896,7 +909,7 @@ Arm, then detonate from the Remote Explosives Console.</description>
 		<defName>rxRemoteRefinedSleepingGasCanPlaced</defName>
 		<label>refined sleeping gas can</label>
 		<thingClass>RemoteExplosives.Building_RemoteExplosive</thingClass>
-		<graphicData>
+		<graphicData Class="RemoteExplosives.GraphicData_Blinker">
 			<texPath>canister_gas_refined</texPath>
 			<graphicClass>Graphic_Single</graphicClass>
 			<shadowData>
