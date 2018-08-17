@@ -8,6 +8,8 @@ using Verse;
 namespace RemoteExplosives {
 	/// <summary>
 	/// Represents a node that can connect to other node-buildings in signal range and recursively form a network.
+	/// Requires the rxSignalRange stat to be set on the parent thing.
+	/// Also uses IWirelessDetonationReceiver when looking for receivers in range.
 	/// </summary>
 	public class CompWirelessDetonationGridNode : ThingComp {
 		public struct TransmitterReceiverPair {

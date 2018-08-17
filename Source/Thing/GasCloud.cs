@@ -17,6 +17,7 @@ namespace RemoteExplosives {
 		private const float DisplacingConcentrationFraction = .33f;
 
 		public delegate bool TraversibilityTest(Building b, GasCloud g);
+		// this can be used to inject open/closed behavior for
 		public static readonly Dictionary<Type, TraversibilityTest> TraversibleBuildings = new Dictionary<Type, TraversibilityTest> {
 			{typeof(Building_Vent), (d,g)=> true },
 			{typeof(Building_Door), (d,g)=> ((Building_Door)d).Open }
@@ -44,7 +45,7 @@ namespace RemoteExplosives {
 
 		//saved fields
 		private float concentration;
-		private int gasTicksProcessed;
+		protected int gasTicksProcessed;
 		//
 
 		public float Concentration {
@@ -151,6 +152,7 @@ namespace RemoteExplosives {
 		}
 
 		protected virtual void GasTick() {
+			if (!Spawned) return;
 			gasTicksProcessed++;
 			// dissipate
 			var underRoof = Map.roofGrid.Roofed(Position);
@@ -220,6 +222,7 @@ namespace RemoteExplosives {
 			adjacentBuffer.Clear();
 			for (int i = 0; i < 4; i++) {
 				var adjPosition = GenAdj.CardinalDirections[i] + Position;
+				if (!adjPosition.InBounds(Map)) continue;
 				var cloud = adjPosition.GetFirstThing(Map, def) as GasCloud;
 				if(cloud != null) {
 					adjacentBuffer.Add(cloud);
@@ -286,7 +289,7 @@ namespace RemoteExplosives {
 			var thingList = map.thingGrid.ThingsListAtFast(pos);
 			for (var i = 0; i < thingList.Count; i++) {
 				var thing = thingList[i];
-				// check for conditionally traversible buildings
+				// check for conditionally traversable buildings
 				var building = thing as Building;
 				if (building != null) {
 					TraversibilityTest travTest;
@@ -295,7 +298,7 @@ namespace RemoteExplosives {
 						return false;
 					}
 				}
-				// check for more concentrated gasses of a different def
+				// check for more concentrated gases of a different def
 				var cloud = thing as GasCloud;
 				if (cloud != null && cloud.def != sourceCloud.def && sourceCloud.concentration < cloud.concentration) {
 					return false;

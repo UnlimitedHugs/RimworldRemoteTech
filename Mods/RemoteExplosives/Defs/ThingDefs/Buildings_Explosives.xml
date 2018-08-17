@@ -63,7 +63,7 @@
 		<thingClass>RemoteExplosives.Building_DetonatorTable</thingClass>
 		<description>A transmitter to detonate armed explosives in range.
 Right-click with a drafted colonist for better timing.</description>
-		<graphicData Class="RemoteExplosives.SidedBaseGraphicData">
+		<graphicData Class="RemoteExplosives.GraphicData_SidedBase">
 			<texPath>detonator_table</texPath>
 			<graphicClass>RemoteExplosives.Graphic_SingleWithBase</graphicClass>
 			<shaderType>CutoutComplex</shaderType>
@@ -229,7 +229,7 @@ Right-click with a drafted colonist for better timing.</description>
 		<thingClass>Building_WorkTable</thingClass>
 		<description>An electric-powered station equipped for crafting remotely detonated explosives.
 Research different types of remote explosives to unlock available recipes.</description>
-		<graphicData Class="RemoteExplosives.SidedBaseGraphicData">
+		<graphicData Class="RemoteExplosives.GraphicData_SidedBase">
 			<texPath>explosives_crafting_bench</texPath>
 			<graphicClass>RemoteExplosives.Graphic_SingleWithBase</graphicClass>
 			<shaderType>CutoutComplex</shaderType>

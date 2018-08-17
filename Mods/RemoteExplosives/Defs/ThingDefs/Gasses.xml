@@ -17,7 +17,7 @@ Rapidly dissipates when under an open sky.</description>
 			<color>(204, 153, 255)</color>
 		</graphicData>
 		<altitudeLayer>MoteOverhead</altitudeLayer>
-		<mote Class="RemoteExplosives.MoteProperties_GasCloud_HediffGiver">
+		<mote Class="RemoteExplosives.MoteProperties_GasEffect">
 			<!-- game ticks between gas ticks --> 
 			<GastickInterval>25</GastickInterval>
 			<!-- gas will attempt to multiply every x gas ticks -->
@@ -40,12 +40,12 @@ Rapidly dissipates when under an open sky.</description>
 				<max>6</max>
 			</AnimationPeriod> 
 			
+			<affectsFleshy>true</affectsFleshy>
 			<hediffDef>rxSleepingGas</hediffDef>
 			<hediffSeverityPerGastick>
 				<min>0.005</min>
 				<max>0.010</max>
 			</hediffSeverityPerGastick>
-			<requiresFleshyPawn>true</requiresFleshyPawn>
 			<immunizingApparelDefs>
 				<li>rxApparel_GasMask</li>
 				<li>Apparel_PowerArmorHelmet</li>
@@ -64,11 +64,12 @@ Rapidly dissipates when under an open sky.</description>
 		<graphicData>
 			<color>(255, 102, 161)</color>
 		</graphicData>
-		<mote Class="RemoteExplosives.MoteProperties_GasCloud_HediffGiver">
+		<mote Class="RemoteExplosives.MoteProperties_GasEffect">
 			<hediffSeverityPerGastick>
 				<min>0.008</min>
 				<max>0.014</max>
 			</hediffSeverityPerGastick>
 		</mote>
-	</ThingDef>
+	</ThingDef>	
+	
 </Defs>

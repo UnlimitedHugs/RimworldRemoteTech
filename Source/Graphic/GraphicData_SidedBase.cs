@@ -3,7 +3,7 @@ using UnityEngine;
 using Verse;
 
 namespace RemoteExplosives {
-	public class SidedBaseGraphicData : GraphicData {
+	public class GraphicData_SidedBase : GraphicData {
 		public string baseFrontTexPath;
 		public string baseSideTexPath;
 		public Vector2 baseOffset;

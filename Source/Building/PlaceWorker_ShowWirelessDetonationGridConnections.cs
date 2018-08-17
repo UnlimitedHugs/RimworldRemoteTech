@@ -20,7 +20,7 @@ namespace RemoteExplosives {
 					if (link.CanTraverse || Time.realtimeSinceStartup % 1f > .5f) {
 						GenDraw.DrawLineBetween(parent1.TrueCenter(), parent2.TrueCenter(), linkColor);
 					}
-			}
+				}
 			}
 		}
 	}
