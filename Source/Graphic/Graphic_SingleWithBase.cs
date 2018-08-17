@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using HugsLib.Utils;
+using UnityEngine;
 using Verse;
 
 namespace RemoteExplosives {
@@ -18,6 +20,10 @@ namespace RemoteExplosives {
 				baseMatFront = MaterialPool.MatFrom(new MaterialRequest(baseData.BaseFrontTex, baseData.shaderType.Shader, baseData.color));
 				baseMatSide = MaterialPool.MatFrom(new MaterialRequest(baseData.BaseSideTex, baseData.shaderType.Shader, baseData.color));
 			}
+		}
+
+		public override Mesh MeshAt(Rot4 rot) {
+			return base.MeshAt(Rot4.North);
 		}
 
 		public override void DrawWorker(Vector3 loc, Rot4 rot, ThingDef thingDef, Thing thing, float extraRotation) {
