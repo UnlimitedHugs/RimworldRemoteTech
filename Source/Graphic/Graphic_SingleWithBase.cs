@@ -23,7 +23,7 @@ namespace RemoteExplosives {
 		}
 
 		public override Mesh MeshAt(Rot4 rot) {
-			return base.MeshAt(Rot4.North);
+			return base.MeshAt(Rot4.North); // fixes incorrect mesh orientation while vertical
 		}
 
 		public override void DrawWorker(Vector3 loc, Rot4 rot, ThingDef thingDef, Thing thing, float extraRotation) {
