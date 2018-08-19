@@ -15,15 +15,7 @@ namespace RemoteExplosives {
 		}
 
 		public void DrawGhostForSelected(Thing thing) {
-			var node = (thing as ThingWithComps)?.GetComp<CompWirelessDetonationGridNode>();
-			if (node != null) {
-				GenDraw.DrawRadiusRing(thing.Position, node.Radius);
-				foreach (var receiver in node.FindReceiversInNodeRange()) {
-					// highlight explosives in range
-					var drawPos = receiver.Position.ToVector3ShiftedWithAltitude(AltitudeLayer.MetaOverlays);
-					Graphics.DrawMesh(MeshPool.plane10, drawPos, Quaternion.identity, GenDraw.InteractionCellMaterial, 0);
-				}
-			}
+			(thing as ThingWithComps)?.GetComp<CompWirelessDetonationGridNode>()?.DrawRadiusRing();
 		}
 	}
 }

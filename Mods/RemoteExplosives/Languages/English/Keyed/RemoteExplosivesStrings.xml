@@ -42,8 +42,8 @@
 	
 	<HediffRecovery_status_label>recovering</HediffRecovery_status_label>
 	
-	<PortableDetonator_detonate_label>Detonate explosives</PortableDetonator_detonate_label>
-	<PortableDetonator_detonate_desc>Detonates all armed explosives in range on channel 1.</PortableDetonator_detonate_desc>
+	<PortableDetonator_detonateChannel_label>Detonate (channel {0})</PortableDetonator_detonateChannel_label>
+	<PortableDetonator_detonateChannel_desc>Detonates all armed explosives in range on the current channel or on channel 1 if not upgraded.</PortableDetonator_detonateChannel_desc>
 	<PortableDetonator_detonate_uses>Uses left: {0}</PortableDetonator_detonate_uses>
 	<PortableDetonator_broke_msg>The Portable Detonator ran out of battery power.</PortableDetonator_broke_msg>
 	
@@ -89,4 +89,5 @@
 	<Upgrade_deliveredIngredients>Stored things: {0}</Upgrade_deliveredIngredients>
 	<Upgrade_installedUpgrades>Installed upgrades: </Upgrade_installedUpgrades>
 	<Upgrade_missingMaterials>need {0}x {1}</Upgrade_missingMaterials>
+	<Upgrade_uneqip_message>Remove from inventory to upgrade.</Upgrade_uneqip_message>
 </LanguageData>

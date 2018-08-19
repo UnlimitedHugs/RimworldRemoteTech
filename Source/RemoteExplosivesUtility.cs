@@ -56,12 +56,12 @@ namespace RemoteExplosives {
 			if (comp == null) throw new Exception("Missing CompWirelessDetonationGridNode on sender");
 			var sample = comp.FindReceiversInNetworkRange().Where(pair => pair.Receiver.CurrentChannel == channel);
 			// closer ones to their transmitters will go off first. This is used to simulate a bit of signal delay
-			var sortedByDistance = sample.OrderBy(pair => pair.Transmitter.parent.Position.DistanceToSquared(pair.Receiver.Position)).Select(pair => pair.Receiver);
+			var sortedByDistance = sample.OrderBy(pair => pair.Transmitter.Position.DistanceToSquared(pair.Receiver.Position)).Select(pair => pair.Receiver);
 			int counter = 0;
 			foreach (var receiver in sortedByDistance) {
 				HugsLibController.Instance.TickDelayScheduler.ScheduleCallback(() => {
 					if (receiver.CanReceiveSignal) receiver.ReceiveSignal(origin);
-				}, TicksBetweenTriggers * 10 * counter++, origin);
+				}, TicksBetweenTriggers * counter++, GetHighestHolderInMap(origin));
 			}
 			if(counter == 0) Messages.Message("Detonator_notargets".Translate(), MessageTypeDefOf.RejectInput);
 		}
@@ -203,8 +203,17 @@ namespace RemoteExplosives {
 			Graphics.DrawMesh(MeshPool.plane10, matrix, material, 0);
 		}
 
-		private static bool TileIsInRange(IntVec3 tile1, IntVec3 tile2, float maxDistance) {
-			return Mathf.Sqrt(Mathf.Pow(tile1.x - tile2.x, 2) + Mathf.Pow(tile1.z - tile2.z, 2)) <= maxDistance;
+		public static Thing GetHighestHolderInMap(Thing heldThing) {
+			// step upwards through containers until we can get a valid root thing for inventory items, etc.
+			var rootHeld = heldThing as IThingHolder;
+			var rootHolder = heldThing.ParentHolder;
+			var lastSeenThing = heldThing;
+			while (rootHolder != null && !(rootHolder is Map)) {
+				rootHeld = rootHolder;
+				if (rootHeld is Thing t) lastSeenThing = t;
+				rootHolder = rootHeld.ParentHolder;
+			}
+			return lastSeenThing;
 		}
 	}
 }

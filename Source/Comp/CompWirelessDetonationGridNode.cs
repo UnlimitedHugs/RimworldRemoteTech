@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using HugsLib.Utils;
 using RimWorld;
 using UnityEngine;
 using Verse;
@@ -78,6 +79,10 @@ namespace RemoteExplosives {
 			get { return parent.GetStatValue(Resources.Stat.rxSignalRange); }
 		}
 
+		public IntVec3 Position {
+			get { return RemoteExplosivesUtility.GetHighestHolderInMap(parent).Position; }
+		}
+
 		private CompPowerTrader powerComp;
 		private int lastRecacheTick;
 		private int lastGlobalRecacheId;
@@ -113,9 +118,10 @@ namespace RemoteExplosives {
 				}
 			}
 			// for each receiver pick the closest transmitter
+			var ownPos = Position;
 			return receivers.Select(r => {
 				var closest = transmitters.Select(t => 
-						new KeyValuePair<CompWirelessDetonationGridNode, float>(t, t.parent.Position.DistanceToSquared(r.Position))
+					new KeyValuePair<CompWirelessDetonationGridNode, float>(t, ownPos.DistanceToSquared(r.Position))
 				).Aggregate((min, pair) => min.Value == 0 || pair.Value < min.Value ? pair : min);
 				return new TransmitterReceiverPair(closest.Key, r);
 			});
@@ -126,9 +132,11 @@ namespace RemoteExplosives {
 		public IEnumerable<IWirelessDetonationReceiver> FindReceiversInNodeRange() {
 			if (!CanTransmit) yield break;
 			float radius = Radius;
-			var sample = parent.Map.listerBuildings.allBuildingsColonist;
+			var map = ThingOwnerUtility.GetRootMap(parent.ParentHolder);
+			var sample = map.listerBuildings.allBuildingsColonist;
+			var ownPos = Position;
 			foreach (var building in sample) {
-				if (building.Position.DistanceTo(parent.Position) > radius) continue;
+				if (building.Position.DistanceTo(ownPos) > radius) continue;
 				if (building is IWirelessDetonationReceiver br) {
 					yield return br;
 				} else {
@@ -180,11 +188,34 @@ namespace RemoteExplosives {
 			}
 		}
 
+		public void DrawNetworkLinks() {
+			foreach (var link in GetAllNetworkLinks()) {
+				IntVec3 pos1 = link.First.Position, pos2 = link.Second.Position;
+				var linkColor = link.CanTraverse ? SimpleColor.White : SimpleColor.Red;
+				if (link.CanTraverse || Time.realtimeSinceStartup % 1f > .5f) {
+					GenDraw.DrawLineBetween(pos1.ToVector3Shifted(), pos2.ToVector3Shifted(), linkColor);
+				}
+			}
+		}
+
+		public void DrawRadiusRing() {
+			var radius = Radius;
+			if (radius <= GenRadial.MaxRadialPatternRadius) {
+				var ownPos = Position;
+				GenDraw.DrawRadiusRing(ownPos, radius);
+				foreach (var receiver in FindReceiversInNodeRange()) {
+					// highlight explosives in range
+					var drawPos = receiver.Position.ToVector3ShiftedWithAltitude(AltitudeLayer.MetaOverlays);
+					Graphics.DrawMesh(MeshPool.plane10, drawPos, Quaternion.identity, GenDraw.InteractionCellMaterial, 0);
+				}
+			}
+		}
+
 		private void RecacheAdjacentNodesIfNeeded() {
 			if (lastRecacheTick + UpdateAdjacentNodesEveryTicks <= Find.TickManager.TicksGame || globalRecacheId != lastGlobalRecacheId) {
 				lastGlobalRecacheId = globalRecacheId;
-				var map = parent.Map;
-				var center = parent.Position;
+				var map = ThingOwnerUtility.GetRootMap(parent.ParentHolder);
+				var center = Position;
 				var radius = Radius;
 				adjacentNodes = adjacentNodes ?? new List<CompWirelessDetonationGridNode>();
 				adjacentNodes.Clear();

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Defs>
+
 	<StatDef Name="rxBaseMiscStat" Abstract="True">
 		<category>rxExplosives</category>
 		<defaultBaseValue>0.0</defaultBaseValue>
@@ -15,7 +16,7 @@
 		<maxValue>1</maxValue>
 		<minValue>0</minValue>
 	</StatDef>
-	
+
 	<StatDef ParentName="rxBaseMiscStat">
 		<defName>rxExplosiveMiningYield</defName>
 		<label>mining yield</label>
@@ -42,7 +43,7 @@
 		<toStringStyle>FloatMaxOne</toStringStyle>
 		<defaultBaseValue>0</defaultBaseValue>
 	</StatDef>
-	
+
 	<StatDef ParentName="rxBaseMiscStat">
 		<defName>rxSignalRange</defName>
 		<label>detonator signal range</label>
@@ -50,5 +51,17 @@
 		<category>Building</category>
 		<toStringStyle>FloatMaxOne</toStringStyle>
 		<defaultBaseValue>0</defaultBaseValue>
+		<parts>
+			<li Class="StatPart_Quality">
+				<factorAwful>0.65</factorAwful>
+				<factorPoor>0.9</factorPoor>
+				<factorNormal>1</factorNormal>
+				<factorGood>1.05</factorGood>
+				<factorExcellent>1.15</factorExcellent>
+				<factorMasterwork>1.2</factorMasterwork>
+				<factorLegendary>1.25</factorLegendary>
+			</li>
+		</parts>
 	</StatDef>
+
 </Defs>

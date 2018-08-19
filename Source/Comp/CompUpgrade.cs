@@ -86,6 +86,10 @@ namespace RemoteExplosives {
 							CompleteUpgrade();
 							return;
 						}
+						if (!wantsWork && !(parent.ParentHolder is Map)) {
+							Messages.Message("Upgrade_uneqip_message".Translate(), parent, MessageTypeDefOf.RejectInput);
+							return;
+						}
 						wantsWork = !wantsWork;
 						if (!wantsWork) ingredients.TryDropAll(parent.Position, parent.Map, ThingPlaceMode.Near);
 						UpdateDesignation();
@@ -183,6 +187,7 @@ namespace RemoteExplosives {
 		}
 
 		private void UpdateDesignation() {
+			if (parent.Map == null) return;
 			var anyWantsWork = parent.AllComps.OfType<CompUpgrade>().Any(c => c.WantsWork);
 			parent.ToggleDesignation(Resources.Designation.rxInstallUpgrade, anyWantsWork);
 		}

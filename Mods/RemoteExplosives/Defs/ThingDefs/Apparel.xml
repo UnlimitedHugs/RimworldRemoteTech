@@ -119,8 +119,8 @@ The filters wear out fairly quickly, so it's recommended to wear this only when 
 		<defName>rxApparel_PortableDetonator</defName>
 		<thingClass>RemoteExplosives.PortableDetonator</thingClass>
 		<label>portable remote detonator</label>
-		<description>A portable version of the detonator table for triggering remote explosives.
-Works only on channel 1, has limited range and runs on a non-rechargeable battery- but hey, you can almost fit it in your pocket. Almost.</description>
+		<description>A portable version of the detonator table for triggering remote explosives. Has limited range and runs on a non-rechargeable battery- but hey, you can almost fit it in your pocket. Almost.
+Works only on channel 1, but can be upgraded once channels have been researched. Unequip to upgrade.</description>
 		<graphicData>
 			<texPath>detonator_portable</texPath>
 			<graphicClass>Graphic_Single</graphicClass>
@@ -129,8 +129,8 @@ Works only on channel 1, has limited range and runs on a non-rechargeable batter
 			<WorkToMake>3000</WorkToMake>
 			<MaxHitPoints>80</MaxHitPoints>
 			<MarketValue>300</MarketValue>
-			<rxPortableDetonatorRange>18</rxPortableDetonatorRange>
 			<rxPortableDetonatorNumUses>20</rxPortableDetonatorNumUses>
+			<rxSignalRange>18</rxSignalRange>
 			<Mass>1</Mass>
 		</statBases>
 		<generateCommonality>0.00001</generateCommonality>
@@ -165,6 +165,16 @@ Works only on channel 1, has limited range and runs on a non-rechargeable batter
 		<comps>
 			<li Class="RemoteExplosives.CompProperties_WirelessDetonationGridNode">
 				<endpoint>true</endpoint>
+			</li>
+			<li Class="RemoteExplosives.CompProperties_Upgrade">
+				<label>Basic channels</label>
+				<referenceId>ChannelsBasic</referenceId>
+				<workAmount>1000</workAmount>
+				<effectDescription>Enables the detonator to trigger explosives on 3 separate channels.</effectDescription>
+				<researchPrerequisite>rxChannels</researchPrerequisite>
+				<costList>
+					<ComponentIndustrial>1</ComponentIndustrial>
+				</costList>
 			</li>
 		</comps>
 	</ThingDef>
