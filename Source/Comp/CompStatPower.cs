@@ -8,7 +8,7 @@ namespace RemoteExplosives {
 	public class CompStatPower : CompPowerTrader {
 		private const int UpdateEveryTicks = 30;
 
-		private float StatPowerConsumption {
+		protected virtual float PowerConsumption {
 			get { return parent.GetStatValue(Resources.Stat.rxPowerConsumption); }
 		}
 
@@ -25,7 +25,7 @@ namespace RemoteExplosives {
 		public override void SetUpPowerVars() {
 			// allows the comp to switch from consumer to producer
 			var prevDefValue = Props.basePowerConsumption;
-			Props.basePowerConsumption = StatPowerConsumption;
+			Props.basePowerConsumption = PowerConsumption;
 			base.SetUpPowerVars();
 			Props.basePowerConsumption = prevDefValue;
 		}

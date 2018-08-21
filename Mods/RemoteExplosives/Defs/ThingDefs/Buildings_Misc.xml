@@ -244,6 +244,8 @@ Tip: switches can be used to toggle vents remotely, as well as in groups.</descr
 			<WorkToBuild>2000</WorkToBuild>
 			<Flammability>0.8</Flammability>
 			<Beauty>-3</Beauty>
+			<rxPowerConsumption>50</rxPowerConsumption>
+			<rxVentingPower>1350</rxVentingPower>
 		</statBases>
 		<tickerType>Normal</tickerType>
 		<size>(1,1)</size>
@@ -251,17 +253,38 @@ Tip: switches can be used to toggle vents remotely, as well as in groups.</descr
 		<passability>Impassable</passability>
 		<building Class="RemoteExplosives.BuildingProperties_GasVent">
 			<heatExchangedPerSecond>0.0672</heatExchangedPerSecond>
-			<gasPushedPerSecond>1350</gasPushedPerSecond>
 			<canPlaceOverWall>true</canPlaceOverWall>
 		</building>
 		<comps>
 			<li Class="CompProperties_Power">
-				<compClass>CompPowerTrader</compClass>
+				<compClass>RemoteExplosives.CompStatPowerIdle</compClass>
 				<shortCircuitInRain>false</shortCircuitInRain>
-				<basePowerConsumption>50</basePowerConsumption>
 			</li>
 			<li Class="CompProperties_Flickable"/>
 			<li Class="CompProperties_Breakdownable"/>
+			<li Class="RemoteExplosives.CompProperties_Upgrade">
+				<label>High-power fans</label>
+				<referenceId>PowerFans</referenceId>
+				<workAmount>1500</workAmount>
+				<statModifiers>
+					<rxVentingPower>2</rxVentingPower>
+					<rxPowerConsumption>2</rxPowerConsumption>
+					<Beauty>10</Beauty>
+				</statModifiers>
+				<costList>
+					<ComponentIndustrial>2</ComponentIndustrial>
+					<Steel>60</Steel>
+				</costList>
+			</li>
+			<li Class="RemoteExplosives.CompProperties_Upgrade">
+				<label>Idle power relay</label>
+				<referenceId>IdlePower</referenceId>
+				<workAmount>1000</workAmount>
+				<effectDescription>The vent will draw very little power when no gas needs to be moved.</effectDescription>
+				<costList>
+					<ComponentIndustrial>2</ComponentIndustrial>
+				</costList>
+			</li>
 		</comps>
 		<placeWorkers>
 			<li>RemoteExplosives.PlaceWorker_GasVent</li>
@@ -291,7 +314,7 @@ Tip: switches can be used to toggle vents remotely, as well as in groups.</descr
 				<cornerBR>Damage/Corner</cornerBR>
 			</damageData>
 		</graphicData>
-		<castEdgeShadows>false</castEdgeShadows>
+		<castEdgeShadows>true</castEdgeShadows>
 		<rotatable>false</rotatable>
 		<altitudeLayer>Building</altitudeLayer>
 		<passability>PassThroughOnly</passability>

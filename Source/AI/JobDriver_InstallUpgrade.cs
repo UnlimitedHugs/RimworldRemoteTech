@@ -50,9 +50,7 @@ namespace RemoteExplosives {
 			yield return new Toil {
 				initAction = () => {
 					if (pawn.carryTracker.CarriedThing != null) {
-						if (pawn.carryTracker.innerContainer.TryTransferToContainer(pawn.carryTracker.CarriedThing, upgrade.GetDirectlyHeldThings(), pawn.carryTracker.CarriedThing.stackCount) <= 0) {
-							pawn.carryTracker.TryDropCarriedThing(pawn.Position, ThingPlaceMode.Near, out Thing _);
-						}
+						pawn.carryTracker.innerContainer.TryTransferToContainer(pawn.carryTracker.CarriedThing, upgrade.GetDirectlyHeldThings(), pawn.carryTracker.CarriedThing.stackCount);
 						pawn.Map.reservationManager.ReleaseAllForTarget(TargetThingB);
 						job.SetTarget(TargetIndex.B, null);
 						JumpToToil(lookForIngredient);

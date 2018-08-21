@@ -71,6 +71,7 @@ namespace RemoteExplosives {
 		private void ChannelGizmoAction(int selectedChannel) {
 			currentChannel = selectedChannel;
 			UpdateArmedExplosivesInRange();
+			RemoteExplosivesUtility.ReportPowerUse(this, 2f);
 		}
 
 		public bool UseInteractionCell {
@@ -88,12 +89,9 @@ namespace RemoteExplosives {
 				PlayNeedPowerEffect();
 				return;
 			}
+			RemoteExplosivesUtility.ReportPowerUse(this, 20f);
 			SoundDefOf.FlickSwitch.PlayOneShot(this);
 			RemoteExplosivesUtility.LightArmedExplosivesInNetworkRange(this, currentChannel);
-		}
-
-		private float SignalRange {
-			get { return this.GetStatValue(Resources.Stat.rxSignalRange); }
 		}
 
 		private void PlayNeedPowerEffect() {

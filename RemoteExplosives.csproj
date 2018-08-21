@@ -78,11 +78,13 @@
     <Compile Include="Source\Comp\CompProperties_WirelessDetonationGridNode.cs" />
     <Compile Include="Source\Comp\CompStatBattery.cs" />
     <Compile Include="Source\Comp\CompStatPower.cs" />
+    <Compile Include="Source\Comp\CompStatPowerIdle.cs" />
     <Compile Include="Source\Comp\CompStatSolarGenerator.cs" />
     <Compile Include="Source\Comp\CompUpgrade.cs" />
     <Compile Include="Source\Comp\CompWiredDetonationCrossing.cs" />
     <Compile Include="Source\Comp\CompWirelessDetonationGridNode.cs" />
     <Compile Include="Source\Comp\IBatteryPropsProvider.cs" />
+    <Compile Include="Source\Comp\IPowerUseNotified.cs" />
     <Compile Include="Source\Comp\StatPart_Upgradeable.cs" />
     <Compile Include="Source\Utils\CachedValue.cs" />
     <Compile Include="Source\Utils\CustomFactionGoodwillCaps.cs" />

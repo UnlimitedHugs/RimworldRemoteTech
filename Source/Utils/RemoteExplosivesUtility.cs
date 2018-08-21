@@ -215,5 +215,11 @@ namespace RemoteExplosives {
 			}
 			return lastSeenThing;
 		}
+
+		public static void ReportPowerUse(ThingWithComps thing, float duration = 1f) {
+			for (var i = 0; i < thing.AllComps.Count; i++) {
+				if(thing.AllComps[i] is IPowerUseNotified comp) comp.ReportPowerUse(duration);
+			}
+		}
 	}
 }

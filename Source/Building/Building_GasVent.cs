@@ -1,4 +1,5 @@
-﻿using RimWorld;
+﻿using System.Text;
+using RimWorld;
 using UnityEngine;
 using Verse;
 
@@ -15,9 +16,14 @@ namespace RemoteExplosives {
 		private bool roomsAreValid;
 		private float moveBuffer;
 		private BuildingProperties_GasVent ventProps;
+		private CachedValue<float> statVentAmount;
 
 		private bool PowerOn {
 			get { return powerComp == null || powerComp.PowerOn; }
+		}
+
+		public Building_GasVent() {
+			statVentAmount = new CachedValue<float>(() => this.GetStatValue(Resources.Stat.rxVentingPower));
 		}
 
 		public override void SpawnSetup(Map map, bool respawningAfterLoad) {
@@ -40,8 +46,9 @@ namespace RemoteExplosives {
 			if (roomsAreValid) {
 				var sourceCloud = RemoteExplosivesUtility.TryFindGasCloudAt(Map, sourceCell);
 				if (sourceCloud != null) {
+					RemoteExplosivesUtility.ReportPowerUse(this);
 					// move only whole units of concentration
-					moveBuffer += Mathf.Min(sourceCloud.Concentration - MinSourceConcentration, ventProps.gasPushedPerSecond / GenTicks.TicksPerRealSecond);
+					moveBuffer += Mathf.Min(sourceCloud.Concentration - MinSourceConcentration, statVentAmount / GenTicks.TicksPerRealSecond);
 					if (moveBuffer > 1) {
 						var moveAmount = Mathf.FloorToInt(moveBuffer);
 						RemoteExplosivesUtility.DeployGas(Map, targetCell, sourceCloud.def, moveAmount);
@@ -83,13 +90,20 @@ namespace RemoteExplosives {
 			}
 		}
 
+		protected override void ReceiveCompSignal(string signal) {
+			base.ReceiveCompSignal(signal);
+			statVentAmount.Recache();
+		}
+
 		public override string GetInspectString() {
-			var str = base.GetInspectString();
+			var str = new StringBuilder(base.GetInspectString());
+			str.AppendLine();
+			str.Append("GasVent_ventedPerSecond".Translate(statVentAmount.Value));
 			if (!roomsAreValid) {
-				if (str.Length > 0) str += "\n";
-				str += "GasVent_blocked".Translate();
+				str.AppendLine();	
+				str.Append("GasVent_blocked".Translate());
 			}
-			return str;
+			return str.ToString();
 		}
 
 		private void ValidateRooms() {

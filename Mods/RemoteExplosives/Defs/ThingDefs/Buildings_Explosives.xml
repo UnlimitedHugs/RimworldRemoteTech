@@ -110,7 +110,7 @@ Right-click with a drafted colonist for better timing.</description>
 		<drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>
 		<comps>
 			<li Class="CompProperties_Power">
-				<compClass>RemoteExplosives.CompStatPower</compClass>
+				<compClass>RemoteExplosives.CompStatPowerIdle</compClass>
 				<shortCircuitInRain>false</shortCircuitInRain>
 			</li>
 			<li Class="CompProperties_Flickable"/>
@@ -140,19 +140,12 @@ Right-click with a drafted colonist for better timing.</description>
 				</costList>
 			</li>
 			<li Class="RemoteExplosives.CompProperties_Upgrade">
-				<label>Built-in power</label>
-				<referenceId>AutonomousPower</referenceId>
-				<workAmount>2500</workAmount>
-				<effectDescription>Makes the detonator fully independent from the power grid by powering it with a built-in RTG cell.</effectDescription>
-				<researchPrerequisite>MicroelectronicsBasics</researchPrerequisite>
-				<statModifiers>
-					<Mass>2</Mass>
-					<rxPowerConsumption>0</rxPowerConsumption>
-				</statModifiers>
+				<label>Idle power relay</label>
+				<referenceId>IdlePower</referenceId>
+				<workAmount>1000</workAmount>
+				<effectDescription>The detonator will consume very little power when not in use.</effectDescription>
 				<costList>
-					<Uranium>50</Uranium>
-					<Plasteel>30</Plasteel>
-					<Steel>50</Steel>
+					<ComponentIndustrial>4</ComponentIndustrial>
 				</costList>
 			</li>
 		</comps>
@@ -275,6 +268,8 @@ Research different types of remote explosives to unlock available recipes.</desc
 			<Flammability>1.0</Flammability>
 			<Cleanliness>-3</Cleanliness>
 			<Mass>50</Mass>
+			<WorkTableWorkSpeedFactor>1</WorkTableWorkSpeedFactor>
+			<rxPowerConsumption>180</rxPowerConsumption>
 		</statBases>
 		<size>(3,1)</size>
 		<terrainAffordanceNeeded>Heavy</terrainAffordanceNeeded>
@@ -289,17 +284,39 @@ Research different types of remote explosives to unlock available recipes.</desc
 		</inspectorTabs>
 		<building>
 		</building>
+		<tickerType>Normal</tickerType>
 		<comps>
 			<li Class="CompProperties_Power">
-				<compClass>CompPowerTrader</compClass>
+				<compClass>RemoteExplosives.CompStatPowerIdle</compClass>
 				<shortCircuitInRain>true</shortCircuitInRain>
-				<basePowerConsumption>180</basePowerConsumption>
 			</li>
 			<li Class="CompProperties_Flickable"/>
 			<li Class="CompProperties_AffectedByFacilities">
 				<linkableFacilities>
 					<li>ToolCabinet</li>
 				</linkableFacilities>
+			</li>
+			<li Class="RemoteExplosives.CompProperties_Upgrade">
+				<label>Idle power relay</label>
+				<referenceId>IdlePower</referenceId>
+				<workAmount>1000</workAmount>
+				<effectDescription>The workbench will consume very little power when not in use.</effectDescription>
+				<costList>
+					<ComponentIndustrial>2</ComponentIndustrial>
+				</costList>
+			</li>
+			<li Class="RemoteExplosives.CompProperties_Upgrade">
+				<label>High-quality tools</label>
+				<referenceId>FasterProduction</referenceId>
+				<workAmount>10000</workAmount>
+				<effectDescription>Boost production speed by 25% by making harder and more precise tools.</effectDescription>
+				<statModifiers>
+					<WorkTableWorkSpeedFactor>1.25</WorkTableWorkSpeedFactor>
+				</statModifiers>
+				<costList>
+					<ComponentSpacer>2</ComponentSpacer>
+					<Plasteel>40</Plasteel>
+				</costList>
 			</li>
 		</comps>
 		<placeWorkers>

@@ -79,6 +79,7 @@ namespace RemoteExplosives {
 			public static StatDef rxSignalRange;
 			public static StatDef rxSunExposure;
 			public static StatDef rxPowerCapacity;
+			public static StatDef rxVentingPower;
 		}
 
 		[DefOf]

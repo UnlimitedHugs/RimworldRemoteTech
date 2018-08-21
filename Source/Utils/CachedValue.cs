@@ -15,20 +15,22 @@ namespace RemoteExplosives {
 		private readonly Func<T> valueGetter;
 		private readonly int recacheIntervalTicks;
 		private int cachedTick;
+		private int tickOffset;
 		private T cachedValue;
 
-		public CachedValue(Func<T> valueGetter, int recacheIntervalTicks = GenTicks.TicksPerRealSecond) {
+		public CachedValue(Func<T> valueGetter, int recacheIntervalTicks = GenTicks.TicksPerRealSecond, bool useTickOffset = true) {
 			this.valueGetter = valueGetter;
 			this.recacheIntervalTicks = recacheIntervalTicks;
 			cachedTick = int.MinValue;
 			cachedValue = default(T);
+			if (useTickOffset) tickOffset = Rand.Range(0, recacheIntervalTicks);
 		}
 
 		public T Value {
 			get {
 				if(!IsValid) throw new InvalidOperationException($"{nameof(CachedValue<T>)} cannot get Value: not initialized");
 				var currentTick = GenTicks.TicksGame;
-				if (cachedTick + recacheIntervalTicks < currentTick) Recache();
+				if (cachedTick + recacheIntervalTicks - tickOffset < currentTick) Recache();
 				return cachedValue;
 			}
 		}
