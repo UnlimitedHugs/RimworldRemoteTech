@@ -207,7 +207,8 @@ Right-click with a drafted colonist for better timing.</description>
 		<useHitPoints>True</useHitPoints>
 		<size>(1,2)</size>
 		<terrainAffordanceNeeded>Heavy</terrainAffordanceNeeded>
-		<passability>Impassable</passability>
+		<passability>PassThroughOnly</passability>
+		<pathCost>100</pathCost>
 		<comps>
 			<li Class="CompProperties_Power">
 				<compClass>RemoteExplosives.CompStatPower</compClass>

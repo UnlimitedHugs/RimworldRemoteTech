@@ -3,7 +3,7 @@
 	
 	<DesignationCategoryDef>
 		<defName>rxRemoteExplosives</defName>
-		<label>rxExplosives</label>
+		<label>Explosives</label>
 		<description>Things for blowing up other things.</description>
 		<order>10</order>
 		<specialDesignatorClasses>

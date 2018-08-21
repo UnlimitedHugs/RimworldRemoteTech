@@ -77,6 +77,8 @@ namespace RemoteExplosives {
 			public static StatDef rxExplosiveWoodYield;
 			public static StatDef rxPowerConsumption;
 			public static StatDef rxSignalRange;
+			public static StatDef rxSunExposure;
+			public static StatDef rxPowerCapacity;
 		}
 
 		[DefOf]
@@ -88,6 +90,12 @@ namespace RemoteExplosives {
 		[DefOf]
 		public static class ThingCategory {
 			public static ThingCategoryDef rxExplosives;
+		}
+
+		[StaticConstructorOnStartup]
+		public static class Materials {
+			public static readonly Material BatteryBarFilledMat = SolidColorMaterials.SimpleSolidColorMaterial(new Color(0.9f, 0.85f, 0.2f));
+			public static readonly Material BatteryBarUnfilledMat = SolidColorMaterials.SimpleSolidColorMaterial(new Color(0.3f, 0.3f, 0.3f));
 		}
 
 		[StaticConstructorOnStartup]

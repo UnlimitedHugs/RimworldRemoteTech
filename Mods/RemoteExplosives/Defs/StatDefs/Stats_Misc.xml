@@ -64,4 +64,24 @@
 		</parts>
 	</StatDef>
 
+	<StatDef ParentName="rxBaseMiscStat">
+		<defName>rxSunExposure</defName>
+		<label>sun exposure</label>
+		<description>The amount of sunlight this solar panel receives. Boosts power production in the morning and evening hours.</description>
+		<category>Building</category>
+		<toStringStyle>PercentZero</toStringStyle>
+		<defaultBaseValue>1</defaultBaseValue>
+		<minValue>0</minValue>
+	</StatDef>
+	
+	<StatDef ParentName="rxBaseMiscStat">
+		<defName>rxPowerCapacity</defName>
+		<label>power capacity</label>
+		<description>The amount of power this battery can store.</description>
+		<category>Building</category>
+		<toStringStyle>FloatMaxOne</toStringStyle>
+		<defaultBaseValue>0</defaultBaseValue>
+		<minValue>0</minValue>
+	</StatDef>
+	
 </Defs>

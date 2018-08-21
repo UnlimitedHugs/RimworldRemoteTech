@@ -127,7 +127,7 @@
 			</li>
 		</damageMultipliers>
 	</ThingDef>
-	
+
 	<ThingDef ParentName="rxFoamWallBase">
 		<defName>rxFoamWall</defName>
 		<label>hardened foam wall</label>
@@ -146,7 +146,7 @@
 			</smoothVariants>
 		</building>
 	</ThingDef>
-	
+
 	<ThingDef ParentName="rxFoamWallBase">
 		<defName>rxFoamWallSmooth</defName>
 		<label>smooth foam wall</label>
@@ -170,7 +170,7 @@
 			<Beauty>0</Beauty>
 		</statBases>
 	</ThingDef>
-	
+
 	<ThingDef>
 		<defName>rxCollapsedRoofRocks</defName>
 		<graphicData>
@@ -212,7 +212,7 @@
 			<claimable>false</claimable>
 		</building>
 	</ThingDef>
-	
+
 	<ThingDef ParentName="rxBuildingMiscBase">
 		<defName>rxGasVent</defName>
 		<label>gas vent</label>
@@ -271,5 +271,101 @@ Tip: switches can be used to toggle vents remotely, as well as in groups.</descr
 			<li>rxGasVent</li>
 		</researchPrerequisites>
 	</ThingDef>
-	
+
+	<ThingDef ParentName="BuildingBase">
+		<defName>rxPowerUnit</defName>
+		<label>portable power unit</label>
+		<description>High-tech solar panels combined with a battery bank. Lightweight and weatherproof- a great choice for camping trips and powering things in the field. The battery will retain its charge when uninstalled. The bar shows the charge level of the battery.</description>
+		<thingClass>Building</thingClass>
+		<graphicData>
+			<texPath>power_unit</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<drawSize>(2,2)</drawSize>
+			<shadowData>
+				<volume>(1.5,0.5,1.5)</volume>
+			</shadowData>
+			<damageData>
+				<cornerTL>Damage/Corner</cornerTL>
+				<cornerTR>Damage/Corner</cornerTR>
+				<cornerBL>Damage/Corner</cornerBL>
+				<cornerBR>Damage/Corner</cornerBR>
+			</damageData>
+		</graphicData>
+		<castEdgeShadows>false</castEdgeShadows>
+		<rotatable>false</rotatable>
+		<altitudeLayer>Building</altitudeLayer>
+		<passability>PassThroughOnly</passability>
+		<pathCost>70</pathCost>
+		<fillPercent>0.5</fillPercent>
+		<statBases>
+			<MaxHitPoints>200</MaxHitPoints>
+			<WorkToBuild>2500</WorkToBuild>
+			<Flammability>0.7</Flammability>
+			<Mass>10</Mass>
+			<Beauty>-10</Beauty>
+			<rxPowerConsumption>-800</rxPowerConsumption>
+			<rxSunExposure>1</rxSunExposure>
+			<rxPowerCapacity>300</rxPowerCapacity>
+		</statBases>
+		<minifiedDef>MinifiedThing</minifiedDef>
+	    <thingCategories>
+			<li>BuildingsPower</li>
+		</thingCategories>
+		<tickerType>Normal</tickerType>
+		<size>(2,2)</size>
+		<costList>
+			<Steel>40</Steel>
+			<Silver>10</Silver>
+			<ComponentIndustrial>2</ComponentIndustrial>
+			<ComponentSpacer>1</ComponentSpacer>
+		</costList>
+		<comps>
+			<li Class="CompProperties_Power">
+				<compClass>RemoteExplosives.CompStatSolarGenerator</compClass>
+				<transmitsPower>true</transmitsPower>
+			</li>
+			<li Class="RemoteExplosives.CompProperties_BatteryWithBar">
+				<efficiency>0.5</efficiency>
+				<shortCircuitInRain>false</shortCircuitInRain>
+				<transmitsPower>true</transmitsPower>
+				<passiveDischargeWatts>2.5</passiveDischargeWatts>
+				<barSize>(1.32, 0.046)</barSize>
+				<barMargin>0.015</barMargin>
+			</li>
+			<li Class="CompProperties_Breakdownable"/>
+			<li Class="RemoteExplosives.CompProperties_Upgrade">
+				<label>Bigger battery</label>
+				<referenceId>BiggerBattery</referenceId>
+				<workAmount>1500</workAmount>
+				<statModifiers>
+					<rxPowerCapacity>1.75</rxPowerCapacity>
+					<Mass>1.5</Mass>
+				</statModifiers>
+				<costList>
+					<ComponentIndustrial>3</ComponentIndustrial>
+				</costList>
+			</li>			
+			<li Class="RemoteExplosives.CompProperties_Upgrade">
+				<label>Tracking motors</label>
+				<referenceId>MoreSunExposure</referenceId>
+				<workAmount>2000</workAmount>
+				<statModifiers>
+					<rxSunExposure>2</rxSunExposure>
+					<Mass>1.2</Mass>
+				</statModifiers>
+				<costList>
+					<ComponentIndustrial>1</ComponentIndustrial>
+					<Steel>40</Steel>
+				</costList>
+			</li>
+		</comps>
+		<terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
+		<designationCategory>rxRemoteExplosives</designationCategory>
+		<constructEffect>ConstructMetal</constructEffect>
+		<researchPrerequisites>
+			<li>rxPortablePower</li>
+		</researchPrerequisites>
+		<constructionSkillPrerequisite>12</constructionSkillPrerequisite>
+	</ThingDef>
+
 </Defs>
