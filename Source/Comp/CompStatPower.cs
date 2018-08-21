@@ -1,5 +1,4 @@
-﻿using HugsLib.Utils;
-using RimWorld;
+﻿using RimWorld;
 using Verse;
 
 namespace RemoteExplosives {
@@ -18,8 +17,15 @@ namespace RemoteExplosives {
 			SetUpPowerVars();
 		}
 
+		public override void ReceiveCompSignal(string signal) {
+			base.ReceiveCompSignal(signal);
+			if (signal == CompUpgrade.UpgradeCompleteSignal) SetUpPowerVars();
+		}
+
 		public override void SetUpPowerVars() {
-			var prevDefValue = StatPowerConsumption; // allows the comp to switch from consumer to producer
+			// allows the comp to switch from consumer to producer
+			var prevDefValue = Props.basePowerConsumption;
+			Props.basePowerConsumption = StatPowerConsumption;
 			base.SetUpPowerVars();
 			Props.basePowerConsumption = prevDefValue;
 		}

@@ -40,8 +40,7 @@ Also includes the detonator wire crossing, which can be used to intersect wires 
 		<label>Remote Detonator</label>
 		<description>Allows you to build a console that detonates remote explosives, as well as a workbench to manufacture them.
 The explosives workshop can create mining explosives that can be deployed as Fracturing or Clearing charges.
-			
-Research Explosive IEDs or Incendiary IEDs to manufacture combat-grade remote explosives.</description>
+Research IEDs to manufacture combat-grade remote explosives.</description>
 		<baseCost>1500</baseCost>
 		<techLevel>Industrial</techLevel>
 		<prerequisites>
@@ -77,6 +76,20 @@ The detonator must be upgraded with an advanced component for this to work.</des
 		</prerequisites>
 		<researchViewX>3</researchViewX>
 		<researchViewY>.5</researchViewY>
+	</ResearchProjectDef>	
+	
+	<ResearchProjectDef ParentName="rxProjectBase">
+		<defName>rxRadioMast</defName>
+		<label>Detonator Network</label>
+		<description>No longer do you have to leave the couch and expose yourself to the elements (and stray shrapnel) just to trigger your explosives. Now you can set up a network of towers that can relay your detonator signal to the farthest reaches of the universe.
+Allows the Radio Mast to be built.</description>
+		<baseCost>1800</baseCost>
+		<techLevel>Industrial</techLevel>
+		<prerequisites>
+			<li>rxChannels</li>
+		</prerequisites>
+		<researchViewX>3</researchViewX>
+		<researchViewY>1.5</researchViewY>
 	</ResearchProjectDef>
 
 	<ResearchProjectDef ParentName="rxProjectBase">
@@ -117,7 +130,7 @@ Allows the Gas Vent to be built.</description>
 			<li>rxSleepingGas</li>
 		</prerequisites>
 		<researchViewX>3</researchViewX>
-		<researchViewY>2</researchViewY>
+		<researchViewY>2.5</researchViewY>
 	</ResearchProjectDef>
 	
 	<ResearchProjectDef ParentName="rxProjectBase">
@@ -130,7 +143,7 @@ Allows the Gas Vent to be built.</description>
 			<li>rxSleepingGas</li>
 		</prerequisites>
 		<researchViewX>3</researchViewX>
-		<researchViewY>3</researchViewY>
+		<researchViewY>3.5</researchViewY>
 	</ResearchProjectDef>
 	
 	<ResearchProjectDef ParentName="rxProjectBase">

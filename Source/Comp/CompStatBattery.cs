@@ -33,9 +33,9 @@ namespace RemoteExplosives {
 			statMaxEnergy = new CachedValue<float>(() => parent.GetStatValue(Resources.Stat.rxPowerCapacity));
 		}
 
-		public override void Notify_SignalReceived(Signal signal) {
-			base.Notify_SignalReceived(signal);
-			if(signal.tag == CompUpgrade.UpgradeCompleteSignal) statMaxEnergy.Recache();
+		public override void ReceiveCompSignal(string signal) {
+			base.ReceiveCompSignal(signal);
+			if(signal == CompUpgrade.UpgradeCompleteSignal) statMaxEnergy.Recache();
 		}
 
 		public override void PostSpawnSetup(bool respawningAfterLoad) {

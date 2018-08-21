@@ -35,9 +35,9 @@ namespace RemoteExplosives {
 			statSunExposure = new CachedValue<float>(() => parent.GetStatValue(Resources.Stat.rxSunExposure));
 		}
 
-		public override void Notify_SignalReceived(Signal signal) {
-			base.Notify_SignalReceived(signal);
-			if (signal.tag == CompUpgrade.UpgradeCompleteSignal) {
+		public override void ReceiveCompSignal(string signal) {
+			base.ReceiveCompSignal(signal);
+			if (signal == CompUpgrade.UpgradeCompleteSignal) {
 				statPowerConsumption.Recache();
 				statSunExposure.Recache();
 			}

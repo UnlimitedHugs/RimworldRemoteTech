@@ -217,11 +217,23 @@ Right-click with a drafted colonist for better timing.</description>
 			<li Class="CompProperties_Flickable"/>
 			<li Class="CompProperties_Breakdownable"/>
 			<li Class="RemoteExplosives.CompProperties_WirelessDetonationGridNode"/>
+			<li Class="RemoteExplosives.CompProperties_Upgrade">
+				<label>More power!</label>
+				<referenceId>MorePower</referenceId>
+				<workAmount>2000</workAmount>
+				<statModifiers>
+					<rxSignalRange>1.5</rxSignalRange>
+					<rxPowerConsumption>2</rxPowerConsumption>
+				</statModifiers>
+				<costList>
+					<ComponentIndustrial>2</ComponentIndustrial>
+				</costList>
+			</li>
 		</comps>
 		<building>
 			<allowAutoroof>false</allowAutoroof>
 		</building>
-		<researchPrerequisites><li>rxRemoteDetonator</li></researchPrerequisites>
+		<researchPrerequisites><li>rxRadioMast</li></researchPrerequisites>
 	</ThingDef>
 	
 	<ThingDef ParentName="rxBuildingBase">
