@@ -105,7 +105,7 @@ Right-click with a drafted colonist for better timing.</description>
 		<tickerType>Normal</tickerType>
 		<placeWorkers>
 			<li>RemoteExplosives.PlaceWorker_DetonatorRadius</li>
-			<li>RemoteExplosives.PlaceWorker_ShowWirelessDetonationGridConnections</li>
+			<li>RemoteExplosives.PlaceWorker_WirelessNodeConnections</li>
 		</placeWorkers>
 		<drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>
 		<comps>
@@ -191,7 +191,7 @@ Right-click with a drafted colonist for better timing.</description>
 		<placeWorkers>
 			<li>RemoteExplosives.PlaceWorker_DetonatorRadius</li>
 			<li>PlaceWorker_NotUnderRoof</li>
-			<li>RemoteExplosives.PlaceWorker_ShowWirelessDetonationGridConnections</li>
+			<li>RemoteExplosives.PlaceWorker_WirelessNodeConnections</li>
 		</placeWorkers>
 		<drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>
 		<constructEffect>ConstructMetal</constructEffect>

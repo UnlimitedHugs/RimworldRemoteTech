@@ -67,7 +67,7 @@ namespace RemoteExplosives {
 
 		public override void SpawnSetup(Map map, bool respawningAfterLoad) {
 			base.SpawnSetup(map, respawningAfterLoad);
-			RemoteExplosivesUtility.UpdateSwitchDesignation(this);
+			this.UpdateSwitchDesignation();
 			explosiveComp = GetComp<CompCustomExplosive>();
 			replaceComp = GetComp<CompAutoReplaceable>();
 			if (replaceComp != null) replaceComp.DisableGizmoAutoDisplay();
@@ -107,7 +107,7 @@ namespace RemoteExplosives {
 				currentChannel = desiredChannel;
 				Resources.Sound.rxChannelChange.PlayOneShot(this);
 			}
-			RemoteExplosivesUtility.UpdateSwitchDesignation(this);
+			this.UpdateSwitchDesignation();
 		}
 
 		public void Arm() {
@@ -228,12 +228,12 @@ namespace RemoteExplosives {
 
 		private void ChannelGizmoAction(int selectedChannel) {
 			desiredChannel = selectedChannel;
-			RemoteExplosivesUtility.UpdateSwitchDesignation(this);
+			this.UpdateSwitchDesignation();
 		}
 
 		private void ArmGizmoAction() {
 			desiredArmState = !desiredArmState;
-			RemoteExplosivesUtility.UpdateSwitchDesignation(this);
+			this.UpdateSwitchDesignation();
 		}
 
 		private void DrawFlareOverlay(bool useStrong) {

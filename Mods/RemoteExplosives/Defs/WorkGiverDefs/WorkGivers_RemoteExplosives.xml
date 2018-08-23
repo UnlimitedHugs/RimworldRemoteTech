@@ -12,9 +12,9 @@
 	</WorkGiverDef>
 	
 	<WorkGiverDef>
-		<defName>rxSwitchRemoteExplosives</defName>
+		<defName>rxSwitchThings</defName>
 		<label>switch remote explosive</label>
-		<giverClass>RemoteExplosives.WorkGiver_RemoteExplosive</giverClass>
+		<giverClass>RemoteExplosives.WorkGiver_SwitchableThing</giverClass>
 		<workType>BasicWorker</workType>
 		<priorityInType>9</priorityInType>
 		<verb>switch</verb>

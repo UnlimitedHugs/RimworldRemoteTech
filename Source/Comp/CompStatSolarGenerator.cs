@@ -31,8 +31,8 @@ namespace RemoteExplosives {
 		}
 
 		public CompStatSolarGenerator() {
-			statPowerConsumption = new CachedValue<float>(() => parent.GetStatValue(Resources.Stat.rxPowerConsumption));
-			statSunExposure = new CachedValue<float>(() => parent.GetStatValue(Resources.Stat.rxSunExposure));
+			statPowerConsumption = parent.GetCachedStat(Resources.Stat.rxPowerConsumption);
+			statSunExposure = parent.GetCachedStat(Resources.Stat.rxSunExposure);
 		}
 
 		public override void ReceiveCompSignal(string signal) {

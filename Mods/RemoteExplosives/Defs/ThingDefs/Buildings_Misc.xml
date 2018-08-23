@@ -391,4 +391,102 @@ Tip: switches can be used to toggle vents remotely, as well as in groups.</descr
 		<constructionSkillPrerequisite>12</constructionSkillPrerequisite>
 	</ThingDef>
 
+	<ThingDef ParentName="BuildingBase">
+		<defName>rxProximitySensor</defName>
+		<label>proximity sensor</label>
+		<thingClass>RemoteExplosives.Building_ProximitySensor</thingClass>
+		<description>Scans for movement in the surrounding area. On detection, can either sound an alarm, or send a detonation signal. Can be upgraded to a wireless detonator, and even an AI core to ignore friendly units.</description>
+		<graphicData>
+			<texPath>proximity_sensor</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+			<drawSize>(1,1)</drawSize>
+			<shadowData>
+				<volume>(.7, 0.5, .7)</volume>
+			</shadowData>
+		</graphicData>
+		<costList>
+			<Steel>40</Steel>
+			<ComponentIndustrial>3</ComponentIndustrial>
+		</costList>
+		<thingCategories>
+			<li>Buildings</li>
+		</thingCategories>
+		<tickerType>Normal</tickerType>
+		<comps>
+			<li Class="CompProperties_Power">
+				<compClass>RemoteExplosives.CompStatPower</compClass>
+				<shortCircuitInRain>false</shortCircuitInRain>
+			</li>
+			<li Class="CompProperties_Flickable"/>
+			<li Class="CompProperties_Breakdownable"/>
+			<li><compClass>RemoteExplosives.CompChannelSelector</compClass></li>
+			<li Class="RemoteExplosives.CompProperties_WirelessDetonationGridNode"/>
+			<li Class="RemoteExplosives.CompProperties_WiredDetonationSender"/>
+			<li Class="RemoteExplosives.CompProperties_Upgrade">
+				<label>Signal processor</label>
+				<referenceId>SignaProcessor</referenceId>
+				<workAmount>2000</workAmount>
+				<statModifiers>
+					<rxSensorRange>1.25</rxSensorRange>
+					<rxSensorAngle>1.25</rxSensorAngle>
+					<rxPowerConsumption>1.2</rxPowerConsumption>
+				</statModifiers>
+				<costList>
+					<ComponentSpacer>1</ComponentSpacer>
+				</costList>
+			</li>
+			<li Class="RemoteExplosives.CompProperties_Upgrade">
+				<label>Wireless detonator</label>
+				<referenceId>WirelessDetonation</referenceId>
+				<workAmount>2000</workAmount>
+				<effectDescription>Adds a wireless detonator to the detector, allowing it to trigger wireless explosives.</effectDescription>
+				<costList>
+					<ComponentIndustrial>1</ComponentIndustrial>
+					<ComponentSpacer>1</ComponentSpacer>
+				</costList>
+			</li>
+			<li Class="RemoteExplosives.CompProperties_Upgrade">
+				<label>AI controller</label>
+				<referenceId>AIController</referenceId>
+				<workAmount>8000</workAmount>
+				<effectDescription>Installs an AI persona core to filter the detected targets.</effectDescription>
+				<statModifiers>
+					<MaxHitPoints>2</MaxHitPoints>
+				</statModifiers>
+				<costList>
+					<AIPersonaCore>1</AIPersonaCore>
+					<Plasteel>40</Plasteel>
+				</costList>
+			</li>
+		</comps>
+		<altitudeLayer>Building</altitudeLayer>
+		<fillPercent>0.5</fillPercent>
+		<useHitPoints>True</useHitPoints>
+		<statBases>
+			<WorkToBuild>1700</WorkToBuild>
+			<MaxHitPoints>120</MaxHitPoints>
+			<Flammability>.5</Flammability>
+			<Mass>10</Mass>
+			<rxPowerConsumption>50</rxPowerConsumption>
+			<rxSensorSpeed>240</rxSensorSpeed>
+			<rxSignalRange>20</rxSignalRange>
+			<!-- careful with these- the sensor can impact game performance at high values. -->
+			<rxSensorAngle>36</rxSensorAngle>
+			<rxSensorRange>8</rxSensorRange>
+		</statBases>
+		<size>(1,1)</size>
+		<constructEffect>ConstructMetal</constructEffect>
+		<passability>PassThroughOnly</passability>
+		<pathCost>50</pathCost>
+		<minifiedDef>MinifiedThing</minifiedDef>
+		<designationCategory>rxRemoteExplosives</designationCategory>
+		<placeWorkers>
+			<li>RemoteExplosives.PlaceWorker_DetonatorRadius</li>
+			<li>RemoteExplosives.PlaceWorker_WirelessNodeConnections</li>
+		</placeWorkers>
+		<drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>
+		<researchPrerequisites></researchPrerequisites>
+	</ThingDef>
+	
 </Defs>

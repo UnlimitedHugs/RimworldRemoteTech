@@ -1,30 +1,32 @@
 ﻿using System.Collections.Generic;
+using RimWorld;
 using Verse.AI;
 
 namespace RemoteExplosives {
-	/* 
-	 * Calls a colonist to flick a remote explosive.
-	 * This includes both setting the armed state and the channel.
-	 */
-	public class JobDriver_SwitchRemoteExplosive : JobDriver {
+
+	/// <summary>
+	/// Calls a colonist to flick a thing or comp implementing ISwitchable.
+	/// </summary>
+	public class JobDriver_SwitchThing : JobDriver {
 		public override bool TryMakePreToilReservations(bool errorOnFailed) {
 			return pawn.Reserve(job.targetA, job);
 		}
 
 		protected override IEnumerable<Toil> MakeNewToils() {
 			AddFailCondition(JobHasFailed);
-			var switchable = TargetThingA as ISwitchable;
-			if (switchable == null) yield break;
+			this.FailOnDestroyedNullOrForbidden(TargetIndex.A);
 			yield return Toils_Goto.GotoCell(TargetIndex.A, PathEndMode.Touch);
 			yield return new Toil {
-				initAction = () => switchable.DoSwitch(),
+				initAction = () => {
+					TargetThingA.TrySwitch();
+					for (int i = 0; i <= 10; i++) MoteMaker.ThrowDustPuff(TargetThingA.Position, Map, 1);
+				},
 				defaultCompleteMode = ToilCompleteMode.Instant
 			};
 		}
 
 		private bool JobHasFailed() {
-			var switchable = TargetThingA as ISwitchable;
-			return switchable == null || !TargetThingA.Spawned || !switchable.WantsSwitch();
+			return !TargetThingA.WantsSwitching();
 		}
 	}
 }

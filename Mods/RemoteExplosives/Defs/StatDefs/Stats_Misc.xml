@@ -92,6 +92,37 @@
 		<toStringStyle>FloatOne</toStringStyle>
 		<defaultBaseValue>0</defaultBaseValue>
 		<minValue>0</minValue>
+	</StatDef>	
+	
+	<StatDef ParentName="rxBaseMiscStat">
+		<defName>rxSensorAngle</defName>
+		<label>sensor angle</label>
+		<description>The angle in which the sensor can simultaneously detect targets.</description>
+		<category>Building</category>
+		<toStringStyle>FloatOne</toStringStyle>
+		<defaultBaseValue>0</defaultBaseValue>
+		<minValue>0</minValue>
+		<maxValue>360</maxValue>
+	</StatDef>
+	
+	<StatDef ParentName="rxBaseMiscStat">
+		<defName>rxSensorRange</defName>
+		<label>sensor range</label>
+		<description>The maximum range at which the sensor is able to detect targets.</description>
+		<category>Building</category>
+		<toStringStyle>FloatOne</toStringStyle>
+		<defaultBaseValue>0</defaultBaseValue>
+		<minValue>0</minValue>
+	</StatDef>
+	
+	<StatDef ParentName="rxBaseMiscStat">
+		<defName>rxSensorSpeed</defName>
+		<label>sensor rotation speed</label>
+		<description>How fast the sensor rotates (degrees per second).</description>
+		<category>Building</category>
+		<toStringStyle>FloatOne</toStringStyle>
+		<defaultBaseValue>0</defaultBaseValue>
+		<minValue>0</minValue>
 	</StatDef>
 	
 </Defs>

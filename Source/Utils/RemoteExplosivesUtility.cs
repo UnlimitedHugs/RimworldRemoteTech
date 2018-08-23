@@ -22,12 +22,6 @@ namespace RemoteExplosives {
 			None, Basic, Advanced
 		}
 
-		public static void UpdateSwitchDesignation(Thing thing) {
-			var switchable = thing as ISwitchable;
-			if(switchable == null) return;
-			thing.ToggleDesignation(Resources.Designation.rxRemoteExplosiveSwitch, switchable.WantsSwitch());
-		}
-
 		public static ChannelType GetChannelsUnlockLevel() {
 			if (Resources.Research.rxChannelsAdvanced.IsFinished) {
 				return ChannelType.Advanced;
@@ -51,7 +45,7 @@ namespace RemoteExplosives {
 			return "RemoteExplosive_currentChannel".Translate(currentChannel);
 		}
 
-		public static void LightArmedExplosivesInNetworkRange(ThingWithComps origin, int channel) {
+		public static void TriggerReceiversInNetworkRange(ThingWithComps origin, int channel, bool noTargetsMessage = true) {
 			var comp = origin.GetComp<CompWirelessDetonationGridNode>();
 			if (comp == null) throw new Exception("Missing CompWirelessDetonationGridNode on sender");
 			var sample = comp.FindReceiversInNetworkRange().Where(pair => pair.Receiver.CurrentChannel == channel);
@@ -63,10 +57,10 @@ namespace RemoteExplosives {
 					if (receiver.CanReceiveSignal) receiver.ReceiveSignal(origin);
 				}, TicksBetweenTriggers * counter++, GetHighestHolderInMap(origin));
 			}
-			if(counter == 0) Messages.Message("Detonator_notargets".Translate(), MessageTypeDefOf.RejectInput);
+			if(counter == 0 && noTargetsMessage) Messages.Message("Detonator_notargets".Translate(), origin, MessageTypeDefOf.RejectInput);
 		}
 
-		public static Dictionary<int, List<IWirelessDetonationReceiver>> FindArmedExplosivesInNetworkRange(ThingWithComps origin) {
+		public static Dictionary<int, List<IWirelessDetonationReceiver>> FindReceiversInNetworkRange(ThingWithComps origin) {
 			var comp = origin.GetComp<CompWirelessDetonationGridNode>();
 			if (comp == null) throw new Exception("Missing CompWirelessDetonationGridNode on sender");
 			var results = new Dictionary<int, List<IWirelessDetonationReceiver>>();
@@ -220,6 +214,10 @@ namespace RemoteExplosives {
 			for (var i = 0; i < thing.AllComps.Count; i++) {
 				if(thing.AllComps[i] is IPowerUseNotified comp) comp.ReportPowerUse(duration);
 			}
+		}
+
+		public static CachedValue<float> GetCachedStat(this Thing thing, StatDef stat, int recacheInterval = GenTicks.TicksPerRealSecond) {
+			return new CachedValue<float>(() => thing.GetStatValue(stat), recacheInterval);
 		}
 	}
 }

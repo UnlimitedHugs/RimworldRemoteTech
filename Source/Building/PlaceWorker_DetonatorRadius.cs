@@ -15,7 +15,7 @@ namespace RemoteExplosives {
 		}
 
 		public void DrawGhostForSelected(Thing thing) {
-			(thing as ThingWithComps)?.GetComp<CompWirelessDetonationGridNode>()?.DrawRadiusRing();
+			(thing as ThingWithComps)?.GetComp<CompWirelessDetonationGridNode>()?.DrawRadiusRing(true);
 		}
 	}
 }

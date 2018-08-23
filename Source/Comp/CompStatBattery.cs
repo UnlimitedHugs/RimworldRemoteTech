@@ -30,7 +30,7 @@ namespace RemoteExplosives {
 		private int ticksToExplode;
 
 		public CompStatBattery() {
-			statMaxEnergy = new CachedValue<float>(() => parent.GetStatValue(Resources.Stat.rxPowerCapacity));
+			statMaxEnergy = parent.GetCachedStat(Resources.Stat.rxPowerCapacity);
 		}
 
 		public override void ReceiveCompSignal(string signal) {

@@ -23,7 +23,7 @@ namespace RemoteExplosives {
 		}
 
 		public Building_GasVent() {
-			statVentAmount = new CachedValue<float>(() => this.GetStatValue(Resources.Stat.rxVentingPower));
+			statVentAmount = this.GetCachedStat(Resources.Stat.rxVentingPower);
 		}
 
 		public override void SpawnSetup(Map map, bool respawningAfterLoad) {

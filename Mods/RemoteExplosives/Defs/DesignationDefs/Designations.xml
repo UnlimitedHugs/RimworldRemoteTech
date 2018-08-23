@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Defs>
 	<DesignationDef>
-		<defName>rxRemoteExplosiveSwitch</defName>
+		<defName>rxSwitchThing</defName>
 		<texturePath>Designations/Flick</texturePath>
 		<targetType>Thing</targetType>
 		<designateCancelable>false</designateCancelable>

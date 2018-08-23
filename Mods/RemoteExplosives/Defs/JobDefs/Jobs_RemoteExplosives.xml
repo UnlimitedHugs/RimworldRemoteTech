@@ -8,9 +8,9 @@
 	</JobDef>
 	
 	<JobDef>
-		<defName>rxSwitchRemoteExplosives</defName>
-		<driverClass>RemoteExplosives.JobDriver_SwitchRemoteExplosive</driverClass>
-		<reportString>Switching remote explosive.</reportString>
+		<defName>rxSwitchThing</defName>
+		<driverClass>RemoteExplosives.JobDriver_SwitchThing</driverClass>
+		<reportString>Switching TargetA.</reportString>
 	</JobDef>
 	
 	<JobDef>

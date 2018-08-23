@@ -30,7 +30,7 @@ namespace RemoteExplosives {
 		[DefOf]
 		public static class Job {
 			public static JobDef rxDryDetonatorWire;
-			public static JobDef rxSwitchRemoteExplosives;
+			public static JobDef rxSwitchThing;
 			public static JobDef rxDetonateExplosives;
 			public static JobDef rxSmoothFoamWall;
 			public static JobDef rxInstallUpgrade;
@@ -63,7 +63,7 @@ namespace RemoteExplosives {
 
 		[DefOf]
 		public static class Designation {
-			public static DesignationDef rxRemoteExplosiveSwitch;
+			public static DesignationDef rxSwitchThing;
 			public static DesignationDef rxDetonatorWireDryOff;
 			public static DesignationDef rxFoamWallSmooth;
 			public static DesignationDef rxInstallUpgrade;
@@ -80,6 +80,9 @@ namespace RemoteExplosives {
 			public static StatDef rxSunExposure;
 			public static StatDef rxPowerCapacity;
 			public static StatDef rxVentingPower;
+			public static StatDef rxSensorAngle;
+			public static StatDef rxSensorRange;
+			public static StatDef rxSensorSpeed;
 		}
 
 		[DefOf]

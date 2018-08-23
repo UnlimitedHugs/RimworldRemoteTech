@@ -91,4 +91,9 @@
 	<Upgrade_installedUpgrades>Installed upgrades: </Upgrade_installedUpgrades>
 	<Upgrade_missingMaterials>need {0}x {1}</Upgrade_missingMaterials>
 	<Upgrade_uneqip_message>Remove from inventory to upgrade.</Upgrade_uneqip_message>
+	
+	<proxSensor_message>Proximity sensor detected a target: {0}</proxSensor_message>
+	<proxSensor_messageName>Proximity sensor "{0}" detected a target: {1}</proxSensor_messageName>
+	<proxSensor_cooldown>Cooldown: {0:F1} seconds</proxSensor_cooldown>
+	<proxSensor_AIStatus>AI status: Not evil</proxSensor_AIStatus>
 </LanguageData>

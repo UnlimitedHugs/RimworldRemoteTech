@@ -91,7 +91,7 @@ namespace RemoteExplosives {
 			}
 			RemoteExplosivesUtility.ReportPowerUse(this, 20f);
 			SoundDefOf.FlickSwitch.PlayOneShot(this);
-			RemoteExplosivesUtility.LightArmedExplosivesInNetworkRange(this, currentChannel);
+			RemoteExplosivesUtility.TriggerReceiversInNetworkRange(this, currentChannel);
 		}
 
 		private void PlayNeedPowerEffect() {
@@ -102,7 +102,7 @@ namespace RemoteExplosives {
 
 		private void UpdateArmedExplosivesInRange() {
 			lastInspectionTick = GenTicks.TicksGame;
-			explosivesInRange = RemoteExplosivesUtility.FindArmedExplosivesInNetworkRange(this);
+			explosivesInRange = RemoteExplosivesUtility.FindReceiversInNetworkRange(this);
 		}
 
 		public override string GetInspectString() {

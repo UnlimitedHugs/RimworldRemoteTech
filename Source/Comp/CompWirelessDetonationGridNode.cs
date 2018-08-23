@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using HugsLib.Utils;
 using RimWorld;
 using UnityEngine;
 using Verse;
@@ -67,12 +66,24 @@ namespace RemoteExplosives {
 			}
 		}
 
+		// saved
+		private bool _enabled = true;
+		public bool Enabled {
+			get { return _enabled; }
+			set {
+				if (_enabled != value) {
+					_enabled = value;
+					RecacheAllNodes();
+				}
+			}
+		}
+
 		public CompProperties_WirelessDetonationGridNode Props {
 			get { return props as CompProperties_WirelessDetonationGridNode; }
 		}
 
 		public bool CanTransmit {
-			get { return powerComp == null || powerComp.PowerOn; }
+			get { return Enabled && powerComp == null || powerComp.PowerOn; }
 		}
 
 		public float Radius {
@@ -98,13 +109,18 @@ namespace RemoteExplosives {
 				RemoteExplosivesController.Instance.Logger.Error($"CompWirelessDetonationGridNode needs CompProperties_WirelessDetonationGridNode on def {parent.def.defName}");
 			}
 			if (!respawningAfterLoad) {
-				globalRecacheId = Rand.Int;
+				RecacheAllNodes();
 			}
 		}
 
 		public override void PostDeSpawn(Map map) {
 			base.PostDeSpawn(map);
 			globalRecacheId = Rand.Int;
+		}
+
+		public override void PostExposeData() {
+			base.PostExposeData();
+			Scribe_Values.Look(ref _enabled, "wirelessNodeEnabled", true);
 		}
 
 		// enumerates pairs of receivers and the node closest to them
@@ -198,15 +214,17 @@ namespace RemoteExplosives {
 			}
 		}
 
-		public void DrawRadiusRing() {
+		public void DrawRadiusRing(bool drawReceivers = false) {
 			var radius = Radius;
 			if (radius <= GenRadial.MaxRadialPatternRadius) {
 				var ownPos = Position;
 				GenDraw.DrawRadiusRing(ownPos, radius);
-				foreach (var receiver in FindReceiversInNodeRange()) {
-					// highlight explosives in range
-					var drawPos = receiver.Position.ToVector3ShiftedWithAltitude(AltitudeLayer.MetaOverlays);
-					Graphics.DrawMesh(MeshPool.plane10, drawPos, Quaternion.identity, GenDraw.InteractionCellMaterial, 0);
+				if (drawReceivers) {
+					foreach (var receiver in FindReceiversInNodeRange()) {
+						// highlight explosives in range
+						var drawPos = receiver.Position.ToVector3ShiftedWithAltitude(AltitudeLayer.MetaOverlays);
+						Graphics.DrawMesh(MeshPool.plane10, drawPos, Quaternion.identity, GenDraw.InteractionCellMaterial, 0);
+					}
 				}
 			}
 		}
@@ -234,6 +252,10 @@ namespace RemoteExplosives {
 					}
 				}
 			}
+		}
+
+		private static void RecacheAllNodes() {
+			globalRecacheId = Rand.Int;
 		}
 	}
 }
