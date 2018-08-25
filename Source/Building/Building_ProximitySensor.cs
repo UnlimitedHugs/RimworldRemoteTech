@@ -6,7 +6,7 @@ using UnityEngine;
 using Verse;
 
 namespace RemoteExplosives {
-	public class Building_ProximitySensor : Building, ISwitchable {
+	public partial class Building_ProximitySensor : Building, ISwitchable, ISensorSettingsProvider {
 		private const string WirelessUpgrageReferenceId = "WirelessDetonation";
 		private const string AIUpgrageReferenceId = "AIController";
 
@@ -25,18 +25,22 @@ namespace RemoteExplosives {
 
 		// saved
 		private Arc slice;
-		private string name;
-		private float cooldownTime = 10f;
-		private float lastTriggeredTick;
-		private bool sendMessage = true;
-		private bool sendWired = true;
-		private bool sendWireless = true;
-		private bool detectAnimals = true;
-		private bool detectFriendlies = true;
-		private bool detectEnemies = true;
+		public float lastTriggeredTick;
+		private SensorSettings settings = new SensorSettings();
+		private SensorSettings pendingSettings;
 
 		private float CooldownTime {
-			get { return Mathf.Max(0, lastTriggeredTick + cooldownTime.SecondsToTicks() - GenTicks.TicksGame) / GenTicks.TicksPerRealSecond; }
+			get { return Mathf.Max(0, lastTriggeredTick + settings.CooldownTime.SecondsToTicks() - GenTicks.TicksGame) / GenTicks.TicksPerRealSecond; }
+		}
+
+		public SensorSettings Settings {
+			get { return pendingSettings ?? settings; }
+		}
+		public bool HasWirelessUpgrade {
+			get { return wirelessComp != null && wirelessComp.Enabled; }
+		}
+		public bool HasAIUpgrade {
+			get { return brainComp != null && brainComp.Complete; }
 		}
 
 		public override void SpawnSetup(Map map, bool respawningAfterLoad) {
@@ -55,15 +59,10 @@ namespace RemoteExplosives {
 		public override void ExposeData() {
 			base.ExposeData();
 			Scribe_Deep.Look(ref slice, "slice");
-			Scribe_Values.Look(ref name, "name");
-			Scribe_Values.Look(ref cooldownTime, "cooldown", 10f);
-			Scribe_Values.Look(ref lastTriggeredTick, "lastActivation");
-			Scribe_Values.Look(ref sendMessage, "sendMessage", true);
-			Scribe_Values.Look(ref sendWired, "sendWired", true);
-			Scribe_Values.Look(ref sendWireless, "sendWireless", true);
-			Scribe_Values.Look(ref detectAnimals, "detectAnimals", true);
-			Scribe_Values.Look(ref detectFriendlies, "detectFriendlies", true);
-			Scribe_Values.Look(ref detectEnemies, "detectEnemies", true);
+			Scribe_Values.Look(ref lastTriggeredTick, "lastTriggered");
+			Scribe_Deep.Look(ref settings, "settings");
+			Scribe_Deep.Look(ref pendingSettings, "pendingSettings");
+			if(Scribe.mode == LoadSaveMode.LoadingVars && settings == null) settings = new SensorSettings();
 		}
 
 		public override void Tick() {
@@ -71,6 +70,7 @@ namespace RemoteExplosives {
 			slice = slice.Rotate(speedStat / GenTicks.TicksPerRealSecond);
 			drawnCells.Clear();
 			var thingGrid = Map.thingGrid;
+			// visit all cells in slice
 			foreach (var cell in area.CellsInSlice(slice)) {
 				if (!cell.InBounds(Map)) continue;
 				Pawn pawn = null;
@@ -102,9 +102,9 @@ namespace RemoteExplosives {
 		public void TriggerSensor(Pawn pawn) {
 			lastTriggeredTick = GenTicks.TicksGame;
 			trackedPawns.Add(pawn);
-			if(sendMessage) NotifyPlayer(pawn);
-			if(sendWired && wiredComp != null) wiredComp.SendNewSignal();
-			if(sendWireless && wirelessComp != null && wirelessComp.Enabled && channelsComp != null)
+			if(settings.SendMessage) NotifyPlayer(pawn);
+			if(settings.SendWired && wiredComp != null) wiredComp.SendNewSignal();
+			if(settings.SendWireless && wirelessComp != null && wirelessComp.Enabled && channelsComp != null)
 				RemoteExplosivesUtility.TriggerReceiversInNetworkRange(this, channelsComp.Channel);
 		}
 
@@ -118,11 +118,23 @@ namespace RemoteExplosives {
 			}
 		}
 
+		public override IEnumerable<Gizmo> GetGizmos() {
+			yield return new Command_Action {
+				defaultLabel = "proxSensor_settings".Translate(),
+				icon = Resources.Textures.UISensorSettings,
+				action = OpenSettingsDialog
+			};
+			foreach (var gizmo in base.GetGizmos()) {
+				yield return gizmo;
+			}
+		}
+
 		public bool WantsSwitch() {
-			return false;
+			return !settings.Equals(pendingSettings);
 		}
 
 		public void DoSwitch() {
+			settings = pendingSettings?.Clone() ?? new SensorSettings();
 		}
 
 		public override string GetInspectString() {
@@ -140,18 +152,32 @@ namespace RemoteExplosives {
 
 		protected override void ReceiveCompSignal(string signal) {
 			base.ReceiveCompSignal(signal);
-			if (signal == CompUpgrade.UpgradeCompleteSignal) UpdateUpgradeableStuff();
+			if (signal == CompUpgrade.UpgradeCompleteSignal) {
+				UpdateUpgradeableStuff();
+				HitPoints = MaxHitPoints; // AI upgrade increases max HP
+			}
+		}
+
+		private void OnSettingsChanged(SensorSettings s) {
+			pendingSettings = s;
+			this.UpdateSwitchDesignation();
+		}
+
+		private void OpenSettingsDialog() {
+			Find.WindowStack.Add(new Dialog_SensorSettings(this) {
+				OnSettingsChanged = OnSettingsChanged
+			});
 		}
 
 		private bool PawnMatchesFilter(Pawn p) {
 			if (brainComp == null || !brainComp.Complete || p.RaceProps == null) return true;
-			return (detectAnimals && p.RaceProps.Animal)
-					|| (detectEnemies && p.HostileTo(Faction))
-					|| (detectFriendlies && (p.Faction == null || !p.Faction.HostileTo(Faction)));
+			return (settings.DetectAnimals && p.RaceProps.Animal)
+					|| (settings.DetectEnemies && p.HostileTo(Faction))
+					|| (settings.DetectFriendlies && (p.Faction == null || !p.Faction.HostileTo(Faction)));
 		}
 
 		private void NotifyPlayer(Pawn pawn) {
-			var message = name.NullOrEmpty() ? "proxSensor_message".Translate(pawn.LabelShort) : "proxSensor_messageName".Translate(name, pawn.LabelShort);
+			var message = settings.Name.NullOrEmpty() ? "proxSensor_message".Translate(pawn.LabelShort) : "proxSensor_messageName".Translate(settings.Name, pawn.LabelShort);
 			Messages.Message(message, pawn, MessageTypeDefOf.CautionInput);
 		}
 

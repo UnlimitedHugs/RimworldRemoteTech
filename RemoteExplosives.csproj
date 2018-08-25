@@ -63,6 +63,8 @@
     <Compile Include="Source\Building\Building_ProximitySensor.cs" />
     <Compile Include="Source\Building\Building_RadioMast.cs" />
     <Compile Include="Source\Building\ISelectedThingPlaceWorker.cs" />
+    <Compile Include="Source\Building\SensorSettings.cs" />
+    <Compile Include="Source\UI\ISensorSettingsProvider.cs" />
     <Compile Include="Source\Building\IWirelessDetonationReceiver.cs" />
     <Compile Include="Source\Building\PlaceWorker_DetonatorRadius.cs" />
     <Compile Include="Source\Building\PlaceWorker_GasVent.cs" />
@@ -89,6 +91,7 @@
     <Compile Include="Source\Comp\IBatteryPropsProvider.cs" />
     <Compile Include="Source\Comp\IPowerUseNotified.cs" />
     <Compile Include="Source\Comp\StatPart_Upgradeable.cs" />
+    <Compile Include="Source\UI\Dialog_SensorSettings.cs" />
     <Compile Include="Source\Utils\CachedValue.cs" />
     <Compile Include="Source\Utils\CustomFactionGoodwillCaps.cs" />
     <Compile Include="Source\Damage\DamageWorker_SuperEMP.cs" />

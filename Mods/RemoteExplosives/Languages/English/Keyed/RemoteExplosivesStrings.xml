@@ -96,4 +96,15 @@
 	<proxSensor_messageName>Proximity sensor "{0}" detected a target: {1}</proxSensor_messageName>
 	<proxSensor_cooldown>Cooldown: {0:F1} seconds</proxSensor_cooldown>
 	<proxSensor_AIStatus>AI status: Not evil</proxSensor_AIStatus>
+	<proxSensor_settings>Sensor settings</proxSensor_settings>
+	<proxSensor_sName>Sensor name</proxSensor_sName>
+	<proxSensor_sCooldown>Detect again delay (seconds)</proxSensor_sCooldown>
+	<proxSensor_sSendMessage>Notify on detection</proxSensor_sSendMessage>
+	<proxSensor_sSendWired>Detonate on detection (wire)</proxSensor_sSendWired>
+	<proxSensor_sSendWireless>Detonate on detection (wireless)</proxSensor_sSendWireless>
+	<proxSensor_sDetectAnimals>Detect animals</proxSensor_sDetectAnimals>
+	<proxSensor_sDetectFriendlies>Detect friendlies</proxSensor_sDetectFriendlies>
+	<proxSensor_sDetectEnemies>Detect enemies</proxSensor_sDetectEnemies>
+	<proxSensor_sWirelessUpgrade>Wireless upgrade:</proxSensor_sWirelessUpgrade>
+	<proxSensor_sAIUpgrade>AI upgrade:</proxSensor_sAIUpgrade>
 </LanguageData>
