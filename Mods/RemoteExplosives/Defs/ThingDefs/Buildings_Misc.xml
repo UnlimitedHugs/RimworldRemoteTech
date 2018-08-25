@@ -420,7 +420,7 @@ Tip: switches can be used to toggle vents remotely, as well as in groups.</descr
 			</li>
 			<li Class="CompProperties_Flickable"/>
 			<li Class="CompProperties_Breakdownable"/>
-			<li><compClass>RemoteExplosives.CompChannelSelector</compClass></li>
+			<li Class="RemoteExplosives.CompProperties_ChannelSelector"/>
 			<li Class="RemoteExplosives.CompProperties_WirelessDetonationGridNode"/>
 			<li Class="RemoteExplosives.CompProperties_WiredDetonationSender"/>
 			<li Class="RemoteExplosives.CompProperties_Upgrade">
@@ -453,6 +453,7 @@ Tip: switches can be used to toggle vents remotely, as well as in groups.</descr
 				<effectDescription>Installs an AI persona core to filter the detected targets.</effectDescription>
 				<statModifiers>
 					<MaxHitPoints>2</MaxHitPoints>
+					<Flammability>0</Flammability>
 				</statModifiers>
 				<costList>
 					<AIPersonaCore>1</AIPersonaCore>
@@ -481,11 +482,6 @@ Tip: switches can be used to toggle vents remotely, as well as in groups.</descr
 		<pathCost>50</pathCost>
 		<minifiedDef>MinifiedThing</minifiedDef>
 		<designationCategory>rxRemoteExplosives</designationCategory>
-		<placeWorkers>
-			<li>RemoteExplosives.PlaceWorker_DetonatorRadius</li>
-			<li>RemoteExplosives.PlaceWorker_WirelessNodeConnections</li>
-		</placeWorkers>
-		<drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>
 		<researchPrerequisites></researchPrerequisites>
 	</ThingDef>
 	

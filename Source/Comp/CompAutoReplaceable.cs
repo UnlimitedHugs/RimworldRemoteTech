@@ -45,8 +45,9 @@ namespace RemoteExplosives {
 			}
 		}
 
-		public void DisableGizmoAutoDisplay() {
+		public CompAutoReplaceable DisableGizmoAutoDisplay() {
 			autoDisplayGizmo = false;
+			return this;
 		}
 		
 		// get the gizmo to display it manually (for custom ordering)

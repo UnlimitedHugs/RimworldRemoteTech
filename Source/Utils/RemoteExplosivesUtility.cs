@@ -15,6 +15,8 @@ namespace RemoteExplosives {
 	[StaticConstructorOnStartup]
 	public static class RemoteExplosivesUtility {
 		public const string InjectedRecipeNameSuffix = "Injected";
+		public const int DefaultChannel = 1;
+		
 		// how long it will take to trigger an additional explosive
 		private const int TicksBetweenTriggers = 2;
 
@@ -214,6 +216,16 @@ namespace RemoteExplosives {
 			for (var i = 0; i < thing.AllComps.Count; i++) {
 				if(thing.AllComps[i] is IPowerUseNotified comp) comp.ReportPowerUse(duration);
 			}
+		}
+
+		public static T GetCompAssert<T>(this ThingWithComps thing) where T: ThingComp {
+			var c = thing.GetComp<T>();
+			if(c == null) RemoteExplosivesController.Instance.Logger.Error($"{thing.GetType().Name} requires ThingComp of type {nameof(T)} in def {thing.def.defName}");
+			return c;
+		}
+
+		public static void AssertComponent<T>(this ThingWithComps thing, T component) {
+			if(component == null) RemoteExplosivesController.Instance.Logger.Error($"{thing.GetType().Name} requires {nameof(T)} in def {thing.def.defName}");
 		}
 
 		public static CachedValue<float> GetCachedStat(this Thing thing, StatDef stat, int recacheInterval = GenTicks.TicksPerRealSecond) {

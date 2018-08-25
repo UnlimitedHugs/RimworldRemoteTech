@@ -15,25 +15,25 @@ namespace RemoteExplosives {
 
 		private const string ChannelsBasicUpgradeId = "ChannelsBasic";
 		private const string ChannelsAdvancedUpgradeId = "ChannelsAdvanced";
-		private const int FindExplosivesEveryTicks = 30;
 
-		private bool wantDetonation;
-		private int lastInspectionTick;
-		private Dictionary<int, List<IWirelessDetonationReceiver>> explosivesInRange;
-		private int currentChannel = 1;
 		private CompUpgrade channelsBasic;
 		private CompUpgrade channelsAdvanced;
+		private CompChannelSelector channels;
+
+		// saved
+		private bool wantDetonation;
 
 		public override void ExposeData() {
 			base.ExposeData();
 			Scribe_Values.Look(ref wantDetonation, "wantDetonation");
-			Scribe_Values.Look(ref currentChannel, "currentChannel", 1);
 		}
 
 		public override void SpawnSetup(Map map, bool respawningAfterLoad) {
 			base.SpawnSetup(map, respawningAfterLoad);
 			channelsBasic = this.TryGetUpgrade(ChannelsBasicUpgradeId);
 			channelsAdvanced = this.TryGetUpgrade(ChannelsAdvancedUpgradeId);
+			channels = GetComp<CompChannelSelector>();
+			ConfigureChannelComp();
 		}
 
 		public override IEnumerable<Gizmo> GetGizmos() {
@@ -47,18 +47,9 @@ namespace RemoteExplosives {
 			};
 			yield return detonateGizmo;
 
-			var channelsLevel = RemoteExplosivesUtility.ChannelType.None;
-			if (channelsAdvanced != null && channelsAdvanced.Complete) {
-				channelsLevel = RemoteExplosivesUtility.ChannelType.Advanced;
-			} else if (channelsBasic != null && channelsBasic.Complete) {
-				channelsLevel = RemoteExplosivesUtility.ChannelType.Basic;
-			}
-			if (channelsLevel != RemoteExplosivesUtility.ChannelType.None) {
-				var channelGizmo = RemoteExplosivesUtility.GetChannelGizmo(currentChannel, currentChannel, ChannelGizmoAction, channelsLevel, explosivesInRange);
-				if (channelGizmo != null) {
-					yield return channelGizmo;
-				}
-			}
+			var c = channels?.GetChannelGizmo();
+			if (c != null) yield return c;
+
 			foreach (var g in base.GetGizmos()) {
 				yield return g;
 			}
@@ -68,10 +59,20 @@ namespace RemoteExplosives {
 			wantDetonation = !wantDetonation;
 		}
 
-		private void ChannelGizmoAction(int selectedChannel) {
-			currentChannel = selectedChannel;
-			UpdateArmedExplosivesInRange();
-			RemoteExplosivesUtility.ReportPowerUse(this, 2f);
+		protected override void ReceiveCompSignal(string signal) {
+			base.ReceiveCompSignal(signal);
+			if(signal == CompUpgrade.UpgradeCompleteSignal) ConfigureChannelComp();
+			if(signal == CompChannelSelector.ChannelChangedSignal) RemoteExplosivesUtility.ReportPowerUse(this, 2f);
+		}
+
+		private void ConfigureChannelComp() {
+			var channelsLevel = RemoteExplosivesUtility.ChannelType.None;
+			if (channelsAdvanced != null && channelsAdvanced.Complete) {
+				channelsLevel = RemoteExplosivesUtility.ChannelType.Advanced;
+			} else if (channelsBasic != null && channelsBasic.Complete) {
+				channelsLevel = RemoteExplosivesUtility.ChannelType.Basic;
+			}
+			channels?.Configure(false, false, true, channelsLevel);
 		}
 
 		public bool UseInteractionCell {
@@ -91,7 +92,7 @@ namespace RemoteExplosives {
 			}
 			RemoteExplosivesUtility.ReportPowerUse(this, 20f);
 			SoundDefOf.FlickSwitch.PlayOneShot(this);
-			RemoteExplosivesUtility.TriggerReceiversInNetworkRange(this, currentChannel);
+			RemoteExplosivesUtility.TriggerReceiversInNetworkRange(this, channels?.Channel ?? RemoteExplosivesUtility.DefaultChannel);
 		}
 
 		private void PlayNeedPowerEffect() {
@@ -100,29 +101,19 @@ namespace RemoteExplosives {
 			SoundDefOf.Power_OffSmall.PlayOneShot(info);
 		}
 
-		private void UpdateArmedExplosivesInRange() {
-			lastInspectionTick = GenTicks.TicksGame;
-			explosivesInRange = RemoteExplosivesUtility.FindReceiversInNetworkRange(this);
-		}
-
 		public override string GetInspectString() {
 			if (!Spawned) return string.Empty;
-			// update channel contents
-			if (lastInspectionTick + FindExplosivesEveryTicks < GenTicks.TicksGame) {
-				UpdateArmedExplosivesInRange();
-			}
-			// assemble info string
 			var stringBuilder = new StringBuilder();
 			stringBuilder.Append(base.GetInspectString());
-			if (explosivesInRange != null) {
-				explosivesInRange.TryGetValue(currentChannel, out List<IWirelessDetonationReceiver> list);
+			if (channels != null) {
+				channels.ChannelPopulation.TryGetValue(channels.Channel, out List<IWirelessDetonationReceiver> list);
 				stringBuilder.AppendLine();
 				stringBuilder.Append("DetonatorTable_inrange".Translate());
-				stringBuilder.Append(": " + (list?.Count).GetValueOrDefault());
-			}
-			if (RemoteExplosivesUtility.GetChannelsUnlockLevel() > RemoteExplosivesUtility.ChannelType.None) {
+				stringBuilder.Append(": " + (list!=null?list.Count:0));
 				stringBuilder.AppendLine();
-				stringBuilder.Append(RemoteExplosivesUtility.GetCurrentChannelInspectString(currentChannel));
+				if (RemoteExplosivesUtility.GetChannelsUnlockLevel() > RemoteExplosivesUtility.ChannelType.None) {
+					stringBuilder.Append(RemoteExplosivesUtility.GetCurrentChannelInspectString(channels.Channel));
+				}
 			}
 			return stringBuilder.ToString();
 		}

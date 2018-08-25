@@ -15,7 +15,7 @@ namespace RemoteExplosives {
 	 * Will blink with an overlay texture when armed.
 	 */
 	public class Building_RemoteExplosive : Building, ISwitchable, IWirelessDetonationReceiver {
-		
+
 		private static readonly string ArmButtonLabel = "RemoteExplosive_arm_label".Translate();
 		private static readonly string ArmButtonDesc = "RemoteExplosive_arm_desc".Translate();
 		
@@ -23,12 +23,11 @@ namespace RemoteExplosives {
 
 		private CompCustomExplosive explosiveComp;
 		private CompAutoReplaceable replaceComp;
+		private CompChannelSelector channelsComp;
 
 		private bool desiredArmState;
 		private bool isArmed;
 		private int ticksSinceFlare;
-		private int currentChannel = 1;
-		private int desiredChannel = 1;
 
 		public bool CanReceiveSignal {
 			get { return IsArmed && !FuseLit; }
@@ -57,7 +56,7 @@ namespace RemoteExplosives {
 		}
 
 		public int CurrentChannel {
-			get { return currentChannel; }
+			get { return channelsComp != null ? channelsComp.Channel : RemoteExplosivesUtility.DefaultChannel; }
 		}
 
 		public virtual void LightFuse() {
@@ -69,10 +68,10 @@ namespace RemoteExplosives {
 			base.SpawnSetup(map, respawningAfterLoad);
 			this.UpdateSwitchDesignation();
 			explosiveComp = GetComp<CompCustomExplosive>();
-			replaceComp = GetComp<CompAutoReplaceable>();
-			if (replaceComp != null) replaceComp.DisableGizmoAutoDisplay();
-			if(CustomProps == null) RemoteExplosivesController.Instance.Logger.Error($"{nameof(Building_RemoteExplosive)} needs {nameof(BuildingProperties_RemoteExplosive)} in def {def.defName}");
-			if(BlinkerData == null) RemoteExplosivesController.Instance.Logger.Error($"{nameof(Building_RemoteExplosive)} needs {nameof(GraphicData_Blinker)} in def {def.defName}");
+			replaceComp = GetComp<CompAutoReplaceable>()?.DisableGizmoAutoDisplay();
+			channelsComp = GetComp<CompChannelSelector>()?.Configure(true);
+			this.AssertComponent(CustomProps);
+			this.AssertComponent(BlinkerData);
 			if (!respawningAfterLoad && CustomProps != null) {
 				if (CustomProps.explosiveType == RemoteExplosiveType.Combat && RemoteExplosivesController.Instance.SettingAutoArmCombat ||
 					CustomProps.explosiveType == RemoteExplosiveType.Mining && RemoteExplosivesController.Instance.SettingAutoArmMining ||
@@ -81,18 +80,16 @@ namespace RemoteExplosives {
 				}
 			}
 		}
-
+		
 		public override void ExposeData() {
 			base.ExposeData();
 			Scribe_Values.Look(ref isArmed, "isArmed");
 			Scribe_Values.Look(ref ticksSinceFlare, "ticksSinceFlare");
 			Scribe_Values.Look(ref desiredArmState, "desiredArmState");
-			Scribe_Values.Look(ref currentChannel, "currentChannel", 1);
-			Scribe_Values.Look(ref desiredChannel, "desiredChannel", 1);
 		}
 
 		public bool WantsSwitch() {
-			return isArmed != desiredArmState || currentChannel != desiredChannel;
+			return isArmed != desiredArmState;
 		}
 
 		public void DoSwitch() {
@@ -103,11 +100,11 @@ namespace RemoteExplosives {
 					Disarm();
 				}
 			}
-			if(desiredChannel!=currentChannel) {
-				currentChannel = desiredChannel;
-				Resources.Sound.rxChannelChange.PlayOneShot(this);
-			}
-			this.UpdateSwitchDesignation();
+		}
+
+		protected override void ReceiveCompSignal(string signal) {
+			base.ReceiveCompSignal(signal);
+			if(signal == CompChannelSelector.ChannelChangedSignal) Resources.Sound.rxChannelChange.PlayOneShot(this);
 		}
 
 		public void Arm() {
@@ -119,7 +116,9 @@ namespace RemoteExplosives {
 		}
 
 		public void SetChannel(int channel) {
-			currentChannel = desiredChannel = channel;
+			if (channelsComp != null) {
+				channelsComp.Channel = channelsComp.DesiredChannel = channel;
+			}
 		}
 
 		public void Disarm() {
@@ -140,9 +139,10 @@ namespace RemoteExplosives {
 			};
 			yield return armGizmo;
 
-			var channelGizmo = RemoteExplosivesUtility.GetChannelGizmo(desiredChannel, currentChannel, ChannelGizmoAction, RemoteExplosivesUtility.GetChannelsUnlockLevel());
-			if (channelGizmo != null) {
-				yield return channelGizmo;
+			if (channelsComp != null) {
+				channelsComp.Configure(true, false, false, RemoteExplosivesUtility.GetChannelsUnlockLevel());
+				var gz = channelsComp.GetChannelGizmo();
+				if (gz != null) yield return gz;
 			}
 
 			if (replaceComp != null) yield return replaceComp.MakeGizmo();
@@ -215,9 +215,9 @@ namespace RemoteExplosives {
 			} else {
 				stringBuilder.Append("RemoteExplosive_notArmed".Translate());
 			}
-			if (RemoteExplosivesUtility.GetChannelsUnlockLevel() > RemoteExplosivesUtility.ChannelType.None) {
+			if (channelsComp != null && RemoteExplosivesUtility.GetChannelsUnlockLevel() > RemoteExplosivesUtility.ChannelType.None) {
 				stringBuilder.AppendLine();
-				stringBuilder.Append(RemoteExplosivesUtility.GetCurrentChannelInspectString(currentChannel));
+				stringBuilder.Append(RemoteExplosivesUtility.GetCurrentChannelInspectString(channelsComp.Channel));
 			}
 			return stringBuilder.ToString();
 		}
@@ -225,12 +225,7 @@ namespace RemoteExplosives {
 		public void ReceiveSignal(Thing sender) {
 			LightFuse();
 		}
-
-		private void ChannelGizmoAction(int selectedChannel) {
-			desiredChannel = selectedChannel;
-			this.UpdateSwitchDesignation();
-		}
-
+		
 		private void ArmGizmoAction() {
 			desiredArmState = !desiredArmState;
 			this.UpdateSwitchDesignation();

@@ -7,6 +7,7 @@ using Verse;
 namespace RemoteExplosives {
 	public static class SwitchableUtility {
 		public static void UpdateSwitchDesignation(this Thing thing) {
+			if(thing.Map == null) return;
 			thing.ToggleDesignation(Resources.Designation.rxSwitchThing, thing.WantsSwitching());
 		}
 

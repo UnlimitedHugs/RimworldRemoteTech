@@ -109,6 +109,7 @@ Right-click with a drafted colonist for better timing.</description>
 		</placeWorkers>
 		<drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>
 		<comps>
+			<li Class="RemoteExplosives.CompProperties_ChannelSelector"/>
 			<li Class="CompProperties_Power">
 				<compClass>RemoteExplosives.CompStatPowerIdle</compClass>
 				<shortCircuitInRain>false</shortCircuitInRain>
@@ -609,6 +610,7 @@ Arm, then detonate from the Remote Explosives Console.</description>
 			<rxRemoteBomb>1</rxRemoteBomb>
 		</costList>
 		<comps>
+			<li Class="RemoteExplosives.CompProperties_ChannelSelector"/>
 			<li Class="CompProperties_Explosive">
 				<compClass>RemoteExplosives.CompCustomExplosive</compClass>
 				<explosiveRadius>2.9</explosiveRadius>
@@ -645,6 +647,7 @@ Arm, then detonate from the Remote Explosives Console.</description>
 			<rxRemoteFireBomb>1</rxRemoteFireBomb>
 		</costList>
 		<comps>
+			<li Class="RemoteExplosives.CompProperties_ChannelSelector"/>
 			<li Class="CompProperties_Explosive">
 				<compClass>RemoteExplosives.CompCustomExplosive</compClass>
 				<explosiveRadius>2.9</explosiveRadius>
@@ -687,6 +690,7 @@ Arm, then detonate from the Remote Explosives Console.</description>
 		</killedLeavings>
 		<specialDisplayRadius>6.5</specialDisplayRadius>
 		<comps>
+			<li Class="RemoteExplosives.CompProperties_ChannelSelector"/>
 			<li Class="CompProperties_Explosive">
 				<compClass>RemoteExplosives.CompCustomExplosive</compClass>
 				<explosiveRadius>6.5</explosiveRadius>
@@ -731,6 +735,7 @@ Detonate from the Remote Explosives Console.</description>
 		</costList>
 		<specialDisplayRadius>3.5</specialDisplayRadius>
 		<comps>
+			<li Class="RemoteExplosives.CompProperties_ChannelSelector"/>
 			<li Class="RemoteExplosives.CompProperties_MiningExplosive">
 				<miningRadius>3.5</miningRadius>
 				<explosiveRadius>3.5</explosiveRadius>
@@ -770,6 +775,7 @@ Detonate from the Remote Explosives Console.</description>
 			<rxMiningExplosiveComponent>1</rxMiningExplosiveComponent>
 		</costList>
 		<comps>
+			<li Class="RemoteExplosives.CompProperties_ChannelSelector"/>
 			<li Class="RemoteExplosives.CompProperties_MiningExplosive">
 				<miningRadius>4</miningRadius>
 				<explosiveRadius>3.9</explosiveRadius>
@@ -831,6 +837,7 @@ Detonate from the Remote Explosives Console.</description>
 		<pathCost>60</pathCost>
 		<minifiedDef>MinifiedThing</minifiedDef>
 		<comps>
+			<li Class="RemoteExplosives.CompProperties_ChannelSelector"/>
 			<li Class="RemoteExplosives.CompProperties_MiningExplosive">
 				<compClass>RemoteExplosives.CompRoofBreakerExplosive</compClass>
 				<miningRadius>2.1</miningRadius>
@@ -876,6 +883,7 @@ Arm, then detonate from the Remote Explosives Console.</description>
 			<rxRemoteFoamCan>1</rxRemoteFoamCan>
 		</costList>
 		<comps>
+			<li Class="RemoteExplosives.CompProperties_ChannelSelector"/>
 			<li Class="RemoteExplosives.CompProperties_ChemicalExplosive">
 				<compClass>RemoteExplosives.CompChemicalExplosive</compClass>
 				<wickTicks>
@@ -914,6 +922,7 @@ Arm, then detonate from the Remote Explosives Console.</description>
 			<rxRemoteSleepingGasCan>1</rxRemoteSleepingGasCan>
 		</costList>
 		<comps>
+			<li Class="RemoteExplosives.CompProperties_ChannelSelector"/>
 			<li Class="RemoteExplosives.CompProperties_ChemicalExplosive">
 				<compClass>RemoteExplosives.CompChemicalExplosive</compClass>
 				<wickTicks>
@@ -953,6 +962,7 @@ Arm, then detonate from the Remote Explosives Console.</description>
 			<rxRemoteRefinedSleepingGasCan>1</rxRemoteRefinedSleepingGasCan>
 		</costList>
 		<comps>
+			<li Class="RemoteExplosives.CompProperties_ChannelSelector"/>
 			<li Class="RemoteExplosives.CompProperties_ChemicalExplosive">
 				<compClass>RemoteExplosives.CompChemicalExplosive</compClass>
 				<wickTicks>

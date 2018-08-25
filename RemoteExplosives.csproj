@@ -71,6 +71,7 @@
     <Compile Include="Source\Comp\CompChannelSelector.cs" />
     <Compile Include="Source\Comp\CompLinkGridMember.cs" />
     <Compile Include="Source\Comp\CompProperties_BatteryWithBar.cs" />
+    <Compile Include="Source\Comp\CompProperties_ChannelSelector.cs" />
     <Compile Include="Source\Comp\CompProperties_LinkGridMember.cs" />
     <Compile Include="Source\Comp\CompProperties_Upgrade.cs" />
     <Compile Include="Source\Comp\CompProperties_WiredDetonationCrossing.cs" />

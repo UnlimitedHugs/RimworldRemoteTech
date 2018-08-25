@@ -160,8 +160,7 @@ namespace RemoteExplosives {
 			slice = new Arc(slice.StartAngle, angleStat.ValueRecached);
 			speedStat.Recache();
 			if (wirelessComp != null) wirelessComp.Enabled = this.IsUpgradeCompleted(WirelessUpgrageReferenceId);
-			channelsComp?.Configure(true, true,
-				this.IsUpgradeCompleted(WirelessUpgrageReferenceId) ? RemoteExplosivesUtility.ChannelType.Advanced : RemoteExplosivesUtility.ChannelType.None);
+			channelsComp?.Configure(true, true, true, this.IsUpgradeCompleted(WirelessUpgrageReferenceId) ? RemoteExplosivesUtility.ChannelType.Advanced : RemoteExplosivesUtility.ChannelType.None);
 		}
 
 		#region support stuff

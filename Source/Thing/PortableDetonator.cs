@@ -21,18 +21,22 @@ namespace RemoteExplosives {
 		private int lastActivationTick; // prevents unintended double activations
 		private CompWirelessDetonationGridNode node;
 		private CompUpgrade channelsUpgrade;
+		private CompChannelSelector channelsComp;
 
 		// saved
 		private int numUsesLeft = -1;
-		private int currentChannel = 1;
 
 		private int MaxNumUses {
 			get { return Mathf.RoundToInt(this.GetStatValue(Resources.Stat.rxPortableDetonatorNumUses)); }
 		}
 
 		private int NumUsesLeft {
-			get { return numUsesLeft < 0 ? numUsesLeft = Mathf.RoundToInt(this.GetStatValue(Resources.Stat.rxPortableDetonatorNumUses)) : numUsesLeft; }
+			get { return numUsesLeft < 0 ? numUsesLeft = MaxNumUses : numUsesLeft; }
 			set { numUsesLeft = value; }
+		}
+
+		private int Channel {
+			get { return channelsComp != null ? channelsComp.Channel : RemoteExplosivesUtility.DefaultChannel; }
 		}
 
 		public override void SpawnSetup(Map map, bool respawningAfterLoad) {
@@ -43,8 +47,8 @@ namespace RemoteExplosives {
 		public override void ExposeData() {
 			base.ExposeData();
 			Scribe_Values.Look(ref numUsesLeft, "numUsesLeft", -1);
-			Scribe_Values.Look(ref currentChannel, "currentChannel", 1);
 			if (Scribe.mode == LoadSaveMode.PostLoadInit) {
+				// apparel does not get SpawnSetup calls, we can init here
 				GetCompRefs();
 			}
 		}
@@ -64,14 +68,15 @@ namespace RemoteExplosives {
 				action = OnGizmoActivation,
 				mouseOverCallback = OnMouseOverGizmo,
 				icon = Resources.Textures.UIDetonatorPortable,
-				defaultLabel = "PortableDetonator_detonateChannel_label".Translate(currentChannel),
+				defaultLabel = "PortableDetonator_detonateChannel_label".Translate(Channel),
 				defaultDesc = $"{DetonateButtonDesc}\n{GetInspectString()}",
 				hotKey = Resources.KeyBinging.rxPortableDetonatorDetonate,
 				disabled = !wearer.IsColonist || wearer.Dead || wearer.InMentalState
 			};
-			if (channelsUpgrade != null) {
+			if (channelsUpgrade != null && channelsComp != null) {
 				if (channelsUpgrade.Complete) {
-					yield return RemoteExplosivesUtility.GetChannelGizmo(currentChannel, currentChannel, c => currentChannel = c, RemoteExplosivesUtility.ChannelType.Basic);
+					var g = channelsComp.GetChannelGizmo();
+					if(g != null) yield return g;
 				} else {
 					var gizmo = channelsUpgrade.CompGetGizmosExtra().FirstOrDefault();
 					if (gizmo != null) yield return gizmo;
@@ -95,7 +100,7 @@ namespace RemoteExplosives {
 			lastActivationTick = Find.TickManager.TicksGame;
 			SoundDefOf.FlickSwitch.PlayOneShot(Wearer);
 
-			RemoteExplosivesUtility.TriggerReceiversInNetworkRange(this, currentChannel);
+			RemoteExplosivesUtility.TriggerReceiversInNetworkRange(this, channelsComp?.Channel ?? RemoteExplosivesUtility.DefaultChannel);
 			
 			NumUsesLeft--;
 			if (NumUsesLeft <= 0) {
@@ -106,8 +111,8 @@ namespace RemoteExplosives {
 
 		private void GetCompRefs() {
 			channelsUpgrade = this.TryGetUpgrade(ChannelsUpgradeId);
-			node = GetComp<CompWirelessDetonationGridNode>();
-			if (node == null) RemoteExplosivesController.Instance.Logger.Error($"{nameof(PortableDetonator)} needs {nameof(CompWirelessDetonationGridNode)} in def {def.defName}");
+			node = this.GetCompAssert<CompWirelessDetonationGridNode>();
+			channelsComp = GetComp<CompChannelSelector>()?.Configure(false, false, false, RemoteExplosivesUtility.ChannelType.Basic);
 		}
 	}
 }
