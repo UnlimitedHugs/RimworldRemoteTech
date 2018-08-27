@@ -22,7 +22,7 @@
 		<graphicData Class="RemoteExplosives.GraphicData_Blinker">
 			<graphicClass>Graphic_Single</graphicClass>
 			<blinkerOffset>(0, 0, .15)</blinkerOffset>
-			<blinkerColor>(1, 0, 0)</blinkerColor>
+			<blinkerColor>(1, 1, 1)</blinkerColor>
 		</graphicData>
 		<statBases>
 			<MaxHitPoints>60</MaxHitPoints>

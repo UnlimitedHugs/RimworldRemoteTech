@@ -135,6 +135,7 @@ namespace RemoteExplosives {
 			public static Texture2D UIUpgrade;
 			public static Texture2D UISensorSettings;
 			public static Texture2D gas_vent_arrow;
+			public static Texture2D proximity_sensor_arc;
 
 			public static readonly Texture2D WallSmoothMenuIcon = ContentFinder<Texture2D>.Get("Things/Building/Linked/WallSmooth_MenuIcon");
 

@@ -26,6 +26,10 @@ namespace RemoteExplosives {
 		// ReSharper disable once ConvertToConstant.Local
 		private readonly bool showDebugControls = false;
 
+		public FieldInfo CompGlowerGlowOnField { get; private set; }
+		public PropertyInfo CompGlowerShouldBeLitProperty { get; private set; }
+		public MethodInfo PawnHealthTrackerMakedDownedMethod { get; private set; }
+
 		public SettingHandle<bool> SettingAutoArmCombat { get; private set; }
 		public SettingHandle<bool> SettingAutoArmMining { get; private set; }
 		public SettingHandle<bool> SettingAutoArmUtility { get; private set; }
@@ -67,7 +71,12 @@ namespace RemoteExplosives {
 		}
 
 		private void PrepareReflection() {
-			if (AccessTools.Method(typeof(Pawn_HealthTracker), "MakeDowned").MethodMatchesSignature(typeof(void), typeof(Pawn_HealthTracker), typeof(DamageDef), typeof(HediffDef))) {
+			PawnHealthTrackerMakedDownedMethod = AccessTools.Method(typeof(Pawn_HealthTracker), "MakeDowned");
+			CompGlowerShouldBeLitProperty = AccessTools.Property(typeof(CompGlower), "ShouldBeLitNow");
+			CompGlowerGlowOnField = AccessTools.Field(typeof(CompGlower), "glowOnInt");
+			if (!PawnHealthTrackerMakedDownedMethod.MethodMatchesSignature(typeof(void), typeof(DamageInfo?), typeof(Hediff)) 
+				|| CompGlowerShouldBeLitProperty == null || CompGlowerShouldBeLitProperty.PropertyType != typeof(bool) 
+				|| CompGlowerGlowOnField == null || CompGlowerGlowOnField.FieldType != typeof(bool)) {
 				Logger.Error("Could not reflect required members");
 			}
 		}

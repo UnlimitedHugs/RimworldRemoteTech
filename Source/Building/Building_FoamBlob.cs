@@ -18,7 +18,7 @@ namespace RemoteExplosives {
 		private int ticksUntilHardened = -1;
 		private int numSpreadsLeft;
 		private int ticksUntilNextSpread;
-		private readonly InterpolatedValue animationProgress = new InterpolatedValue { value = 1 };
+		private readonly ValueInterpolator animationProgress = new ValueInterpolator(1f);
 		public Vector2 spriteScaleMultiplier = new Vector2(1f, 1f);
 
 		private List<IntVec3> adjacentCells;
@@ -55,7 +55,7 @@ namespace RemoteExplosives {
 
 		private void PrimeSpawnAnimation() {
 			animationProgress.value = 0;
-			animationProgress.StartInterpolation(1f, animationDuration, InterpolationCurves.QuinticEaseOut);
+			animationProgress.StartInterpolation(1f, animationDuration, CurveType.QuinticOut);
 		}
 
 		private void Harden() {

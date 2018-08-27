@@ -1,12 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using HugsLib.Utils;
 using RimWorld;
 using UnityEngine;
 using Verse;
 
 namespace RemoteExplosives {
-	public partial class Building_ProximitySensor : Building, ISwitchable, ISensorSettingsProvider {
+	public class Building_ProximitySensor : Building, ISwitchable, ISensorSettingsProvider {
 		private const string WirelessUpgrageReferenceId = "WirelessDetonation";
 		private const string AIUpgrageReferenceId = "AIController";
 
@@ -22,6 +23,8 @@ namespace RemoteExplosives {
 		private CompWirelessDetonationGridNode wirelessComp;
 		private CompUpgrade brainComp;
 		private CompChannelSelector channelsComp;
+		private CompAIPilotLight lightComp;
+		private CompGlowerToggleable glowerComp;
 
 		// saved
 		private Arc slice;
@@ -53,6 +56,8 @@ namespace RemoteExplosives {
 			wirelessComp = GetComp<CompWirelessDetonationGridNode>();
 			channelsComp = GetComp<CompChannelSelector>();
 			brainComp = this.TryGetUpgrade(AIUpgrageReferenceId);
+			lightComp = GetComp<CompAIPilotLight>();
+			glowerComp = GetComp<CompGlowerToggleable>();
 			UpdateUpgradeableStuff();
 		}
 
@@ -77,6 +82,7 @@ namespace RemoteExplosives {
 				// find first pawn in cell
 				var cellThings = thingGrid.ThingsListAtFast(cell);
 				for (var i = 0; i < cellThings.Count; i++) {
+					lightComp?.ReportTarget(cellThings[i]);
 					if (cellThings[i] is Pawn p) {
 						pawn = p;
 						break;
@@ -94,7 +100,10 @@ namespace RemoteExplosives {
 			}
 			// prune tracked pawns that have left the area
 			for (int i = trackedPawns.Count - 1; i >= 0; i--) {
-				if (Position.DistanceTo(trackedPawns[i].Position) > rangeStat) trackedPawns.RemoveAt(i);
+				if (Position.DistanceTo(trackedPawns[i].Position) > rangeStat) {
+					lightComp?.ReportTargetLost(trackedPawns[i]);
+					trackedPawns.RemoveAt(i);
+				}
 			}
 			isSelected = false;
 		}
@@ -120,7 +129,7 @@ namespace RemoteExplosives {
 
 		public override IEnumerable<Gizmo> GetGizmos() {
 			yield return new Command_Action {
-				defaultLabel = "proxSensor_settings".Translate(),
+				defaultLabel = "proxSensor_settings".Translate() + (WantsSwitch()?"RemoteExplosive_channel_switching".Translate():string.Empty),
 				icon = Resources.Textures.UISensorSettings,
 				action = OpenSettingsDialog
 			};
@@ -130,7 +139,7 @@ namespace RemoteExplosives {
 		}
 
 		public bool WantsSwitch() {
-			return !settings.Equals(pendingSettings);
+			return pendingSettings != null && !settings.Equals(pendingSettings);
 		}
 
 		public void DoSwitch() {
@@ -143,17 +152,13 @@ namespace RemoteExplosives {
 				s.AppendLine();
 				s.AppendFormat("proxSensor_cooldown".Translate(), CooldownTime);
 			}
-			if (brainComp != null && brainComp.Complete) {
-				s.AppendLine();
-				s.AppendFormat("proxSensor_AIStatus".Translate());
-			}
 			return s.ToString();
 		}
 
 		protected override void ReceiveCompSignal(string signal) {
 			base.ReceiveCompSignal(signal);
+			UpdateUpgradeableStuff();
 			if (signal == CompUpgrade.UpgradeCompleteSignal) {
-				UpdateUpgradeableStuff();
 				HitPoints = MaxHitPoints; // AI upgrade increases max HP
 			}
 		}
@@ -187,6 +192,10 @@ namespace RemoteExplosives {
 			speedStat.Recache();
 			if (wirelessComp != null) wirelessComp.Enabled = this.IsUpgradeCompleted(WirelessUpgrageReferenceId);
 			channelsComp?.Configure(true, true, true, this.IsUpgradeCompleted(WirelessUpgrageReferenceId) ? RemoteExplosivesUtility.ChannelType.Advanced : RemoteExplosivesUtility.ChannelType.None);
+			var brainIsOn = (brainComp?.Complete ?? false) && (powerComp?.PowerOn ?? true);
+			Tracer.Trace(brainIsOn);
+			if (lightComp != null) lightComp.Enabled = brainIsOn;
+			glowerComp?.ToggleGlow(brainIsOn);
 		}
 
 		#region support stuff

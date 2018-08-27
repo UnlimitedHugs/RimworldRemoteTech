@@ -64,6 +64,9 @@
     <Compile Include="Source\Building\Building_RadioMast.cs" />
     <Compile Include="Source\Building\ISelectedThingPlaceWorker.cs" />
     <Compile Include="Source\Building\SensorSettings.cs" />
+    <Compile Include="Source\Comp\CompAIPilotLight.cs" />
+    <Compile Include="Source\Comp\CompGlowerToggleable.cs" />
+    <Compile Include="Source\Graphic\ValueInterpolator.cs" />
     <Compile Include="Source\UI\ISensorSettingsProvider.cs" />
     <Compile Include="Source\Building\IWirelessDetonationReceiver.cs" />
     <Compile Include="Source\Building\PlaceWorker_DetonatorRadius.cs" />
@@ -137,7 +140,6 @@
     <Compile Include="Source\Damage\DamageWorker_FlameChance.cs" />
     <Compile Include="Source\UI\Designator_SelectDetonatorWire.cs" />
     <Compile Include="Source\Damage\FlameChanceDamageDef.cs" />
-    <Compile Include="Source\Graphic\InterpolatedValue.cs" />
     <Compile Include="Source\Graphic\InterpolationCurves.cs" />
     <Compile Include="Source\AI\IPawnDetonateable.cs" />
     <Compile Include="Source\Graphic\Graphic_SingleWithBase.cs" />

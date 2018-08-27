@@ -95,7 +95,8 @@
 	<proxSensor_message>Proximity sensor detected a target: {0}</proxSensor_message>
 	<proxSensor_messageName>Proximity sensor "{0}" detected a target: {1}</proxSensor_messageName>
 	<proxSensor_cooldown>Cooldown: {0:F1} seconds</proxSensor_cooldown>
-	<proxSensor_AIStatus>AI status: Not evil</proxSensor_AIStatus>
+	<proxSensor_AIStatusCaption>AI status: {0}</proxSensor_AIStatusCaption>
+	<proxSensor_AIStatusValue>Not evil</proxSensor_AIStatusValue>
 	<proxSensor_settings>Sensor settings</proxSensor_settings>
 	<proxSensor_sName>Sensor name</proxSensor_sName>
 	<proxSensor_sCooldown>Detect again delay (seconds)</proxSensor_sCooldown>

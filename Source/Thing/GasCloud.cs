@@ -38,10 +38,10 @@ namespace RemoteExplosives {
 		private bool needsInitialFill;
 		
 		private float interpolatedAlpha;
-		private readonly InterpolatedValue interpolatedOffsetX;
-		private readonly InterpolatedValue interpolatedOffsetY;
-		private readonly InterpolatedValue interpolatedScale;
-		private readonly InterpolatedValue interpolatedRotation;
+		private readonly ValueInterpolator interpolatedOffsetX;
+		private readonly ValueInterpolator interpolatedOffsetY;
+		private readonly ValueInterpolator interpolatedScale;
+		private readonly ValueInterpolator interpolatedRotation;
 
 		//saved fields
 		private float concentration;
@@ -59,10 +59,10 @@ namespace RemoteExplosives {
 		}
 
 		public GasCloud() {
-			interpolatedOffsetX = new InterpolatedValue();
-			interpolatedOffsetY = new InterpolatedValue();
-			interpolatedScale = new InterpolatedValue();
-			interpolatedRotation = new InterpolatedValue();
+			interpolatedOffsetX = new ValueInterpolator();
+			interpolatedOffsetY = new ValueInterpolator();
+			interpolatedScale = new ValueInterpolator();
+			interpolatedRotation = new ValueInterpolator();
 		}
 
 		public override void SpawnSetup(Map map, bool respawningAfterLoad) {
@@ -108,18 +108,18 @@ namespace RemoteExplosives {
 					var newX = Rand.Range(-gasProps.AnimationAmplitude, gasProps.AnimationAmplitude);
 					var newY = Rand.Range(-gasProps.AnimationAmplitude, gasProps.AnimationAmplitude);
 					var duration = gasProps.AnimationPeriod.RandomInRange;
-					interpolatedOffsetX.StartInterpolation(newX, duration, InterpolationCurves.CubicEaseInOut);
-					interpolatedOffsetY.StartInterpolation(newY, duration, InterpolationCurves.CubicEaseInOut);
+					interpolatedOffsetX.StartInterpolation(newX, duration, CurveType.CubicInOut);
+					interpolatedOffsetY.StartInterpolation(newY, duration, CurveType.CubicInOut);
 				}
 				if (interpolatedScale.finished) {
 					// start scale interpolation
-					interpolatedScale.StartInterpolation(GetRandomGasScale(), gasProps.AnimationPeriod.RandomInRange, InterpolationCurves.CubicEaseInOut);
+					interpolatedScale.StartInterpolation(GetRandomGasScale(), gasProps.AnimationPeriod.RandomInRange, CurveType.CubicInOut);
 				}
 				if (interpolatedRotation.finished) {
 					// start rotation interpolation
 					const float MaxRotationDelta = 90f;
 					var newRotation = interpolatedRotation.value + Rand.Range(-MaxRotationDelta, MaxRotationDelta)*gasProps.AnimationAmplitude;
-					interpolatedRotation.StartInterpolation(newRotation, gasProps.AnimationPeriod.RandomInRange, InterpolationCurves.CubicEaseInOut);
+					interpolatedRotation.StartInterpolation(newRotation, gasProps.AnimationPeriod.RandomInRange, CurveType.CubicInOut);
 				}
 			}
 		}
@@ -147,8 +147,8 @@ namespace RemoteExplosives {
 		public void BeginSpreadingTransition(GasCloud parentCloud, IntVec3 targetPosition) {
 			interpolatedOffsetX.value = parentCloud.Position.x - targetPosition.x;
 			interpolatedOffsetY.value = parentCloud.Position.z - targetPosition.z;
-			interpolatedOffsetX.StartInterpolation(0, SpreadingAnimationDuration, InterpolationCurves.QuinticEaseOut);
-			interpolatedOffsetY.StartInterpolation(0, SpreadingAnimationDuration, InterpolationCurves.QuinticEaseOut);
+			interpolatedOffsetX.StartInterpolation(0, SpreadingAnimationDuration, CurveType.QuinticOut);
+			interpolatedOffsetY.StartInterpolation(0, SpreadingAnimationDuration, CurveType.QuinticOut);
 		}
 
 		protected virtual void GasTick() {

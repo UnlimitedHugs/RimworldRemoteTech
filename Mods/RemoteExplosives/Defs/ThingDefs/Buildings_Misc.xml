@@ -396,7 +396,7 @@ Tip: switches can be used to toggle vents remotely, as well as in groups.</descr
 		<label>proximity sensor</label>
 		<thingClass>RemoteExplosives.Building_ProximitySensor</thingClass>
 		<description>Scans for movement in the surrounding area. On detection, can either sound an alarm, or send a detonation signal. Can be upgraded to a wireless detonator, and even an AI core to ignore friendly units.</description>
-		<graphicData>
+		<graphicData Class="RemoteExplosives.GraphicData_Blinker">
 			<texPath>proximity_sensor</texPath>
 			<graphicClass>Graphic_Single</graphicClass>
 			<shaderType>CutoutComplex</shaderType>
@@ -404,6 +404,8 @@ Tip: switches can be used to toggle vents remotely, as well as in groups.</descr
 			<shadowData>
 				<volume>(.7, 0.5, .7)</volume>
 			</shadowData>
+			<blinkerOffset>(0, 0, .05)</blinkerOffset>
+			<blinkerColor>(1, 1, 1, 1)</blinkerColor>
 		</graphicData>
 		<costList>
 			<Steel>40</Steel>
@@ -423,6 +425,13 @@ Tip: switches can be used to toggle vents remotely, as well as in groups.</descr
 			<li Class="RemoteExplosives.CompProperties_ChannelSelector"/>
 			<li Class="RemoteExplosives.CompProperties_WirelessDetonationGridNode"/>
 			<li Class="RemoteExplosives.CompProperties_WiredDetonationSender"/>
+			<li><compClass>RemoteExplosives.CompAIPilotLight</compClass></li>
+			<li Class="CompProperties_Glower">
+				<compClass>RemoteExplosives.CompGlowerToggleable</compClass>
+				<overlightRadius>1.5</overlightRadius>
+				<glowRadius>3</glowRadius>
+				<glowColor>(255,50,25,0)</glowColor>
+			</li>
 			<li Class="RemoteExplosives.CompProperties_Upgrade">
 				<label>Signal processor</label>
 				<referenceId>SignaProcessor</referenceId>

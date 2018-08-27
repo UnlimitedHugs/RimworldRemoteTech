@@ -17,7 +17,7 @@ namespace RemoteExplosives {
 					pawn.stances.stunner.Notify_DamageApplied(new DamageInfo(DamageDefOf.EMP, dinfo.Amount), true);
 				}
 				if (pawn.health.summaryHealth.SummaryHealthPercent < empDef.incapHealthThreshold && Rand.Chance(empDef.incapChance)) {
-					AccessTools.Method(typeof(Pawn_HealthTracker), "MakeDowned").Invoke(pawn.health, new object[]{dinfo, null});
+					RemoteExplosivesController.Instance.PawnHealthTrackerMakedDownedMethod.Invoke(pawn.health, new object[]{dinfo, null});
 				}
 			}
 			return base.Apply(dinfo, victim);

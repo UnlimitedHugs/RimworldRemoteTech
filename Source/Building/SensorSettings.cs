@@ -10,10 +10,10 @@ namespace RemoteExplosives {
 		public float CooldownTime = 10f;
 		public bool SendMessage = true;
 		public bool SendWired = true;
-		public bool SendWireless = true;
-		public bool DetectAnimals = true;
-		public bool DetectFriendlies = true;
-		public bool DetectEnemies = true;
+		public bool SendWireless;
+		public bool DetectAnimals;
+		public bool DetectFriendlies;
+		public bool DetectEnemies;
 		public void ExposeData() {
 			Scribe_Values.Look(ref Name, "name");
 			Scribe_Values.Look(ref CooldownTime, "cooldown", 10f);

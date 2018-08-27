@@ -48,11 +48,6 @@ namespace RemoteExplosives {
 			hasUpgrade = HasIdlePowerUpgrade;
 		}
 
-		public override void PostDeSpawn(Map map) {
-			base.PostDeSpawn(map);
-			HugsLibController.Instance.DistributedTicker.UnregisterTickability(parent);
-		}
-
 		public override void CompTick() {
 			if (HighPowerTicksLeft > 0) HighPowerTicksLeft--;
 			if (parent.def.hasInteractionCell && GenTicks.TicksGame % InteractionCellPollIntervalTicks == 0) {

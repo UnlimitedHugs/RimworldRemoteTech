@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using HugsLib;
-using HugsLib.Utils;
 using RimWorld;
 using UnityEngine;
 using Verse;
@@ -191,11 +190,12 @@ namespace RemoteExplosives {
 			return upgrade != null && upgrade.Complete;
 		}
 		
-		public static void DrawFlareOverlay(Graphic overlay, Vector3 drawPos, GraphicData_Blinker props, float alpha = 1f) {
+		public static void DrawFlareOverlay(Graphic overlay, Vector3 drawPos, GraphicData_Blinker props, float alpha = 1f, float scaleZ = 1f) {
 			var color = new Color(props.blinkerColor.r, props.blinkerColor.g, props.blinkerColor.b, props.blinkerColor.a * alpha);
 			var flareMat = overlay.MatSingle;
 			var material = MaterialPool.MatFrom(new MaterialRequest((Texture2D)flareMat.mainTexture, flareMat.shader, color));
-			var matrix = Matrix4x4.TRS(drawPos + Altitudes.AltIncVect + props.blinkerOffset, Quaternion.identity, props.blinkerScale);
+			var matrix = Matrix4x4.TRS(drawPos + Altitudes.AltIncVect + props.blinkerOffset, Quaternion.identity, 
+				new Vector3(props.blinkerScale.x, props.blinkerScale.y, props.blinkerScale.z * scaleZ));
 			Graphics.DrawMesh(MeshPool.plane10, matrix, material, 0);
 		}
 
@@ -224,8 +224,9 @@ namespace RemoteExplosives {
 			return c;
 		}
 
-		public static void AssertComponent<T>(this ThingWithComps thing, T component) {
+		public static T AssertComponent<T>(this ThingWithComps thing, T component) {
 			if(component == null) RemoteExplosivesController.Instance.Logger.Error($"{thing.GetType().Name} requires {nameof(T)} in def {thing.def.defName}");
+			return component;
 		}
 
 		public static CachedValue<float> GetCachedStat(this Thing thing, StatDef stat, int recacheInterval = GenTicks.TicksPerRealSecond) {
