@@ -1,10 +1,8 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using Verse;
 
 namespace RemoteExplosives {
 	public class Dialog_SensorSettings : Window {
-		public Action<SensorSettings> OnSettingsChanged;
 		private readonly ISensorSettingsProvider sensor;
 		private readonly SensorSettings settings;
 		private string cooldownBuffer;
@@ -61,7 +59,9 @@ namespace RemoteExplosives {
 
 		public override void PostClose() {
 			base.PostClose();
-			if (OnSettingsChanged != null && !settings.Equals(sensor.Settings)) OnSettingsChanged(settings);
+			foreach (var obj in Find.Selector.SelectedObjects) {
+				if(obj is ISensorSettingsProvider s) s.OnSettingsChanged(settings.Clone());
+			}
 		}
 	}
 }

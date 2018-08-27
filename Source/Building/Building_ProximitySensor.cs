@@ -71,8 +71,8 @@ namespace RemoteExplosives {
 		}
 
 		public override void Tick() {
-			if (GenTicks.TicksGame % 6 != 0 || (powerComp != null && !powerComp.PowerOn)) return;
 			slice = slice.Rotate(speedStat / GenTicks.TicksPerRealSecond);
+			if (GenTicks.TicksGame % 6 != 0 || (powerComp != null && !powerComp.PowerOn)) return;
 			drawnCells.Clear();
 			var thingGrid = Map.thingGrid;
 			// visit all cells in slice
@@ -163,15 +163,20 @@ namespace RemoteExplosives {
 			}
 		}
 
-		private void OnSettingsChanged(SensorSettings s) {
+		public override void Draw() {
+			base.Draw();
+			var m = Matrix4x4.TRS(DrawPos, Quaternion.AngleAxis(slice.StartAngle, Vector3.up), Vector3.one * 2f) *
+					Matrix4x4.TRS(new Vector3(0.5f, 0, 0.5f), Quaternion.identity, Vector3.one);
+			Graphics.DrawMesh(MeshPool.plane10, m, MaterialPool.MatFrom(Resources.Textures.proximity_sensor_arc, ShaderDatabase.TransparentPostLight, Color.white), 0);
+		}
+
+		public void OnSettingsChanged(SensorSettings s) {
 			pendingSettings = s;
 			this.UpdateSwitchDesignation();
 		}
 
 		private void OpenSettingsDialog() {
-			Find.WindowStack.Add(new Dialog_SensorSettings(this) {
-				OnSettingsChanged = OnSettingsChanged
-			});
+			Find.WindowStack.Add(new Dialog_SensorSettings(this));
 		}
 
 		private bool PawnMatchesFilter(Pawn p) {

@@ -15,6 +15,7 @@ namespace RemoteExplosives {
 		private const float AttentionDeficitMutiplier = .05f;
 		private const float BlinkMaxInterval = 5f;
 		private const float BlinkAnimDuration = .2f;
+		private const float SquintAnimDuration = 1f;
 		private const float OffsetAnimDuration = .5f;
 		private const float OffsetDistance = .15f;
 		private const float ReportStringCorruptChance = .008f;
@@ -57,12 +58,19 @@ namespace RemoteExplosives {
 
 		public CompAIPilotLight ReportTarget(Thing t) {
 			// switch to new target more likely if current target was looked at longer
-			var interruptChance = Mathf.Clamp01((targetExpirationTick - GenTicks.TicksGame) / CurrentTargetInterestTime);
+			var interruptChance = Mathf.Clamp01((targetExpirationTick - GenTicks.TicksGame) / CurrentTargetInterestTime) * AttentionDeficitMutiplier;
 			var currentIsPawn = currentTarget.Thing is Pawn;
 			var newIsPawn = t is Pawn;
-			var newIsHumanlike = currentTarget.Thing is Pawn p && p.RaceProps != null && p.RaceProps.Humanlike;
-			if (!currentIsPawn && newIsPawn || newIsHumanlike) interruptChance = 1f;
-			if (!currentTarget.IsValid || Rand.Chance(interruptChance * AttentionDeficitMutiplier)) {
+			var currentIsHumanlike = currentTarget.Thing is Pawn cp && cp.RaceProps != null && cp.RaceProps.Humanlike;
+			var newIsHumanlike = t is Pawn np && np.RaceProps != null && np.RaceProps.Humanlike;
+			if (!currentIsPawn && newIsPawn) {
+				interruptChance = 1f; // pawns are more interesting than things
+			} else if (currentIsHumanlike) {
+				interruptChance -= .8f; // humanlikes hold attention longer
+			} else if (newIsHumanlike) {
+				interruptChance += .8f; // humanlikes more likely to gain attention
+			}
+			if (!currentTarget.IsValid || Rand.Chance(interruptChance)) {
 				SetLookTarget(new LocalTargetInfo(t));
 			}
 			return this;
@@ -83,6 +91,7 @@ namespace RemoteExplosives {
 			base.PostDraw();
 			if (blinker != null && Enabled) {
 				var currentTick = GenTicks.TicksGame;
+				RefreshCurrentTargetPosition(false);
 				if (nextBlinkTick <= currentTick) {
 					nextBlinkTick = currentTick + Mathf.Round(Rand.Range(BlinkMaxInterval / 2f, BlinkMaxInterval)).SecondsToTicks();
 					blinkAnim.StartInterpolation(0f, BlinkAnimDuration / 2f, CurveType.CubicInOut);
@@ -94,7 +103,7 @@ namespace RemoteExplosives {
 					// squint if target is a dirty humanlike
 					var isHumanlike = currentTarget.Thing is Pawn p && p.RaceProps != null && p.RaceProps.Humanlike;
 					var targetSquint = isHumanlike ? .5f : 1f;
-					if (blinkSquintAnim.value != targetSquint) blinkSquintAnim.StartInterpolation(targetSquint, BlinkAnimDuration, CurveType.CubicInOut);
+					if (blinkSquintAnim.value != targetSquint) blinkSquintAnim.StartInterpolation(targetSquint, SquintAnimDuration, CurveType.CubicInOut);
 				}
 				if (currentTarget.IsValid && targetExpirationTick <= GenTicks.TicksGame) {
 					SetLookTarget(LocalTargetInfo.Invalid, false);
@@ -109,8 +118,15 @@ namespace RemoteExplosives {
 		}
 
 		private void SetLookTarget(LocalTargetInfo info, bool setFreshExpirationTime = true) {
-			if (info != currentTarget) {
-				currentTarget = info;
+			currentTarget = info;
+			RefreshCurrentTargetPosition(true);
+			if (setFreshExpirationTime) {
+				targetExpirationTick = GenTicks.TicksGame + Rand.Range(CurrentTargetInterestTime / 2f, CurrentTargetInterestTime).SecondsToTicks();
+			}
+		}
+
+		private void RefreshCurrentTargetPosition(bool forceRefresh) {
+			if (offsetXAnim.finished || forceRefresh) {
 				Vector3 lightOffset;
 				if (currentTarget.IsValid) {
 					lightOffset = (currentTarget.CenterVector3 - parent.TrueCenter()).normalized * OffsetDistance;
@@ -118,11 +134,8 @@ namespace RemoteExplosives {
 					lightOffset = Vector3.zero;
 				}
 				var animDuration = currentTarget.Thing is Pawn ? OffsetAnimDuration / 2f : OffsetAnimDuration;
-				offsetXAnim.StartInterpolation(lightOffset.x, animDuration, CurveType.CircularInOut);
-				offsetZAnim.StartInterpolation(lightOffset.z, animDuration, CurveType.CircularInOut);
-			}
-			if (setFreshExpirationTime) {
-				targetExpirationTick = GenTicks.TicksGame + Rand.Range(CurrentTargetInterestTime / 2f, CurrentTargetInterestTime).SecondsToTicks();
+				offsetXAnim.StartInterpolation(lightOffset.x, animDuration, CurveType.CubicInOut);
+				offsetZAnim.StartInterpolation(lightOffset.z, animDuration, CurveType.CubicInOut);
 			}
 		}
 

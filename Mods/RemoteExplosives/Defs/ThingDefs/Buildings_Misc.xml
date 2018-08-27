@@ -407,6 +407,7 @@ Tip: switches can be used to toggle vents remotely, as well as in groups.</descr
 			<blinkerOffset>(0, 0, .05)</blinkerOffset>
 			<blinkerColor>(1, 1, 1, 1)</blinkerColor>
 		</graphicData>
+		<drawerType>RealtimeOnly</drawerType>
 		<costList>
 			<Steel>40</Steel>
 			<ComponentIndustrial>3</ComponentIndustrial>
@@ -461,6 +462,7 @@ Tip: switches can be used to toggle vents remotely, as well as in groups.</descr
 				<workAmount>8000</workAmount>
 				<effectDescription>Installs an AI persona core to filter the detected targets.</effectDescription>
 				<statModifiers>
+					<rxSensorSpeed>1.25</rxSensorSpeed>
 					<MaxHitPoints>2</MaxHitPoints>
 					<Flammability>0</Flammability>
 				</statModifiers>
@@ -479,7 +481,7 @@ Tip: switches can be used to toggle vents remotely, as well as in groups.</descr
 			<Flammability>.5</Flammability>
 			<Mass>10</Mass>
 			<rxPowerConsumption>50</rxPowerConsumption>
-			<rxSensorSpeed>240</rxSensorSpeed>
+			<rxSensorSpeed>72</rxSensorSpeed>
 			<rxSignalRange>20</rxSignalRange>
 			<!-- careful with these- the sensor can impact game performance at high values. -->
 			<rxSensorAngle>36</rxSensorAngle>
