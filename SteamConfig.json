@@ -1,5 +1,5 @@
 {
-	"title": "Remote Explosives",
-	"description": "An assortment of remotely detonated explosives for different purposes- from defending your base to mining, to chemical utility explosives.\nAlso includes several new researches and a workbench to manufacture your explosive goodies.\n\nCurrently includes:\nRemote Detonator and Explosives Workbench\nRemote Explosive\nIncendiary Remote Explosive\nRemote EMP Explosive\nFracturing Mining Explosive\nClearing Mining Explosive\nSealing Foam Canister\nSleeping Gas Canister\nGas Mask\nPortable Remote Detonator\nManual detonator\nDetonator cord\nMakeshift explosive\nShaped charge\n\nThis mod can be safely added to existing games.\n\n[b]Notice:[/b] The HugsLib library mod must also be installed. Make sure both are anabled in the Mods menu and HugsLib is loaded first. \n\nThe in-game description contains a brief guide. To get more info, discuss features or provide feedback, please visit the official forum thread:\nhttps://ludeon.com/forums/index.php?topic=17285\n\nHope you enjoy.\n\nThe A17 version is still available, and can be found here: [url=http://steamcommunity.com/sharedfiles/filedetails/?id=1204605279]Remote Explosives (A17)[/url]",
+	"title": "Remote Explosives (B18)",
+	"description": "Legacy version of Remote Explosives for B18.\nThe latest version for B19 is available here: [url=https://steamcommunity.com/sharedfiles/filedetails/?id=761379469]Remote Explosives (B19)[/url]",
 	"visibility": 0
 }
