@@ -28,6 +28,12 @@ namespace RemoteExplosives {
 		}
 
 		[DefOf]
+		public static class MessageType {
+			public static MessageTypeDef rxSensorOne;
+			public static MessageTypeDef rxSensorTwo;
+		}
+
+		[DefOf]
 		public static class Job {
 			public static JobDef rxDryDetonatorWire;
 			public static JobDef rxSwitchThing;

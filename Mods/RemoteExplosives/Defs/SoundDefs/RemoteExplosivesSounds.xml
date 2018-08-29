@@ -141,8 +141,8 @@
 				</pitchRange>
 			</li>   
 		</subSounds>
-	</SoundDef>
-	
+	</SoundDef>	
+
 	<SoundDef>
 		<defName>rxFoamSpray</defName>  
 		<context>MapOnly</context> 
@@ -288,6 +288,56 @@
 				<pitchRange>
 					<min>0.9</min>        
 					<max>1.1</max>
+				</pitchRange>
+			</li>   
+		</subSounds>
+	</SoundDef>
+	
+	<SoundDef>
+		<defName>rxSensorOne</defName>  
+		<eventNames />  
+		<maxVoices>4</maxVoices>   
+		<maxSimultaneous>4</maxSimultaneous>  
+		<subSounds>
+			<li>
+				<onCamera>True</onCamera>  
+				<grains>
+					<li Class="AudioGrain_Clip">
+						<clipPath>rxSensorChime</clipPath>
+					</li>
+				</grains>     
+				<volumeRange>
+					<min>40</min>
+					<max>40</max>
+				</volumeRange>
+				<pitchRange>
+					<min>0.97</min>        
+					<max>1.03</max>
+				</pitchRange>
+			</li>   
+		</subSounds>
+	</SoundDef>
+	
+	<SoundDef>
+		<defName>rxSensorTwo</defName>  
+		<eventNames />  
+		<maxVoices>4</maxVoices>   
+		<maxSimultaneous>4</maxSimultaneous>  
+		<subSounds>
+			<li>
+				<onCamera>True</onCamera>  
+				<grains>
+					<li Class="AudioGrain_Clip">
+						<clipPath>rxSensorBlip</clipPath>
+					</li>
+				</grains>     
+				<volumeRange>
+					<min>30</min>
+					<max>30</max>
+				</volumeRange>
+				<pitchRange>
+					<min>0.97</min>        
+					<max>1.03</max>
 				</pitchRange>
 			</li>   
 		</subSounds>
