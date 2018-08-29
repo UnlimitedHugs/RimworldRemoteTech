@@ -55,7 +55,7 @@ namespace RemoteExplosives {
 			int counter = 0;
 			foreach (var receiver in sortedByDistance) {
 				HugsLibController.Instance.TickDelayScheduler.ScheduleCallback(() => {
-					if (receiver.CanReceiveSignal) receiver.ReceiveSignal(origin);
+					if (receiver.CanReceiveWirelessSignal) receiver.ReceiveWirelessSignal(origin);
 				}, TicksBetweenTriggers * counter++, GetHighestHolderInMap(origin));
 			}
 			if(counter == 0 && noTargetsMessage) Messages.Message("Detonator_notargets".Translate(), origin, MessageTypeDefOf.RejectInput);
@@ -67,7 +67,7 @@ namespace RemoteExplosives {
 			var results = new Dictionary<int, List<IWirelessDetonationReceiver>>();
 			var sample = comp.FindReceiversInNetworkRange();
 			foreach (var pair in sample) {
-				if (pair.Receiver.CanReceiveSignal) {
+				if (pair.Receiver.CanReceiveWirelessSignal) {
 					results.TryGetValue(pair.Receiver.CurrentChannel, out List<IWirelessDetonationReceiver> list);
 					if (list == null) {
 						list = new List<IWirelessDetonationReceiver>();

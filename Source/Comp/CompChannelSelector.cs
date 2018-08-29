@@ -6,7 +6,7 @@ namespace RemoteExplosives {
 	/// <summary>
 	/// Holds the necessary data to run and display the wireless channel selector.
 	/// </summary>
-	public class CompChannelSelector : ThingComp, ISwitchable {
+	public class CompChannelSelector : ThingComp, ISwitchable, IAutoReplaceExposable {
 		public const string DesiredChannelChangedSignal = "DesiredChannelChanged";
 		public const string ChannelChangedSignal = "ChannelChanged";
 
@@ -91,6 +91,11 @@ namespace RemoteExplosives {
 				var g = GetChannelGizmo();
 				if (g != null) yield return g;
 			}
+		}
+
+		public void ExposeAutoReplaceValues(AutoReplaceWatcher watcher) {
+			watcher.ExposeValue(ref _channel, "channel");
+			if (watcher.ExposeMode == LoadSaveMode.LoadingVars) _desiredChannel = _channel;
 		}
 	}
 }

@@ -14,7 +14,7 @@ namespace RemoteExplosives {
 		/// </summary>
 		IntVec3 Position { get; }
 		int CurrentChannel { get; }
-		bool CanReceiveSignal { get; }
-		void ReceiveSignal(Thing sender);
+		bool CanReceiveWirelessSignal { get; }
+		void ReceiveWirelessSignal(Thing sender);
 	}
 }

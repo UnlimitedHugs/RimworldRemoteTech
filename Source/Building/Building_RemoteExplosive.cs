@@ -14,7 +14,7 @@ namespace RemoteExplosives {
 	 * Requires a CompCustomExplosive to work correctly. Can be armed and assigned to a channel.
 	 * Will blink with an overlay texture when armed.
 	 */
-	public class Building_RemoteExplosive : Building, ISwitchable, IWirelessDetonationReceiver {
+	public class Building_RemoteExplosive : Building, ISwitchable, IWirelessDetonationReceiver, IAutoReplaceExposable {
 
 		private static readonly string ArmButtonLabel = "RemoteExplosive_arm_label".Translate();
 		private static readonly string ArmButtonDesc = "RemoteExplosive_arm_desc".Translate();
@@ -29,7 +29,7 @@ namespace RemoteExplosives {
 		private bool isArmed;
 		private int ticksSinceFlare;
 
-		public bool CanReceiveSignal {
+		public bool CanReceiveWirelessSignal {
 			get { return IsArmed && !FuseLit; }
 		}
 
@@ -113,12 +113,6 @@ namespace RemoteExplosives {
 			Resources.Sound.rxArmed.PlayOneShot(this);
 			desiredArmState = true;
 			isArmed = true;
-		}
-
-		public void SetChannel(int channel) {
-			if (channelsComp != null) {
-				channelsComp.Channel = channelsComp.DesiredChannel = channel;
-			}
 		}
 
 		public void Disarm() {
@@ -222,10 +216,18 @@ namespace RemoteExplosives {
 			return stringBuilder.ToString();
 		}
 
-		public void ReceiveSignal(Thing sender) {
+		public void ReceiveWirelessSignal(Thing sender) {
 			LightFuse();
 		}
-		
+
+		public void ExposeAutoReplaceValues(AutoReplaceWatcher watcher) {
+			var armed = IsArmed;
+			watcher.ExposeValue(ref armed, "armed");
+			if (watcher.ExposeMode == LoadSaveMode.LoadingVars && armed) {
+				Arm();
+			}
+		}
+
 		private void ArmGizmoAction() {
 			desiredArmState = !desiredArmState;
 			this.UpdateSwitchDesignation();

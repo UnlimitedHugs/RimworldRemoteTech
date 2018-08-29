@@ -162,6 +162,7 @@
     <Compile Include="Source\Comp\CompProperties_MiningExplosive.cs" />
     <Compile Include="Source\Comp\CompRandomResourceLeaver.cs" />
     <Compile Include="Source\Comp\CompProperties_RandomResourceLeaver.cs" />
+    <Compile Include="Source\Utils\IAutoReplaceExposable.cs" />
     <Compile Include="Source\Utils\MapComponent_RemoteExplosives.cs" />
     <Compile Include="Source\Building\PlaceWorker_DetonatorWire.cs" />
     <Compile Include="Source\Building\PlaceWorker_RoofBreakerExplosive.cs" />

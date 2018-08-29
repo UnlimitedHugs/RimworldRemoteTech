@@ -32,7 +32,7 @@ namespace RemoteExplosives {
 			ParentPosition = parent.Position;
 			ParentRotation = parent.Rotation;
 			if (!wasLoaded) {
-				parent.Map.GetComponent<MapComponent_RemoteExplosives>().ReplaceWatcher.TryApplySavedSettings(parent);
+				parent.Map.GetComponent<MapComponent_RemoteExplosives>().ReplaceWatcher.OnReplaceableThingSpawned(parent);
 			}
 		}
 
