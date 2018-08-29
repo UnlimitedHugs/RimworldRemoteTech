@@ -208,15 +208,10 @@
 		<workSkill>Crafting</workSkill>
 	</RecipeDef>  
 	
-	<RecipeDef Name="rxBaseChemicalCan">
-		<defName>rxMakeRemoteFoamCan</defName>
-		<label>make sealing foam canister</label>
-		<description>Craft a sealing foam canister.</description>
-		<jobString>Making sealing foam canister.</jobString>
+	<RecipeDef Name="rxBaseChemicalCan" Abstract="true">
 		<recipeUsers>
 			<li>rxBench</li>
 		</recipeUsers>
-		<researchPrerequisite>rxRemoteChemicals</researchPrerequisite>
 		<workSpeedStat>SmithingSpeed</workSpeedStat>
 		<effectWorking>Cook</effectWorking>
 		<soundWorking>Recipe_Machining</soundWorking>
@@ -256,10 +251,18 @@
 				<li>MedicineHerbal</li>
 			</thingDefs>
 		</fixedIngredientFilter>
+		<workSkill>Crafting</workSkill>
+	</RecipeDef>
+	
+	<RecipeDef ParentName="rxBaseChemicalCan">
+		<defName>rxMakeRemoteFoamCan</defName>
+		<label>make sealing foam canister</label>
+		<description>Craft a sealing foam canister.</description>
+		<jobString>Making sealing foam canister.</jobString>
+		<researchPrerequisite>rxSealingFoam</researchPrerequisite>
 		<products>
 			<rxRemoteFoamCan>1</rxRemoteFoamCan>
 		</products>
-		<workSkill>Crafting</workSkill>
 	</RecipeDef>
 
 	<RecipeDef ParentName="rxBaseChemicalCan">

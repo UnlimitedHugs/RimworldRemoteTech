@@ -93,7 +93,7 @@ Allows the Radio Mast to be built.</description>
 	</ResearchProjectDef>
 
 	<ResearchProjectDef ParentName="rxProjectBase">
-		<defName>rxRemoteChemicals</defName>
+		<defName>rxSealingFoam</defName>
 		<label>Sealing Foam</label>
 		<description>Allows the creation of remotely triggered canisters that contain sealing foam. The foam hardens into exceptionally tough walls that are great for sealing off passages and constructing durable defenses.</description>
 		<baseCost>900</baseCost>
