@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Text;
-using HugsLib.Utils;
 using RimWorld;
 using UnityEngine;
 using Verse;
@@ -151,15 +150,17 @@ namespace RemoteExplosives {
 						sb.Append(c);
 					} else if (Rand.Chance(.15f)) {
 					} else if (Rand.Chance(.20f)) {
+						// invert case
 						var s = c.ToString();
 						var sCap = s.ToUpperInvariant();
 						if (sCap == s) {
-							s = s.ToLower();
+							s = s.ToLowerInvariant();
 						} else {
 							s = sCap;
 						}
 						sb.Append(s);
 					} else {
+						// random printable ASCII char
 						sb.Append(Convert.ToChar(Rand.Range(33, 126)));
 					}
 				} else {

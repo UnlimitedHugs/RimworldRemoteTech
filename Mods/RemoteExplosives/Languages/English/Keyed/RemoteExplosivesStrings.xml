@@ -101,6 +101,7 @@
 	<proxSensor_sName>Sensor name</proxSensor_sName>
 	<proxSensor_sCooldown>Detect again delay (seconds)</proxSensor_sCooldown>
 	<proxSensor_sSendMessage>Notify on detection</proxSensor_sSendMessage>
+	<proxSensor_sMessageSound>Alternative message sound</proxSensor_sMessageSound>
 	<proxSensor_sSendWired>Detonate on detection (wire)</proxSensor_sSendWired>
 	<proxSensor_sSendWireless>Detonate on detection (wireless)</proxSensor_sSendWireless>
 	<proxSensor_sDetectAnimals>Detect animals</proxSensor_sDetectAnimals>

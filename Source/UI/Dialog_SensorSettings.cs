@@ -1,15 +1,18 @@
-﻿using UnityEngine;
+﻿using System.Linq;
+using UnityEngine;
 using Verse;
 
 namespace RemoteExplosives {
 	public class Dialog_SensorSettings : Window {
 		private readonly ISensorSettingsProvider sensor;
+		private readonly SensorSettings originalSettings;
 		private readonly SensorSettings settings;
 		private string cooldownBuffer;
 
 		public Dialog_SensorSettings(ISensorSettingsProvider sensor) {
 			this.sensor = sensor;
 			settings = sensor.Settings.Clone();
+			originalSettings = settings.Clone();
 			absorbInputAroundWindow = false;
 			doCloseX = true;
 			doCloseButton = true;
@@ -18,7 +21,7 @@ namespace RemoteExplosives {
 
 		public override Vector2 InitialSize {
 			get {
-				return new Vector2(450f, 400f);
+				return new Vector2(450f, 450f);
 			}
 		}
 
@@ -42,6 +45,7 @@ namespace RemoteExplosives {
 			Text.Anchor = TextAnchor.UpperLeft;
 
 			l.CheckboxLabeled("proxSensor_sSendMessage".Translate(), ref settings.SendMessage);
+			l.CheckboxLabeled("proxSensor_sMessageSound".Translate(), ref settings.AlternativeSound);
 			l.CheckboxLabeled("proxSensor_sSendWired".Translate(), ref settings.SendWired);
 			l.Gap();
 			GUI.enabled = sensor.HasWirelessUpgrade;
@@ -59,8 +63,14 @@ namespace RemoteExplosives {
 
 		public override void PostClose() {
 			base.PostClose();
-			foreach (var obj in Find.Selector.SelectedObjects) {
-				if(obj is ISensorSettingsProvider s) s.OnSettingsChanged(settings.Clone());
+			// assign modified fields to all selected sensors
+			foreach (var obj in Find.Selector.SelectedObjects.Union(new[] {sensor})) {
+				if (obj is ISensorSettingsProvider s) {
+					var selectedSettingsCopy = s.Settings.Clone();
+					if (SensorSettings.AssignModifiedFields(originalSettings, settings, selectedSettingsCopy)) {
+						s.OnSettingsChanged(selectedSettingsCopy);
+					}
+				}
 			}
 		}
 	}

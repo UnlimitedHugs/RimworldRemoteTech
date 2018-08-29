@@ -409,8 +409,8 @@ Tip: switches can be used to toggle vents remotely, as well as in groups.</descr
 		</graphicData>
 		<drawerType>RealtimeOnly</drawerType>
 		<costList>
-			<Steel>40</Steel>
-			<ComponentIndustrial>3</ComponentIndustrial>
+			<Steel>60</Steel>
+			<ComponentIndustrial>2</ComponentIndustrial>
 		</costList>
 		<thingCategories>
 			<li>Buildings</li>
@@ -435,7 +435,7 @@ Tip: switches can be used to toggle vents remotely, as well as in groups.</descr
 			</li>
 			<li Class="RemoteExplosives.CompProperties_Upgrade">
 				<label>Signal processor</label>
-				<referenceId>SignaProcessor</referenceId>
+				<referenceId>SignalProcessor</referenceId>
 				<workAmount>2000</workAmount>
 				<statModifiers>
 					<rxSensorRange>1.25</rxSensorRange>

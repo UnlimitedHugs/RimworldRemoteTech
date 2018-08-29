@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using HugsLib.Utils;
 using RimWorld;
 using UnityEngine;
 using Verse;
@@ -12,7 +11,6 @@ namespace RemoteExplosives {
 		private const string AIUpgrageReferenceId = "AIController";
 
 		private readonly List<IntVec3> drawnCells = new List<IntVec3>();
-		private readonly List<Pawn> trackedPawns = new List<Pawn>();
 		private bool isSelected;
 		private RadialGradientArea area;
 		private CachedValue<float> angleStat;
@@ -28,6 +26,7 @@ namespace RemoteExplosives {
 
 		// saved
 		private Arc slice;
+		private List<Pawn> trackedPawns = new List<Pawn>();
 		public float lastTriggeredTick;
 		private SensorSettings settings = new SensorSettings();
 		private SensorSettings pendingSettings;
@@ -44,6 +43,9 @@ namespace RemoteExplosives {
 		}
 		public bool HasAIUpgrade {
 			get { return brainComp != null && brainComp.Complete; }
+		}
+		private bool PowerOn {
+			get { return powerComp == null || powerComp.PowerOn; }
 		}
 
 		public override void SpawnSetup(Map map, bool respawningAfterLoad) {
@@ -64,6 +66,7 @@ namespace RemoteExplosives {
 		public override void ExposeData() {
 			base.ExposeData();
 			Scribe_Deep.Look(ref slice, "slice");
+			Scribe_Collections.Look(ref trackedPawns, false, "trackedPawns", LookMode.Reference);
 			Scribe_Values.Look(ref lastTriggeredTick, "lastTriggered");
 			Scribe_Deep.Look(ref settings, "settings");
 			Scribe_Deep.Look(ref pendingSettings, "pendingSettings");
@@ -71,8 +74,9 @@ namespace RemoteExplosives {
 		}
 
 		public override void Tick() {
+			if (!PowerOn) return;
 			slice = slice.Rotate(speedStat / GenTicks.TicksPerRealSecond);
-			if (GenTicks.TicksGame % 6 != 0 || (powerComp != null && !powerComp.PowerOn)) return;
+			if (GenTicks.TicksGame % 6 != 0) return;
 			drawnCells.Clear();
 			var thingGrid = Map.thingGrid;
 			// visit all cells in slice
@@ -165,6 +169,8 @@ namespace RemoteExplosives {
 
 		public override void Draw() {
 			base.Draw();
+			if (!PowerOn) return;
+			// draw arc overlay; rotate around lower left corner
 			var m = Matrix4x4.TRS(DrawPos, Quaternion.AngleAxis(slice.StartAngle, Vector3.up), Vector3.one * 2f) *
 					Matrix4x4.TRS(new Vector3(0.5f, 0, 0.5f), Quaternion.identity, Vector3.one);
 			Graphics.DrawMesh(MeshPool.plane10, m, MaterialPool.MatFrom(Resources.Textures.proximity_sensor_arc, ShaderDatabase.TransparentPostLight, Color.white), 0);
@@ -188,7 +194,7 @@ namespace RemoteExplosives {
 
 		private void NotifyPlayer(Pawn pawn) {
 			var message = settings.Name.NullOrEmpty() ? "proxSensor_message".Translate(pawn.LabelShort) : "proxSensor_messageName".Translate(settings.Name, pawn.LabelShort);
-			Messages.Message(message, pawn, MessageTypeDefOf.CautionInput);
+			Messages.Message(message, pawn, settings.AlternativeSound ? MessageTypeDefOf.TaskCompletion : MessageTypeDefOf.CautionInput);
 		}
 
 		private void UpdateUpgradeableStuff() {
@@ -197,8 +203,7 @@ namespace RemoteExplosives {
 			speedStat.Recache();
 			if (wirelessComp != null) wirelessComp.Enabled = this.IsUpgradeCompleted(WirelessUpgrageReferenceId);
 			channelsComp?.Configure(true, true, true, this.IsUpgradeCompleted(WirelessUpgrageReferenceId) ? RemoteExplosivesUtility.ChannelType.Advanced : RemoteExplosivesUtility.ChannelType.None);
-			var brainIsOn = (brainComp?.Complete ?? false) && (powerComp?.PowerOn ?? true);
-			Tracer.Trace(brainIsOn);
+			var brainIsOn = (brainComp?.Complete ?? false) && PowerOn;
 			if (lightComp != null) lightComp.Enabled = brainIsOn;
 			glowerComp?.ToggleGlow(brainIsOn);
 		}
@@ -226,7 +231,7 @@ namespace RemoteExplosives {
 
 		/// <summary>
 		/// A performance-friendly way to query a circular area of map cells in a given arc from the starting position.
-		/// Cell angles are pre-calculated, allowing for O(1) time queries.
+		/// Cell angles are pre-calculated, allowing for sub-linear time queries.
 		/// </summary>
 		private class RadialGradientArea {
 			public struct Enumerable {
