@@ -28,7 +28,6 @@ namespace RemoteExplosives {
 
 		public FieldInfo CompGlowerGlowOnField { get; private set; }
 		public PropertyInfo CompGlowerShouldBeLitProperty { get; private set; }
-		public MethodInfo PawnHealthTrackerMakedDownedMethod { get; private set; }
 
 		public SettingHandle<bool> SettingAutoArmCombat { get; private set; }
 		public SettingHandle<bool> SettingAutoArmMining { get; private set; }
@@ -71,11 +70,9 @@ namespace RemoteExplosives {
 		}
 
 		private void PrepareReflection() {
-			PawnHealthTrackerMakedDownedMethod = AccessTools.Method(typeof(Pawn_HealthTracker), "MakeDowned");
 			CompGlowerShouldBeLitProperty = AccessTools.Property(typeof(CompGlower), "ShouldBeLitNow");
 			CompGlowerGlowOnField = AccessTools.Field(typeof(CompGlower), "glowOnInt");
-			if (!PawnHealthTrackerMakedDownedMethod.MethodMatchesSignature(typeof(void), typeof(DamageInfo?), typeof(Hediff)) 
-				|| CompGlowerShouldBeLitProperty == null || CompGlowerShouldBeLitProperty.PropertyType != typeof(bool) 
+			if (CompGlowerShouldBeLitProperty == null || CompGlowerShouldBeLitProperty.PropertyType != typeof(bool) 
 				|| CompGlowerGlowOnField == null || CompGlowerGlowOnField.FieldType != typeof(bool)) {
 				Logger.Error("Could not reflect required members");
 			}

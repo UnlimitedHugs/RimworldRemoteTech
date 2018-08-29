@@ -1,5 +1,4 @@
-﻿using Harmony;
-using RimWorld;
+﻿using RimWorld;
 using Verse;
 
 namespace RemoteExplosives {
@@ -17,7 +16,7 @@ namespace RemoteExplosives {
 					pawn.stances.stunner.Notify_DamageApplied(new DamageInfo(DamageDefOf.EMP, dinfo.Amount), true);
 				}
 				if (pawn.health.summaryHealth.SummaryHealthPercent < empDef.incapHealthThreshold && Rand.Chance(empDef.incapChance)) {
-					RemoteExplosivesController.Instance.PawnHealthTrackerMakedDownedMethod.Invoke(pawn.health, new object[]{dinfo, null});
+					pawn.Kill(dinfo);
 				}
 			}
 			return base.Apply(dinfo, victim);

@@ -56,8 +56,8 @@
 		<explosionInteriorMote>Mote_ElectricalSpark</explosionInteriorMote>
 		<soundExplosion>Explosion_EMP</soundExplosion>
 		<combatLogRules>Damage_EMP</combatLogRules>
-		<incapHealthThreshold>.3</incapHealthThreshold>
-		<incapChance>.3</incapChance>
+		<incapHealthThreshold>.33</incapHealthThreshold>
+		<incapChance>.5</incapChance>
 	</DamageDef>
 	
 </Defs>

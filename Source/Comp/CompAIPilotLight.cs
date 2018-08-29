@@ -28,7 +28,7 @@ namespace RemoteExplosives {
 		private CompPowerTrader powerComp;
 
 		// saved
-		private LocalTargetInfo currentTarget = LocalTargetInfo.Invalid;
+		private Thing currentTarget;
 		private int targetExpirationTick;
 		private int nextBlinkTick;
 
@@ -39,7 +39,7 @@ namespace RemoteExplosives {
 		}
 
 		private float CurrentTargetInterestTime {
-			get { return currentTarget.Thing is Pawn ? PawnInterestExpirationTime : ThingInterestExpirationTime; }
+			get { return currentTarget is Pawn ? PawnInterestExpirationTime : ThingInterestExpirationTime; }
 		}
 
 		public override void PostSpawnSetup(bool respawningAfterLoad) {
@@ -50,7 +50,7 @@ namespace RemoteExplosives {
 
 		public override void PostExposeData() {
 			base.PostExposeData();
-			Scribe_Values.Look(ref currentTarget, "AILightTarget");
+			Scribe_References.Look(ref currentTarget, "AILightTarget");
 			Scribe_Values.Look(ref targetExpirationTick, "AILightExpiration");
 			Scribe_Values.Look(ref nextBlinkTick, "AILightBlink");
 		}
@@ -58,9 +58,9 @@ namespace RemoteExplosives {
 		public CompAIPilotLight ReportTarget(Thing t) {
 			// switch to new target more likely if current target was looked at longer
 			var interruptChance = Mathf.Clamp01((targetExpirationTick - GenTicks.TicksGame) / CurrentTargetInterestTime) * AttentionDeficitMutiplier;
-			var currentIsPawn = currentTarget.Thing is Pawn;
+			var currentIsPawn = currentTarget is Pawn;
 			var newIsPawn = t is Pawn;
-			var currentIsHumanlike = currentTarget.Thing is Pawn cp && cp.RaceProps != null && cp.RaceProps.Humanlike;
+			var currentIsHumanlike = currentTarget is Pawn cp && cp.RaceProps != null && cp.RaceProps.Humanlike;
 			var newIsHumanlike = t is Pawn np && np.RaceProps != null && np.RaceProps.Humanlike;
 			if (!currentIsPawn && newIsPawn) {
 				interruptChance = 1f; // pawns are more interesting than things
@@ -69,15 +69,15 @@ namespace RemoteExplosives {
 			} else if (newIsHumanlike) {
 				interruptChance += .8f; // humanlikes more likely to gain attention
 			}
-			if (!currentTarget.IsValid || Rand.Chance(interruptChance)) {
-				SetLookTarget(new LocalTargetInfo(t));
+			if (currentTarget == null || Rand.Chance(interruptChance)) {
+				SetLookTarget(t);
 			}
 			return this;
 		}
 
 		public CompAIPilotLight ReportTargetLost(Thing t) {
-			if (currentTarget.Thing == t) {
-				SetLookTarget(new LocalTargetInfo(t.Position), false); // look at last known position
+			if (currentTarget == t) {
+				SetLookTarget(null, false); // look at last known position
 			}
 			return this;
 		}
@@ -100,12 +100,12 @@ namespace RemoteExplosives {
 				}
 				if (blinkSquintAnim.finished) {
 					// squint if target is a dirty humanlike
-					var isHumanlike = currentTarget.Thing is Pawn p && p.RaceProps != null && p.RaceProps.Humanlike;
+					var isHumanlike = currentTarget is Pawn p && p.RaceProps != null && p.RaceProps.Humanlike;
 					var targetSquint = isHumanlike ? .5f : 1f;
 					if (blinkSquintAnim.value != targetSquint) blinkSquintAnim.StartInterpolation(targetSquint, SquintAnimDuration, CurveType.CubicInOut);
 				}
-				if (currentTarget.IsValid && targetExpirationTick <= GenTicks.TicksGame) {
-					SetLookTarget(LocalTargetInfo.Invalid, false);
+				if (currentTarget != null && targetExpirationTick <= GenTicks.TicksGame) {
+					SetLookTarget(null, false);
 				}
 				blinkAnim.UpdateIfUnpaused();
 				blinkSquintAnim.UpdateIfUnpaused();
@@ -116,8 +116,8 @@ namespace RemoteExplosives {
 			}
 		}
 
-		private void SetLookTarget(LocalTargetInfo info, bool setFreshExpirationTime = true) {
-			currentTarget = info;
+		private void SetLookTarget(Thing newTarget, bool setFreshExpirationTime = true) {
+			currentTarget = newTarget;
 			RefreshCurrentTargetPosition(true);
 			if (setFreshExpirationTime) {
 				targetExpirationTick = GenTicks.TicksGame + Rand.Range(CurrentTargetInterestTime / 2f, CurrentTargetInterestTime).SecondsToTicks();
@@ -127,12 +127,12 @@ namespace RemoteExplosives {
 		private void RefreshCurrentTargetPosition(bool forceRefresh) {
 			if (offsetXAnim.finished || forceRefresh) {
 				Vector3 lightOffset;
-				if (currentTarget.IsValid) {
-					lightOffset = (currentTarget.CenterVector3 - parent.TrueCenter()).normalized * OffsetDistance;
+				if (currentTarget != null) {
+					lightOffset = (currentTarget.TrueCenter() - parent.TrueCenter()).normalized * OffsetDistance;
 				} else {
 					lightOffset = Vector3.zero;
 				}
-				var animDuration = currentTarget.Thing is Pawn ? OffsetAnimDuration / 2f : OffsetAnimDuration;
+				var animDuration = currentTarget is Pawn ? OffsetAnimDuration / 2f : OffsetAnimDuration;
 				offsetXAnim.StartInterpolation(lightOffset.x, animDuration, CurveType.CubicInOut);
 				offsetZAnim.StartInterpolation(lightOffset.z, animDuration, CurveType.CubicInOut);
 			}
