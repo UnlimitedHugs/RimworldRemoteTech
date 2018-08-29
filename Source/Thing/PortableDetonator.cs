@@ -111,7 +111,7 @@ namespace RemoteExplosives {
 
 		private void GetCompRefs() {
 			channelsUpgrade = this.TryGetUpgrade(ChannelsUpgradeId);
-			node = this.GetCompAssert<CompWirelessDetonationGridNode>();
+			node = this.RequireComp<CompWirelessDetonationGridNode>();
 			channelsComp = GetComp<CompChannelSelector>()?.Configure(false, false, false, RemoteExplosivesUtility.ChannelType.Basic);
 		}
 	}

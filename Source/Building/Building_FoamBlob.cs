@@ -27,12 +27,14 @@ namespace RemoteExplosives {
 		public override void SpawnSetup(Map map, bool respawningAfterLoad) {
 			base.SpawnSetup(map, respawningAfterLoad);
 			foamProps = (BuildingProperties_FoamBlob)def.building;
+			this.RequireComponent(foamProps);
 			if(justCreated) {
 				SetFactionDirect(Faction.OfPlayer);
 				ticksUntilHardened = foamProps.ticksToHarden.RandomInRange;
 				Resources.Sound.rxFoamSpray.PlayOneShot(this);
 				PrimeSpawnAnimation();
 				justCreated = false;
+				ticksUntilNextSpread = foamProps.ticksBetweenSpreading.RandomInRange;
 			}
 		}
 
@@ -48,9 +50,8 @@ namespace RemoteExplosives {
 			Scribe_Values.Look(ref ticksUntilNextSpread, "ticksUntilNextSpread");
 		}
 
-		public void SetSpreadingCharges(int numCharges) {
-			numSpreadsLeft = numCharges;
-			ticksUntilNextSpread = foamProps.ticksBetweenSpreading.RandomInRange;
+		public void AddSpreadingCharges(int numCharges) {
+			numSpreadsLeft += numCharges;
 		}
 
 		private void PrimeSpawnAnimation() {

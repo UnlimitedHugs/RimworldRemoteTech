@@ -218,15 +218,19 @@ namespace RemoteExplosives {
 			}
 		}
 
-		public static T GetCompAssert<T>(this ThingWithComps thing) where T: ThingComp {
+		public static T RequireComp<T>(this ThingWithComps thing) where T: ThingComp {
 			var c = thing.GetComp<T>();
 			if(c == null) RemoteExplosivesController.Instance.Logger.Error($"{thing.GetType().Name} requires ThingComp of type {nameof(T)} in def {thing.def.defName}");
 			return c;
 		}
 
-		public static T AssertComponent<T>(this ThingWithComps thing, T component) {
+		public static T RequireComponent<T>(this ThingWithComps thing, T component) {
 			if(component == null) RemoteExplosivesController.Instance.Logger.Error($"{thing.GetType().Name} requires {nameof(T)} in def {thing.def.defName}");
 			return component;
+		}
+
+		public static void RequireTicker(this ThingComp comp, TickerType type) {
+			if(comp.parent.def.tickerType != type) RemoteExplosivesController.Instance.Logger.Error($"{comp.GetType().Name} requires tickerType:{type} in def {comp.parent.def.defName}");
 		}
 
 		public static CachedValue<float> GetCachedStat(this Thing thing, StatDef stat, int recacheInterval = GenTicks.TicksPerRealSecond) {

@@ -1,4 +1,5 @@
-﻿using Verse;
+﻿using HugsLib.Utils;
+using Verse;
 using Verse.Sound;
 
 namespace RemoteExplosives {
@@ -14,18 +15,22 @@ namespace RemoteExplosives {
 		}
 
 		protected override void Detonate() {
-			var map = parent.Map;
+			var stackCount = parent.stackCount;
 			base.Detonate();
 			if (customProps.spawnThingDef == null) return;
-			var thing = ThingMaker.MakeThing(customProps.spawnThingDef);
-			GenPlace.TryPlaceThing(thing, parent.Position, map, ThingPlaceMode.Direct);
+			var thing = parentPosition.GetFirstThing(parentMap, customProps.spawnThingDef);
+			var existingThing = thing != null;
+			if (thing == null) {
+				thing = ThingMaker.MakeThing(customProps.spawnThingDef);
+				GenPlace.TryPlaceThing(thing, parentPosition, parentMap, ThingPlaceMode.Direct);
+			}
 			if (thing is Building_FoamBlob) {
 				if (customProps.numFoamBlobs > 1) {
-					(thing as Building_FoamBlob).SetSpreadingCharges(customProps.numFoamBlobs - 1);
+					(thing as Building_FoamBlob).AddSpreadingCharges(customProps.numFoamBlobs * stackCount - (existingThing ? 0 : 1));
 				}
 			} else if(thing is GasCloud) {
 				if (customProps.gasConcentration > 0) {
-					(thing as GasCloud).ReceiveConcentration(customProps.gasConcentration);
+					(thing as GasCloud).ReceiveConcentration(customProps.gasConcentration * stackCount);
 				}
 			}
 		}

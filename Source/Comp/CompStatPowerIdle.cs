@@ -46,6 +46,7 @@ namespace RemoteExplosives {
 		public override void PostSpawnSetup(bool respawningAfterLoad) {
 			base.PostSpawnSetup(respawningAfterLoad);
 			hasUpgrade = HasIdlePowerUpgrade;
+			this.RequireTicker(TickerType.Normal);
 		}
 
 		public override void CompTick() {

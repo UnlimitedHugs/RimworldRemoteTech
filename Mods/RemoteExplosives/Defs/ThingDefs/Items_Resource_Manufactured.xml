@@ -159,6 +159,7 @@ Place as a building from the Explosives menu to use.</description>
 					<min>50</min>
 					<max>50</max>
 				</wickTicks>
+				<explosiveRadius>0</explosiveRadius>
 				<startWickHitPointsPercent>.2</startWickHitPointsPercent>
 				<breakSound>rxGlassBreak</breakSound>
 				<spawnThingDef>rxWallFoamBlob</spawnThingDef>
@@ -187,6 +188,7 @@ Place as a building from the Explosives menu to use.</description>
 					<min>50</min>
 					<max>50</max>
 				</wickTicks>
+				<explosiveRadius>0</explosiveRadius>
 				<startWickHitPointsPercent>.2</startWickHitPointsPercent>
 				<breakSound>rxGlassBreak</breakSound>
 				<spawnThingDef>rxGas_Sleeping</spawnThingDef>
@@ -215,6 +217,7 @@ Place as a building from the Explosives menu to use.</description>
 					<min>50</min>
 					<max>50</max>
 				</wickTicks>
+				<explosiveRadius>0</explosiveRadius>
 				<startWickHitPointsPercent>.2</startWickHitPointsPercent>
 				<breakSound>rxGlassBreak</breakSound>
 				<spawnThingDef>rxGas_SleepingRefined</spawnThingDef>

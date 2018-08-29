@@ -70,8 +70,8 @@ namespace RemoteExplosives {
 			explosiveComp = GetComp<CompCustomExplosive>();
 			replaceComp = GetComp<CompAutoReplaceable>()?.DisableGizmoAutoDisplay();
 			channelsComp = GetComp<CompChannelSelector>()?.Configure(true);
-			this.AssertComponent(CustomProps);
-			this.AssertComponent(BlinkerData);
+			this.RequireComponent(CustomProps);
+			this.RequireComponent(BlinkerData);
 			if (!respawningAfterLoad && CustomProps != null) {
 				if (CustomProps.explosiveType == RemoteExplosiveType.Combat && RemoteExplosivesController.Instance.SettingAutoArmCombat ||
 					CustomProps.explosiveType == RemoteExplosiveType.Mining && RemoteExplosivesController.Instance.SettingAutoArmMining ||

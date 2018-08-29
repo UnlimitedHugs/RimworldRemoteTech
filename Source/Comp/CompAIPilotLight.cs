@@ -44,7 +44,7 @@ namespace RemoteExplosives {
 
 		public override void PostSpawnSetup(bool respawningAfterLoad) {
 			base.PostSpawnSetup(respawningAfterLoad);
-			blinker = parent.AssertComponent(parent.def.graphicData as GraphicData_Blinker);
+			blinker = parent.RequireComponent(parent.def.graphicData as GraphicData_Blinker);
 			powerComp = parent.GetComp<CompPowerTrader>();
 		}
 
