@@ -193,7 +193,7 @@ namespace RemoteExplosives {
 		}
 
 		private void NotifyPlayer(Pawn pawn) {
-			var message = settings.Name.NullOrEmpty() ? "proxSensor_message".Translate(pawn.LabelShort) : "proxSensor_messageName".Translate(settings.Name, pawn.LabelShort);
+			var message = settings.Name.NullOrEmpty() ? "proxSensor_message".Translate(pawn.LabelShortCap) : "proxSensor_messageName".Translate(settings.Name, pawn.LabelShort);
 			Messages.Message(message, pawn, settings.AlternativeSound ? Resources.MessageType.rxSensorTwo : Resources.MessageType.rxSensorOne);
 		}
 

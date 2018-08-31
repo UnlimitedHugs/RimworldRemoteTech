@@ -90,6 +90,10 @@ namespace RemoteExplosives {
 							Messages.Message("Upgrade_uneqip_message".Translate(), parent, MessageTypeDefOf.RejectInput);
 							return;
 						}
+						if (!wantsWork && parent.Map.mapPawns.FreeColonists.All(p => !PawnMeetsSkillRequirement(p))) {
+							Messages.Message("Upgrade_needSkills_message".Translate(Props.constructionSkillPrerequisite), MessageTypeDefOf.RejectInput);
+							return;
+						}
 						wantsWork = !wantsWork;
 						if (!wantsWork) ingredients.TryDropAll(parent.Position, parent.Map, ThingPlaceMode.Near);
 						UpdateDesignation();
@@ -176,6 +180,10 @@ namespace RemoteExplosives {
 
 		public ThingOwner GetDirectlyHeldThings() {
 			return ingredients;
+		}
+
+		public bool PawnMeetsSkillRequirement(Pawn p) {
+			return p.skills.GetSkill(SkillDefOf.Construction).Level >= Props.constructionSkillPrerequisite;
 		}
 
 		private void CompleteUpgrade() {

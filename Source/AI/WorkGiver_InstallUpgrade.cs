@@ -12,7 +12,7 @@ namespace RemoteExplosives {
 		private const int maxIngredientSearchDist = 999;
 
 		public override ThingRequest PotentialWorkThingRequest {
-			get { return ThingRequest.ForUndefined(); }
+			get { return ThingRequest.ForGroup(ThingRequestGroup.Undefined); }
 		}
 
 		public override Job JobOnThing(Pawn pawn, Thing t, bool forced = false) {
@@ -31,7 +31,10 @@ namespace RemoteExplosives {
 				JobFailReason.Is("Upgrade_missingMaterials".Translate(missingIngredient.Count, missingIngredient.ThingDef.LabelCap));
 				status = false;
 			}
-
+			if (status && !comp.PawnMeetsSkillRequirement(pawn)) {
+				JobFailReason.Is("ConstructionSkillTooLow".Translate());
+				status = false;
+			}
 			return status ? new Job(Resources.Job.rxInstallUpgrade, t) : null;
 		}
 
@@ -39,7 +42,8 @@ namespace RemoteExplosives {
 			var candidates = pawn.Map.designationManager.SpawnedDesignationsOfDef(Resources.Designation.rxInstallUpgrade);
 			foreach (var des in candidates) {
 				var designatedThing = des.target.Thing;
-				if ((designatedThing.FirstUpgradeableComp()?.WantsWork).GetValueOrDefault() && pawn.CanReserve(designatedThing)) {
+				var comp = designatedThing.FirstUpgradeableComp();
+				if (comp != null && comp.WantsWork) {
 					yield return designatedThing;
 				}
 			}

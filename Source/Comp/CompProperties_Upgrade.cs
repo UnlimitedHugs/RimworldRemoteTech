@@ -26,6 +26,8 @@ namespace RemoteExplosives {
 		public ResearchProjectDef researchPrerequisite;
 		// optional referenceId of another upgrade on the same thing that must be installed before this upgrade can be installed
 		public string prerequisiteUpgradeId;
+		// minimum construction skill level on the builder who can install the upgrade
+		public int constructionSkillPrerequisite = 5;
 
 		private string _effectDescription;
 		public string EffectDescription {
@@ -72,13 +74,16 @@ namespace RemoteExplosives {
 		private string _prerequisitesDescription;
 		public string GetPrerequisitesDescription(ThingDef parentDef) {
 			if (_prerequisitesDescription == null) {
-				var reqList = new List<string>(2);
+				var reqList = new List<string>(3);
 				if (researchPrerequisite != null) {
 					reqList.Add("Upgrade_prerequisitesResearch".Translate(researchPrerequisite.label));
 				}
 				if (prerequisiteUpgradeId != null) {
 					var prereqLabel = parentDef.comps.OfType<CompProperties_Upgrade>().FirstOrDefault(u => u.referenceId == prerequisiteUpgradeId)?.label;
 					reqList.Add("Upgrade_prerequisitesUpgrade".Translate(prereqLabel ?? prerequisiteUpgradeId));
+				}
+				if (constructionSkillPrerequisite > 0) {
+					reqList.Add("Upgrade_prerequisitesSkill".Translate(constructionSkillPrerequisite));
 				}
 				_prerequisitesDescription = reqList.Count > 0 ? "Upgrade_prerequisites".Translate() + reqList.Join(", ") : string.Empty;
 			}

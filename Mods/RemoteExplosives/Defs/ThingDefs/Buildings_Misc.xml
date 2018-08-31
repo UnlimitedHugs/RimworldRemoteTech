@@ -445,6 +445,7 @@ Tip: switches can be used to toggle vents remotely, as well as in groups.</descr
 				<costList>
 					<ComponentSpacer>1</ComponentSpacer>
 				</costList>
+				<constructionSkillPrerequisite>10</constructionSkillPrerequisite>
 			</li>
 			<li Class="RemoteExplosives.CompProperties_Upgrade">
 				<label>Wireless detonator</label>
@@ -455,6 +456,7 @@ Tip: switches can be used to toggle vents remotely, as well as in groups.</descr
 					<ComponentIndustrial>1</ComponentIndustrial>
 					<ComponentSpacer>1</ComponentSpacer>
 				</costList>
+				<constructionSkillPrerequisite>7</constructionSkillPrerequisite>
 			</li>
 			<li Class="RemoteExplosives.CompProperties_Upgrade">
 				<label>AI controller</label>
@@ -470,6 +472,7 @@ Tip: switches can be used to toggle vents remotely, as well as in groups.</descr
 					<AIPersonaCore>1</AIPersonaCore>
 					<Plasteel>40</Plasteel>
 				</costList>
+				<constructionSkillPrerequisite>12</constructionSkillPrerequisite>
 			</li>
 		</comps>
 		<altitudeLayer>Building</altitudeLayer>

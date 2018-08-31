@@ -139,6 +139,7 @@ Right-click with a drafted colonist for better timing.</description>
 				<costList>
 					<ComponentSpacer>1</ComponentSpacer>
 				</costList>
+				<constructionSkillPrerequisite>7</constructionSkillPrerequisite>
 			</li>
 			<li Class="RemoteExplosives.CompProperties_Upgrade">
 				<label>Idle power relay</label>
@@ -318,6 +319,7 @@ Research different types of remote explosives to unlock available recipes.</desc
 					<ComponentSpacer>2</ComponentSpacer>
 					<Plasteel>40</Plasteel>
 				</costList>
+				<constructionSkillPrerequisite>10</constructionSkillPrerequisite>
 			</li>
 		</comps>
 		<placeWorkers>

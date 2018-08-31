@@ -86,11 +86,13 @@
 	<Upgrade_prerequisites>Prerequisites: </Upgrade_prerequisites>
 	<Upgrade_prerequisitesResearch>research ({0})</Upgrade_prerequisitesResearch>
 	<Upgrade_prerequisitesUpgrade>upgrade ({0})</Upgrade_prerequisitesUpgrade>
+	<Upgrade_prerequisitesSkill>construction skill ({0})</Upgrade_prerequisitesSkill>
 	<Upgrade_workProgress>Work progress: {0:F0}%</Upgrade_workProgress>
 	<Upgrade_deliveredIngredients>Stored things: {0}</Upgrade_deliveredIngredients>
 	<Upgrade_installedUpgrades>Installed upgrades: </Upgrade_installedUpgrades>
 	<Upgrade_missingMaterials>need {0}x {1}</Upgrade_missingMaterials>
 	<Upgrade_uneqip_message>Remove from inventory to upgrade.</Upgrade_uneqip_message>
+	<Upgrade_needSkills_message>A colonist with a minimum building skill of {0} is needed to install this upgrade.</Upgrade_needSkills_message>
 	
 	<proxSensor_message>Proximity sensor detected a target: {0}</proxSensor_message>
 	<proxSensor_messageName>Proximity sensor "{0}" detected a target: {1}</proxSensor_messageName>
