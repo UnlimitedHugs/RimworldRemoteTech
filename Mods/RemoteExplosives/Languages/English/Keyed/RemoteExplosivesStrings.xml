@@ -7,6 +7,7 @@
 	
 	<Detonator_detonatenow>Detonate explosives NOW</Detonator_detonatenow>
 	<Detonator_detonatenow_reserved>(reserved by {0})</Detonator_detonatenow_reserved>
+	<Detonator_detonateNow_label>Detonate now</Detonator_detonateNow_label>
 	
 	<RemoteExplosive_arm_label>Arm</RemoteExplosive_arm_label>
 	<RemoteExplosive_arm_desc>When armed, this explosive can be remotely detonated.</RemoteExplosive_arm_desc>

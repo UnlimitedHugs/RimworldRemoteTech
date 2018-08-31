@@ -6,6 +6,9 @@ using UnityEngine;
 using Verse;
 
 namespace RemoteExplosives {
+	/// <summary>
+	/// Scans a circular area using a sweeping scan and detects pawns that match the current filter.
+	/// </summary>
 	public class Building_ProximitySensor : Building, ISwitchable, ISensorSettingsProvider {
 		private const string WirelessUpgrageReferenceId = "WirelessDetonation";
 		private const string AIUpgrageReferenceId = "AIController";

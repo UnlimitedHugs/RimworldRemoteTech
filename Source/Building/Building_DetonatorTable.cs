@@ -10,9 +10,6 @@ namespace RemoteExplosives {
 	 * Can be upgraded with a component to unlock the ability to use channels.
 	 */
 	public class Building_DetonatorTable : Building, IPawnDetonateable {
-		private static readonly string DetonateButtonLabel = "DetonatorTable_detonate_label".Translate();
-		private static readonly string DetonateButtonDesc = "DetonatorTable_detonate_desc".Translate();
-
 		private const string ChannelsBasicUpgradeId = "ChannelsBasic";
 		private const string ChannelsAdvancedUpgradeId = "ChannelsAdvanced";
 
@@ -37,15 +34,23 @@ namespace RemoteExplosives {
 		}
 
 		public override IEnumerable<Gizmo> GetGizmos() {
-			var detonateGizmo = new Command_Toggle {
-				toggleAction = DetonateGizmoAction,
-				isActive = () => wantDetonation,
-				icon = Resources.Textures.UIDetonate,
-				defaultLabel = DetonateButtonLabel,
-				defaultDesc = DetonateButtonDesc,
-				hotKey = Resources.KeyBinging.rxRemoteTableDetonate
-			};
-			yield return detonateGizmo;
+			Command detonate;
+			if (CanDetonateImmediately()) {
+				detonate = new Command_Action {
+					action = DoDetonation,
+					defaultLabel = "Detonator_detonateNow_label".Translate(),
+				};
+			} else {
+				detonate = new Command_Toggle {
+					toggleAction = DetonateToggleAction,
+					isActive = () => wantDetonation,
+					defaultLabel = "DetonatorTable_detonate_label".Translate(),
+				};
+			}
+			detonate.icon = Resources.Textures.UIDetonate;
+			detonate.defaultDesc = "DetonatorTable_detonate_desc".Translate();
+			detonate.hotKey = Resources.KeyBinging.rxRemoteTableDetonate;
+			yield return detonate;
 
 			var c = channels?.GetChannelGizmo();
 			if (c != null) yield return c;
@@ -55,7 +60,7 @@ namespace RemoteExplosives {
 			}
 		}
 
-		private void DetonateGizmoAction() {
+		private void DetonateToggleAction() {
 			wantDetonation = !wantDetonation;
 		}
 
@@ -63,6 +68,14 @@ namespace RemoteExplosives {
 			base.ReceiveCompSignal(signal);
 			if(signal == CompUpgrade.UpgradeCompleteSignal) ConfigureChannelComp();
 			if(signal == CompChannelSelector.ChannelChangedSignal) RemoteExplosivesUtility.ReportPowerUse(this, 2f);
+		}
+
+		private bool CanDetonateImmediately() {
+			if (def.hasInteractionCell) {
+				var manningPawn = InteractionCell.GetFirstPawn(Map);
+				if (manningPawn != null && manningPawn.Drafted) return true;
+			}
+			return false;
 		}
 
 		private void ConfigureChannelComp() {
