@@ -51,6 +51,17 @@ Research IEDs to manufacture combat-grade remote explosives.</description>
 	</ResearchProjectDef>
 	
 	<ResearchProjectDef ParentName="rxProjectBase">
+		<defName>rxProximitySensor</defName>
+		<label>Proximity sensor</label>
+		<description>Allows you to build the proximity sensor- a small device that can detect movement in its immediate vicinity.
+Also acts as an automated detonator when connected to detonator wire.</description>
+		<baseCost>1500</baseCost>
+		<techLevel>Industrial</techLevel>
+		<researchViewX>1</researchViewX>
+		<researchViewY>1.5</researchViewY>
+	</ResearchProjectDef>
+	
+	<ResearchProjectDef ParentName="rxProjectBase">
 		<defName>rxChannels</defName>
 		<label>Remote Explosives Channels</label>
 		<description>Unlocks the use of channel on your remote explosives and the detonator. Only explosives on the same channel as the detonator can be triggered. This allows to set up multiple lines of explosive defenses.

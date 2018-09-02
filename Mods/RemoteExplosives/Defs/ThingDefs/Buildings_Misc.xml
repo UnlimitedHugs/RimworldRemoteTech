@@ -496,7 +496,9 @@ Tip: switches can be used to toggle vents remotely, as well as in groups.</descr
 		<pathCost>50</pathCost>
 		<minifiedDef>MinifiedThing</minifiedDef>
 		<designationCategory>rxRemoteExplosives</designationCategory>
-		<researchPrerequisites></researchPrerequisites>
+		<researchPrerequisites>
+			<li>rxProximitySensor</li>
+		</researchPrerequisites>
 	</ThingDef>
 	
 </Defs>

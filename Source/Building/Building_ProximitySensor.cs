@@ -174,7 +174,7 @@ namespace RemoteExplosives {
 			base.Draw();
 			if (!PowerOn) return;
 			// draw arc overlay; rotate around lower left corner
-			var m = Matrix4x4.TRS(DrawPos, Quaternion.AngleAxis(slice.StartAngle, Vector3.up), Vector3.one * 2f) *
+			var m = Matrix4x4.TRS(DrawPos - Altitudes.AltIncVect, Quaternion.AngleAxis(slice.StartAngle, Vector3.up), Vector3.one * 2f) *
 					Matrix4x4.TRS(new Vector3(0.5f, 0, 0.5f), Quaternion.identity, Vector3.one);
 			Graphics.DrawMesh(MeshPool.plane10, m, MaterialPool.MatFrom(Resources.Textures.proximity_sensor_arc, ShaderDatabase.TransparentPostLight, Color.white), 0);
 		}
@@ -192,7 +192,7 @@ namespace RemoteExplosives {
 			if (brainComp == null || !brainComp.Complete || p.RaceProps == null) return true;
 			return (settings.DetectAnimals && p.RaceProps.Animal)
 					|| (settings.DetectEnemies && p.HostileTo(Faction))
-					|| (settings.DetectFriendlies && (p.Faction == null || !p.Faction.HostileTo(Faction)));
+					|| (settings.DetectFriendlies && (p.Faction == null || !p.Faction.HostileTo(Faction)) && !p.RaceProps.Animal);
 		}
 
 		private void NotifyPlayer(Pawn pawn) {
