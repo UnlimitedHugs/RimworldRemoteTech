@@ -11,7 +11,7 @@
 			<li>
 				<grains>
 					<li Class="AudioGrain_Clip">
-						<clipPath>beep</clipPath>
+						<clipPath>rxBeep</clipPath>
 					</li>
 				</grains>     
 				<volumeRange>
@@ -32,7 +32,7 @@
 			<li>
 				<grains>
 					<li Class="AudioGrain_Clip">
-						<clipPath>arm_beep</clipPath>
+						<clipPath>rxArmBeep</clipPath>
 					</li>
 				</grains>     
 				<volumeRange>
@@ -53,7 +53,7 @@
 			<li>
 				<grains>
 					<li Class="AudioGrain_Clip">
-						<clipPath>cavein</clipPath>
+						<clipPath>rxCavein</clipPath>
 					</li>
 				</grains>     
 				<volumeRange>
@@ -78,7 +78,7 @@
 			<li>
 				<grains>
 					<li Class="AudioGrain_Clip">
-						<clipPath>emp_charge</clipPath>
+						<clipPath>rxEmpCharge</clipPath>
 					</li>
 				</grains>     
 				<volumeRange>
@@ -103,7 +103,7 @@
 			<li>
 				<grains>
 					<li Class="AudioGrain_Clip">
-						<clipPath>dial_click</clipPath>
+						<clipPath>rxDialClick</clipPath>
 					</li>
 				</grains>     
 				<volumeRange>
@@ -128,7 +128,7 @@
 				<onCamera>True</onCamera>  
 				<grains>
 					<li Class="AudioGrain_Clip">
-						<clipPath>dial_click</clipPath>
+						<clipPath>rxDialClick</clipPath>
 					</li>
 				</grains>     
 				<volumeRange>
@@ -153,7 +153,7 @@
 			<li>
 				<grains>
 					<li Class="AudioGrain_Clip">
-						<clipPath>foam_spray</clipPath>
+						<clipPath>rxFoamSpray</clipPath>
 					</li>
 				</grains>     
 				<volumeRange>
@@ -178,7 +178,7 @@
 			<li>
 				<grains>
 					<li Class="AudioGrain_Clip">
-						<clipPath>glass_break</clipPath>
+						<clipPath>rxGlassBreak</clipPath>
 					</li>
 				</grains>     
 				<volumeRange>
@@ -203,7 +203,7 @@
 			<li>
 				<grains>
 					<li Class="AudioGrain_Clip">
-						<clipPath>foam_solidify</clipPath>
+						<clipPath>rxFoamSolidify</clipPath>
 					</li>
 				</grains>     
 				<volumeRange>
@@ -228,7 +228,7 @@
 			<li>
 				<grains>
 					<li Class="AudioGrain_Clip">
-						<clipPath>lever_cycle</clipPath>
+						<clipPath>rxLeverCycle</clipPath>
 					</li>
 				</grains>     
 				<volumeRange>
@@ -253,7 +253,7 @@
 			<li>
 				<grains>
 					<li Class="AudioGrain_Clip">
-						<clipPath>ignite</clipPath>
+						<clipPath>rxIgnite</clipPath>
 					</li>
 				</grains>     
 				<volumeRange>
@@ -278,7 +278,7 @@
 			<li>
 				<grains>
 					<li Class="AudioGrain_Clip">
-						<clipPath>electric_zap</clipPath>
+						<clipPath>rxElectricZap</clipPath>
 					</li>
 				</grains>     
 				<volumeRange>
