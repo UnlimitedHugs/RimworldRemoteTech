@@ -258,7 +258,7 @@ Place as a building from the Explosives menu to use.</description>
 	
 	<ThingDef ParentName="rxBaseExplosiveIngredient">
 		<defName>rxSparkpowder</defName>
-		<label>rxSparkpowder</label>
+		<label>Sparkpowder</label>
 		<description>Harvested from Sparkweed plants and specially preserved to prevent spontaneous combustion. Keep away from fire.</description>
 		<graphicData>
 			<texPath>spark_powder</texPath>
