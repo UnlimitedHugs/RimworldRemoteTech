@@ -114,6 +114,7 @@ namespace RemoteExplosives {
 
 			public static readonly Graphic FlareOverlayNormal = GraphicDatabase.Get<Graphic_Single>("rxFlare", ShaderDatabase.TransparentPostLight);
 			public static readonly Graphic FlareOverlayStrong = GraphicDatabase.Get<Graphic_Single>("rxFlareStrong", ShaderDatabase.TransparentPostLight);
+			public static readonly Graphic FlareOverlayGreen = GraphicDatabase.Get<Graphic_Single>("rxFlareGreen", ShaderDatabase.TransparentPostLight);
 			public static readonly Graphic DetWireOverlayAtlas = GraphicDatabase.Get<Graphic_Single>("rxDetWire/detWireOverlayAtlas", ShaderDatabase.MetaOverlay);
 			public static readonly Graphic DetWireOverlayEndpoint = GraphicDatabase.Get<Graphic_Single>("rxDetWire/connectionPointOverlay", ShaderDatabase.MetaOverlay);
 			public static readonly Graphic DetWireOverlayCrossing = GraphicDatabase.Get<Graphic_Single>("rxDetWire/crossingOverlay", ShaderDatabase.MetaOverlay);

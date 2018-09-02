@@ -1,12 +1,12 @@
-﻿using HugsLib.Utils;
-using RimWorld;
+﻿using RimWorld;
 using UnityEngine;
 using Verse;
 
 namespace RemoteExplosives {
 	/// <summary>
-	/// This guy only blinks his overlay- the actual wireless routing is done using CompWirelessDetonationGridNode
+	/// This guy only blinks his overlay- the actual wireless routing is done using a comp.
 	/// </summary>
+	/// <see cref="CompWirelessDetonationGridNode"/>
 	public class Building_RadioMast : Building {
 		private const int FlareAlphaLevels = 16;
 
@@ -25,10 +25,10 @@ namespace RemoteExplosives {
 		public override void Draw() {
 			base.Draw();
 			if (compPower == null || !compPower.PowerOn) return;
-			// limit the number of possible alpha levels to avoid creating lots of materials
+			// limit the number of possible alpha levels to avoid leaking materials
 			var props = BlinkerData;
 			var alpha = Mathf.Round(Mathf.Max(0f, Mathf.Sin(((Find.TickManager.TicksGame + thingIDNumber * 1000) * Mathf.PI) / Mathf.Max(.1f, props.blinkerIntervalNormal))) * FlareAlphaLevels) / FlareAlphaLevels;
-			if(alpha > 0) RemoteExplosivesUtility.DrawFlareOverlay(Resources.Graphics.FlareOverlayNormal, DrawPos, props, alpha);
+			if(alpha > 0) RemoteExplosivesUtility.DrawFlareOverlay(Resources.Graphics.FlareOverlayGreen, DrawPos, props, alpha);
 		}
 	}
 }

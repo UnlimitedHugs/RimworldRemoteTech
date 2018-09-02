@@ -173,7 +173,7 @@ Right-click with a drafted colonist for better timing.</description>
 				<offset>(0, 0, -.8)</offset>
 			</shadowData>
 			<blinkerOffset>(-.12, 0, 1.25)</blinkerOffset>
-			<blinkerScale>(.5, 1, .5)</blinkerScale>
+			<blinkerScale>(.4, 1, .4)</blinkerScale>
 			<blinkerColor>(0, 1, 0)</blinkerColor>
 			<blinkerIntervalNormal>60</blinkerIntervalNormal>
 		</graphicData>
