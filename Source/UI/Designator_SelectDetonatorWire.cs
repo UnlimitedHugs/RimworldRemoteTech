@@ -10,7 +10,7 @@ namespace RemoteExplosives {
 	public class Designator_SelectDetonatorWire : Designator {
 		public Designator_SelectDetonatorWire() {
 			hotKey = KeyBindingDefOf.Misc10;
-			icon = Resources.Textures.UISelectWire;
+			icon = Resources.Textures.rxUISelectWire;
 			useMouseIcon = true;
 			defaultLabel = "WireDesignator_label".Translate();
 			defaultDesc = "WireDesignator_desc".Translate();

@@ -55,7 +55,7 @@ The filters wear out fairly quickly, so it's recommended to wear this only when 
 			<unfinishedThingDef>UnfinishedTechArmor</unfinishedThingDef>
 		</recipeMaker>
 		<graphicData>
-			<texPath>GasMask/GasMask</texPath>
+			<texPath>rxGasMask/GasMask</texPath>
 			<graphicClass>Graphic_Single</graphicClass>
 		</graphicData>
 		<statBases>
@@ -84,7 +84,7 @@ The filters wear out fairly quickly, so it's recommended to wear this only when 
 			<bodyPartGroups>
 				<li>FullHead</li>
 			</bodyPartGroups>
-			<wornGraphicPath>GasMask/GasMask</wornGraphicPath>
+			<wornGraphicPath>rxGasMask/GasMask</wornGraphicPath>
 			<layers>
 				<li>Overhead</li>
 			</layers>
@@ -122,7 +122,7 @@ The filters wear out fairly quickly, so it's recommended to wear this only when 
 		<description>A portable version of the detonator table for triggering remote explosives. Has limited range and runs on a non-rechargeable battery- but hey, you can almost fit it in your pocket. Almost.
 Works only on channel 1, but can be upgraded once channels have been researched. Unequip to upgrade.</description>
 		<graphicData>
-			<texPath>detonator_portable</texPath>
+			<texPath>rxDetonatorPortable</texPath>
 			<graphicClass>Graphic_Single</graphicClass>
 		</graphicData>
 		<statBases>

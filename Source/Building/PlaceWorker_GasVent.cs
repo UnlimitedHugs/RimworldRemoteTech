@@ -19,7 +19,7 @@ namespace RemoteExplosives {
 		}
 
 		private void DrawArrow(IntVec3 pos, Rot4 rot, Color color) {
-			var material = MaterialPool.MatFrom(Resources.Textures.gas_vent_arrow, ShaderDatabase.TransparentPostLight, color);
+			var material = MaterialPool.MatFrom(Resources.Textures.rxGasVentArrow, ShaderDatabase.TransparentPostLight, color);
 			Graphics.DrawMesh(MeshPool.plane10, pos.ToVector3ShiftedWithAltitude(AltitudeLayer.MetaOverlays), rot.AsQuat, material, 0);
 		}
 	}

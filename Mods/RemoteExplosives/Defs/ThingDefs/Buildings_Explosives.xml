@@ -64,12 +64,12 @@
 		<description>A transmitter to detonate armed explosives in range.
 Right-click with a drafted colonist for better timing.</description>
 		<graphicData Class="RemoteExplosives.GraphicData_SidedBase">
-			<texPath>detonator_table</texPath>
+			<texPath>rxDetonatorTable</texPath>
 			<graphicClass>RemoteExplosives.Graphic_SingleWithBase</graphicClass>
 			<shaderType>CutoutComplex</shaderType>
 			<drawSize>(2,1)</drawSize>
-			<baseFrontTexPath>BenchBase/base_front1x2</baseFrontTexPath>
-			<baseSideTexPath>BenchBase/base_side1x1</baseSideTexPath>
+			<baseFrontTexPath>rxBenchBase/baseFront1x2</baseFrontTexPath>
+			<baseSideTexPath>rxBenchBase/baseSide1x1</baseSideTexPath>
 			<baseOffset>(0, -0.1875)</baseOffset> <!-- 12 px / 64 px -->
 		</graphicData>
 		<castEdgeShadows>true</castEdgeShadows>
@@ -160,7 +160,7 @@ Right-click with a drafted colonist for better timing.</description>
 		<thingClass>RemoteExplosives.Building_RadioMast</thingClass>
 		<description>Extends the range of detonators, provided that the mast is within their range. Masts connect to each other, as well, making it possible to cover even large maps with a single detonator.</description>
 		<graphicData Class="RemoteExplosives.GraphicData_Blinker">
-			<texPath>radio_mast</texPath>
+			<texPath>rxRadioMast</texPath>
 			<graphicClass>Graphic_Single</graphicClass>
 			<shaderType>CutoutComplex</shaderType>
 			<drawSize>(1.2,2.4)</drawSize>
@@ -238,7 +238,7 @@ Right-click with a drafted colonist for better timing.</description>
 		<description>An electric-powered station equipped for crafting remotely detonated explosives.
 Research different types of remote explosives to unlock available recipes.</description>
 		<graphicData Class="RemoteExplosives.GraphicData_SidedBase">
-			<texPath>explosives_crafting_bench</texPath>
+			<texPath>rxCraftingBench</texPath>
 			<graphicClass>RemoteExplosives.Graphic_SingleWithBase</graphicClass>
 			<shaderType>CutoutComplex</shaderType>
 			<drawSize>(3,1)</drawSize>
@@ -246,8 +246,8 @@ Research different types of remote explosives to unlock available recipes.</desc
 				<cornerTR>Damage/Corner</cornerTR>
 				<cornerBL>Damage/Corner</cornerBL>
 			</damageData>
-			<baseFrontTexPath>BenchBase/base_front1x3</baseFrontTexPath>
-			<baseSideTexPath>BenchBase/base_side1x1</baseSideTexPath>
+			<baseFrontTexPath>rxBenchBase/baseFront1x3</baseFrontTexPath>
+			<baseSideTexPath>rxBenchBase/baseSide1x1</baseSideTexPath>
 			<baseOffset>(0, -0.1875)</baseOffset>
 		</graphicData>
 		<castEdgeShadows>true</castEdgeShadows>
@@ -335,7 +335,7 @@ Research different types of remote explosives to unlock available recipes.</desc
 		<description>A simple plunger-type detonator. When activated, sends a pulse along the attached detonator wire to all connected explosives, lighting their fuses.
 Right-click with a drafted colonist for better timing.</description>
 		<graphicData>
-			<texPath>DetonatorManual</texPath>
+			<texPath>rxDetonatorManual</texPath>
 			<graphicClass>RemoteExplosives.Graphic_Variants</graphicClass>
 			<shaderType>CutoutComplex</shaderType>
 			<drawSize>(1,1)</drawSize>
@@ -375,7 +375,7 @@ Right-click with a drafted colonist for better timing.</description>
 	<ThingDef ParentName="rxBuildingBase" Name="rxDetWireBase" Abstract="True">
 		<drawerType>MapMeshOnly</drawerType>
 		<graphicData>
-			<texPath>DetWire/det_wire_Atlas</texPath>
+			<texPath>rxDetWire/detWireAtlas</texPath>
 			<graphicClass>Graphic_Single</graphicClass>
 			<linkType>Basic</linkType>
 			<linkFlags>
@@ -386,7 +386,7 @@ Right-click with a drafted colonist for better timing.</description>
 			</damageData>
 		</graphicData>
 		<tickerType>Rare</tickerType>
-		<uiIconPath>DetWire/det_wire_icon</uiIconPath>
+		<uiIconPath>rxDetWire/detWireIcon</uiIconPath>
 		<altitudeLayer>FloorEmplacement</altitudeLayer>
 		<passability>Standable</passability>
 		<leaveResourcesWhenKilled>false</leaveResourcesWhenKilled>
@@ -401,7 +401,7 @@ Right-click with a drafted colonist for better timing.</description>
 			<fireOnFailure>true</fireOnFailure>
 			<dryOffJobDurationTicks>80</dryOffJobDurationTicks>
 			<blueprintGraphicData>
-				<texPath>DetWire/det_wire_blueprint_atlas</texPath>
+				<texPath>rxDetWire/detWireBlueprintAtlas</texPath>
 			</blueprintGraphicData>
 		</building>
 		<statBases>
@@ -504,14 +504,14 @@ Can be placed under walls and other buildings.</description>
 		Waterproof.</description>
 		<drawerType>MapMeshOnly</drawerType>
 		<graphicData>
-			<texPath>det_wire_crossing</texPath>
+			<texPath>rxDetWireCrossing</texPath>
 			<graphicClass>Graphic_Single</graphicClass>
 			<drawSize>(1.1, 1.1)</drawSize>
 			<linkFlags>
 				<li>Custom2</li>
 			</linkFlags>
 		</graphicData>
-		<uiIconPath>det_wire_crossing</uiIconPath>
+		<uiIconPath>rxDetWireCrossing</uiIconPath>
 		<building Class="RemoteExplosives.BuildingProperties_DetonatorWire">
 			<isInert>true</isInert>
 			<isEdifice>true</isEdifice>
@@ -563,7 +563,7 @@ Can be placed under walls and other buildings.</description>
 		<thingClass>Building</thingClass>
 		<label>makeshift explosive</label>
 		<graphicData Class="RemoteExplosives.GraphicData_Blinker">
-			<texPath>makeshift_explosive</texPath>
+			<texPath>rxChargeMakeshift</texPath>
 			<graphicClass>Graphic_Single</graphicClass>
 			<shadowData>
 				<volume>(.4, 0.15, .75)</volume>
@@ -599,7 +599,7 @@ Detonate using a Manual Detonator and Detonator Wire.</description>
 		<defName>rxRemoteBombPlaced</defName>
 		<label>remote explosive charge</label>
 		<graphicData Class="RemoteExplosives.GraphicData_Blinker">
-			<texPath>remote_mine</texPath>
+			<texPath>rxCharge</texPath>
 			<graphicClass>Graphic_Single</graphicClass>
 			<shadowData>
 				<volume>(.6, 0.15, .6)</volume>
@@ -636,7 +636,7 @@ Arm, then detonate from the Remote Explosives Console.</description>
 		<defName>rxRemoteFireBombPlaced</defName>
 		<label>remote incendiary charge</label>
 		<graphicData Class="RemoteExplosives.GraphicData_Blinker">
-			<texPath>remote_mine_incendiary</texPath>
+			<texPath>rxChargeIncendiary</texPath>
 			<graphicClass>Graphic_Single</graphicClass>
 			<shadowData>
 				<volume>(.6, 0.15, .6)</volume>
@@ -674,7 +674,7 @@ Arm, then detonate from the Remote Explosives Console.</description>
 		<label>remote EMP charge</label>
 		<thingClass>RemoteExplosives.Building_RemoteExplosiveEmp</thingClass>
 		<graphicData Class="RemoteExplosives.GraphicData_Blinker">
-			<texPath>mine_emp</texPath>
+			<texPath>rxChargeEmp</texPath>
 			<graphicClass>Graphic_Single</graphicClass>
 			<shadowData>
 				<volume>(.6, 0.15, .6)</volume>
@@ -720,7 +720,7 @@ Arm, then detonate from the Remote Explosives Console.</description>
 		<thingClass>RemoteExplosives.Building_MiningExplosive</thingClass>
 		<label>fracturing explosive</label>
 		<graphicData Class="RemoteExplosives.GraphicData_Blinker">
-			<texPath>rock_explosive</texPath>
+			<texPath>rxMiningExplosiveChunks</texPath>
 			<graphicClass>Graphic_Single</graphicClass>
 			<shadowData>
 				<volume>(.35, 0.15, .7)</volume>
@@ -762,7 +762,7 @@ Detonate from the Remote Explosives Console.</description>
 		<thingClass>RemoteExplosives.Building_MiningExplosiveSquare</thingClass>
 		<label>clearing explosive</label>
 		<graphicData Class="RemoteExplosives.GraphicData_Blinker">
-			<texPath>clear_explosive</texPath>
+			<texPath>rxMiningExplosiveClear</texPath>
 			<graphicClass>Graphic_Single</graphicClass><shadowData>
 				<volume>(.35, 0.15, .7)</volume>
 			</shadowData>
@@ -806,7 +806,7 @@ Detonate from the Remote Explosives Console.</description>
 		<label>shaped charge</label>
 		<description>A specialized explosive that focuses its power upwards to attempt to break thick overhead mountain roof. It must be applied from the edge of the thick roof to be effective.\n\nThe white overlay shows nearby mountain roof, while the area around the charge is its effective radius. A green outline indicates that the charge is properly placed and will successfully break through the roof.</description>
 		<graphicData Class="RemoteExplosives.GraphicData_Blinker">
-			<texPath>shaped_charge</texPath>
+			<texPath>rxMiningExplosiveShaped</texPath>
 			<graphicClass>Graphic_Single</graphicClass>
 			<shadowData>
 				<volume>(.8, 0.5, .45)</volume>
@@ -872,7 +872,7 @@ Detonate from the Remote Explosives Console.</description>
 		<label>sealing foam can</label>
 		<thingClass>RemoteExplosives.Building_RemoteExplosive</thingClass>
 		<graphicData Class="RemoteExplosives.GraphicData_Blinker">
-			<texPath>canister_foam</texPath>
+			<texPath>rxCanFoam</texPath>
 			<graphicClass>Graphic_Single</graphicClass>
 			<shadowData>
 				<volume>(.75, 0.15, .75)</volume>
@@ -912,7 +912,7 @@ Arm, then detonate from the Remote Explosives Console.</description>
 		<label>sleeping gas can</label>
 		<thingClass>RemoteExplosives.Building_RemoteExplosive</thingClass>
 		<graphicData Class="RemoteExplosives.GraphicData_Blinker">
-			<texPath>canister_gas</texPath>
+			<texPath>rxCanSleepingGas</texPath>
 			<graphicClass>Graphic_Single</graphicClass>
 			<shadowData>
 				<volume>(.75, 0.15, .75)</volume>
@@ -953,7 +953,7 @@ Arm, then detonate from the Remote Explosives Console.</description>
 		<label>refined sleeping gas can</label>
 		<thingClass>RemoteExplosives.Building_RemoteExplosive</thingClass>
 		<graphicData Class="RemoteExplosives.GraphicData_Blinker">
-			<texPath>canister_gas_refined</texPath>
+			<texPath>rxCanSleepingGasRefined</texPath>
 			<graphicClass>Graphic_Single</graphicClass>
 			<shadowData>
 				<volume>(.75, 0.15, .75)</volume>

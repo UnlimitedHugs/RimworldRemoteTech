@@ -99,7 +99,7 @@ namespace RemoteExplosives {
 						UpdateDesignation();
 					},
 					isActive = () => wantsWork,
-					icon = Resources.Textures.UIUpgrade
+					icon = Resources.Textures.rxUIUpgrade
 				};
 			}
 		}

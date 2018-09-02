@@ -5,14 +5,14 @@
         <defName>rxExplosives</defName>
         <label>explosives</label>
         <parent>Manufactured</parent>
-        <iconPath>explosive_part</iconPath>
+        <iconPath>rxMiningExplosivePart</iconPath>
 	</ThingCategoryDef>
 	
 	<ThingCategoryDef>
         <defName>rxExplosivesIngredients</defName>
         <label>ingredients</label>
         <parent>rxExplosives</parent>
-        <iconPath>charcoal</iconPath>
+        <iconPath>rxCharcoal</iconPath>
 	</ThingCategoryDef>
 	
 </Defs>

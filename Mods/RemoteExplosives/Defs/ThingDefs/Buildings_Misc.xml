@@ -17,7 +17,7 @@
 		<thingClass>RemoteExplosives.Building_FoamBlob</thingClass>
 		<description>Becomes tougher than rock as it solidifies.</description>
 		<graphicData>
-			<texPath>foam_blob</texPath>
+			<texPath>rxFoamBlob</texPath>
 			<graphicClass>RemoteExplosives.Graphic_FoamBlob</graphicClass>
 			<shaderType>CutoutComplex</shaderType>
 			<drawSize>(1.2,1.2)</drawSize>
@@ -79,7 +79,7 @@
 				<edgeRight>Damage/Edge</edgeRight>
 			</damageData>
 		</graphicData>
-		<uiIconPath>FoamWall/foam_wall_icon</uiIconPath>
+		<uiIconPath>rxFoamWall/foamWallIcon</uiIconPath>
 		<statBases>
 			<MaxHitPoints>8500</MaxHitPoints>
 			<WorkToMake>0</WorkToMake>
@@ -133,7 +133,7 @@
 		<label>hardened foam wall</label>
 		<description>Solidified chemical foam. Extremely tough and non-flammable.</description>
 		<graphicData>
-			<texPath>FoamWall/foam_wall_Atlas_Smooth</texPath>
+			<texPath>rxFoamWall/foamWallAtlas</texPath>
 		</graphicData>
 		<statBases>
 			<Beauty>-10</Beauty>
@@ -224,7 +224,7 @@ Tip: switches can be used to toggle vents remotely, as well as in groups.</descr
 		<designationCategory>rxRemoteExplosives</designationCategory>
 		<graphicData>
 			<graphicClass>Graphic_Multi</graphicClass>
-			<texPath>GasVent/GasVent</texPath>
+			<texPath>rxGasVent/GasVent</texPath>
 			<drawSize>(1,1)</drawSize>
 			<shadowData>
 				<volume>(1, 1, 1)</volume>
@@ -303,7 +303,7 @@ Tip: switches can be used to toggle vents remotely, as well as in groups.</descr
 		<description>High-tech solar panels combined with a battery bank. Lightweight and weatherproof- a great choice for camping trips and powering things in the field. The battery will retain its charge when uninstalled. The bar shows the charge level of the battery.</description>
 		<thingClass>Building</thingClass>
 		<graphicData>
-			<texPath>power_unit</texPath>
+			<texPath>rxPowerUnit</texPath>
 			<graphicClass>Graphic_Single</graphicClass>
 			<drawSize>(2,2)</drawSize>
 			<shadowData>
@@ -399,7 +399,7 @@ Tip: switches can be used to toggle vents remotely, as well as in groups.</descr
 		<thingClass>RemoteExplosives.Building_ProximitySensor</thingClass>
 		<description>Scans for movement in the surrounding area. On detection, can either sound an alarm, or send a detonation signal. Can be upgraded to a wireless detonator, and even an AI core to ignore friendly units.</description>
 		<graphicData Class="RemoteExplosives.GraphicData_Blinker">
-			<texPath>proximity_sensor</texPath>
+			<texPath>rxProximitySensor</texPath>
 			<graphicClass>Graphic_Single</graphicClass>
 			<shaderType>CutoutComplex</shaderType>
 			<drawSize>(1,1)</drawSize>

@@ -137,7 +137,7 @@ namespace RemoteExplosives {
 		public override IEnumerable<Gizmo> GetGizmos() {
 			yield return new Command_Action {
 				defaultLabel = "proxSensor_settings".Translate() + (WantsSwitch()?"RemoteExplosive_channel_switching".Translate():string.Empty),
-				icon = Resources.Textures.UISensorSettings,
+				icon = Resources.Textures.rxUISensorSettings,
 				action = OpenSettingsDialog
 			};
 			foreach (var gizmo in base.GetGizmos()) {
@@ -176,7 +176,7 @@ namespace RemoteExplosives {
 			// draw arc overlay; rotate around lower left corner
 			var m = Matrix4x4.TRS(DrawPos - Altitudes.AltIncVect, Quaternion.AngleAxis(slice.StartAngle, Vector3.up), Vector3.one * 2f) *
 					Matrix4x4.TRS(new Vector3(0.5f, 0, 0.5f), Quaternion.identity, Vector3.one);
-			Graphics.DrawMesh(MeshPool.plane10, m, MaterialPool.MatFrom(Resources.Textures.proximity_sensor_arc, ShaderDatabase.TransparentPostLight, Color.white), 0);
+			Graphics.DrawMesh(MeshPool.plane10, m, MaterialPool.MatFrom(Resources.Textures.rxProximitySensorArc, ShaderDatabase.TransparentPostLight, Color.white), 0);
 		}
 
 		public void OnSettingsChanged(SensorSettings s) {

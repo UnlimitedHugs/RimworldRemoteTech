@@ -60,7 +60,7 @@ namespace RemoteExplosives {
 					defaultLabel = "DetonatorManual_detonate_label".Translate(),
 				};
 			}
-			detonate.icon = Resources.Textures.UI_Trigger;
+			detonate.icon = Resources.Textures.rxUIDetonateManual;
 			detonate.defaultDesc = "DetonatorManual_detonate_desc".Translate();
 			detonate.hotKey = Resources.KeyBinging.rxRemoteTableDetonate;
 			yield return detonate;

@@ -50,7 +50,7 @@ namespace RemoteExplosives {
 			for (int i = 0; i < 8; i++) {
 				var channel = i + 1;
 				var buttonRect = new Rect(contentRect.x + (i % rowSize) * (ButtonSize + buttonSpacing), contentRect.y + (i / rowSize) * (ButtonSize + buttonSpacing), ButtonSize, ButtonSize);
-				Graphics.DrawTexture(buttonRect, Resources.Textures.UIChannelKeypadAtlas, Resources.Textures.KeypadAtlasCoords.Keys[i], ButtonSize, 0, 0, 0);
+				Graphics.DrawTexture(buttonRect, Resources.Textures.rxUIChannelKeypadAtlas, Resources.Textures.KeypadAtlasCoords.Keys[i], ButtonSize, 0, 0, 0);
 				var channelIsPopulated = channelPopulation != null && channelPopulation.ContainsKey(channel);
 				var outline = Resources.Textures.KeypadAtlasCoords.OutlineOff;
 				if (channel == selectedChannel) {
@@ -58,7 +58,7 @@ namespace RemoteExplosives {
 				} else if (channelIsPopulated) {
 					outline = Resources.Textures.KeypadAtlasCoords.OutlineHighlight;
 				}
-				Graphics.DrawTexture(buttonRect, Resources.Textures.UIChannelKeypadAtlas, outline, ButtonSize, 0, 0, 0);
+				Graphics.DrawTexture(buttonRect, Resources.Textures.rxUIChannelKeypadAtlas, outline, ButtonSize, 0, 0, 0);
 				if (Mouse.IsOver(buttonRect)) {
 					overChannel = channel;
 					Widgets.DrawHighlight(buttonRect);

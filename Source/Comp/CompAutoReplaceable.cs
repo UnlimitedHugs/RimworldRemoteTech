@@ -55,7 +55,7 @@ namespace RemoteExplosives {
 			var replaceGizmo = new Command_Toggle {
 				toggleAction = ReplaceGizmoAction,
 				isActive = () => AutoReplaceEnabled,
-				icon = Resources.Textures.UIAutoReplace,
+				icon = Resources.Textures.rxUIAutoReplace,
 				defaultLabel = AutoReplaceButtonLabel,
 				defaultDesc = AutoReplaceButtonDesc,
 				hotKey = Resources.KeyBinging.rxAutoReplace

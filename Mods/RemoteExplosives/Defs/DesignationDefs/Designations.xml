@@ -9,7 +9,7 @@
 	
 	<DesignationDef>
 		<defName>rxDetonatorWireDryOff</defName>
-		<texturePath>dry_off_designation</texturePath>
+		<texturePath>rxDesignationDryOff</texturePath>
 		<targetType>Thing</targetType>
 		<designateCancelable>false</designateCancelable>
 	</DesignationDef>
@@ -23,7 +23,7 @@
 	
 	<DesignationDef>
 		<defName>rxInstallUpgrade</defName>
-		<texturePath>upgrade_designation</texturePath>
+		<texturePath>rxDesignationUpgrade</texturePath>
 		<targetType>Thing</targetType>
 		<designateCancelable>false</designateCancelable>
 	</DesignationDef>

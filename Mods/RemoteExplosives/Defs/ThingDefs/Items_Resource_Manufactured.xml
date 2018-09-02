@@ -46,7 +46,7 @@
 		<description>Explosive trap with a remote trigger.
 Place as a building from the Explosives menu to use.</description>
 		<graphicData>
-			<texPath>remote_mine</texPath>
+			<texPath>rxCharge</texPath>
 			<graphicClass>Graphic_Single</graphicClass>
 		</graphicData>
 		<comps>
@@ -74,7 +74,7 @@ Place as a building from the Explosives menu to use.</description>
 		<description>A canister filled with flammable chemicals with a radio trigger.
 Place as a building from the Explosives menu to use.</description>
 		<graphicData>
-			<texPath>remote_mine_incendiary</texPath>
+			<texPath>rxChargeIncendiary</texPath>
 			<graphicClass>Graphic_Single</graphicClass>
 		</graphicData>
 		<comps>
@@ -102,7 +102,7 @@ Place as a building from the Explosives menu to use.</description>
 		<description>The main part of a remote mining explosive.
 Place as a building from the Explosives menu to use.</description>
 		<graphicData>
-			<texPath>explosive_part</texPath>
+			<texPath>rxMiningExplosivePart</texPath>
 			<graphicClass>Graphic_Single</graphicClass>
 		</graphicData>
 		<comps>
@@ -133,7 +133,7 @@ Place as a building from the Explosives menu to use.</description>
 		<description>A single-use electromagnetic pulse generator.
 Place as a building from the Explosives menu to use.</description>
 		<graphicData>
-			<texPath>mine_emp</texPath>
+			<texPath>rxChargeEmp</texPath>
 			<graphicClass>Graphic_Single</graphicClass>
 		</graphicData>
 		<statBases>
@@ -149,7 +149,7 @@ Place as a building from the Explosives menu to use.</description>
 		<description>A remotely triggered canister containing sealing foam.
 Place as a building from the Explosives menu to use.</description>
 		<graphicData>
-			<texPath>canister_foam</texPath>
+			<texPath>rxCanFoam</texPath>
 			<graphicClass>Graphic_Single</graphicClass>
 		</graphicData>
 		<comps>
@@ -178,7 +178,7 @@ Place as a building from the Explosives menu to use.</description>
 		<description>A remotely triggered canister containing sleeping gas.
 Place as a building from the Explosives menu to use.</description>
 		<graphicData>
-			<texPath>canister_gas</texPath>
+			<texPath>rxCanSleepingGas</texPath>
 			<graphicClass>Graphic_Single</graphicClass>
 		</graphicData>
 		<comps>
@@ -207,7 +207,7 @@ Place as a building from the Explosives menu to use.</description>
 		<description>A remotely triggered canister filled with refined sleeping gas. Significantly more potent than common sleeping gas.
 Place as a building from the Explosives menu to use.</description>
 		<graphicData>
-			<texPath>canister_gas_refined</texPath>
+			<texPath>rxCanSleepingGasRefined</texPath>
 			<graphicClass>Graphic_Single</graphicClass>
 		</graphicData>
 		<comps>
@@ -236,7 +236,7 @@ Place as a building from the Explosives menu to use.</description>
 		<description>A primitive explosive charge made from volatile powder mixture wrapped in animal leather.
 Place as a building from the Explosives menu to use.</description>
 		<graphicData>
-			<texPath>makeshift_explosive</texPath>
+			<texPath>rxChargeMakeshift</texPath>
 			<graphicClass>Graphic_Single</graphicClass>
 		</graphicData>
 		<comps>
@@ -261,7 +261,7 @@ Place as a building from the Explosives menu to use.</description>
 		<label>Sparkpowder</label>
 		<description>Harvested from Sparkweed plants and specially preserved to prevent spontaneous combustion. Keep away from fire.</description>
 		<graphicData>
-			<texPath>spark_powder</texPath>
+			<texPath>rxSparkpowder</texPath>
 			<graphicClass>Graphic_Single</graphicClass>
 			<drawSize>(.8, .8)</drawSize>
 		</graphicData>
@@ -290,7 +290,7 @@ Place as a building from the Explosives menu to use.</description>
 		<description>An efficient fuel made by burning wood in low-oxygen conditions. Becomes a great additive for explosives when crushed into powder.
 Can be made at a campfire or a fueled stove.</description>
 		<graphicData>
-			<texPath>charcoal</texPath>
+			<texPath>rxCharcoal</texPath>
 			<graphicClass>Graphic_Single</graphicClass>
 		</graphicData>
 		<statBases>

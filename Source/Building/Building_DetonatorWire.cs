@@ -87,7 +87,7 @@ namespace RemoteExplosives {
 				yield return new Command_Toggle {
 					toggleAction = DryGizmoAction,
 					isActive = () => wantDrying,
-					icon = Resources.Textures.UIDryOff,
+					icon = Resources.Textures.rxUIDryOff,
 					defaultLabel = "Wire_dry_label".Translate(),
 					defaultDesc = "Wire_dry_desc".Translate(),
 					hotKey = KeyBindingDefOf.Misc1

@@ -126,7 +126,7 @@ namespace RemoteExplosives {
 			var armGizmo = new Command_Toggle {
 				toggleAction = ArmGizmoAction,
 				isActive = () => desiredArmState,
-				icon = Resources.Textures.UIArm,
+				icon = Resources.Textures.rxUIArm,
 				defaultLabel = ArmButtonLabel,
 				defaultDesc = ArmButtonDesc,
 				hotKey = Resources.KeyBinging.rxArm
@@ -150,7 +150,7 @@ namespace RemoteExplosives {
 							Arm();
 						}
 					},
-					icon = Resources.Textures.UIArm,
+					icon = Resources.Textures.rxUIArm,
 					defaultLabel = "DEV: Toggle armed"
 				};
 				yield return new Command_Action {
@@ -158,7 +158,7 @@ namespace RemoteExplosives {
 						Arm();
 						LightFuse();
 					},
-					icon = Resources.Textures.UIDetonate,
+					icon = Resources.Textures.rxUIDetonate,
 					defaultLabel = "DEV: Detonate now"
 				};
 			}

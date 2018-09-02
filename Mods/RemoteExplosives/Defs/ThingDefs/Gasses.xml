@@ -10,7 +10,7 @@ Rapidly dissipates when under an open sky.</description>
 		<category>Ethereal</category>
 		<drawerType>RealtimeOnly</drawerType>
 		<graphicData>
-			<texPath>GasCloud</texPath>
+			<texPath>rxGasCloud</texPath>
 			<graphicClass>RemoteExplosives.Graphic_GasCloud</graphicClass>
 			<shaderType>Mote</shaderType>
 			<drawSize>(1.3,1.3)</drawSize>

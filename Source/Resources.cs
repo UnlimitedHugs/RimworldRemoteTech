@@ -112,11 +112,11 @@ namespace RemoteExplosives {
 		public static class Graphics {
 			private const LinkFlags OverlayAtlasLinkFlags = LinkFlags.Custom3;
 
-			public static readonly Graphic FlareOverlayNormal = GraphicDatabase.Get<Graphic_Single>("mine_flare", ShaderDatabase.TransparentPostLight);
-			public static readonly Graphic FlareOverlayStrong = GraphicDatabase.Get<Graphic_Single>("mine_flare_strong", ShaderDatabase.TransparentPostLight);
-			public static readonly Graphic DetWireOverlayAtlas = GraphicDatabase.Get<Graphic_Single>("DetWire/det_wire_overlay_atlas", ShaderDatabase.MetaOverlay);
-			public static readonly Graphic DetWireOverlayEndpoint = GraphicDatabase.Get<Graphic_Single>("DetWire/connection_point_overlay", ShaderDatabase.MetaOverlay);
-			public static readonly Graphic DetWireOverlayCrossing = GraphicDatabase.Get<Graphic_Single>("DetWire/crossing_overlay", ShaderDatabase.MetaOverlay);
+			public static readonly Graphic FlareOverlayNormal = GraphicDatabase.Get<Graphic_Single>("rxFlare", ShaderDatabase.TransparentPostLight);
+			public static readonly Graphic FlareOverlayStrong = GraphicDatabase.Get<Graphic_Single>("rxFlareStrong", ShaderDatabase.TransparentPostLight);
+			public static readonly Graphic DetWireOverlayAtlas = GraphicDatabase.Get<Graphic_Single>("rxDetWire/detWireOverlayAtlas", ShaderDatabase.MetaOverlay);
+			public static readonly Graphic DetWireOverlayEndpoint = GraphicDatabase.Get<Graphic_Single>("rxDetWire/connectionPointOverlay", ShaderDatabase.MetaOverlay);
+			public static readonly Graphic DetWireOverlayCrossing = GraphicDatabase.Get<Graphic_Single>("rxDetWire/crossingOverlay", ShaderDatabase.MetaOverlay);
 
 			static Graphics() {
 				DetWireOverlayAtlas = GraphicUtility.WrapLinked(DetWireOverlayAtlas, LinkDrawerType.Basic);
@@ -127,21 +127,21 @@ namespace RemoteExplosives {
 
 		[StaticConstructorOnStartup]
 		public static class Textures {
-			public static Texture2D UI_Trigger;
-			public static Texture2D UIDetonate;
-			public static Texture2D UIDryOff;
-			public static Texture2D UIArm;
-			public static Texture2D UIAutoReplace;
-			public static Texture2D UIChannelBasic1;
-			public static Texture2D UIChannelBasic2;
-			public static Texture2D UIChannelBasic3;
-			public static Texture2D UIChannelKeypadAtlas;
-			public static Texture2D UIDetonatorPortable;
-			public static Texture2D UISelectWire;
-			public static Texture2D UIUpgrade;
-			public static Texture2D UISensorSettings;
-			public static Texture2D gas_vent_arrow;
-			public static Texture2D proximity_sensor_arc;
+			public static Texture2D rxUIDetonateManual;
+			public static Texture2D rxUIDetonate;
+			public static Texture2D rxUIDryOff;
+			public static Texture2D rxUIArm;
+			public static Texture2D rxUIAutoReplace;
+			public static Texture2D rxUIChannelBasic1;
+			public static Texture2D rxUIChannelBasic2;
+			public static Texture2D rxUIChannelBasic3;
+			public static Texture2D rxUIChannelKeypadAtlas;
+			public static Texture2D rxUIDetonatorPortable;
+			public static Texture2D rxUISelectWire;
+			public static Texture2D rxUIUpgrade;
+			public static Texture2D rxUISensorSettings;
+			public static Texture2D rxGasVentArrow;
+			public static Texture2D rxProximitySensorArc;
 
 			public static readonly Texture2D WallSmoothMenuIcon = ContentFinder<Texture2D>.Get("Things/Building/Linked/WallSmooth_MenuIcon");
 

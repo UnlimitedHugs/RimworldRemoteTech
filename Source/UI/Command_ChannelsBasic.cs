@@ -10,9 +10,9 @@ namespace RemoteExplosives {
 		protected int totalChannels = 3;
 
 		private static readonly Texture2D[] UITex_ChannelsBasic = {
-			Resources.Textures.UIChannelBasic1,
-			Resources.Textures.UIChannelBasic2,
-			Resources.Textures.UIChannelBasic3
+			Resources.Textures.rxUIChannelBasic1,
+			Resources.Textures.rxUIChannelBasic2,
+			Resources.Textures.rxUIChannelBasic3
 		};
 
 		public Command_ChannelsBasic(int selectedChannel, bool switching, Action<int> activateCallback) {

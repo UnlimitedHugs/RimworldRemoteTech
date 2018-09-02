@@ -27,7 +27,7 @@
 		<label>gold slag chunk</label>
 		<description>A chunk of gold and steel melted together. A smelter might be able to separate them for reuse.</description>
 		<graphicData>
-			<texPath>gold_slag</texPath>
+			<texPath>rxGoldSlag</texPath>
 			<graphicClass>Graphic_Single</graphicClass>
 		</graphicData>
 		<statBases>

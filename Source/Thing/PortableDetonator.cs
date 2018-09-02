@@ -67,7 +67,7 @@ namespace RemoteExplosives {
 			yield return new Command_MouseOverDetector {
 				action = OnGizmoActivation,
 				mouseOverCallback = OnMouseOverGizmo,
-				icon = Resources.Textures.UIDetonatorPortable,
+				icon = Resources.Textures.rxUIDetonatorPortable,
 				defaultLabel = "PortableDetonator_detonateChannel_label".Translate(Channel),
 				defaultDesc = $"{DetonateButtonDesc}\n{GetInspectString()}",
 				hotKey = Resources.KeyBinging.rxPortableDetonatorDetonate,

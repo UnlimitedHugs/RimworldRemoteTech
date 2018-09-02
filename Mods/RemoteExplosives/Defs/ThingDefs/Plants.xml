@@ -48,7 +48,7 @@ It is cultivated as a source of low-grade explosive and gunpowder.</description>
 			<Nutrition>0.05</Nutrition>
 		</statBases>
 		<graphicData>
-			<texPath>sparkweed</texPath>
+			<texPath>rxSparkweed</texPath>
 			<graphicClass>Graphic_Single</graphicClass>
 		</graphicData>
 		<selectable>true</selectable>
