@@ -189,6 +189,8 @@
 		<scatterableOnMapGen>false</scatterableOnMapGen>
 		<altitudeLayer>Building</altitudeLayer>
 		<passability>PassThroughOnly</passability>
+		<pathCost>200</pathCost>
+		<pathCostIgnoreRepeat>false</pathCostIgnoreRepeat>
 		<blockWind>true</blockWind>
 		<castEdgeShadows>true</castEdgeShadows>
 		<fillPercent>1</fillPercent>

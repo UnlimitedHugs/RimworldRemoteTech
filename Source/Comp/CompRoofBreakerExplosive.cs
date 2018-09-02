@@ -30,13 +30,13 @@ namespace RemoteExplosives {
 				}
 				if (roof.isThickRoof) {
 					anyThickRoofAffected = true;
-					map.roofGrid.SetRoof(cell, null);
 					var roofCell = cell;
 					HugsLibController.Instance.TickDelayScheduler.ScheduleCallback(() => { // delay collapse for more interesting visual effect
 						CollapseRockOnCell(roofCell, map);
 						SoundDefOf.Roof_Collapse.PlayOneShot(new TargetInfo(roofCell, map));
 					}, CollapseDelay.RandomInRange);
 				}
+				map.roofGrid.SetRoof(cell, null);
 			}
 			if (anyThickRoofAffected) {
 				Resources.Sound.rxMiningCavein.PlayOneShot(new TargetInfo(position, map));
