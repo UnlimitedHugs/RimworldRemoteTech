@@ -265,6 +265,18 @@ Tip: switches can be used to toggle vents remotely, as well as in groups.</descr
 			<li Class="CompProperties_Flickable"/>
 			<li Class="CompProperties_Breakdownable"/>
 			<li Class="RemoteExplosives.CompProperties_Upgrade">
+				<label>Armor plating</label>
+				<referenceId>ArmorPlating</referenceId>
+				<workAmount>2000</workAmount>
+				<statModifiers>
+					<MaxHitPoints>3</MaxHitPoints>
+					<Flammability>0</Flammability>
+				</statModifiers>
+				<costList>
+					<Plasteel>50</Plasteel>
+				</costList>
+			</li>
+			<li Class="RemoteExplosives.CompProperties_Upgrade">
 				<label>High-power fans</label>
 				<referenceId>PowerFans</referenceId>
 				<workAmount>1500</workAmount>

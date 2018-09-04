@@ -229,6 +229,11 @@ namespace RemoteExplosives {
 			return component;
 		}
 
+		public static T RequireComponent<T>(this ThingComp comp, T component) {
+			if(component == null) RemoteExplosivesController.Instance.Logger.Error($"{comp.GetType().Name} requires {nameof(T)} in def {comp.parent.def.defName}");
+			return component;
+		}
+
 		public static void RequireTicker(this ThingComp comp, TickerType type) {
 			if(comp.parent.def.tickerType != type) RemoteExplosivesController.Instance.Logger.Error($"{comp.GetType().Name} requires tickerType:{type} in def {comp.parent.def.defName}");
 		}

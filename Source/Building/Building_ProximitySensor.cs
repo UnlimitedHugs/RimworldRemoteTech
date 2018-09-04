@@ -165,9 +165,6 @@ namespace RemoteExplosives {
 		protected override void ReceiveCompSignal(string signal) {
 			base.ReceiveCompSignal(signal);
 			UpdateUpgradeableStuff();
-			if (signal == CompUpgrade.UpgradeCompleteSignal) {
-				HitPoints = MaxHitPoints; // AI upgrade increases max HP
-			}
 		}
 
 		public override void Draw() {

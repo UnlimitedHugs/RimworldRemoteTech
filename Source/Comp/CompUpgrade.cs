@@ -54,9 +54,7 @@ namespace RemoteExplosives {
 
 		public override void PostSpawnSetup(bool respawningAfterLoad) {
 			base.PostSpawnSetup(respawningAfterLoad);
-			if (!(props is CompProperties_Upgrade)) {
-				RemoteExplosivesController.Instance.Logger.Error($"CompUpgrade requires CompProperties_Upgrade on def {parent.def.defName}");
-			}
+			this.RequireComponent(props as CompProperties_Upgrade);
 			UpdateDesignation();
 		}
 
@@ -191,6 +189,9 @@ namespace RemoteExplosives {
 			complete = true;
 			ingredients.ClearAndDestroyContents();
 			UpdateDesignation();
+			if (Props.statModifiers.Any(m => m.stat == StatDefOf.MaxHitPoints)) {
+				parent.HitPoints = parent.MaxHitPoints;
+			}
 			parent.BroadcastCompSignal(UpgradeCompleteSignal);
 		}
 
