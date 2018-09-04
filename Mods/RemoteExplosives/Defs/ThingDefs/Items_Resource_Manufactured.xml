@@ -50,6 +50,7 @@ Place as a building from the Explosives menu to use.</description>
 			<graphicClass>Graphic_Single</graphicClass>
 		</graphicData>
 		<comps>
+			<li Class="RemoteExplosives.CompProperties_BuildGizmo"/>
 			<li Class="CompProperties_Explosive">
 				<compClass>CompExplosive</compClass>
 				<explosiveRadius>2.9</explosiveRadius>
@@ -78,6 +79,7 @@ Place as a building from the Explosives menu to use.</description>
 			<graphicClass>Graphic_Single</graphicClass>
 		</graphicData>
 		<comps>
+			<li Class="RemoteExplosives.CompProperties_BuildGizmo"/>
 			<li Class="CompProperties_Explosive">
 				<compClass>CompExplosive</compClass>
 				<explosiveRadius>2.9</explosiveRadius>
@@ -106,6 +108,7 @@ Place as a building from the Explosives menu to use.</description>
 			<graphicClass>Graphic_Single</graphicClass>
 		</graphicData>
 		<comps>
+			<li Class="RemoteExplosives.CompProperties_BuildGizmo"/>
 			<li Class="RemoteExplosives.CompProperties_MiningExplosive">
 				<miningRadius>2.9</miningRadius>
 				<explosiveRadius>2.9</explosiveRadius>
@@ -141,6 +144,9 @@ Place as a building from the Explosives menu to use.</description>
 			<MarketValue>360</MarketValue>
 			<Mass>5</Mass>
 		</statBases>
+		<comps>
+			<li Class="RemoteExplosives.CompProperties_BuildGizmo"/>
+		</comps>
 	</ThingDef>
 	
 	<ThingDef ParentName="rxBaseExplosivePart">
@@ -153,6 +159,7 @@ Place as a building from the Explosives menu to use.</description>
 			<graphicClass>Graphic_Single</graphicClass>
 		</graphicData>
 		<comps>
+			<li Class="RemoteExplosives.CompProperties_BuildGizmo"/>
 			<li Class="RemoteExplosives.CompProperties_ChemicalExplosive">
 				<compClass>RemoteExplosives.CompChemicalExplosive</compClass>
 				<wickTicks>
@@ -182,6 +189,7 @@ Place as a building from the Explosives menu to use.</description>
 			<graphicClass>Graphic_Single</graphicClass>
 		</graphicData>
 		<comps>
+			<li Class="RemoteExplosives.CompProperties_BuildGizmo"/>
 			<li Class="RemoteExplosives.CompProperties_ChemicalExplosive">
 				<compClass>RemoteExplosives.CompChemicalExplosive</compClass>
 				<wickTicks>
@@ -211,6 +219,7 @@ Place as a building from the Explosives menu to use.</description>
 			<graphicClass>Graphic_Single</graphicClass>
 		</graphicData>
 		<comps>
+			<li Class="RemoteExplosives.CompProperties_BuildGizmo"/>
 			<li Class="RemoteExplosives.CompProperties_ChemicalExplosive">
 				<compClass>RemoteExplosives.CompChemicalExplosive</compClass>
 				<wickTicks>
@@ -240,6 +249,7 @@ Place as a building from the Explosives menu to use.</description>
 			<graphicClass>Graphic_Single</graphicClass>
 		</graphicData>
 		<comps>
+			<li Class="RemoteExplosives.CompProperties_BuildGizmo"/>
 			<li Class="CompProperties_Explosive">
 				<explosiveRadius>2.5</explosiveRadius>
 				<explosiveDamageType>rxFlameBomb</explosiveDamageType>

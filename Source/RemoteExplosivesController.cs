@@ -11,10 +11,10 @@ using UnityEngine;
 using Verse;
 
 namespace RemoteExplosives {
-	/**
-	 * The hub of the mod.
-	 * Injects trader stock generators, generates recipe copies for the workbench and injects comps.
-	 */
+	/// <summary>
+	/// The hub of the mod.
+	/// Injects trader stock generators, generates recipe copies for the workbench and injects comps.
+	/// </summary>
 	public class RemoteExplosivesController : ModBase {
 		private const int ComponentValueInSteel = 40;
 		private const int ForbiddenTimeoutSettingDefault = 30;
@@ -47,6 +47,8 @@ namespace RemoteExplosives {
 			get { return SettingForbidReplaced ? SettingForbidTimeout : 0; }
 		}
 
+		public Dictionary<ThingDef, List<ThingDef>> MaterialToBuilding { get; } = new Dictionary<ThingDef, List<ThingDef>>();
+
 		public RemoteExplosivesController() {
 			Instance = this;
 		}
@@ -56,6 +58,7 @@ namespace RemoteExplosives {
 			InjectSteelRecipeVariants();
 			InjectVanillaExplosivesComps();
 			InjectUpgradeableStatParts();
+			PrepareReverseBuildingMaterialLookup();
 			GetSettingsHandles();
 			PrepareReflection();
 			RemoveFoamWallsFromMeteoritePool();
@@ -92,48 +95,56 @@ namespace RemoteExplosives {
 			if (showDebugControls) DrawDebugControls();
 		}
 
-		/**
-		 * Injects StockGenerators into existing traders.
-		 */
+		/// <summary>
+		/// Injects StockGenerators into existing traders.
+		/// </summary>
 		private void InjectTraderStocks() {
-			var allInjectors = DefDatabase<TraderStockInjectorDef>.AllDefs;
-			var affectedTraders = new List<TraderKindDef>();
-			foreach (var injectorDef in allInjectors) {
-				if (injectorDef.traderDef == null || injectorDef.stockGenerators.Count == 0) continue;
-				affectedTraders.Add(injectorDef.traderDef);
-				foreach (var stockGenerator in injectorDef.stockGenerators) {
-					injectorDef.traderDef.stockGenerators.Add(stockGenerator);
+			try {
+				var allInjectors = DefDatabase<TraderStockInjectorDef>.AllDefs;
+				var affectedTraders = new List<TraderKindDef>();
+				foreach (var injectorDef in allInjectors) {
+					if (injectorDef.traderDef == null || injectorDef.stockGenerators.Count == 0) continue;
+					affectedTraders.Add(injectorDef.traderDef);
+					foreach (var stockGenerator in injectorDef.stockGenerators) {
+						injectorDef.traderDef.stockGenerators.Add(stockGenerator);
+					}
 				}
-			}
-			if (affectedTraders.Count > 0) {
-				Logger.Trace(string.Format("Injected stock generators for {0} traders", affectedTraders.Count));
-			}
+				if (affectedTraders.Count > 0) {
+					Logger.Trace($"Injected stock generators for {affectedTraders.Count} traders");
+				}
 
-			// Unless all defs are reloaded, we no longer need the injector defs
-			DefDatabase<TraderStockInjectorDef>.Clear();
+				// Unless all defs are reloaded, we no longer need the injector defs
+				DefDatabase<TraderStockInjectorDef>.Clear();
+			} catch (Exception e) {
+				Logger.ReportException(e);
+			}
 		}
 
-		/**
-		 * Injects copies of explosives recipes, changing components into an equivalent amount of steel
-		 */
+		/// <summary>
+		/// Injects copies of explosives recipes, changing components into an equivalent amount of steel
+		/// </summary>
 		private void InjectSteelRecipeVariants() {
-			int injectCount = 0;
-			foreach (var explosiveRecipe in GetAllExplosivesRecipes().ToList()) {
-				var variant = TryMakeRecipeVariantWithSteel(explosiveRecipe);
-				if (variant != null) {
-					DefDatabase<RecipeDef>.Add(variant);
-					injectCount++;
+			try {
+				int injectCount = 0;
+				foreach (var explosiveRecipe in GetAllExplosivesRecipes().ToList()) {
+					var variant = TryMakeRecipeVariantWithSteel(explosiveRecipe);
+					if (variant != null) {
+						DefDatabase<RecipeDef>.Add(variant);
+						injectCount++;
+					}
 				}
-			}
 
-			if (injectCount > 0) {
-				Logger.Trace(string.Format("Injected {0} alternate explosives recipes.", injectCount));
+				if (injectCount > 0) {
+					Logger.Trace($"Injected {injectCount} alternate explosives recipes.");
+				}
+			} catch (Exception e) {
+				Logger.ReportException(e);
 			}
 		}
 
-		/**
-		 * Add comps to vanilla IED's so that they can be triggered by the manual detonator
-		 */
+		/// <summary>
+		/// Add comps to vanilla IED's so that they can be triggered by the manual detonator
+		/// </summary>
 		private void InjectVanillaExplosivesComps() {
 			try {
 				var ieds = new List<ThingDef> {
@@ -147,32 +158,76 @@ namespace RemoteExplosives {
 				}
 				ThingDefOf.PassiveCooler.comps.Add(new CompProperties_AutoReplaceable {applyOnVanish = true});
 			} catch (Exception e) {
-				Logger.Error("Exception while injecting comps into defs: " + e);
+				Logger.ReportException(e);
 			}
 		}
 
-		/**
-		 * Add StatPart_Upgradeable to all stats that are used in any CompProperties_Upgrade
-		 */
+
+		/// <summary>
+		/// Add StatPart_Upgradeable to all stats that are used in any CompProperties_Upgrade
+		/// </summary>
 		private void InjectUpgradeableStatParts() {
-			var relevantStats = new HashSet<StatDef>();
-			var allThings = DefDatabase<ThingDef>.AllDefs.ToArray();
-			for (var i = 0; i < allThings.Length; i++) {
-				var def = allThings[i];
-				if (def.comps.Count > 0) {
-					for (int j = 0; j < def.comps.Count; j++) {
-						var comp = def.comps[j];
-						if (comp is CompProperties_Upgrade upgradeProps) {
-							foreach (var upgradeProp in upgradeProps.statModifiers) {
-								relevantStats.Add(upgradeProp.stat);
+			try {
+				var relevantStats = new HashSet<StatDef>();
+				var allThings = DefDatabase<ThingDef>.AllDefs.ToArray();
+				for (var i = 0; i < allThings.Length; i++) {
+					var def = allThings[i];
+					if (def.comps.Count > 0) {
+						for (int j = 0; j < def.comps.Count; j++) {
+							var comp = def.comps[j];
+							if (comp is CompProperties_Upgrade upgradeProps) {
+								foreach (var upgradeProp in upgradeProps.statModifiers) {
+									relevantStats.Add(upgradeProp.stat);
+								}
 							}
 						}
 					}
 				}
+				foreach (var stat in relevantStats) {
+					var parts = stat.parts ?? (stat.parts = new List<StatPart>());
+					parts.Add(new StatPart_Upgradeable {parentStat = stat});
+				}
+			} catch (Exception e) {
+				Logger.ReportException(e);
 			}
-			foreach (var stat in relevantStats) {
-				var parts = stat.parts ?? (stat.parts = new List<StatPart>());
-				parts.Add(new StatPart_Upgradeable {parentStat = stat});
+		}
+
+		/// <summary>
+		/// Finds all buildings in which things with CompBuildGizmo are used as materials.
+		/// </summary>
+		/// <see cref="CompBuildGizmo"/>
+		/// <see cref="CompProperties_BuildGizmo"/>
+		private void PrepareReverseBuildingMaterialLookup() {
+			try {
+				// find all defs with our comp
+				var lookup = MaterialToBuilding;
+				lookup.Clear();
+				for (var i = 0; i < DefDatabase<ThingDef>.AllDefsListForReading.Count; i++) {
+					var def = DefDatabase<ThingDef>.AllDefsListForReading[i];
+					for (var j = 0; j < def.comps.Count; j++) {
+						if (def.comps[j] is CompProperties_BuildGizmo) {
+							lookup.Add(def, new List<ThingDef>());
+							break;
+						}
+					}
+				}
+				// find all buildings with our material def in their costList
+				for (var i = 0; i < DefDatabase<ThingDef>.AllDefsListForReading.Count; i++) {
+					var def = DefDatabase<ThingDef>.AllDefsListForReading[i];
+					if (def.category != ThingCategory.Building || def.costList == null) continue;
+					for (var j = 0; j < def.costList.Count; j++) {
+						var materialDef = def.costList[j]?.thingDef;
+						/*if (def.defName == "rxMiningChargeShaped") {
+							Tracer.Trace(materialDef?.defName, lookup.ContainsKey(materialDef));
+						}*/
+						if (materialDef != null && lookup.TryGetValue(materialDef, out List<ThingDef> buildingDefs)) {
+							buildingDefs.Add(def);
+							break;
+						}
+					}
+				}
+			} catch (Exception e) {
+				Logger.ReportException(e);
 			}
 		}
 
@@ -185,7 +240,7 @@ namespace RemoteExplosives {
 		private IEnumerable<RecipeDef> GetAllExplosivesRecipes() {
 			return DefDatabase<RecipeDef>.AllDefs.Where(d => {
 				var product = d.products.FirstOrDefault();
-				return product != null && product.thingDef != null && product.thingDef.thingCategories != null && product.thingDef.thingCategories.Contains(Resources.ThingCategory.rxExplosives);
+				return product?.thingDef?.thingCategories != null && product.thingDef.thingCategories.Contains(Resources.ThingCategory.rxExplosives);
 			});
 		}
 
