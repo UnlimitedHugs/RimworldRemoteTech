@@ -40,6 +40,7 @@ namespace RemoteExplosives {
 			public static JobDef rxDetonateExplosives;
 			public static JobDef rxSmoothFoamWall;
 			public static JobDef rxInstallUpgrade;
+			public static JobDef rxRedButtonFever;
 		}
 
 		[DefOf]

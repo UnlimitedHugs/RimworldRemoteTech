@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+	<ThinkTreeDef>
+		<defName>rxRedButtonFeverTree</defName>
+		<insertTag>Humanlike_PostMentalState</insertTag>
+		<thinkRoot Class="ThinkNode_Tagger">
+			<tagToGive>InMentalState</tagToGive>
+			<subNodes>
+				<li Class="ThinkNode_ConditionalMentalState">
+					<state>rxRedButtonFever</state>
+					<subNodes>
+						<li Class="RemoteExplosives.JobGiver_RedButtonFever" />
+					</subNodes>
+				</li>
+			</subNodes>
+		</thinkRoot>
+	</ThinkTreeDef>
+
+</Defs>

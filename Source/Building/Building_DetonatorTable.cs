@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using RimWorld;
 using Verse;
@@ -9,13 +10,14 @@ namespace RemoteExplosives {
 	 * Finds remote explosive charges in range and detonates them on command.
 	 * Can be upgraded with a component to unlock the ability to use channels.
 	 */
-	public class Building_DetonatorTable : Building, IPawnDetonateable {
+	public class Building_DetonatorTable : Building, IPawnDetonateable, IRedButtonFeverTarget {
 		private const string ChannelsBasicUpgradeId = "ChannelsBasic";
 		private const string ChannelsAdvancedUpgradeId = "ChannelsAdvanced";
 
 		private CompUpgrade channelsBasic;
 		private CompUpgrade channelsAdvanced;
 		private CompChannelSelector channels;
+		private CompPowerTrader power;
 
 		// saved
 		private bool wantDetonation;
@@ -30,6 +32,7 @@ namespace RemoteExplosives {
 			channelsBasic = this.TryGetUpgrade(ChannelsBasicUpgradeId);
 			channelsAdvanced = this.TryGetUpgrade(ChannelsAdvancedUpgradeId);
 			channels = GetComp<CompChannelSelector>();
+			power = GetComp<CompPowerTrader>();
 			ConfigureChannelComp();
 		}
 
@@ -97,21 +100,19 @@ namespace RemoteExplosives {
 			set { wantDetonation = value; }
 		}
 
+		private bool IsPowered {
+			get { return power == null || power.PowerOn; }
+		}
+
 		public void DoDetonation() {
 			wantDetonation = false;
-			if (!GetComp<CompPowerTrader>().PowerOn) {
+			if (!IsPowered) {
 				PlayNeedPowerEffect();
 				return;
 			}
 			RemoteExplosivesUtility.ReportPowerUse(this, 20f);
 			SoundDefOf.FlickSwitch.PlayOneShot(this);
 			RemoteExplosivesUtility.TriggerReceiversInNetworkRange(this, channels?.Channel ?? RemoteExplosivesUtility.DefaultChannel);
-		}
-
-		private void PlayNeedPowerEffect() {
-			var info = SoundInfo.InMap(this);
-			info.volumeFactor = 3f;
-			SoundDefOf.Power_OffSmall.PlayOneShot(info);
 		}
 
 		public override string GetInspectString() {
@@ -139,6 +140,27 @@ namespace RemoteExplosives {
 			foreach (var option in base.GetFloatMenuOptions(selPawn)) {
 				yield return option;
 			}
+		}
+
+		public bool RedButtonFeverCanInteract {
+			get { return IsPowered; }
+		}
+
+		public void RedButtonFeverDoInteraction(Pawn p) {
+			if (channels != null) {
+				// switch to a non-empty channel
+				var channelWithReceivers = channels.ChannelPopulation.Where(kv => kv.Value.Count > 0).Select(kv => kv.Key).RandomElementWithFallback(-1);
+				if (channelWithReceivers > -1) {
+					channels.Channel = channelWithReceivers;
+				}
+			}
+			DoDetonation();
+		}
+
+		private void PlayNeedPowerEffect() {
+			var info = SoundInfo.InMap(this);
+			info.volumeFactor = 3f;
+			SoundDefOf.Power_OffSmall.PlayOneShot(info);
 		}
 	}
 }

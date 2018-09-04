@@ -25,6 +25,7 @@ namespace RemoteExplosives {
 			get { return _channel; }
 			set {
 				_channel = value;
+				if (!manualSwitching) _desiredChannel = value;
 				UpdateSwitchDesignation();
 			}
 		}
@@ -33,6 +34,7 @@ namespace RemoteExplosives {
 			get { return _desiredChannel; }
 			set {
 				_desiredChannel = value;
+				if (!manualSwitching) _channel = value;
 				UpdateSwitchDesignation();
 			}
 		}
@@ -43,17 +45,6 @@ namespace RemoteExplosives {
 
 		public bool WantsSwitch() {
 			return manualSwitching && DesiredChannel != Channel;
-		}
-
-		public void DoSwitch() {
-			if (Channel != DesiredChannel) {
-				Channel = DesiredChannel;
-				parent.BroadcastCompSignal(ChannelChangedSignal);
-			}
-		}
-
-		private void UpdateSwitchDesignation() {
-			parent.UpdateSwitchDesignation();
 		}
 
 		public CompChannelSelector() {
@@ -73,6 +64,13 @@ namespace RemoteExplosives {
 			gizmoMode = gizmoType;
 			readPopulation = canReadPopulation;
 			return this;
+		}
+
+		public void DoSwitch() {
+			if (Channel != DesiredChannel) {
+				Channel = DesiredChannel;
+				parent.BroadcastCompSignal(ChannelChangedSignal);
+			}
 		}
 
 		public override void PostExposeData() {
@@ -96,6 +94,10 @@ namespace RemoteExplosives {
 		public void ExposeAutoReplaceValues(AutoReplaceWatcher watcher) {
 			watcher.ExposeValue(ref _channel, "channel");
 			if (watcher.ExposeMode == LoadSaveMode.LoadingVars) _desiredChannel = _channel;
+		}
+
+		private void UpdateSwitchDesignation() {
+			parent.UpdateSwitchDesignation();
 		}
 	}
 }

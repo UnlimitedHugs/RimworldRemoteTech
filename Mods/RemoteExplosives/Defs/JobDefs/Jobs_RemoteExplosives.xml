@@ -31,4 +31,11 @@
 		<reportString>Installing upgrade.</reportString>
 	</JobDef>
 	
+	<JobDef>
+		<defName>rxRedButtonFever</defName>
+		<driverClass>RemoteExplosives.JobDriver_RedButtonFever</driverClass>
+		<reportString>Triggering TargetA.</reportString>
+		<collideWithPawns>true</collideWithPawns>
+	</JobDef>
+	
 </Defs>

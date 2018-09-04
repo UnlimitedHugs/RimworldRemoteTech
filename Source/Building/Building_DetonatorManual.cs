@@ -7,7 +7,7 @@ namespace RemoteExplosives {
 	/* 
 	 * Initiates a detonation signal carried by wire when triggered by a colonist.
 	 */
-	public class Building_DetonatorManual : Building, IGraphicVariantProvider, IPawnDetonateable {
+	public class Building_DetonatorManual : Building, IGraphicVariantProvider, IPawnDetonateable, IRedButtonFeverTarget {
 		private enum VisualVariant {
 			PlungerUp = 0,
 			PlungerDown = 1
@@ -86,6 +86,14 @@ namespace RemoteExplosives {
 			foreach (var option in base.GetFloatMenuOptions(selPawn)) {
 				yield return option;
 			}
+		}
+
+		public bool RedButtonFeverCanInteract {
+			get { return true; }
+		}
+
+		public void RedButtonFeverDoInteraction(Pawn p) {
+			DoDetonation();
 		}
 
 		private void DetonateToggleAction() {
