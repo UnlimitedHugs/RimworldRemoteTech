@@ -117,15 +117,14 @@ namespace RemoteExplosives {
 
 		public override string GetInspectString() {
 			if (!Spawned) return string.Empty;
-			var stringBuilder = new StringBuilder();
-			stringBuilder.Append(base.GetInspectString());
+			var stringBuilder = new StringBuilder(base.GetInspectString());
 			if (channels != null) {
 				channels.ChannelPopulation.TryGetValue(channels.Channel, out List<IWirelessDetonationReceiver> list);
 				stringBuilder.AppendLine();
 				stringBuilder.Append("DetonatorTable_inrange".Translate());
 				stringBuilder.Append(": " + (list!=null?list.Count:0));
-				stringBuilder.AppendLine();
 				if (RemoteExplosivesUtility.GetChannelsUnlockLevel() > RemoteExplosivesUtility.ChannelType.None) {
+					stringBuilder.AppendLine();
 					stringBuilder.Append(RemoteExplosivesUtility.GetCurrentChannelInspectString(channels.Channel));
 				}
 			}
