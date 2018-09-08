@@ -4,7 +4,7 @@ using HugsLib;
 using RimWorld;
 using Verse;
 
-namespace RemoteExplosives {
+namespace RemoteTech {
 	/**
 	 * A plant that has a chance to set itself of fire when walked over by a pawn.
 	 */

@@ -3,7 +3,7 @@ using UnityEngine;
 using Verse;
 using Verse.Sound;
 
-namespace RemoteExplosives {
+namespace RemoteTech {
 	/* 
 	 * Initiates a detonation signal carried by wire when triggered by a colonist.
 	 */
@@ -80,7 +80,7 @@ namespace RemoteExplosives {
 
 		// quick detonation option for drafted pawns
 		public override IEnumerable<FloatMenuOption> GetFloatMenuOptions(Pawn selPawn) {
-			var opt = RemoteExplosivesUtility.TryMakeDetonatorFloatMenuOption(selPawn, this);
+			var opt = RemoteTechUtility.TryMakeDetonatorFloatMenuOption(selPawn, this);
 			if (opt != null) yield return opt;
 
 			foreach (var option in base.GetFloatMenuOptions(selPawn)) {

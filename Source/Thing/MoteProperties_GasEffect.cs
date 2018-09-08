@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using Verse;
 
 
-namespace RemoteExplosives {
+namespace RemoteTech {
 	/// <summary>
 	/// Provides settings to gases that affect things or pawns in some way
 	/// </summary>

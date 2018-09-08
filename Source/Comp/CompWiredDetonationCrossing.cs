@@ -1,7 +1,7 @@
 ﻿using System;
 using Verse;
 
-namespace RemoteExplosives {
+namespace RemoteTech {
 	/// <summary>
 	/// Transmits a signal only along a straight line.
 	/// </summary>

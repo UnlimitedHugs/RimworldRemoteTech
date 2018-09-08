@@ -1,6 +1,6 @@
 ﻿using RimWorld;
 
-namespace RemoteExplosives {
+namespace RemoteTech {
 	/// <summary>
 	/// In combination with CompPowerBattery_Props_Patch allows types extending CompPowerBattery 
 	/// to return custom comp props to the base class (can't override key methods)

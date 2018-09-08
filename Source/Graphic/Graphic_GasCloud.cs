@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using Verse;
 
-namespace RemoteExplosives {
+namespace RemoteTech {
 	/* 
 	 * An advanced version of Graphic_Random with support for alpha, position offset, scaling and rotation
 	 */

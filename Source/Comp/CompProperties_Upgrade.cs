@@ -8,7 +8,7 @@ using RimWorld;
 using Verse;
 // ReSharper disable CollectionNeverUpdated.Global
 
-namespace RemoteExplosives {
+namespace RemoteTech {
 	public class CompProperties_Upgrade : CompProperties {
 		// a readable identifier for the player
 		public string label;

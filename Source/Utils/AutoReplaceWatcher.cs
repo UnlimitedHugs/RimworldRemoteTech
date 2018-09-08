@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using RimWorld;
 using Verse;
 
-namespace RemoteExplosives {
+namespace RemoteTech {
 	/// <summary>
 	/// Replaces destroyed buildings that have a CompAutoReplaceable new blueprints that are forbidden for a set number of seconds (see mod settings).
 	/// Buildings and their comps can implement IAutoReplaceExposable to carry over additional data to their rebuilt form.
@@ -42,23 +42,23 @@ namespace RemoteExplosives {
 			var building = replaceableComp.parent;
 			if (building?.def == null) return;
 			if ((building.Stuff == null && building.def.MadeFromStuff) || (building.Stuff != null && !building.def.MadeFromStuff)) {
-				RemoteExplosivesController.Instance.Logger.Warning("Could not schedule {0} auto-replacement due to Stuff discrepancy.", building);
+				RemoteTechController.Instance.Logger.Warning("Could not schedule {0} auto-replacement due to Stuff discrepancy.", building);
 				return;
 			}
 			var report = GenConstruct.CanPlaceBlueprintAt(building.def, replaceableComp.ParentPosition, replaceableComp.ParentRotation, map);
 			if (!report.Accepted) {
-				RemoteExplosivesController.Instance.Logger.Message($"Could not auto-replace {building.LabelCap}: {report.Reason}");
+				RemoteTechController.Instance.Logger.Message($"Could not auto-replace {building.LabelCap}: {report.Reason}");
 				return;
 			}
 			var blueprint = GenConstruct.PlaceBlueprintForBuild(building.def, replaceableComp.ParentPosition, map, replaceableComp.ParentRotation, Faction.OfPlayer, building.Stuff);
 			var entry = new ReplacementEntry {
 				position = replaceableComp.ParentPosition,
-				unforbidTick = Find.TickManager.TicksGame + RemoteExplosivesController.Instance.BlueprintForbidDuration * GenTicks.TicksPerRealSecond,
+				unforbidTick = Find.TickManager.TicksGame + RemoteTechController.Instance.BlueprintForbidDuration * GenTicks.TicksPerRealSecond,
 				savedVars = new Dictionary<string, ValueType>()
 			};
 			InvokeExposableCallbacks(building, entry.savedVars, LoadSaveMode.Saving);
 			pendingSettings.Add(entry);
-			if (RemoteExplosivesController.Instance.BlueprintForbidDuration > 0) {
+			if (RemoteTechController.Instance.BlueprintForbidDuration > 0) {
 				blueprint.SetForbidden(true, false);
 				pendingForbiddenBlueprints.Add(entry);
 			}
@@ -99,14 +99,14 @@ namespace RemoteExplosives {
 			if (ExposeMode == LoadSaveMode.LoadingVars) {
 				if (currentVars.TryGetValue(name, out ValueType storedValue)) {
 					value = (T)storedValue;
-					//RemoteExplosivesController.Instance.Logger.Message($"Loaded {value} as {name}");
+					//RemoteTechController.Instance.Logger.Message($"Loaded {value} as {name}");
 					return true;
 				} else {
 					value = fallbackValue;
-					//RemoteExplosivesController.Instance.Logger.Message($"Loaded fallback {value} as {name}");
+					//RemoteTechController.Instance.Logger.Message($"Loaded fallback {value} as {name}");
 				}
 			} else if (ExposeMode == LoadSaveMode.Saving) {
-				//RemoteExplosivesController.Instance.Logger.Message($"Saving {value} as {name}");
+				//RemoteTechController.Instance.Logger.Message($"Saving {value} as {name}");
 				currentVars[name] = value;
 				return true;
 			}

@@ -3,7 +3,7 @@ using RimWorld;
 using Verse;
 using Verse.AI;
 
-namespace RemoteExplosives {
+namespace RemoteTech {
 	/// <summary>
 	/// Provides JobDriver_InstallUpgrade to colonists, based on things that have upgrade designation.
 	/// The designation is applied by CompUpgrade using the toggle gizmo.

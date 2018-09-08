@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace RemoteExplosives {
+namespace RemoteTech {
 	public enum CurveType {
 		Linear,
 		QuadraticIn, QuadraticOut, QuadraticInOut,

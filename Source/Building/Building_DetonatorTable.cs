@@ -5,7 +5,7 @@ using RimWorld;
 using Verse;
 using Verse.Sound;
 
-namespace RemoteExplosives {
+namespace RemoteTech {
 	/*
 	 * Finds remote explosive charges in range and detonates them on command.
 	 * Can be upgraded with a component to unlock the ability to use channels.
@@ -70,7 +70,7 @@ namespace RemoteExplosives {
 		protected override void ReceiveCompSignal(string signal) {
 			base.ReceiveCompSignal(signal);
 			if(signal == CompUpgrade.UpgradeCompleteSignal) ConfigureChannelComp();
-			if(signal == CompChannelSelector.ChannelChangedSignal) RemoteExplosivesUtility.ReportPowerUse(this, 2f);
+			if(signal == CompChannelSelector.ChannelChangedSignal) RemoteTechUtility.ReportPowerUse(this, 2f);
 		}
 
 		private bool CanDetonateImmediately() {
@@ -82,11 +82,11 @@ namespace RemoteExplosives {
 		}
 
 		private void ConfigureChannelComp() {
-			var channelsLevel = RemoteExplosivesUtility.ChannelType.None;
+			var channelsLevel = RemoteTechUtility.ChannelType.None;
 			if (channelsAdvanced != null && channelsAdvanced.Complete) {
-				channelsLevel = RemoteExplosivesUtility.ChannelType.Advanced;
+				channelsLevel = RemoteTechUtility.ChannelType.Advanced;
 			} else if (channelsBasic != null && channelsBasic.Complete) {
-				channelsLevel = RemoteExplosivesUtility.ChannelType.Basic;
+				channelsLevel = RemoteTechUtility.ChannelType.Basic;
 			}
 			channels?.Configure(false, false, true, channelsLevel);
 		}
@@ -110,9 +110,9 @@ namespace RemoteExplosives {
 				PlayNeedPowerEffect();
 				return;
 			}
-			RemoteExplosivesUtility.ReportPowerUse(this, 20f);
+			RemoteTechUtility.ReportPowerUse(this, 20f);
 			SoundDefOf.FlickSwitch.PlayOneShot(this);
-			RemoteExplosivesUtility.TriggerReceiversInNetworkRange(this, channels?.Channel ?? RemoteExplosivesUtility.DefaultChannel);
+			RemoteTechUtility.TriggerReceiversInNetworkRange(this, channels?.Channel ?? RemoteTechUtility.DefaultChannel);
 		}
 
 		public override string GetInspectString() {
@@ -123,9 +123,9 @@ namespace RemoteExplosives {
 				stringBuilder.AppendLine();
 				stringBuilder.Append("DetonatorTable_inrange".Translate());
 				stringBuilder.Append(": " + (list!=null?list.Count:0));
-				if (RemoteExplosivesUtility.GetChannelsUnlockLevel() > RemoteExplosivesUtility.ChannelType.None) {
+				if (RemoteTechUtility.GetChannelsUnlockLevel() > RemoteTechUtility.ChannelType.None) {
 					stringBuilder.AppendLine();
-					stringBuilder.Append(RemoteExplosivesUtility.GetCurrentChannelInspectString(channels.Channel));
+					stringBuilder.Append(RemoteTechUtility.GetCurrentChannelInspectString(channels.Channel));
 				}
 			}
 			return stringBuilder.ToString();
@@ -133,7 +133,7 @@ namespace RemoteExplosives {
 
 		// quick detonation option for drafted pawns
 		public override IEnumerable<FloatMenuOption> GetFloatMenuOptions(Pawn selPawn) {
-			var opt = RemoteExplosivesUtility.TryMakeDetonatorFloatMenuOption(selPawn, this);
+			var opt = RemoteTechUtility.TryMakeDetonatorFloatMenuOption(selPawn, this);
 			if (opt != null) yield return opt;
 
 			foreach (var option in base.GetFloatMenuOptions(selPawn)) {

@@ -1,6 +1,6 @@
 ﻿using Verse;
 
-namespace RemoteExplosives {
+namespace RemoteTech {
 	/* 
 	 * Drops a random amount of a certain item on destruction.
 	 */

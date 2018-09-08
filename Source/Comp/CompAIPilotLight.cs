@@ -4,7 +4,7 @@ using RimWorld;
 using UnityEngine;
 using Verse;
 
-namespace RemoteExplosives {
+namespace RemoteTech {
 	/// <summary>
 	/// A cosmetic comp that displays an animated overlay light to simulate the attention of an AI
 	/// </summary>
@@ -111,7 +111,7 @@ namespace RemoteExplosives {
 				blinkSquintAnim.UpdateIfUnpaused();
 				offsetXAnim.UpdateIfUnpaused();
 				offsetZAnim.UpdateIfUnpaused();
-				RemoteExplosivesUtility.DrawFlareOverlay(Resources.Graphics.FlareOverlayNormal, 
+				RemoteTechUtility.DrawFlareOverlay(Resources.Graphics.FlareOverlayNormal, 
 					parent.DrawPos + new Vector3(offsetXAnim.value, 0, offsetZAnim.value) + Altitudes.AltIncVect, blinker, 1f, blinkAnim.value * blinkSquintAnim.value);
 			}
 		}

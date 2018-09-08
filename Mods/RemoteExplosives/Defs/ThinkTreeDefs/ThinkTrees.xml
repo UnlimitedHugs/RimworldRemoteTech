@@ -10,7 +10,7 @@
 				<li Class="ThinkNode_ConditionalMentalState">
 					<state>rxRedButtonFever</state>
 					<subNodes>
-						<li Class="RemoteExplosives.JobGiver_RedButtonFever" />
+						<li Class="RemoteTech.JobGiver_RedButtonFever" />
 					</subNodes>
 				</li>
 			</subNodes>

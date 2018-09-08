@@ -2,7 +2,7 @@
 using UnityEngine;
 using Verse;
 
-namespace RemoteExplosives {
+namespace RemoteTech {
 	/// <summary>
 	/// A solar plant with stat based power production (rxPowerConsumption) and sun exposure multiplier (rxSunExposure)
 	/// </summary>

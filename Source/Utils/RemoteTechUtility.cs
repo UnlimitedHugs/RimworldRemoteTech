@@ -7,12 +7,12 @@ using UnityEngine;
 using Verse;
 using Verse.AI;
 
-namespace RemoteExplosives {
+namespace RemoteTech {
 	 /*
 	  * A place for common functions and utilities used by the mod.
 	  */
 	[StaticConstructorOnStartup]
-	public static class RemoteExplosivesUtility {
+	public static class RemoteTechUtility {
 		public const string InjectedRecipeNameSuffix = "Injected";
 		public const int DefaultChannel = 1;
 		
@@ -148,14 +148,14 @@ namespace RemoteExplosives {
 
 		public static void DeployGas(Map map, IntVec3 pos, ThingDef gasDef, int amount) {
 			if (gasDef == null) {
-				RemoteExplosivesController.Instance.Logger.Error("Tried to deploy null GasDef: " + Environment.StackTrace);
+				RemoteTechController.Instance.Logger.Error("Tried to deploy null GasDef: " + Environment.StackTrace);
 				return;
 			}
 			var cloud = TryFindGasCloudAt(map, pos, gasDef);
 			if (cloud == null) {
 				cloud = ThingMaker.MakeThing(gasDef) as GasCloud;
 				if (cloud == null) {
-					RemoteExplosivesController.Instance.Logger.Error(string.Format("Deployed thing was not a GasCloud: {0}", gasDef));
+					RemoteTechController.Instance.Logger.Error(string.Format("Deployed thing was not a GasCloud: {0}", gasDef));
 					return;
 				}
 				GenPlace.TryPlaceThing(cloud, pos, map, ThingPlaceMode.Direct);
@@ -220,22 +220,22 @@ namespace RemoteExplosives {
 
 		public static T RequireComp<T>(this ThingWithComps thing) where T: ThingComp {
 			var c = thing.GetComp<T>();
-			if(c == null) RemoteExplosivesController.Instance.Logger.Error($"{thing.GetType().Name} requires ThingComp of type {nameof(T)} in def {thing.def.defName}");
+			if(c == null) RemoteTechController.Instance.Logger.Error($"{thing.GetType().Name} requires ThingComp of type {nameof(T)} in def {thing.def.defName}");
 			return c;
 		}
 
 		public static T RequireComponent<T>(this ThingWithComps thing, T component) {
-			if(component == null) RemoteExplosivesController.Instance.Logger.Error($"{thing.GetType().Name} requires {nameof(T)} in def {thing.def.defName}");
+			if(component == null) RemoteTechController.Instance.Logger.Error($"{thing.GetType().Name} requires {nameof(T)} in def {thing.def.defName}");
 			return component;
 		}
 
 		public static T RequireComponent<T>(this ThingComp comp, T component) {
-			if(component == null) RemoteExplosivesController.Instance.Logger.Error($"{comp.GetType().Name} requires {nameof(T)} in def {comp.parent.def.defName}");
+			if(component == null) RemoteTechController.Instance.Logger.Error($"{comp.GetType().Name} requires {nameof(T)} in def {comp.parent.def.defName}");
 			return component;
 		}
 
 		public static void RequireTicker(this ThingComp comp, TickerType type) {
-			if(comp.parent.def.tickerType != type) RemoteExplosivesController.Instance.Logger.Error($"{comp.GetType().Name} requires tickerType:{type} in def {comp.parent.def.defName}");
+			if(comp.parent.def.tickerType != type) RemoteTechController.Instance.Logger.Error($"{comp.GetType().Name} requires tickerType:{type} in def {comp.parent.def.defName}");
 		}
 
 		public static CachedValue<float> GetCachedStat(this Thing thing, StatDef stat, int recacheInterval = GenTicks.TicksPerRealSecond) {

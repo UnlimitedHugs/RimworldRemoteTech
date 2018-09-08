@@ -2,7 +2,7 @@
 using RimWorld;
 using Verse.AI;
 
-namespace RemoteExplosives {
+namespace RemoteTech {
 
 	/// <summary>
 	/// Calls a colonist to flick a thing or comp implementing ISwitchable.

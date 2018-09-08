@@ -5,7 +5,7 @@ using RimWorld;
 using UnityEngine;
 using Verse;
 
-namespace RemoteExplosives {
+namespace RemoteTech {
 	/* 
 	 * A self-replicating Thing with a concentration property.
 	 * Will spread in cardinal directions when the concentration is high enough, and loose concentration over time.

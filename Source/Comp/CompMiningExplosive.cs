@@ -5,7 +5,7 @@ using UnityEngine;
 using Verse;
 using Verse.Sound;
 
-namespace RemoteExplosives {
+namespace RemoteTech {
 	/* 
 	 * An explosive with high power against rocks. Will break rocks within the defined area.
 	 */

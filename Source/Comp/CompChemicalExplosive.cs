@@ -2,7 +2,7 @@
 using Verse;
 using Verse.Sound;
 
-namespace RemoteExplosives {
+namespace RemoteTech {
 	/*
 	 * A remote explosive that creates things on detonation.
 	 */

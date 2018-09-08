@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Verse.AI;
 
-namespace RemoteExplosives {
+namespace RemoteTech {
 	/// <summary>
 	/// Drives a pawn with the Red Button Fever mental break to go trigger a detonator.
 	/// </summary>

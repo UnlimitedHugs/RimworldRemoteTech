@@ -3,7 +3,7 @@ using RimWorld;
 using Verse;
 using Verse.AI;
 
-namespace RemoteExplosives {
+namespace RemoteTech {
 	/* 
 	 * Issues jobs on behalf of Building_DetonatorWire to dry it off when it is appropriately designated
 	 */

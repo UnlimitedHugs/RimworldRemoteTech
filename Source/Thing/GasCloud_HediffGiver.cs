@@ -2,7 +2,7 @@
 using RimWorld;
 using Verse;
 
-namespace RemoteExplosives {
+namespace RemoteTech {
 	/// <summary>
 	/// A GasCloud that increases severity of a Hediff on pawns in the same tile.
 	/// See MoteProperties_GasEffect for setting.

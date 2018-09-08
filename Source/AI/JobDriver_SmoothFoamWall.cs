@@ -4,7 +4,7 @@ using RimWorld;
 using Verse;
 using Verse.AI;
 
-namespace RemoteExplosives {
+namespace RemoteTech {
 	/*
 	 * Calls a colonist to transform a foam wall into one of its smoothed variants
 	 */

@@ -1,7 +1,7 @@
 ﻿using RimWorld;
 using UnityEngine;
 
-namespace RemoteExplosives {
+namespace RemoteTech {
 	public class CompProperties_BatteryWithBar : CompProperties_Battery {
 		public float passiveDischargeWatts = 0f;
 		public Vector3 barOffset = new Vector3(0f, .1f, 0f);

@@ -10,17 +10,17 @@ using RimWorld;
 using UnityEngine;
 using Verse;
 
-namespace RemoteExplosives {
+namespace RemoteTech {
 	/// <summary>
 	/// The hub of the mod.
 	/// Injects trader stock generators, generates recipe copies for the workbench and injects comps.
 	/// </summary>
-	public class RemoteExplosivesController : ModBase {
+	public class RemoteTechController : ModBase {
 		private const int ComponentValueInSteel = 40;
 		private const int ForbiddenTimeoutSettingDefault = 30;
 		private const int ForbiddenTimeoutSettingIncrement = 5;
 
-		public static RemoteExplosivesController Instance { get; private set; }
+		public static RemoteTechController Instance { get; private set; }
 
 		private readonly MethodInfo objectCloneMethod = typeof (object).GetMethod("MemberwiseClone", BindingFlags.Instance | BindingFlags.NonPublic);
 		// ReSharper disable once ConvertToConstant.Local
@@ -36,7 +36,7 @@ namespace RemoteExplosives {
 		private SettingHandle<int> SettingForbidTimeout { get; set; }
 
 		public override string ModIdentifier {
-			get { return "RemoteExplosives"; }
+			get { return "RemoteTech"; }
 		}
 
 		public new ModLogger Logger {
@@ -49,7 +49,7 @@ namespace RemoteExplosives {
 
 		public Dictionary<ThingDef, List<ThingDef>> MaterialToBuilding { get; } = new Dictionary<ThingDef, List<ThingDef>>();
 
-		public RemoteExplosivesController() {
+		public RemoteTechController() {
 			Instance = this;
 		}
 
@@ -249,7 +249,7 @@ namespace RemoteExplosives {
 			var recipeCopy = (RecipeDef) objectCloneMethod.Invoke(recipeOriginal, null);
 			recipeCopy.shortHash = 0;
 			InjectedDefHasher.GiveShortHashToDef(recipeCopy, typeof(RecipeDef));
-			recipeCopy.defName += RemoteExplosivesUtility.InjectedRecipeNameSuffix;
+			recipeCopy.defName += RemoteTechUtility.InjectedRecipeNameSuffix;
 
 			var newFixedFilter = new ThingFilter();
 			foreach (var allowedThingDef in recipeOriginal.fixedIngredientFilter.AllowedThingDefs) {

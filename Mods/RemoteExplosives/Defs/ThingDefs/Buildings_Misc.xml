@@ -14,11 +14,11 @@
 	<ThingDef ParentName="rxBuildingMiscBase">
 		<defName>rxWallFoamBlob</defName>
 		<label>chemical foam</label>
-		<thingClass>RemoteExplosives.Building_FoamBlob</thingClass>
+		<thingClass>RemoteTech.Building_FoamBlob</thingClass>
 		<description>Becomes tougher than rock as it solidifies.</description>
 		<graphicData>
 			<texPath>rxFoamBlob</texPath>
-			<graphicClass>RemoteExplosives.Graphic_FoamBlob</graphicClass>
+			<graphicClass>RemoteTech.Graphic_FoamBlob</graphicClass>
 			<shaderType>CutoutComplex</shaderType>
 			<drawSize>(1.2,1.2)</drawSize>
 			<shadowData>
@@ -44,7 +44,7 @@
 		<pathCost>230</pathCost>
 		<pathCostIgnoreRepeat>false</pathCostIgnoreRepeat>
 		<tickerType>Normal</tickerType>
-		<building Class="RemoteExplosives.BuildingProperties_FoamBlob">
+		<building Class="RemoteTech.BuildingProperties_FoamBlob">
 			<ticksToHarden>
 				<min>750</min>
 				<max>850</max>
@@ -58,7 +58,7 @@
 	</ThingDef>
 
 	<ThingDef ParentName="rxBuildingMiscBase" Abstract="True" Name="rxFoamWallBase">
-		<thingClass>RemoteExplosives.Building_FoamWall</thingClass>
+		<thingClass>RemoteTech.Building_FoamWall</thingClass>
 		<category>Building</category>
 		<graphicData>
 			<texPath>rxFoamWall</texPath>
@@ -102,7 +102,7 @@
 		<holdsRoof>true</holdsRoof>
 		<saveCompressible>false</saveCompressible>
 		<mineable>true</mineable>
-		<building Class="RemoteExplosives.BuildingProperties_FoamWall">
+		<building Class="RemoteTech.BuildingProperties_FoamWall">
 			<isInert>true</isInert>
 			<isNaturalRock>false</isNaturalRock>
 			<canBuildNonEdificesUnder>false</canBuildNonEdificesUnder>
@@ -138,7 +138,7 @@
 		<statBases>
 			<Beauty>-10</Beauty>
 		</statBases>
-		<building Class="RemoteExplosives.BuildingProperties_FoamWall">
+		<building Class="RemoteTech.BuildingProperties_FoamWall">
 			<smoothWorkAmount>1000</smoothWorkAmount>
 			<smoothVariants>
 				<li>rxFoamWallSmooth</li>
@@ -218,7 +218,7 @@
 	<ThingDef ParentName="rxBuildingMiscBase">
 		<defName>rxGasVent</defName>
 		<label>gas vent</label>
-		<thingClass>RemoteExplosives.Building_GasVent</thingClass>
+		<thingClass>RemoteTech.Building_GasVent</thingClass>
 		<description>Pushes gasses from one side to the other when powered. Also equalizes heat like a regular vent when powered.
 Tip: switches can be used to toggle vents remotely, as well as in groups.</description>
 		<designationCategory>rxRemoteExplosives</designationCategory>
@@ -253,18 +253,18 @@ Tip: switches can be used to toggle vents remotely, as well as in groups.</descr
 		<size>(1,1)</size>
 		<terrainAffordanceNeeded>Heavy</terrainAffordanceNeeded>
 		<passability>Impassable</passability>
-		<building Class="RemoteExplosives.BuildingProperties_GasVent">
+		<building Class="RemoteTech.BuildingProperties_GasVent">
 			<heatExchangedPerSecond>0.0672</heatExchangedPerSecond>
 			<canPlaceOverWall>true</canPlaceOverWall>
 		</building>
 		<comps>
 			<li Class="CompProperties_Power">
-				<compClass>RemoteExplosives.CompStatPowerIdle</compClass>
+				<compClass>RemoteTech.CompStatPowerIdle</compClass>
 				<shortCircuitInRain>false</shortCircuitInRain>
 			</li>
 			<li Class="CompProperties_Flickable"/>
 			<li Class="CompProperties_Breakdownable"/>
-			<li Class="RemoteExplosives.CompProperties_Upgrade">
+			<li Class="RemoteTech.CompProperties_Upgrade">
 				<label>Armor plating</label>
 				<referenceId>ArmorPlating</referenceId>
 				<workAmount>2000</workAmount>
@@ -276,7 +276,7 @@ Tip: switches can be used to toggle vents remotely, as well as in groups.</descr
 					<Plasteel>50</Plasteel>
 				</costList>
 			</li>
-			<li Class="RemoteExplosives.CompProperties_Upgrade">
+			<li Class="RemoteTech.CompProperties_Upgrade">
 				<label>High-power fans</label>
 				<referenceId>PowerFans</referenceId>
 				<workAmount>1500</workAmount>
@@ -290,7 +290,7 @@ Tip: switches can be used to toggle vents remotely, as well as in groups.</descr
 					<Steel>60</Steel>
 				</costList>
 			</li>
-			<li Class="RemoteExplosives.CompProperties_Upgrade">
+			<li Class="RemoteTech.CompProperties_Upgrade">
 				<label>Idle power relay</label>
 				<referenceId>IdlePower</referenceId>
 				<workAmount>1000</workAmount>
@@ -301,7 +301,7 @@ Tip: switches can be used to toggle vents remotely, as well as in groups.</descr
 			</li>
 		</comps>
 		<placeWorkers>
-			<li>RemoteExplosives.PlaceWorker_GasVent</li>
+			<li>RemoteTech.PlaceWorker_GasVent</li>
 		</placeWorkers>
 		<drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>
 		<researchPrerequisites>
@@ -358,10 +358,10 @@ Tip: switches can be used to toggle vents remotely, as well as in groups.</descr
 		</costList>
 		<comps>
 			<li Class="CompProperties_Power">
-				<compClass>RemoteExplosives.CompStatSolarGenerator</compClass>
+				<compClass>RemoteTech.CompStatSolarGenerator</compClass>
 				<transmitsPower>true</transmitsPower>
 			</li>
-			<li Class="RemoteExplosives.CompProperties_BatteryWithBar">
+			<li Class="RemoteTech.CompProperties_BatteryWithBar">
 				<efficiency>0.5</efficiency>
 				<shortCircuitInRain>false</shortCircuitInRain>
 				<transmitsPower>true</transmitsPower>
@@ -370,7 +370,7 @@ Tip: switches can be used to toggle vents remotely, as well as in groups.</descr
 				<barMargin>0.015</barMargin>
 			</li>
 			<li Class="CompProperties_Breakdownable"/>
-			<li Class="RemoteExplosives.CompProperties_Upgrade">
+			<li Class="RemoteTech.CompProperties_Upgrade">
 				<label>Bigger battery</label>
 				<referenceId>BiggerBattery</referenceId>
 				<workAmount>1500</workAmount>
@@ -382,7 +382,7 @@ Tip: switches can be used to toggle vents remotely, as well as in groups.</descr
 					<ComponentIndustrial>3</ComponentIndustrial>
 				</costList>
 			</li>			
-			<li Class="RemoteExplosives.CompProperties_Upgrade">
+			<li Class="RemoteTech.CompProperties_Upgrade">
 				<label>Tracking motors</label>
 				<referenceId>MoreSunExposure</referenceId>
 				<workAmount>2000</workAmount>
@@ -408,9 +408,9 @@ Tip: switches can be used to toggle vents remotely, as well as in groups.</descr
 	<ThingDef ParentName="BuildingBase">
 		<defName>rxProximitySensor</defName>
 		<label>proximity sensor</label>
-		<thingClass>RemoteExplosives.Building_ProximitySensor</thingClass>
+		<thingClass>RemoteTech.Building_ProximitySensor</thingClass>
 		<description>Scans for movement in the surrounding area. On detection, can either sound an alarm, or send a detonation signal. Can be upgraded to a wireless detonator, and even an AI core to ignore friendly units.</description>
-		<graphicData Class="RemoteExplosives.GraphicData_Blinker">
+		<graphicData Class="RemoteTech.GraphicData_Blinker">
 			<texPath>rxProximitySensor</texPath>
 			<graphicClass>Graphic_Single</graphicClass>
 			<shaderType>CutoutComplex</shaderType>
@@ -432,22 +432,22 @@ Tip: switches can be used to toggle vents remotely, as well as in groups.</descr
 		<tickerType>Normal</tickerType>
 		<comps>
 			<li Class="CompProperties_Power">
-				<compClass>RemoteExplosives.CompStatPower</compClass>
+				<compClass>RemoteTech.CompStatPower</compClass>
 				<shortCircuitInRain>false</shortCircuitInRain>
 			</li>
 			<li Class="CompProperties_Flickable"/>
 			<li Class="CompProperties_Breakdownable"/>
-			<li Class="RemoteExplosives.CompProperties_ChannelSelector"/>
-			<li Class="RemoteExplosives.CompProperties_WirelessDetonationGridNode"/>
-			<li Class="RemoteExplosives.CompProperties_WiredDetonationSender"/>
-			<li><compClass>RemoteExplosives.CompAIPilotLight</compClass></li>
+			<li Class="RemoteTech.CompProperties_ChannelSelector"/>
+			<li Class="RemoteTech.CompProperties_WirelessDetonationGridNode"/>
+			<li Class="RemoteTech.CompProperties_WiredDetonationSender"/>
+			<li><compClass>RemoteTech.CompAIPilotLight</compClass></li>
 			<li Class="CompProperties_Glower">
-				<compClass>RemoteExplosives.CompGlowerToggleable</compClass>
+				<compClass>RemoteTech.CompGlowerToggleable</compClass>
 				<overlightRadius>1.5</overlightRadius>
 				<glowRadius>3</glowRadius>
 				<glowColor>(255,50,25,0)</glowColor>
 			</li>
-			<li Class="RemoteExplosives.CompProperties_Upgrade">
+			<li Class="RemoteTech.CompProperties_Upgrade">
 				<label>Signal processor</label>
 				<referenceId>SignalProcessor</referenceId>
 				<workAmount>2000</workAmount>
@@ -461,7 +461,7 @@ Tip: switches can be used to toggle vents remotely, as well as in groups.</descr
 				</costList>
 				<constructionSkillPrerequisite>10</constructionSkillPrerequisite>
 			</li>
-			<li Class="RemoteExplosives.CompProperties_Upgrade">
+			<li Class="RemoteTech.CompProperties_Upgrade">
 				<label>Wireless detonator</label>
 				<referenceId>WirelessDetonation</referenceId>
 				<workAmount>2000</workAmount>
@@ -472,7 +472,7 @@ Tip: switches can be used to toggle vents remotely, as well as in groups.</descr
 				</costList>
 				<constructionSkillPrerequisite>7</constructionSkillPrerequisite>
 			</li>
-			<li Class="RemoteExplosives.CompProperties_Upgrade">
+			<li Class="RemoteTech.CompProperties_Upgrade">
 				<label>AI controller</label>
 				<referenceId>AIController</referenceId>
 				<workAmount>8000</workAmount>

@@ -36,9 +36,9 @@
 		</plant>
 	</ThingDef>
 
-	<ThingDef ParentName="rxPlantBase" Class="RemoteExplosives.SparkweedPlantDef">
+	<ThingDef ParentName="rxPlantBase" Class="RemoteTech.SparkweedPlantDef">
 		<defName>rxPlantSparkweed</defName>
-		<thingClass>RemoteExplosives.Plant_Sparkweed</thingClass>
+		<thingClass>RemoteTech.Plant_Sparkweed</thingClass>
 		<label>sparkweed</label>
 		<description>A curious plant of unknown origin. Its stems contain a flammable orange powder that is released when the plant is disturbed. The powder ignites on contact with air, producing hot sparks that can set fire to the surrounding area.
 It is cultivated as a source of low-grade explosive and gunpowder.</description>

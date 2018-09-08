@@ -2,7 +2,7 @@
 using System.Linq;
 using Verse;
 
-namespace RemoteExplosives {
+namespace RemoteTech {
 	/// <summary>
 	/// Applies damage to thing in the same cell based on concentration.
 	/// See MoteProperties_GasEffect for settings.

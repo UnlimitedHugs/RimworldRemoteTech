@@ -1,6 +1,6 @@
 ﻿using Verse;
 
-namespace RemoteExplosives {
+namespace RemoteTech {
 	public class CompProperties_AutoReplaceable : CompProperties {
 		public bool applyOnVanish;
 

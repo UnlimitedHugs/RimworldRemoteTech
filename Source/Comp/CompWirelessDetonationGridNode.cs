@@ -5,7 +5,7 @@ using RimWorld;
 using UnityEngine;
 using Verse;
 
-namespace RemoteExplosives {
+namespace RemoteTech {
 	/// <summary>
 	/// Represents a node that can connect to other node-buildings in signal range and recursively form a network.
 	/// Requires the rxSignalRange stat to be set on the parent thing.
@@ -91,7 +91,7 @@ namespace RemoteExplosives {
 		}
 
 		public IntVec3 Position {
-			get { return RemoteExplosivesUtility.GetHighestHolderInMap(parent).Position; }
+			get { return RemoteTechUtility.GetHighestHolderInMap(parent).Position; }
 		}
 
 		private CompPowerTrader powerComp;
@@ -103,10 +103,10 @@ namespace RemoteExplosives {
 			base.PostSpawnSetup(respawningAfterLoad);
 			powerComp = parent.GetComp<CompPowerTrader>();
 			if (Radius == 0) {
-				RemoteExplosivesController.Instance.Logger.Error($"CompWirelessDetonationGridNode has zero radius. Missing signal range property on def {parent.def.defName}?");
+				RemoteTechController.Instance.Logger.Error($"CompWirelessDetonationGridNode has zero radius. Missing signal range property on def {parent.def.defName}?");
 			}
 			if (Props == null) {
-				RemoteExplosivesController.Instance.Logger.Error($"CompWirelessDetonationGridNode needs CompProperties_WirelessDetonationGridNode on def {parent.def.defName}");
+				RemoteTechController.Instance.Logger.Error($"CompWirelessDetonationGridNode needs CompProperties_WirelessDetonationGridNode on def {parent.def.defName}");
 			}
 			if (!respawningAfterLoad) {
 				RecacheAllNodes();

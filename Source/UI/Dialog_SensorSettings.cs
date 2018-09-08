@@ -2,7 +2,7 @@
 using UnityEngine;
 using Verse;
 
-namespace RemoteExplosives {
+namespace RemoteTech {
 	public class Dialog_SensorSettings : Window {
 		private readonly ISensorSettingsProvider sensor;
 		private readonly SensorSettings originalSettings;

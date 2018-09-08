@@ -7,7 +7,7 @@ using RimWorld;
 using RimWorld.Planet;
 using Verse;
 
-namespace RemoteExplosives.Patches {
+namespace RemoteTech.Patches {
 	/// <summary>
 	/// Allows faction standing to be reduced below the normal -100 limit
 	/// See CustomFactionGoodwillCaps for details
@@ -19,7 +19,7 @@ namespace RemoteExplosives.Patches {
 		[HarmonyPrepare]
 		public static void Prepare() {
 			LongEventHandler.ExecuteWhenFinished(() => {
-				if (!patchApplied) RemoteExplosivesController.Instance.Logger.Error("Faction_AffectGoodwillWith_Patch infix could not be applied");
+				if (!patchApplied) RemoteTechController.Instance.Logger.Error("Faction_AffectGoodwillWith_Patch infix could not be applied");
 			});
 		}
 

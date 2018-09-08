@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using Verse;
 
-namespace RemoteExplosives {
+namespace RemoteTech {
 	/**
 	 * A graphic that can change appearance between multiple graphics, current variant is specified by IGraphicVariantProvider
 	 */
@@ -21,7 +21,7 @@ namespace RemoteExplosives {
 			}
 			var variantIndex = provider.GraphicVariant;
 			if (variantIndex < 0 || variantIndex > subGraphics.Length) {
-				RemoteExplosivesController.Instance.Logger.Error(string.Format("No material with index {0} available, as requested by {1}", variantIndex, thing.GetType()));
+				RemoteTechController.Instance.Logger.Error(string.Format("No material with index {0} available, as requested by {1}", variantIndex, thing.GetType()));
 				return GetDefaultMat();
 			}
 			return subGraphics[variantIndex].MatSingleFor(thing);

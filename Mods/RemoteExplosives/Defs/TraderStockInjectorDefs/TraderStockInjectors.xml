@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Defs>
 
-	<RemoteExplosives.TraderStockInjectorDef>
+	<RemoteTech.TraderStockInjectorDef>
 		<defName>rxBulkGoods_inject</defName>
 		<traderDef>Orbital_BulkGoods</traderDef>
 		<stockGenerators>
@@ -14,9 +14,9 @@
 				</countRange>
 			</li>
 		</stockGenerators>
-	</RemoteExplosives.TraderStockInjectorDef>
+	</RemoteTech.TraderStockInjectorDef>
 
-	<RemoteExplosives.TraderStockInjectorDef>
+	<RemoteTech.TraderStockInjectorDef>
 		<defName>rxBulkCaravan_inject</defName>
 		<traderDef>Caravan_Outlander_BulkGoods</traderDef>
 		<stockGenerators>
@@ -28,9 +28,9 @@
 				</countRange>
 			</li>
 		</stockGenerators>
-	</RemoteExplosives.TraderStockInjectorDef>
+	</RemoteTech.TraderStockInjectorDef>
 
-	<RemoteExplosives.TraderStockInjectorDef>
+	<RemoteTech.TraderStockInjectorDef>
 		<defName>rxCombatSupplier_inject</defName>
 		<traderDef>Orbital_CombatSupplier</traderDef>
 		<stockGenerators>
@@ -58,9 +58,9 @@
 				</countRange>
 			</li>
 		</stockGenerators>
-	</RemoteExplosives.TraderStockInjectorDef>
+	</RemoteTech.TraderStockInjectorDef>
 
-	<RemoteExplosives.TraderStockInjectorDef>
+	<RemoteTech.TraderStockInjectorDef>
 		<defName>rxCombatSupplierCaravan_inject</defName>
 		<traderDef>Caravan_Outlander_CombatSupplier</traderDef>
 		<stockGenerators>
@@ -89,9 +89,9 @@
 				</countRange>
 			</li>
 		</stockGenerators>
-	</RemoteExplosives.TraderStockInjectorDef>
+	</RemoteTech.TraderStockInjectorDef>
 
-	<RemoteExplosives.TraderStockInjectorDef>
+	<RemoteTech.TraderStockInjectorDef>
 		<defName>rxPirateMerchant_inject</defName>
 		<traderDef>Orbital_PirateMerchant</traderDef>
 		<stockGenerators>
@@ -113,9 +113,9 @@
 				</countRange>
 			</li>
 		</stockGenerators>
-	</RemoteExplosives.TraderStockInjectorDef>
+	</RemoteTech.TraderStockInjectorDef>
 
-	<RemoteExplosives.TraderStockInjectorDef>
+	<RemoteTech.TraderStockInjectorDef>
 		<defName>rxPirateCaravan_inject</defName>
 		<traderDef>Caravan_Outlander_PirateMerchant</traderDef>
 		<stockGenerators>
@@ -137,9 +137,9 @@
 				</countRange>
 			</li>
 		</stockGenerators>
-	</RemoteExplosives.TraderStockInjectorDef>
+	</RemoteTech.TraderStockInjectorDef>
 
-	<RemoteExplosives.TraderStockInjectorDef>
+	<RemoteTech.TraderStockInjectorDef>
 		<defName>rxExotic_inject</defName>
 		<traderDef>Orbital_Exotic</traderDef>
 		<stockGenerators>
@@ -158,6 +158,6 @@
 				</countRange>
 			</li>
 		</stockGenerators>
-	</RemoteExplosives.TraderStockInjectorDef>
+	</RemoteTech.TraderStockInjectorDef>
 
 </Defs>

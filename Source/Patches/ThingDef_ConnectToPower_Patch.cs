@@ -2,7 +2,7 @@
 using RimWorld;
 using Verse;
 
-namespace RemoteExplosives.Patches {
+namespace RemoteTech.Patches {
 	/// <summary>
 	/// Allows types extending CompPowerTrader to be recognized as power grid connectables
 	/// </summary>

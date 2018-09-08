@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Verse;
 
-namespace RemoteExplosives {
+namespace RemoteTech {
 	/*
 	 * Destroyed buildings with this comp will be replaced as blueprints by AutoReplaceWatcher
 	 */
@@ -32,7 +32,7 @@ namespace RemoteExplosives {
 			ParentPosition = parent.Position;
 			ParentRotation = parent.Rotation;
 			if (!wasLoaded) {
-				parent.Map.GetComponent<MapComponent_RemoteExplosives>().ReplaceWatcher.OnReplaceableThingSpawned(parent);
+				parent.Map.GetComponent<MapComponent_RemoteTech>().ReplaceWatcher.OnReplaceableThingSpawned(parent);
 			}
 		}
 
@@ -41,7 +41,7 @@ namespace RemoteExplosives {
 			var replaceProps = props as CompProperties_AutoReplaceable;
 			var applyOnVanish = replaceProps != null ? replaceProps.applyOnVanish : false;
 			if (AutoReplaceEnabled && (mode == DestroyMode.KillFinalize || (applyOnVanish && mode == DestroyMode.Vanish))) {
-				map.GetComponent<MapComponent_RemoteExplosives>().ReplaceWatcher.ScheduleReplacement(this);
+				map.GetComponent<MapComponent_RemoteTech>().ReplaceWatcher.ScheduleReplacement(this);
 			}
 		}
 

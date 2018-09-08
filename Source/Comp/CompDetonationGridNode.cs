@@ -1,6 +1,6 @@
 ﻿using Verse;
 
-namespace RemoteExplosives {
+namespace RemoteTech {
 	/**
 	 * Base class for comps involved in the detonation grid. Required to print the overlay section layer.
 	 */

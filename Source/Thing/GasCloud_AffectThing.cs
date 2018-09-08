@@ -2,7 +2,7 @@
 using UnityEngine;
 using Verse;
 
-namespace RemoteExplosives {
+namespace RemoteTech {
 	/// <summary>
 	/// To be used as a base for custom gases that affect things in the cell they are located in.
 	/// Effect strength is based on gas concentration.
@@ -14,7 +14,7 @@ namespace RemoteExplosives {
 
 		public override void SpawnSetup(Map map, bool respawningAfterLoad) {
 			base.SpawnSetup(map, respawningAfterLoad);
-			if((Props = def.mote as MoteProperties_GasEffect) == null) RemoteExplosivesController.Instance.Logger.Error($"{nameof(GasCloud_AffectThing)} needs {nameof(MoteProperties_GasEffect)} in def " + def.defName); 
+			if((Props = def.mote as MoteProperties_GasEffect) == null) RemoteTechController.Instance.Logger.Error($"{nameof(GasCloud_AffectThing)} needs {nameof(MoteProperties_GasEffect)} in def " + def.defName); 
 		}
 
 		protected override void GasTick() {

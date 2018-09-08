@@ -2,7 +2,7 @@
 using UnityEngine;
 using Verse;
 
-namespace RemoteExplosives {
+namespace RemoteTech {
 	/// <summary>
 	/// Draws a radius ring based on the signal range stat
 	/// </summary>

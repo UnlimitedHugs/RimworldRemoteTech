@@ -6,18 +6,18 @@
 		<label>sleeping gas cloud</label>
 		<description>Knocks out living organisms after enough exposure.
 Rapidly dissipates when under an open sky.</description>
-		<thingClass>RemoteExplosives.GasCloud_HediffGiver</thingClass>
+		<thingClass>RemoteTech.GasCloud_HediffGiver</thingClass>
 		<category>Ethereal</category>
 		<drawerType>RealtimeOnly</drawerType>
 		<graphicData>
 			<texPath>rxGasCloud</texPath>
-			<graphicClass>RemoteExplosives.Graphic_GasCloud</graphicClass>
+			<graphicClass>RemoteTech.Graphic_GasCloud</graphicClass>
 			<shaderType>Mote</shaderType>
 			<drawSize>(1.3,1.3)</drawSize>
 			<color>(204, 153, 255)</color>
 		</graphicData>
 		<altitudeLayer>MoteOverhead</altitudeLayer>
-		<mote Class="RemoteExplosives.MoteProperties_GasEffect">
+		<mote Class="RemoteTech.MoteProperties_GasEffect">
 			<!-- game ticks between gas ticks --> 
 			<GastickInterval>25</GastickInterval>
 			<!-- gas will attempt to multiply every x gas ticks -->
@@ -64,7 +64,7 @@ Rapidly dissipates when under an open sky.</description>
 		<graphicData>
 			<color>(255, 102, 161)</color>
 		</graphicData>
-		<mote Class="RemoteExplosives.MoteProperties_GasEffect">
+		<mote Class="RemoteTech.MoteProperties_GasEffect">
 			<hediffSeverityPerGastick>
 				<min>0.008</min>
 				<max>0.014</max>

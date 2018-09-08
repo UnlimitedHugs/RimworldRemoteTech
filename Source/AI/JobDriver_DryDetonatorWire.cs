@@ -2,7 +2,7 @@
 using RimWorld;
 using Verse.AI;
 
-namespace RemoteExplosives {
+namespace RemoteTech {
 	/*
 	 * Calls a colonist to a marked detonation wire to dry it off
 	 */

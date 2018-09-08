@@ -3,7 +3,7 @@ using RimWorld;
 using UnityEngine;
 using Verse;
 
-namespace RemoteExplosives {
+namespace RemoteTech {
 	public class Building_GasVent : Building {
 		// improves draining of the last view points from source room
 		private const float MinSourceConcentration = 3f;
@@ -30,7 +30,7 @@ namespace RemoteExplosives {
 			sourceCell = Position + IntVec3.South.RotatedBy(Rotation);
 			ventProps = def.building as BuildingProperties_GasVent;
 			if (ventProps == null) {
-				RemoteExplosivesController.Instance.Logger.Error("Building_GasVent requires BuildingProperties_GasVent");
+				RemoteTechController.Instance.Logger.Error("Building_GasVent requires BuildingProperties_GasVent");
 			}
 			ValidateRooms();
 		}
@@ -41,14 +41,14 @@ namespace RemoteExplosives {
 
 			// move gas
 			if (roomsAreValid) {
-				var sourceCloud = RemoteExplosivesUtility.TryFindGasCloudAt(Map, sourceCell);
+				var sourceCloud = RemoteTechUtility.TryFindGasCloudAt(Map, sourceCell);
 				if (sourceCloud != null) {
-					RemoteExplosivesUtility.ReportPowerUse(this);
+					RemoteTechUtility.ReportPowerUse(this);
 					// move only whole units of concentration
 					moveBuffer += Mathf.Min(sourceCloud.Concentration - MinSourceConcentration, statVentAmount / GenTicks.TicksPerRealSecond);
 					if (moveBuffer > 1) {
 						var moveAmount = Mathf.FloorToInt(moveBuffer);
-						RemoteExplosivesUtility.DeployGas(Map, targetCell, sourceCloud.def, moveAmount);
+						RemoteTechUtility.DeployGas(Map, targetCell, sourceCloud.def, moveAmount);
 						sourceCloud.ReceiveConcentration(-moveAmount);
 						moveBuffer -= moveAmount;
 					}

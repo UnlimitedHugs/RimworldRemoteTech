@@ -3,7 +3,7 @@ using RimWorld.Planet;
 using UnityEngine;
 using Verse;
 
-namespace RemoteExplosives {
+namespace RemoteTech {
 	// A FloatMenuOption that shows a tooltip when hovered over.
 	public class FloatMenuOptionWithTooltip : FloatMenuOption {
 		public TipSignal Tooltip;

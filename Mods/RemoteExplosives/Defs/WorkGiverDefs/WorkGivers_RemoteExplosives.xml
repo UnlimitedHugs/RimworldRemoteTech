@@ -4,7 +4,7 @@
 	<WorkGiverDef>
 		<defName>rxDetonateExplosives</defName>
 		<label>trigger detonator</label>
-		<giverClass>RemoteExplosives.WorkGiver_IPawnDetonateable</giverClass>
+		<giverClass>RemoteTech.WorkGiver_IPawnDetonateable</giverClass>
 		<workType>BasicWorker</workType>
 		<priorityInType>10</priorityInType>
 		<verb>detonate</verb>
@@ -14,7 +14,7 @@
 	<WorkGiverDef>
 		<defName>rxSwitchThings</defName>
 		<label>switch remote explosive</label>
-		<giverClass>RemoteExplosives.WorkGiver_SwitchableThing</giverClass>
+		<giverClass>RemoteTech.WorkGiver_SwitchableThing</giverClass>
 		<workType>BasicWorker</workType>
 		<priorityInType>9</priorityInType>
 		<verb>switch</verb>
@@ -24,7 +24,7 @@
 	<WorkGiverDef>
 		<defName>rxInstallUpgrade</defName>
 		<label>install upgrade</label>
-		<giverClass>RemoteExplosives.WorkGiver_InstallUpgrade</giverClass>
+		<giverClass>RemoteTech.WorkGiver_InstallUpgrade</giverClass>
 		<workType>Construction</workType>
 		<priorityInType>200</priorityInType>
 		<verb>upgrade</verb>
@@ -68,7 +68,7 @@
 	<WorkGiverDef>
 		<defName>rxDryOffDetonatorWire</defName>
 		<label>dry off detonator wire</label>
-		<giverClass>RemoteExplosives.WorkGiver_DetonatorWire</giverClass>
+		<giverClass>RemoteTech.WorkGiver_DetonatorWire</giverClass>
 		<workType>Cleaning</workType>
 		<priorityInType>50</priorityInType>
 		<verb>dry off</verb>
@@ -82,7 +82,7 @@
 	<WorkGiverDef>
 		<defName>rxSmoothFoamWall</defName>
 		<label>smooth foam wall</label>
-		<giverClass>RemoteExplosives.WorkGiver_FoamWall</giverClass>
+		<giverClass>RemoteTech.WorkGiver_FoamWall</giverClass>
 		<workType>Construction</workType>
 		<priorityInType>8</priorityInType>
 		<verb>smooth foam wall</verb>

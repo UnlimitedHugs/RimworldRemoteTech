@@ -2,7 +2,7 @@
 using RimWorld;
 using Verse;
 
-namespace RemoteExplosives {
+namespace RemoteTech {
 	/*
 	 * Receives detonation signals from CompWiredDetonationTransmitter and light explosives attached to parent thing.
 	 */

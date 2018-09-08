@@ -2,7 +2,7 @@
 using RimWorld;
 using UnityEngine;
 
-namespace RemoteExplosives {
+namespace RemoteTech {
 	public class BuildingProperties_RemoteExplosive : BuildingProperties {
 		public RemoteExplosiveType explosiveType;
 	}

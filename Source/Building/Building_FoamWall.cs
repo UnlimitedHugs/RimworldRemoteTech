@@ -5,7 +5,7 @@ using HugsLib.Utils;
 using RimWorld;
 using Verse;
 
-namespace RemoteExplosives {
+namespace RemoteTech {
 	/* 
 	 * A wall that will kill and trap any pawns and items it is placed on.
 	 * Contained items are dropped on destruction.

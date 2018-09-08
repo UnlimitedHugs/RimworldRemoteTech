@@ -1,7 +1,7 @@
 ﻿using System;
 using Verse;
 
-namespace RemoteExplosives {
+namespace RemoteTech {
 	/*
 	 * Transmits a new detonation signal to CompWiredDetonationTransmitter comps on the same tile. 
 	 */

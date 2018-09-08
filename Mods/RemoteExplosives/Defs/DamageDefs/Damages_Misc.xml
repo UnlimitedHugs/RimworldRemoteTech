@@ -13,9 +13,9 @@
 		<externalViolence>false</externalViolence>
 	</DamageDef>
 	
-	<DamageDef Class="RemoteExplosives.FlameChanceDamageDef">
+	<DamageDef Class="RemoteTech.FlameChanceDamageDef">
 		<defName>rxFlameBomb</defName>
-		<workerClass>RemoteExplosives.DamageWorker_FlameChance</workerClass>
+		<workerClass>RemoteTech.DamageWorker_FlameChance</workerClass>
 		<label>flame bomb</label>
 		<hasForcefulImpact>false</hasForcefulImpact>
 		<makesBlood>false</makesBlood>
@@ -41,7 +41,7 @@
 		<flameChance>0.2</flameChance>
 	</DamageDef>
 	
-	<DamageDef Class="RemoteExplosives.SuperEMPDamageDef">
+	<DamageDef Class="RemoteTech.SuperEMPDamageDef">
 		<defName>rxSuperEMP</defName>
 		<label>EMP</label>
 		<externalViolence>true</externalViolence>

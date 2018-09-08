@@ -5,7 +5,7 @@ using UnityEngine;
 using Verse;
 using Verse.Sound;
 
-namespace RemoteExplosives {
+namespace RemoteTech {
 	/* 
 	 * An apparel item to be worn by a colonist in the accessory (shield) slot.
 	 * Provides the functionality of a detonator table with a limited number of uses.
@@ -36,7 +36,7 @@ namespace RemoteExplosives {
 		}
 
 		private int Channel {
-			get { return channelsComp != null ? channelsComp.Channel : RemoteExplosivesUtility.DefaultChannel; }
+			get { return channelsComp != null ? channelsComp.Channel : RemoteTechUtility.DefaultChannel; }
 		}
 
 		public override void SpawnSetup(Map map, bool respawningAfterLoad) {
@@ -100,7 +100,7 @@ namespace RemoteExplosives {
 			lastActivationTick = Find.TickManager.TicksGame;
 			SoundDefOf.FlickSwitch.PlayOneShot(Wearer);
 
-			RemoteExplosivesUtility.TriggerReceiversInNetworkRange(this, channelsComp?.Channel ?? RemoteExplosivesUtility.DefaultChannel);
+			RemoteTechUtility.TriggerReceiversInNetworkRange(this, channelsComp?.Channel ?? RemoteTechUtility.DefaultChannel);
 			
 			NumUsesLeft--;
 			if (NumUsesLeft <= 0) {
@@ -112,7 +112,7 @@ namespace RemoteExplosives {
 		private void GetCompRefs() {
 			channelsUpgrade = this.TryGetUpgrade(ChannelsUpgradeId);
 			node = this.RequireComp<CompWirelessDetonationGridNode>();
-			channelsComp = GetComp<CompChannelSelector>()?.Configure(false, false, false, RemoteExplosivesUtility.ChannelType.Basic);
+			channelsComp = GetComp<CompChannelSelector>()?.Configure(false, false, false, RemoteTechUtility.ChannelType.Basic);
 		}
 	}
 }

@@ -2,7 +2,7 @@
 using UnityEngine;
 using Verse;
 
-namespace RemoteExplosives {
+namespace RemoteTech {
 	/* 
 	 * A companion PlaceWorker for the clearing explosives. Needed to display the custom area overlay.
 	 */

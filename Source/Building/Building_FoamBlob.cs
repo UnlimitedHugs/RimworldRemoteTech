@@ -4,7 +4,7 @@ using UnityEngine;
 using Verse;
 using Verse.Sound;
 
-namespace RemoteExplosives {
+namespace RemoteTech {
 	/* 
 	 * Created by the sealing foam canister. 
 	 * Will spread a given number of times and turn into another building (wall) once time runs out.

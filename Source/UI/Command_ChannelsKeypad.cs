@@ -6,7 +6,7 @@ using UnityEngine;
 using Verse;
 using Verse.Sound;
 
-namespace RemoteExplosives {
+namespace RemoteTech {
 	public class Command_ChannelsKeypad : Command_ChannelsBasic {
 		private const int ButtonSize = 31;
 

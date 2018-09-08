@@ -2,7 +2,7 @@
 using UnityEngine;
 using Verse;
 
-namespace RemoteExplosives {
+namespace RemoteTech {
 	/* 
 	 * A mining explosive that affects an area of a square with the corners cut off.
 	 */

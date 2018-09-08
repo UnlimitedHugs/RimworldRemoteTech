@@ -9,8 +9,8 @@
 	</MentalBreakDef>
 	<MentalStateDef>
 		<defName>rxRedButtonFever</defName>
-		<stateClass>RemoteExplosives.MentalState_RedButtonFever</stateClass>
-		<workerClass>RemoteExplosives.MentalStateWorker_RedButtonFever</workerClass>
+		<stateClass>RemoteTech.MentalState_RedButtonFever</stateClass>
+		<workerClass>RemoteTech.MentalStateWorker_RedButtonFever</workerClass>
 		<label>red button fever</label>
 		<category>Malicious</category>
 		<prisonersCanDo>false</prisonersCanDo>

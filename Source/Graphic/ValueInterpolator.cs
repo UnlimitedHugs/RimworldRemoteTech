@@ -3,7 +3,7 @@ using HugsLib.Utils;
 using UnityEngine;
 using Verse;
 
-namespace RemoteExplosives {
+namespace RemoteTech {
 	/**
 	 * Changes a float value over time according to an interpolation curve. Used for animation.
 	 */
@@ -60,7 +60,7 @@ namespace RemoteExplosives {
 				if (!curveName.NullOrEmpty()) {
 					var curveMethod = typeof(InterpolationCurves).GetMethod(curveName, HugsLibUtility.AllBindingFlags);
 					if (curveMethod == null) {
-						RemoteExplosivesController.Instance.Logger.Error("Failed to load interpolation curve: " + curveName);
+						RemoteTechController.Instance.Logger.Error("Failed to load interpolation curve: " + curveName);
 					} else {
 						curve = (InterpolationCurves.Curve)Delegate.CreateDelegate(typeof(InterpolationCurves.Curve), curveMethod, true);
 					}

@@ -1,6 +1,6 @@
 ﻿using Verse;
 
-namespace RemoteExplosives {
+namespace RemoteTech {
 	/// <summary>
 	/// An interface for Things and ThingComps that want to be detected and triggered by the wireless detonation grid.
 	/// </summary>

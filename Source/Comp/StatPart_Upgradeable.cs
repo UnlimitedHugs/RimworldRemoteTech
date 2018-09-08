@@ -2,12 +2,12 @@
 using RimWorld;
 using Verse;
 
-namespace RemoteExplosives {
+namespace RemoteTech {
 	/// <summary>
 	/// Required for CompUpgrade to modify arbitrary stats.
 	/// This is automatically added to StatDefs that have been found to be used in a CompProperties_Upgrade.
 	/// </summary>
-	/// <see cref="RemoteExplosivesController.InjectUpgradeableStatParts"/>
+	/// <see cref="RemoteTechController.InjectUpgradeableStatParts"/>
 	public class StatPart_Upgradeable : StatPart {
 		public override void TransformValue(StatRequest req, ref float val) {
 			if (req.Thing is ThingWithComps tcomps) {

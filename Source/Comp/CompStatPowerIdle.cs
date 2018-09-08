@@ -2,7 +2,7 @@
 using UnityEngine;
 using Verse;
 
-namespace RemoteExplosives {
+namespace RemoteTech {
 	/// <summary>
 	/// Stat-based power consumption that will switch to Idle mode when the parent device is not in use.
 	/// By default looks for pawns on the interaction cells, but can be called directly to report in-use status.

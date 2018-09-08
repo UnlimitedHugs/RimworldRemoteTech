@@ -1,6 +1,6 @@
 ﻿using Verse;
 
-namespace RemoteExplosives {
+namespace RemoteTech {
 	/* 
 	 * This hediff will prevent the game from randomly killing off non-colonist pawns when incapacitated by an increase in severity.
 	 */

@@ -3,7 +3,7 @@ using RimWorld;
 using Verse;
 using Verse.Sound;
 
-namespace RemoteExplosives {
+namespace RemoteTech {
 	// A mining explosive that is able to break thick mountain roof
 	// TODO: Add postfix to AutoBuildRoofZoneSetter to remove roof orders over collapsed rock, make collapsed rock impassable again
 	public class CompRoofBreakerExplosive : CompMiningExplosive {
@@ -17,7 +17,7 @@ namespace RemoteExplosives {
 			if (map == null) return;
 			var explosiveProps = props as CompProperties_Explosive;
 			if(explosiveProps == null) return;
-			var canAffectThickRoof = RemoteExplosivesUtility.IsEffectiveRoofBreakerPlacement(explosiveProps.explosiveRadius, position, map);
+			var canAffectThickRoof = RemoteTechUtility.IsEffectiveRoofBreakerPlacement(explosiveProps.explosiveRadius, position, map);
 			bool anyThickRoofAffected = false;
 			foreach (var cell in GenRadial.RadialCellsAround(position, explosiveProps.explosiveRadius, true)) {
 				if(!cell.InBounds(map)) continue;

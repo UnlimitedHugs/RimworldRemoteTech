@@ -2,7 +2,7 @@
 using Verse;
 using Verse.AI;
 
-namespace RemoteExplosives {
+namespace RemoteTech {
 	public class MentalStateWorker_RedButtonFever : MentalStateWorker {
 		public override bool StateCanOccur(Pawn pawn) {
 			return pawn.Map.listerBuildings.allBuildingsColonist.OfType<IRedButtonFeverTarget>().Any();

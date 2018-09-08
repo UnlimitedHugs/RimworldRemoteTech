@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using Verse;
 
-namespace RemoteExplosives {
+namespace RemoteTech {
 	public class PlaceWorker_GasVent : PlaceWorker {
 		private readonly Color DefaultArrowColor = Color.white;
 		private readonly Color BlockedArrowColor = Color.red;

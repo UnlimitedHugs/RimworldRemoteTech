@@ -5,7 +5,7 @@ using RimWorld;
 using UnityEngine;
 using Verse;
 
-namespace RemoteExplosives {
+namespace RemoteTech {
 	/* 
 	 * A tab for a workbench that allows switching between using Steel and Components to make recipes.
 	 * It works by displaying a different set of recipes depending on the setting.
@@ -86,7 +86,7 @@ namespace RemoteExplosives {
 		}
 
 		private bool IsInjectedSteelRecipe(RecipeDef recipe) {
-			return recipe.defName.EndsWith(RemoteExplosivesUtility.InjectedRecipeNameSuffix);
+			return recipe.defName.EndsWith(RemoteTechUtility.InjectedRecipeNameSuffix);
 		}
 	}
 }

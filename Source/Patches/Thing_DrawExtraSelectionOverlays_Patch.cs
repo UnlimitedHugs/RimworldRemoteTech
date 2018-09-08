@@ -5,7 +5,7 @@ using Harmony;
 using UnityEngine;
 using Verse;
 
-namespace RemoteExplosives.Patches {
+namespace RemoteTech.Patches {
 	/// <summary>
 	/// Allows ISelectedThingPlaceWorker to be called with a reference to a Thing while it's selected.
 	/// </summary>
@@ -17,7 +17,7 @@ namespace RemoteExplosives.Patches {
 		[HarmonyPrepare]
 		public static void PrePatch() {
 			LongEventHandler.ExecuteWhenFinished(() => {
-				if (!patched) RemoteExplosivesController.Instance.Logger.Error($"{nameof(Thing_DrawExtraSelectionOverlays_Patch)} infix could not be applied.");
+				if (!patched) RemoteTechController.Instance.Logger.Error($"{nameof(Thing_DrawExtraSelectionOverlays_Patch)} infix could not be applied.");
 			});
 		}
 

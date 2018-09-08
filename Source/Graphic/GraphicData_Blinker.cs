@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using Verse;
 
-namespace RemoteExplosives {
+namespace RemoteTech {
 	/// <summary>
 	/// Additional settings for buildings with blinking overlays, such as the radio mast and remote charges
 	/// </summary>

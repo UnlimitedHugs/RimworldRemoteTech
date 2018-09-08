@@ -1,6 +1,6 @@
 ﻿using Verse;
 
-namespace RemoteExplosives {
+namespace RemoteTech {
 	/// <summary>
 	/// A CompGlower that can be toggled on and off
 	/// </summary>
@@ -16,7 +16,7 @@ namespace RemoteExplosives {
 			if (enable == (originalGlowRadius == Props.glowRadius)) return;
 			Props.glowRadius = enable ? originalGlowRadius : 0f;
 			// reset cache in parent class
-			RemoteExplosivesController.Instance.CompGlowerGlowOnField.SetValue(this, !(bool)RemoteExplosivesController.Instance.CompGlowerShouldBeLitProperty.GetValue(this, null));
+			RemoteTechController.Instance.CompGlowerGlowOnField.SetValue(this, !(bool)RemoteTechController.Instance.CompGlowerShouldBeLitProperty.GetValue(this, null));
 			UpdateLit(parent.Map);
 		}
 	}

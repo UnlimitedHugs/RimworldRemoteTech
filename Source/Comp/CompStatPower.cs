@@ -1,7 +1,7 @@
 ﻿using RimWorld;
 using Verse;
 
-namespace RemoteExplosives {
+namespace RemoteTech {
 	/// <summary>
 	/// Enables power consumption to be pulled from a stat value, which allows it to be affected by upgrade comps
 	/// </summary>

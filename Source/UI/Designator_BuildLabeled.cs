@@ -1,7 +1,7 @@
 ﻿using RimWorld;
 using Verse;
 
-namespace RemoteExplosives {
+namespace RemoteTech {
 	/// <summary>
 	/// A Designator_Build with a replaceable label.
 	/// </summary>

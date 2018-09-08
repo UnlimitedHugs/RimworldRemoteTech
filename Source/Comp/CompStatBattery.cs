@@ -4,7 +4,7 @@ using UnityEngine;
 using Verse;
 using Verse.Sound;
 
-namespace RemoteExplosives {
+namespace RemoteTech {
 	/// <summary>
 	/// A battery that has variable capacity based on the rxPowerCapacity stat of the parent thing.
 	/// Also contains overlay drawing and exploding logic form Building_Battery.
@@ -37,7 +37,7 @@ namespace RemoteExplosives {
 		public override void PostSpawnSetup(bool respawningAfterLoad) {
 			base.PostSpawnSetup(respawningAfterLoad);
 			statMaxEnergy = parent.GetCachedStat(Resources.Stat.rxPowerCapacity);
-			if (statMaxEnergy <= 0f) RemoteExplosivesController.Instance.Logger.Error($"{nameof(CompStatBattery)} has zero power capacity. Missing rxPowerCapacity stat in def {parent.def.defName}?");
+			if (statMaxEnergy <= 0f) RemoteTechController.Instance.Logger.Error($"{nameof(CompStatBattery)} has zero power capacity. Missing rxPowerCapacity stat in def {parent.def.defName}?");
 		}
 
 		public override void PostExposeData() {

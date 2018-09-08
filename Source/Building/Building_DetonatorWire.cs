@@ -6,7 +6,7 @@ using RimWorld;
 using UnityEngine;
 using Verse;
 
-namespace RemoteExplosives {
+namespace RemoteTech {
 	/*
 	 * A wire to connect the detonator to explosives.
 	 * Will get wet during rain and have a chance to fail when used unless dried.

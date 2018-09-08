@@ -3,7 +3,7 @@ using RimWorld;
 using Verse;
 using Verse.AI;
 
-namespace RemoteExplosives {
+namespace RemoteTech {
 	/* 
 	 * Gives JobDriver_DetonateExplosives job to colonists
 	 * Handles both the detonator table and the manual detonator

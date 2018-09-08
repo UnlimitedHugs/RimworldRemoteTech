@@ -2,7 +2,7 @@
 using RimWorld;
 using Verse;
 
-namespace RemoteExplosives {
+namespace RemoteTech {
 	/**
 	 * Like the Flame damage worker, but makes a roll against the chance defined in the def, to see if it should crate fire.
 	 */

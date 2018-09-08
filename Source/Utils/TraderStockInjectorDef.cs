@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using RimWorld;
 using Verse;
 
-namespace RemoteExplosives {
+namespace RemoteTech {
 	public class TraderStockInjectorDef : Def {
 		public TraderKindDef traderDef;
 		public List<StockGenerator> stockGenerators = new List<StockGenerator>();

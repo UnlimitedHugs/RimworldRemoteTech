@@ -117,7 +117,7 @@ The filters wear out fairly quickly, so it's recommended to wear this only when 
 
 	<ThingDef ParentName="rxApparelBase">
 		<defName>rxApparel_PortableDetonator</defName>
-		<thingClass>RemoteExplosives.PortableDetonator</thingClass>
+		<thingClass>RemoteTech.PortableDetonator</thingClass>
 		<label>portable remote detonator</label>
 		<description>A portable version of the detonator table for triggering remote explosives. Has limited range and runs on a non-rechargeable battery- but hey, you can almost fit it in your pocket. Almost.
 Works only on channel 1, but can be upgraded once channels have been researched. Unequip to upgrade.</description>
@@ -163,11 +163,11 @@ Works only on channel 1, but can be upgraded once channels have been researched.
 			</layers>
 		</apparel>
 		<comps>
-			<li Class="RemoteExplosives.CompProperties_ChannelSelector"/>
-			<li Class="RemoteExplosives.CompProperties_WirelessDetonationGridNode">
+			<li Class="RemoteTech.CompProperties_ChannelSelector"/>
+			<li Class="RemoteTech.CompProperties_WirelessDetonationGridNode">
 				<endpoint>true</endpoint>
 			</li>
-			<li Class="RemoteExplosives.CompProperties_Upgrade">
+			<li Class="RemoteTech.CompProperties_Upgrade">
 				<label>Basic channels</label>
 				<referenceId>ChannelsBasic</referenceId>
 				<workAmount>1000</workAmount>

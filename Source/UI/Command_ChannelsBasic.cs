@@ -2,7 +2,7 @@
 using UnityEngine;
 using Verse;
 
-namespace RemoteExplosives {
+namespace RemoteTech {
 	[StaticConstructorOnStartup]
 	public class Command_ChannelsBasic : Command {
 		private readonly int selectedChannel;

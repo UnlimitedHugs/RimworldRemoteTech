@@ -2,7 +2,7 @@
 using RimWorld;
 using Verse;
 
-namespace RemoteExplosives {
+namespace RemoteTech {
 	public class BuildingProperties_DetonatorWire : BuildingProperties {
 		public float failureChanceWhenFullyWet = 0.05f;
 		public float daysToSelfDry = .8f;

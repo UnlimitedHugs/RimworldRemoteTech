@@ -1,6 +1,6 @@
 ﻿using Verse;
 
-namespace RemoteExplosives {
+namespace RemoteTech {
 	public class CompProperties_WirelessDetonationGridNode : CompProperties {
 		// endpoints don't connect to each other and don't act as retransmitters
 		public bool endpoint;

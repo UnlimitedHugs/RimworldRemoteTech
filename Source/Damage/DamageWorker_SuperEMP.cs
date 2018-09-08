@@ -1,7 +1,7 @@
 ﻿using RimWorld;
 using Verse;
 
-namespace RemoteExplosives {
+namespace RemoteTech {
 	/// <summary>
 	/// Enhanced EMP damage with custom duration and the ability to incapacitate a mechanical pawn at low health
 	/// </summary>

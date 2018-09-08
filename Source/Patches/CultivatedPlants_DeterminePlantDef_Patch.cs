@@ -3,7 +3,7 @@ using RimWorld;
 using RimWorld.BaseGen;
 using Verse;
 
-namespace RemoteExplosives.Patches {
+namespace RemoteTech.Patches {
 	/// <summary>
 	/// Prevents Sparkweed farms from generating in faction bases. Plants potatoes instead.
 	/// </summary>

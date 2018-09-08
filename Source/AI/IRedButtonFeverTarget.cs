@@ -1,6 +1,6 @@
 ﻿using Verse;
 
-namespace RemoteExplosives {
+namespace RemoteTech {
 	/// <summary>
 	/// Implemented by buildings to become potential targets of the Red Button Fever mental break.
 	/// </summary>

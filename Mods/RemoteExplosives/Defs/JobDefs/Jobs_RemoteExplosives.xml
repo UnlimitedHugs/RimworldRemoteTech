@@ -3,37 +3,37 @@
 	
 	<JobDef>
 		<defName>rxDetonateExplosives</defName>
-		<driverClass>RemoteExplosives.JobDriver_DetonateExplosives</driverClass>
+		<driverClass>RemoteTech.JobDriver_DetonateExplosives</driverClass>
 		<reportString>Detonating explosives.</reportString>
 	</JobDef>
 	
 	<JobDef>
 		<defName>rxSwitchThing</defName>
-		<driverClass>RemoteExplosives.JobDriver_SwitchThing</driverClass>
+		<driverClass>RemoteTech.JobDriver_SwitchThing</driverClass>
 		<reportString>Switching TargetA.</reportString>
 	</JobDef>
 	
 	<JobDef>
 		<defName>rxDryDetonatorWire</defName>
-		<driverClass>RemoteExplosives.JobDriver_DryDetonatorWire</driverClass>
+		<driverClass>RemoteTech.JobDriver_DryDetonatorWire</driverClass>
 		<reportString>Drying off detonator wire.</reportString>
 	</JobDef>
 	
 	<JobDef>
 		<defName>rxSmoothFoamWall</defName>
-		<driverClass>RemoteExplosives.JobDriver_SmoothFoamWall</driverClass>
+		<driverClass>RemoteTech.JobDriver_SmoothFoamWall</driverClass>
 		<reportString>Smoothing foam wall.</reportString>
 	</JobDef>
 	
 	<JobDef>
 		<defName>rxInstallUpgrade</defName>
-		<driverClass>RemoteExplosives.JobDriver_InstallUpgrade</driverClass>
+		<driverClass>RemoteTech.JobDriver_InstallUpgrade</driverClass>
 		<reportString>Installing upgrade.</reportString>
 	</JobDef>
 	
 	<JobDef>
 		<defName>rxRedButtonFever</defName>
-		<driverClass>RemoteExplosives.JobDriver_RedButtonFever</driverClass>
+		<driverClass>RemoteTech.JobDriver_RedButtonFever</driverClass>
 		<reportString>Triggering TargetA.</reportString>
 		<collideWithPawns>true</collideWithPawns>
 	</JobDef>

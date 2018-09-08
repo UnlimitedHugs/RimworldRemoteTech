@@ -6,7 +6,7 @@ using RimWorld;
 using UnityEngine;
 using Verse;
 
-namespace RemoteExplosives {
+namespace RemoteTech {
 	/// <summary>
 	/// A universal upgrade that modifies stats on the thing it is applied to in exchange for building materials.
 	/// Displays a toggle gizmo and requires a pawn to perform work to bring in materials and complete the upgrade.

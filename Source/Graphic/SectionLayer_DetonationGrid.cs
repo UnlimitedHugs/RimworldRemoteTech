@@ -3,7 +3,7 @@ using RimWorld;
 using UnityEngine;
 using Verse;
 
-namespace RemoteExplosives {
+namespace RemoteTech {
 	/**
 	 * An overlay for explosives and conductors on the wired detonation grid.
 	 * Displays only when a building designator for a building with a relevant comp is selected.

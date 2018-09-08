@@ -1,7 +1,7 @@
 ﻿using Harmony;
 using RimWorld;
 
-namespace RemoteExplosives.Patches {
+namespace RemoteTech.Patches {
 	/// <summary>
 	/// Allows comps extending CompPowerBattery to work properly with PowerNet
 	/// </summary>

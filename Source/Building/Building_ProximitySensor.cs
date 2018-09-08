@@ -5,7 +5,7 @@ using RimWorld;
 using UnityEngine;
 using Verse;
 
-namespace RemoteExplosives {
+namespace RemoteTech {
 	/// <summary>
 	/// Scans a circular area using a sweeping scan and detects pawns that match the current filter.
 	/// </summary>
@@ -121,7 +121,7 @@ namespace RemoteExplosives {
 			if(settings.SendMessage) NotifyPlayer(pawn);
 			if(settings.SendWired && wiredComp != null) wiredComp.SendNewSignal();
 			if(settings.SendWireless && wirelessComp != null && wirelessComp.Enabled && channelsComp != null)
-				RemoteExplosivesUtility.TriggerReceiversInNetworkRange(this, channelsComp.Channel);
+				RemoteTechUtility.TriggerReceiversInNetworkRange(this, channelsComp.Channel);
 		}
 
 		public override void DrawExtraSelectionOverlays() {
@@ -202,7 +202,7 @@ namespace RemoteExplosives {
 			slice = new Arc(slice.StartAngle, angleStat.ValueRecached);
 			speedStat.Recache();
 			if (wirelessComp != null) wirelessComp.Enabled = this.IsUpgradeCompleted(WirelessUpgrageReferenceId);
-			channelsComp?.Configure(true, true, true, this.IsUpgradeCompleted(WirelessUpgrageReferenceId) ? RemoteExplosivesUtility.ChannelType.Advanced : RemoteExplosivesUtility.ChannelType.None);
+			channelsComp?.Configure(true, true, true, this.IsUpgradeCompleted(WirelessUpgrageReferenceId) ? RemoteTechUtility.ChannelType.Advanced : RemoteTechUtility.ChannelType.None);
 			var brainIsOn = (brainComp?.Complete ?? false) && PowerOn;
 			if (lightComp != null) lightComp.Enabled = brainIsOn;
 			glowerComp?.ToggleGlow(brainIsOn);

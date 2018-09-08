@@ -3,7 +3,7 @@ using System.Linq.Expressions;
 using System.Reflection;
 using Verse;
 
-namespace RemoteExplosives {
+namespace RemoteTech {
 	/// <summary>
 	/// A wrapper for the proximity sensor settings, for easy change detection
 	/// </summary>

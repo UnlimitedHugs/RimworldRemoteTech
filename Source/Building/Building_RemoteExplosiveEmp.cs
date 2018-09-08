@@ -1,6 +1,6 @@
 ﻿using Verse.Sound;
 
-namespace RemoteExplosives {
+namespace RemoteTech {
 	/*
 	 * A remote explosive with a custom wind-up sound.
 	 */

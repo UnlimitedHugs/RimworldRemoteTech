@@ -1,4 +1,4 @@
-﻿namespace RemoteExplosives {
+﻿namespace RemoteTech {
 	public interface ISensorSettingsProvider {
 		bool HasAIUpgrade { get; }
 		bool HasWirelessUpgrade { get; }

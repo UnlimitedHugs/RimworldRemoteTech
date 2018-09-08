@@ -1,7 +1,7 @@
 ﻿using System;
 using Verse;
 
-namespace RemoteExplosives {
+namespace RemoteTech {
 	/// <summary>
 	/// Represents a value that is cached for a given number of ticks. 
 	/// Allows to reduce performance overhead for getting expensive to calculate values every tick or frame.

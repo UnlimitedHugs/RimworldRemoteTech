@@ -1,6 +1,6 @@
 ﻿using Verse;
 
-namespace RemoteExplosives {
+namespace RemoteTech {
 	/* 
 	 * A Hediff Comp that will gradually diminish the severity when it is not actively increasing.
 	 */

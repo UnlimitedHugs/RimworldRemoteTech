@@ -3,7 +3,7 @@
 using System.Collections.Generic;
 using Verse;
 
-namespace RemoteExplosives {
+namespace RemoteTech {
 	public class SparkweedPlantDef : ThingDef {
 		public int detectEveryTicks = 60;
 		public float minimumIgnitePlantGrowth = .2f;

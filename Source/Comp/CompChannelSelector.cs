@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Verse;
 
-namespace RemoteExplosives {
+namespace RemoteTech {
 	/// <summary>
 	/// Holds the necessary data to run and display the wireless channel selector.
 	/// </summary>
@@ -14,12 +14,12 @@ namespace RemoteExplosives {
 		private bool manualSwitching;
 		private bool autoDraw;
 		private bool readPopulation;
-		private RemoteExplosivesUtility.ChannelType gizmoMode;
+		private RemoteTechUtility.ChannelType gizmoMode;
 		private CachedValue<Dictionary<int, List<IWirelessDetonationReceiver>>> channelPopulation;
 
 		// saved
-		private int _channel = RemoteExplosivesUtility.DefaultChannel;
-		private int _desiredChannel = RemoteExplosivesUtility.DefaultChannel;
+		private int _channel = RemoteTechUtility.DefaultChannel;
+		private int _desiredChannel = RemoteTechUtility.DefaultChannel;
 
 		public int Channel {
 			get { return _channel; }
@@ -54,11 +54,11 @@ namespace RemoteExplosives {
 				parent.BroadcastCompSignal(DesiredChannelChangedSignal);
 			};
 			channelPopulation = new CachedValue<Dictionary<int, List<IWirelessDetonationReceiver>>>(
-				() => readPopulation ? RemoteExplosivesUtility.FindReceiversInNetworkRange(parent) : null
+				() => readPopulation ? RemoteTechUtility.FindReceiversInNetworkRange(parent) : null
 			);
 		}
 
-		public CompChannelSelector Configure(bool manualChannelSwitching = false, bool autoDrawGizmo = false, bool canReadPopulation = false, RemoteExplosivesUtility.ChannelType gizmoType = RemoteExplosivesUtility.ChannelType.None) {
+		public CompChannelSelector Configure(bool manualChannelSwitching = false, bool autoDrawGizmo = false, bool canReadPopulation = false, RemoteTechUtility.ChannelType gizmoType = RemoteTechUtility.ChannelType.None) {
 			manualSwitching = manualChannelSwitching;
 			autoDraw = autoDrawGizmo;
 			gizmoMode = gizmoType;
@@ -75,13 +75,13 @@ namespace RemoteExplosives {
 
 		public override void PostExposeData() {
 			base.PostExposeData();
-			Scribe_Values.Look(ref _channel, "channel", RemoteExplosivesUtility.DefaultChannel);
-			Scribe_Values.Look(ref _desiredChannel, "desiredChannel", RemoteExplosivesUtility.DefaultChannel);
+			Scribe_Values.Look(ref _channel, "channel", RemoteTechUtility.DefaultChannel);
+			Scribe_Values.Look(ref _desiredChannel, "desiredChannel", RemoteTechUtility.DefaultChannel);
 		}
 
 		public Gizmo GetChannelGizmo() {
-			Dictionary<int, List<IWirelessDetonationReceiver>> population = gizmoMode == RemoteExplosivesUtility.ChannelType.Advanced ? channelPopulation.Value : null;
-			return RemoteExplosivesUtility.GetChannelGizmo(DesiredChannel, Channel, gizmoCallback, gizmoMode, population);
+			Dictionary<int, List<IWirelessDetonationReceiver>> population = gizmoMode == RemoteTechUtility.ChannelType.Advanced ? channelPopulation.Value : null;
+			return RemoteTechUtility.GetChannelGizmo(DesiredChannel, Channel, gizmoCallback, gizmoMode, population);
 		}
 
 		public override IEnumerable<Gizmo> CompGetGizmosExtra() {

@@ -3,7 +3,7 @@ using RimWorld;
 using Verse;
 using Verse.AI;
 
-namespace RemoteExplosives {
+namespace RemoteTech {
 	/// <summary>
 	/// For pawns with the Red button fever mental break. Gives them a job to interact with a detonator.
 	/// </summary>

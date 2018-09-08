@@ -2,7 +2,7 @@
 using Verse;
 using System.Linq;
 
-namespace RemoteExplosives {
+namespace RemoteTech {
 	/* 
 	 * A remote explosive that shows its range when selected.
 	 */

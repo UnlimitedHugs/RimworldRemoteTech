@@ -1,7 +1,7 @@
 ﻿using System;
 using Verse;
 
-namespace RemoteExplosives {
+namespace RemoteTech {
 	/*
 	 * Allows detonator wire to be placed under existing structures
 	 */

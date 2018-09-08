@@ -1,11 +1,11 @@
 ﻿using HugsLib.Utils;
 using Verse;
 
-namespace RemoteExplosives {
+namespace RemoteTech {
 	/**
 	 * Stores the AutoReplaceWatcher for an individual map
 	 */
-	public class MapComponent_RemoteExplosives : MapComponent {
+	public class MapComponent_RemoteTech : MapComponent {
 		
 		private AutoReplaceWatcher replaceWatcher;
 
@@ -13,7 +13,7 @@ namespace RemoteExplosives {
 			get { return replaceWatcher; }
 		}
 
-		public MapComponent_RemoteExplosives(Map map) : base(map) {
+		public MapComponent_RemoteTech(Map map) : base(map) {
 			this.EnsureIsActive();
 			replaceWatcher = new AutoReplaceWatcher();
 			replaceWatcher.SetParentMap(map);

@@ -2,7 +2,7 @@
 using UnityEngine;
 using Verse;
 
-namespace RemoteExplosives {
+namespace RemoteTech {
 	/**
 	 * Draws the effective area of a shaped charge, changing color depending on its ability to break any thick mountain roof.
 	 * Also highlights any thick mountain roof near the effective area.
@@ -16,7 +16,7 @@ namespace RemoteExplosives {
 		private static readonly List<IntVec3> overheadMountainCells = new List<IntVec3>();
 
 		public override void DrawGhost(ThingDef def, IntVec3 center, Rot4 rot, Color ghostCol) {
-			var effectiveRadius = RemoteExplosivesUtility.TryGetExplosiveRadius(def);
+			var effectiveRadius = RemoteTechUtility.TryGetExplosiveRadius(def);
 			if (effectiveRadius <= 0) return;
 			var map = Find.CurrentMap;
 			if(map == null) return;
@@ -41,7 +41,7 @@ namespace RemoteExplosives {
 			if (overheadMountainCells.Count > 0 && Find.Selector.NumSelected <= 1) { // don't draw overlay when multiple charges are selected
 				GenDraw.DrawFieldEdges(overheadMountainCells, Color.white);
 			}
-			var effectiveRadiusColor = RemoteExplosivesUtility.IsEffectiveRoofBreakerPlacement(effectiveRadius, center, map) ? EffectivePlacementColor : IneffectivePlacementColor;
+			var effectiveRadiusColor = RemoteTechUtility.IsEffectiveRoofBreakerPlacement(effectiveRadius, center, map) ? EffectivePlacementColor : IneffectivePlacementColor;
 			GenDraw.DrawFieldEdges(effectiveRadiusCells, effectiveRadiusColor);
 		}
 	}

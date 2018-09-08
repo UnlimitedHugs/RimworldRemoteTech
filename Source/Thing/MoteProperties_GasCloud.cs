@@ -1,7 +1,7 @@
 ﻿// ReSharper disable UnassignedField.Global
 using Verse;
 
-namespace RemoteExplosives {
+namespace RemoteTech {
 	public class MoteProperties_GasCloud : MoteProperties {
 		/// <summary>
 		/// Game ticks between gas ticks. Everything a gas cloud does is done during its gas tick.
@@ -53,7 +53,7 @@ namespace RemoteExplosives {
 		}
 
 		protected void Assert(bool check, string errorMessage) {
-			if(!check) Log.Error($"[RemoteExplosives] Invalid data in {GetType().Name} definition: {errorMessage}");
+			if(!check) Log.Error($"[RemoteTech] Invalid data in {GetType().Name} definition: {errorMessage}");
 		}
 	}
 }

@@ -2,7 +2,7 @@
 using UnityEngine;
 using Verse;
 
-namespace RemoteExplosives {
+namespace RemoteTech {
 	public class PlaceWorker_WirelessNodeConnections : PlaceWorker, ISelectedThingPlaceWorker {
 		public override void DrawGhost(ThingDef def, IntVec3 center, Rot4 rot, Color ghostCol) {
 			var nodes = CompWirelessDetonationGridNode.GetPotentialNeighborsFor(def, center, Find.CurrentMap);

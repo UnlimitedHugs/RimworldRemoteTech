@@ -4,7 +4,7 @@ using RimWorld;
 using UnityEngine;
 using Verse;
 
-namespace RemoteExplosives {
+namespace RemoteTech {
 	/// <summary>
 	/// Stores custom negative goodwill caps with non-player factions.
 	/// Lowering the cap circumvents the trader gassing exploit that allows to rob a trader, 

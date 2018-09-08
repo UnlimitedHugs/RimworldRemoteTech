@@ -4,7 +4,7 @@ using RimWorld;
 using Verse;
 using Verse.Sound;
 
-namespace RemoteExplosives {
+namespace RemoteTech {
 	public enum RemoteExplosiveType {
 		Combat, Mining, Utility
 	}
@@ -56,7 +56,7 @@ namespace RemoteExplosives {
 		}
 
 		public int CurrentChannel {
-			get { return channelsComp != null ? channelsComp.Channel : RemoteExplosivesUtility.DefaultChannel; }
+			get { return channelsComp != null ? channelsComp.Channel : RemoteTechUtility.DefaultChannel; }
 		}
 
 		public virtual void LightFuse() {
@@ -73,9 +73,9 @@ namespace RemoteExplosives {
 			this.RequireComponent(CustomProps);
 			this.RequireComponent(BlinkerData);
 			if (!respawningAfterLoad && CustomProps != null) {
-				if (CustomProps.explosiveType == RemoteExplosiveType.Combat && RemoteExplosivesController.Instance.SettingAutoArmCombat ||
-					CustomProps.explosiveType == RemoteExplosiveType.Mining && RemoteExplosivesController.Instance.SettingAutoArmMining ||
-					CustomProps.explosiveType == RemoteExplosiveType.Utility && RemoteExplosivesController.Instance.SettingAutoArmUtility) {
+				if (CustomProps.explosiveType == RemoteExplosiveType.Combat && RemoteTechController.Instance.SettingAutoArmCombat ||
+					CustomProps.explosiveType == RemoteExplosiveType.Mining && RemoteTechController.Instance.SettingAutoArmMining ||
+					CustomProps.explosiveType == RemoteExplosiveType.Utility && RemoteTechController.Instance.SettingAutoArmUtility) {
 					Arm();
 				}
 			}
@@ -134,7 +134,7 @@ namespace RemoteExplosives {
 			yield return armGizmo;
 
 			if (channelsComp != null) {
-				channelsComp.Configure(true, false, false, RemoteExplosivesUtility.GetChannelsUnlockLevel());
+				channelsComp.Configure(true, false, false, RemoteTechUtility.GetChannelsUnlockLevel());
 				var gz = channelsComp.GetChannelGizmo();
 				if (gz != null) yield return gz;
 			}
@@ -209,9 +209,9 @@ namespace RemoteExplosives {
 			} else {
 				stringBuilder.Append("RemoteExplosive_notArmed".Translate());
 			}
-			if (channelsComp != null && RemoteExplosivesUtility.GetChannelsUnlockLevel() > RemoteExplosivesUtility.ChannelType.None) {
+			if (channelsComp != null && RemoteTechUtility.GetChannelsUnlockLevel() > RemoteTechUtility.ChannelType.None) {
 				stringBuilder.AppendLine();
-				stringBuilder.Append(RemoteExplosivesUtility.GetCurrentChannelInspectString(channelsComp.Channel));
+				stringBuilder.Append(RemoteTechUtility.GetCurrentChannelInspectString(channelsComp.Channel));
 			}
 			return stringBuilder.ToString();
 		}
@@ -236,7 +236,7 @@ namespace RemoteExplosives {
 		private void DrawFlareOverlay(bool useStrong) {
 			ticksSinceFlare = 0;
 			var overlay = useStrong ? Resources.Graphics.FlareOverlayStrong : Resources.Graphics.FlareOverlayNormal;
-			RemoteExplosivesUtility.DrawFlareOverlay(overlay, DrawPos, BlinkerData);
+			RemoteTechUtility.DrawFlareOverlay(overlay, DrawPos, BlinkerData);
 		}
 
 		private void EmitBeep(float pitch) {

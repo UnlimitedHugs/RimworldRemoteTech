@@ -4,7 +4,7 @@ using System.Linq;
 using HugsLib.Utils;
 using Verse;
 
-namespace RemoteExplosives {
+namespace RemoteTech {
 	public static class SwitchableUtility {
 		public static void UpdateSwitchDesignation(this Thing thing) {
 			if(thing.Map == null) return;

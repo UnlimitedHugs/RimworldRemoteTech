@@ -2,7 +2,7 @@
 using Verse;
 using Verse.AI;
 
-namespace RemoteExplosives {
+namespace RemoteTech {
 	/* 
 	 * Calls a colonist to a detonator to perform the detonation.
 	 */

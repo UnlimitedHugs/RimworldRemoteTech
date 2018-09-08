@@ -3,7 +3,7 @@ using HugsLib.Utils;
 using UnityEngine;
 using Verse;
 
-namespace RemoteExplosives {
+namespace RemoteTech {
 	/**
 	 * A Graphic_Single placed on an offset base. Used to give the workbenches a custom vanilla-style 3d look.
 	 * Chosen over the vanilla approach for faster loading (fewer textures to load, smaller size).

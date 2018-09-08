@@ -3,7 +3,7 @@ using RimWorld;
 using Verse;
 using Verse.AI;
 
-namespace RemoteExplosives {
+namespace RemoteTech {
 	/// <summary>
 	/// Calls a colonist to bring in needed materials and performs some work on a Thing to unlock one of its CompUpgrade
 	/// </summary>

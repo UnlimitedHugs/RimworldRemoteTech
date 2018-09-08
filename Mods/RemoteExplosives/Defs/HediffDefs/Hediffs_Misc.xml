@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Defs>
-	<HediffDef Class="RemoteExplosives.HediffDef_NonLethal">
+	<HediffDef Class="RemoteTech.HediffDef_NonLethal">
 		<defName>rxSleepingGas</defName>
-		<hediffClass>RemoteExplosives.Hediff_NonLethal</hediffClass>
+		<hediffClass>RemoteTech.Hediff_NonLethal</hediffClass>
 		<defaultLabelColor>(0.7, 0.1 , 1)</defaultLabelColor>
 		<label>sleeping gas</label>
 		<makesSickThought>true</makesSickThought>
@@ -10,8 +10,8 @@
 		<vanillaLethalityChance>.1</vanillaLethalityChance>
 		<maxSeverity>2.5</maxSeverity>
 		<comps>
-			<li Class="RemoteExplosives.HediffCompProps_SeverityRecovery">
-				<compClass>RemoteExplosives.HediffComp_SeverityRecovery</compClass>
+			<li Class="RemoteTech.HediffCompProps_SeverityRecovery">
+				<compClass>RemoteTech.HediffComp_SeverityRecovery</compClass>
 				<severityRecoveryPerTick>
 					<min>0.0001</min>
 					<max>0.0003</max>

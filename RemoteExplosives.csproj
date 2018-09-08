@@ -174,10 +174,10 @@
     <Compile Include="Source\Comp\CompRandomResourceLeaver.cs" />
     <Compile Include="Source\Comp\CompProperties_RandomResourceLeaver.cs" />
     <Compile Include="Source\Utils\IAutoReplaceExposable.cs" />
-    <Compile Include="Source\Utils\MapComponent_RemoteExplosives.cs" />
+    <Compile Include="Source\Utils\MapComponent_RemoteTech.cs" />
     <Compile Include="Source\Building\PlaceWorker_DetonatorWire.cs" />
     <Compile Include="Source\Building\PlaceWorker_RoofBreakerExplosive.cs" />
-    <Compile Include="Source\RemoteExplosivesController.cs" />
+    <Compile Include="Source\RemoteTechController.cs" />
     <Compile Include="Source\Resources.cs" />
     <Compile Include="Source\Graphic\SectionLayer_DetonationGrid.cs" />
     <Compile Include="Source\Thing\SparkweedPlantDef.cs" />
@@ -193,7 +193,7 @@
     <Compile Include="Source\AI\JobDriver_DetonateExplosives.cs" />
     <Compile Include="Source\AI\JobDriver_SwitchThing.cs" />
     <Compile Include="Source\Building\PlaceWorker_MiningExplosiveSquare.cs" />
-    <Compile Include="Source\Utils\RemoteExplosivesUtility.cs" />
+    <Compile Include="Source\Utils\RemoteTechUtility.cs" />
     <Compile Include="Source\AI\WorkGiver_IPawnDetonateable.cs" />
   </ItemGroup>
   <ItemGroup>

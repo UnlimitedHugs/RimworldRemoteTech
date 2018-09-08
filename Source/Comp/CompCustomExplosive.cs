@@ -3,7 +3,7 @@ using UnityEngine;
 using Verse;
 using Verse.Sound;
 
-namespace RemoteExplosives {
+namespace RemoteTech {
 	/// <summary>
 	/// An explosive with a timer. Can be triggered silently, but will revert to the vanilla wick if it takes enough damage.
 	/// Does not extend CompExplosive, because there is no good way to override some methods.

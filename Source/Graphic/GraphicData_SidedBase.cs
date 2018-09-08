@@ -2,7 +2,7 @@
 using UnityEngine;
 using Verse;
 
-namespace RemoteExplosives {
+namespace RemoteTech {
 	public class GraphicData_SidedBase : GraphicData {
 		public string baseFrontTexPath;
 		public string baseSideTexPath;
