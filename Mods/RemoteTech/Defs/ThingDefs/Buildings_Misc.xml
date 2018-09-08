@@ -221,7 +221,7 @@
 		<thingClass>RemoteTech.Building_GasVent</thingClass>
 		<description>Pushes gasses from one side to the other when powered. Also equalizes heat like a regular vent when powered.
 Tip: switches can be used to toggle vents remotely, as well as in groups.</description>
-		<designationCategory>rxRemoteExplosives</designationCategory>
+		<designationCategory>rxRemoteTech</designationCategory>
 		<graphicData>
 			<graphicClass>Graphic_Multi</graphicClass>
 			<texPath>rxGasVent/GasVent</texPath>
@@ -397,7 +397,7 @@ Tip: switches can be used to toggle vents remotely, as well as in groups.</descr
 			</li>
 		</comps>
 		<terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
-		<designationCategory>rxRemoteExplosives</designationCategory>
+		<designationCategory>rxRemoteTech</designationCategory>
 		<constructEffect>ConstructMetal</constructEffect>
 		<researchPrerequisites>
 			<li>rxPortablePower</li>
@@ -509,7 +509,7 @@ Tip: switches can be used to toggle vents remotely, as well as in groups.</descr
 		<passability>PassThroughOnly</passability>
 		<pathCost>50</pathCost>
 		<minifiedDef>MinifiedThing</minifiedDef>
-		<designationCategory>rxRemoteExplosives</designationCategory>
+		<designationCategory>rxRemoteTech</designationCategory>
 		<researchPrerequisites>
 			<li>rxProximitySensor</li>
 		</researchPrerequisites>

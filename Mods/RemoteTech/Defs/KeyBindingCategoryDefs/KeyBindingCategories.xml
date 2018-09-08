@@ -2,9 +2,9 @@
 
 <Defs>
 	<KeyBindingCategoryDef>
-		<defName>rxRemoteExplosives</defName>
-		<label>Remote Explosives</label>
-		<description>Shortcuts for actions in the Remote Explosives mod.</description>
+		<defName>rxRemoteTech</defName>
+		<label>Remote Tech</label>
+		<description>Shortcuts for actions in the Remote Tech mod.</description>
 		<checkForConflicts>
 			<li>GameMapCamera</li>
 			<li>Game</li>
@@ -13,8 +13,8 @@
 	
     <KeyBindingCategoryDef>
 		<defName>rxDetonator</defName>
-		<label>Remote Explosives Detonator</label>
-		<description>Shortcuts for actions in the Remote Explosives mod.</description>
+		<label>Remote Tech Detonator</label>
+		<description>Shortcuts for actions in the Remote Tech mod.</description>
 		<checkForConflicts>
 			<li>GameMapCamera</li>
 			<li>Game</li>
@@ -23,8 +23,8 @@
 	
     <KeyBindingCategoryDef>
 		<defName>rxTools</defName>
-		<label>Remote Explosives Tools</label>
-		<description>Shortcuts for activation of Remote Explosives items worn by pawns.</description>
+		<label>Remote Tech Tools</label>
+		<description>Shortcuts for activation of Remote Tech items worn by pawns.</description>
 		<checkForConflicts>
 			<li>GameMapCamera</li>
 			<li>Game</li>

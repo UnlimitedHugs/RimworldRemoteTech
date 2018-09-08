@@ -9,23 +9,23 @@
 	</KeyBindingDef>
 	
 	<KeyBindingDef>
-		<category>rxRemoteExplosives</category>
+		<category>rxRemoteTech</category>
 		<defName>rxNextChannel</defName>
 		<label>Detonator, explosives: Switch channel</label>
 		<defaultKeyCodeA>C</defaultKeyCodeA>
 	</KeyBindingDef>
 	
 	<KeyBindingDef>
-		<category>rxRemoteExplosives</category>
+		<category>rxRemoteTech</category>
 		<defName>rxArm</defName>
-		<label>Remote Explosive Arm</label>
+		<label>Remote Tech Arm</label>
 		<defaultKeyCodeA>Z</defaultKeyCodeA>
 	</KeyBindingDef>
 	
 	<KeyBindingDef>
-		<category>rxRemoteExplosives</category>
+		<category>rxRemoteTech</category>
 		<defName>rxAutoReplace</defName>
-		<label>Remote Explosive auto replace</label>
+		<label>Remote Tech auto replace</label>
 		<defaultKeyCodeA>R</defaultKeyCodeA>
 	</KeyBindingDef>
 	

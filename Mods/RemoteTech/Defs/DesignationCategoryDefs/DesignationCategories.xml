@@ -2,8 +2,8 @@
 <Defs>
 	
 	<DesignationCategoryDef>
-		<defName>rxRemoteExplosives</defName>
-		<label>Explosives</label>
+		<defName>rxRemoteTech</defName>
+		<label>Remote Tech</label>
 		<description>Things for blowing up other things.</description>
 		<order>10</order>
 		<specialDesignatorClasses>

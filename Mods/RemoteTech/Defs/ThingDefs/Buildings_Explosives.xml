@@ -10,7 +10,7 @@
 		<repairEffect>Repair</repairEffect>
 		<leaveResourcesWhenKilled>false</leaveResourcesWhenKilled>
 		<filthLeaving>Filth_RubbleBuilding</filthLeaving>
-		<designationCategory>rxRemoteExplosives</designationCategory>
+		<designationCategory>rxRemoteTech</designationCategory>
 	</ThingDef>
 	
 	<ThingDef Name="rxRemoteExplosiveBase" ParentName="rxBuildingBase" Abstract="True">
