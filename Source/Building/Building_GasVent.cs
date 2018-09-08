@@ -22,13 +22,10 @@ namespace RemoteExplosives {
 			get { return powerComp == null || powerComp.PowerOn; }
 		}
 
-		public Building_GasVent() {
-			statVentAmount = this.GetCachedStat(Resources.Stat.rxVentingPower);
-		}
-
 		public override void SpawnSetup(Map map, bool respawningAfterLoad) {
 			base.SpawnSetup(map, respawningAfterLoad);
 			powerComp = GetComp<CompPowerTrader>();
+			statVentAmount = this.GetCachedStat(Resources.Stat.rxVentingPower);
 			targetCell = Position + IntVec3.North.RotatedBy(Rotation);
 			sourceCell = Position + IntVec3.South.RotatedBy(Rotation);
 			ventProps = def.building as BuildingProperties_GasVent;

@@ -7,8 +7,8 @@ namespace RemoteExplosives {
 	/// A solar plant with stat based power production (rxPowerConsumption) and sun exposure multiplier (rxSunExposure)
 	/// </summary>
 	public class CompStatSolarGenerator : CompPowerPlantSolar {
-		private readonly CachedValue<float> statPowerConsumption;
-		private readonly CachedValue<float> statSunExposure;
+		private CachedValue<float> statPowerConsumption;
+		private CachedValue<float> statSunExposure;
 
 		protected override float DesiredPowerOutput {
 			get {
@@ -30,7 +30,7 @@ namespace RemoteExplosives {
 			}
 		}
 
-		public CompStatSolarGenerator() {
+		public override void PostSpawnSetup(bool respawningAfterLoad) {
 			statPowerConsumption = parent.GetCachedStat(Resources.Stat.rxPowerConsumption);
 			statSunExposure = parent.GetCachedStat(Resources.Stat.rxSunExposure);
 		}

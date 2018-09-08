@@ -23,16 +23,12 @@ namespace RemoteExplosives {
 			}
 		}
 		
-		private readonly CachedValue<float> statMaxEnergy;
+		private CachedValue<float> statMaxEnergy;
 		private Sustainer wickSustainer;
 
 		// saved
 		private int ticksToExplode;
-
-		public CompStatBattery() {
-			statMaxEnergy = parent.GetCachedStat(Resources.Stat.rxPowerCapacity);
-		}
-
+		
 		public override void ReceiveCompSignal(string signal) {
 			base.ReceiveCompSignal(signal);
 			if(signal == CompUpgrade.UpgradeCompleteSignal) statMaxEnergy.Recache();
@@ -40,6 +36,7 @@ namespace RemoteExplosives {
 
 		public override void PostSpawnSetup(bool respawningAfterLoad) {
 			base.PostSpawnSetup(respawningAfterLoad);
+			statMaxEnergy = parent.GetCachedStat(Resources.Stat.rxPowerCapacity);
 			if (statMaxEnergy <= 0f) RemoteExplosivesController.Instance.Logger.Error($"{nameof(CompStatBattery)} has zero power capacity. Missing rxPowerCapacity stat in def {parent.def.defName}?");
 		}
 
