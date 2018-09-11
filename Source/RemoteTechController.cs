@@ -157,13 +157,6 @@ namespace RemoteTech {
 			}
 		}
 
-		private IEnumerable<RecipeDef> GetAllExplosivesRecipes() {
-			return DefDatabase<RecipeDef>.AllDefs.Where(d => {
-				var product = d.products.FirstOrDefault();
-				return product?.thingDef?.thingCategories != null && product.thingDef.thingCategories.Contains(Resources.ThingCategory.rxExplosives);
-			});
-		}
-
 		/// <summary>
 		/// Generates a copy of a given recipe with the provided ingredient replaced with another, at the given ratio.
 		///  Will return null if recipe requires none of the original ingredient.
