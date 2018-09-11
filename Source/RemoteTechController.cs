@@ -128,18 +128,22 @@ namespace RemoteTech {
 		/// </summary>
 		private void InjectRecipeVariants() {
 			try {
+				IEnumerable<RecipeDef> GetRecipesRequestingVariant(RecipeVariantType variant) {
+					return DefDatabase<RecipeDef>.AllDefs.Where(r => r.GetModExtension<MakeRecipeVariants>() is MakeRecipeVariants v && v.CreateVariants.Contains(variant)).ToArray();
+				}
+
 				// components to steel variants
 				int injectCount = 0;
-				foreach (var explosiveRecipe in GetAllExplosivesRecipes().ToArray()) {
-					var variant = TryMakeRecipeVariant(explosiveRecipe, RecipeVariant.Steel, ThingDefOf.ComponentIndustrial, ThingDefOf.Steel, ComponentToSteelRatio, ComponentReplacementWorkMultiplier);
+				foreach (var explosiveRecipe in GetRecipesRequestingVariant(RecipeVariantType.Steel)) {
+					var variant = TryMakeRecipeVariant(explosiveRecipe, RecipeVariantType.Steel, ThingDefOf.ComponentIndustrial, ThingDefOf.Steel, ComponentToSteelRatio, ComponentReplacementWorkMultiplier);
 					if (variant != null) {
 						DefDatabase<RecipeDef>.Add(variant);
 						injectCount++;
 					}
 				}
 				// silver to sparkpowder variants
-				foreach (var explosiveRecipe in GetAllExplosivesRecipes().ToArray()) {
-					var variant = TryMakeRecipeVariant(explosiveRecipe, RecipeVariant.Sparkpowder, ThingDefOf.Silver, Resources.Thing.rxSparkpowder, SilverToSparkpowderRatio, SilverReplacementWorkMultiplier);
+				foreach (var explosiveRecipe in GetRecipesRequestingVariant(RecipeVariantType.Sparkpowder)) {
+					var variant = TryMakeRecipeVariant(explosiveRecipe, RecipeVariantType.Sparkpowder, ThingDefOf.Silver, Resources.Thing.rxSparkpowder, SilverToSparkpowderRatio, SilverReplacementWorkMultiplier);
 					if (variant != null) {
 						DefDatabase<RecipeDef>.Add(variant);
 						injectCount++;
@@ -164,7 +168,7 @@ namespace RemoteTech {
 		/// Generates a copy of a given recipe with the provided ingredient replaced with another, at the given ratio.
 		///  Will return null if recipe requires none of the original ingredient.
 		/// </summary>
-		private RecipeDef TryMakeRecipeVariant(RecipeDef recipeOriginal, RecipeVariant variant, ThingDef originalIngredient, ThingDef replacementIngredient, float replacementRatio, float workAmountMultiplier) {
+		private RecipeDef TryMakeRecipeVariant(RecipeDef recipeOriginal, RecipeVariantType variant, ThingDef originalIngredient, ThingDef replacementIngredient, float replacementRatio, float workAmountMultiplier) {
 			// check original recipe for the replaced ingredient, copy other ingredients
 			var resourceCountRequired = 0f;
 			var newIngredientList = new List<IngredientCount>(recipeOriginal.ingredients);
@@ -177,25 +181,22 @@ namespace RemoteTech {
 			}
 			if (resourceCountRequired == 0) return null;
 
-			// allow defs to specify variants they should not exist in
-			if (recipeOriginal.GetModExtension<RecipeVariantSkip>()?.skipVariant == variant) return null;
-
 			var recipeCopy = (RecipeDef) objectCloneMethod.Invoke(recipeOriginal, null);
 			recipeCopy.defName = $"{recipeOriginal.defName}_{replacementIngredient.defName}";
 			recipeCopy.shortHash = 0;
 			InjectedDefHasher.GiveShortHashToDef(recipeCopy, typeof(RecipeDef));
 			// clone our extension to avoid polluting the original def
-			recipeCopy.modExtensions = recipeCopy.modExtensions?.Select(e => e is RecipeVariantExtension r ? r.Clone() : e).ToList();
-			if (!recipeOriginal.HasModExtension<RecipeVariantExtension>()) {
+			recipeCopy.modExtensions = recipeCopy.modExtensions?.Select(e => e is ICloneable i ? (DefModExtension)i.Clone() : e).ToList();
+			if (!recipeOriginal.HasModExtension<MakeRecipeVariants>()) {
 				// mark original as a variant, as well
 				recipeOriginal.modExtensions = recipeOriginal.modExtensions ?? new List<DefModExtension>();
-				recipeOriginal.modExtensions.Add(new RecipeVariantExtension());
+				recipeOriginal.modExtensions.Add(new MakeRecipeVariants());
 			}
 
 			// mark the copy as variant
-			var variantExtension = recipeCopy.GetModExtension<RecipeVariantExtension>();
+			var variantExtension = recipeCopy.GetModExtension<MakeRecipeVariants>();
 			if (variantExtension == null) {
-				variantExtension = new RecipeVariantExtension();
+				variantExtension = new MakeRecipeVariants();
 				recipeCopy.modExtensions = recipeCopy.modExtensions ?? new List<DefModExtension>();
 				recipeCopy.modExtensions.Add(variantExtension);
 			}

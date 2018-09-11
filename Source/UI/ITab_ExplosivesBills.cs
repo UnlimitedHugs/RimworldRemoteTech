@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using RimWorld;
 using UnityEngine;
@@ -11,17 +10,12 @@ namespace RemoteTech {
 	/// It works by displaying a different set of recipes depending on the setting.
 	/// </summary>
 	public class ITab_ExplosivesBills : ITab_Bills {
-
-		private enum RecipeMode {
-			 Components, Steel
-		}
-
 		private static readonly Vector2 WinSize = new Vector2(370f, 480f);
 
 		private float viewHeight = 1000f;
 		private Vector2 scrollPosition = default(Vector2);
 		private Bill mouseoverBill;
-		private RecipeVariant currentVariant;
+		private RecipeVariantType currentVariant;
 
 		public ITab_ExplosivesBills()
 		{
@@ -30,7 +24,7 @@ namespace RemoteTech {
 		}
 
 		protected override void FillTab() {
-			Text.Font = GameFont.Medium;
+			Text.Font = GameFont.Small;
 			const float Padding = 10f, Spacing = 6f, SettingsRowHeight = 29f;
 			var canvasRect = new Rect(0f, 18f, WinSize.x, WinSize.y).ContractedBy(Padding);
 			
@@ -40,17 +34,17 @@ namespace RemoteTech {
 
 			Text.Anchor = TextAnchor.MiddleLeft;
 			var rowRect = new Rect(settingsContent.x, settingsContent.y, settingsContent.width, SettingsRowHeight);
-			var sparkpowderVariant = (currentVariant & RecipeVariant.Sparkpowder) != 0;
+			var sparkpowderVariant = (currentVariant & RecipeVariantType.Sparkpowder) != 0;
 			Widgets.Label(rowRect, "BillsTab_MainMaterial_label".Translate());
 			if (Widgets.ButtonText(rowRect.RightHalf(), sparkpowderVariant ? "BillsTab_MaterialButton_sparkpowder_mode".Translate() : "BillsTab_MaterialButton_silver_mode".Translate())) {
-				currentVariant ^= RecipeVariant.Sparkpowder;
+				currentVariant ^= RecipeVariantType.Sparkpowder;
 			}
 
 			rowRect.y += SettingsRowHeight + Spacing;
-			var steelVariant = (currentVariant & RecipeVariant.Steel) != 0;
+			var steelVariant = (currentVariant & RecipeVariantType.Steel) != 0;
 			Widgets.Label(rowRect, "BillsTab_SecondaryMaterial_label".Translate());
 			if (Widgets.ButtonText(rowRect.RightHalf(), steelVariant ? "BillsTab_MaterialButton_steel_mode".Translate() : "BillsTab_MaterialButton_component_mode".Translate())) {
-				currentVariant ^= RecipeVariant.Steel;
+				currentVariant ^= RecipeVariantType.Steel;
 			}
 
 			rowRect.y += SettingsRowHeight + Spacing;
@@ -65,16 +59,16 @@ namespace RemoteTech {
 			TooltipHandler.TipRegion(infoRect, "BillsTab_Materials_info".Translate());
 			GUI.DrawTexture(infoRect, Resources.Textures.InfoButtonIcon);
 
-			var recipesRect = new Rect(canvasRect.x, canvasRect.y + settingsRect.height + Spacing, canvasRect.width + 16f, canvasRect.height - (settingsRect.height + Spacing));
+			var recipesRect = new Rect(canvasRect.x, canvasRect.y + settingsRect.height + Spacing, canvasRect.width, canvasRect.height - (settingsRect.height + Spacing));
 
 			List<FloatMenuOption> RecipeOptionsMaker() {
 				var list = new List<FloatMenuOption>();
 				for (int i = 0; i < SelTable.def.AllRecipes.Count; i++) {
 					var recipe = SelTable.def.AllRecipes[i];
-					var variant = recipe.GetModExtension<RecipeVariantExtension>();
+					var variant = recipe.GetModExtension<MakeRecipeVariants>();
 					if(variant != null && variant.Variant != currentVariant) continue;
 
-					var locked = recipe.researchPrerequisite != null && !recipe.AvailableNow;
+					var locked = recipe.researchPrerequisite != null && !recipe.AvailableNow && !DebugSettings.godMode;
 					string researchTip = "";
 					if (locked) {
 						researchTip = "BillsTab_ResearchRequired".Translate(recipe.researchPrerequisite.label);

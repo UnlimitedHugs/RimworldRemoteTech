@@ -53,6 +53,14 @@
 			<rxRemoteBomb>1</rxRemoteBomb>
 		</products>
 		<workSkill>Crafting</workSkill>
+		<modExtensions>
+			<li Class="RemoteTech.MakeRecipeVariants">
+				<CreateVariants>
+					<li>Steel</li>
+					<li>Sparkpowder</li>
+				</CreateVariants>
+			</li>
+		</modExtensions>
 	</RecipeDef>
 		
 	<RecipeDef>
@@ -107,6 +115,14 @@
 			<rxRemoteFireBomb>1</rxRemoteFireBomb>
 		</products>
 		<workSkill>Crafting</workSkill>
+		<modExtensions>
+			<li Class="RemoteTech.MakeRecipeVariants">
+				<CreateVariants>
+					<li>Steel</li>
+					<li>Sparkpowder</li>
+				</CreateVariants>
+			</li>
+		</modExtensions>
 	</RecipeDef>
 	
 	<RecipeDef>
@@ -162,8 +178,10 @@
 		</products>
 		<workSkill>Crafting</workSkill>
 		<modExtensions>
-			<li Class="RemoteTech.RecipeVariantSkip">
-				<skipVariant>Sparkpowder</skipVariant>
+			<li Class="RemoteTech.MakeRecipeVariants">
+				<CreateVariants>
+					<li>Steel</li>
+				</CreateVariants>
 			</li>
 		</modExtensions>
 	</RecipeDef>  
@@ -211,6 +229,14 @@
 			<rxMiningExplosiveComponent>1</rxMiningExplosiveComponent>
 		</products>
 		<workSkill>Crafting</workSkill>
+		<modExtensions>
+			<li Class="RemoteTech.MakeRecipeVariants">
+				<CreateVariants>
+					<li>Steel</li>
+					<li>Sparkpowder</li>
+				</CreateVariants>
+			</li>
+		</modExtensions>
 	</RecipeDef>  
 	
 	<RecipeDef Name="rxBaseChemicalCan" Abstract="true">
@@ -258,8 +284,10 @@
 		</fixedIngredientFilter>
 		<workSkill>Crafting</workSkill>
 		<modExtensions>
-			<li Class="RemoteTech.RecipeVariantSkip">
-				<skipVariant>Sparkpowder</skipVariant>
+			<li Class="RemoteTech.MakeRecipeVariants">
+				<CreateVariants>
+					<li>Steel</li>
+				</CreateVariants>
 			</li>
 		</modExtensions>
 	</RecipeDef>
@@ -342,8 +370,10 @@
 		</products>
 		<workSkill>Crafting</workSkill>
 		<modExtensions>
-			<li Class="RemoteTech.RecipeVariantSkip">
-				<skipVariant>Sparkpowder</skipVariant>
+			<li Class="RemoteTech.MakeRecipeVariants">
+				<CreateVariants>
+					<li>Steel</li>
+				</CreateVariants>
 			</li>
 		</modExtensions>
 	</RecipeDef>
@@ -357,6 +387,7 @@
 			<li>CraftingSpot</li>
 			<li>HandTailoringBench</li>
 			<li>ElectricTailoringBench</li>
+			<li>rxBench</li>
 		</recipeUsers>
 		<researchPrerequisite>rxMakeshiftExplosives</researchPrerequisite>
 		<workSpeedStat>TailoringSpeed</workSpeedStat>

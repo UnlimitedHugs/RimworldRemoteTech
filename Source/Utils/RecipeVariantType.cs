@@ -2,7 +2,7 @@
 
 namespace RemoteTech {
 	[Flags]
-	public enum RecipeVariant {
+	public enum RecipeVariantType {
 		Original = 0,
 		Steel = 1,
 		Sparkpowder = 2

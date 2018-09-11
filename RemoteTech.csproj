@@ -106,7 +106,6 @@
     <Compile Include="Source\Comp\IPowerUseNotified.cs" />
     <Compile Include="Source\Comp\StatPart_Upgradeable.cs" />
     <Compile Include="Source\UI\Dialog_SensorSettings.cs" />
-    <Compile Include="Source\Utils\ICloneable.cs" />
     <Compile Include="Source\Utils\CachedValue.cs" />
     <Compile Include="Source\Utils\CustomFactionGoodwillCaps.cs" />
     <Compile Include="Source\Damage\DamageWorker_SuperEMP.cs" />
@@ -175,7 +174,7 @@
     <Compile Include="Source\Comp\CompRandomResourceLeaver.cs" />
     <Compile Include="Source\Comp\CompProperties_RandomResourceLeaver.cs" />
     <Compile Include="Source\Utils\IAutoReplaceExposable.cs" />
-    <Compile Include="Source\Utils\RecipeVariant.cs" />
+    <Compile Include="Source\Utils\RecipeVariantType.cs" />
     <Compile Include="Source\Utils\RecipeVariantExtension.cs" />
     <Compile Include="Source\Utils\MapComponent_RemoteTech.cs" />
     <Compile Include="Source\Building\PlaceWorker_DetonatorWire.cs" />
@@ -187,7 +186,6 @@
     <Compile Include="Source\Thing\Plant_Sparkweed.cs" />
     <Compile Include="Source\Thing\PortableDetonator.cs" />
     <Compile Include="Source\Graphic\GraphicData_SidedBase.cs" />
-    <Compile Include="Source\Utils\RecipeVariantSkip.cs" />
     <Compile Include="Source\Utils\SwitchableUtility.cs" />
     <Compile Include="Source\Utils\TraderStockInjectorDef.cs" />
     <Compile Include="Source\Building\BuildingProperties_FoamBlob.cs" />
