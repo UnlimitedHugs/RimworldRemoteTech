@@ -39,7 +39,7 @@
 						<li>Silver</li>
 					</thingDefs>
 				</filter>
-				<count>2</count>
+				<count>4</count>
 			</li>
 		</ingredients>
 		<fixedIngredientFilter>
@@ -93,7 +93,7 @@
 						<li>Silver</li>
 					</thingDefs>
 				</filter>
-				<count>2</count>
+				<count>4</count>
 			</li>
 		</ingredients>
 		<fixedIngredientFilter>
@@ -139,7 +139,7 @@
 						<li>Silver</li>
 					</thingDefs>
 				</filter>
-				<count>2</count>
+				<count>4</count>
 			</li>
 			<li>
 				<filter>
@@ -147,7 +147,7 @@
 						<li>Gold</li>
 					</thingDefs>
 				</filter>
-				<count>1</count>
+				<count>2</count>
 			</li>
 		</ingredients>
 		<fixedIngredientFilter>
@@ -161,6 +161,11 @@
 			<rxRemoteEmpBomb>1</rxRemoteEmpBomb>
 		</products>
 		<workSkill>Crafting</workSkill>
+		<modExtensions>
+			<li Class="RemoteTech.RecipeVariantSkip">
+				<skipVariant>Sparkpowder</skipVariant>
+			</li>
+		</modExtensions>
 	</RecipeDef>  
 	
 	<RecipeDef>
@@ -193,7 +198,7 @@
 						<li>Silver</li>
 					</thingDefs>
 				</filter>
-				<count>2</count>
+				<count>4</count>
 			</li>
 		</ingredients>
 		<fixedIngredientFilter>
@@ -233,7 +238,7 @@
 						<li>Silver</li>
 					</thingDefs>
 				</filter>
-				<count>6</count>
+				<count>12</count>
 			</li>
 			<li>
 				<filter>
@@ -252,6 +257,11 @@
 			</thingDefs>
 		</fixedIngredientFilter>
 		<workSkill>Crafting</workSkill>
+		<modExtensions>
+			<li Class="RemoteTech.RecipeVariantSkip">
+				<skipVariant>Sparkpowder</skipVariant>
+			</li>
+		</modExtensions>
 	</RecipeDef>
 	
 	<RecipeDef ParentName="rxBaseChemicalCan">
@@ -309,7 +319,7 @@
 						<li>Silver</li>
 					</thingDefs>
 				</filter>
-				<count>6</count>
+				<count>12</count>
 			</li>
 			<li>
 				<filter>
@@ -331,6 +341,11 @@
 			<rxRemoteRefinedSleepingGasCan>1</rxRemoteRefinedSleepingGasCan>
 		</products>
 		<workSkill>Crafting</workSkill>
+		<modExtensions>
+			<li Class="RemoteTech.RecipeVariantSkip">
+				<skipVariant>Sparkpowder</skipVariant>
+			</li>
+		</modExtensions>
 	</RecipeDef>
 	
 	<RecipeDef>

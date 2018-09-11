@@ -45,12 +45,12 @@ namespace RemoteTech {
 
 		[DefOf]
 		public static class Thing {
-			public static ThingDef rxTableDetonator;
 			public static ThingDef rxCollapsedRoofRocks;
 			public static ThingDef rxGas_Sleeping;
 			public static ThingDef rxFoamWallSmooth;
 			public static ThingDef rxFoamWallBricks;
 			public static ThingDef rxPlantSparkweed;
+			public static ThingDef rxSparkpowder;
 		}
 
 		[DefOf]
@@ -146,6 +146,7 @@ namespace RemoteTech {
 			public static Texture2D rxProximitySensorArc;
 
 			public static readonly Texture2D WallSmoothMenuIcon = ContentFinder<Texture2D>.Get("Things/Building/Linked/WallSmooth_MenuIcon");
+			public static readonly Texture2D InfoButtonIcon = ContentFinder<Texture2D>.Get("UI/Buttons/InfoButton");
 
 			// defines sprite offsets within the channel keypad atlas
 			public static readonly KepadAtlas KeypadAtlasCoords = new KepadAtlas();

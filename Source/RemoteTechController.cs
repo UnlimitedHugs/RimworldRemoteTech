@@ -16,7 +16,10 @@ namespace RemoteTech {
 	/// Injects trader stock generators, generates recipe copies for the workbench and injects comps.
 	/// </summary>
 	public class RemoteTechController : ModBase {
-		private const int ComponentValueInSteel = 40;
+		public const float ComponentReplacementWorkMultiplier = 2f;
+		public const float SilverReplacementWorkMultiplier = 1.75f;
+		private const float ComponentToSteelRatio = 20f;
+		private const float SilverToSparkpowderRatio = 5f;
 		private const int ForbiddenTimeoutSettingDefault = 30;
 		private const int ForbiddenTimeoutSettingIncrement = 5;
 
@@ -55,7 +58,7 @@ namespace RemoteTech {
 
 		public override void DefsLoaded() {
 			InjectTraderStocks();
-			InjectSteelRecipeVariants();
+			InjectRecipeVariants();
 			InjectVanillaExplosivesComps();
 			InjectUpgradeableStatParts();
 			PrepareReverseBuildingMaterialLookup();
@@ -121,25 +124,105 @@ namespace RemoteTech {
 		}
 
 		/// <summary>
-		/// Injects copies of explosives recipes, changing components into an equivalent amount of steel
+		/// Injects copies of explosives recipes, substituting ingredients
 		/// </summary>
-		private void InjectSteelRecipeVariants() {
+		private void InjectRecipeVariants() {
 			try {
+				// components to steel variants
 				int injectCount = 0;
-				foreach (var explosiveRecipe in GetAllExplosivesRecipes().ToList()) {
-					var variant = TryMakeRecipeVariantWithSteel(explosiveRecipe);
+				foreach (var explosiveRecipe in GetAllExplosivesRecipes().ToArray()) {
+					var variant = TryMakeRecipeVariant(explosiveRecipe, RecipeVariant.Steel, ThingDefOf.ComponentIndustrial, ThingDefOf.Steel, ComponentToSteelRatio, ComponentReplacementWorkMultiplier);
 					if (variant != null) {
 						DefDatabase<RecipeDef>.Add(variant);
 						injectCount++;
 					}
 				}
-
+				// silver to sparkpowder variants
+				foreach (var explosiveRecipe in GetAllExplosivesRecipes().ToArray()) {
+					var variant = TryMakeRecipeVariant(explosiveRecipe, RecipeVariant.Sparkpowder, ThingDefOf.Silver, Resources.Thing.rxSparkpowder, SilverToSparkpowderRatio, SilverReplacementWorkMultiplier);
+					if (variant != null) {
+						DefDatabase<RecipeDef>.Add(variant);
+						injectCount++;
+					}
+				}
 				if (injectCount > 0) {
 					Logger.Trace($"Injected {injectCount} alternate explosives recipes.");
 				}
 			} catch (Exception e) {
 				Logger.ReportException(e);
 			}
+		}
+
+		private IEnumerable<RecipeDef> GetAllExplosivesRecipes() {
+			return DefDatabase<RecipeDef>.AllDefs.Where(d => {
+				var product = d.products.FirstOrDefault();
+				return product?.thingDef?.thingCategories != null && product.thingDef.thingCategories.Contains(Resources.ThingCategory.rxExplosives);
+			});
+		}
+
+		/// <summary>
+		/// Generates a copy of a given recipe with the provided ingredient replaced with another, at the given ratio.
+		///  Will return null if recipe requires none of the original ingredient.
+		/// </summary>
+		private RecipeDef TryMakeRecipeVariant(RecipeDef recipeOriginal, RecipeVariant variant, ThingDef originalIngredient, ThingDef replacementIngredient, float replacementRatio, float workAmountMultiplier) {
+			// check original recipe for the replaced ingredient, copy other ingredients
+			var resourceCountRequired = 0f;
+			var newIngredientList = new List<IngredientCount>(recipeOriginal.ingredients);
+			foreach (var ingredientCount in newIngredientList) {
+				if (ingredientCount.filter.Allows(originalIngredient)) {
+					resourceCountRequired = ingredientCount.GetBaseCount();
+					newIngredientList.Remove(ingredientCount);
+					break;
+				}
+			}
+			if (resourceCountRequired == 0) return null;
+
+			// allow defs to specify variants they should not exist in
+			if (recipeOriginal.GetModExtension<RecipeVariantSkip>()?.skipVariant == variant) return null;
+
+			var recipeCopy = (RecipeDef) objectCloneMethod.Invoke(recipeOriginal, null);
+			recipeCopy.defName = $"{recipeOriginal.defName}_{replacementIngredient.defName}";
+			recipeCopy.shortHash = 0;
+			InjectedDefHasher.GiveShortHashToDef(recipeCopy, typeof(RecipeDef));
+			// clone our extension to avoid polluting the original def
+			recipeCopy.modExtensions = recipeCopy.modExtensions?.Select(e => e is RecipeVariantExtension r ? r.Clone() : e).ToList();
+			if (!recipeOriginal.HasModExtension<RecipeVariantExtension>()) {
+				// mark original as a variant, as well
+				recipeOriginal.modExtensions = recipeOriginal.modExtensions ?? new List<DefModExtension>();
+				recipeOriginal.modExtensions.Add(new RecipeVariantExtension());
+			}
+
+			// mark the copy as variant
+			var variantExtension = recipeCopy.GetModExtension<RecipeVariantExtension>();
+			if (variantExtension == null) {
+				variantExtension = new RecipeVariantExtension();
+				recipeCopy.modExtensions = recipeCopy.modExtensions ?? new List<DefModExtension>();
+				recipeCopy.modExtensions.Add(variantExtension);
+			}
+			variantExtension.Variant |= variant;
+
+			// copy non-replaced ingredients over to the new filter
+			var newFixedFilter = new ThingFilter();
+			foreach (var allowedThingDef in recipeOriginal.fixedIngredientFilter.AllowedThingDefs) {
+				if (allowedThingDef != originalIngredient) newFixedFilter.SetAllow(allowedThingDef, true);
+			}
+			newFixedFilter.SetAllow(replacementIngredient, true);
+			recipeCopy.fixedIngredientFilter = newFixedFilter;
+			recipeCopy.defaultIngredientFilter = null;
+
+			// add the replacement ingredient
+			var replacementIngredientFilter = new ThingFilter();
+			replacementIngredientFilter.SetAllow(replacementIngredient, true);
+			var replacementCount = new IngredientCount {filter = replacementIngredientFilter};
+			replacementCount.SetBaseCount(Mathf.Round(resourceCountRequired * replacementRatio));
+			newIngredientList.Add(replacementCount);
+			recipeCopy.ingredients = newIngredientList;
+
+			// multiply work amount
+			recipeCopy.workAmount = recipeOriginal.workAmount * workAmountMultiplier;
+
+			recipeCopy.ResolveReferences();
+			return recipeCopy;
 		}
 
 		/// <summary>
@@ -161,7 +244,6 @@ namespace RemoteTech {
 				Logger.ReportException(e);
 			}
 		}
-
 
 		/// <summary>
 		/// Add StatPart_Upgradeable to all stats that are used in any CompProperties_Upgrade
@@ -217,9 +299,6 @@ namespace RemoteTech {
 					if (def.category != ThingCategory.Building || def.costList == null) continue;
 					for (var j = 0; j < def.costList.Count; j++) {
 						var materialDef = def.costList[j]?.thingDef;
-						/*if (def.defName == "rxMiningChargeShaped") {
-							Tracer.Trace(materialDef?.defName, lookup.ContainsKey(materialDef));
-						}*/
 						if (materialDef != null && lookup.TryGetValue(materialDef, out List<ThingDef> buildingDefs)) {
 							buildingDefs.Add(def);
 							break;
@@ -235,50 +314,6 @@ namespace RemoteTech {
 			var def = DefDatabase<ThingDef>.GetNamedSilentFail(defName);
 			if (def == null) Logger.Warning("Could not get ThingDef for Comp injection: " + defName);
 			return def;
-		}
-
-		private IEnumerable<RecipeDef> GetAllExplosivesRecipes() {
-			return DefDatabase<RecipeDef>.AllDefs.Where(d => {
-				var product = d.products.FirstOrDefault();
-				return product?.thingDef?.thingCategories != null && product.thingDef.thingCategories.Contains(Resources.ThingCategory.rxExplosives);
-			});
-		}
-
-		// Will return null if recipe requires no components
-		private RecipeDef TryMakeRecipeVariantWithSteel(RecipeDef recipeOriginal) {
-			var recipeCopy = (RecipeDef) objectCloneMethod.Invoke(recipeOriginal, null);
-			recipeCopy.shortHash = 0;
-			InjectedDefHasher.GiveShortHashToDef(recipeCopy, typeof(RecipeDef));
-			recipeCopy.defName += RemoteTechUtility.InjectedRecipeNameSuffix;
-
-			var newFixedFilter = new ThingFilter();
-			foreach (var allowedThingDef in recipeOriginal.fixedIngredientFilter.AllowedThingDefs) {
-				if (allowedThingDef == ThingDefOf.ComponentIndustrial) continue;
-				newFixedFilter.SetAllow(allowedThingDef, true);
-			}
-			newFixedFilter.SetAllow(ThingDefOf.Steel, true);
-			recipeCopy.fixedIngredientFilter = newFixedFilter;
-			recipeCopy.defaultIngredientFilter = null;
-
-			float numComponentsRequired = 0;
-			var newIngredientList = new List<IngredientCount>(recipeOriginal.ingredients);
-			foreach (var ingredientCount in newIngredientList) {
-				if (ingredientCount.filter.Allows(ThingDefOf.ComponentIndustrial)) {
-					numComponentsRequired = ingredientCount.GetBaseCount();
-					newIngredientList.Remove(ingredientCount);
-					break;
-				}
-			}
-			if (numComponentsRequired == 0) return null;
-
-			var steelFilter = new ThingFilter();
-			steelFilter.SetAllow(ThingDefOf.Steel, true);
-			var steelIngredient = new IngredientCount {filter = steelFilter};
-			steelIngredient.SetBaseCount(ComponentValueInSteel*numComponentsRequired);
-			newIngredientList.Add(steelIngredient);
-			recipeCopy.ingredients = newIngredientList;
-			recipeCopy.ResolveReferences();
-			return recipeCopy;
 		}
 
 		private void DrawDebugControls() {

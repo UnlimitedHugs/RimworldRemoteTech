@@ -13,7 +13,6 @@ namespace RemoteTech {
 	  */
 	[StaticConstructorOnStartup]
 	public static class RemoteTechUtility {
-		public const string InjectedRecipeNameSuffix = "Injected";
 		public const int DefaultChannel = 1;
 		
 		// how long it will take to trigger an additional explosive

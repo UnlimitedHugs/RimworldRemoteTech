@@ -26,10 +26,14 @@
 	<DetonatorTable_component_label>Install channels</DetonatorTable_component_label>
 	<DetonatorTable_component_desc>Install a component to allow detonating explosives on different channels.</DetonatorTable_component_desc>
 	
-	<BillsTab_MaterialButton_label>Material: {0}</BillsTab_MaterialButton_label>
+	<BillsTab_MainMaterial_label>Main ingredient</BillsTab_MainMaterial_label>
+	<BillsTab_SecondaryMaterial_label>Secondary ingredient</BillsTab_SecondaryMaterial_label>
+	<BillsTab_WorkAmount_label>Work amount</BillsTab_WorkAmount_label>
 	<BillsTab_MaterialButton_component_mode>Components</BillsTab_MaterialButton_component_mode>
 	<BillsTab_MaterialButton_steel_mode>Steel</BillsTab_MaterialButton_steel_mode>
-	<BillsTab_MaterialButton_tooltip>Sets the base material that new bills are created with.</BillsTab_MaterialButton_tooltip>
+	<BillsTab_MaterialButton_silver_mode>Silver</BillsTab_MaterialButton_silver_mode>
+	<BillsTab_MaterialButton_sparkpowder_mode>Sparkpowder</BillsTab_MaterialButton_sparkpowder_mode>
+	<BillsTab_Materials_info>These buttons can be used to select the materials that new bills are created with. Non-standard materials increase the amount of work required.</BillsTab_Materials_info>
 	<BillsTab_ResearchRequired>Research required: {0}</BillsTab_ResearchRequired>
 	
 	<FoamBlob_solidify_progress>Solidifying: {0}%</FoamBlob_solidify_progress>
