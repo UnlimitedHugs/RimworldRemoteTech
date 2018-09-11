@@ -445,7 +445,6 @@ Can fail if used while wet.</description>
 		<thingClass>RemoteTech.Building_DetonatorWire</thingClass>
 		<costList>
 			<Steel>1</Steel>
-			<rxSparkpowder>1</rxSparkpowder>
 		</costList>
 		<comps>
 			<li Class="RemoteTech.CompProperties_WiredDetonationTransmitter">
@@ -476,7 +475,7 @@ Can be placed under walls and other buildings.</description>
 		</statBases>
 		<costList>
 			<Plasteel>1</Plasteel>
-			<rxSparkpowder>1</rxSparkpowder>
+			<Steel>1</Steel>
 		</costList>
 		<comps>
 			<li Class="RemoteTech.CompProperties_WiredDetonationTransmitter">
