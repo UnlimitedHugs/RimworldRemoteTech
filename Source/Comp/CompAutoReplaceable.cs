@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using Verse;
 
 namespace RemoteTech {
-	/*
-	 * Destroyed buildings with this comp will be replaced as blueprints by AutoReplaceWatcher
-	 */
+	/// <summary>
+	/// Destroyed buildings with this comp will be replaced as blueprints by AutoReplaceWatcher
+	/// </summary>
 	public class CompAutoReplaceable : ThingComp {
 		private static readonly string AutoReplaceButtonLabel = "RemoteExplosive_autoReplace_label".Translate();
 		private static readonly string AutoReplaceButtonDesc = "RemoteExplosive_autoReplace_desc".Translate();

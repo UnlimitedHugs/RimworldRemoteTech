@@ -6,9 +6,9 @@ using Verse;
 using Verse.Sound;
 
 namespace RemoteTech {
-	/* 
-	 * An explosive with high power against rocks. Will break rocks within the defined area.
-	 */
+	/// <summary>
+	/// An explosive with high power against rocks. Will break rocks within the defined area.
+	/// </summary>
 	public class CompMiningExplosive : CompCustomExplosive {
 		private const int MinAffectedCellsToTriggerCaveInSound = 6;
 

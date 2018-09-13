@@ -3,9 +3,9 @@ using Verse;
 using Verse.Sound;
 
 namespace RemoteTech {
-	/*
-	 * A remote explosive that creates things on detonation.
-	 */
+	/// <summary>
+	/// A remote explosive that creates things on detonation.
+	/// </summary>
 	public class CompChemicalExplosive : CompCustomExplosive {
 		private CompProperties_ChemicalExplosive customProps;
 

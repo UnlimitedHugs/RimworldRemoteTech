@@ -7,10 +7,10 @@ using UnityEngine;
 using Verse;
 
 namespace RemoteTech {
-	/*
-	 * A wire to connect the detonator to explosives.
-	 * Will get wet during rain and have a chance to fail when used unless dried.
-	 */
+	/// <summary>
+	/// A wire to connect the detonator to explosives.
+	/// Will get wet during rain and have a chance to fail when used unless dried.
+	/// </summary>
 
 	public class Building_DetonatorWire : Building {
 		private const float FreezeTemperature = -1f;

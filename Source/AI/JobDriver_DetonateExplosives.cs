@@ -3,9 +3,9 @@ using Verse;
 using Verse.AI;
 
 namespace RemoteTech {
-	/* 
-	 * Calls a colonist to a detonator to perform the detonation.
-	 */
+	/// <summary>
+	/// Calls a colonist to a detonator to perform the detonation.
+	/// </summary>
 	public class JobDriver_DetonateExplosives : JobDriver {
 		public override bool TryMakePreToilReservations(bool errorOnFailed) {
 			return pawn.Reserve(job.targetA, job);

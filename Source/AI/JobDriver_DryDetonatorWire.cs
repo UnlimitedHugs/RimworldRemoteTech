@@ -3,9 +3,9 @@ using RimWorld;
 using Verse.AI;
 
 namespace RemoteTech {
-	/*
-	 * Calls a colonist to a marked detonation wire to dry it off
-	 */
+	/// <summary>
+	/// Calls a colonist to a marked detonation wire to dry it off
+	/// </summary>
 	public class JobDriver_DryDetonatorWire : JobDriver {
 		public override bool TryMakePreToilReservations(bool errorOnFailed) {
 			return pawn.Reserve(job.targetA, job);

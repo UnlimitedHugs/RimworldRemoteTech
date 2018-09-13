@@ -4,9 +4,9 @@ using Verse;
 using Verse.AI;
 
 namespace RemoteTech {
-	/* 
-	 * Issues jobs on behalf of Building_FoamWall to do smoothing work on it when it is appropriately designated
-	 */
+	/// <summary>
+	/// Issues jobs on behalf of Building_FoamWall to do smoothing work on it when it is appropriately designated
+	/// </summary>
 	public class WorkGiver_FoamWall : WorkGiver_Scanner {
 		public override IEnumerable<Thing> PotentialWorkThingsGlobal(Pawn pawn) {
 			var designations = pawn.Map.designationManager.SpawnedDesignationsOfDef(Resources.Designation.rxFoamWallSmooth);

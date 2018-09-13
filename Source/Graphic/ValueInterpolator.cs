@@ -4,9 +4,9 @@ using UnityEngine;
 using Verse;
 
 namespace RemoteTech {
-	/**
-	 * Changes a float value over time according to an interpolation curve. Used for animation.
-	 */
+	/// <summary>
+	/// Changes a float value over time according to an interpolation curve. Used for animation.
+	/// </summary>
 	public class ValueInterpolator : IExposable {
 		public delegate void FinishedCallback(ValueInterpolator interpolator, float finalValue, float interpolationDuration, InterpolationCurves.Curve interpolationCurve);
 

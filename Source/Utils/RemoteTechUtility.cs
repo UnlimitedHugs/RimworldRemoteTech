@@ -8,9 +8,9 @@ using Verse;
 using Verse.AI;
 
 namespace RemoteTech {
-	 /*
-	  * A place for common functions and utilities used by the mod.
-	  */
+	/// <summary>
+	/// A place for common functions and utilities used by the mod.
+	/// </summary>
 	[StaticConstructorOnStartup]
 	public static class RemoteTechUtility {
 		public const int DefaultChannel = 1;

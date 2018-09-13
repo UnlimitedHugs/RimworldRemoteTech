@@ -4,10 +4,10 @@ using Verse;
 using Verse.AI;
 
 namespace RemoteTech {
-	/* 
-	 * Gives JobDriver_DetonateExplosives job to colonists
-	 * Handles both the detonator table and the manual detonator
-	 */
+	/// <summary>
+	/// Gives JobDriver_DetonateExplosives job to colonists
+	/// Handles both the detonator table and the manual detonator
+	/// </summary>
 	public class WorkGiver_IPawnDetonateable : WorkGiver_Scanner {
 		
 		public override IEnumerable<Thing> PotentialWorkThingsGlobal(Pawn pawn) {

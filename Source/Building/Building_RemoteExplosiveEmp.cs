@@ -1,9 +1,9 @@
 ﻿using Verse.Sound;
 
 namespace RemoteTech {
-	/*
-	 * A remote explosive with a custom wind-up sound.
-	 */
+	/// <summary>
+	/// A remote explosive with a custom wind-up sound.
+	/// </summary>
 	public class Building_RemoteExplosiveEmp : Building_RemoteExplosive {
 		private bool chargeSoundRequested;
 		

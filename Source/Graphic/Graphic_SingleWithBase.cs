@@ -1,13 +1,11 @@
-﻿using System;
-using HugsLib.Utils;
-using UnityEngine;
+﻿using UnityEngine;
 using Verse;
 
 namespace RemoteTech {
-	/**
-	 * A Graphic_Single placed on an offset base. Used to give the workbenches a custom vanilla-style 3d look.
-	 * Chosen over the vanilla approach for faster loading (fewer textures to load, smaller size).
-	 */
+	/// <summary>
+	/// A Graphic_Single placed on an offset base. Used to give the workbenches a custom vanilla-style 3d look.
+	/// Chosen over the vanilla approach for faster loading (fewer textures to load, smaller size).
+	/// </summary>
 	public class Graphic_SingleWithBase : Graphic_Single {
 		private GraphicData_SidedBase baseData;
 		private Material baseMatFront;

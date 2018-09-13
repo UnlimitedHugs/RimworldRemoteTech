@@ -6,10 +6,10 @@ using Verse;
 using Verse.Sound;
 
 namespace RemoteTech {
-	/* 
-	 * An apparel item to be worn by a colonist in the accessory (shield) slot.
-	 * Provides the functionality of a detonator table with a limited number of uses.
-	 */
+	/// <summary>
+	/// An apparel item to be worn by a colonist in the accessory (shield) slot.
+	/// Provides the functionality of a detonator table with a limited number of uses.
+	/// </summary>
 	public class PortableDetonator : Apparel {
 		private const int ActivationCooldownTicks = 30;
 		private const string ChannelsUpgradeId = "ChannelsBasic";

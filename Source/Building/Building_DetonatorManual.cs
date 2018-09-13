@@ -4,9 +4,9 @@ using Verse;
 using Verse.Sound;
 
 namespace RemoteTech {
-	/* 
-	 * Initiates a detonation signal carried by wire when triggered by a colonist.
-	 */
+	/// <summary>
+	/// Initiates a detonation signal carried by wire when triggered by a colonist.
+	/// </summary>
 	public class Building_DetonatorManual : Building, IGraphicVariantProvider, IPawnDetonateable, IRedButtonFeverTarget {
 		private enum VisualVariant {
 			PlungerUp = 0,

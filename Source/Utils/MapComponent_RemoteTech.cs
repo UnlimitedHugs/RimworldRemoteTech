@@ -2,9 +2,9 @@
 using Verse;
 
 namespace RemoteTech {
-	/**
-	 * Stores the AutoReplaceWatcher for an individual map
-	 */
+	/// <summary>
+	/// Stores the AutoReplaceWatcher for an individual map
+	/// </summary>
 	public class MapComponent_RemoteTech : MapComponent {
 		
 		private AutoReplaceWatcher replaceWatcher;

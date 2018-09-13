@@ -15,11 +15,11 @@ namespace RemoteTech {
 		BackIn, BackOut, BackInOut,
 		BounceIn, BounceOut, BounceInOut
 	}
-	
-	/**
-	 * These are functions that describe the change of a value over time. See http://easings.net/ for more info.
-	 * Swiped from https://gist.github.com/Fonserbc/3d31a25e87fdaa541ddf
-	 */
+
+	/// <summary>
+	/// These are functions that describe the change of a value over time. See http://easings.net/ for more info.
+	/// Swiped from https://gist.github.com/Fonserbc/3d31a25e87fdaa541ddf
+	/// </summary>
 	public static class InterpolationCurves {
 			public delegate float Curve(float time);
 			

@@ -3,10 +3,10 @@ using UnityEngine;
 using Verse;
 
 namespace RemoteTech {
-	/**
-	 * Draws the effective area of a shaped charge, changing color depending on its ability to break any thick mountain roof.
-	 * Also highlights any thick mountain roof near the effective area.
-	 */
+	/// <summary>
+	/// Draws the effective area of a shaped charge, changing color depending on its ability to break any thick mountain roof.
+	/// Also highlights any thick mountain roof near the effective area.
+	/// </summary>
 	public class PlaceWorker_RoofBreakerExplosive : PlaceWorker {
 		private const float AdditionalRoofDisplayRadius = 3f;
 

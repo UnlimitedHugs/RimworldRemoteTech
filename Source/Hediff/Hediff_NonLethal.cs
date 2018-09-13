@@ -1,9 +1,9 @@
 ﻿using Verse;
 
 namespace RemoteTech {
-	/* 
-	 * This hediff will prevent the game from randomly killing off non-colonist pawns when incapacitated by an increase in severity.
-	 */
+	/// <summary>
+	/// This hediff will prevent the game from randomly killing off non-colonist pawns when incapacitated by an increase in severity.
+	/// </summary>
 	public class Hediff_NonLethal : HediffWithComps {
 
 		public override float Severity {

@@ -4,9 +4,9 @@ using UnityEngine;
 using Verse;
 
 namespace RemoteTech {
-	/**
-	 * A designator that selects only detonation wire
-	 */
+	/// <summary>
+	/// A designator that selects only detonation wire
+	/// </summary>
 	public class Designator_SelectDetonatorWire : Designator {
 		public Designator_SelectDetonatorWire() {
 			hotKey = KeyBindingDefOf.Misc10;

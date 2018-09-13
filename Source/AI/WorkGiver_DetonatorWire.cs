@@ -4,9 +4,9 @@ using Verse;
 using Verse.AI;
 
 namespace RemoteTech {
-	/* 
-	 * Issues jobs on behalf of Building_DetonatorWire to dry it off when it is appropriately designated
-	 */
+	/// <summary>
+	/// Issues jobs on behalf of Building_DetonatorWire to dry it off when it is appropriately designated
+	/// </summary>
 	public class WorkGiver_DetonatorWire : WorkGiver_Scanner {
 		public override PathEndMode PathEndMode {
 			get { return PathEndMode.ClosestTouch; }

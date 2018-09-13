@@ -1,9 +1,9 @@
 ﻿using Verse;
 
 namespace RemoteTech {
-	/* 
-	 * Drops a random amount of a certain item on destruction.
-	 */
+	/// <summary>
+	/// Drops a random amount of a certain item on destruction.
+	/// </summary>
 	public class CompRandomResourceLeaver : ThingComp {
 		public override void PostDestroy(DestroyMode mode, Map map) {
 			base.PostDestroy(mode, map);

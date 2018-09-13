@@ -2,9 +2,9 @@
 using Verse;
 
 namespace RemoteTech {
-	/*
-	 * Allows detonator wire to be placed under existing structures
-	 */
+	/// <summary>
+	/// Allows detonator wire to be placed under existing structures
+	/// </summary>
 	public class PlaceWorker_DetonatorWire : PlaceWorker {
 		private readonly Type compTypeTransmitter = typeof (CompWiredDetonationTransmitter);
 		private readonly Type compTypeCrossing = typeof (CompWiredDetonationCrossing);

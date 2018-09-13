@@ -3,9 +3,9 @@ using RimWorld;
 using Verse;
 
 namespace RemoteTech {
-	/**
-	 * Like the Flame damage worker, but makes a roll against the chance defined in the def, to see if it should crate fire.
-	 */
+	/// <summary>
+	/// Like the Flame damage worker, but makes a roll against the chance defined in the def, to see if it should crate fire.
+	/// </summary>
 	public class DamageWorker_FlameChance : DamageWorker_AddInjury {
 		public override DamageResult Apply(DamageInfo dinfo, Thing victim) {
 			if (ShouldCreateFire()) {

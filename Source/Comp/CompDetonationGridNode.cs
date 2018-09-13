@@ -1,9 +1,9 @@
 ﻿using Verse;
 
 namespace RemoteTech {
-	/**
-	 * Base class for comps involved in the detonation grid. Required to print the overlay section layer.
-	 */
+	/// <summary>
+	/// Base class for comps involved in the detonation grid. Required to print the overlay section layer.
+	/// </summary>
 	public abstract class CompDetonationGridNode : ThingComp {
 		private IntVec3 cachedPosition = IntVec3.Invalid;
 

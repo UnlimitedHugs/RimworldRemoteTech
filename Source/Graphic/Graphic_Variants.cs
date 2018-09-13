@@ -2,9 +2,9 @@
 using Verse;
 
 namespace RemoteTech {
-	/**
-	 * A graphic that can change appearance between multiple graphics, current variant is specified by IGraphicVariantProvider
-	 */
+	/// <summary>
+	/// A graphic that can change appearance between multiple graphics, current variant is specified by IGraphicVariantProvider
+	/// </summary>
 	public class Graphic_Variants : Graphic_Collection {
 		public override Material MatSingle {
 			get { return GetDefaultMat(); }

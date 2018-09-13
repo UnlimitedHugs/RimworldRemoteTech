@@ -5,10 +5,10 @@ using Verse;
 using Verse.Sound;
 
 namespace RemoteTech {
-	/* 
-	 * Created by the sealing foam canister. 
-	 * Will spread a given number of times and turn into another building (wall) once time runs out.
-	 */
+	/// <summary>
+	/// Created by the sealing foam canister. 
+	/// Will spread a given number of times and turn into another building (wall) once time runs out.
+	/// </summary>
 	public class Building_FoamBlob : Building {
 		private const float animationDuration = 1f;
 		private const float animationMagnitude = 1.5f;

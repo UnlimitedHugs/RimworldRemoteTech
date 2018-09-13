@@ -6,10 +6,10 @@ using RimWorld;
 using Verse;
 
 namespace RemoteTech {
-	/* 
-	 * A wall that will kill and trap any pawns and items it is placed on.
-	 * Contained items are dropped on destruction.
-	 */
+	/// <summary>
+	/// A wall that will kill and trap any pawns and items it is placed on.
+	/// Contained items are dropped on destruction.
+	/// </summary>
 	public class Building_FoamWall : Mineable, IThingHolder {
 		private bool justCreated;
 		private ThingOwner<Thing> trappedInventory;

@@ -5,9 +5,9 @@ using Verse;
 using Verse.AI;
 
 namespace RemoteTech {
-	/*
-	 * Calls a colonist to transform a foam wall into one of its smoothed variants
-	 */
+	/// <summary>
+	/// Calls a colonist to transform a foam wall into one of its smoothed variants
+	/// </summary>
 	public class JobDriver_SmoothFoamWall : JobDriver {
 		private float workLeft;
 

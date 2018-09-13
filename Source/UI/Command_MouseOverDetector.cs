@@ -3,9 +3,9 @@ using UnityEngine;
 using Verse;
 
 namespace RemoteTech {
-	/* 
-	 * A simple Command_Action that reports back when the mouse is hovering over it.
-	 */
+	/// <summary>
+	/// A simple Command_Action that reports back when the mouse is hovering over it.
+	/// </summary>
 	public class Command_MouseOverDetector : Command_Action {
 		public Action mouseOverCallback;
 

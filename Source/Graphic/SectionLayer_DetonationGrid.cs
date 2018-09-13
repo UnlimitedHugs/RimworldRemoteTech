@@ -4,10 +4,10 @@ using UnityEngine;
 using Verse;
 
 namespace RemoteTech {
-	/**
-	 * An overlay for explosives and conductors on the wired detonation grid.
-	 * Displays only when a building designator for a building with a relevant comp is selected.
-	 */
+	/// <summary>
+	/// An overlay for explosives and conductors on the wired detonation grid.
+	/// Displays only when a building designator for a building with a relevant comp is selected.
+	/// </summary>
 	public class SectionLayer_DetonationGrid : SectionLayer_Things {
 		private static readonly Type GridNodeCompType = typeof (CompDetonationGridNode);
 

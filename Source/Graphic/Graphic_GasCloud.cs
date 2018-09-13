@@ -2,9 +2,9 @@
 using Verse;
 
 namespace RemoteTech {
-	/* 
-	 * An advanced version of Graphic_Random with support for alpha, position offset, scaling and rotation
-	 */
+	/// <summary>
+	/// An advanced version of Graphic_Random with support for alpha, position offset, scaling and rotation
+	/// </summary>
 	public class Graphic_GasCloud : Graphic_Collection {
 		private const float DistinctAlphaLevels = 128f;
 

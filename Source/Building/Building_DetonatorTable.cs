@@ -6,10 +6,10 @@ using Verse;
 using Verse.Sound;
 
 namespace RemoteTech {
-	/*
-	 * Finds remote explosive charges in range and detonates them on command.
-	 * Can be upgraded with a component to unlock the ability to use channels.
-	 */
+	/// <summary>
+	/// Finds remote explosive charges in range and detonates them on command.
+	/// Can be upgraded with a component to unlock the ability to use channels.
+	/// </summary>
 	public class Building_DetonatorTable : Building, IPawnDetonateable, IRedButtonFeverTarget {
 		private const string ChannelsBasicUpgradeId = "ChannelsBasic";
 		private const string ChannelsAdvancedUpgradeId = "ChannelsAdvanced";

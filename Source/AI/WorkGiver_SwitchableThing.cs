@@ -4,9 +4,9 @@ using Verse;
 using Verse.AI;
 
 namespace RemoteTech {
-	/*
-	 * Gives JobDriver_SwitchThing job to colonists
-	 */
+	/// <summary>
+	/// Gives JobDriver_SwitchThing job to colonists
+	/// </summary>
 	public class WorkGiver_SwitchableThing : WorkGiver_Scanner {
 		
 		private const PathEndMode pathEndMode = PathEndMode.Touch;

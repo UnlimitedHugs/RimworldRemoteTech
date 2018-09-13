@@ -3,9 +3,9 @@ using Verse;
 using System.Linq;
 
 namespace RemoteTech {
-	/* 
-	 * A remote explosive that shows its range when selected.
-	 */
+	/// <summary>
+	/// A remote explosive that shows its range when selected.
+	/// </summary>
 	public class Building_MiningExplosive : Building_RemoteExplosive {
 
 		private List<IntVec3> affectedCells;
