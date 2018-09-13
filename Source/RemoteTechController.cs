@@ -19,7 +19,7 @@ namespace RemoteTech {
 		public const float ComponentReplacementWorkMultiplier = 2f;
 		public const float SilverReplacementWorkMultiplier = 1.75f;
 		private const float ComponentToSteelRatio = 20f;
-		private const float SilverToSparkpowderRatio = 5f;
+		private const float SilverToSparkpowderRatio = 4f;
 		private const int ForbiddenTimeoutSettingDefault = 30;
 		private const int ForbiddenTimeoutSettingIncrement = 5;
 
