@@ -35,6 +35,12 @@ namespace RemoteTech {
 			statSunExposure = parent.GetCachedStat(Resources.Stat.rxSunExposure);
 		}
 
+		public override void PostExposeData() {
+			Scribe.EnterNode(nameof(CompStatSolarGenerator)); // prevents properties collisions from multiple CompPower on the same Thing
+			base.PostExposeData();
+			Scribe.ExitNode();
+		}
+
 		public override void ReceiveCompSignal(string signal) {
 			base.ReceiveCompSignal(signal);
 			if (signal == CompUpgrade.UpgradeCompleteSignal) {

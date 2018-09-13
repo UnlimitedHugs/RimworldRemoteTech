@@ -67,6 +67,10 @@ namespace RemoteTech {
 			RemoveFoamWallsFromMeteoritePool();
 		}
 
+		public T CloneObject<T>(T obj) {
+			return (T)objectCloneMethod.Invoke(obj, null);
+		}
+
 		private void RemoveFoamWallsFromMeteoritePool() {
 			// smoothed foam walls are mineable, but should not appear in a meteorite drop
 			ThingSetMaker_Meteorite.nonSmoothedMineables.Remove(Resources.Thing.rxFoamWallSmooth);
@@ -174,7 +178,7 @@ namespace RemoteTech {
 			}
 			if (resourceCountRequired == 0) return null;
 
-			var recipeCopy = (RecipeDef) objectCloneMethod.Invoke(recipeOriginal, null);
+			var recipeCopy = CloneObject(recipeOriginal);
 			recipeCopy.defName = $"{recipeOriginal.defName}_{replacementIngredient.defName}";
 			recipeCopy.shortHash = 0;
 			InjectedDefHasher.GiveShortHashToDef(recipeCopy, typeof(RecipeDef));

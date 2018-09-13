@@ -102,7 +102,6 @@
     <Compile Include="Source\Comp\CompUpgrade.cs" />
     <Compile Include="Source\Comp\CompWiredDetonationCrossing.cs" />
     <Compile Include="Source\Comp\CompWirelessDetonationGridNode.cs" />
-    <Compile Include="Source\Comp\IBatteryPropsProvider.cs" />
     <Compile Include="Source\Comp\IPowerUseNotified.cs" />
     <Compile Include="Source\Comp\StatPart_Upgradeable.cs" />
     <Compile Include="Source\UI\Dialog_SensorSettings.cs" />
@@ -111,7 +110,6 @@
     <Compile Include="Source\Damage\DamageWorker_SuperEMP.cs" />
     <Compile Include="Source\Damage\SuperEMPDamageDef.cs" />
     <Compile Include="Source\Graphic\GraphicData_Blinker.cs" />
-    <Compile Include="Source\Patches\CompPowerBattery_Props_Patch.cs" />
     <Compile Include="Source\Patches\Faction_AffectGoodwillWith_Patch.cs" />
     <Compile Include="Source\Patches\CultivatedPlants_DeterminePlantDef_Patch.cs" />
     <Compile Include="Source\Patches\GenLeaving_GetLeaveCalculator_Patch.cs" />

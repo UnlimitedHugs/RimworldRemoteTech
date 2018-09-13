@@ -9,18 +9,13 @@ namespace RemoteTech {
 	/// A battery that has variable capacity based on the rxPowerCapacity stat of the parent thing.
 	/// Also contains overlay drawing and exploding logic form Building_Battery.
 	/// </summary>
-	public class CompStatBattery : CompPowerBattery, IBatteryPropsProvider {
+	public class CompStatBattery : CompPowerBattery {
 		private const float MinChargeToExplode = .75f;
 		private const float ChargeToLoseWhenExplode = .8f;
 		private const float ExplodeChancePerDamage = 0.05f;
 
-		private CompProperties_BatteryWithBar customProps;
-		public CompProperties_Battery ReplacementProps {
-			get {
-				customProps = customProps ?? props as CompProperties_BatteryWithBar ?? new CompProperties_BatteryWithBar();
-				customProps.storedEnergyMax = statMaxEnergy;
-				return customProps;
-			}
+		private CompProperties_BatteryWithBar BatteryProps {
+			get { return props as CompProperties_BatteryWithBar; }
 		}
 		
 		private CachedValue<float> statMaxEnergy;
@@ -31,31 +26,37 @@ namespace RemoteTech {
 		
 		public override void ReceiveCompSignal(string signal) {
 			base.ReceiveCompSignal(signal);
-			if(signal == CompUpgrade.UpgradeCompleteSignal) statMaxEnergy.Recache();
+			if (signal == CompUpgrade.UpgradeCompleteSignal) UpdateStoredEnergyMax();
 		}
 
 		public override void PostSpawnSetup(bool respawningAfterLoad) {
+			props = RemoteTechController.Instance.CloneObject(props); // make a copy of our props so we can manipulate them
+			this.RequireComponent(BatteryProps);
 			base.PostSpawnSetup(respawningAfterLoad);
 			statMaxEnergy = parent.GetCachedStat(Resources.Stat.rxPowerCapacity);
+			UpdateStoredEnergyMax();
 			if (statMaxEnergy <= 0f) RemoteTechController.Instance.Logger.Error($"{nameof(CompStatBattery)} has zero power capacity. Missing rxPowerCapacity stat in def {parent.def.defName}?");
 		}
 
 		public override void PostExposeData() {
+			Scribe.EnterNode(nameof(CompStatBattery));
 			base.PostExposeData();
 			Scribe_Values.Look(ref ticksToExplode, "ticksToExplode");
+			Scribe.ExitNode();
 		}
 
 		public override void PostDraw() {
-			var fillPercent = StoredEnergy / ReplacementProps.storedEnergyMax;
+			var bProps = BatteryProps;
+			var fillPercent = StoredEnergy / bProps.storedEnergyMax;
 			var rotation = parent.Rotation;
 			rotation.Rotate(RotationDirection.Clockwise);
 			var r = new GenDraw.FillableBarRequest {
-				center = parent.DrawPos + customProps.barOffset,
-				size = customProps.barSize,
+				center = parent.DrawPos + bProps.barOffset,
+				size = bProps.barSize,
 				fillPercent = fillPercent,
 				filledMat = Resources.Materials.BatteryBarFilledMat,
 				unfilledMat = Resources.Materials.BatteryBarUnfilledMat,
-				margin = customProps.barMargin,
+				margin = bProps.barMargin,
 				rotation = rotation
 			};
 			GenDraw.DrawFillableBar(r);
@@ -65,7 +66,7 @@ namespace RemoteTech {
 		}
 
 		public override string CompInspectStringExtra() {
-			var batteryProps = (CompProperties_BatteryWithBar)ReplacementProps;
+			var batteryProps = BatteryProps;
 			var stored = StoredEnergy;
 			var s = new StringBuilder();
 			s.Append($"{"PowerBatteryStored".Translate()}: {stored:F0} / {batteryProps.storedEnergyMax:F0} Wd");
@@ -77,7 +78,7 @@ namespace RemoteTech {
 		}
 
 		public override void CompTick() {
-			var batteryProps = (CompProperties_BatteryWithBar)ReplacementProps;
+			var batteryProps = BatteryProps;
 			if (batteryProps.passiveDischargeWatts > 0f) {
 				DrawPower(Mathf.Min(batteryProps.passiveDischargeWatts * WattsToWattDaysPerTick, StoredEnergy));
 			}
@@ -105,6 +106,10 @@ namespace RemoteTech {
 				ticksToExplode = Rand.Range(70, 150);
 				StartWickSustainer();
 			}
+		}
+
+		private void UpdateStoredEnergyMax() {
+			BatteryProps.storedEnergyMax = statMaxEnergy.ValueRecached;
 		}
 
 		private void StartWickSustainer() {
