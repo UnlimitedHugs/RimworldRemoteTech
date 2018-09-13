@@ -1,22 +1,24 @@
 ﻿using System.Collections.Generic;
+using HugsLib.Utils;
 using RimWorld;
 using UnityEngine;
 using Verse;
 
-namespace RemoteExplosives {
-	/**
-	 * A designator that selects only detonation wire
-	 */
+namespace RemoteTech {
+	/// <summary>
+	/// A designator that selects only detonation wire
+	/// </summary>
 	public class Designator_SelectDetonatorWire : Designator {
 		public Designator_SelectDetonatorWire() {
 			hotKey = KeyBindingDefOf.Misc10;
-			icon = Resources.Textures.UISelectWire;
+			icon = Resources.Textures.rxUISelectWire;
 			useMouseIcon = true;
 			defaultLabel = "WireDesignator_label".Translate();
 			defaultDesc = "WireDesignator_desc".Translate();
-			soundDragSustain = SoundDefOf.DesignateDragStandard;
-			soundDragChanged = SoundDefOf.DesignateDragStandardChanged;
+			soundDragSustain = SoundDefOf.Designate_DragStandard;
+			soundDragChanged = SoundDefOf.Designate_DragStandard_Changed;
 			soundSucceeded = SoundDefOf.ThingSelected;
+			hasDesignateAllFloatMenuOption = true;
 		}
 
 		public override string Label {
@@ -39,28 +41,32 @@ namespace RemoteExplosives {
 			var contents = Map.thingGrid.ThingsListAt(loc);
 			if (contents != null) {
 				for (int i = 0; i < contents.Count; i++) {
-					if (IsWire(contents[i])) return true;
+					if (IsSelectable(contents[i])) return true;
 				}
 			}
 			return false;
 		}
-		
+
+		public override AcceptanceReport CanDesignateThing(Thing t) {
+			return IsSelectable(t);
+		}
+
 		public override void DesignateSingleCell(IntVec3 c) {
-			if(!ShiftIsHeld()) Find.Selector.ClearSelection();
+			if(!HugsLibUtility.ShiftIsHeld) Find.Selector.ClearSelection();
 			CellDesignate(c);
 			TryCloseArchitectMenu();
 		}
 
 		public override void DesignateMultiCell(IEnumerable<IntVec3> cells) {
-			if (!ShiftIsHeld()) Find.Selector.ClearSelection();
+			if (!HugsLibUtility.ShiftIsHeld) Find.Selector.ClearSelection();
 			foreach (var cell in cells) {
 				CellDesignate(cell);
 			}
 			TryCloseArchitectMenu();
 		}
 
-		private bool IsWire(Thing t) {
-			return t.def != null && t.def.building is BuildingProperties_DetonatorWire;
+		private bool IsSelectable(Thing t) {
+			return t.def?.building is BuildingProperties_DetonatorWire;
 		}
 
 		private void CellDesignate(IntVec3 cell) {
@@ -69,7 +75,7 @@ namespace RemoteExplosives {
 			if (contents != null) {
 				for (int i = 0; i < contents.Count; i++) {
 					var thing = contents[i];
-					if (IsWire(thing) && !selector.SelectedObjects.Contains(thing)) {
+					if (IsSelectable(thing) && !selector.SelectedObjects.Contains(thing)) {
 						selector.SelectedObjects.Add(thing);
 						SelectionDrawer.Notify_Selected(thing);
 					}
@@ -81,10 +87,6 @@ namespace RemoteExplosives {
 			if (Find.Selector.NumSelected == 0) return;
 			if (Find.MainTabsRoot.OpenTab != MainButtonDefOf.Architect) return;
 			Find.MainTabsRoot.EscapeCurrentTab();
-		}
-
-		private bool ShiftIsHeld() {
-			return Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift);
 		}
 	}
 }

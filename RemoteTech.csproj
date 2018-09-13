@@ -1,0 +1,222 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{C8464FD7-BFC5-4EAE-A526-BC650C462480}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>RemoteTech</RootNamespace>
+    <AssemblyName>RemoteTech</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>false</DebugSymbols>
+    <DebugType>none</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>Mods\RemoteExplosives\Assemblies\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>none</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>Mods\RemoteTech\Assemblies\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <RunPostBuildEvent>Always</RunPostBuildEvent>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="0Harmony, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\0Harmony.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Assembly-CSharp">
+      <HintPath>..\Assembly-CSharp.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="UnityEngine">
+      <HintPath>..\UnityEngine.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Source\AI\IRedButtonFeverTarget.cs" />
+    <Compile Include="Source\AI\JobDriver_InstallUpgrade.cs" />
+    <Compile Include="Source\AI\JobDriver_RedButtonFever.cs" />
+    <Compile Include="Source\AI\JobGiver_RedButtonFever.cs" />
+    <Compile Include="Source\AI\MentalStateWorker_RedButtonFever.cs" />
+    <Compile Include="Source\AI\MentalState_RedButtonFever.cs" />
+    <Compile Include="Source\AI\WorkGiver_FoamWall.cs" />
+    <Compile Include="Source\AI\JobDriver_SmoothFoamWall.cs" />
+    <Compile Include="Source\AI\WorkGiver_InstallUpgrade.cs" />
+    <Compile Include="Source\Building\BuildingProperties_FoamWall.cs" />
+    <Compile Include="Source\Building\BuildingProperties_GasVent.cs" />
+    <Compile Include="Source\Building\Building_GasVent.cs" />
+    <Compile Include="Source\Building\Building_ProximitySensor.cs" />
+    <Compile Include="Source\Building\Building_RadioMast.cs" />
+    <Compile Include="Source\Building\ISelectedThingPlaceWorker.cs" />
+    <Compile Include="Source\Building\SensorSettings.cs" />
+    <Compile Include="Source\Comp\CompAIPilotLight.cs" />
+    <Compile Include="Source\Comp\CompBuildGizmo.cs" />
+    <Compile Include="Source\Comp\CompGlowerToggleable.cs" />
+    <Compile Include="Source\Comp\CompProperties_BuildGizmo.cs" />
+    <Compile Include="Source\Graphic\ValueInterpolator.cs" />
+    <Compile Include="Source\UI\Designator_BuildLabeled.cs" />
+    <Compile Include="Source\UI\ISensorSettingsProvider.cs" />
+    <Compile Include="Source\Building\IWirelessDetonationReceiver.cs" />
+    <Compile Include="Source\Building\PlaceWorker_DetonatorRadius.cs" />
+    <Compile Include="Source\Building\PlaceWorker_GasVent.cs" />
+    <Compile Include="Source\Building\PlaceWorker_DetWireReplacer.cs" />
+    <Compile Include="Source\Building\PlaceWorker_WirelessNodeConnections.cs" />
+    <Compile Include="Source\Comp\CompChannelSelector.cs" />
+    <Compile Include="Source\Comp\CompLinkGridMember.cs" />
+    <Compile Include="Source\Comp\CompProperties_BatteryWithBar.cs" />
+    <Compile Include="Source\Comp\CompProperties_ChannelSelector.cs" />
+    <Compile Include="Source\Comp\CompProperties_LinkGridMember.cs" />
+    <Compile Include="Source\Comp\CompProperties_Upgrade.cs" />
+    <Compile Include="Source\Comp\CompProperties_WiredDetonationCrossing.cs" />
+    <Compile Include="Source\Comp\CompProperties_WiredDetonationTransmitter.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Source\Comp\CompProperties_WirelessDetonationGridNode.cs" />
+    <Compile Include="Source\Comp\CompStatBattery.cs" />
+    <Compile Include="Source\Comp\CompStatPower.cs" />
+    <Compile Include="Source\Comp\CompStatPowerIdle.cs" />
+    <Compile Include="Source\Comp\CompStatSolarGenerator.cs" />
+    <Compile Include="Source\Comp\CompUpgrade.cs" />
+    <Compile Include="Source\Comp\CompWiredDetonationCrossing.cs" />
+    <Compile Include="Source\Comp\CompWirelessDetonationGridNode.cs" />
+    <Compile Include="Source\Comp\IPowerUseNotified.cs" />
+    <Compile Include="Source\Comp\StatPart_Upgradeable.cs" />
+    <Compile Include="Source\UI\Dialog_SensorSettings.cs" />
+    <Compile Include="Source\Utils\CachedValue.cs" />
+    <Compile Include="Source\Utils\CustomFactionGoodwillCaps.cs" />
+    <Compile Include="Source\Damage\DamageWorker_SuperEMP.cs" />
+    <Compile Include="Source\Damage\SuperEMPDamageDef.cs" />
+    <Compile Include="Source\Graphic\GraphicData_Blinker.cs" />
+    <Compile Include="Source\Patches\Faction_AffectGoodwillWith_Patch.cs" />
+    <Compile Include="Source\Patches\CultivatedPlants_DeterminePlantDef_Patch.cs" />
+    <Compile Include="Source\Patches\GenLeaving_GetLeaveCalculator_Patch.cs" />
+    <Compile Include="Source\Patches\ThingDef_ConnectToPower_Patch.cs" />
+    <Compile Include="Source\Patches\Thing_DrawExtraSelectionOverlays_Patch.cs" />
+    <Compile Include="Source\Thing\FullDeconstructionRefund.cs" />
+    <Compile Include="Source\Thing\GasCloud_AffectThing.cs" />
+    <Compile Include="Source\Thing\GasCloud_DamageDealer.cs" />
+    <Compile Include="Source\Thing\MoteProperties_GasEffect.cs" />
+    <Compile Include="Source\UI\Alert_DetonatorWireFailure.cs" />
+    <Compile Include="Source\Utils\AutoReplaceWatcher.cs" />
+    <Compile Include="Source\Building\BuildingProperties_DetonatorWire.cs" />
+    <Compile Include="Source\Building\BuildingProperties_RemoteExplosive.cs" />
+    <Compile Include="Source\Building\Building_DetonatorManual.cs" />
+    <Compile Include="Source\Building\Building_DetonatorWire.cs" />
+    <Compile Include="Source\Building\Building_FoamWall.cs" />
+    <Compile Include="Source\Building\Building_MiningExplosive.cs" />
+    <Compile Include="Source\Building\Building_DetonatorTable.cs" />
+    <Compile Include="Source\Building\Building_MiningExplosiveSquare.cs" />
+    <Compile Include="Source\Building\Building_RemoteExplosive.cs" />
+    <Compile Include="Source\Building\Building_RemoteExplosiveEmp.cs" />
+    <Compile Include="Source\Building\Building_FoamBlob.cs" />
+    <Compile Include="Source\UI\Command_ChannelsBasic.cs" />
+    <Compile Include="Source\UI\Command_ChannelsKeypad.cs" />
+    <Compile Include="Source\UI\Command_MouseOverDetector.cs" />
+    <Compile Include="Source\Comp\CompAutoReplaceable.cs" />
+    <Compile Include="Source\Comp\CompChemicalExplosive.cs" />
+    <Compile Include="Source\Comp\CompDetonationGridNode.cs" />
+    <Compile Include="Source\Comp\CompProperties_AutoReplaceable.cs" />
+    <Compile Include="Source\Comp\CompProperties_WiredDetonationSender.cs" />
+    <Compile Include="Source\Comp\CompRoofBreakerExplosive.cs" />
+    <Compile Include="Source\Comp\CompWiredDetonationSender.cs" />
+    <Compile Include="Source\Comp\CompWiredDetonationTransmitter.cs" />
+    <Compile Include="Source\Comp\CompProperties_ChemicalExplosive.cs" />
+    <Compile Include="Source\Comp\CompProperties_WiredDetonationReceiver.cs" />
+    <Compile Include="Source\Comp\CompWiredDetonationReceiver.cs" />
+    <Compile Include="Source\Damage\DamageWorker_FlameChance.cs" />
+    <Compile Include="Source\UI\Designator_SelectDetonatorWire.cs" />
+    <Compile Include="Source\Damage\FlameChanceDamageDef.cs" />
+    <Compile Include="Source\Graphic\InterpolationCurves.cs" />
+    <Compile Include="Source\AI\IPawnDetonateable.cs" />
+    <Compile Include="Source\Graphic\Graphic_SingleWithBase.cs" />
+    <Compile Include="Source\Graphic\Graphic_Variants.cs" />
+    <Compile Include="Source\Hediff\HediffCompProps_SeverityRecovery.cs" />
+    <Compile Include="Source\Hediff\HediffComp_SeverityRecovery.cs" />
+    <Compile Include="Source\Hediff\HediffDef_NonLethal.cs" />
+    <Compile Include="Source\Hediff\Hediff_NonLethal.cs" />
+    <Compile Include="Source\Graphic\IGraphicVariantProvider.cs" />
+    <Compile Include="Source\AI\JobDriver_DryDetonatorWire.cs" />
+    <Compile Include="Source\Thing\GasCloud.cs" />
+    <Compile Include="Source\Thing\GasCloud_HediffGiver.cs" />
+    <Compile Include="Source\Graphic\Graphic_FoamBlob.cs" />
+    <Compile Include="Source\Thing\MoteProperties_GasCloud.cs" />
+    <Compile Include="Source\Graphic\Graphic_GasCloud.cs" />
+    <Compile Include="Source\UI\FloatMenuOptionWithTooltip.cs" />
+    <Compile Include="Source\UI\ITab_ExplosivesBills.cs" />
+    <Compile Include="Source\Comp\CompCustomExplosive.cs" />
+    <Compile Include="Source\Comp\CompMiningExplosive.cs" />
+    <Compile Include="Source\Comp\CompProperties_MiningExplosive.cs" />
+    <Compile Include="Source\Comp\CompRandomResourceLeaver.cs" />
+    <Compile Include="Source\Comp\CompProperties_RandomResourceLeaver.cs" />
+    <Compile Include="Source\Utils\IAutoReplaceExposable.cs" />
+    <Compile Include="Source\Utils\RecipeVariantType.cs" />
+    <Compile Include="Source\Utils\RecipeVariantExtension.cs" />
+    <Compile Include="Source\Utils\MapComponent_RemoteTech.cs" />
+    <Compile Include="Source\Building\PlaceWorker_DetonatorWire.cs" />
+    <Compile Include="Source\Building\PlaceWorker_RoofBreakerExplosive.cs" />
+    <Compile Include="Source\RemoteTechController.cs" />
+    <Compile Include="Source\Resources.cs" />
+    <Compile Include="Source\Graphic\SectionLayer_DetonationGrid.cs" />
+    <Compile Include="Source\Thing\SparkweedPlantDef.cs" />
+    <Compile Include="Source\Thing\Plant_Sparkweed.cs" />
+    <Compile Include="Source\Thing\PortableDetonator.cs" />
+    <Compile Include="Source\Graphic\GraphicData_SidedBase.cs" />
+    <Compile Include="Source\Utils\SwitchableUtility.cs" />
+    <Compile Include="Source\Utils\TraderStockInjectorDef.cs" />
+    <Compile Include="Source\Building\BuildingProperties_FoamBlob.cs" />
+    <Compile Include="Source\AI\WorkGiver_DetonatorWire.cs" />
+    <Compile Include="Source\AI\WorkGiver_SwitchableThing.cs" />
+    <Compile Include="Source\AI\ISwitchable.cs" />
+    <Compile Include="Source\AI\JobDriver_DetonateExplosives.cs" />
+    <Compile Include="Source\AI\JobDriver_SwitchThing.cs" />
+    <Compile Include="Source\Building\PlaceWorker_MiningExplosiveSquare.cs" />
+    <Compile Include="Source\Utils\RemoteTechUtility.cs" />
+    <Compile Include="Source\AI\WorkGiver_IPawnDetonateable.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\HugsLibChecker\HugsLibChecker.csproj">
+      <Project>{a7dea100-952b-4516-b020-b66c8bcb4b50}</Project>
+      <Name>HugsLibChecker</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HugsLib\HugsLib.csproj">
+      <Project>{a5d9bd45-533c-4ca0-9298-8950a3da724c}</Project>
+      <Name>HugsLib</Name>
+      <Private>False</Private>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>RimWorldWin64.exe</PostBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

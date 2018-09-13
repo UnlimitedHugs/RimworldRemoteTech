@@ -1,9 +1,9 @@
 ﻿using Verse;
 
-namespace RemoteExplosives {
-	/* 
-	 * A Hediff Comp that will gradually diminish the severity when it is not actively increasing.
-	 */
+namespace RemoteTech {
+	/// <summary>
+	/// A Hediff Comp that will gradually diminish the severity when it is not actively increasing.
+	/// </summary>
 	public class HediffComp_SeverityRecovery : HediffComp {
 
 		private static readonly string RecoveringStatusSuffix = "HediffRecovery_status_label".Translate();

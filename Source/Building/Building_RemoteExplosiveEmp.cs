@@ -1,9 +1,9 @@
 ﻿using Verse.Sound;
 
-namespace RemoteExplosives {
-	/*
-	 * A remote explosive with a custom wind-up sound.
-	 */
+namespace RemoteTech {
+	/// <summary>
+	/// A remote explosive with a custom wind-up sound.
+	/// </summary>
 	public class Building_RemoteExplosiveEmp : Building_RemoteExplosive {
 		private bool chargeSoundRequested;
 		
@@ -21,7 +21,7 @@ namespace RemoteExplosives {
 		public override void Tick() {
 			base.Tick();
 			if (chargeSoundRequested) {
-				Resources.Sound.RemoteEmpCharge.PlayOneShot(this);
+				Resources.Sound.rxEmpCharge.PlayOneShot(this);
 				chargeSoundRequested = false;
 			}
 		}

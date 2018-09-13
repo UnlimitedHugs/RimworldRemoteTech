@@ -1,0 +1,121 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+	
+	<DetonatorTable_detonate_label>Detonate</DetonatorTable_detonate_label>
+	<DetonatorTable_detonate_desc>Detonates all armed remote explosives on the same channel in range.</DetonatorTable_detonate_desc>
+	<DetonatorTable_inrange>Armed explosives in range</DetonatorTable_inrange>
+	
+	<Detonator_detonatenow>Detonate explosives NOW</Detonator_detonatenow>
+	<Detonator_detonatenow_reserved>(reserved by {0})</Detonator_detonatenow_reserved>
+	<Detonator_detonateNow_label>Detonate now</Detonator_detonateNow_label>
+	
+	<RemoteExplosive_arm_label>Arm</RemoteExplosive_arm_label>
+	<RemoteExplosive_arm_desc>When armed, this explosive can be remotely detonated.</RemoteExplosive_arm_desc>
+	
+	<RemoteExplosive_armed>Armed</RemoteExplosive_armed>
+	<RemoteExplosive_notArmed>Not armed</RemoteExplosive_notArmed>
+	<RemoteExplosive_currentChannel>Current channel: {0}</RemoteExplosive_currentChannel>
+	<RemoteExplosive_channelChanger_label>Channel {0}{1}</RemoteExplosive_channelChanger_label>
+	<RemoteExplosive_channel_switching> (switching)</RemoteExplosive_channel_switching>
+	<RemoteExplosive_detonatorChannelChanger_desc>Sets the detonation channel. Only explosives on the same channel can be detonated.</RemoteExplosive_detonatorChannelChanger_desc>
+	<RemoteExplosive_channelKeypad_buttonTip>{0}\n&lt;color=#888888&gt;Shift-click selects all.&lt;/color&gt;</RemoteExplosive_channelKeypad_buttonTip>
+	
+	<RemoteExplosive_autoReplace_label>Auto replace</RemoteExplosive_autoReplace_label>
+	<RemoteExplosive_autoReplace_desc>If enabled, this building will be automatically re-placed after being destroyed.</RemoteExplosive_autoReplace_desc>
+	
+	<DetonatorTable_component_label>Install channels</DetonatorTable_component_label>
+	<DetonatorTable_component_desc>Install a component to allow detonating explosives on different channels.</DetonatorTable_component_desc>
+	
+	<BillsTab_MainMaterial_label>Main ingredient</BillsTab_MainMaterial_label>
+	<BillsTab_SecondaryMaterial_label>Secondary ingredient</BillsTab_SecondaryMaterial_label>
+	<BillsTab_WorkAmount_label>Work amount</BillsTab_WorkAmount_label>
+	<BillsTab_MaterialButton_component_mode>Components</BillsTab_MaterialButton_component_mode>
+	<BillsTab_MaterialButton_steel_mode>Steel</BillsTab_MaterialButton_steel_mode>
+	<BillsTab_MaterialButton_silver_mode>Silver</BillsTab_MaterialButton_silver_mode>
+	<BillsTab_MaterialButton_sparkpowder_mode>Sparkpowder</BillsTab_MaterialButton_sparkpowder_mode>
+	<BillsTab_Materials_info>These buttons can be used to select the materials that new bills are created with. Non-standard materials increase the amount of work required.</BillsTab_Materials_info>
+	<BillsTab_ResearchRequired>Research required: {0}</BillsTab_ResearchRequired>
+	
+	<FoamBlob_solidify_progress>Solidifying: {0}%</FoamBlob_solidify_progress>
+	
+	<FoamWall_contents>Contents: {0}</FoamWall_contents>
+	<FoamWall_smoothAction_label>Smooth</FoamWall_smoothAction_label>
+	<FoamWall_smoothAction_desc>Smooth this wall to make it more presentable and usable as an interior wall.</FoamWall_smoothAction_desc>
+	
+	<GasCloud_statusReadout_high>{0} ({1:F1}K, {2:F0}% effect)</GasCloud_statusReadout_high>
+	<GasCloud_statusReadout_low>{0} ({1:F0}, {2:F0}% effect)</GasCloud_statusReadout_low>
+	
+	<HediffRecovery_status_label>recovering</HediffRecovery_status_label>
+	
+	<PortableDetonator_detonateChannel_label>Detonate (channel {0})</PortableDetonator_detonateChannel_label>
+	<PortableDetonator_detonateChannel_desc>Detonates all armed explosives in range on the current channel or on channel 1 if not upgraded.</PortableDetonator_detonateChannel_desc>
+	<PortableDetonator_detonate_uses>Uses left: {0}</PortableDetonator_detonate_uses>
+	<PortableDetonator_broke_msg>The Portable Detonator ran out of battery power.</PortableDetonator_broke_msg>
+	
+	<Detonator_notargets>Cannot detonate- no armed explosives in range on this channel.</Detonator_notargets>
+	
+	<DetonatorManual_detonate_label>Detonate</DetonatorManual_detonate_label>
+	<DetonatorManual_detonate_desc>Detonates all explosives connected to the same detonator wire.</DetonatorManual_detonate_desc>
+		
+	<Wire_inspect_wet>{0}% wet</Wire_inspect_wet>
+	<Wire_inspect_dry>Dry</Wire_inspect_dry>
+	<Wire_inspect_covered>covered</Wire_inspect_covered>
+	<Wire_inspect_exposed>exposed</Wire_inspect_exposed>
+	<Wire_dry_label>Dry off</Wire_dry_label>
+	<Wire_dry_desc>Calls a colonist to dry this wire section to prevent failures when it is used.</Wire_dry_desc>
+	
+	<Alert_wireFailure_label>Wire failure</Alert_wireFailure_label>
+	<Alert_wireFailure_desc>A detonator wire failed due to being wet and burned out.</Alert_wireFailure_desc>
+	
+	<WireDesignator_label>Det. wire select</WireDesignator_label>
+	<WireDesignator_desc>Selects only Detonator Wire placed in an area. Useful for maintenance and deconstruction. Hold Shift to add to current selection.</WireDesignator_desc>
+	
+	<Setting_forbidReplaced_label>Forbid auto-replaced blueprints</Setting_forbidReplaced_label>
+	<Setting_forbidReplaced_desc>When enabled, automatically placed blueprints will stay forbidden for a given number of seconds to keep colonists out of danger.</Setting_forbidReplaced_desc>
+	<Setting_forbidTimeout_label>Blueprints forbidden time</Setting_forbidTimeout_label>
+	<Setting_forbidTimeout_desc>How long an auto-replaced blueprint should stay forbidden (in seconds).</Setting_forbidTimeout_desc>
+	<Setting_autoArmCombat_label>Auto-arm combat explosives</Setting_autoArmCombat_label>
+	<Setting_autoArmCombat_desc>When enabled, combat explosives will be automatically armed when they are deployed.</Setting_autoArmCombat_desc>
+	<Setting_autoArmMining_label>Auto-arm mining explosives</Setting_autoArmMining_label>
+	<Setting_autoArmMining_desc>When enabled, mining explosives will be automatically armed when they are deployed.</Setting_autoArmMining_desc>
+	<Setting_autoArmUtility_label>Auto-arm utility explosives</Setting_autoArmUtility_label>
+	<Setting_autoArmUtility_desc>When enabled, utility explosives will be automatically armed when they are deployed.</Setting_autoArmUtility_desc>
+	
+	<GasVent_ventedPerSecond>Venting capacity: {0} per second</GasVent_ventedPerSecond>
+	<GasVent_blocked>Blocked</GasVent_blocked>
+	
+	<Upgrade_statModifierCategory>Completed upgrades</Upgrade_statModifierCategory>
+	<Upgrade_labelPrefix>Upgrade: {0}</Upgrade_labelPrefix>
+	<Upgrade_descriptionEffects>Effects: </Upgrade_descriptionEffects>
+	<Upgrade_descriptionCost>Required materials: </Upgrade_descriptionCost>
+	<Upgrade_prerequisites>Prerequisites: </Upgrade_prerequisites>
+	<Upgrade_prerequisitesResearch>research ({0})</Upgrade_prerequisitesResearch>
+	<Upgrade_prerequisitesUpgrade>upgrade ({0})</Upgrade_prerequisitesUpgrade>
+	<Upgrade_prerequisitesSkill>construction skill ({0})</Upgrade_prerequisitesSkill>
+	<Upgrade_workProgress>Work progress: {0:F0}%</Upgrade_workProgress>
+	<Upgrade_deliveredIngredients>Stored things: {0}</Upgrade_deliveredIngredients>
+	<Upgrade_installedUpgrades>Installed upgrades: </Upgrade_installedUpgrades>
+	<Upgrade_missingMaterials>need {0}x {1}</Upgrade_missingMaterials>
+	<Upgrade_uneqip_message>Remove from inventory to upgrade.</Upgrade_uneqip_message>
+	<Upgrade_needSkills_message>A colonist with a minimum building skill of {0} is needed to install this upgrade.</Upgrade_needSkills_message>
+	
+	<proxSensor_message>Proximity sensor detected a target: {0}</proxSensor_message>
+	<proxSensor_messageName>Proximity sensor "{0}" detected a target: {1}</proxSensor_messageName>
+	<proxSensor_cooldown>Cooldown: {0:F1} seconds</proxSensor_cooldown>
+	<proxSensor_AIStatusCaption>AI status: {0}</proxSensor_AIStatusCaption>
+	<proxSensor_AIStatusValue>Not evil</proxSensor_AIStatusValue>
+	<proxSensor_settings>Sensor settings</proxSensor_settings>
+	<proxSensor_sName>Sensor name</proxSensor_sName>
+	<proxSensor_sCooldown>Detect again delay (seconds)</proxSensor_sCooldown>
+	<proxSensor_sSendMessage>Notify on detection</proxSensor_sSendMessage>
+	<proxSensor_sMessageSound>Alternative message sound</proxSensor_sMessageSound>
+	<proxSensor_sSendWired>Detonate on detection (wire)</proxSensor_sSendWired>
+	<proxSensor_sSendWireless>Detonate on detection (wireless)</proxSensor_sSendWireless>
+	<proxSensor_sDetectAnimals>Detect animals</proxSensor_sDetectAnimals>
+	<proxSensor_sDetectFriendlies>Detect friendlies</proxSensor_sDetectFriendlies>
+	<proxSensor_sDetectEnemies>Detect enemies</proxSensor_sDetectEnemies>
+	<proxSensor_sWirelessUpgrade>Wireless upgrade:</proxSensor_sWirelessUpgrade>
+	<proxSensor_sAIUpgrade>AI upgrade:</proxSensor_sAIUpgrade>
+	
+	<buildGizmo_label>Place {0}</buildGizmo_label>
+</LanguageData>

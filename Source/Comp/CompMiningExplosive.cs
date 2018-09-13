@@ -5,10 +5,10 @@ using UnityEngine;
 using Verse;
 using Verse.Sound;
 
-namespace RemoteExplosives {
-	/* 
-	 * An explosive with high power against rocks. Will break rocks within the defined area.
-	 */
+namespace RemoteTech {
+	/// <summary>
+	/// An explosive with high power against rocks. Will break rocks within the defined area.
+	/// </summary>
 	public class CompMiningExplosive : CompCustomExplosive {
 		private const int MinAffectedCellsToTriggerCaveInSound = 6;
 
@@ -50,7 +50,7 @@ namespace RemoteExplosives {
 				}
 			}
 			if (affectedMineables >= MinAffectedCellsToTriggerCaveInSound) {
-				Resources.Sound.RemoteMiningCavein.PlayOneShot(new TargetInfo(parentPosition, parentMap));
+				Resources.Sound.rxMiningCavein.PlayOneShot(new TargetInfo(parentPosition, parentMap));
 			}
 		}
 
@@ -65,7 +65,7 @@ namespace RemoteExplosives {
 				if (rockBuildingDef.isResourceRock && mineable != null) {
 					// resource rocks
 					breakingPowerRemaining -= thing.HitPoints * MiningProps.resourceBreakingCost;
-					DamageResourceHolder(thing, explosive.GetStatValue(Resources.Stat.ExplosiveMiningYield));
+					DamageResourceHolder(thing, explosive.GetStatValue(Resources.Stat.rxExplosiveMiningYield));
 					BreakMineableAndYieldResources(mineable);
 					affected = true;
 				} else if (rockBuildingDef.isNaturalRock) {
@@ -76,7 +76,7 @@ namespace RemoteExplosives {
 					if (thing.def.filthLeaving != null) {
 						FilthMaker.MakeFilth(thing.Position, map, thing.def.filthLeaving, Rand.RangeInclusive(1, 3));
 					}
-					if (rockBuildingDef.mineableThing != null && Rand.Value < explosive.GetStatValue(Resources.Stat.ExplosiveChunkYield)) {
+					if (rockBuildingDef.mineableThing != null && Rand.Value < explosive.GetStatValue(Resources.Stat.rxExplosiveChunkYield)) {
 						var rockDrop = ThingMaker.MakeThing(rockBuildingDef.mineableThing);
 						if (rockDrop.def.stackLimit == 1) {
 							rockDrop.stackCount = 1;
@@ -95,7 +95,7 @@ namespace RemoteExplosives {
 				// trees
 				breakingPowerRemaining -= thing.HitPoints * MiningProps.woodBreakingCost;
 				var tree = (Plant)thing;
-				DamageResourceHolder(tree, explosive.GetStatValue(Resources.Stat.ExplosiveWoodYield));
+				DamageResourceHolder(tree, explosive.GetStatValue(Resources.Stat.rxExplosiveWoodYield));
 				var yield = tree.YieldNow();
 				tree.PlantCollected();
 				if (yield > 0) {
@@ -110,13 +110,13 @@ namespace RemoteExplosives {
 		// this affects the amount of ore drops
 		private void DamageResourceHolder(Thing thing, float efficiency) {
 			var damage = thing.MaxHitPoints * (1 - efficiency);
-			thing.TakeDamage(new DamageInfo(DamageDefOf.Bomb, (int)damage, -1F, parent));
+			thing.TakeDamage(new DamageInfo(DamageDefOf.Bomb, (int)damage, 0F, -1F, parent));
 		}
 
 		private void BreakMineableAndYieldResources(Mineable mineable) {
 			// swiped from Mineable.TrySpawnYield
 			// the vanilla system is hardcoded to work for pawns, so we implement our own copy
-			if (mineable == null || mineable.def == null || mineable.def.building == null || mineable.def.building.mineableThing == null) {
+			if (mineable?.def?.building?.mineableThing == null) {
 				return;
 			}
 			var pos = mineable.Position;

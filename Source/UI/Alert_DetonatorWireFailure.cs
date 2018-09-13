@@ -1,7 +1,7 @@
 ﻿using RimWorld;
 using Verse;
 
-namespace RemoteExplosives {
+namespace RemoteTech {
 	public class Alert_DetonatorWireFailure : Alert_Critical {
 		private const float AutoExpireInSeconds = 8f;
 

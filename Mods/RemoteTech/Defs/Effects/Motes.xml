@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+	
+	<ThingDef Name="rxMoteBase" Abstract="True">
+		<thingClass>MoteThrown</thingClass>
+		<label>Mote</label>
+		<category>Mote</category>
+		<graphicData>
+			<graphicClass>Graphic_Mote</graphicClass>
+			<shaderType>Mote</shaderType>
+		</graphicData>
+		<altitudeLayer>MoteLow</altitudeLayer>
+		<tickerType>Normal</tickerType>
+		<useHitPoints>false</useHitPoints>
+		<isSaveable>false</isSaveable>
+		<rotatable>false</rotatable>
+	</ThingDef>
+	
+	<ThingDef ParentName="rxMoteBase">
+		<defName>rxMote_SpreadingSparks</defName>
+		<graphicData>
+			<texPath>Things/Mote/MicroSparks</texPath>
+			<shaderType>MoteGlow</shaderType>
+		</graphicData>
+		<altitudeLayer>MoteOverhead</altitudeLayer>
+		<mote>
+			<growthRate>3</growthRate>
+			<fadeInTime>0.1</fadeInTime>
+			<solidTime>0.1</solidTime>
+			<fadeOutTime>0.2</fadeOutTime>
+		</mote>
+	</ThingDef>
+	
+</Defs>

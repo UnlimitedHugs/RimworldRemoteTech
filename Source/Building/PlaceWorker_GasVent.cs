@@ -1,13 +1,13 @@
 ﻿using UnityEngine;
 using Verse;
 
-namespace RemoteExplosives {
+namespace RemoteTech {
 	public class PlaceWorker_GasVent : PlaceWorker {
 		private readonly Color DefaultArrowColor = Color.white;
 		private readonly Color BlockedArrowColor = Color.red;
 
-		public override void DrawGhost(ThingDef def, IntVec3 center, Rot4 rot) {
-			var map = Find.VisibleMap;
+		public override void DrawGhost(ThingDef def, IntVec3 center, Rot4 rot, Color ghostCol) {
+			var map = Find.CurrentMap;
 			if (map == null) return;
 			var targetCell = center + IntVec3Utility.RotatedBy(IntVec3.North, rot);
 			var sourceCell = center + IntVec3Utility.RotatedBy(IntVec3.South, rot);
@@ -19,7 +19,7 @@ namespace RemoteExplosives {
 		}
 
 		private void DrawArrow(IntVec3 pos, Rot4 rot, Color color) {
-			var material = MaterialPool.MatFrom(Resources.Textures.gas_vent_arrow, ShaderDatabase.TransparentPostLight, color);
+			var material = MaterialPool.MatFrom(Resources.Textures.rxGasVentArrow, ShaderDatabase.TransparentPostLight, color);
 			Graphics.DrawMesh(MeshPool.plane10, pos.ToVector3ShiftedWithAltitude(AltitudeLayer.MetaOverlays), rot.AsQuat, material, 0);
 		}
 	}

@@ -1,12 +1,8 @@
 ﻿// ReSharper disable UnassignedField.Global
 using RimWorld;
-using UnityEngine;
 
-namespace RemoteExplosives {
+namespace RemoteTech {
 	public class BuildingProperties_RemoteExplosive : BuildingProperties {
 		public RemoteExplosiveType explosiveType;
-		public Vector3 blinkerOffset;
-		public int blinkerIntervalArmed = 100;
-		public int blinkerIntervalLit = 7;
 	}
 }

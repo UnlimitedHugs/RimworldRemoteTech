@@ -3,14 +3,11 @@ using UnityEngine;
 using Verse;
 using Verse.Sound;
 
-namespace RemoteExplosives {
-	/* 
-	 * Initiates a detonation signal carried by wire when triggered by a colonist.
-	 */
-	public class Building_DetonatorManual : Building, IGraphicVariantProvider, IPawnDetonateable {
-		private static readonly string DetonateButtonLabel = "DetonatorManual_detonate_label".Translate();
-		private static readonly string DetonateButtonDesc = "DetonatorManual_detonate_desc".Translate();
-
+namespace RemoteTech {
+	/// <summary>
+	/// Initiates a detonation signal carried by wire when triggered by a colonist.
+	/// </summary>
+	public class Building_DetonatorManual : Building, IGraphicVariantProvider, IPawnDetonateable, IRedButtonFeverTarget {
 		private enum VisualVariant {
 			PlungerUp = 0,
 			PlungerDown = 1
@@ -39,7 +36,7 @@ namespace RemoteExplosives {
 			wantDetonation = false;
 			currentVariant = VisualVariant.PlungerDown;
 			plungerExpireTime = Time.realtimeSinceStartup + PlungerDownTime;
-			Resources.Sound.RemoteDetonatorLever.PlayOneShot(new TargetInfo(Position, Map));
+			Resources.Sound.rxDetonatorLever.PlayOneShot(new TargetInfo(Position, Map));
 			var transmitterComp = GetComp<CompWiredDetonationSender>();
 			if(transmitterComp != null) transmitterComp.SendNewSignal();
 		}
@@ -50,23 +47,27 @@ namespace RemoteExplosives {
 		}
 
 		public override IEnumerable<Gizmo> GetGizmos() {
-			var detonateGizmo = new Command_Toggle {
-				toggleAction = DetonateGizmoAction,
-				isActive = () => wantDetonation,
-				icon = Resources.Textures.UI_Trigger,
-				defaultLabel = DetonateButtonLabel,
-				defaultDesc = DetonateButtonDesc,
-				hotKey = Resources.KeyBinging.RemoteTableDetonate
-			};
-			yield return detonateGizmo;
+			Command detonate;
+			if (CanDetonateImmediately()) {
+				detonate = new Command_Action {
+					action = DoDetonation,
+					defaultLabel = "Detonator_detonateNow_label".Translate(),
+				};
+			} else {
+				detonate = new Command_Toggle {
+					toggleAction = DetonateToggleAction,
+					isActive = () => wantDetonation,
+					defaultLabel = "DetonatorManual_detonate_label".Translate(),
+				};
+			}
+			detonate.icon = Resources.Textures.rxUIDetonateManual;
+			detonate.defaultDesc = "DetonatorManual_detonate_desc".Translate();
+			detonate.hotKey = Resources.KeyBinging.rxRemoteTableDetonate;
+			yield return detonate;
 
 			foreach (var g in base.GetGizmos()) {
 				yield return g;
 			}
-		}
-
-		private void DetonateGizmoAction() {
-			wantDetonation = !wantDetonation;
 		}
 
 		public override void Draw() {
@@ -79,12 +80,33 @@ namespace RemoteExplosives {
 
 		// quick detonation option for drafted pawns
 		public override IEnumerable<FloatMenuOption> GetFloatMenuOptions(Pawn selPawn) {
-			var opt = RemoteExplosivesUtility.TryMakeDetonatorFloatMenuOption(selPawn, this);
+			var opt = RemoteTechUtility.TryMakeDetonatorFloatMenuOption(selPawn, this);
 			if (opt != null) yield return opt;
 
 			foreach (var option in base.GetFloatMenuOptions(selPawn)) {
 				yield return option;
 			}
+		}
+
+		public bool RedButtonFeverCanInteract {
+			get { return true; }
+		}
+
+		public void RedButtonFeverDoInteraction(Pawn p) {
+			DoDetonation();
+		}
+
+		private void DetonateToggleAction() {
+			wantDetonation = !wantDetonation;
+		}
+
+		private bool CanDetonateImmediately() {
+			// a drafted pawn in any of the adjacent cells allows for immediate detonation
+			for (var i = 0; i < GenAdj.AdjacentCellsAround.Length; i++) {
+				var manningPawn = (Position + GenAdj.AdjacentCellsAround[i]).GetFirstPawn(Map);
+				if (manningPawn != null && manningPawn.Drafted) return true;
+			}
+			return false;
 		}
 	}
 }

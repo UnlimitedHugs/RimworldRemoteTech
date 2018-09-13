@@ -1,6 +1,6 @@
 ﻿using RimWorld;
 
-namespace RemoteExplosives {
+namespace RemoteTech {
 	public class CompProperties_MiningExplosive : CompProperties_Explosive {
 		public float miningRadius = 2f;
 		public float breakingPower = 68400;

@@ -1,8 +1,7 @@
-﻿using Harmony;
-using RimWorld;
+﻿using RimWorld;
 using Verse;
 
-namespace RemoteExplosives {
+namespace RemoteTech {
 	/// <summary>
 	/// Enhanced EMP damage with custom duration and the ability to incapacitate a mechanical pawn at low health
 	/// </summary>
@@ -13,11 +12,11 @@ namespace RemoteExplosives {
 			// duplicate vanilla emp behavior, since the original def is hardcoded
 			if (pawn != null && !pawn.RaceProps.IsFlesh && !pawn.health.Dead && !pawn.health.Downed) {
 				var empDef = def as SuperEMPDamageDef ?? new SuperEMPDamageDef();
-				if (pawn.stances != null && pawn.stances.stunner != null) {
+				if (pawn.stances?.stunner != null) {
 					pawn.stances.stunner.Notify_DamageApplied(new DamageInfo(DamageDefOf.EMP, dinfo.Amount), true);
 				}
 				if (pawn.health.summaryHealth.SummaryHealthPercent < empDef.incapHealthThreshold && Rand.Chance(empDef.incapChance)) {
-					AccessTools.Method(typeof(Pawn_HealthTracker), "MakeDowned").Invoke(pawn.health, new object[]{dinfo, null});
+					pawn.Kill(dinfo);
 				}
 			}
 			return base.Apply(dinfo, victim);

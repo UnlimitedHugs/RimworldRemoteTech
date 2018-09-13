@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+	<DesignationDef>
+		<defName>rxSwitchThing</defName>
+		<texturePath>Designations/Flick</texturePath>
+		<targetType>Thing</targetType>
+		<designateCancelable>false</designateCancelable>
+	</DesignationDef>
+	
+	<DesignationDef>
+		<defName>rxDetonatorWireDryOff</defName>
+		<texturePath>rxDesignationDryOff</texturePath>
+		<targetType>Thing</targetType>
+		<designateCancelable>false</designateCancelable>
+	</DesignationDef>
+	
+	<DesignationDef>
+		<defName>rxFoamWallSmooth</defName>
+		<texturePath>Designations/SmoothSurface</texturePath>
+		<targetType>Thing</targetType>
+		<designateCancelable>true</designateCancelable>
+	</DesignationDef>
+	
+	<DesignationDef>
+		<defName>rxInstallUpgrade</defName>
+		<texturePath>rxDesignationUpgrade</texturePath>
+		<targetType>Thing</targetType>
+		<designateCancelable>false</designateCancelable>
+	</DesignationDef>
+</Defs>

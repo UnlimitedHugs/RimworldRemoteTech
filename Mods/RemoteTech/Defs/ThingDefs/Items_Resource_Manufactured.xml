@@ -1,0 +1,312 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+	
+	<ThingDef Name="rxBaseExplosivePart" Abstract="True">
+		<thingClass>ThingWithComps</thingClass>
+		<label>unspecified resource</label>
+		<category>Item</category>
+		<resourceReadoutPriority>Middle</resourceReadoutPriority>
+		<useHitPoints>true</useHitPoints>
+		<selectable>true</selectable>
+		<altitudeLayer>Item</altitudeLayer>
+		<comps>
+			<li>
+				<compClass>CompForbiddable</compClass>
+			</li>
+		</comps>
+		<alwaysHaulable>true</alwaysHaulable>
+		<drawGUIOverlay>true</drawGUIOverlay>
+		<rotatable>false</rotatable>
+		<pathCost>15</pathCost>    
+		<soundInteract>Metal_Drop</soundInteract>
+		<soundDrop>Standard_Drop</soundDrop>
+		<tickerType>Normal</tickerType>
+		<stackLimit>10</stackLimit>
+		<statBases>
+			<MaxHitPoints>70</MaxHitPoints>
+			<Flammability>1.0</Flammability>
+			<DeteriorationRate>0</DeteriorationRate>
+		</statBases>
+		<thingCategories>
+			<li>rxExplosives</li>
+		</thingCategories>
+	</ThingDef>
+	
+	<ThingDef Name="rxBaseExplosiveIngredient" ParentName="rxBaseExplosivePart" Abstract="True">
+		<thingCategories>
+			<li>rxExplosivesIngredients</li>
+		</thingCategories>
+		<soundInteract>Standard_Drop</soundInteract>
+		<stackLimit>75</stackLimit>
+	</ThingDef>
+	
+	<ThingDef ParentName="rxBaseExplosivePart">
+		<defName>rxRemoteBomb</defName>
+		<label>remote explosive</label>
+		<description>Explosive trap with a remote trigger.
+Place as a building from the Explosives menu to use.</description>
+		<graphicData>
+			<texPath>rxCharge</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+		</graphicData>
+		<comps>
+			<li Class="RemoteTech.CompProperties_BuildGizmo"/>
+			<li Class="CompProperties_Explosive">
+				<compClass>CompExplosive</compClass>
+				<explosiveRadius>2.9</explosiveRadius>
+				<explosiveDamageType>Bomb</explosiveDamageType>
+				<explosiveExpandPerStackcount>0.4</explosiveExpandPerStackcount>
+				<startWickHitPointsPercent>0.333</startWickHitPointsPercent>
+				<wickTicks>
+					<min>10</min>
+					<max>30</max>
+				</wickTicks>
+			</li>
+		</comps>
+		<statBases>
+			<MarketValue>80</MarketValue>
+			<Mass>3</Mass>
+		</statBases>
+	</ThingDef>
+	
+	<ThingDef ParentName="rxBaseExplosivePart">
+		<defName>rxRemoteFireBomb</defName>
+		<label>incendiary remote explosive</label>
+		<description>A canister filled with flammable chemicals with a radio trigger.
+Place as a building from the Explosives menu to use.</description>
+		<graphicData>
+			<texPath>rxChargeIncendiary</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+		</graphicData>
+		<comps>
+			<li Class="RemoteTech.CompProperties_BuildGizmo"/>
+			<li Class="CompProperties_Explosive">
+				<compClass>CompExplosive</compClass>
+				<explosiveRadius>2.9</explosiveRadius>
+				<explosiveDamageType>Flame</explosiveDamageType>
+				<explosiveExpandPerStackcount>0.4</explosiveExpandPerStackcount>
+				<startWickHitPointsPercent>0.333</startWickHitPointsPercent>
+				<wickTicks>
+					<min>10</min>
+					<max>30</max>
+				</wickTicks>
+			</li>
+		</comps>
+		<statBases>
+			<MarketValue>80</MarketValue>
+			<Mass>3</Mass>
+		</statBases>
+	</ThingDef>
+	
+	<ThingDef ParentName="rxBaseExplosivePart">
+		<defName>rxMiningExplosiveComponent</defName>
+		<label>mining explosive</label>
+		<description>The main part of a remote mining explosive.
+Place as a building from the Explosives menu to use.</description>
+		<graphicData>
+			<texPath>rxMiningExplosivePart</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+		</graphicData>
+		<comps>
+			<li Class="RemoteTech.CompProperties_BuildGizmo"/>
+			<li Class="RemoteTech.CompProperties_MiningExplosive">
+				<miningRadius>2.9</miningRadius>
+				<explosiveRadius>2.9</explosiveRadius>
+				<explosiveDamageType>Bomb</explosiveDamageType>
+				<explosiveExpandPerStackcount>0.5</explosiveExpandPerStackcount>
+				<startWickHitPointsPercent>0.333</startWickHitPointsPercent>
+				<wickTicks>
+					<min>30</min>
+					<max>60</max>
+				</wickTicks>
+			</li>
+		</comps>
+		<statBases>
+			<MarketValue>65</MarketValue>
+			<rxExplosiveChunkYield>.5</rxExplosiveChunkYield>
+			<rxExplosiveMiningYield>.75</rxExplosiveMiningYield>
+			<rxExplosiveWoodYield>.70</rxExplosiveWoodYield>
+			<Mass>3</Mass>
+		</statBases>
+	</ThingDef>
+	
+	<ThingDef ParentName="rxBaseExplosivePart">
+		<defName>rxRemoteEmpBomb</defName>
+		<label>EMP remote explosive</label>
+		<description>A single-use electromagnetic pulse generator.
+Place as a building from the Explosives menu to use.</description>
+		<graphicData>
+			<texPath>rxChargeEmp</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+		</graphicData>
+		<statBases>
+			<MaxHitPoints>120</MaxHitPoints>
+			<MarketValue>360</MarketValue>
+			<Mass>5</Mass>
+		</statBases>
+		<comps>
+			<li Class="RemoteTech.CompProperties_BuildGizmo"/>
+		</comps>
+	</ThingDef>
+	
+	<ThingDef ParentName="rxBaseExplosivePart">
+		<defName>rxRemoteFoamCan</defName>
+		<label>sealing foam canister</label>
+		<description>A remotely triggered canister containing sealing foam.
+Place as a building from the Explosives menu to use.</description>
+		<graphicData>
+			<texPath>rxCanFoam</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+		</graphicData>
+		<comps>
+			<li Class="RemoteTech.CompProperties_BuildGizmo"/>
+			<li Class="RemoteTech.CompProperties_ChemicalExplosive">
+				<compClass>RemoteTech.CompChemicalExplosive</compClass>
+				<wickTicks>
+					<min>50</min>
+					<max>50</max>
+				</wickTicks>
+				<explosiveRadius>0</explosiveRadius>
+				<startWickHitPointsPercent>.2</startWickHitPointsPercent>
+				<breakSound>rxGlassBreak</breakSound>
+				<spawnThingDef>rxWallFoamBlob</spawnThingDef>
+				<numFoamBlobs>5</numFoamBlobs>
+			</li>
+		</comps>
+		<statBases>
+			<MarketValue>150</MarketValue>
+			<Mass>2</Mass>
+		</statBases>
+	</ThingDef>
+	
+	<ThingDef ParentName="rxBaseExplosivePart">
+		<defName>rxRemoteSleepingGasCan</defName>
+		<label>sleeping gas canister</label>
+		<description>A remotely triggered canister containing sleeping gas.
+Place as a building from the Explosives menu to use.</description>
+		<graphicData>
+			<texPath>rxCanSleepingGas</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+		</graphicData>
+		<comps>
+			<li Class="RemoteTech.CompProperties_BuildGizmo"/>
+			<li Class="RemoteTech.CompProperties_ChemicalExplosive">
+				<compClass>RemoteTech.CompChemicalExplosive</compClass>
+				<wickTicks>
+					<min>50</min>
+					<max>50</max>
+				</wickTicks>
+				<explosiveRadius>0</explosiveRadius>
+				<startWickHitPointsPercent>.2</startWickHitPointsPercent>
+				<breakSound>rxGlassBreak</breakSound>
+				<spawnThingDef>rxGas_Sleeping</spawnThingDef>
+				<gasConcentration>80000</gasConcentration>
+			</li>
+		</comps>
+		<statBases>
+			<MarketValue>150</MarketValue>
+			<Mass>2</Mass>
+		</statBases>
+	</ThingDef>
+	
+	<ThingDef ParentName="rxBaseExplosivePart">
+		<defName>rxRemoteRefinedSleepingGasCan</defName>
+		<label>refined sleeping gas canister</label>
+		<description>A remotely triggered canister filled with refined sleeping gas. Significantly more potent than common sleeping gas.
+Place as a building from the Explosives menu to use.</description>
+		<graphicData>
+			<texPath>rxCanSleepingGasRefined</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+		</graphicData>
+		<comps>
+			<li Class="RemoteTech.CompProperties_BuildGizmo"/>
+			<li Class="RemoteTech.CompProperties_ChemicalExplosive">
+				<compClass>RemoteTech.CompChemicalExplosive</compClass>
+				<wickTicks>
+					<min>50</min>
+					<max>50</max>
+				</wickTicks>
+				<explosiveRadius>0</explosiveRadius>
+				<startWickHitPointsPercent>.2</startWickHitPointsPercent>
+				<breakSound>rxGlassBreak</breakSound>
+				<spawnThingDef>rxGas_SleepingRefined</spawnThingDef>
+				<gasConcentration>80000</gasConcentration>
+			</li>
+		</comps>
+		<statBases>
+			<MarketValue>300</MarketValue>
+			<Mass>2</Mass>
+		</statBases>
+	</ThingDef>
+
+	<ThingDef ParentName="rxBaseExplosivePart">
+		<defName>rxExplosivePouch</defName>
+		<label>explosive pouch</label>
+		<description>A primitive explosive charge made from volatile powder mixture wrapped in animal leather.
+Place as a building from the Explosives menu to use.</description>
+		<graphicData>
+			<texPath>rxChargeMakeshift</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+		</graphicData>
+		<comps>
+			<li Class="RemoteTech.CompProperties_BuildGizmo"/>
+			<li Class="CompProperties_Explosive">
+				<explosiveRadius>2.5</explosiveRadius>
+				<explosiveDamageType>rxFlameBomb</explosiveDamageType>
+				<explosiveExpandPerStackcount>0.4</explosiveExpandPerStackcount>
+				<startWickHitPointsPercent>0.3</startWickHitPointsPercent>
+				<wickTicks>
+					<min>10</min>
+					<max>30</max>
+				</wickTicks>
+			</li>
+		</comps>
+		<statBases>
+			<Mass>4</Mass>
+		</statBases>
+	</ThingDef>
+	
+	<ThingDef ParentName="rxBaseExplosiveIngredient">
+		<defName>rxSparkpowder</defName>
+		<label>Sparkpowder</label>
+		<description>Harvested from Sparkweed plants and specially preserved to prevent spontaneous combustion. Keep away from fire.</description>
+		<graphicData>
+			<texPath>rxSparkpowder</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<drawSize>(.8, .8)</drawSize>
+		</graphicData>
+		<comps>
+			<li Class="CompProperties_Explosive">
+				<explosiveRadius>1</explosiveRadius>
+				<explosiveDamageType>Flame</explosiveDamageType>
+				<explosiveExpandPerStackcount>0.1</explosiveExpandPerStackcount>
+				<startWickHitPointsPercent>1</startWickHitPointsPercent>
+				<chanceNeverExplodeFromDamage>0.25</chanceNeverExplodeFromDamage>
+				<startWickOnDamageTaken>Flame</startWickOnDamageTaken>
+				<wickTicks>
+					<min>90</min>
+					<max>180</max>
+				</wickTicks>
+			</li>
+		</comps>
+		<statBases>
+			<Mass>.1</Mass>
+		</statBases>
+	</ThingDef>
+	
+	<ThingDef ParentName="rxBaseExplosiveIngredient">
+		<defName>rxCharcoal</defName>
+		<label>crushed charcoal</label>
+		<description>An efficient fuel made by burning wood in low-oxygen conditions. Becomes a great additive for explosives when crushed into powder.
+Can be made at a campfire or a fueled stove.</description>
+		<graphicData>
+			<texPath>rxCharcoal</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+		</graphicData>
+		<statBases>
+			<Flammability>3.0</Flammability>
+			<Mass>.1</Mass>
+		</statBases>
+	</ThingDef>
+	
+</Defs>

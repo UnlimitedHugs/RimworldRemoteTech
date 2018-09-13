@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+	
+	<DamageDef>
+		<defName>rxFoamWallStuck</defName>
+		<label>trapped</label>
+		<workerClass>DamageWorker_AddInjury</workerClass>
+		<hasForcefulImpact>false</hasForcefulImpact>
+		<deathMessage>{0} died in a solidifying foam wall.</deathMessage>
+		<hediff>Misc</hediff>
+		<harmsHealth>true</harmsHealth>
+		<makesBlood>false</makesBlood>
+		<externalViolence>false</externalViolence>
+	</DamageDef>
+	
+	<DamageDef Class="RemoteTech.FlameChanceDamageDef">
+		<defName>rxFlameBomb</defName>
+		<workerClass>RemoteTech.DamageWorker_FlameChance</workerClass>
+		<label>flame bomb</label>
+		<hasForcefulImpact>false</hasForcefulImpact>
+		<makesBlood>false</makesBlood>
+		<canInterruptJobs>false</canInterruptJobs>
+		<externalViolence>true</externalViolence>
+		<isExplosive>true</isExplosive>
+		<deathMessage>{0} has burned to death.</deathMessage>
+		<hediff>Burn</hediff>
+		<harmAllLayersUntilOutside>true</harmAllLayersUntilOutside>
+		<armorCategory>Heat</armorCategory>
+		<soundExplosion>Explosion_Flame</soundExplosion>
+		<defaultStoppingPower>0.3</defaultStoppingPower>
+		<defaultArmorPenetration>0.05</defaultArmorPenetration>
+		<explosionAffectOutsidePartsOnly>true</explosionAffectOutsidePartsOnly>
+		<explosionPlantDamageFactor>2</explosionPlantDamageFactor>
+		<explosionBuildingDamageFactor>1.5</explosionBuildingDamageFactor>
+		<defaultDamage>50</defaultDamage>
+		<explosionHeatEnergyPerCell>10</explosionHeatEnergyPerCell>
+		<explosionCellMote>Mote_BlastFlame</explosionCellMote>
+		<explosionColorCenter>(1, 0.7, 0.7)</explosionColorCenter>
+		<explosionColorEdge>(1, 1, 0.7)</explosionColorEdge>
+		<combatLogRules>Damage_Flame</combatLogRules>
+		<flameChance>0.2</flameChance>
+	</DamageDef>
+	
+	<DamageDef Class="RemoteTech.SuperEMPDamageDef">
+		<defName>rxSuperEMP</defName>
+		<label>EMP</label>
+		<externalViolence>true</externalViolence>
+		<deathMessage>{0} has been EMPed to death.</deathMessage>
+		<harmsHealth>false</harmsHealth>
+		<makesBlood>false</makesBlood>
+		<impactSoundType>Electric</impactSoundType>
+		<defaultDamage>75</defaultDamage>
+		<explosionSnowMeltAmount>0</explosionSnowMeltAmount>
+		<explosionCellMote>Mote_BlastEMP</explosionCellMote>
+		<explosionColorEdge>(0.8, 0.8, 0.8, 0.8)</explosionColorEdge>
+		<explosionInteriorMote>Mote_ElectricalSpark</explosionInteriorMote>
+		<soundExplosion>Explosion_EMP</soundExplosion>
+		<combatLogRules>Damage_EMP</combatLogRules>
+		<incapHealthThreshold>.33</incapHealthThreshold>
+		<incapChance>.5</incapChance>
+	</DamageDef>
+	
+</Defs>

@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+	
+	<DesignationCategoryDef>
+		<defName>rxRemoteTech</defName>
+		<label>Remote Tech</label>
+		<description>Things for blowing up other things.</description>
+		<order>10</order>
+		<specialDesignatorClasses>
+			<li>Designator_Cancel</li>
+			<li>Designator_Deconstruct</li>
+			<li>RemoteTech.Designator_SelectDetonatorWire</li>
+		</specialDesignatorClasses>
+	</DesignationCategoryDef>
+	
+</Defs>

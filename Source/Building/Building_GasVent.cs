@@ -1,8 +1,9 @@
-﻿using RimWorld;
+﻿using System.Text;
+using RimWorld;
 using UnityEngine;
 using Verse;
 
-namespace RemoteExplosives {
+namespace RemoteTech {
 	public class Building_GasVent : Building {
 		// improves draining of the last view points from source room
 		private const float MinSourceConcentration = 3f;
@@ -15,6 +16,7 @@ namespace RemoteExplosives {
 		private bool roomsAreValid;
 		private float moveBuffer;
 		private BuildingProperties_GasVent ventProps;
+		private CachedValue<float> statVentAmount;
 
 		private bool PowerOn {
 			get { return powerComp == null || powerComp.PowerOn; }
@@ -23,11 +25,12 @@ namespace RemoteExplosives {
 		public override void SpawnSetup(Map map, bool respawningAfterLoad) {
 			base.SpawnSetup(map, respawningAfterLoad);
 			powerComp = GetComp<CompPowerTrader>();
+			statVentAmount = this.GetCachedStat(Resources.Stat.rxVentingPower);
 			targetCell = Position + IntVec3.North.RotatedBy(Rotation);
 			sourceCell = Position + IntVec3.South.RotatedBy(Rotation);
 			ventProps = def.building as BuildingProperties_GasVent;
 			if (ventProps == null) {
-				RemoteExplosivesController.Instance.Logger.Error("Building_GasVent requires BuildingProperties_GasVent");
+				RemoteTechController.Instance.Logger.Error("Building_GasVent requires BuildingProperties_GasVent");
 			}
 			ValidateRooms();
 		}
@@ -38,13 +41,14 @@ namespace RemoteExplosives {
 
 			// move gas
 			if (roomsAreValid) {
-				var sourceCloud = RemoteExplosivesUtility.TryFindGasCloudAt(Map, sourceCell);
+				var sourceCloud = RemoteTechUtility.TryFindGasCloudAt(Map, sourceCell);
 				if (sourceCloud != null) {
+					RemoteTechUtility.ReportPowerUse(this);
 					// move only whole units of concentration
-					moveBuffer += Mathf.Min(sourceCloud.Concentration - MinSourceConcentration, ventProps.gasPushedPerSecond / GenTicks.TicksPerRealSecond);
+					moveBuffer += Mathf.Min(sourceCloud.Concentration - MinSourceConcentration, statVentAmount / GenTicks.TicksPerRealSecond);
 					if (moveBuffer > 1) {
 						var moveAmount = Mathf.FloorToInt(moveBuffer);
-						RemoteExplosivesUtility.DeployGas(Map, targetCell, sourceCloud.def, moveAmount);
+						RemoteTechUtility.DeployGas(Map, targetCell, sourceCloud.def, moveAmount);
 						sourceCloud.ReceiveConcentration(-moveAmount);
 						moveBuffer -= moveAmount;
 					}
@@ -83,13 +87,20 @@ namespace RemoteExplosives {
 			}
 		}
 
+		protected override void ReceiveCompSignal(string signal) {
+			base.ReceiveCompSignal(signal);
+			statVentAmount.Recache();
+		}
+
 		public override string GetInspectString() {
-			var str = base.GetInspectString();
+			var str = new StringBuilder(base.GetInspectString());
+			str.AppendLine();
+			str.Append("GasVent_ventedPerSecond".Translate(statVentAmount.Value));
 			if (!roomsAreValid) {
-				if (str.Length > 0) str += "\n";
-				str += "GasVent_blocked".Translate();
+				str.AppendLine();	
+				str.Append("GasVent_blocked".Translate());
 			}
-			return str;
+			return str.ToString();
 		}
 
 		private void ValidateRooms() {

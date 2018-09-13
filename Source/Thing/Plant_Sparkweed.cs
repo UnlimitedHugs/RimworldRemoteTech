@@ -4,10 +4,10 @@ using HugsLib;
 using RimWorld;
 using Verse;
 
-namespace RemoteExplosives {
-	/**
-	 * A plant that has a chance to set itself of fire when walked over by a pawn.
-	 */
+namespace RemoteTech {
+	/// <summary>
+	/// A plant that has a chance to set itself of fire when walked over by a pawn.
+	/// </summary>
 	public class Plant_Sparkweed : Plant {
 		private SparkweedPlantDef CustomDef {
 			get {

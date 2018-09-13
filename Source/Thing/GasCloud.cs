@@ -5,18 +5,19 @@ using RimWorld;
 using UnityEngine;
 using Verse;
 
-namespace RemoteExplosives {
-	/* 
-	 * A self-replicating Thing with a concentration property.
-	 * Will spread in cardinal directions when the concentration is high enough, and loose concentration over time.
-	 * See MoteProperties_GasCloud for settings.
-	 */
+namespace RemoteTech {
+	/// <summary>
+	/// A self-replicating Thing with a concentration property.
+	/// Will spread in cardinal directions when the concentration is high enough, and loose concentration over time.
+	/// See MoteProperties_GasCloud for settings.
+	/// </summary>
 	public class GasCloud : Thing {
 		private const float AlphaEasingDivider = 10f;
 		private const float SpreadingAnimationDuration = 1f;
 		private const float DisplacingConcentrationFraction = .33f;
 
 		public delegate bool TraversibilityTest(Building b, GasCloud g);
+		// this can be used to inject open/closed behavior for
 		public static readonly Dictionary<Type, TraversibilityTest> TraversibleBuildings = new Dictionary<Type, TraversibilityTest> {
 			{typeof(Building_Vent), (d,g)=> true },
 			{typeof(Building_Door), (d,g)=> ((Building_Door)d).Open }
@@ -37,14 +38,14 @@ namespace RemoteExplosives {
 		private bool needsInitialFill;
 		
 		private float interpolatedAlpha;
-		private readonly InterpolatedValue interpolatedOffsetX;
-		private readonly InterpolatedValue interpolatedOffsetY;
-		private readonly InterpolatedValue interpolatedScale;
-		private readonly InterpolatedValue interpolatedRotation;
+		private readonly ValueInterpolator interpolatedOffsetX;
+		private readonly ValueInterpolator interpolatedOffsetY;
+		private readonly ValueInterpolator interpolatedScale;
+		private readonly ValueInterpolator interpolatedRotation;
 
 		//saved fields
 		private float concentration;
-		private int gasTicksProcessed;
+		protected int gasTicksProcessed;
 		//
 
 		public float Concentration {
@@ -58,10 +59,10 @@ namespace RemoteExplosives {
 		}
 
 		public GasCloud() {
-			interpolatedOffsetX = new InterpolatedValue();
-			interpolatedOffsetY = new InterpolatedValue();
-			interpolatedScale = new InterpolatedValue();
-			interpolatedRotation = new InterpolatedValue();
+			interpolatedOffsetX = new ValueInterpolator();
+			interpolatedOffsetY = new ValueInterpolator();
+			interpolatedScale = new ValueInterpolator();
+			interpolatedRotation = new ValueInterpolator();
 		}
 
 		public override void SpawnSetup(Map map, bool respawningAfterLoad) {
@@ -107,18 +108,18 @@ namespace RemoteExplosives {
 					var newX = Rand.Range(-gasProps.AnimationAmplitude, gasProps.AnimationAmplitude);
 					var newY = Rand.Range(-gasProps.AnimationAmplitude, gasProps.AnimationAmplitude);
 					var duration = gasProps.AnimationPeriod.RandomInRange;
-					interpolatedOffsetX.StartInterpolation(newX, duration, InterpolationCurves.CubicEaseInOut);
-					interpolatedOffsetY.StartInterpolation(newY, duration, InterpolationCurves.CubicEaseInOut);
+					interpolatedOffsetX.StartInterpolation(newX, duration, CurveType.CubicInOut);
+					interpolatedOffsetY.StartInterpolation(newY, duration, CurveType.CubicInOut);
 				}
 				if (interpolatedScale.finished) {
 					// start scale interpolation
-					interpolatedScale.StartInterpolation(GetRandomGasScale(), gasProps.AnimationPeriod.RandomInRange, InterpolationCurves.CubicEaseInOut);
+					interpolatedScale.StartInterpolation(GetRandomGasScale(), gasProps.AnimationPeriod.RandomInRange, CurveType.CubicInOut);
 				}
 				if (interpolatedRotation.finished) {
 					// start rotation interpolation
 					const float MaxRotationDelta = 90f;
 					var newRotation = interpolatedRotation.value + Rand.Range(-MaxRotationDelta, MaxRotationDelta)*gasProps.AnimationAmplitude;
-					interpolatedRotation.StartInterpolation(newRotation, gasProps.AnimationPeriod.RandomInRange, InterpolationCurves.CubicEaseInOut);
+					interpolatedRotation.StartInterpolation(newRotation, gasProps.AnimationPeriod.RandomInRange, CurveType.CubicInOut);
 				}
 			}
 		}
@@ -146,11 +147,12 @@ namespace RemoteExplosives {
 		public void BeginSpreadingTransition(GasCloud parentCloud, IntVec3 targetPosition) {
 			interpolatedOffsetX.value = parentCloud.Position.x - targetPosition.x;
 			interpolatedOffsetY.value = parentCloud.Position.z - targetPosition.z;
-			interpolatedOffsetX.StartInterpolation(0, SpreadingAnimationDuration, InterpolationCurves.QuinticEaseOut);
-			interpolatedOffsetY.StartInterpolation(0, SpreadingAnimationDuration, InterpolationCurves.QuinticEaseOut);
+			interpolatedOffsetX.StartInterpolation(0, SpreadingAnimationDuration, CurveType.QuinticOut);
+			interpolatedOffsetY.StartInterpolation(0, SpreadingAnimationDuration, CurveType.QuinticOut);
 		}
 
 		protected virtual void GasTick() {
+			if (!Spawned) return;
 			gasTicksProcessed++;
 			// dissipate
 			var underRoof = Map.roofGrid.Roofed(Position);
@@ -220,6 +222,7 @@ namespace RemoteExplosives {
 			adjacentBuffer.Clear();
 			for (int i = 0; i < 4; i++) {
 				var adjPosition = GenAdj.CardinalDirections[i] + Position;
+				if (!adjPosition.InBounds(Map)) continue;
 				var cloud = adjPosition.GetFirstThing(Map, def) as GasCloud;
 				if(cloud != null) {
 					adjacentBuffer.Add(cloud);
@@ -286,7 +289,7 @@ namespace RemoteExplosives {
 			var thingList = map.thingGrid.ThingsListAtFast(pos);
 			for (var i = 0; i < thingList.Count; i++) {
 				var thing = thingList[i];
-				// check for conditionally traversible buildings
+				// check for conditionally traversable buildings
 				var building = thing as Building;
 				if (building != null) {
 					TraversibilityTest travTest;
@@ -295,7 +298,7 @@ namespace RemoteExplosives {
 						return false;
 					}
 				}
-				// check for more concentrated gasses of a different def
+				// check for more concentrated gases of a different def
 				var cloud = thing as GasCloud;
 				if (cloud != null && cloud.def != sourceCloud.def && sourceCloud.concentration < cloud.concentration) {
 					return false;

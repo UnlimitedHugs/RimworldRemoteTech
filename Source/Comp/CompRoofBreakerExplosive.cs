@@ -3,7 +3,7 @@ using RimWorld;
 using Verse;
 using Verse.Sound;
 
-namespace RemoteExplosives {
+namespace RemoteTech {
 	// A mining explosive that is able to break thick mountain roof
 	// TODO: Add postfix to AutoBuildRoofZoneSetter to remove roof orders over collapsed rock, make collapsed rock impassable again
 	public class CompRoofBreakerExplosive : CompMiningExplosive {
@@ -17,7 +17,7 @@ namespace RemoteExplosives {
 			if (map == null) return;
 			var explosiveProps = props as CompProperties_Explosive;
 			if(explosiveProps == null) return;
-			var canAffectThickRoof = RemoteExplosivesUtility.IsEffectiveRoofBreakerPlacement(explosiveProps.explosiveRadius, position, map);
+			var canAffectThickRoof = RemoteTechUtility.IsEffectiveRoofBreakerPlacement(explosiveProps.explosiveRadius, position, map);
 			bool anyThickRoofAffected = false;
 			foreach (var cell in GenRadial.RadialCellsAround(position, explosiveProps.explosiveRadius, true)) {
 				if(!cell.InBounds(map)) continue;
@@ -30,22 +30,22 @@ namespace RemoteExplosives {
 				}
 				if (roof.isThickRoof) {
 					anyThickRoofAffected = true;
-					map.roofGrid.SetRoof(cell, null);
 					var roofCell = cell;
 					HugsLibController.Instance.TickDelayScheduler.ScheduleCallback(() => { // delay collapse for more interesting visual effect
 						CollapseRockOnCell(roofCell, map);
-						SoundDefOf.RoofCollapse.PlayOneShot(new TargetInfo(roofCell, map));
+						SoundDefOf.Roof_Collapse.PlayOneShot(new TargetInfo(roofCell, map));
 					}, CollapseDelay.RandomInRange);
 				}
+				map.roofGrid.SetRoof(cell, null);
 			}
 			if (anyThickRoofAffected) {
-				Resources.Sound.RemoteMiningCavein.PlayOneShot(new TargetInfo(position, map));
+				Resources.Sound.rxMiningCavein.PlayOneShot(new TargetInfo(position, map));
 			}
 		}
 
 		private void CollapseRockOnCell(IntVec3 cell, Map map) {
 			CrushThingsUnderCollapsingRock(cell, map);
-			var rock = GenSpawn.Spawn(Resources.Thing.CollapsedRoofRocks, cell, map);
+			var rock = GenSpawn.Spawn(Resources.Thing.rxCollapsedRoofRocks, cell, map);
 			if (rock.def.rotatable) {
 				rock.Rotation = Rot4.Random;
 			}
@@ -56,12 +56,12 @@ namespace RemoteExplosives {
 				var thingList = cell.GetThingList(map);
 				for (int j = thingList.Count - 1; j >= 0; j--) {
 					var thing = thingList[j];
-					map.roofCollapseBuffer.Notify_Crushed(thing);
+					//map.roofCollapseBuffer.Notify_Crushed(thing);
 					var pawn = thing as Pawn;
 					DamageInfo dinfo;
 					if (pawn != null) {
 						var brain = pawn.health.hediffSet.GetBrain();
-						dinfo = new DamageInfo(DamageDefOf.Crush, 99999, -1f, null, brain);
+						dinfo = new DamageInfo(DamageDefOf.Crush, 99999, 1F, -1f, null, brain);
 					} else {
 						dinfo = new DamageInfo(DamageDefOf.Crush, 99999);
 						dinfo.SetBodyRegion(BodyPartHeight.Top, BodyPartDepth.Outside);

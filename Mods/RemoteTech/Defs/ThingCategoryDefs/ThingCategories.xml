@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+	
+	<ThingCategoryDef>
+        <defName>rxExplosives</defName>
+        <label>explosives</label>
+        <parent>Manufactured</parent>
+        <iconPath>rxMiningExplosivePart</iconPath>
+	</ThingCategoryDef>
+	
+	<ThingCategoryDef>
+        <defName>rxExplosivesIngredients</defName>
+        <label>ingredients</label>
+        <parent>rxExplosives</parent>
+        <iconPath>rxCharcoal</iconPath>
+	</ThingCategoryDef>
+	
+</Defs>

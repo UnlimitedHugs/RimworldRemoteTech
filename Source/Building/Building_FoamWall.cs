@@ -5,11 +5,11 @@ using HugsLib.Utils;
 using RimWorld;
 using Verse;
 
-namespace RemoteExplosives {
-	/* 
-	 * A wall that will kill and trap any pawns and items it is placed on.
-	 * Contained items are dropped on destruction.
-	 */
+namespace RemoteTech {
+	/// <summary>
+	/// A wall that will kill and trap any pawns and items it is placed on.
+	/// Contained items are dropped on destruction.
+	/// </summary>
 	public class Building_FoamWall : Mineable, IThingHolder {
 		private bool justCreated;
 		private ThingOwner<Thing> trappedInventory;
@@ -73,7 +73,7 @@ namespace RemoteExplosives {
 							var selectedWalls = Find.Selector.SelectedObjects.OfType<Building_FoamWall>().Where(o => o.def == def);
 							foreach (var wall in selectedWalls) {
 								wall.smoothingReplacementDef = wallDef;
-								wall.ToggleDesignation(Resources.Designation.FoamWallSmooth, true);	
+								wall.ToggleDesignation(Resources.Designation.rxFoamWallSmooth, true);	
 							}
 						}))
 					))),
@@ -101,8 +101,8 @@ namespace RemoteExplosives {
 			foreach (var thing in thingsList) {
 				var pawn = thing as Pawn;
 				if (pawn != null && !pawn.RaceProps.IsMechanoid && !pawn.Dead) {
-					foreach (var partRecord in pawn.RaceProps.body.GetPartsWithTag("BreathingSource")) {
-						pawn.TakeDamage(new DamageInfo(Resources.Damage.FoamWallRekt, 9999, -1f, wall, partRecord));
+					foreach (var partRecord in pawn.RaceProps.body.GetPartsWithTag(BodyPartTagDefOf.BreathingSource)) {
+						pawn.TakeDamage(new DamageInfo(Resources.Damage.rxFoamWallStuck, 9999, 0f, -1f, wall, partRecord));
 					}
 				} else if (thing.def.plant != null) {
 					thing.Destroy(DestroyMode.KillFinalize);

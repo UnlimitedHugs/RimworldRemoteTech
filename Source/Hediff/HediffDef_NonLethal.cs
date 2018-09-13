@@ -1,7 +1,7 @@
 ﻿// ReSharper disable UnassignedField.Global
 using Verse;
 
-namespace RemoteExplosives {
+namespace RemoteTech {
 	public class HediffDef_NonLethal : HediffDef {
 		public float vanillaLethalityChance;
 	}

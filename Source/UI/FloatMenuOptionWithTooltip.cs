@@ -3,7 +3,7 @@ using RimWorld.Planet;
 using UnityEngine;
 using Verse;
 
-namespace RemoteExplosives {
+namespace RemoteTech {
 	// A FloatMenuOption that shows a tooltip when hovered over.
 	public class FloatMenuOptionWithTooltip : FloatMenuOption {
 		public TipSignal Tooltip;
@@ -12,8 +12,8 @@ namespace RemoteExplosives {
 			Tooltip = tooltip;
 		}
 
-		public override bool DoGUI(Rect rect, bool colonistOrdering) {
-			var result = base.DoGUI(rect, colonistOrdering);
+		public override bool DoGUI(Rect rect, bool colonistOrdering, FloatMenu floatMenu) {
+			var result = base.DoGUI(rect, colonistOrdering, floatMenu);
 			if (!Tooltip.text.NullOrEmpty() || Tooltip.textGetter != null) {
 				TooltipHandler.TipRegion(rect, Tooltip);
 			}

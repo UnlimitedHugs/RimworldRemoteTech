@@ -19,3 +19,4 @@ TestCases/bin/
 TestCases/obj/
 build.js
 *.tmp
+*.DotSettings

@@ -1,8 +1,7 @@
 ﻿using RimWorld;
 
-namespace RemoteExplosives {
+namespace RemoteTech {
 	public class BuildingProperties_GasVent : BuildingProperties {
 		public float heatExchangedPerSecond;
-		public float gasPushedPerSecond;
 	}
 }

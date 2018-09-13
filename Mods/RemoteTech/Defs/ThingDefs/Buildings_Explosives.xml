@@ -1,0 +1,993 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+	
+	<ThingDef Name="rxBuildingBase" Abstract="True">
+		<category>Building</category>
+		<soundImpactDefault>MetalHitImportant</soundImpactDefault>
+		<selectable>true</selectable>
+		<drawerType>RealtimeOnly</drawerType>
+		<terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
+		<repairEffect>Repair</repairEffect>
+		<leaveResourcesWhenKilled>false</leaveResourcesWhenKilled>
+		<filthLeaving>Filth_RubbleBuilding</filthLeaving>
+		<designationCategory>rxRemoteTech</designationCategory>
+	</ThingDef>
+	
+	<ThingDef Name="rxRemoteExplosiveBase" ParentName="rxBuildingBase" Abstract="True">
+		<thingClass>RemoteTech.Building_RemoteExplosive</thingClass>
+		<altitudeLayer>Building</altitudeLayer>
+		<drawerType>RealtimeOnly</drawerType>
+		<rotatable>false</rotatable>
+		<tickerType>Normal</tickerType>
+		<graphicData Class="RemoteTech.GraphicData_Blinker">
+			<graphicClass>Graphic_Single</graphicClass>
+			<blinkerOffset>(0, 0, .15)</blinkerOffset>
+			<blinkerColor>(1, 1, 1)</blinkerColor>
+		</graphicData>
+		<statBases>
+			<MaxHitPoints>60</MaxHitPoints>
+			<WorkToBuild>150</WorkToBuild>
+			<Beauty>-4</Beauty>
+		</statBases>
+		<modExtensions>
+			<li Class="RemoteTech.FullDeconstructionRefund"/>
+		</modExtensions>
+	</ThingDef>
+	
+	<ThingDef Name="rxMiningExplosiveBase" ParentName="rxBuildingBase" Abstract="True">
+		<altitudeLayer>Building</altitudeLayer>
+		<rotatable>false</rotatable>
+		<tickerType>Normal</tickerType>
+		<graphicData Class="RemoteTech.GraphicData_Blinker">
+			<graphicClass>Graphic_Single</graphicClass>
+			<blinkerOffset>(0, 0, .15)</blinkerOffset>
+			<blinkerColor>(1, 0, 0)</blinkerColor>
+			<blinkerIntervalActive>25</blinkerIntervalActive>
+		</graphicData>
+		<statBases>
+			<MaxHitPoints>60</MaxHitPoints>
+			<WorkToBuild>150</WorkToBuild>
+			<Beauty>-4</Beauty>
+			<rxExplosiveChunkYield>0</rxExplosiveChunkYield>
+			<rxExplosiveMiningYield>.75</rxExplosiveMiningYield>
+			<rxExplosiveWoodYield>.70</rxExplosiveWoodYield>
+		</statBases>
+		<modExtensions>
+			<li Class="RemoteTech.FullDeconstructionRefund"/>
+		</modExtensions>
+	</ThingDef>
+	
+	<ThingDef ParentName="rxBuildingBase">
+		<defName>rxTableDetonator</defName>
+		<label>remote detonator</label>
+		<thingClass>RemoteTech.Building_DetonatorTable</thingClass>
+		<description>A transmitter to detonate armed explosives in range.
+Right-click with a drafted colonist for better timing.</description>
+		<graphicData Class="RemoteTech.GraphicData_SidedBase">
+			<texPath>rxDetonatorTable</texPath>
+			<graphicClass>RemoteTech.Graphic_SingleWithBase</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+			<drawSize>(2,1)</drawSize>
+			<baseFrontTexPath>rxBenchBase/baseFront1x2</baseFrontTexPath>
+			<baseSideTexPath>rxBenchBase/baseSide1x1</baseSideTexPath>
+			<baseOffset>(0, -0.1875)</baseOffset> <!-- 12 px / 64 px -->
+		</graphicData>
+		<castEdgeShadows>true</castEdgeShadows>
+		<staticSunShadowHeight>0.10</staticSunShadowHeight>
+		<costList>
+			<ComponentIndustrial>2</ComponentIndustrial>
+			<Steel>20</Steel>
+			<Silver>10</Silver>
+		</costList>
+		<thingCategories>
+			<li>Buildings</li>
+		</thingCategories>
+		<altitudeLayer>Building</altitudeLayer>
+		<fillPercent>0.5</fillPercent>
+		<useHitPoints>True</useHitPoints>
+		<statBases>
+			<WorkToBuild>2500</WorkToBuild>
+			<MaxHitPoints>180</MaxHitPoints>
+			<Flammability>1.0</Flammability>
+			<Beauty>3</Beauty>
+			<Mass>15</Mass>
+			<rxPowerConsumption>200</rxPowerConsumption>
+			<rxSignalRange>35</rxSignalRange>
+		</statBases>
+		<size>(2,1)</size>
+		<constructEffect>ConstructMetal</constructEffect>
+		<passability>PassThroughOnly</passability>
+		<pathCost>60</pathCost>
+		<hasInteractionCell>True</hasInteractionCell>
+		<interactionCellOffset>(1,0,-1)</interactionCellOffset>
+		<surfaceType>Item</surfaceType>
+		<minifiedDef>MinifiedThing</minifiedDef>
+		<tickerType>Normal</tickerType>
+		<placeWorkers>
+			<li>RemoteTech.PlaceWorker_DetonatorRadius</li>
+			<li>RemoteTech.PlaceWorker_WirelessNodeConnections</li>
+		</placeWorkers>
+		<drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>
+		<comps>
+			<li Class="RemoteTech.CompProperties_ChannelSelector"/>
+			<li Class="CompProperties_Power">
+				<compClass>RemoteTech.CompStatPowerIdle</compClass>
+				<shortCircuitInRain>false</shortCircuitInRain>
+			</li>
+			<li Class="CompProperties_Flickable"/>
+			<li Class="RemoteTech.CompProperties_WirelessDetonationGridNode">
+				<endpoint>true</endpoint>
+			</li>
+			<li Class="CompProperties_Breakdownable"/>
+			<li Class="RemoteTech.CompProperties_Upgrade">
+				<label>Basic channels</label>
+				<referenceId>ChannelsBasic</referenceId>
+				<workAmount>1500</workAmount>
+				<effectDescription>Enables the detonator to trigger explosives on 3 separate channels.</effectDescription>
+				<researchPrerequisite>rxChannels</researchPrerequisite>
+				<costList>
+					<ComponentIndustrial>1</ComponentIndustrial>
+				</costList>
+			</li>
+			<li Class="RemoteTech.CompProperties_Upgrade">
+				<label>Advanced channels</label>
+				<referenceId>ChannelsAdvanced</referenceId>
+				<workAmount>1500</workAmount>
+				<effectDescription>Enables the detonator to use the channels keypad with access to 8 distinct channels.</effectDescription>
+				<researchPrerequisite>rxChannelsAdvanced</researchPrerequisite>
+				<prerequisiteUpgradeId>ChannelsBasic</prerequisiteUpgradeId>
+				<costList>
+					<ComponentSpacer>1</ComponentSpacer>
+				</costList>
+				<constructionSkillPrerequisite>7</constructionSkillPrerequisite>
+			</li>
+			<li Class="RemoteTech.CompProperties_Upgrade">
+				<label>Idle power relay</label>
+				<referenceId>IdlePower</referenceId>
+				<workAmount>1000</workAmount>
+				<effectDescription>The detonator will consume very little power when not in use.</effectDescription>
+				<costList>
+					<ComponentIndustrial>4</ComponentIndustrial>
+				</costList>
+			</li>
+		</comps>
+		<researchPrerequisites><li>rxRemoteDetonator</li></researchPrerequisites>
+	</ThingDef>
+
+	<ThingDef ParentName="rxBuildingBase">
+		<defName>rxRadioMast</defName>
+		<label>radio mast</label>
+		<thingClass>RemoteTech.Building_RadioMast</thingClass>
+		<description>Extends the range of detonators, provided that the mast is within their range. Masts connect to each other, as well, making it possible to cover even large maps with a single detonator.</description>
+		<graphicData Class="RemoteTech.GraphicData_Blinker">
+			<texPath>rxRadioMast</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+			<drawSize>(1.2,2.4)</drawSize>
+			<damageData>
+				<cornerTR>Damage/Corner</cornerTR>
+				<cornerBL>Damage/Corner</cornerBL>
+			</damageData>
+			<shadowData>
+				<volume>(.4, 2, .4)</volume>
+				<offset>(0, 0, -.8)</offset>
+			</shadowData>
+			<blinkerOffset>(-.12, 0, 1.25)</blinkerOffset>
+			<blinkerScale>(.4, 1, .4)</blinkerScale>
+			<blinkerColor>(0, 1, 0)</blinkerColor>
+			<blinkerIntervalNormal>60</blinkerIntervalNormal>
+		</graphicData>
+		<statBases>
+			<WorkToBuild>3500</WorkToBuild>
+			<MaxHitPoints>250</MaxHitPoints>
+			<Flammability>.5</Flammability>
+			<Cleanliness>-10</Cleanliness>
+			<rxPowerConsumption>200</rxPowerConsumption>
+			<rxSignalRange>35</rxSignalRange>
+		</statBases>
+		<costList>
+			<Steel>100</Steel>
+			<Silver>200</Silver>
+			<ComponentIndustrial>3</ComponentIndustrial>
+		</costList>
+		<placeWorkers>
+			<li>RemoteTech.PlaceWorker_DetonatorRadius</li>
+			<li>PlaceWorker_NotUnderRoof</li>
+			<li>RemoteTech.PlaceWorker_WirelessNodeConnections</li>
+		</placeWorkers>
+		<drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>
+		<constructEffect>ConstructMetal</constructEffect>
+		<altitudeLayer>BuildingOnTop</altitudeLayer>
+		<fillPercent>0.5</fillPercent>
+		<useHitPoints>True</useHitPoints>
+		<size>(1,2)</size>
+		<terrainAffordanceNeeded>Heavy</terrainAffordanceNeeded>
+		<passability>PassThroughOnly</passability>
+		<pathCost>100</pathCost>
+		<comps>
+			<li Class="CompProperties_Power">
+				<compClass>RemoteTech.CompStatPower</compClass>
+				<shortCircuitInRain>false</shortCircuitInRain>
+			</li>
+			<li Class="CompProperties_Flickable"/>
+			<li Class="CompProperties_Breakdownable"/>
+			<li Class="RemoteTech.CompProperties_WirelessDetonationGridNode"/>
+			<li Class="RemoteTech.CompProperties_Upgrade">
+				<label>More power!</label>
+				<referenceId>MorePower</referenceId>
+				<workAmount>2000</workAmount>
+				<statModifiers>
+					<rxSignalRange>1.5</rxSignalRange>
+					<rxPowerConsumption>2</rxPowerConsumption>
+				</statModifiers>
+				<costList>
+					<ComponentIndustrial>2</ComponentIndustrial>
+				</costList>
+			</li>
+		</comps>
+		<building>
+			<allowAutoroof>false</allowAutoroof>
+		</building>
+		<researchPrerequisites><li>rxRadioMast</li></researchPrerequisites>
+	</ThingDef>
+	
+	<ThingDef ParentName="rxBuildingBase">
+		<defName>rxBench</defName>
+		<label>explosives workshop</label>
+		<thingClass>Building_WorkTable</thingClass>
+		<description>An electric-powered station equipped for crafting remotely detonated explosives.
+Research different types of remote explosives to unlock available recipes.</description>
+		<graphicData Class="RemoteTech.GraphicData_SidedBase">
+			<texPath>rxCraftingBench</texPath>
+			<graphicClass>RemoteTech.Graphic_SingleWithBase</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+			<drawSize>(3,1)</drawSize>
+			<damageData>
+				<cornerTR>Damage/Corner</cornerTR>
+				<cornerBL>Damage/Corner</cornerBL>
+			</damageData>
+			<baseFrontTexPath>rxBenchBase/baseFront1x3</baseFrontTexPath>
+			<baseSideTexPath>rxBenchBase/baseSide1x1</baseSideTexPath>
+			<baseOffset>(0, -0.1875)</baseOffset>
+		</graphicData>
+		<castEdgeShadows>true</castEdgeShadows>
+		<staticSunShadowHeight>0.15</staticSunShadowHeight>
+		<costList>
+			<Steel>65</Steel>
+			<Silver>200</Silver>
+			<ComponentIndustrial>3</ComponentIndustrial>
+		</costList>
+		<thingCategories>
+			<li>Buildings</li>
+		</thingCategories>
+		<constructEffect>ConstructMetal</constructEffect>
+		<altitudeLayer>Building</altitudeLayer>
+		<fillPercent>0.5</fillPercent>
+		<useHitPoints>True</useHitPoints>
+		<statBases>
+			<WorkToBuild>2500</WorkToBuild>
+			<MaxHitPoints>150</MaxHitPoints>
+			<Flammability>1.0</Flammability>
+			<Cleanliness>-3</Cleanliness>
+			<Mass>50</Mass>
+			<WorkTableWorkSpeedFactor>1</WorkTableWorkSpeedFactor>
+			<rxPowerConsumption>180</rxPowerConsumption>
+		</statBases>
+		<size>(3,1)</size>
+		<terrainAffordanceNeeded>Heavy</terrainAffordanceNeeded>
+		<passability>PassThroughOnly</passability>
+		<pathCost>70</pathCost>
+		<hasInteractionCell>True</hasInteractionCell>
+		<interactionCellOffset>(0,0,-1)</interactionCellOffset>
+		<surfaceType>Item</surfaceType>
+		<minifiedDef>MinifiedThing</minifiedDef>
+		<inspectorTabs>
+			<li>RemoteTech.ITab_ExplosivesBills</li>
+		</inspectorTabs>
+		<building>
+		</building>
+		<tickerType>Normal</tickerType>
+		<comps>
+			<li Class="CompProperties_Power">
+				<compClass>RemoteTech.CompStatPowerIdle</compClass>
+				<shortCircuitInRain>true</shortCircuitInRain>
+			</li>
+			<li Class="CompProperties_Flickable"/>
+			<li Class="CompProperties_AffectedByFacilities">
+				<linkableFacilities>
+					<li>ToolCabinet</li>
+				</linkableFacilities>
+			</li>
+			<li Class="RemoteTech.CompProperties_Upgrade">
+				<label>Idle power relay</label>
+				<referenceId>IdlePower</referenceId>
+				<workAmount>1000</workAmount>
+				<effectDescription>The workbench will consume very little power when not in use.</effectDescription>
+				<costList>
+					<ComponentIndustrial>2</ComponentIndustrial>
+				</costList>
+			</li>
+			<li Class="RemoteTech.CompProperties_Upgrade">
+				<label>High-quality tools</label>
+				<referenceId>FasterProduction</referenceId>
+				<workAmount>10000</workAmount>
+				<effectDescription>Boost production speed by 25% by making harder and more precise tools.</effectDescription>
+				<statModifiers>
+					<WorkTableWorkSpeedFactor>1.25</WorkTableWorkSpeedFactor>
+				</statModifiers>
+				<costList>
+					<ComponentSpacer>2</ComponentSpacer>
+					<Plasteel>40</Plasteel>
+				</costList>
+				<constructionSkillPrerequisite>10</constructionSkillPrerequisite>
+			</li>
+		</comps>
+		<placeWorkers>
+			<li>PlaceWorker_ShowFacilitiesConnections</li>
+		</placeWorkers>
+		<researchPrerequisites><li>rxRemoteDetonator</li></researchPrerequisites>
+	</ThingDef>
+	
+	<ThingDef ParentName="rxBuildingBase">
+		<defName>rxDetonatorManual</defName>
+		<label>manual detonator</label>
+		<thingClass>RemoteTech.Building_DetonatorManual</thingClass>
+		<description>A simple plunger-type detonator. When activated, sends a pulse along the attached detonator wire to all connected explosives, lighting their fuses.
+Right-click with a drafted colonist for better timing.</description>
+		<graphicData>
+			<texPath>rxDetonatorManual</texPath>
+			<graphicClass>RemoteTech.Graphic_Variants</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+			<drawSize>(1,1)</drawSize>
+			<shadowData>
+				<volume>(.6, 0.5, .6)</volume>
+				<offset>(0, 0, -.2)</offset>
+			</shadowData>
+		</graphicData>
+		<costList>
+			<WoodLog>30</WoodLog>
+			<Steel>20</Steel>
+		</costList>
+		<thingCategories>
+			<li>Buildings</li>
+		</thingCategories>
+		<comps>
+			<li Class="RemoteTech.CompProperties_WiredDetonationSender"/>
+		</comps>
+		<altitudeLayer>Building</altitudeLayer>
+		<fillPercent>0.5</fillPercent>
+		<useHitPoints>True</useHitPoints>
+		<statBases>
+			<WorkToBuild>1300</WorkToBuild>
+			<MaxHitPoints>70</MaxHitPoints>
+			<Flammability>1.0</Flammability>
+			<Mass>8</Mass>
+		</statBases>
+		<size>(1,1)</size>
+		<constructEffect>ConstructWood</constructEffect>
+		<passability>PassThroughOnly</passability>
+		<pathCost>30</pathCost>
+		<hasInteractionCell>False</hasInteractionCell>
+		<minifiedDef>MinifiedThing</minifiedDef>
+		<researchPrerequisites><li>rxMakeshiftExplosives</li></researchPrerequisites>
+	</ThingDef>
+    
+	<ThingDef ParentName="rxBuildingBase" Name="rxDetWireBase" Abstract="True">
+		<drawerType>MapMeshOnly</drawerType>
+		<graphicData>
+			<texPath>rxDetWire/detWireAtlas</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<linkType>Basic</linkType>
+			<linkFlags>
+				<li>Custom2</li>
+			</linkFlags>
+			<damageData>
+				<rect>(0,0.35,1,0.3)</rect>
+			</damageData>
+		</graphicData>
+		<tickerType>Rare</tickerType>
+		<uiIconPath>rxDetWire/detWireIcon</uiIconPath>
+		<altitudeLayer>FloorEmplacement</altitudeLayer>
+		<passability>Standable</passability>
+		<leaveResourcesWhenKilled>false</leaveResourcesWhenKilled>
+		<building Class="RemoteTech.BuildingProperties_DetonatorWire">
+			<isInert>true</isInert>
+			<isEdifice>false</isEdifice>
+			<canPlaceOverWall>true</canPlaceOverWall>
+			<failureChanceWhenFullyWet>.015</failureChanceWhenFullyWet>
+			<daysToSelfDry>.8</daysToSelfDry>
+			<baseDryingTemperature>20</baseDryingTemperature>
+			<failureEffecter>rxDetWireFailure</failureEffecter>
+			<fireOnFailure>true</fireOnFailure>
+			<dryOffJobDurationTicks>80</dryOffJobDurationTicks>
+			<blueprintGraphicData>
+				<texPath>rxDetWire/detWireBlueprintAtlas</texPath>
+			</blueprintGraphicData>
+		</building>
+		<statBases>
+			<MaxHitPoints>80</MaxHitPoints>
+			<WorkToBuild>35</WorkToBuild>
+			<Flammability>0.1</Flammability>
+			<Beauty>-2</Beauty>
+		</statBases>
+		<placingDraggableDimensions>1</placingDraggableDimensions>
+		<resourcesFractionWhenDeconstructed>0</resourcesFractionWhenDeconstructed>
+		<placeWorkers>
+			<li>RemoteTech.PlaceWorker_DetonatorWire</li>
+		</placeWorkers>
+		<damageMultipliers>
+			<li>
+				<damageDef>Bomb</damageDef>
+				<multiplier>.1</multiplier>
+			</li>
+			<li>
+				<damageDef>rxFlameBomb</damageDef>
+				<multiplier>.1</multiplier>
+			</li>
+			<li>
+				<damageDef>Flame</damageDef>
+				<multiplier>.5</multiplier>
+			</li>
+		</damageMultipliers>
+		<rotatable>false</rotatable>
+		<selectable>true</selectable>
+		<neverMultiSelect>true</neverMultiSelect>
+		<researchPrerequisites>
+			<li>rxMakeshiftExplosives</li>
+		</researchPrerequisites>
+	</ThingDef>
+	
+	<ThingDef ParentName="rxDetWireBase">
+		<defName>rxDetonatorWire</defName>
+		<label>detonator wire</label>
+		<description>A special wire used to connect the manual detonator to makeshift explosives, remote explosives and IEDs. Can be placed under walls and other buildings.
+Can fail if used while wet.</description>
+		<thingClass>RemoteTech.Building_DetonatorWire</thingClass>
+		<costList>
+			<Steel>1</Steel>
+		</costList>
+		<comps>
+			<li Class="RemoteTech.CompProperties_WiredDetonationTransmitter">
+				<signalDelayPerTile>0.8</signalDelayPerTile> <!-- signal delay is calculated by the last transmitter before the receiver -->
+			</li>
+			<li Class="RemoteTech.CompProperties_RandomResourceLeaver">
+				<thingDef>Steel</thingDef>
+				<amountRange>
+					<min>0</min>
+					<max>1</max>
+				</amountRange>
+				<requiredDestroyMode>Deconstruct</requiredDestroyMode>
+			</li>
+		</comps>
+	</ThingDef>
+	
+	<ThingDef ParentName="rxDetWireBase">
+		<defName>rxImprovedDetonatorWire</defName>
+		<label>improved detonator wire</label>
+		<description>An improved version of the detonator wire for use with the manual detonator. Tougher, fully waterproof, and with a much lower signal transmission delay. 
+Can be placed under walls and other buildings.</description>
+		<thingClass>Building</thingClass>
+		<graphicData>
+			<color>(.61, 0.86, .86)</color>
+		</graphicData>
+		<statBases>
+			<MaxHitPoints>120</MaxHitPoints>
+		</statBases>
+		<costList>
+			<Plasteel>1</Plasteel>
+			<Steel>1</Steel>
+		</costList>
+		<comps>
+			<li Class="RemoteTech.CompProperties_WiredDetonationTransmitter">
+				<signalDelayPerTile>0.3</signalDelayPerTile>
+			</li>
+			<li Class="RemoteTech.CompProperties_RandomResourceLeaver">
+				<thingDef>Plasteel</thingDef>
+				<amountRange>
+					<min>0</min>
+					<max>1</max>
+				</amountRange>
+				<requiredDestroyMode>Deconstruct</requiredDestroyMode>
+			</li>
+		</comps>
+		<researchPrerequisites>
+			<li>rxImprovedDetWire</li>
+		</researchPrerequisites>
+	</ThingDef>
+	
+	<ThingDef ParentName="rxBuildingBase">
+		<defName>rxDetonatorWireCrossing</defName>
+		<label>detonator wire crossing</label>
+		<thingClass>Building</thingClass>
+		<description>Allows two detonator wires to cross without causing signal transmission between them.
+		Waterproof.</description>
+		<drawerType>MapMeshOnly</drawerType>
+		<graphicData>
+			<texPath>rxDetWireCrossing</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<drawSize>(1.1, 1.1)</drawSize>
+			<linkFlags>
+				<li>Custom2</li>
+			</linkFlags>
+		</graphicData>
+		<uiIconPath>rxDetWireCrossing</uiIconPath>
+		<building Class="RemoteTech.BuildingProperties_DetonatorWire">
+			<isInert>true</isInert>
+			<isEdifice>true</isEdifice>
+			<canPlaceOverWall>false</canPlaceOverWall>
+		</building>
+		<costList>
+			<Steel>20</Steel>
+		</costList>
+		<altitudeLayer>Building</altitudeLayer>
+		<fillPercent>0.1</fillPercent>
+		<useHitPoints>True</useHitPoints>
+		<statBases>
+			<WorkToBuild>400</WorkToBuild>
+			<MaxHitPoints>100</MaxHitPoints>
+			<Flammability>0.2</Flammability>
+			<Beauty>-4</Beauty>
+		</statBases>
+		<placeWorkers>
+			<li>RemoteTech.PlaceWorker_DetWireReplacer</li>
+		</placeWorkers>
+		<damageMultipliers>
+			<li>
+				<damageDef>Bomb</damageDef>
+				<multiplier>.1</multiplier>
+			</li>
+			<li>
+				<damageDef>rxFlameBomb</damageDef>
+				<multiplier>.1</multiplier>
+			</li>
+			<li>
+				<damageDef>Flame</damageDef>
+				<multiplier>.5</multiplier>
+			</li>
+		</damageMultipliers>
+		<constructEffect>ConstructMetal</constructEffect>
+		<passability>PassThroughOnly</passability>
+		<pathCost>10</pathCost>
+		<comps>
+			<li Class="RemoteTech.CompProperties_WiredDetonationCrossing"/>
+			<li Class="RemoteTech.CompProperties_LinkGridMember"/>
+		</comps>
+		<researchPrerequisites><li>rxImprovedDetWire</li></researchPrerequisites>
+	</ThingDef>
+	
+	<!-- Combat explosives -->
+	
+	<ThingDef ParentName="rxRemoteExplosiveBase">
+		<defName>rxExplosivePouchPlaced</defName>
+		<thingClass>Building</thingClass>
+		<label>makeshift explosive</label>
+		<graphicData Class="RemoteTech.GraphicData_Blinker">
+			<texPath>rxChargeMakeshift</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<shadowData>
+				<volume>(.4, 0.15, .75)</volume>
+			</shadowData>
+		</graphicData>
+		<description>A primitive bomb made from explosive powder and animal leather.
+Craft at a crafting spot or tailoring bench.
+Detonate using a Manual Detonator and Detonator Wire.</description>
+		<costList>
+			<rxExplosivePouch>1</rxExplosivePouch>
+		</costList>
+		<constructEffect>ConstructDirt</constructEffect>
+		<comps>
+			<li Class="CompProperties_Explosive">
+				<explosiveRadius>2.1</explosiveRadius>
+				<explosiveDamageType>rxFlameBomb</explosiveDamageType>
+				<startWickHitPointsPercent>0.3</startWickHitPointsPercent>
+				<wickTicks>
+					<min>10</min>
+					<max>30</max>
+				</wickTicks>
+			</li>
+			<li Class="RemoteTech.CompProperties_WiredDetonationReceiver"/>
+			<li Class="RemoteTech.CompProperties_AutoReplaceable"/>
+		</comps>
+		<building>
+			<isTrap>true</isTrap>
+		</building>
+		<researchPrerequisites><li>rxMakeshiftExplosives</li></researchPrerequisites>
+	</ThingDef>
+	
+	<ThingDef ParentName="rxRemoteExplosiveBase">
+		<defName>rxRemoteBombPlaced</defName>
+		<label>remote explosive charge</label>
+		<graphicData Class="RemoteTech.GraphicData_Blinker">
+			<texPath>rxCharge</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<shadowData>
+				<volume>(.6, 0.15, .6)</volume>
+			</shadowData>
+		</graphicData>
+		<description>An explosive canister with a radio trigger.
+Craft at the Explosives Workshop.
+Arm, then detonate from the Remote Explosives Console.</description>
+		<costList>
+			<rxRemoteBomb>1</rxRemoteBomb>
+		</costList>
+		<comps>
+			<li Class="RemoteTech.CompProperties_ChannelSelector"/>
+			<li Class="CompProperties_Explosive">
+				<compClass>RemoteTech.CompCustomExplosive</compClass>
+				<explosiveRadius>2.9</explosiveRadius>
+				<explosiveDamageType>Bomb</explosiveDamageType>
+				<startWickHitPointsPercent>0.2</startWickHitPointsPercent>
+				<wickTicks>
+					<min>40</min>
+					<max>40</max>
+				</wickTicks>
+			</li>
+			<li Class="RemoteTech.CompProperties_WiredDetonationReceiver"/>
+			<li Class="RemoteTech.CompProperties_AutoReplaceable"/>
+		</comps>
+		<building Class="RemoteTech.BuildingProperties_RemoteExplosive">
+			<isTrap>true</isTrap>
+			<explosiveType>Combat</explosiveType>
+		</building>
+	</ThingDef>
+	
+	<ThingDef ParentName="rxRemoteExplosiveBase">
+		<defName>rxRemoteFireBombPlaced</defName>
+		<label>remote incendiary charge</label>
+		<graphicData Class="RemoteTech.GraphicData_Blinker">
+			<texPath>rxChargeIncendiary</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<shadowData>
+				<volume>(.6, 0.15, .6)</volume>
+			</shadowData>
+		</graphicData>
+		<description>A canister filled with flammable chemicals with a radio trigger.
+Craft at the Explosives Workshop.
+Arm, then detonate from the Remote Explosives Console.</description>
+		<costList>
+			<rxRemoteFireBomb>1</rxRemoteFireBomb>
+		</costList>
+		<comps>
+			<li Class="RemoteTech.CompProperties_ChannelSelector"/>
+			<li Class="CompProperties_Explosive">
+				<compClass>RemoteTech.CompCustomExplosive</compClass>
+				<explosiveRadius>2.9</explosiveRadius>
+				<explosiveDamageType>Flame</explosiveDamageType>
+				<startWickHitPointsPercent>0.2</startWickHitPointsPercent>
+				<wickTicks>
+					<min>40</min>
+					<max>40</max>
+				</wickTicks>
+			</li>
+			<li Class="RemoteTech.CompProperties_WiredDetonationReceiver"/>
+			<li Class="RemoteTech.CompProperties_AutoReplaceable"/>
+		</comps>
+		<building Class="RemoteTech.BuildingProperties_RemoteExplosive">
+			<isTrap>true</isTrap>
+			<explosiveType>Combat</explosiveType>
+		</building>
+	</ThingDef>
+	
+	<ThingDef ParentName="rxRemoteExplosiveBase">
+		<defName>rxRemoteEmpBombPlaced</defName>
+		<label>remote EMP charge</label>
+		<thingClass>RemoteTech.Building_RemoteExplosiveEmp</thingClass>
+		<graphicData Class="RemoteTech.GraphicData_Blinker">
+			<texPath>rxChargeEmp</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<shadowData>
+				<volume>(.6, 0.15, .6)</volume>
+			</shadowData>
+		</graphicData>
+		<description>A single-use electromagnetic pulse generator.
+Very powerful against mechanoids.
+Craft at the Explosives Workshop.
+Arm, then detonate from the Remote Explosives Console.</description>
+		<costList>
+			<rxRemoteEmpBomb>1</rxRemoteEmpBomb>
+		</costList>
+		<killedLeavings>
+			<rxChunkSlagGold>1</rxChunkSlagGold>
+		</killedLeavings>
+		<specialDisplayRadius>6.5</specialDisplayRadius>
+		<comps>
+			<li Class="RemoteTech.CompProperties_ChannelSelector"/>
+			<li Class="CompProperties_Explosive">
+				<compClass>RemoteTech.CompCustomExplosive</compClass>
+				<explosiveRadius>6.5</explosiveRadius>
+				<explosiveDamageType>rxSuperEMP</explosiveDamageType>
+				<!-- will never be triggered by damage -->
+				<startWickHitPointsPercent>0</startWickHitPointsPercent>
+				<wickTicks>
+					<min>50</min>
+					<max>50</max>
+				</wickTicks>
+			</li>
+			<li Class="RemoteTech.CompProperties_WiredDetonationReceiver"/>
+			<li Class="RemoteTech.CompProperties_AutoReplaceable"/>
+		</comps>
+		<building Class="RemoteTech.BuildingProperties_RemoteExplosive">
+			<isTrap>true</isTrap>
+			<explosiveType>Combat</explosiveType>
+		</building>
+	</ThingDef>
+	
+	<!-- Mining explosives -->
+	
+	<ThingDef ParentName="rxMiningExplosiveBase">
+		<defName>rxMiningChargeChunks</defName>
+		<thingClass>RemoteTech.Building_MiningExplosive</thingClass>
+		<label>fracturing explosive</label>
+		<graphicData Class="RemoteTech.GraphicData_Blinker">
+			<texPath>rxMiningExplosiveChunks</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<shadowData>
+				<volume>(.35, 0.15, .7)</volume>
+			</shadowData>
+		</graphicData>
+		<description>A remote mining explosive that creates a lot of rock chunks.
+Requires a part crafted at the Explosives Workshop.
+Detonate from the Remote Explosives Console.</description>
+		<statBases>
+			<rxExplosiveChunkYield>0.75</rxExplosiveChunkYield>
+		</statBases>
+		<costList>
+			<rxMiningExplosiveComponent>1</rxMiningExplosiveComponent>
+		</costList>
+		<specialDisplayRadius>3.5</specialDisplayRadius>
+		<comps>
+			<li Class="RemoteTech.CompProperties_ChannelSelector"/>
+			<li Class="RemoteTech.CompProperties_MiningExplosive">
+				<miningRadius>3.5</miningRadius>
+				<explosiveRadius>3.5</explosiveRadius>
+				<explosiveDamageType>Bomb</explosiveDamageType>
+				<startWickHitPointsPercent>0.2</startWickHitPointsPercent>
+				<wickTicks>
+					<min>150</min>
+					<max>150</max>
+				</wickTicks>
+			</li>
+			<li Class="RemoteTech.CompProperties_WiredDetonationReceiver"/>
+			<li Class="RemoteTech.CompProperties_AutoReplaceable"/>
+		</comps>
+		<building Class="RemoteTech.BuildingProperties_RemoteExplosive">
+			<isTrap>false</isTrap>
+			<explosiveType>Mining</explosiveType>
+		</building>
+	</ThingDef>
+	
+	<ThingDef ParentName="rxMiningExplosiveBase">
+		<defName>rxMiningChargeClearing</defName>
+		<thingClass>RemoteTech.Building_MiningExplosiveSquare</thingClass>
+		<label>clearing explosive</label>
+		<graphicData Class="RemoteTech.GraphicData_Blinker">
+			<texPath>rxMiningExplosiveClear</texPath>
+			<graphicClass>Graphic_Single</graphicClass><shadowData>
+				<volume>(.35, 0.15, .7)</volume>
+			</shadowData>
+		</graphicData>
+		<description>A remote mining explosive that can clear a room-sized area without creating much rubble.
+Requires a part crafted at the Explosives Workshop.
+Detonate from the Remote Explosives Console.</description>
+		<statBases>
+			<rxExplosiveChunkYield>0.05</rxExplosiveChunkYield>
+		</statBases>
+		<costList>
+			<rxMiningExplosiveComponent>1</rxMiningExplosiveComponent>
+		</costList>
+		<comps>
+			<li Class="RemoteTech.CompProperties_ChannelSelector"/>
+			<li Class="RemoteTech.CompProperties_MiningExplosive">
+				<miningRadius>4</miningRadius>
+				<explosiveRadius>3.9</explosiveRadius>
+				<explosiveDamageType>Bomb</explosiveDamageType>
+				<startWickHitPointsPercent>0.2</startWickHitPointsPercent>
+				<wickTicks>
+					<min>150</min>
+					<max>150</max>
+				</wickTicks>
+			</li>
+			<li Class="RemoteTech.CompProperties_WiredDetonationReceiver"/>
+			<li Class="RemoteTech.CompProperties_AutoReplaceable"/>
+		</comps>
+		<building Class="RemoteTech.BuildingProperties_RemoteExplosive">
+			<isTrap>false</isTrap>
+			<explosiveType>Mining</explosiveType>
+		</building>
+		<placeWorkers>
+			<li>RemoteTech.PlaceWorker_MiningExplosiveSquare</li>
+		</placeWorkers>
+	</ThingDef>
+	
+
+	<ThingDef ParentName="rxRemoteExplosiveBase">
+		<defName>rxMiningChargeShaped</defName>
+		<label>shaped charge</label>
+		<description>A specialized explosive that focuses its power upwards to attempt to break thick overhead mountain roof. It must be applied from the edge of the thick roof to be effective.\n\nThe white overlay shows nearby mountain roof, while the area around the charge is its effective radius. A green outline indicates that the charge is properly placed and will successfully break through the roof.</description>
+		<graphicData Class="RemoteTech.GraphicData_Blinker">
+			<texPath>rxMiningExplosiveShaped</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<shadowData>
+				<volume>(.8, 0.5, .45)</volume>
+			</shadowData>
+		</graphicData>
+		<costList>
+			<rxMiningExplosiveComponent>2</rxMiningExplosiveComponent>
+			<Plasteel>20</Plasteel>
+		</costList>
+		<thingCategories>
+			<li>Buildings</li>
+		</thingCategories>
+		<resourcesFractionWhenDeconstructed>0.75</resourcesFractionWhenDeconstructed>
+		<altitudeLayer>Building</altitudeLayer>
+		<fillPercent>0.5</fillPercent>
+		<useHitPoints>True</useHitPoints>
+		<statBases>
+			<WorkToBuild>1700</WorkToBuild>
+			<MaxHitPoints>120</MaxHitPoints>
+			<Flammability>1.0</Flammability>
+			<Beauty>-5</Beauty>
+			<rxExplosiveChunkYield>.5</rxExplosiveChunkYield>
+			<rxExplosiveMiningYield>.3</rxExplosiveMiningYield>
+			<rxExplosiveWoodYield>.1</rxExplosiveWoodYield>
+			<Mass>20</Mass>
+		</statBases>
+		<size>(1,1)</size>
+		<constructEffect>ConstructMetal</constructEffect>
+		<passability>PassThroughOnly</passability>
+		<pathCost>60</pathCost>
+		<minifiedDef>MinifiedThing</minifiedDef>
+		<comps>
+			<li Class="RemoteTech.CompProperties_ChannelSelector"/>
+			<li Class="RemoteTech.CompProperties_MiningExplosive">
+				<compClass>RemoteTech.CompRoofBreakerExplosive</compClass>
+				<miningRadius>2.1</miningRadius>
+				<explosiveRadius>2.1</explosiveRadius>
+				<explosiveDamageType>Bomb</explosiveDamageType>
+				<startWickHitPointsPercent>0.2</startWickHitPointsPercent>
+				<wickTicks>
+					<min>150</min>
+					<max>150</max>
+				</wickTicks>
+			</li>
+			<li Class="RemoteTech.CompProperties_WiredDetonationReceiver"/>
+		</comps>
+		<building Class="RemoteTech.BuildingProperties_RemoteExplosive">
+			<isTrap>false</isTrap>
+			<explosiveType>Mining</explosiveType>
+		</building>
+		<researchPrerequisites><li>rxRoofBreaking</li></researchPrerequisites>
+		<drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>
+		<placeWorkers>
+			<li>RemoteTech.PlaceWorker_RoofBreakerExplosive</li>
+		</placeWorkers>
+		<modExtensions></modExtensions>
+	</ThingDef>
+	
+	<!-- chemical explosives -->
+	
+	<ThingDef ParentName="rxRemoteExplosiveBase">
+		<defName>rxRemoteFoamCanPlaced</defName>
+		<label>sealing foam can</label>
+		<thingClass>RemoteTech.Building_RemoteExplosive</thingClass>
+		<graphicData Class="RemoteTech.GraphicData_Blinker">
+			<texPath>rxCanFoam</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<shadowData>
+				<volume>(.75, 0.15, .75)</volume>
+			</shadowData>
+		</graphicData>
+		<description>A remotely triggered canister that releases a rapidly hardening foam. 
+Craft at the Explosives Workshop.
+Arm, then detonate from the Remote Explosives Console.</description>
+		<costList>
+			<rxRemoteFoamCan>1</rxRemoteFoamCan>
+		</costList>
+		<comps>
+			<li Class="RemoteTech.CompProperties_ChannelSelector"/>
+			<li Class="RemoteTech.CompProperties_ChemicalExplosive">
+				<compClass>RemoteTech.CompChemicalExplosive</compClass>
+				<wickTicks>
+					<min>50</min>
+					<max>50</max>
+				</wickTicks>
+				<explosiveRadius>0</explosiveRadius>
+				<startWickHitPointsPercent>.2</startWickHitPointsPercent>
+				<breakSound>rxGlassBreak</breakSound>
+				<spawnThingDef>rxWallFoamBlob</spawnThingDef>
+				<numFoamBlobs>5</numFoamBlobs>
+			</li>
+			<li Class="RemoteTech.CompProperties_WiredDetonationReceiver"/>
+			<li Class="RemoteTech.CompProperties_AutoReplaceable"/>
+		</comps>
+		<building Class="RemoteTech.BuildingProperties_RemoteExplosive">
+			<isTrap>true</isTrap>
+			<explosiveType>Utility</explosiveType>
+		</building>
+	</ThingDef>
+	
+	<ThingDef ParentName="rxRemoteExplosiveBase">
+		<defName>rxRemoteSleepingGasCanPlaced</defName>
+		<label>sleeping gas can</label>
+		<thingClass>RemoteTech.Building_RemoteExplosive</thingClass>
+		<graphicData Class="RemoteTech.GraphicData_Blinker">
+			<texPath>rxCanSleepingGas</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<shadowData>
+				<volume>(.75, 0.15, .75)</volume>
+			</shadowData>
+		</graphicData>
+		<description>A remotely triggered canister filled with sleeping gas. 
+Craft at the Explosives Workshop.
+Arm, then detonate from the Remote Explosives Console.</description>
+		<costList>
+			<rxRemoteSleepingGasCan>1</rxRemoteSleepingGasCan>
+		</costList>
+		<comps>
+			<li Class="RemoteTech.CompProperties_ChannelSelector"/>
+			<li Class="RemoteTech.CompProperties_ChemicalExplosive">
+				<compClass>RemoteTech.CompChemicalExplosive</compClass>
+				<wickTicks>
+					<min>50</min>
+					<max>50</max>
+				</wickTicks>
+				<explosiveRadius>0</explosiveRadius>
+				<startWickHitPointsPercent>.2</startWickHitPointsPercent>
+				<breakSound>rxGlassBreak</breakSound>
+				<spawnThingDef>rxGas_Sleeping</spawnThingDef>
+				<gasConcentration>80000</gasConcentration>
+			</li>
+			<li Class="RemoteTech.CompProperties_WiredDetonationReceiver"/>
+			<li Class="RemoteTech.CompProperties_AutoReplaceable"/>
+		</comps>
+		<building Class="RemoteTech.BuildingProperties_RemoteExplosive">
+			<isTrap>true</isTrap>
+			<explosiveType>Utility</explosiveType>
+		</building>
+	</ThingDef>
+	
+	
+	<ThingDef ParentName="rxRemoteExplosiveBase">
+		<defName>rxRemoteRefinedSleepingGasCanPlaced</defName>
+		<label>refined sleeping gas can</label>
+		<thingClass>RemoteTech.Building_RemoteExplosive</thingClass>
+		<graphicData Class="RemoteTech.GraphicData_Blinker">
+			<texPath>rxCanSleepingGasRefined</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<shadowData>
+				<volume>(.75, 0.15, .75)</volume>
+			</shadowData>
+		</graphicData>
+		<description>A remotely triggered canister filled with refined sleeping gas. Significantly more potent than common sleeping gas. 
+Craft at the Explosives Workshop.
+Arm, then detonate from the Remote Explosives Console.</description>
+		<costList>
+			<rxRemoteRefinedSleepingGasCan>1</rxRemoteRefinedSleepingGasCan>
+		</costList>
+		<comps>
+			<li Class="RemoteTech.CompProperties_ChannelSelector"/>
+			<li Class="RemoteTech.CompProperties_ChemicalExplosive">
+				<compClass>RemoteTech.CompChemicalExplosive</compClass>
+				<wickTicks>
+					<min>50</min>
+					<max>50</max>
+				</wickTicks>
+				<explosiveRadius>0</explosiveRadius>
+				<startWickHitPointsPercent>.2</startWickHitPointsPercent>
+				<breakSound>rxGlassBreak</breakSound>
+				<spawnThingDef>rxGas_SleepingRefined</spawnThingDef>
+				<gasConcentration>80000</gasConcentration>
+			</li>
+			<li Class="RemoteTech.CompProperties_WiredDetonationReceiver"/>
+			<li Class="RemoteTech.CompProperties_AutoReplaceable"/>
+		</comps>
+		<building Class="RemoteTech.BuildingProperties_RemoteExplosive">
+			<isTrap>true</isTrap>
+			<explosiveType>Utility</explosiveType>
+		</building>
+		<researchPrerequisites>
+			<li>rxRefinedSleepingGas</li>
+		</researchPrerequisites>
+	</ThingDef>
+
+</Defs>

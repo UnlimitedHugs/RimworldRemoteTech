@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+	
+	<ThingDef Name="rxChunkBase" Abstract="True">
+		<category>Item</category>
+		<thingClass>Thing</thingClass>
+		<altitudeLayer>Item</altitudeLayer>
+		<passability>PassThroughOnly</passability>
+		<fillPercent>0.4</fillPercent>
+		<statBases>
+			<MaxHitPoints>300</MaxHitPoints>
+			<Flammability>0</Flammability>
+			<Beauty>-10</Beauty>
+			<Cleanliness>-2</Cleanliness>
+		</statBases>
+		<selectable>true</selectable>
+		<pathCost>55</pathCost>
+		<drawerType>MapMeshOnly</drawerType>
+		<randomizeRotationOnSpawn>true</randomizeRotationOnSpawn>
+		<designateHaulable>true</designateHaulable>
+		<stackLimit>1</stackLimit>
+		<tradeability>None</tradeability>
+	</ThingDef>
+	
+	<ThingDef ParentName="rxChunkBase">
+		<defName>rxChunkSlagGold</defName>
+		<label>gold slag chunk</label>
+		<description>A chunk of gold and steel melted together. A smelter might be able to separate them for reuse.</description>
+		<graphicData>
+			<texPath>rxGoldSlag</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+		</graphicData>
+		<statBases>
+			<Mass>10</Mass>
+		</statBases>
+		<soundDrop>ChunkSlag_Drop</soundDrop>
+		<thingCategories>
+			<li>Chunks</li>
+		</thingCategories>
+		<smeltProducts>
+			<Steel>20</Steel>
+			<Gold>10</Gold>
+		</smeltProducts>
+	</ThingDef>
+	
+	
+</Defs>

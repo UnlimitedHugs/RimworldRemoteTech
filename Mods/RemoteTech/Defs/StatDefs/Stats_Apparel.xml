@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+	<StatDef>
+		<defName>rxPortableDetonatorNumUses</defName>
+		<label>Detonator activations</label>
+		<description>How many times a portable detonator can be activated before the battery runs dry.</description>
+		<category>Apparel</category>
+		<toStringStyle>Integer</toStringStyle>
+		<showIfUndefined>false</showIfUndefined>
+		<parts>
+			<li Class="StatPart_Quality">
+				<factorAwful>0.7</factorAwful>
+				<factorPoor>0.9</factorPoor>
+				<factorNormal>1</factorNormal>
+				<factorGood>1.25</factorGood>
+				<factorExcellent>2</factorExcellent>
+				<factorMasterwork>2.5</factorMasterwork>
+				<factorLegendary>3</factorLegendary>
+			</li>
+		</parts>
+	</StatDef>
+	
+</Defs>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+	<MentalBreakDef>
+		<defName>rxRedButtonFever</defName>
+		<mentalState>rxRedButtonFever</mentalState>
+		<baseCommonality>1</baseCommonality>
+		<intensity>Extreme</intensity>
+	</MentalBreakDef>
+	<MentalStateDef>
+		<defName>rxRedButtonFever</defName>
+		<stateClass>RemoteTech.MentalState_RedButtonFever</stateClass>
+		<workerClass>RemoteTech.MentalStateWorker_RedButtonFever</workerClass>
+		<label>red button fever</label>
+		<category>Malicious</category>
+		<prisonersCanDo>false</prisonersCanDo>
+		<colonistsOnly>true</colonistsOnly>
+		<minTicksBeforeRecovery>3000</minTicksBeforeRecovery>
+		<recoveryMtbDays>0.1</recoveryMtbDays>
+		<maxTicksBeforeRecovery>6000</maxTicksBeforeRecovery>
+		<nameColor>(0.9, 0.5, 0.5)</nameColor>
+		<beginLetter>{0} has had it and is heading for the detonator.\n\n[PAWN_pronoun] must be stopped!</beginLetter>
+		<beginLetterDef>ThreatSmall</beginLetterDef>
+		<moodRecoveryThought>Catharsis</moodRecoveryThought>
+		<recoveryMessage>{0} is no longer craving to trigger a detonator.</recoveryMessage>
+		<baseInspectLine>Mental state: Red button fever</baseInspectLine>
+		<recoverFromSleep>true</recoverFromSleep>
+	</MentalStateDef>
+
+</Defs>

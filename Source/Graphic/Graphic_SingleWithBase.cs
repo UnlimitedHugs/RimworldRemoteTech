@@ -1,23 +1,27 @@
 ﻿using UnityEngine;
 using Verse;
 
-namespace RemoteExplosives {
-	/**
-	 * A Graphic_Single placed on an offset base. Used to give the workbenches a custom vanilla-style 3d look.
-	 * Chosen over the vanilla approach for faster loading (fewer textures to load, smaller size).
-	 */
+namespace RemoteTech {
+	/// <summary>
+	/// A Graphic_Single placed on an offset base. Used to give the workbenches a custom vanilla-style 3d look.
+	/// Chosen over the vanilla approach for faster loading (fewer textures to load, smaller size).
+	/// </summary>
 	public class Graphic_SingleWithBase : Graphic_Single {
-		private SidedBaseGraphicData baseData;
+		private GraphicData_SidedBase baseData;
 		private Material baseMatFront;
 		private Material baseMatSide;
 
 		public override void Init(GraphicRequest req) {
 			base.Init(req);
-			baseData = data as SidedBaseGraphicData;
+			baseData = data as GraphicData_SidedBase;
 			if (baseData != null) {
-				baseMatFront = MaterialPool.MatFrom(new MaterialRequest(baseData.BaseFrontTex, ShaderDatabase.ShaderFromType(baseData.shaderType), baseData.color));
-				baseMatSide = MaterialPool.MatFrom(new MaterialRequest(baseData.BaseSideTex, ShaderDatabase.ShaderFromType(baseData.shaderType), baseData.color));
+				baseMatFront = MaterialPool.MatFrom(new MaterialRequest(baseData.BaseFrontTex, baseData.shaderType.Shader, baseData.color));
+				baseMatSide = MaterialPool.MatFrom(new MaterialRequest(baseData.BaseSideTex, baseData.shaderType.Shader, baseData.color));
 			}
+		}
+
+		public override Mesh MeshAt(Rot4 rot) {
+			return base.MeshAt(Rot4.North); // fixes incorrect mesh orientation while vertical
 		}
 
 		public override void DrawWorker(Vector3 loc, Rot4 rot, ThingDef thingDef, Thing thing, float extraRotation) {

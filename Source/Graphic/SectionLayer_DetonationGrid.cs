@@ -3,11 +3,11 @@ using RimWorld;
 using UnityEngine;
 using Verse;
 
-namespace RemoteExplosives {
-	/**
-	 * An overlay for explosives and conductors on the wired detonation grid.
-	 * Displays only when a building designator for a building with a relevant comp is selected.
-	 */
+namespace RemoteTech {
+	/// <summary>
+	/// An overlay for explosives and conductors on the wired detonation grid.
+	/// Displays only when a building designator for a building with a relevant comp is selected.
+	/// </summary>
 	public class SectionLayer_DetonationGrid : SectionLayer_Things {
 		private static readonly Type GridNodeCompType = typeof (CompDetonationGridNode);
 
@@ -47,7 +47,7 @@ namespace RemoteExplosives {
 			if (comps == null) return false;
 			for (int i = 0; i < comps.Count; i++) {
 				var compProps = comps[i];
-				if (compProps != null && compProps.compClass != null && compProps.compClass.IsSubclassOf(GridNodeCompType)) 
+				if (compProps?.compClass != null && compProps.compClass.IsSubclassOf(GridNodeCompType)) 
 					return true;
 			}
 			return false;

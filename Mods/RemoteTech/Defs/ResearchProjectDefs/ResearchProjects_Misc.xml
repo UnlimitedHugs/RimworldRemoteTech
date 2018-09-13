@@ -1,0 +1,203 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+	<ResearchProjectDef Abstract="True" Name="rxProjectBase">
+		<tab>rxRemoteTech</tab>
+	</ResearchProjectDef>
+	
+	<ResearchProjectDef ParentName="rxProjectBase">
+		<defName>rxMakeshiftExplosives</defName>
+		<label>Makeshift Explosives</label>
+		<description>Allows you to make simple explosives out of renewable resources.
+Once researched: 
+- Sparkweed can be planted.
+- Charcoal can be made from wood logs at campfires and the fueled stove.
+- Explosive pouch can be made at a crafting spot or tailoring bench.
+- The manual detonator and detonator wire can be built to trigger the explosives.</description>
+		<baseCost>1000</baseCost>
+		<techLevel>Medieval</techLevel>
+		<prerequisites></prerequisites>
+		<researchViewX>0</researchViewX>
+		<researchViewY>2.5</researchViewY>
+	</ResearchProjectDef>
+	
+	<ResearchProjectDef ParentName="rxProjectBase">
+		<defName>rxImprovedDetWire</defName>
+		<label>Improved Detonator Wire</label>
+		<description>Unlocks the improved detonator wire. Fully waterproof, and with much faster signal transmission.
+Also includes the detonator wire crossing, which can be used to intersect wires without connecting them.</description>
+		<baseCost>600</baseCost>
+		<techLevel>Industrial</techLevel>
+		<prerequisites>
+			<li>rxMakeshiftExplosives</li>
+		</prerequisites>
+		<researchViewX>1</researchViewX>
+		<researchViewY>3.5</researchViewY>
+	</ResearchProjectDef>
+
+	<ResearchProjectDef ParentName="rxProjectBase">
+		<defName>rxRemoteDetonator</defName>
+		<label>Remote Detonator</label>
+		<description>Allows you to build a console that detonates remote explosives, as well as a workbench to manufacture them.
+The explosives workshop can create mining explosives that can be deployed as Fracturing or Clearing charges.
+Research IEDs to manufacture combat-grade remote explosives.</description>
+		<baseCost>1500</baseCost>
+		<techLevel>Industrial</techLevel>
+		<prerequisites>
+			<li>rxMakeshiftExplosives</li>
+		</prerequisites>
+		<researchViewX>1</researchViewX>
+		<researchViewY>2.5</researchViewY>
+	</ResearchProjectDef>
+	
+	<ResearchProjectDef ParentName="rxProjectBase">
+		<defName>rxProximitySensor</defName>
+		<label>Proximity sensor</label>
+		<description>Allows you to build the proximity sensor- a small device that can detect movement in its immediate vicinity.
+Also acts as an automated detonator when connected to detonator wire.</description>
+		<baseCost>1500</baseCost>
+		<techLevel>Industrial</techLevel>
+		<researchViewX>1</researchViewX>
+		<researchViewY>1.5</researchViewY>
+	</ResearchProjectDef>
+	
+	<ResearchProjectDef ParentName="rxProjectBase">
+		<defName>rxChannels</defName>
+		<label>Detonator Channels</label>
+		<description>Unlocks the use of channel on your remote explosives and the detonator. Only explosives on the same channel as the detonator can be triggered. This allows to set up multiple lines of explosive defenses.
+The detonator must be upgraded with a component for this to work.</description>
+		<baseCost>750</baseCost>
+		<techLevel>Industrial</techLevel>
+		<prerequisites>
+			<li>rxRemoteDetonator</li>
+		</prerequisites>
+		<researchViewX>2</researchViewX>
+		<researchViewY>.5</researchViewY>
+	</ResearchProjectDef>
+	
+	<ResearchProjectDef ParentName="rxProjectBase">
+		<defName>rxChannelsAdvanced</defName>
+		<label>Advanced Channels</label>
+		<description>Advances in signal transmission allow the use of 8 channels for remote explosives. The detonator also gains the ability to identify the types of charges present on each channel.
+The detonator must be upgraded with an advanced component for this to work.</description>
+		<baseCost>1500</baseCost>
+		<techLevel>Industrial</techLevel>
+		<prerequisites>
+			<li>rxChannels</li>
+		</prerequisites>
+		<researchViewX>3</researchViewX>
+		<researchViewY>.5</researchViewY>
+	</ResearchProjectDef>	
+	
+	<ResearchProjectDef ParentName="rxProjectBase">
+		<defName>rxRadioMast</defName>
+		<label>Detonator Network</label>
+		<description>No longer do you have to leave the couch and expose yourself to the elements (and stray shrapnel) just to trigger your explosives. Now you can set up a network of towers that can relay your detonator signal to the farthest reaches of the universe.
+Allows the Radio Mast to be built.</description>
+		<baseCost>1800</baseCost>
+		<techLevel>Industrial</techLevel>
+		<prerequisites>
+			<li>rxChannels</li>
+		</prerequisites>
+		<researchViewX>3</researchViewX>
+		<researchViewY>1.5</researchViewY>
+	</ResearchProjectDef>
+
+	<ResearchProjectDef ParentName="rxProjectBase">
+		<defName>rxSealingFoam</defName>
+		<label>Sealing Foam</label>
+		<description>Allows the creation of remotely triggered canisters that contain sealing foam. The foam hardens into exceptionally tough walls that are great for sealing off passages and constructing durable defenses.</description>
+		<baseCost>900</baseCost>
+		<techLevel>Industrial</techLevel>
+		<prerequisites>
+			<li>rxRemoteDetonator</li>
+		</prerequisites>
+		<researchViewX>2</researchViewX>
+		<researchViewY>1.5</researchViewY>
+	</ResearchProjectDef>
+	
+	<ResearchProjectDef ParentName="rxProjectBase">
+		<defName>rxSleepingGas</defName>
+		<label>Sleeping Gas</label>
+		<description>Allows the creation of remotely triggered canisters that contain sleeping gas. Used for disabling biological targets without killing them.
+Use in enclosed areas for best results.</description>
+		<baseCost>900</baseCost>
+		<techLevel>Industrial</techLevel>
+		<prerequisites>
+			<li>rxRemoteDetonator</li>
+		</prerequisites>
+		<researchViewX>2</researchViewX>
+		<researchViewY>2.5</researchViewY>
+	</ResearchProjectDef>
+	
+	<ResearchProjectDef ParentName="rxProjectBase">
+		<defName>rxGasVent</defName>
+		<label>Gas Vent</label>
+		<description>While sleeping gas is a powerful tool, it can be difficult to move once deployed. The gas vent comes to the rescue- it allows to push gas between rooms and can be used to create gas distribution pathways.
+Allows the Gas Vent to be built.</description>
+		<baseCost>800</baseCost>
+		<techLevel>Industrial</techLevel>
+		<prerequisites>
+			<li>rxSleepingGas</li>
+		</prerequisites>
+		<researchViewX>3</researchViewX>
+		<researchViewY>2.5</researchViewY>
+	</ResearchProjectDef>
+	
+	<ResearchProjectDef ParentName="rxProjectBase">
+		<defName>rxRefinedSleepingGas</defName>
+		<label>Refined Sleeping Gas</label>
+		<description>With the right ingredients and proper mixing proportions, it's possible to make a significantly more potent variety of sleeping gas.</description>
+		<baseCost>2000</baseCost>
+		<techLevel>Industrial</techLevel>
+		<prerequisites>
+			<li>rxSleepingGas</li>
+		</prerequisites>
+		<researchViewX>3</researchViewX>
+		<researchViewY>3.5</researchViewY>
+	</ResearchProjectDef>
+	
+	<ResearchProjectDef ParentName="rxProjectBase">
+		<defName>rxEmpMine</defName>
+		<label>Remote EMP Charge</label>
+		<description>Allows the creation of EMP charges that can be triggered with a remote detonator.
+While expensive, they can be devastating against mechanoids when properly used.</description>
+		<baseCost>1500</baseCost>
+		<techLevel>Industrial</techLevel>
+		<prerequisites>
+			<li>rxRemoteDetonator</li>
+		</prerequisites>
+		<researchViewX>2</researchViewX>
+		<researchViewY>3.5</researchViewY>
+	</ResearchProjectDef>
+
+	<ResearchProjectDef ParentName="rxProjectBase">
+		<defName>rxRoofBreaking</defName>
+		<label>Mountain Roof Removal</label>
+		<description>The destructive power of mining explosives can be focused using strong composite materials. When aimed upwards, this allows to break even through thick mountain roof, as long as the charge is properly positioned.
+Allows the Shaped Charge to be built.</description>
+		<baseCost>1000</baseCost>
+		<techLevel>Industrial</techLevel>
+		<prerequisites>
+			<li>rxRemoteDetonator</li>
+		</prerequisites>
+		<researchViewX>2</researchViewX>
+		<researchViewY>4.5</researchViewY>
+	</ResearchProjectDef>
+	
+	<ResearchProjectDef ParentName="rxProjectBase">
+		<defName>rxPortablePower</defName>
+		<label>Portable Power</label>
+		<description>Powering things in the field can be tricky. So, why not take your power grid with you? Portable solar panels with a built-in battery may not quench your thirst for power, but they will keep your mobile operations running.
+Allows the Portable Power Unit to be built.</description>
+		<baseCost>1500</baseCost>
+		<techLevel>Industrial</techLevel>
+		<prerequisites>
+			<li>Electricity</li>
+			<li>SolarPanels</li>
+		</prerequisites>
+		<researchViewX>0</researchViewX>
+		<researchViewY>3.5</researchViewY>
+	</ResearchProjectDef>
+	
+</Defs>

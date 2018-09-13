@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using Verse;
 
-namespace RemoteExplosives {
-	/*
-	 * Destroyed buildings with this comp will be replaced as blueprints by AutoReplaceWatcher
-	 */
+namespace RemoteTech {
+	/// <summary>
+	/// Destroyed buildings with this comp will be replaced as blueprints by AutoReplaceWatcher
+	/// </summary>
 	public class CompAutoReplaceable : ThingComp {
 		private static readonly string AutoReplaceButtonLabel = "RemoteExplosive_autoReplace_label".Translate();
 		private static readonly string AutoReplaceButtonDesc = "RemoteExplosive_autoReplace_desc".Translate();
@@ -32,7 +32,7 @@ namespace RemoteExplosives {
 			ParentPosition = parent.Position;
 			ParentRotation = parent.Rotation;
 			if (!wasLoaded) {
-				parent.Map.GetComponent<MapComponent_RemoteExplosives>().ReplaceWatcher.TryApplySavedSettings(parent);
+				parent.Map.GetComponent<MapComponent_RemoteTech>().ReplaceWatcher.OnReplaceableThingSpawned(parent);
 			}
 		}
 
@@ -41,12 +41,13 @@ namespace RemoteExplosives {
 			var replaceProps = props as CompProperties_AutoReplaceable;
 			var applyOnVanish = replaceProps != null ? replaceProps.applyOnVanish : false;
 			if (AutoReplaceEnabled && (mode == DestroyMode.KillFinalize || (applyOnVanish && mode == DestroyMode.Vanish))) {
-				map.GetComponent<MapComponent_RemoteExplosives>().ReplaceWatcher.ScheduleReplacement(this);
+				map.GetComponent<MapComponent_RemoteTech>().ReplaceWatcher.ScheduleReplacement(this);
 			}
 		}
 
-		public void DisableGizmoAutoDisplay() {
+		public CompAutoReplaceable DisableGizmoAutoDisplay() {
 			autoDisplayGizmo = false;
+			return this;
 		}
 		
 		// get the gizmo to display it manually (for custom ordering)
@@ -54,10 +55,10 @@ namespace RemoteExplosives {
 			var replaceGizmo = new Command_Toggle {
 				toggleAction = ReplaceGizmoAction,
 				isActive = () => AutoReplaceEnabled,
-				icon = Resources.Textures.UIAutoReplace,
+				icon = Resources.Textures.rxUIAutoReplace,
 				defaultLabel = AutoReplaceButtonLabel,
 				defaultDesc = AutoReplaceButtonDesc,
-				hotKey = Resources.KeyBinging.RemoteExplosiveAutoReplace
+				hotKey = Resources.KeyBinging.rxAutoReplace
 			};
 			return replaceGizmo;
 		}

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+	<ThingDef Name="rxPlantBase" Abstract="True">
+		<category>Plant</category>
+		<thingClass>Plant</thingClass>
+		<altitudeLayer>LowPlant</altitudeLayer>
+		<useHitPoints>True</useHitPoints>
+		<statBases>
+			<Flammability>0.8</Flammability>
+		</statBases>
+		<tickerType>Long</tickerType>
+		<selectable>False</selectable>
+		<neverMultiSelect>True</neverMultiSelect>
+		<drawerType>MapMeshOnly</drawerType>
+		<pathCostIgnoreRepeat>false</pathCostIgnoreRepeat>
+		<graphicData>
+			<shaderType>CutoutPlant</shaderType>
+		</graphicData>
+		<ingestible>
+			<foodType>Plant</foodType>
+			<preferability>RawBad</preferability>
+		</ingestible>
+		<plant>
+			<soundHarvesting>Harvest_Standard</soundHarvesting>
+			<soundHarvestFinish>Harvest_Standard_Finish</soundHarvestFinish>
+			<harvestWork>190</harvestWork>
+			<sowWork>260</sowWork>
+			<fertilityMin>0.5</fertilityMin>
+			<topWindExposure>0.1</topWindExposure>
+			<harvestTag>Standard</harvestTag>
+			<visualSizeRange>
+				<min>0.3</min>
+				<max>1.00</max>
+			</visualSizeRange>
+		</plant>
+	</ThingDef>
+
+	<ThingDef ParentName="rxPlantBase" Class="RemoteTech.SparkweedPlantDef">
+		<defName>rxPlantSparkweed</defName>
+		<thingClass>RemoteTech.Plant_Sparkweed</thingClass>
+		<label>sparkweed</label>
+		<description>A curious plant of unknown origin. Its stems contain a flammable orange powder that is released when the plant is disturbed. The powder ignites on contact with air, producing hot sparks that can set fire to the surrounding area.
+It is cultivated as a source of low-grade explosive and gunpowder.</description>
+		<statBases>
+			<MaxHitPoints>80</MaxHitPoints>
+			<Beauty>1</Beauty>
+			<Nutrition>0.05</Nutrition>
+		</statBases>
+		<graphicData>
+			<texPath>rxSparkweed</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+		</graphicData>
+		<selectable>true</selectable>
+		<pathCost>7</pathCost>
+
+		<plant>
+			<dieIfLeafless>true</dieIfLeafless>
+			<harvestTag>Standard</harvestTag>
+			<harvestedThingDef>rxSparkpowder</harvestedThingDef>
+			<harvestYield>6</harvestYield>
+			<sowTags>
+				<li>Ground</li>
+				<li>Hydroponic</li>
+			</sowTags>
+			<sowResearchPrerequisites>
+				<li>rxMakeshiftExplosives</li>
+			</sowResearchPrerequisites>
+			<topWindExposure>0.1</topWindExposure>
+			<fertilitySensitivity>0.3</fertilitySensitivity>
+			<growDays>3.5</growDays>
+			<visualSizeRange>
+				<min>0.3</min>
+				<max>1.4</max>
+			</visualSizeRange>
+		</plant>
+
+		<!-- Cannot use PlantProperties for these, as the field won't accept Class overrides for whatever reason -->
+		<detectEveryTicks>30</detectEveryTicks>
+		<minimumIgnitePlantGrowth>.2</minimumIgnitePlantGrowth>
+		<ignitePlantChance>.65</ignitePlantChance>
+		<ignitePawnChance>.1</ignitePawnChance>
+		<igniteEffecter>rxSparkweedIgnite</igniteEffecter>
+		<ignitionSuppressorThings>
+			<li>Filth_FireFoam</li>
+		</ignitionSuppressorThings>
+	</ThingDef>
+
+</Defs>

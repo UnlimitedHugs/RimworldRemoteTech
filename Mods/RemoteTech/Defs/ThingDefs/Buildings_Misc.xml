@@ -1,0 +1,518 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+	<ThingDef Name="rxBuildingMiscBase" Abstract="True">
+		<category>Building</category>
+		<soundImpactDefault>BulletImpact_Ground</soundImpactDefault>
+		<selectable>true</selectable>
+		<drawerType>MapMeshAndRealTime</drawerType>
+		<terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
+		<leaveResourcesWhenKilled>false</leaveResourcesWhenKilled>
+		<filthLeaving>Filth_RubbleBuilding</filthLeaving>
+	</ThingDef>
+
+	<ThingDef ParentName="rxBuildingMiscBase">
+		<defName>rxWallFoamBlob</defName>
+		<label>chemical foam</label>
+		<thingClass>RemoteTech.Building_FoamBlob</thingClass>
+		<description>Becomes tougher than rock as it solidifies.</description>
+		<graphicData>
+			<texPath>rxFoamBlob</texPath>
+			<graphicClass>RemoteTech.Graphic_FoamBlob</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+			<drawSize>(1.2,1.2)</drawSize>
+			<shadowData>
+				<volume>(.8, 1, .8)</volume>
+				<offset>(.5, 0, .5)</offset>
+			</shadowData>
+		</graphicData>
+		<drawerType>RealtimeOnly</drawerType>
+		<castEdgeShadows>false</castEdgeShadows>
+		<altitudeLayer>Building</altitudeLayer>
+		<fillPercent>0.5</fillPercent>
+		<coversFloor>false</coversFloor>
+		<useHitPoints>True</useHitPoints>
+		<statBases>
+			<WorkToMake>50</WorkToMake>
+			<MaxHitPoints>30</MaxHitPoints>
+			<Flammability>2.0</Flammability>
+			<Beauty>-20</Beauty>
+		</statBases>
+		<size>(1,1)</size>
+		<constructEffect>ConstructMetal</constructEffect>
+		<passability>PassThroughOnly</passability>
+		<pathCost>230</pathCost>
+		<pathCostIgnoreRepeat>false</pathCostIgnoreRepeat>
+		<tickerType>Normal</tickerType>
+		<building Class="RemoteTech.BuildingProperties_FoamBlob">
+			<ticksToHarden>
+				<min>750</min>
+				<max>850</max>
+			</ticksToHarden>
+			<ticksBetweenSpreading>
+				<min>10</min>
+				<max>15</max>
+			</ticksBetweenSpreading>
+			<hardenedDef>rxFoamWall</hardenedDef>
+		</building>
+	</ThingDef>
+
+	<ThingDef ParentName="rxBuildingMiscBase" Abstract="True" Name="rxFoamWallBase">
+		<thingClass>RemoteTech.Building_FoamWall</thingClass>
+		<category>Building</category>
+		<graphicData>
+			<texPath>rxFoamWall</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<linkType>CornerFiller</linkType>
+			<linkFlags>
+				<li>Wall</li>
+				<li>Rock</li>
+			</linkFlags>
+			<damageData>
+				<cornerTL>Damage/Corner</cornerTL>
+				<cornerTR>Damage/Corner</cornerTR>
+				<cornerBL>Damage/Corner</cornerBL>
+				<cornerBR>Damage/Corner</cornerBR>
+				<edgeTop>Damage/Edge</edgeTop>
+				<edgeBot>Damage/Edge</edgeBot>
+				<edgeLeft>Damage/Edge</edgeLeft>
+				<edgeRight>Damage/Edge</edgeRight>
+			</damageData>
+		</graphicData>
+		<uiIconPath>rxFoamWall/foamWallIcon</uiIconPath>
+		<statBases>
+			<MaxHitPoints>8500</MaxHitPoints>
+			<WorkToMake>0</WorkToMake>
+			<Flammability>0</Flammability>
+		</statBases>
+		<leaveResourcesWhenKilled>false</leaveResourcesWhenKilled>
+		<altitudeLayer>Building</altitudeLayer>
+		<passability>Impassable</passability>
+		<castEdgeShadows>true</castEdgeShadows>
+		<staticSunShadowHeight>1.0</staticSunShadowHeight>
+		<blockLight>true</blockLight>
+		<fillPercent>1</fillPercent>
+		<coversFloor>true</coversFloor>
+		<placingDraggableDimensions>1</placingDraggableDimensions>
+		<tickerType>Never</tickerType>
+		<rotatable>false</rotatable>
+		<selectable>true</selectable>
+		<neverMultiSelect>false</neverMultiSelect>
+		<terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
+		<holdsRoof>true</holdsRoof>
+		<saveCompressible>false</saveCompressible>
+		<mineable>true</mineable>
+		<building Class="RemoteTech.BuildingProperties_FoamWall">
+			<isInert>true</isInert>
+			<isNaturalRock>false</isNaturalRock>
+			<canBuildNonEdificesUnder>false</canBuildNonEdificesUnder>
+			<deconstructible>false</deconstructible>
+			<repairable>false</repairable>
+			<blueprintGraphicData>
+				<texPath>Things/Building/Linked/Wall_Blueprint_Atlas</texPath>
+			</blueprintGraphicData>
+		</building>
+		<damageMultipliers>
+			<li>
+				<damageDef>Bomb</damageDef>
+				<multiplier>1.75</multiplier>
+			</li>
+			<li>
+				<damageDef>Bullet</damageDef>
+				<multiplier>0.03</multiplier>
+			</li>
+			<li>
+				<damageDef>Mining</damageDef>
+				<multiplier>3</multiplier>
+			</li>
+		</damageMultipliers>
+	</ThingDef>
+
+	<ThingDef ParentName="rxFoamWallBase">
+		<defName>rxFoamWall</defName>
+		<label>hardened foam wall</label>
+		<description>Solidified chemical foam. Extremely tough and non-flammable.</description>
+		<graphicData>
+			<texPath>rxFoamWall/foamWallAtlas</texPath>
+		</graphicData>
+		<statBases>
+			<Beauty>-10</Beauty>
+		</statBases>
+		<building Class="RemoteTech.BuildingProperties_FoamWall">
+			<smoothWorkAmount>1000</smoothWorkAmount>
+			<smoothVariants>
+				<li>rxFoamWallSmooth</li>
+				<li>rxFoamWallBricks</li>
+			</smoothVariants>
+		</building>
+	</ThingDef>
+
+	<ThingDef ParentName="rxFoamWallBase">
+		<defName>rxFoamWallSmooth</defName>
+		<label>smooth foam wall</label>
+		<description>Solidified chemical foam. Made a bit more presentable by smoothing the surface.</description>
+		<graphicData>
+			<texPath>Things/Building/Linked/Wall/Wall_Atlas_Smooth</texPath>
+		</graphicData>
+		<statBases>
+			<Beauty>0</Beauty>
+		</statBases>
+	</ThingDef>
+
+	<ThingDef ParentName="rxFoamWallBase">
+		<defName>rxFoamWallBricks</defName>
+		<label>chiseled foam wall</label>
+		<description>Solidified chemical foam. Made a bit more presentable by carving a brick pattern into the surface.</description>
+		<graphicData>
+			<texPath>Things/Building/Linked/Wall/Wall_Atlas_Bricks</texPath>
+		</graphicData>
+		<statBases>
+			<Beauty>0</Beauty>
+		</statBases>
+	</ThingDef>
+
+	<ThingDef>
+		<defName>rxCollapsedRoofRocks</defName>
+		<graphicData>
+			<texPath>Things/Building/Natural/CollapsedRocks</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<linkType>None</linkType>
+			<drawSize>(3,3)</drawSize>
+		</graphicData>
+		<thingClass>Mineable</thingClass>
+		<description>Collapsed rocks, packed tightly enough to hold up a roof.</description>
+		<label>collapsed rocks</label>
+		<drawerType>MapMeshOnly</drawerType>
+		<category>Building</category>
+		<selectable>true</selectable>
+		<filthLeaving>Filth_RubbleRock</filthLeaving>
+		<scatterableOnMapGen>false</scatterableOnMapGen>
+		<altitudeLayer>Building</altitudeLayer>
+		<passability>PassThroughOnly</passability>
+		<pathCost>200</pathCost>
+		<pathCostIgnoreRepeat>false</pathCostIgnoreRepeat>
+		<blockWind>true</blockWind>
+		<castEdgeShadows>true</castEdgeShadows>
+		<fillPercent>1</fillPercent>
+		<coversFloor>true</coversFloor>
+		<neverMultiSelect>false</neverMultiSelect>
+		<saveCompressible>false</saveCompressible>
+		<holdsRoof>true</holdsRoof>
+		<staticSunShadowHeight>1.0</staticSunShadowHeight>
+		<blockLight>true</blockLight>
+		<mineable>true</mineable>
+		<rotatable>true</rotatable>
+		<statBases>
+			<MaxHitPoints>500</MaxHitPoints>
+			<Flammability>0</Flammability>
+		</statBases>
+		<building>
+			<isInert>true</isInert>
+			<canBuildNonEdificesUnder>false</canBuildNonEdificesUnder>
+			<deconstructible>false</deconstructible>
+			<isNaturalRock>false</isNaturalRock>
+			<claimable>false</claimable>
+		</building>
+	</ThingDef>
+
+	<ThingDef ParentName="rxBuildingMiscBase">
+		<defName>rxGasVent</defName>
+		<label>gas vent</label>
+		<thingClass>RemoteTech.Building_GasVent</thingClass>
+		<description>Pushes gasses from one side to the other when powered. Also equalizes heat like a regular vent when powered.
+Tip: switches can be used to toggle vents remotely, as well as in groups.</description>
+		<designationCategory>rxRemoteTech</designationCategory>
+		<graphicData>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<texPath>rxGasVent/GasVent</texPath>
+			<drawSize>(1,1)</drawSize>
+			<shadowData>
+				<volume>(1, 1, 1)</volume>
+			</shadowData>
+			<damageData>
+				<rect>(0.1,0.1,1.8,1.8)</rect>
+			</damageData>
+		</graphicData>
+		<costList>
+			<Steel>40</Steel>
+			<ComponentIndustrial>2</ComponentIndustrial>
+		</costList>
+		<constructEffect>ConstructMetal</constructEffect>
+		<altitudeLayer>Building</altitudeLayer>
+		<fillPercent>1</fillPercent>
+		<useHitPoints>True</useHitPoints>
+		<statBases>
+			<MaxHitPoints>80</MaxHitPoints>
+			<WorkToBuild>2000</WorkToBuild>
+			<Flammability>0.8</Flammability>
+			<Beauty>-3</Beauty>
+			<rxPowerConsumption>50</rxPowerConsumption>
+			<rxVentingPower>1350</rxVentingPower>
+		</statBases>
+		<tickerType>Normal</tickerType>
+		<size>(1,1)</size>
+		<terrainAffordanceNeeded>Heavy</terrainAffordanceNeeded>
+		<passability>Impassable</passability>
+		<building Class="RemoteTech.BuildingProperties_GasVent">
+			<heatExchangedPerSecond>0.0672</heatExchangedPerSecond>
+			<canPlaceOverWall>true</canPlaceOverWall>
+		</building>
+		<comps>
+			<li Class="CompProperties_Power">
+				<compClass>RemoteTech.CompStatPowerIdle</compClass>
+				<shortCircuitInRain>false</shortCircuitInRain>
+			</li>
+			<li Class="CompProperties_Flickable"/>
+			<li Class="CompProperties_Breakdownable"/>
+			<li Class="RemoteTech.CompProperties_Upgrade">
+				<label>Armor plating</label>
+				<referenceId>ArmorPlating</referenceId>
+				<workAmount>2000</workAmount>
+				<statModifiers>
+					<MaxHitPoints>3</MaxHitPoints>
+					<Flammability>0</Flammability>
+				</statModifiers>
+				<costList>
+					<Plasteel>50</Plasteel>
+				</costList>
+			</li>
+			<li Class="RemoteTech.CompProperties_Upgrade">
+				<label>High-power fans</label>
+				<referenceId>PowerFans</referenceId>
+				<workAmount>1500</workAmount>
+				<statModifiers>
+					<rxVentingPower>2</rxVentingPower>
+					<rxPowerConsumption>2</rxPowerConsumption>
+					<Beauty>10</Beauty>
+				</statModifiers>
+				<costList>
+					<ComponentIndustrial>2</ComponentIndustrial>
+					<Steel>60</Steel>
+				</costList>
+			</li>
+			<li Class="RemoteTech.CompProperties_Upgrade">
+				<label>Idle power relay</label>
+				<referenceId>IdlePower</referenceId>
+				<workAmount>1000</workAmount>
+				<effectDescription>The vent will draw very little power when no gas needs to be moved.</effectDescription>
+				<costList>
+					<ComponentIndustrial>2</ComponentIndustrial>
+				</costList>
+			</li>
+		</comps>
+		<placeWorkers>
+			<li>RemoteTech.PlaceWorker_GasVent</li>
+		</placeWorkers>
+		<drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>
+		<researchPrerequisites>
+			<li>rxGasVent</li>
+		</researchPrerequisites>
+	</ThingDef>
+
+	<ThingDef ParentName="BuildingBase">
+		<defName>rxPowerUnit</defName>
+		<label>portable power unit</label>
+		<description>High-tech solar panels combined with a battery bank. Lightweight and weatherproof- a great choice for camping trips and powering things in the field. The battery will retain its charge when uninstalled. The bar shows the charge level of the battery.</description>
+		<thingClass>Building</thingClass>
+		<graphicData>
+			<texPath>rxPowerUnit</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<drawSize>(2,2)</drawSize>
+			<shadowData>
+				<volume>(1.5,0.5,1.5)</volume>
+			</shadowData>
+			<damageData>
+				<cornerTL>Damage/Corner</cornerTL>
+				<cornerTR>Damage/Corner</cornerTR>
+				<cornerBL>Damage/Corner</cornerBL>
+				<cornerBR>Damage/Corner</cornerBR>
+			</damageData>
+		</graphicData>
+		<castEdgeShadows>true</castEdgeShadows>
+		<rotatable>false</rotatable>
+		<altitudeLayer>Building</altitudeLayer>
+		<passability>PassThroughOnly</passability>
+		<pathCost>70</pathCost>
+		<fillPercent>0.5</fillPercent>
+		<statBases>
+			<MaxHitPoints>200</MaxHitPoints>
+			<WorkToBuild>2500</WorkToBuild>
+			<Flammability>0.7</Flammability>
+			<Mass>10</Mass>
+			<Beauty>-10</Beauty>
+			<rxPowerConsumption>-800</rxPowerConsumption>
+			<rxSunExposure>1</rxSunExposure>
+			<rxPowerCapacity>300</rxPowerCapacity>
+		</statBases>
+		<minifiedDef>MinifiedThing</minifiedDef>
+	    <thingCategories>
+			<li>BuildingsPower</li>
+		</thingCategories>
+		<tickerType>Normal</tickerType>
+		<size>(2,2)</size>
+		<costList>
+			<Steel>40</Steel>
+			<Silver>10</Silver>
+			<ComponentIndustrial>2</ComponentIndustrial>
+			<ComponentSpacer>1</ComponentSpacer>
+		</costList>
+		<comps>
+			<li Class="CompProperties_Power">
+				<compClass>RemoteTech.CompStatSolarGenerator</compClass>
+				<transmitsPower>true</transmitsPower>
+			</li>
+			<li Class="RemoteTech.CompProperties_BatteryWithBar">
+				<efficiency>0.5</efficiency>
+				<shortCircuitInRain>false</shortCircuitInRain>
+				<transmitsPower>true</transmitsPower>
+				<passiveDischargeWatts>2.5</passiveDischargeWatts>
+				<barSize>(1.32, 0.046)</barSize>
+				<barMargin>0.015</barMargin>
+			</li>
+			<li Class="CompProperties_Breakdownable"/>
+			<li Class="RemoteTech.CompProperties_Upgrade">
+				<label>Bigger battery</label>
+				<referenceId>BiggerBattery</referenceId>
+				<workAmount>1500</workAmount>
+				<statModifiers>
+					<rxPowerCapacity>1.75</rxPowerCapacity>
+					<Mass>1.5</Mass>
+				</statModifiers>
+				<costList>
+					<ComponentIndustrial>3</ComponentIndustrial>
+				</costList>
+			</li>			
+			<li Class="RemoteTech.CompProperties_Upgrade">
+				<label>Tracking motors</label>
+				<referenceId>MoreSunExposure</referenceId>
+				<workAmount>2000</workAmount>
+				<statModifiers>
+					<rxSunExposure>2</rxSunExposure>
+					<Mass>1.2</Mass>
+				</statModifiers>
+				<costList>
+					<ComponentIndustrial>1</ComponentIndustrial>
+					<Steel>40</Steel>
+				</costList>
+			</li>
+		</comps>
+		<terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
+		<designationCategory>rxRemoteTech</designationCategory>
+		<constructEffect>ConstructMetal</constructEffect>
+		<researchPrerequisites>
+			<li>rxPortablePower</li>
+		</researchPrerequisites>
+		<constructionSkillPrerequisite>12</constructionSkillPrerequisite>
+	</ThingDef>
+
+	<ThingDef ParentName="BuildingBase">
+		<defName>rxProximitySensor</defName>
+		<label>proximity sensor</label>
+		<thingClass>RemoteTech.Building_ProximitySensor</thingClass>
+		<description>Scans for movement in the surrounding area. On detection, can either sound an alarm, or send a detonation signal. Can be upgraded to a wireless detonator, and even an AI core to ignore friendly units.</description>
+		<graphicData Class="RemoteTech.GraphicData_Blinker">
+			<texPath>rxProximitySensor</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+			<drawSize>(1,1)</drawSize>
+			<shadowData>
+				<volume>(.7, 0.5, .7)</volume>
+			</shadowData>
+			<blinkerOffset>(0, 0, .05)</blinkerOffset>
+			<blinkerColor>(1, 1, 1, 1)</blinkerColor>
+		</graphicData>
+		<drawerType>RealtimeOnly</drawerType>
+		<costList>
+			<Steel>60</Steel>
+			<ComponentIndustrial>2</ComponentIndustrial>
+		</costList>
+		<thingCategories>
+			<li>Buildings</li>
+		</thingCategories>
+		<tickerType>Normal</tickerType>
+		<comps>
+			<li Class="CompProperties_Power">
+				<compClass>RemoteTech.CompStatPower</compClass>
+				<shortCircuitInRain>false</shortCircuitInRain>
+			</li>
+			<li Class="CompProperties_Flickable"/>
+			<li Class="CompProperties_Breakdownable"/>
+			<li Class="RemoteTech.CompProperties_ChannelSelector"/>
+			<li Class="RemoteTech.CompProperties_WirelessDetonationGridNode"/>
+			<li Class="RemoteTech.CompProperties_WiredDetonationSender"/>
+			<li><compClass>RemoteTech.CompAIPilotLight</compClass></li>
+			<li Class="CompProperties_Glower">
+				<compClass>RemoteTech.CompGlowerToggleable</compClass>
+				<overlightRadius>1.5</overlightRadius>
+				<glowRadius>3</glowRadius>
+				<glowColor>(255,50,25,0)</glowColor>
+			</li>
+			<li Class="RemoteTech.CompProperties_Upgrade">
+				<label>Signal processor</label>
+				<referenceId>SignalProcessor</referenceId>
+				<workAmount>2000</workAmount>
+				<statModifiers>
+					<rxSensorRange>1.25</rxSensorRange>
+					<rxSensorAngle>1.25</rxSensorAngle>
+					<rxPowerConsumption>1.2</rxPowerConsumption>
+				</statModifiers>
+				<costList>
+					<ComponentSpacer>1</ComponentSpacer>
+				</costList>
+				<constructionSkillPrerequisite>10</constructionSkillPrerequisite>
+			</li>
+			<li Class="RemoteTech.CompProperties_Upgrade">
+				<label>Wireless detonator</label>
+				<referenceId>WirelessDetonation</referenceId>
+				<workAmount>2000</workAmount>
+				<effectDescription>Adds a wireless detonator to the detector, allowing it to trigger wireless explosives.</effectDescription>
+				<costList>
+					<ComponentIndustrial>1</ComponentIndustrial>
+					<ComponentSpacer>1</ComponentSpacer>
+				</costList>
+				<constructionSkillPrerequisite>7</constructionSkillPrerequisite>
+			</li>
+			<li Class="RemoteTech.CompProperties_Upgrade">
+				<label>AI controller</label>
+				<referenceId>AIController</referenceId>
+				<workAmount>8000</workAmount>
+				<effectDescription>Installs an AI persona core to filter the detected targets.</effectDescription>
+				<statModifiers>
+					<rxSensorSpeed>1.25</rxSensorSpeed>
+					<MaxHitPoints>2</MaxHitPoints>
+					<Flammability>0</Flammability>
+				</statModifiers>
+				<costList>
+					<AIPersonaCore>1</AIPersonaCore>
+					<Plasteel>40</Plasteel>
+				</costList>
+				<constructionSkillPrerequisite>12</constructionSkillPrerequisite>
+			</li>
+		</comps>
+		<altitudeLayer>Building</altitudeLayer>
+		<fillPercent>0.5</fillPercent>
+		<useHitPoints>True</useHitPoints>
+		<statBases>
+			<WorkToBuild>1700</WorkToBuild>
+			<MaxHitPoints>120</MaxHitPoints>
+			<Flammability>.5</Flammability>
+			<Mass>10</Mass>
+			<rxPowerConsumption>50</rxPowerConsumption>
+			<rxSensorSpeed>72</rxSensorSpeed>
+			<rxSignalRange>20</rxSignalRange>
+			<!-- careful with these- the sensor can impact game performance at high values. -->
+			<rxSensorAngle>36</rxSensorAngle>
+			<rxSensorRange>8</rxSensorRange>
+		</statBases>
+		<size>(1,1)</size>
+		<constructEffect>ConstructMetal</constructEffect>
+		<passability>PassThroughOnly</passability>
+		<pathCost>50</pathCost>
+		<minifiedDef>MinifiedThing</minifiedDef>
+		<designationCategory>rxRemoteTech</designationCategory>
+		<researchPrerequisites>
+			<li>rxProximitySensor</li>
+		</researchPrerequisites>
+	</ThingDef>
+	
+</Defs>

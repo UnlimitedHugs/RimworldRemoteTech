@@ -1,6 +1,6 @@
 ﻿using Verse;
 
-namespace RemoteExplosives {
+namespace RemoteTech {
 	/// <summary>
 	/// Allows a non-linked graphic to be connected to by other linked graphics. 
 	/// Only LinkFlags need to be set on the graphicData.

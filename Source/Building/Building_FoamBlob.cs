@@ -4,11 +4,11 @@ using UnityEngine;
 using Verse;
 using Verse.Sound;
 
-namespace RemoteExplosives {
-	/* 
-	 * Created by the sealing foam canister. 
-	 * Will spread a given number of times and turn into another building (wall) once time runs out.
-	 */
+namespace RemoteTech {
+	/// <summary>
+	/// Created by the sealing foam canister. 
+	/// Will spread a given number of times and turn into another building (wall) once time runs out.
+	/// </summary>
 	public class Building_FoamBlob : Building {
 		private const float animationDuration = 1f;
 		private const float animationMagnitude = 1.5f;
@@ -18,7 +18,7 @@ namespace RemoteExplosives {
 		private int ticksUntilHardened = -1;
 		private int numSpreadsLeft;
 		private int ticksUntilNextSpread;
-		private readonly InterpolatedValue animationProgress = new InterpolatedValue { value = 1 };
+		private readonly ValueInterpolator animationProgress = new ValueInterpolator(1f);
 		public Vector2 spriteScaleMultiplier = new Vector2(1f, 1f);
 
 		private List<IntVec3> adjacentCells;
@@ -27,12 +27,14 @@ namespace RemoteExplosives {
 		public override void SpawnSetup(Map map, bool respawningAfterLoad) {
 			base.SpawnSetup(map, respawningAfterLoad);
 			foamProps = (BuildingProperties_FoamBlob)def.building;
+			this.RequireComponent(foamProps);
 			if(justCreated) {
 				SetFactionDirect(Faction.OfPlayer);
 				ticksUntilHardened = foamProps.ticksToHarden.RandomInRange;
-				Resources.Sound.RemoteFoamSpray.PlayOneShot(this);
+				Resources.Sound.rxFoamSpray.PlayOneShot(this);
 				PrimeSpawnAnimation();
 				justCreated = false;
+				ticksUntilNextSpread = foamProps.ticksBetweenSpreading.RandomInRange;
 			}
 		}
 
@@ -48,14 +50,13 @@ namespace RemoteExplosives {
 			Scribe_Values.Look(ref ticksUntilNextSpread, "ticksUntilNextSpread");
 		}
 
-		public void SetSpreadingCharges(int numCharges) {
-			numSpreadsLeft = numCharges;
-			ticksUntilNextSpread = foamProps.ticksBetweenSpreading.RandomInRange;
+		public void AddSpreadingCharges(int numCharges) {
+			numSpreadsLeft += numCharges;
 		}
 
 		private void PrimeSpawnAnimation() {
 			animationProgress.value = 0;
-			animationProgress.StartInterpolation(1f, animationDuration, InterpolationCurves.QuinticEaseOut);
+			animationProgress.StartInterpolation(1f, animationDuration, CurveType.QuinticOut);
 		}
 
 		private void Harden() {
@@ -65,7 +66,7 @@ namespace RemoteExplosives {
 			var wallTile = ThingMaker.MakeThing(foamProps.hardenedDef);
 			wallTile.SetFactionDirect(Faction.OfPlayer);
 			GenPlace.TryPlaceThing(wallTile, pos, map, ThingPlaceMode.Direct);
-			Resources.Sound.RemoteFoamSolidify.PlayOneShot(this);
+			Resources.Sound.rxFoamSolidify.PlayOneShot(this);
 		}
 
 		public override void Tick() {

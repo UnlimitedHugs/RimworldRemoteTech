@@ -1,10 +1,10 @@
 ﻿using System;
 using Verse;
 
-namespace RemoteExplosives {
-	/*
-	 * Transmits a new detonation signal to CompWiredDetonationTransmitter comps on the same tile. 
-	 */
+namespace RemoteTech {
+	/// <summary>
+	/// Transmits a new detonation signal to CompWiredDetonationTransmitter comps on the same tile. 
+	/// </summary>
 	public class CompWiredDetonationSender : CompDetonationGridNode {
 		public void SendNewSignal() {
 			if (parent.Map == null) throw new Exception("null map");

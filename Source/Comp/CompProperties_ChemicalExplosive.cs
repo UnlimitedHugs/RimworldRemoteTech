@@ -2,7 +2,7 @@
 using RimWorld;
 using Verse;
 
-namespace RemoteExplosives {
+namespace RemoteTech {
 	public class CompProperties_ChemicalExplosive : CompProperties_Explosive {
 		public SoundDef breakSound;
 		public ThingDef spawnThingDef;

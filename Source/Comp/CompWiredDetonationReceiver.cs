@@ -2,10 +2,10 @@
 using RimWorld;
 using Verse;
 
-namespace RemoteExplosives {
-	/*
-	 * Receives detonation signals from CompWiredDetonationTransmitter and light explosives attached to parent thing.
-	 */
+namespace RemoteTech {
+	/// <summary>
+	/// Receives detonation signals from CompWiredDetonationTransmitter and light explosives attached to parent thing.
+	/// </summary>
 	public class CompWiredDetonationReceiver : CompDetonationGridNode {
 		public void ReceiveSignal(int delayTicks) {
 			var parentExplosive = parent as Building_RemoteExplosive;

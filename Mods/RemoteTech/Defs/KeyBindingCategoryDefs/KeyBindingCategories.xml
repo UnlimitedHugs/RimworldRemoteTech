@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<Defs>
+	<KeyBindingCategoryDef>
+		<defName>rxRemoteTech</defName>
+		<label>Remote Tech</label>
+		<description>Shortcuts for actions in the Remote Tech mod.</description>
+		<checkForConflicts>
+			<li>GameMapCamera</li>
+			<li>Game</li>
+		</checkForConflicts>
+	</KeyBindingCategoryDef>
+	
+    <KeyBindingCategoryDef>
+		<defName>rxDetonator</defName>
+		<label>Remote Tech Detonator</label>
+		<description>Shortcuts for actions in the Remote Tech mod.</description>
+		<checkForConflicts>
+			<li>GameMapCamera</li>
+			<li>Game</li>
+		</checkForConflicts>
+	</KeyBindingCategoryDef>
+	
+    <KeyBindingCategoryDef>
+		<defName>rxTools</defName>
+		<label>Remote Tech Tools</label>
+		<description>Shortcuts for activation of Remote Tech items worn by pawns.</description>
+		<checkForConflicts>
+			<li>GameMapCamera</li>
+			<li>Game</li>
+		</checkForConflicts>
+	</KeyBindingCategoryDef>
+	
+	
+</Defs>

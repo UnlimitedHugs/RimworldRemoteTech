@@ -2,7 +2,7 @@
 using UnityEngine;
 using Verse;
 
-namespace RemoteExplosives {
+namespace RemoteTech {
 	// Transmits the wired detonation signal to signal receiver comps and transmitter comps on adjacent tiles. 
 	public class CompWiredDetonationTransmitter : CompDetonationGridNode {
 		public delegate bool AllowSignalPassage();

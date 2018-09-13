@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+	
+	<WorkGiverDef>
+		<defName>rxDetonateExplosives</defName>
+		<label>trigger detonator</label>
+		<giverClass>RemoteTech.WorkGiver_IPawnDetonateable</giverClass>
+		<workType>BasicWorker</workType>
+		<priorityInType>10</priorityInType>
+		<verb>detonate</verb>
+		<gerund>detonating</gerund>
+	</WorkGiverDef>
+	
+	<WorkGiverDef>
+		<defName>rxSwitchThings</defName>
+		<label>switch remote explosive</label>
+		<giverClass>RemoteTech.WorkGiver_SwitchableThing</giverClass>
+		<workType>BasicWorker</workType>
+		<priorityInType>9</priorityInType>
+		<verb>switch</verb>
+		<gerund>switching</gerund>
+	</WorkGiverDef>
+	
+	<WorkGiverDef>
+		<defName>rxInstallUpgrade</defName>
+		<label>install upgrade</label>
+		<giverClass>RemoteTech.WorkGiver_InstallUpgrade</giverClass>
+		<workType>Construction</workType>
+		<priorityInType>200</priorityInType>
+		<verb>upgrade</verb>
+		<gerund>upgrading</gerund>
+	</WorkGiverDef>
+	
+	<WorkGiverDef>
+		<defName>rxDoBillsBench</defName>
+		<label>assemble explosive</label>
+		<giverClass>WorkGiver_DoBill</giverClass>
+		<workType>Smithing</workType>
+		<priorityInType>60</priorityInType>
+		<fixedBillGiverDefs>
+			<li>rxBench</li>
+		</fixedBillGiverDefs>
+		<verb>assemble explosive</verb>
+		<gerund>assembling explosive at</gerund>
+		<requiredCapacities>
+			<li>Manipulation</li>
+		</requiredCapacities>
+	</WorkGiverDef>
+	
+	<WorkGiverDef>
+		<defName>rxDoBillsCraftFire</defName>
+		<label>do bills at fireplace</label>
+		<giverClass>WorkGiver_DoBill</giverClass>
+		<workType>Crafting</workType>
+		<priorityInType>50</priorityInType>
+		<fixedBillGiverDefs>
+			<li>Campfire</li>
+			<li>FueledStove</li>
+		</fixedBillGiverDefs>
+		<verb>craft</verb>
+		<gerund>crafting at</gerund>
+		<requiredCapacities>
+			<li>Manipulation</li>
+		</requiredCapacities>
+		<prioritizeSustains>true</prioritizeSustains>
+	</WorkGiverDef>
+	
+	<WorkGiverDef>
+		<defName>rxDryOffDetonatorWire</defName>
+		<label>dry off detonator wire</label>
+		<giverClass>RemoteTech.WorkGiver_DetonatorWire</giverClass>
+		<workType>Cleaning</workType>
+		<priorityInType>50</priorityInType>
+		<verb>dry off</verb>
+		<gerund>drying off</gerund>
+		<requiredCapacities>
+			<li>Manipulation</li>
+		</requiredCapacities>
+		<prioritizeSustains>true</prioritizeSustains>
+	</WorkGiverDef>
+	
+	<WorkGiverDef>
+		<defName>rxSmoothFoamWall</defName>
+		<label>smooth foam wall</label>
+		<giverClass>RemoteTech.WorkGiver_FoamWall</giverClass>
+		<workType>Construction</workType>
+		<priorityInType>8</priorityInType>
+		<verb>smooth foam wall</verb>
+		<gerund>smoothing</gerund>
+		<requiredCapacities>
+			<li>Manipulation</li>
+		</requiredCapacities>
+		<prioritizeSustains>true</prioritizeSustains>
+	</WorkGiverDef>
+
+</Defs>

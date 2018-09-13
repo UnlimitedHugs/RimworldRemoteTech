@@ -2,10 +2,10 @@
 using UnityEngine;
 using Verse;
 
-namespace RemoteExplosives {
-	/* 
-	 * A mining explosive that affects an area of a square with the corners cut off.
-	 */
+namespace RemoteTech {
+	/// <summary>
+	/// A mining explosive that affects an area of a square with the corners cut off.
+	/// </summary>
 	public class Building_MiningExplosiveSquare : Building_MiningExplosive {
 
 		public static List<IntVec3> GetAffectedCellsSquareAtPosition(IntVec3 position, float radius) {

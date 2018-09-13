@@ -1,0 +1,346 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+	
+	<SoundDef>
+		<defName>rxBeep</defName>  
+		<context>MapOnly</context>
+		<eventNames />  
+		<maxVoices>4</maxVoices>   
+		<maxSimultaneous>5</maxSimultaneous>  
+		<subSounds>
+			<li>
+				<grains>
+					<li Class="AudioGrain_Clip">
+						<clipPath>rxBeep</clipPath>
+					</li>
+				</grains>     
+				<volumeRange>
+					<min>3</min>
+					<max>3</max>
+				</volumeRange>   
+			</li>   
+		</subSounds>
+	</SoundDef>
+	
+	<SoundDef>
+		<defName>rxArmed</defName>  
+		<context>MapOnly</context> 
+		<eventNames />  
+		<maxVoices>4</maxVoices>   
+		<maxSimultaneous>1</maxSimultaneous>  
+		<subSounds>
+			<li>
+				<grains>
+					<li Class="AudioGrain_Clip">
+						<clipPath>rxArmBeep</clipPath>
+					</li>
+				</grains>     
+				<volumeRange>
+					<min>3</min>
+					<max>4</max>
+				</volumeRange>
+			</li>   
+		</subSounds>
+	</SoundDef>
+	
+	<SoundDef>
+		<defName>rxMiningCavein</defName>  
+		<context>MapOnly</context>
+		<eventNames />  
+		<maxVoices>3</maxVoices>   
+		<maxSimultaneous>3</maxSimultaneous>  
+		<subSounds>
+			<li>
+				<grains>
+					<li Class="AudioGrain_Clip">
+						<clipPath>rxCavein</clipPath>
+					</li>
+				</grains>     
+				<volumeRange>
+					<min>50</min>
+					<max>80</max>
+				</volumeRange>
+				<pitchRange>
+					<min>0.9</min>        
+					<max>1.1</max>
+				</pitchRange>
+			</li>   
+		</subSounds>
+	</SoundDef>
+	
+	<SoundDef>
+		<defName>rxEmpCharge</defName>   
+		<context>MapOnly</context>
+		<eventNames />  
+		<maxVoices>3</maxVoices>   
+		<maxSimultaneous>3</maxSimultaneous>  
+		<subSounds>
+			<li>
+				<grains>
+					<li Class="AudioGrain_Clip">
+						<clipPath>rxEmpCharge</clipPath>
+					</li>
+				</grains>     
+				<volumeRange>
+					<min>40</min>
+					<max>50</max>
+				</volumeRange>
+				<pitchRange>
+					<min>0.9</min>        
+					<max>1.1</max>
+				</pitchRange>
+			</li>   
+		</subSounds>
+	</SoundDef>
+	
+	<SoundDef>
+		<defName>rxChannelChange</defName>  
+		<context>MapOnly</context>
+		<eventNames />  
+		<maxVoices>3</maxVoices>   
+		<maxSimultaneous>3</maxSimultaneous>  
+		<subSounds>
+			<li>
+				<grains>
+					<li Class="AudioGrain_Clip">
+						<clipPath>rxDialClick</clipPath>
+					</li>
+				</grains>     
+				<volumeRange>
+					<min>5</min>
+					<max>6</max>
+				</volumeRange>
+				<pitchRange>
+					<min>1.15</min>        
+					<max>1.25</max>
+				</pitchRange>
+			</li>   
+		</subSounds>
+	</SoundDef>
+	
+	<SoundDef>
+		<defName>rxDialClick</defName>  
+		<eventNames />  
+		<maxVoices>3</maxVoices>   
+		<maxSimultaneous>3</maxSimultaneous>  
+		<subSounds>
+			<li>
+				<onCamera>True</onCamera>  
+				<grains>
+					<li Class="AudioGrain_Clip">
+						<clipPath>rxDialClick</clipPath>
+					</li>
+				</grains>     
+				<volumeRange>
+					<min>7</min>
+					<max>8</max>
+				</volumeRange>
+				<pitchRange>
+					<min>0.95</min>        
+					<max>1.05</max>
+				</pitchRange>
+			</li>   
+		</subSounds>
+	</SoundDef>	
+
+	<SoundDef>
+		<defName>rxFoamSpray</defName>  
+		<context>MapOnly</context> 
+		<eventNames />  
+		<maxVoices>5</maxVoices>   
+		<maxSimultaneous>5</maxSimultaneous>  
+		<subSounds>
+			<li>
+				<grains>
+					<li Class="AudioGrain_Clip">
+						<clipPath>rxFoamSpray</clipPath>
+					</li>
+				</grains>     
+				<volumeRange>
+					<min>40</min>
+					<max>70</max>
+				</volumeRange>
+				<pitchRange>
+					<min>0.85</min>        
+					<max>1.15</max>
+				</pitchRange>
+			</li>   
+		</subSounds>
+	</SoundDef>
+	
+	<SoundDef>
+		<defName>rxGlassBreak</defName>  
+		<context>MapOnly</context>
+		<eventNames />  
+		<maxVoices>4</maxVoices>   
+		<maxSimultaneous>4</maxSimultaneous>  
+		<subSounds>
+			<li>
+				<grains>
+					<li Class="AudioGrain_Clip">
+						<clipPath>rxGlassBreak</clipPath>
+					</li>
+				</grains>     
+				<volumeRange>
+					<min>60</min>
+					<max>80</max>
+				</volumeRange>
+				<pitchRange>
+					<min>0.8</min>        
+					<max>1.2</max>
+				</pitchRange>
+			</li>   
+		</subSounds>
+	</SoundDef>
+	
+	<SoundDef>
+		<defName>rxFoamSolidify</defName>  
+		<context>MapOnly</context>
+		<eventNames />  
+		<maxVoices>4</maxVoices>   
+		<maxSimultaneous>4</maxSimultaneous>  
+		<subSounds>
+			<li>
+				<grains>
+					<li Class="AudioGrain_Clip">
+						<clipPath>rxFoamSolidify</clipPath>
+					</li>
+				</grains>     
+				<volumeRange>
+					<min>25</min>
+					<max>40</max>
+				</volumeRange>
+				<pitchRange>
+					<min>0.8</min>        
+					<max>1.2</max>
+				</pitchRange>
+			</li>   
+		</subSounds>
+	</SoundDef>
+	
+	<SoundDef>
+		<defName>rxDetonatorLever</defName>  
+		<context>MapOnly</context>
+		<eventNames />  
+		<maxVoices>4</maxVoices>   
+		<maxSimultaneous>4</maxSimultaneous>  
+		<subSounds>
+			<li>
+				<grains>
+					<li Class="AudioGrain_Clip">
+						<clipPath>rxLeverCycle</clipPath>
+					</li>
+				</grains>     
+				<volumeRange>
+					<min>40</min>
+					<max>50</max>
+				</volumeRange>
+				<pitchRange>
+					<min>0.8</min>        
+					<max>1.2</max>
+				</pitchRange>
+			</li>   
+		</subSounds>
+	</SoundDef>
+	
+	<SoundDef>
+		<defName>rxSparkweedIgnite</defName>  
+		<context>MapOnly</context>
+		<eventNames />  
+		<maxVoices>4</maxVoices>   
+		<maxSimultaneous>4</maxSimultaneous>  
+		<subSounds>
+			<li>
+				<grains>
+					<li Class="AudioGrain_Clip">
+						<clipPath>rxIgnite</clipPath>
+					</li>
+				</grains>     
+				<volumeRange>
+					<min>15</min>
+					<max>25</max>
+				</volumeRange>
+				<pitchRange>
+					<min>0.8</min>        
+					<max>1.2</max>
+				</pitchRange>
+			</li>   
+		</subSounds>
+	</SoundDef>
+	
+	<SoundDef>
+		<defName>rxCableFailure</defName>  
+		<context>MapOnly</context>
+		<eventNames />  
+		<maxVoices>4</maxVoices>   
+		<maxSimultaneous>4</maxSimultaneous>  
+		<subSounds>
+			<li>
+				<grains>
+					<li Class="AudioGrain_Clip">
+						<clipPath>rxElectricZap</clipPath>
+					</li>
+				</grains>     
+				<volumeRange>
+					<min>20</min>
+					<max>25</max>
+				</volumeRange>
+				<pitchRange>
+					<min>0.9</min>        
+					<max>1.1</max>
+				</pitchRange>
+			</li>   
+		</subSounds>
+	</SoundDef>
+	
+	<SoundDef>
+		<defName>rxSensorOne</defName>  
+		<eventNames />  
+		<maxVoices>4</maxVoices>   
+		<maxSimultaneous>4</maxSimultaneous>  
+		<subSounds>
+			<li>
+				<onCamera>True</onCamera>  
+				<grains>
+					<li Class="AudioGrain_Clip">
+						<clipPath>rxSensorChime</clipPath>
+					</li>
+				</grains>     
+				<volumeRange>
+					<min>40</min>
+					<max>40</max>
+				</volumeRange>
+				<pitchRange>
+					<min>0.97</min>        
+					<max>1.03</max>
+				</pitchRange>
+			</li>   
+		</subSounds>
+	</SoundDef>
+	
+	<SoundDef>
+		<defName>rxSensorTwo</defName>  
+		<eventNames />  
+		<maxVoices>4</maxVoices>   
+		<maxSimultaneous>4</maxSimultaneous>  
+		<subSounds>
+			<li>
+				<onCamera>True</onCamera>  
+				<grains>
+					<li Class="AudioGrain_Clip">
+						<clipPath>rxSensorBlip</clipPath>
+					</li>
+				</grains>     
+				<volumeRange>
+					<min>30</min>
+					<max>30</max>
+				</volumeRange>
+				<pitchRange>
+					<min>0.97</min>        
+					<max>1.03</max>
+				</pitchRange>
+			</li>   
+		</subSounds>
+	</SoundDef>
+	
+</Defs>

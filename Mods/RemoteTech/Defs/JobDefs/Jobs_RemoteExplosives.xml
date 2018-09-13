@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+	
+	<JobDef>
+		<defName>rxDetonateExplosives</defName>
+		<driverClass>RemoteTech.JobDriver_DetonateExplosives</driverClass>
+		<reportString>Detonating explosives.</reportString>
+	</JobDef>
+	
+	<JobDef>
+		<defName>rxSwitchThing</defName>
+		<driverClass>RemoteTech.JobDriver_SwitchThing</driverClass>
+		<reportString>Switching TargetA.</reportString>
+	</JobDef>
+	
+	<JobDef>
+		<defName>rxDryDetonatorWire</defName>
+		<driverClass>RemoteTech.JobDriver_DryDetonatorWire</driverClass>
+		<reportString>Drying off detonator wire.</reportString>
+	</JobDef>
+	
+	<JobDef>
+		<defName>rxSmoothFoamWall</defName>
+		<driverClass>RemoteTech.JobDriver_SmoothFoamWall</driverClass>
+		<reportString>Smoothing foam wall.</reportString>
+	</JobDef>
+	
+	<JobDef>
+		<defName>rxInstallUpgrade</defName>
+		<driverClass>RemoteTech.JobDriver_InstallUpgrade</driverClass>
+		<reportString>Installing upgrade.</reportString>
+	</JobDef>
+	
+	<JobDef>
+		<defName>rxRedButtonFever</defName>
+		<driverClass>RemoteTech.JobDriver_RedButtonFever</driverClass>
+		<reportString>Triggering TargetA.</reportString>
+		<collideWithPawns>true</collideWithPawns>
+	</JobDef>
+	
+</Defs>

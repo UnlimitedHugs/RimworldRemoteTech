@@ -6,11 +6,11 @@ using RimWorld;
 using UnityEngine;
 using Verse;
 
-namespace RemoteExplosives {
-	/*
-	 * A wire to connect the detonator to explosives.
-	 * Will get wet during rain and have a chance to fail when used unless dried.
-	 */
+namespace RemoteTech {
+	/// <summary>
+	/// A wire to connect the detonator to explosives.
+	/// Will get wet during rain and have a chance to fail when used unless dried.
+	/// </summary>
 
 	public class Building_DetonatorWire : Building {
 		private const float FreezeTemperature = -1f;
@@ -87,7 +87,7 @@ namespace RemoteExplosives {
 				yield return new Command_Toggle {
 					toggleAction = DryGizmoAction,
 					isActive = () => wantDrying,
-					icon = Resources.Textures.UIDryOff,
+					icon = Resources.Textures.rxUIDryOff,
 					defaultLabel = "Wire_dry_label".Translate(),
 					defaultDesc = "Wire_dry_desc".Translate(),
 					hotKey = KeyBindingDefOf.Misc1
@@ -141,7 +141,7 @@ namespace RemoteExplosives {
 		}
 
 		private void UpdateDesignation() {
-			this.ToggleDesignation(Resources.Designation.DetonatorWireDryOff, wantDrying);
+			this.ToggleDesignation(Resources.Designation.rxDetonatorWireDryOff, wantDrying);
 		}
 	}
 }

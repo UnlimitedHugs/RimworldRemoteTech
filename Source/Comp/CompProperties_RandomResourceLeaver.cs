@@ -1,7 +1,7 @@
 ﻿// ReSharper disable UnassignedField.Global
 using Verse;
 
-namespace RemoteExplosives {
+namespace RemoteTech {
 	public class CompProperties_RandomResourceLeaver : CompProperties {
 		public ThingDef thingDef;
 		public IntRange amountRange;

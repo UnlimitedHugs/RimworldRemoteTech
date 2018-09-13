@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+	<ResearchTabDef>
+		<defName>rxRemoteTech</defName>
+		<label>Remote Tech</label>
+	</ResearchTabDef>
+
+</Defs>

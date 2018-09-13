@@ -1,6 +1,6 @@
 ﻿using Verse;
 
-namespace RemoteExplosives {
+namespace RemoteTech {
 	/// <summary>
 	/// Allows the wire crossing to be placed over wires and automatically deconstruct them
 	/// </summary>

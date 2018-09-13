@@ -1,0 +1,510 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+	
+	<RecipeDef>
+		<defName>rxMakeRemoteBomb</defName>
+		<label>make remote explosive</label>
+		<description>Craft a deployable remote explosive.</description>
+		<jobString>Making deployable remote explosive.</jobString>
+		<recipeUsers>
+			<li>rxBench</li>
+		</recipeUsers>
+		<researchPrerequisite>IEDs</researchPrerequisite>
+		<workSpeedStat>SmithingSpeed</workSpeedStat>
+		<effectWorking>Cook</effectWorking>
+		<soundWorking>Recipe_Machining</soundWorking>
+		<allowMixingIngredients>true</allowMixingIngredients>
+		<workAmount>1000</workAmount>
+		<targetCountAdjustment>1</targetCountAdjustment>
+		<ingredients>
+			<li>
+				<filter>
+					<thingDefs>
+						<li>Shell_HighExplosive</li>
+					</thingDefs>
+				</filter>
+				<count>1</count>
+			</li>
+			<li>
+				<filter>
+					<thingDefs>
+						<li>ComponentIndustrial</li>
+					</thingDefs>
+				</filter>
+				<count>1</count>
+			</li>
+			<li>
+				<filter>
+					<thingDefs>
+						<li>Silver</li>
+					</thingDefs>
+				</filter>
+				<count>4</count>
+			</li>
+		</ingredients>
+		<fixedIngredientFilter>
+			<thingDefs>
+				<li>Shell_HighExplosive</li>
+				<li>ComponentIndustrial</li>
+				<li>Silver</li>
+			</thingDefs>
+		</fixedIngredientFilter>
+		<products>
+			<rxRemoteBomb>1</rxRemoteBomb>
+		</products>
+		<workSkill>Crafting</workSkill>
+		<modExtensions>
+			<li Class="RemoteTech.MakeRecipeVariants">
+				<CreateVariants>
+					<li>Steel</li>
+					<li>Sparkpowder</li>
+				</CreateVariants>
+			</li>
+		</modExtensions>
+	</RecipeDef>
+		
+	<RecipeDef>
+		<defName>rxMakeRemoteFireBomb</defName>
+		<label>make incendiary remote explosive</label>
+		<description>Craft a deployable incendiary remote explosive.</description>
+		<jobString>Making deployable incendiary remote explosive.</jobString>
+		<recipeUsers>
+			<li>rxBench</li>
+		</recipeUsers>
+		<researchPrerequisite>IEDs</researchPrerequisite>
+		<workSpeedStat>SmithingSpeed</workSpeedStat>
+		<effectWorking>Cook</effectWorking>
+		<soundWorking>Recipe_Machining</soundWorking>
+		<allowMixingIngredients>true</allowMixingIngredients>
+		<workAmount>1000</workAmount>
+		<targetCountAdjustment>1</targetCountAdjustment>
+		<ingredients>
+			<li>
+				<filter>
+					<thingDefs>
+						<li>Shell_Incendiary</li>
+					</thingDefs>
+				</filter>
+				<count>1</count>
+			</li>
+			<li>
+				<filter>
+					<thingDefs>
+						<li>ComponentIndustrial</li>
+					</thingDefs>
+				</filter>
+				<count>1</count>
+			</li>
+			<li>
+				<filter>
+					<thingDefs>
+						<li>Silver</li>
+					</thingDefs>
+				</filter>
+				<count>4</count>
+			</li>
+		</ingredients>
+		<fixedIngredientFilter>
+			<thingDefs>
+				<li>Shell_Incendiary</li>
+				<li>ComponentIndustrial</li>
+				<li>Silver</li>
+			</thingDefs>
+		</fixedIngredientFilter>
+		<products>
+			<rxRemoteFireBomb>1</rxRemoteFireBomb>
+		</products>
+		<workSkill>Crafting</workSkill>
+		<modExtensions>
+			<li Class="RemoteTech.MakeRecipeVariants">
+				<CreateVariants>
+					<li>Steel</li>
+					<li>Sparkpowder</li>
+				</CreateVariants>
+			</li>
+		</modExtensions>
+	</RecipeDef>
+	
+	<RecipeDef>
+		<defName>rxMakeRemoteEmpBomb</defName>
+		<label>make remote EMP charge</label>
+		<description>Craft a remote EMP charge.</description>
+		<jobString>Making remote EMP charge.</jobString>
+		<recipeUsers>
+			<li>rxBench</li>
+		</recipeUsers>
+		<researchPrerequisite>rxEmpMine</researchPrerequisite>
+		<workSpeedStat>SmithingSpeed</workSpeedStat>
+		<effectWorking>Cook</effectWorking>
+		<soundWorking>Recipe_Machining</soundWorking>
+		<allowMixingIngredients>true</allowMixingIngredients>
+		<workAmount>1800</workAmount>
+		<targetCountAdjustment>1</targetCountAdjustment>
+		<ingredients>
+			<li>
+				<filter>
+					<thingDefs>
+						<li>ComponentIndustrial</li>
+					</thingDefs>
+				</filter>
+				<count>1</count>
+			</li>
+			<li>
+				<filter>
+					<thingDefs>
+						<li>Silver</li>
+					</thingDefs>
+				</filter>
+				<count>4</count>
+			</li>
+			<li>
+				<filter>
+					<thingDefs>
+						<li>Gold</li>
+					</thingDefs>
+				</filter>
+				<count>2</count>
+			</li>
+		</ingredients>
+		<fixedIngredientFilter>
+			<thingDefs>
+				<li>ComponentIndustrial</li>
+				<li>Silver</li>
+				<li>Gold</li>
+			</thingDefs>
+		</fixedIngredientFilter>
+		<products>
+			<rxRemoteEmpBomb>1</rxRemoteEmpBomb>
+		</products>
+		<workSkill>Crafting</workSkill>
+		<modExtensions>
+			<li Class="RemoteTech.MakeRecipeVariants">
+				<CreateVariants>
+					<li>Steel</li>
+				</CreateVariants>
+			</li>
+		</modExtensions>
+	</RecipeDef>  
+	
+	<RecipeDef>
+		<defName>rxMakeMiningExplosiveComponent</defName>
+		<label>make mining explosive</label>
+		<description>Craft a mining explosive.</description>
+		<jobString>Making mining explosive.</jobString>
+		<recipeUsers>
+			<li>rxBench</li>
+		</recipeUsers>
+		<researchPrerequisite>rxRemoteDetonator</researchPrerequisite>
+		<workSpeedStat>SmithingSpeed</workSpeedStat>
+		<effectWorking>Cook</effectWorking>
+		<soundWorking>Recipe_Machining</soundWorking>
+		<allowMixingIngredients>true</allowMixingIngredients>
+		<workAmount>1000</workAmount>
+		<targetCountAdjustment>1</targetCountAdjustment>
+		<ingredients>
+			<li>
+				<filter>
+					<thingDefs>
+						<li>ComponentIndustrial</li>
+					</thingDefs>
+				</filter>
+				<count>1</count>
+			</li>
+			<li>
+				<filter>
+					<thingDefs>
+						<li>Silver</li>
+					</thingDefs>
+				</filter>
+				<count>4</count>
+			</li>
+		</ingredients>
+		<fixedIngredientFilter>
+			<thingDefs>
+				<li>ComponentIndustrial</li>
+				<li>Silver</li>
+			</thingDefs>
+		</fixedIngredientFilter>
+		<products>
+			<rxMiningExplosiveComponent>1</rxMiningExplosiveComponent>
+		</products>
+		<workSkill>Crafting</workSkill>
+		<modExtensions>
+			<li Class="RemoteTech.MakeRecipeVariants">
+				<CreateVariants>
+					<li>Steel</li>
+					<li>Sparkpowder</li>
+				</CreateVariants>
+			</li>
+		</modExtensions>
+	</RecipeDef>  
+	
+	<RecipeDef Name="rxBaseChemicalCan" Abstract="true">
+		<recipeUsers>
+			<li>rxBench</li>
+		</recipeUsers>
+		<workSpeedStat>SmithingSpeed</workSpeedStat>
+		<effectWorking>Cook</effectWorking>
+		<soundWorking>Recipe_Machining</soundWorking>
+		<allowMixingIngredients>true</allowMixingIngredients>
+		<workAmount>1400</workAmount>
+		<targetCountAdjustment>1</targetCountAdjustment>
+		<ingredients>
+			<li>
+				<filter>
+					<thingDefs>
+						<li>ComponentIndustrial</li>
+					</thingDefs>
+				</filter>
+				<count>1</count>
+			</li>
+			<li>
+				<filter>
+					<thingDefs>
+						<li>Silver</li>
+					</thingDefs>
+				</filter>
+				<count>12</count>
+			</li>
+			<li>
+				<filter>
+					<thingDefs>
+						<li>MedicineHerbal</li>
+					</thingDefs>
+				</filter>
+				<count>2</count>
+			</li>
+		</ingredients>
+		<fixedIngredientFilter>
+			<thingDefs>
+				<li>ComponentIndustrial</li>
+				<li>Silver</li>
+				<li>MedicineHerbal</li>
+			</thingDefs>
+		</fixedIngredientFilter>
+		<workSkill>Crafting</workSkill>
+		<modExtensions>
+			<li Class="RemoteTech.MakeRecipeVariants">
+				<CreateVariants>
+					<li>Steel</li>
+				</CreateVariants>
+			</li>
+		</modExtensions>
+	</RecipeDef>
+	
+	<RecipeDef ParentName="rxBaseChemicalCan">
+		<defName>rxMakeRemoteFoamCan</defName>
+		<label>make sealing foam canister</label>
+		<description>Craft a sealing foam canister.</description>
+		<jobString>Making sealing foam canister.</jobString>
+		<researchPrerequisite>rxSealingFoam</researchPrerequisite>
+		<products>
+			<rxRemoteFoamCan>1</rxRemoteFoamCan>
+		</products>
+	</RecipeDef>
+
+	<RecipeDef ParentName="rxBaseChemicalCan">
+		<defName>rxMakeRemoteSleepingGasCan</defName>
+		<label>make sleeping gas canister</label>
+		<description>Craft a canister containing sleeping gas.</description>
+		<jobString>Making sleeping gas canister.</jobString>
+		<researchPrerequisite>rxSleepingGas</researchPrerequisite>
+		<products>
+			<rxRemoteSleepingGasCan>1</rxRemoteSleepingGasCan>
+		</products>
+	</RecipeDef>
+	
+	<RecipeDef>
+		<defName>rxMakeRemoteRefinedSleepingGasCan</defName>
+		<label>make refined sleeping gas canister</label>
+		<description>Craft a refined sleeping gas canister.</description>
+		<jobString>Making refined sleeping gas canister.</jobString>
+		<recipeUsers>
+			<li>rxBench</li>
+		</recipeUsers>
+		<researchPrerequisite>rxRefinedSleepingGas</researchPrerequisite>
+		<workSpeedStat>SmithingSpeed</workSpeedStat>
+		<effectWorking>Cook</effectWorking>
+		<soundWorking>Recipe_Machining</soundWorking>
+		<allowMixingIngredients>true</allowMixingIngredients>
+		<workAmount>1800</workAmount>
+		<targetCountAdjustment>1</targetCountAdjustment>
+		<skillRequirements>
+			<Crafting>10</Crafting>
+		</skillRequirements>
+		<ingredients>
+			<li>
+				<filter>
+					<thingDefs>
+						<li>ComponentIndustrial</li>
+					</thingDefs>
+				</filter>
+				<count>1</count>
+			</li>
+			<li>
+				<filter>
+					<thingDefs>
+						<li>Silver</li>
+					</thingDefs>
+				</filter>
+				<count>12</count>
+			</li>
+			<li>
+				<filter>
+					<thingDefs>
+						<li>MedicineIndustrial</li>
+					</thingDefs>
+				</filter>
+				<count>2</count>
+			</li>
+		</ingredients>
+		<fixedIngredientFilter>
+			<thingDefs>
+				<li>ComponentIndustrial</li>
+				<li>Silver</li>
+				<li>MedicineIndustrial</li>
+			</thingDefs>
+		</fixedIngredientFilter>
+		<products>
+			<rxRemoteRefinedSleepingGasCan>1</rxRemoteRefinedSleepingGasCan>
+		</products>
+		<workSkill>Crafting</workSkill>
+		<modExtensions>
+			<li Class="RemoteTech.MakeRecipeVariants">
+				<CreateVariants>
+					<li>Steel</li>
+				</CreateVariants>
+			</li>
+		</modExtensions>
+	</RecipeDef>
+	
+	<RecipeDef>
+		<defName>rxMakeExplosivePouch</defName>
+		<label>make explosive pouch</label>
+		<description>Craft an explosive pouch.</description>
+		<jobString>Making explosive pouch.</jobString>
+		<recipeUsers>
+			<li>CraftingSpot</li>
+			<li>HandTailoringBench</li>
+			<li>ElectricTailoringBench</li>
+			<li>rxBench</li>
+		</recipeUsers>
+		<researchPrerequisite>rxMakeshiftExplosives</researchPrerequisite>
+		<workSpeedStat>TailoringSpeed</workSpeedStat>
+		<workSkill>Crafting</workSkill>
+		<effectWorking>Cook</effectWorking>
+		<soundWorking>Recipe_Tailor</soundWorking>
+		<allowMixingIngredients>true</allowMixingIngredients>
+		<workAmount>1000</workAmount>
+		<targetCountAdjustment>1</targetCountAdjustment>
+		<ingredients>
+			<li>
+				<filter>
+					<categories>
+						<li>Leathers</li>
+					</categories>
+				</filter>
+				<count>12</count>
+			</li>
+			<li>
+				<filter>
+					<thingDefs>
+						<li>rxSparkpowder</li>
+					</thingDefs>
+				</filter>
+				<count>9</count>
+			</li>
+			<li>
+				<filter>
+					<thingDefs>
+						<li>rxCharcoal</li>
+					</thingDefs>
+				</filter>
+				<count>15</count>
+			</li>
+		</ingredients>
+		<fixedIngredientFilter>
+			<categories>
+				<li>Leathers</li>
+			</categories>
+			<thingDefs>
+				<li>rxSparkpowder</li>
+				<li>rxCharcoal</li>
+			</thingDefs>
+		</fixedIngredientFilter>
+		<products>
+			<rxExplosivePouch>1</rxExplosivePouch>
+		</products>
+	</RecipeDef>
+	
+	<RecipeDef>
+		<defName>rxMakeCharcoal</defName>
+		<label>make charcoal</label>
+		<description>Make charcoal from wood logs.</description>
+		<jobString>Making charcoal.</jobString>
+		<recipeUsers>
+			<li>Campfire</li>
+			<li>FueledStove</li>
+		</recipeUsers>
+		<researchPrerequisite>rxMakeshiftExplosives</researchPrerequisite>
+		<workSpeedStat>SmeltingSpeed</workSpeedStat>
+		<allowMixingIngredients>true</allowMixingIngredients>
+		<workAmount>500</workAmount>
+		<requiredGiverWorkType>Crafting</requiredGiverWorkType>
+		<effectWorking>Cremate</effectWorking>
+		<soundWorking>Recipe_Cremate</soundWorking>
+		<targetCountAdjustment>5</targetCountAdjustment>
+		<ingredients>
+			<li>
+				<filter>
+					<thingDefs>
+						<li>WoodLog</li>
+					</thingDefs>
+				</filter>
+				<count>5</count>
+			</li>
+		</ingredients>
+		<fixedIngredientFilter>
+			<thingDefs>
+				<li>WoodLog</li>
+			</thingDefs>
+		</fixedIngredientFilter>
+		<products>
+			<rxCharcoal>5</rxCharcoal>
+		</products>
+	</RecipeDef>
+	
+	<RecipeDef>
+		<defName>rxExtractGoldFromSlag</defName>
+		<label>extract gold from slag</label>
+		<description>Use heat and strong electromagnets to separate useful metal from slag chunks.</description>
+		<jobString>Smelting gold from slag.</jobString>
+		<workAmount>2000</workAmount>
+		<workSpeedStat>SmeltingSpeed</workSpeedStat>
+		<effectWorking>Smelt</effectWorking>
+		<soundWorking>Recipe_Smelt</soundWorking>
+		<ingredients>
+			<li>
+				<filter>
+					<thingDefs>
+						<li>rxChunkSlagGold</li>
+					</thingDefs>
+				</filter>
+				<count>1</count>
+			</li>
+		</ingredients>
+		<products>
+			<Steel>20</Steel>
+			<Gold>10</Gold>
+		</products>
+		<fixedIngredientFilter>
+			<thingDefs>
+				<li>rxChunkSlagGold</li>
+			</thingDefs>
+		</fixedIngredientFilter>
+		<recipeUsers>
+			<li>ElectricSmelter</li>
+		</recipeUsers>
+	</RecipeDef>
+
+</Defs>
