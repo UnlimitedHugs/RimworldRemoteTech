@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using HugsLib.Utils;
 using RimWorld;
 using UnityEngine;
 using Verse;
@@ -17,6 +18,7 @@ namespace RemoteTech {
 			soundDragSustain = SoundDefOf.Designate_DragStandard;
 			soundDragChanged = SoundDefOf.Designate_DragStandard_Changed;
 			soundSucceeded = SoundDefOf.ThingSelected;
+			hasDesignateAllFloatMenuOption = true;
 		}
 
 		public override string Label {
@@ -39,27 +41,31 @@ namespace RemoteTech {
 			var contents = Map.thingGrid.ThingsListAt(loc);
 			if (contents != null) {
 				for (int i = 0; i < contents.Count; i++) {
-					if (IsWire(contents[i])) return true;
+					if (IsSelectable(contents[i])) return true;
 				}
 			}
 			return false;
 		}
-		
+
+		public override AcceptanceReport CanDesignateThing(Thing t) {
+			return IsSelectable(t);
+		}
+
 		public override void DesignateSingleCell(IntVec3 c) {
-			if(!ShiftIsHeld()) Find.Selector.ClearSelection();
+			if(!HugsLibUtility.ShiftIsHeld) Find.Selector.ClearSelection();
 			CellDesignate(c);
 			TryCloseArchitectMenu();
 		}
 
 		public override void DesignateMultiCell(IEnumerable<IntVec3> cells) {
-			if (!ShiftIsHeld()) Find.Selector.ClearSelection();
+			if (!HugsLibUtility.ShiftIsHeld) Find.Selector.ClearSelection();
 			foreach (var cell in cells) {
 				CellDesignate(cell);
 			}
 			TryCloseArchitectMenu();
 		}
 
-		private bool IsWire(Thing t) {
+		private bool IsSelectable(Thing t) {
 			return t.def?.building is BuildingProperties_DetonatorWire;
 		}
 
@@ -69,7 +75,7 @@ namespace RemoteTech {
 			if (contents != null) {
 				for (int i = 0; i < contents.Count; i++) {
 					var thing = contents[i];
-					if (IsWire(thing) && !selector.SelectedObjects.Contains(thing)) {
+					if (IsSelectable(thing) && !selector.SelectedObjects.Contains(thing)) {
 						selector.SelectedObjects.Add(thing);
 						SelectionDrawer.Notify_Selected(thing);
 					}
@@ -81,10 +87,6 @@ namespace RemoteTech {
 			if (Find.Selector.NumSelected == 0) return;
 			if (Find.MainTabsRoot.OpenTab != MainButtonDefOf.Architect) return;
 			Find.MainTabsRoot.EscapeCurrentTab();
-		}
-
-		private bool ShiftIsHeld() {
-			return Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift);
 		}
 	}
 }

@@ -93,9 +93,9 @@ namespace RemoteTech {
 			SettingForbidTimeout = Settings.GetHandle("forbidTimeout", "Setting_forbidTimeout_label".Translate(), "Setting_forbidTimeout_desc".Translate(), ForbiddenTimeoutSettingDefault, Validators.IntRangeValidator(0, 100000000));
 			SettingForbidTimeout.SpinnerIncrement = ForbiddenTimeoutSettingIncrement;
 			SettingForbidTimeout.VisibilityPredicate = () => SettingForbidReplaced.Value;
-			SettingAutoArmCombat = Settings.GetHandle("autoArmCombat", "Setting_autoArmCombat_label".Translate(), "Setting_autoArmCombat_desc".Translate(), false);
+			SettingAutoArmCombat = Settings.GetHandle("autoArmCombat", "Setting_autoArmCombat_label".Translate(), "Setting_autoArmCombat_desc".Translate(), true);
 			SettingAutoArmMining = Settings.GetHandle("autoArmMining", "Setting_autoArmMining_label".Translate(), "Setting_autoArmMining_desc".Translate(), true);
-			SettingAutoArmUtility = Settings.GetHandle("autoArmUtility", "Setting_autoArmUtility_label".Translate(), "Setting_autoArmUtility_desc".Translate(), false);
+			SettingAutoArmUtility = Settings.GetHandle("autoArmUtility", "Setting_autoArmUtility_label".Translate(), "Setting_autoArmUtility_desc".Translate(), true);
 		}
 
 		public override void OnGUI() {
