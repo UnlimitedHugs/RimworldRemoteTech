@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ModSyncNinjaData>
+  <ID>2e7a4254-b7d8-4070-a528-71f9e4f77b06</ID>
+  <ModName>Remote Tech</ModName>
+  <Version>1.14.0.0</Version>
+  <SaveBreaking>False</SaveBreaking>
+  <Host name="Github">
+    <Owner>UnlimitedHugs</Owner>
+    <Project>RimworldRemoteTech</Project>
+    <AboutDir>Mods/RemoteTech/About</AboutDir>
+    <DownloadFrom>ModSyncReleases</DownloadFrom>
+    <Branch>master</Branch>
+  </Host>
+</ModSyncNinjaData>
