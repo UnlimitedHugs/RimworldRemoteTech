@@ -60,7 +60,7 @@ namespace RemoteTech {
 		}
 
 		private bool IsWire(Thing t) {
-			return t.def != null && t.def.building is BuildingProperties_DetonatorWire;
+			return t.def?.building is BuildingProperties_DetonatorWire;
 		}
 
 		private void CellDesignate(IntVec3 cell) {

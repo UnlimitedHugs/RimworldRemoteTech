@@ -154,7 +154,7 @@ namespace RemoteTech {
 			if (cloud == null) {
 				cloud = ThingMaker.MakeThing(gasDef) as GasCloud;
 				if (cloud == null) {
-					RemoteTechController.Instance.Logger.Error(string.Format("Deployed thing was not a GasCloud: {0}", gasDef));
+					RemoteTechController.Instance.Logger.Error($"Deployed thing was not a GasCloud: {gasDef}");
 					return;
 				}
 				GenPlace.TryPlaceThing(cloud, pos, map, ThingPlaceMode.Direct);

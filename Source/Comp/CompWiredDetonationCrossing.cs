@@ -11,7 +11,7 @@ namespace RemoteTech {
 
 		public override void ReceiveSignal(int signalId, int signalSteps, CompWiredDetonationTransmitter source = null) {
 			if (parent.Map == null) throw new Exception("null map");
-			var sourcePos = source != null && source.parent != null ? source.parent.Position : IntVec3.Invalid;
+			var sourcePos = source?.parent?.Position ?? IntVec3.Invalid;
 			var ownPos = parent.Position;
 			if (!sourcePos.IsValid) return;
 			

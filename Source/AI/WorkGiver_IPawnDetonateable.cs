@@ -13,8 +13,7 @@ namespace RemoteTech {
 		public override IEnumerable<Thing> PotentialWorkThingsGlobal(Pawn pawn) {
 			var buildings = pawn.Map.listerBuildings.allBuildingsColonist;
 			for (var i = 0; i < buildings.Count; i++) {
-				var detonator = buildings[i] as IPawnDetonateable;
-				if (detonator != null) yield return buildings[i];
+				if (buildings[i] is IPawnDetonateable) yield return buildings[i];
 			}
 		}
 

@@ -11,9 +11,8 @@ namespace RemoteTech {
 
 	/// <summary>
 	/// The base class for all wireless remote explosives.
-	 * Requires a CompCustomExplosive to work correctly. Can be armed and assigned to a channel.
-	 * Will blink with an overlay texture when armed.
-	 *
+	/// Requires a CompCustomExplosive to work correctly. Can be armed and assigned to a channel.
+	/// Will blink with an overlay texture when armed.
 	/// </summary>
 	public class Building_RemoteExplosive : Building, ISwitchable, IWirelessDetonationReceiver, IAutoReplaceExposable {
 

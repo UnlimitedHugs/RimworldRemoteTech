@@ -47,7 +47,7 @@ namespace RemoteTech {
 			if (comps == null) return false;
 			for (int i = 0; i < comps.Count; i++) {
 				var compProps = comps[i];
-				if (compProps != null && compProps.compClass != null && compProps.compClass.IsSubclassOf(GridNodeCompType)) 
+				if (compProps?.compClass != null && compProps.compClass.IsSubclassOf(GridNodeCompType)) 
 					return true;
 			}
 			return false;

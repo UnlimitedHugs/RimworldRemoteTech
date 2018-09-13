@@ -1,4 +1,4 @@
-﻿// ReSharper disable UnassignedField.Global
+﻿// ReSharper disable UnassignedField.Global, CollectionNeverUpdated.Global
 
 using System.Collections.Generic;
 using Verse;

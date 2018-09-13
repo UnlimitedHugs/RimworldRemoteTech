@@ -8,7 +8,7 @@ namespace RemoteTech {
 		public override void PostDestroy(DestroyMode mode, Map map) {
 			base.PostDestroy(mode, map);
 			var leaverProps = props as CompProperties_RandomResourceLeaver;
-			if (leaverProps == null || leaverProps.thingDef == null) return;
+			if (leaverProps?.thingDef == null) return;
 			if (mode != leaverProps.requiredDestroyMode) return;
 			var amount = leaverProps.amountRange.RandomInRange;
 			if(amount <= 0) return;

@@ -12,7 +12,7 @@ namespace RemoteTech {
 			// duplicate vanilla emp behavior, since the original def is hardcoded
 			if (pawn != null && !pawn.RaceProps.IsFlesh && !pawn.health.Dead && !pawn.health.Downed) {
 				var empDef = def as SuperEMPDamageDef ?? new SuperEMPDamageDef();
-				if (pawn.stances != null && pawn.stances.stunner != null) {
+				if (pawn.stances?.stunner != null) {
 					pawn.stances.stunner.Notify_DamageApplied(new DamageInfo(DamageDefOf.EMP, dinfo.Amount), true);
 				}
 				if (pawn.health.summaryHealth.SummaryHealthPercent < empDef.incapHealthThreshold && Rand.Chance(empDef.incapChance)) {

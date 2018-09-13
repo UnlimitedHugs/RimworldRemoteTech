@@ -122,6 +122,7 @@ namespace RemoteTech {
 				Find.Selector.ClearSelection();
 				charges.ForEach(t => {
 					if (t is Thing) Find.Selector.Select(t);
+					// ReSharper disable once SuspiciousTypeConversion.Global <- support for Comp receivers by other mods
 					if (t is ThingComp tc) Find.Selector.Select(tc.parent);
 				});
 			}

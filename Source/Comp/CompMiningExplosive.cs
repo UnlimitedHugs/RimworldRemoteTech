@@ -116,7 +116,7 @@ namespace RemoteTech {
 		private void BreakMineableAndYieldResources(Mineable mineable) {
 			// swiped from Mineable.TrySpawnYield
 			// the vanilla system is hardcoded to work for pawns, so we implement our own copy
-			if (mineable == null || mineable.def == null || mineable.def.building == null || mineable.def.building.mineableThing == null) {
+			if (mineable?.def?.building?.mineableThing == null) {
 				return;
 			}
 			var pos = mineable.Position;

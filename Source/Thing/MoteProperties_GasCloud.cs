@@ -1,4 +1,4 @@
-﻿// ReSharper disable UnassignedField.Global
+﻿// ReSharper disable UnassignedField.Global, VirtualMemberNeverOverridden.Global
 using Verse;
 
 namespace RemoteTech {

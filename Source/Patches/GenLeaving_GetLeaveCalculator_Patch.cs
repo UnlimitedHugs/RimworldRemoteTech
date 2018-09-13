@@ -12,7 +12,7 @@ namespace RemoteTech.Patches {
 	internal static class GenLeaving_GetLeaveCalculator_Patch {
 		[HarmonyPostfix]
 		public static void FullRefundOnDeconstruct(Thing diedThing, DestroyMode mode, ref Func<int, int> __result) {
-			if (mode == DestroyMode.Deconstruct && diedThing != null && diedThing.def != null && diedThing.def.HasModExtension<FullDeconstructionRefund>()) {
+			if (mode == DestroyMode.Deconstruct && diedThing?.def != null && diedThing.def.HasModExtension<FullDeconstructionRefund>()) {
 				__result = count => count;
 			}
 		}

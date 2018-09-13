@@ -1,4 +1,4 @@
-﻿// ReSharper disable UnassignedField.Global
+﻿// ReSharper disable UnassignedField.Global, CollectionNeverUpdated.Global
 using System.Collections.Generic;
 using RimWorld;
 using Verse;
@@ -10,7 +10,7 @@ namespace RemoteTech {
 		
 		public override void ResolveReferences() {
 			base.ResolveReferences();
-			foreach (StockGenerator current in stockGenerators) {
+			foreach (var current in stockGenerators) {
 				current.ResolveReferences(traderDef);
 			}
 		}
