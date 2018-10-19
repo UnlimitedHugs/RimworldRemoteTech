@@ -41,6 +41,7 @@ Rapidly dissipates when under an open sky.</description>
 			</AnimationPeriod> 
 			
 			<affectsFleshy>true</affectsFleshy>
+			<toxicSensitivityStatPower>.5</toxicSensitivityStatPower>
 			<hediffDef>rxSleepingGas</hediffDef>
 			<hediffSeverityPerGastick>
 				<min>0.005</min>
