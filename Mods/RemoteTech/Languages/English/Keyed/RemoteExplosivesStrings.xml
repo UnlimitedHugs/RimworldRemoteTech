@@ -42,8 +42,8 @@
 	<FoamWall_smoothAction_label>Smooth</FoamWall_smoothAction_label>
 	<FoamWall_smoothAction_desc>Smooth this wall to make it more presentable and usable as an interior wall.</FoamWall_smoothAction_desc>
 	
-	<GasCloud_statusReadout_high>{0} ({1:F1}K, {2:F0}% effect)</GasCloud_statusReadout_high>
-	<GasCloud_statusReadout_low>{0} ({1:F0}, {2:F0}% effect)</GasCloud_statusReadout_low>
+	<GasCloud_statusReadout_high>{0} ({1}K, {2}% effect)</GasCloud_statusReadout_high>
+	<GasCloud_statusReadout_low>{0} ({1}, {2}% effect)</GasCloud_statusReadout_low>
 	
 	<HediffRecovery_status_label>recovering</HediffRecovery_status_label>
 	
@@ -92,7 +92,7 @@
 	<Upgrade_prerequisitesResearch>research ({0})</Upgrade_prerequisitesResearch>
 	<Upgrade_prerequisitesUpgrade>upgrade ({0})</Upgrade_prerequisitesUpgrade>
 	<Upgrade_prerequisitesSkill>construction skill ({0})</Upgrade_prerequisitesSkill>
-	<Upgrade_workProgress>Work progress: {0:F0}%</Upgrade_workProgress>
+	<Upgrade_workProgress>Work progress: {0}%</Upgrade_workProgress>
 	<Upgrade_deliveredIngredients>Stored things: {0}</Upgrade_deliveredIngredients>
 	<Upgrade_installedUpgrades>Installed upgrades: </Upgrade_installedUpgrades>
 	<Upgrade_missingMaterials>need {0}x {1}</Upgrade_missingMaterials>
@@ -101,7 +101,7 @@
 	
 	<proxSensor_message>Proximity sensor detected a target: {0}</proxSensor_message>
 	<proxSensor_messageName>Proximity sensor "{0}" detected a target: {1}</proxSensor_messageName>
-	<proxSensor_cooldown>Cooldown: {0:F1} seconds</proxSensor_cooldown>
+	<proxSensor_cooldown>Cooldown: {0} seconds</proxSensor_cooldown>
 	<proxSensor_AIStatusCaption>AI status: {0}</proxSensor_AIStatusCaption>
 	<proxSensor_AIStatusValue>Not evil</proxSensor_AIStatusValue>
 	<proxSensor_settings>Sensor settings</proxSensor_settings>

@@ -107,7 +107,7 @@ namespace RemoteTech {
 			if (WantsWork) {
 				s.AppendFormat("Upgrade_labelPrefix".Translate(), Props.label);
 				s.AppendLine();
-				s.AppendFormat("Upgrade_workProgress".Translate(), WorkProgress * 100f);
+				s.AppendFormat("Upgrade_workProgress".Translate(), Mathf.Round(WorkProgress * 100f));
 				if (Props.costList.Any()) {
 					s.Append("; ");
 					s.AppendFormat("Upgrade_deliveredIngredients".Translate(), ingredients.ContentsString);

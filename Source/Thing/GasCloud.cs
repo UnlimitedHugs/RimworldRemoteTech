@@ -127,11 +127,12 @@ namespace RemoteTech {
 		public override string LabelMouseover {
 			get {
 				if (cachedMouseoverLabel == null || mouseoverLabelCacheTime < Time.realtimeSinceStartup - .5f) {
-					var effectivenessPercent = Mathf.Clamp01(Concentration / gasProps.FullAlphaConcentration) * 100f;
+					var effectivenessPercent = Mathf.Round(Mathf.Clamp01(Concentration / gasProps.FullAlphaConcentration) * 100f);
 					if (concentration >= 1000) {
-						cachedMouseoverLabel = "GasCloud_statusReadout_high".Translate(LabelCap, concentration / 1000, effectivenessPercent);
+						var concentrationThousands = Math.Round(concentration / 1000, 1);
+						cachedMouseoverLabel = "GasCloud_statusReadout_high".Translate(LabelCap, concentrationThousands, effectivenessPercent);
 					} else {
-						cachedMouseoverLabel = "GasCloud_statusReadout_low".Translate(LabelCap, concentration, effectivenessPercent);
+						cachedMouseoverLabel = "GasCloud_statusReadout_low".Translate(LabelCap, Mathf.Round(concentration), effectivenessPercent);
 					}
 					mouseoverLabelCacheTime = Time.realtimeSinceStartup;
 				}

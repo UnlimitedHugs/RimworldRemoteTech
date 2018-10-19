@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using RimWorld;
@@ -157,7 +158,7 @@ namespace RemoteTech {
 			var s = new StringBuilder(base.GetInspectString());
 			if (CooldownTime > 0f) {
 				s.AppendLine();
-				s.AppendFormat("proxSensor_cooldown".Translate(), CooldownTime);
+				s.AppendFormat("proxSensor_cooldown".Translate(), Math.Round(CooldownTime, 1));
 			}
 			return s.ToString();
 		}
