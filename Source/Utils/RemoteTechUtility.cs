@@ -240,5 +240,14 @@ namespace RemoteTech {
 		public static CachedValue<float> GetCachedStat(this Thing thing, StatDef stat, int recacheInterval = GenTicks.TicksPerRealSecond) {
 			return new CachedValue<float>(() => thing.GetStatValue(stat), recacheInterval);
 		}
+
+		public static bool PawnKnowsAboutFriendlyAvoidGrid(Pawn p) {
+			if (p == null) return false;
+			var playerFaction = Faction.OfPlayer;
+			return (p.Faction != null && !p.Faction.HostileTo(playerFaction)) 
+				|| (p.guest != null && p.guest.Released)
+				|| (p.IsPrisoner && p.HostFaction == playerFaction)
+				|| (p.Faction == null && p.RaceProps.Humanlike);
+		}
 	}
 }

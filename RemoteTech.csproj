@@ -77,6 +77,8 @@
     <Compile Include="Source\Comp\CompGlowerToggleable.cs" />
     <Compile Include="Source\Comp\CompProperties_BuildGizmo.cs" />
     <Compile Include="Source\Graphic\ValueInterpolator.cs" />
+    <Compile Include="Source\Patches\PawnUtility_GetAvoidGrid_Patch.cs" />
+    <Compile Include="Source\Patches\PawnUtility_KnownDangerAt_Patch.cs" />
     <Compile Include="Source\UI\Designator_BuildLabeled.cs" />
     <Compile Include="Source\UI\ISensorSettingsProvider.cs" />
     <Compile Include="Source\Building\IWirelessDetonationReceiver.cs" />

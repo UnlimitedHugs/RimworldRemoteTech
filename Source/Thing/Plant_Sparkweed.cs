@@ -9,6 +9,8 @@ namespace RemoteTech {
 	/// A plant that has a chance to set itself of fire when walked over by a pawn.
 	/// </summary>
 	public class Plant_Sparkweed : Plant {
+		private const byte FriendlyPathCost = 255;
+
 		private SparkweedPlantDef CustomDef {
 			get {
 				var plantDef = def as SparkweedPlantDef;
@@ -18,10 +20,23 @@ namespace RemoteTech {
 		}
 
 		private List<Pawn> touchingPawns = new List<Pawn>(1);
-		
+		private Map ownMap;
+
 		public override void SpawnSetup(Map map, bool respawningAfterLoad) {
 			base.SpawnSetup(map, respawningAfterLoad);
 			HugsLibController.Instance.DistributedTicker.RegisterTickability(CustomTick, CustomDef.detectEveryTicks, this);
+			ToggleAvoidGridCost(map, true);
+			ownMap = map;
+		}
+
+		public override void DeSpawn(DestroyMode mode = DestroyMode.Vanish) {
+			base.DeSpawn(mode);
+			ToggleAvoidGridCost(ownMap, false);
+		}
+
+		private void ToggleAvoidGridCost(Map map, bool enable) {
+			map.GetComponent<MapComponent_RemoteTech>().PlayerAvoidGrid[map.cellIndices.CellToIndex(Position)] =
+				enable ? FriendlyPathCost : (byte)0;
 		}
 
 		public override void ExposeData() {
