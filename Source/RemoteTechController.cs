@@ -24,17 +24,18 @@ namespace RemoteTech {
 		private const int ForbiddenTimeoutSettingIncrement = 5;
 
 		public static RemoteTechController Instance { get; private set; }
+		[TweakValue("Remote Tech")]
+		private static bool showDebugControls = false;
 
 		private readonly MethodInfo objectCloneMethod = typeof (object).GetMethod("MemberwiseClone", BindingFlags.Instance | BindingFlags.NonPublic);
-		// ReSharper disable once ConvertToConstant.Local
-		private readonly bool showDebugControls = false;
-
+		
 		public FieldInfo CompGlowerGlowOnField { get; private set; }
 		public PropertyInfo CompGlowerShouldBeLitProperty { get; private set; }
 
 		public SettingHandle<bool> SettingAutoArmCombat { get; private set; }
 		public SettingHandle<bool> SettingAutoArmMining { get; private set; }
 		public SettingHandle<bool> SettingAutoArmUtility { get; private set; }
+		public SettingHandle<bool> SettingLowerStandingCap { get; set; }
 		private SettingHandle<bool> SettingForbidReplaced { get; set; }
 		private SettingHandle<int> SettingForbidTimeout { get; set; }
 
@@ -96,6 +97,8 @@ namespace RemoteTech {
 			SettingAutoArmCombat = Settings.GetHandle("autoArmCombat", "Setting_autoArmCombat_label".Translate(), "Setting_autoArmCombat_desc".Translate(), true);
 			SettingAutoArmMining = Settings.GetHandle("autoArmMining", "Setting_autoArmMining_label".Translate(), "Setting_autoArmMining_desc".Translate(), true);
 			SettingAutoArmUtility = Settings.GetHandle("autoArmUtility", "Setting_autoArmUtility_label".Translate(), "Setting_autoArmUtility_desc".Translate(), true);
+			SettingLowerStandingCap = Settings.GetHandle("lowerStandingCap", "Setting_lowerStandingCap_label".Translate(), "Setting_lowerStandingCap_label".Translate(), true);
+			SettingLowerStandingCap.VisibilityPredicate = () => Prefs.DevMode;
 		}
 
 		public override void OnGUI() {

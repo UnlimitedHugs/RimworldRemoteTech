@@ -80,6 +80,8 @@
 	<Setting_autoArmMining_desc>When enabled, mining explosives will be automatically armed when they are deployed.</Setting_autoArmMining_desc>
 	<Setting_autoArmUtility_label>Auto-arm utility explosives</Setting_autoArmUtility_label>
 	<Setting_autoArmUtility_desc>When enabled, utility explosives will be automatically armed when they are deployed.</Setting_autoArmUtility_desc>
+	<Setting_lowerStandingCap_label>Lower standing cap</Setting_lowerStandingCap_label>
+	<Setting_lowerStandingCap_desc>When enabled, faction standing with friendlies will drop below -100 when knocking them out with sleeping gas.</Setting_lowerStandingCap_desc>
 	
 	<GasVent_ventedPerSecond>Venting capacity: {0} per second</GasVent_ventedPerSecond>
 	<GasVent_blocked>Blocked</GasVent_blocked>
