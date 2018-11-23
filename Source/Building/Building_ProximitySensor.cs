@@ -158,6 +158,7 @@ namespace RemoteTech {
 
 		public void DoSwitch() {
 			settings = pendingSettings?.Clone() ?? new SensorSettings();
+			pendingSettings = null;
 		}
 
 		public override string GetInspectString() {
