@@ -8,6 +8,7 @@ using HugsLib.Settings;
 using HugsLib.Utils;
 using RimWorld;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Verse;
 
 namespace RemoteTech {
@@ -66,6 +67,14 @@ namespace RemoteTech {
 			GetSettingsHandles();
 			PrepareReflection();
 			RemoveFoamWallsFromMeteoritePool();
+		}
+
+		public override void SceneLoaded(Scene scene) {
+			PlayerAvoidanceGrids.ClearAllMaps();
+		}
+
+		public override void MapDiscarded(Map map) {
+			PlayerAvoidanceGrids.DiscardMap(map);
 		}
 
 		public T CloneObject<T>(T obj) {

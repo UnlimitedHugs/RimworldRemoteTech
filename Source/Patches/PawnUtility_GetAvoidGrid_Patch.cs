@@ -11,8 +11,8 @@ namespace RemoteTech.Patches {
 	internal static class PawnUtility_GetAvoidGrid_Patch {
 		[HarmonyPostfix]
 		public static void ReturnFriendlyAvoidGrid(this Pawn p, ref ByteGrid __result) {
-			if (__result == null && p?.Map != null && RemoteTechUtility.PawnKnowsAboutFriendlyAvoidGrid(p)) {
-				__result = p.Map.GetComponent<MapComponent_RemoteTech>().PlayerAvoidGrid;
+			if (__result == null && p?.Map != null && PlayerAvoidanceGrids.PawnHasPlayerAvoidanceGridKnowledge(p)) {
+				__result = PlayerAvoidanceGrids.TryGetByteGridForMap(p.Map);
 			}
 		}
 	}

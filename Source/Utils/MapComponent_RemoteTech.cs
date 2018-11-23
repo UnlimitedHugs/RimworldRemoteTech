@@ -8,8 +8,6 @@ namespace RemoteTech {
 	public class MapComponent_RemoteTech : MapComponent {
 		
 		private AutoReplaceWatcher replaceWatcher;
-		
-		public ByteGrid PlayerAvoidGrid { get; }
 
 		public AutoReplaceWatcher ReplaceWatcher {
 			get { return replaceWatcher; }
@@ -19,11 +17,6 @@ namespace RemoteTech {
 			this.EnsureIsActive();
 			replaceWatcher = new AutoReplaceWatcher();
 			replaceWatcher.SetParentMap(map);
-			PlayerAvoidGrid = new ByteGrid(map);
-		}
-
-		public byte PlayerAvoidGridValueForCell(IntVec3 c) {
-			return PlayerAvoidGrid[map.cellIndices.CellToIndex(c)];
 		}
 
 		public override void ExposeData() {

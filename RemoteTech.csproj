@@ -174,6 +174,7 @@
     <Compile Include="Source\Comp\CompRandomResourceLeaver.cs" />
     <Compile Include="Source\Comp\CompProperties_RandomResourceLeaver.cs" />
     <Compile Include="Source\Utils\IAutoReplaceExposable.cs" />
+    <Compile Include="Source\Utils\PlayerAvoidanceGrids.cs" />
     <Compile Include="Source\Utils\RecipeVariantType.cs" />
     <Compile Include="Source\Utils\RecipeVariantExtension.cs" />
     <Compile Include="Source\Utils\MapComponent_RemoteTech.cs" />

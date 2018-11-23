@@ -15,6 +15,7 @@ namespace RemoteTech {
 		private const float AlphaEasingDivider = 10f;
 		private const float SpreadingAnimationDuration = 1f;
 		private const float DisplacingConcentrationFraction = .33f;
+		private const int AvoidanceGridPathCost = 10;
 
 		public delegate bool TraversibilityTest(Building b, GasCloud g);
 		// this can be used to inject open/closed behavior for
@@ -77,6 +78,12 @@ namespace RemoteTech {
 			HugsLibController.Instance.TickDelayScheduler.ScheduleCallback(() =>
 				HugsLibController.Instance.DistributedTicker.RegisterTickability(GasTick, gasProps.GastickInterval, this)
 			, 1, this);
+			PlayerAvoidanceGrids.AddAvoidanceSource(this, AvoidanceGridPathCost);
+		}
+
+		public override void DeSpawn(DestroyMode mode = DestroyMode.Vanish) {
+			PlayerAvoidanceGrids.RemoveAvoidanceSource(this);
+			base.DeSpawn(mode);
 		}
 
 		public override void ExposeData() {
