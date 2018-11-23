@@ -74,7 +74,11 @@ namespace RemoteTech {
 			Scribe_Values.Look(ref lastTriggeredTick, "lastTriggered");
 			Scribe_Deep.Look(ref settings, "settings");
 			Scribe_Deep.Look(ref pendingSettings, "pendingSettings");
-			if(Scribe.mode == LoadSaveMode.LoadingVars && settings == null) settings = new SensorSettings();
+			if (Scribe.mode == LoadSaveMode.PostLoadInit) {
+				if(trackedPawns == null) trackedPawns = new List<Pawn>();
+				trackedPawns.RemoveAll(p => p == null);
+				if(settings == null) settings = new SensorSettings();
+			} 
 		}
 
 		public override void Tick() {
@@ -106,9 +110,10 @@ namespace RemoteTech {
 					drawnCells.Add(cell);
 				}
 			}
-			// prune tracked pawns that have left the area
+			// prune tracked pawns that have died or left the area
 			for (int i = trackedPawns.Count - 1; i >= 0; i--) {
-				if (Position.DistanceTo(trackedPawns[i].Position) > rangeStat) {
+				var pawn = trackedPawns[i];
+				if (pawn == null || pawn.Dead || Position.DistanceTo(trackedPawns[i].Position) > rangeStat) {
 					lightComp?.ReportTargetLost(trackedPawns[i]);
 					trackedPawns.RemoveAt(i);
 				}
@@ -131,6 +136,7 @@ namespace RemoteTech {
 			isSelected = true;
 			GenDraw.DrawFieldEdges(drawnCells);
 			for (int i = 0; i < trackedPawns.Count; i++) {
+				if (trackedPawns == null) continue;
 				GenDraw.DrawCooldownCircle(trackedPawns[i].DrawPos - Altitudes.AltIncVect, .5f);
 			}
 		}
