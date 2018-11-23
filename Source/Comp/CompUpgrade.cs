@@ -67,9 +67,11 @@ namespace RemoteTech {
 			base.PostExposeData();
 			Scribe.EnterNode("CompUpgrade_" + Props.referenceId);
 			Scribe_Values.Look(ref complete, "complete");
-			Scribe_Values.Look(ref workDone, "workDone");
-			Scribe_Values.Look(ref wantsWork, "wantsWork");
-			Scribe_Deep.Look(ref ingredients, "ingredients", this);
+			if (!(Scribe.mode == LoadSaveMode.Saving && complete)) {
+				Scribe_Values.Look(ref workDone, "workDone");
+				Scribe_Values.Look(ref wantsWork, "wantsWork");
+				Scribe_Deep.Look(ref ingredients, "ingredients", this);
+			}
 			if(ingredients == null) ingredients = new ThingOwner<Thing>(this);
 			Scribe.ExitNode();
 		}
