@@ -26,13 +26,18 @@ namespace RemoteTech {
 			}
 		}
 
-		private void ApplyGoodwillPenalty(Faction faction, int goodwillLoss) {
-			var goodwillBefore = faction.PlayerGoodwill;
+		private void ApplyGoodwillPenalty(Faction targetFaction, int goodwillLoss) {
+			var gasOwnerFaction = Faction.OfPlayer;
+			var goodwillBefore = targetFaction.GoodwillWith(gasOwnerFaction);
 			// ensure that faction goodwill drops below the usual cap- relevant when gassing large groups
-			if (goodwillBefore - goodwillLoss < CustomFactionGoodwillCaps.DefaultMinNegativeGoodwill) {
-				UtilityWorldObjectManager.GetUtilityWorldObject<CustomFactionGoodwillCaps>().SetMinNegativeGoodwill(faction, goodwillBefore - goodwillLoss);	
+			var caps = UtilityWorldObjectManager.GetUtilityWorldObject<CustomFactionGoodwillCaps>();
+			if (!targetFaction.HostileTo(gasOwnerFaction) && gasOwnerFaction == Faction.OfPlayer) {
+				caps.OnPlayerBetrayedFaction(targetFaction);
 			}
-			faction.TryAffectGoodwillWith(Faction.OfPlayer, -goodwillLoss);
+			if (caps.HasPlayerBetrayedFaction(targetFaction) && goodwillBefore - goodwillLoss < CustomFactionGoodwillCaps.DefaultMinNegativeGoodwill) {
+				caps.SetMinNegativeGoodwill(targetFaction, goodwillBefore - goodwillLoss);	
+			}
+			targetFaction.TryAffectGoodwillWith(gasOwnerFaction, -goodwillLoss);
 		}
 	}
 }

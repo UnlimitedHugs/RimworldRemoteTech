@@ -46,6 +46,7 @@ It is cultivated as a source of low-grade explosive and gunpowder.</description>
 			<MaxHitPoints>80</MaxHitPoints>
 			<Beauty>1</Beauty>
 			<Nutrition>0.05</Nutrition>
+			<Flammability>2</Flammability>
 		</statBases>
 		<graphicData>
 			<texPath>rxSparkweed</texPath>

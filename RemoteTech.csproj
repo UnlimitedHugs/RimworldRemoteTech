@@ -77,6 +77,9 @@
     <Compile Include="Source\Comp\CompGlowerToggleable.cs" />
     <Compile Include="Source\Comp\CompProperties_BuildGizmo.cs" />
     <Compile Include="Source\Graphic\ValueInterpolator.cs" />
+    <Compile Include="Source\Patches\RCellFinder_TryFindRandomCellInRegionUnforbidden_Patch.cs" />
+    <Compile Include="Source\Patches\PawnUtility_GetAvoidGrid_Patch.cs" />
+    <Compile Include="Source\Patches\PawnUtility_KnownDangerAt_Patch.cs" />
     <Compile Include="Source\UI\Designator_BuildLabeled.cs" />
     <Compile Include="Source\UI\ISensorSettingsProvider.cs" />
     <Compile Include="Source\Building\IWirelessDetonationReceiver.cs" />
@@ -172,6 +175,7 @@
     <Compile Include="Source\Comp\CompRandomResourceLeaver.cs" />
     <Compile Include="Source\Comp\CompProperties_RandomResourceLeaver.cs" />
     <Compile Include="Source\Utils\IAutoReplaceExposable.cs" />
+    <Compile Include="Source\Utils\PlayerAvoidanceGrids.cs" />
     <Compile Include="Source\Utils\RecipeVariantType.cs" />
     <Compile Include="Source\Utils\RecipeVariantExtension.cs" />
     <Compile Include="Source\Utils\MapComponent_RemoteTech.cs" />

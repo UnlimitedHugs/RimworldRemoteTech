@@ -15,10 +15,16 @@ namespace RemoteTech {
 		public const int NegativeGoodwillCap = -5000;
 
 		private Dictionary<int, int> goodwillCaps = new Dictionary<int, int>();
+		private HashSet<int> betrayedFactions = new HashSet<int>();
 
 		public override void ExposeData() {
 			base.ExposeData();
 			Scribe_Collections.Look(ref goodwillCaps, "goodwillCaps", LookMode.Value, LookMode.Value);
+			Scribe_Collections.Look(ref betrayedFactions, "betrayedFactions", LookMode.Value);
+			if (Scribe.mode == LoadSaveMode.PostLoadInit) {
+				if(goodwillCaps == null) goodwillCaps = new Dictionary<int, int>();
+				if(betrayedFactions == null) betrayedFactions = new HashSet<int>();
+			}
 		}
 
 		public void SetMinNegativeGoodwill(Faction faction, int minGoodwill) {
@@ -26,11 +32,21 @@ namespace RemoteTech {
 		}
 
 		public int GetMinNegativeGoodwill(Faction faction) {
-			var factionId = faction.loadID;
-			if (goodwillCaps.ContainsKey(factionId)) {
-				return goodwillCaps[factionId];
+			if (RemoteTechController.Instance.SettingLowerStandingCap.Value) {
+				var factionId = faction.loadID;
+				if (goodwillCaps.ContainsKey(factionId)) {
+					return goodwillCaps[factionId];
+				}
 			}
 			return DefaultMinNegativeGoodwill;
+		}
+
+		public bool HasPlayerBetrayedFaction(Faction faction) {
+			return betrayedFactions.Contains(faction.loadID);
+		}
+
+		public void OnPlayerBetrayedFaction(Faction faction) {
+			betrayedFactions.Add(faction.loadID);
 		}
 	}
 }

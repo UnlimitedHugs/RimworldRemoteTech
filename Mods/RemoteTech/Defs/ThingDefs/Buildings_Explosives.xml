@@ -590,6 +590,7 @@ Detonate using a Manual Detonator and Detonator Wire.</description>
 		</comps>
 		<building>
 			<isTrap>true</isTrap>
+			<expandHomeArea>false</expandHomeArea>
 		</building>
 		<researchPrerequisites><li>rxMakeshiftExplosives</li></researchPrerequisites>
 	</ThingDef>
@@ -628,6 +629,7 @@ Arm, then detonate from the Remote Explosives Console.</description>
 		<building Class="RemoteTech.BuildingProperties_RemoteExplosive">
 			<isTrap>true</isTrap>
 			<explosiveType>Combat</explosiveType>
+			<expandHomeArea>false</expandHomeArea>
 		</building>
 	</ThingDef>
 	
@@ -665,6 +667,7 @@ Arm, then detonate from the Remote Explosives Console.</description>
 		<building Class="RemoteTech.BuildingProperties_RemoteExplosive">
 			<isTrap>true</isTrap>
 			<explosiveType>Combat</explosiveType>
+			<expandHomeArea>false</expandHomeArea>
 		</building>
 	</ThingDef>
 	
@@ -709,6 +712,7 @@ Arm, then detonate from the Remote Explosives Console.</description>
 		<building Class="RemoteTech.BuildingProperties_RemoteExplosive">
 			<isTrap>true</isTrap>
 			<explosiveType>Combat</explosiveType>
+			<expandHomeArea>false</expandHomeArea>
 		</building>
 	</ThingDef>
 	
@@ -753,6 +757,7 @@ Detonate from the Remote Explosives Console.</description>
 		<building Class="RemoteTech.BuildingProperties_RemoteExplosive">
 			<isTrap>false</isTrap>
 			<explosiveType>Mining</explosiveType>
+			<expandHomeArea>false</expandHomeArea>
 		</building>
 	</ThingDef>
 	
@@ -793,6 +798,7 @@ Detonate from the Remote Explosives Console.</description>
 		<building Class="RemoteTech.BuildingProperties_RemoteExplosive">
 			<isTrap>false</isTrap>
 			<explosiveType>Mining</explosiveType>
+			<expandHomeArea>false</expandHomeArea>
 		</building>
 		<placeWorkers>
 			<li>RemoteTech.PlaceWorker_MiningExplosiveSquare</li>
@@ -855,6 +861,7 @@ Detonate from the Remote Explosives Console.</description>
 		<building Class="RemoteTech.BuildingProperties_RemoteExplosive">
 			<isTrap>false</isTrap>
 			<explosiveType>Mining</explosiveType>
+			<expandHomeArea>false</expandHomeArea>
 		</building>
 		<researchPrerequisites><li>rxRoofBreaking</li></researchPrerequisites>
 		<drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>
@@ -903,6 +910,7 @@ Arm, then detonate from the Remote Explosives Console.</description>
 		<building Class="RemoteTech.BuildingProperties_RemoteExplosive">
 			<isTrap>true</isTrap>
 			<explosiveType>Utility</explosiveType>
+			<expandHomeArea>false</expandHomeArea>
 		</building>
 	</ThingDef>
 	
@@ -943,6 +951,7 @@ Arm, then detonate from the Remote Explosives Console.</description>
 		<building Class="RemoteTech.BuildingProperties_RemoteExplosive">
 			<isTrap>true</isTrap>
 			<explosiveType>Utility</explosiveType>
+			<expandHomeArea>false</expandHomeArea>
 		</building>
 	</ThingDef>
 	
@@ -984,6 +993,7 @@ Arm, then detonate from the Remote Explosives Console.</description>
 		<building Class="RemoteTech.BuildingProperties_RemoteExplosive">
 			<isTrap>true</isTrap>
 			<explosiveType>Utility</explosiveType>
+			<expandHomeArea>false</expandHomeArea>
 		</building>
 		<researchPrerequisites>
 			<li>rxRefinedSleepingGas</li>

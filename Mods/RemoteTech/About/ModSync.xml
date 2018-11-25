@@ -2,7 +2,7 @@
 <ModSyncNinjaData>
   <ID>2e7a4254-b7d8-4070-a528-71f9e4f77b06</ID>
   <ModName>Remote Tech</ModName>
-  <Version>2.1.0</Version>
+  <Version>2.1.1</Version>
   <SaveBreaking>False</SaveBreaking>
   <Host name="Github">
     <Owner>UnlimitedHugs</Owner>

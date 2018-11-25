@@ -439,18 +439,18 @@
 	
 	<RecipeDef>
 		<defName>rxMakeCharcoal</defName>
-		<label>make charcoal</label>
+		<label>make crushed charcoal</label>
 		<description>Make charcoal from wood logs.</description>
 		<jobString>Making charcoal.</jobString>
 		<recipeUsers>
 			<li>Campfire</li>
 			<li>FueledStove</li>
+			<li>FueledSmithy</li>
 		</recipeUsers>
 		<researchPrerequisite>rxMakeshiftExplosives</researchPrerequisite>
 		<workSpeedStat>SmeltingSpeed</workSpeedStat>
 		<allowMixingIngredients>true</allowMixingIngredients>
 		<workAmount>500</workAmount>
-		<requiredGiverWorkType>Crafting</requiredGiverWorkType>
 		<effectWorking>Cremate</effectWorking>
 		<soundWorking>Recipe_Cremate</soundWorking>
 		<targetCountAdjustment>5</targetCountAdjustment>
