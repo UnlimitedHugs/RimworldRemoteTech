@@ -57,6 +57,10 @@ namespace RemoteTech {
 			return grid.byteGrid[cellIndex] > 0;
 		}
 
+		public static bool PawnShouldAvoidCell(Pawn pawn, IntVec3 cell) {
+			return PawnHasPlayerAvoidanceGridKnowledge(pawn) && ShouldAvoidCell(pawn.Map, cell);
+		}
+
 		public static void ClearAllMaps() {
 			grids.Clear();
 		}

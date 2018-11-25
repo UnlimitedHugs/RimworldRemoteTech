@@ -10,8 +10,8 @@ namespace RemoteTech.Patches {
 	internal static class PawnUtility_KnownDangerAt_Patch {
 		[HarmonyPostfix]
 		public static void ConsiderFriendlyAvoidGrid(IntVec3 c, Map map, Pawn forPawn, ref bool __result) {
-			if (__result == false && map != null && PlayerAvoidanceGrids.PawnHasPlayerAvoidanceGridKnowledge(forPawn)) {
-				__result = PlayerAvoidanceGrids.ShouldAvoidCell(map, c);
+			if (__result == false && PlayerAvoidanceGrids.PawnShouldAvoidCell(forPawn, c)) {
+				__result = true;
 			}
 		}
 	}
