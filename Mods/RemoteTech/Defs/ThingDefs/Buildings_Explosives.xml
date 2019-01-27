@@ -411,6 +411,7 @@ Right-click with a drafted colonist for better timing.</description>
 			<Beauty>-2</Beauty>
 		</statBases>
 		<placingDraggableDimensions>1</placingDraggableDimensions>
+		<clearBuildingArea>false</clearBuildingArea>
 		<resourcesFractionWhenDeconstructed>0</resourcesFractionWhenDeconstructed>
 		<placeWorkers>
 			<li>RemoteTech.PlaceWorker_DetonatorWire</li>
