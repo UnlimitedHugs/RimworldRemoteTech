@@ -3,6 +3,7 @@
 
 	<MentalBreakDef>
 		<defName>rxRedButtonFever</defName>
+		<workerClass>RemoteTech.MentalBreakWorker_ColonistsOnly</workerClass>
 		<mentalState>rxRedButtonFever</mentalState>
 		<baseCommonality>1</baseCommonality>
 		<intensity>Extreme</intensity>

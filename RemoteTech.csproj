@@ -60,6 +60,7 @@
     <Compile Include="Source\AI\JobDriver_InstallUpgrade.cs" />
     <Compile Include="Source\AI\JobDriver_RedButtonFever.cs" />
     <Compile Include="Source\AI\JobGiver_RedButtonFever.cs" />
+    <Compile Include="Source\AI\MentalBreakWorker_ColonistsOnly.cs" />
     <Compile Include="Source\AI\MentalStateWorker_RedButtonFever.cs" />
     <Compile Include="Source\AI\MentalState_RedButtonFever.cs" />
     <Compile Include="Source\AI\WorkGiver_FoamWall.cs" />
