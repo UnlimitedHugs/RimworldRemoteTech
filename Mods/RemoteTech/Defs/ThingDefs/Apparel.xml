@@ -159,7 +159,7 @@ Works only on channel 1, but can be upgraded once channels have been researched.
 				<li>Waist</li>
 			</bodyPartGroups>
 			<layers>
-				<li>Belt</li>
+				<li>rxAccessory</li>
 			</layers>
 		</apparel>
 		<comps>

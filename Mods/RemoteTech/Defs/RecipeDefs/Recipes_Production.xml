@@ -446,6 +446,7 @@
 			<li>Campfire</li>
 			<li>FueledStove</li>
 			<li>FueledSmithy</li>
+			<li>ElectricSmelter</li>
 		</recipeUsers>
 		<researchPrerequisite>rxMakeshiftExplosives</researchPrerequisite>
 		<workSpeedStat>SmeltingSpeed</workSpeedStat>
