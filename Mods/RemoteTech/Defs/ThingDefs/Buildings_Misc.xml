@@ -242,7 +242,7 @@ Tip: switches can be used to toggle vents remotely, as well as in groups.</descr
 		<fillPercent>1</fillPercent>
 		<useHitPoints>True</useHitPoints>
 		<statBases>
-			<MaxHitPoints>80</MaxHitPoints>
+			<MaxHitPoints>250</MaxHitPoints>
 			<WorkToBuild>2000</WorkToBuild>
 			<Flammability>0.8</Flammability>
 			<Beauty>-3</Beauty>
