@@ -138,7 +138,8 @@ namespace RemoteTech {
 				var resourceDrop = ThingMaker.MakeThing(building.mineableThing);
 				resourceDrop.stackCount = resourceYield;
 				GenSpawn.Spawn(resourceDrop, mineablePosition, mineableMap);
-				if (resourceDrop.def.EverHaulable && !resourceDrop.def.designateHaulable) {
+				if (resourceDrop.def.EverHaulable && !resourceDrop.def.designateHaulable 
+					&& RemoteTechController.Instance.SettingMiningChargesForbid.Value) {
 					resourceDrop.SetForbidden(true);
 				}
 			}
