@@ -61,12 +61,11 @@ namespace RemoteTech {
 			if (thing.def.mineable) {
 				var rockBuildingDef = thing.def.building;
 				if (rockBuildingDef == null) return false;
-				var mineable = thing as Mineable;
-				if (rockBuildingDef.isResourceRock && mineable != null) {
+				if (rockBuildingDef.isResourceRock) {
 					// resource rocks
 					breakingPowerRemaining -= thing.HitPoints * MiningProps.resourceBreakingCost;
 					DamageResourceHolder(thing, explosive.GetStatValue(Resources.Stat.rxExplosiveMiningYield));
-					BreakMineableAndYieldResources(mineable);
+					BreakMineableAndYieldResources(thing);
 					affected = true;
 				} else if (rockBuildingDef.isNaturalRock) {
 					// stone
@@ -107,38 +106,42 @@ namespace RemoteTech {
 			return affected;
 		}
 
-		// this affects the amount of ore drops
 		private void DamageResourceHolder(Thing thing, float efficiency) {
-			var damage = thing.MaxHitPoints * (1 - efficiency);
-			thing.TakeDamage(new DamageInfo(DamageDefOf.Bomb, (int)damage, 0F, -1F, parent));
+			// remaining hitpoints affect the amount of ore drops
+			// make sure we don't destroy our resource holder at this point
+			var bombDamageMultiplier = thing.def.damageMultipliers?
+				.FirstOrDefault(m => m?.damageDef == DamageDefOf.Bomb)?.multiplier ?? 1f;
+			var damageToTake = thing.MaxHitPoints * (1f - efficiency) * bombDamageMultiplier;
+			thing.HitPoints = Mathf.Max(1, thing.HitPoints - Mathf.RoundToInt(damageToTake));
 		}
 
-		private void BreakMineableAndYieldResources(Mineable mineable) {
-			// swiped from Mineable.TrySpawnYield
-			// the vanilla system is hardcoded to work for pawns, so we implement our own copy
-			if (mineable?.def?.building?.mineableThing == null) {
+		private static void BreakMineableAndYieldResources(Thing mineable) {
+			// swiped from Mineable.TrySpawnYield- we have to manually include the remaining health multiplier
+			if (mineable == null || mineable.Destroyed || mineable.def.building.mineableThing == null) {
 				return;
 			}
-			var pos = mineable.Position;
-			var map = mineable.Map;
-			var hitPointsLeft = mineable.HitPoints;
-			mineable.Destroy(DestroyMode.KillFinalize);
-			// clean up the single-item stack left by the vanilla dropper
-			var vanillaDrop = map.thingGrid.ThingAt(pos, mineable.def.building.mineableThing);
-			if (vanillaDrop != null && !vanillaDrop.Destroyed) {
-				vanillaDrop.Destroy();
-			}
-			if (Rand.Value > mineable.def.building.mineableDropChance) {
+			var building = mineable.def.building;
+			if (Rand.Value > building.mineableDropChance){
 				return;
 			}
-			int yield = mineable.def.building.mineableYield;
-			var yieldMultiplier = (hitPointsLeft / (float)mineable.MaxHitPoints);
-			if (mineable.def.building.mineableYieldWasteable) {
-				yield = Mathf.Max(1, GenMath.RoundRandom(yield * yieldMultiplier));
+			int resourceYield = Mathf.Max(1, Mathf.RoundToInt(building.mineableYield * Find.Storyteller.difficulty.mineYieldFactor));
+			if (building.mineableYieldWasteable) {
+				var remainingHealthMultiplier = (float)mineable.HitPoints / mineable.MaxHitPoints;
+				resourceYield = GenMath.RoundRandom(resourceYield * remainingHealthMultiplier);
 			}
-			var drop = ThingMaker.MakeThing(mineable.def.building.mineableThing);
-			drop.stackCount = yield;
-			GenSpawn.Spawn(drop, pos, map);
+
+			var mineableMap = mineable.Map;
+			var mineablePosition = mineable.Position;
+			mineable.Destroy();
+
+			if (resourceYield > 0) {
+				var resourceDrop = ThingMaker.MakeThing(building.mineableThing);
+				resourceDrop.stackCount = resourceYield;
+				GenSpawn.Spawn(resourceDrop, mineablePosition, mineableMap);
+				if (resourceDrop.def.EverHaulable && !resourceDrop.def.designateHaulable) {
+					resourceDrop.SetForbidden(true);
+				}
+			}
 		}
 	}
 }
