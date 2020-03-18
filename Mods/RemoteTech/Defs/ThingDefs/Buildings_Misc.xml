@@ -254,7 +254,7 @@ Tip: switches can be used to toggle vents remotely, as well as in groups.</descr
 		<terrainAffordanceNeeded>Heavy</terrainAffordanceNeeded>
 		<passability>Impassable</passability>
 		<building Class="RemoteTech.BuildingProperties_GasVent">
-			<heatExchangedPerSecond>0.0672</heatExchangedPerSecond>
+			<heatExchangedPerSecond>3.35</heatExchangedPerSecond>
 			<canPlaceOverWall>true</canPlaceOverWall>
 		</building>
 		<comps>
