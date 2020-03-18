@@ -82,7 +82,8 @@ namespace RemoteTech {
 		}
 
 		private void RemoveFoamWallsFromMeteoritePool() {
-			// smoothed foam walls are mineable, but should not appear in a meteorite drop
+			// foam walls are mineable, but should not appear in a meteorite drop
+			ThingSetMaker_Meteorite.nonSmoothedMineables.Remove(Resources.Thing.rxFoamWall);
 			ThingSetMaker_Meteorite.nonSmoothedMineables.Remove(Resources.Thing.rxFoamWallSmooth);
 			ThingSetMaker_Meteorite.nonSmoothedMineables.Remove(Resources.Thing.rxFoamWallBricks);
 			// same for our passable collapsed rock
