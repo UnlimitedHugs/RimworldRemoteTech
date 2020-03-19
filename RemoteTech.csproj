@@ -76,6 +76,7 @@
     <Compile Include="Source\Building\Building_RadioMast.cs" />
     <Compile Include="Source\Building\ISelectedThingPlaceWorker.cs" />
     <Compile Include="Source\Building\SensorSettings.cs" />
+    <Compile Include="Source\Compat\Compat_DoorsExpanded.cs" />
     <Compile Include="Source\Comp\CompAIPilotLight.cs" />
     <Compile Include="Source\Comp\CompBuildGizmo.cs" />
     <Compile Include="Source\Comp\CompGlowerToggleable.cs" />

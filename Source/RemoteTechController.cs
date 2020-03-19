@@ -68,6 +68,7 @@ namespace RemoteTech {
 			GetSettingsHandles();
 			PrepareReflection();
 			RemoveFoamWallsFromMeteoritePool();
+			Compat_DoorsExpanded.OnDefsLoaded();
 		}
 
 		public override void SceneLoaded(Scene scene) {
