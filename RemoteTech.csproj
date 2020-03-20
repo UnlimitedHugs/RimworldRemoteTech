@@ -86,7 +86,6 @@
     <Compile Include="Source\Building\Building_GasVent.cs" />
     <Compile Include="Source\Building\Building_ProximitySensor.cs" />
     <Compile Include="Source\Building\Building_RadioMast.cs" />
-    <Compile Include="Source\Building\ISelectedThingPlaceWorker.cs" />
     <Compile Include="Source\Building\SensorSettings.cs" />
     <Compile Include="Source\Compat\Compat_DoorsExpanded.cs" />
     <Compile Include="Source\Comp\CompAIPilotLight.cs" />
@@ -134,7 +133,6 @@
     <Compile Include="Source\Patches\CultivatedPlants_DeterminePlantDef_Patch.cs" />
     <Compile Include="Source\Patches\GenLeaving_GetLeaveCalculator_Patch.cs" />
     <Compile Include="Source\Patches\ThingDef_ConnectToPower_Patch.cs" />
-    <Compile Include="Source\Patches\Thing_DrawExtraSelectionOverlays_Patch.cs" />
     <Compile Include="Source\Thing\FullDeconstructionRefund.cs" />
     <Compile Include="Source\Thing\GasCloud_AffectThing.cs" />
     <Compile Include="Source\Thing\GasCloud_DamageDealer.cs" />
