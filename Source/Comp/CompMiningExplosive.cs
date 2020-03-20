@@ -39,6 +39,7 @@ namespace RemoteTech {
 			var affectedMineables = 0;
 			var breakingPowerRemaining = MiningProps.breakingPower;
 			foreach (var pos in cellsByDistance) {
+				if (!pos.InBounds(parentMap)) continue;
 				var things = parentMap.thingGrid.ThingsListAt(pos).ToArray(); // copy required because of collection modification
 				foreach (var thing in things) {
 					if (TryAffectThing(thing, parent, ref breakingPowerRemaining)) {
