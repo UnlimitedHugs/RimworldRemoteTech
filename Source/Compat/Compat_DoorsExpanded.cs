@@ -16,7 +16,7 @@ namespace RemoteTech {
 				doorRemoteTypeName = "DoorsExpanded.Building_DoorRemote",
 				curtainDoorDefName = "HeronCurtainTribal",
 				jailDoorDefName = "PH_DoorJail";
-			var doorExpandedType = GenTypes.GetTypeInAnyAssemblyNew(doorExpandedTypeName, null);
+			var doorExpandedType = GenTypes.GetTypeInAnyAssembly(doorExpandedTypeName);
 			if (doorExpandedType != null) {
 				var logger = RemoteTechController.Instance.Logger;
 				try {
@@ -27,7 +27,7 @@ namespace RemoteTech {
 					if (openIntField == null || openIntField.FieldType != typeof(bool)) {
 						throw new Exception($"Expected {doorExpandedTypeName} to have field {openIntFieldName}");
 					}
-					var doorRemoteType = GenTypes.GetTypeInAnyAssemblyNew(doorRemoteTypeName, null);
+					var doorRemoteType = GenTypes.GetTypeInAnyAssembly(doorRemoteTypeName);
 					if (doorRemoteType == null || !doorExpandedType.IsAssignableFrom(doorRemoteType)) {
 						throw new Exception($"Expected type {doorRemoteTypeName}, extending {doorExpandedTypeName}");
 					}

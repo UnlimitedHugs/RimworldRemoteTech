@@ -26,7 +26,7 @@ namespace RemoteTech {
 			return "Alert_wireFailure_label".Translate();
 		}
 
-		public override string GetExplanation() {
+		public override TaggedString GetExplanation() {
 			return "Alert_wireFailure_desc".Translate();
 		}
 

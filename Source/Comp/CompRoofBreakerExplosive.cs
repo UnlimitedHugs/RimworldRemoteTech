@@ -25,7 +25,7 @@ namespace RemoteTech {
 				if(roof == null || (roof.isThickRoof && !canAffectThickRoof)) continue;
 				if (roof.filthLeaving != null) {
 					for (int j = 0; j < RoofFilthAmount; j++) {
-						FilthMaker.MakeFilth(cell, map, roof.filthLeaving);
+						FilthMaker.TryMakeFilth(cell, map, roof.filthLeaving);
 					}
 				}
 				if (roof.isThickRoof) {

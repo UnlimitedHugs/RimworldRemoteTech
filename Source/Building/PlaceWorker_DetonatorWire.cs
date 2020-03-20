@@ -9,7 +9,7 @@ namespace RemoteTech {
 		private readonly Type compTypeTransmitter = typeof (CompWiredDetonationTransmitter);
 		private readonly Type compTypeCrossing = typeof (CompWiredDetonationCrossing);
 		
-		public override AcceptanceReport AllowsPlacing(BuildableDef checkingDef, IntVec3 loc, Rot4 rot, Map map, Thing thingToIgnore = null) {
+		public override AcceptanceReport AllowsPlacing(BuildableDef checkingDef, IntVec3 loc, Rot4 rot, Map map, Thing thingToIgnore = null, Thing thing = null) {
 			var thingList = loc.GetThingList(map);
 			for (var i = 0; i < thingList.Count; i++) {
 				var thingOnTile = thingList[i];

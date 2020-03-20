@@ -18,7 +18,7 @@ namespace RemoteTech {
 		private static readonly Color OtherEffectiveAreasColor = new Color(.3f, .7f, .3f, .15f);
 		private static readonly List<IntVec3> cellBuffer = new List<IntVec3>();
 		
-		public override void DrawGhost(ThingDef def, IntVec3 center, Rot4 rot, Color ghostCol) {
+		public override void DrawGhost(ThingDef def, IntVec3 center, Rot4 rot, Color ghostCol, Thing thing = null) {
 			var ownEffectiveRadius = RemoteTechUtility.TryGetExplosiveRadius(def);
 			var map = Find.CurrentMap;
 			if (map == null || ownEffectiveRadius <= 0) return;

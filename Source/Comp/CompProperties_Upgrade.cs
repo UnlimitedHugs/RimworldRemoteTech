@@ -85,7 +85,7 @@ namespace RemoteTech {
 				if (constructionSkillPrerequisite > 0) {
 					reqList.Add("Upgrade_prerequisitesSkill".Translate(constructionSkillPrerequisite));
 				}
-				_prerequisitesDescription = reqList.Count > 0 ? "Upgrade_prerequisites".Translate() + reqList.Join(", ") : string.Empty;
+				_prerequisitesDescription = reqList.Count > 0 ? "Upgrade_prerequisites".Translate() + reqList.Join(", ") : TaggedString.Empty;
 			}
 			return _prerequisitesDescription;
 		}

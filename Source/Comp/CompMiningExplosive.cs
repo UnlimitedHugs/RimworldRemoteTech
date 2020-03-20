@@ -73,7 +73,7 @@ namespace RemoteTech {
 					thing.Destroy();
 					affected = true;
 					if (thing.def.filthLeaving != null) {
-						FilthMaker.MakeFilth(thing.Position, map, thing.def.filthLeaving, Rand.RangeInclusive(1, 3));
+						FilthMaker.TryMakeFilth(thing.Position, map, thing.def.filthLeaving, Rand.RangeInclusive(1, 3));
 					}
 					if (rockBuildingDef.mineableThing != null && Rand.Value < explosive.GetStatValue(Resources.Stat.rxExplosiveChunkYield)) {
 						var rockDrop = ThingMaker.MakeThing(rockBuildingDef.mineableThing);

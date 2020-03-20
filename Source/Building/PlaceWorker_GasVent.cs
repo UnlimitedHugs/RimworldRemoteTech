@@ -6,7 +6,7 @@ namespace RemoteTech {
 		private readonly Color DefaultArrowColor = Color.white;
 		private readonly Color BlockedArrowColor = Color.red;
 
-		public override void DrawGhost(ThingDef def, IntVec3 center, Rot4 rot, Color ghostCol) {
+		public override void DrawGhost(ThingDef def, IntVec3 center, Rot4 rot, Color ghostCol, Thing thing = null) {
 			var map = Find.CurrentMap;
 			if (map == null) return;
 			var targetCell = center + IntVec3Utility.RotatedBy(IntVec3.North, rot);

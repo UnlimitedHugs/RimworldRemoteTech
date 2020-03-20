@@ -31,7 +31,7 @@ namespace RemoteTech {
 		}
 
 		protected string GetLabelForChannel(int channel, bool switching) {
-			return "RemoteExplosive_channelChanger_label".Translate(channel, switching ? "RemoteExplosive_channel_switching".Translate() : "");
+			return "RemoteExplosive_channelChanger_label".Translate(channel, switching ? "RemoteExplosive_channel_switching".Translate() : TaggedString.Empty);
 		}
 
 		internal int GetNextChannel(int channel) {
