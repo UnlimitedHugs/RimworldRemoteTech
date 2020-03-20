@@ -2,6 +2,7 @@
 <Defs>
 	<HediffDef Class="RemoteTech.HediffDef_NonLethal">
 		<defName>rxSleepingGas</defName>
+		<description>Effects of inhaled sleeping gas. As concentration increases, the body becomes less capable until eventually falling asleep.\n\nRecovers naturally over time, but only if no additional gas is inhaled.</description>
 		<hediffClass>RemoteTech.Hediff_NonLethal</hediffClass>
 		<defaultLabelColor>(0.7, 0.1 , 1)</defaultLabelColor>
 		<label>sleeping gas</label>

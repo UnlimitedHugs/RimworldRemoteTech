@@ -282,7 +282,9 @@ Place as a building from the Explosives menu to use.</description>
 				<explosiveExpandPerStackcount>0.1</explosiveExpandPerStackcount>
 				<startWickHitPointsPercent>1</startWickHitPointsPercent>
 				<chanceNeverExplodeFromDamage>0.25</chanceNeverExplodeFromDamage>
-				<startWickOnDamageTaken>Flame</startWickOnDamageTaken>
+				<startWickOnDamageTaken>
+					<li>Flame</li>
+				</startWickOnDamageTaken>
 				<wickTicks>
 					<min>90</min>
 					<max>180</max>
