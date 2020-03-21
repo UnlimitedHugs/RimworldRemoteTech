@@ -33,7 +33,7 @@
 
 	<ThingDef Name="rxApparelMakeableBase" ParentName="rxApparelBase" Abstract="True">
 		<recipeMaker>
-			<workSpeedStat>TailoringSpeed</workSpeedStat>
+			<workSpeedStat>GeneralLaborSpeed</workSpeedStat>
 			<workSkill>Crafting</workSkill>
 			<effectWorking>Tailor</effectWorking>
 			<soundWorking>Recipe_Tailor</soundWorking>
@@ -135,7 +135,7 @@ Works only on channel 1, but can be upgraded once channels have been researched.
 		</statBases>
 		<generateCommonality>0.00001</generateCommonality>
 		<recipeMaker>
-			<workSpeedStat>SmithingSpeed</workSpeedStat>
+			<workSpeedStat>GeneralLaborSpeed</workSpeedStat>
 			<workSkill>Crafting</workSkill>
 			<effectWorking>Smith</effectWorking>
 			<soundWorking>Recipe_Machining</soundWorking>

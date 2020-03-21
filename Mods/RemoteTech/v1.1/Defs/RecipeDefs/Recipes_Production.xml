@@ -10,7 +10,7 @@
 			<li>rxBench</li>
 		</recipeUsers>
 		<researchPrerequisite>IEDs</researchPrerequisite>
-		<workSpeedStat>SmithingSpeed</workSpeedStat>
+		<workSpeedStat>GeneralLaborSpeed</workSpeedStat>
 		<effectWorking>Cook</effectWorking>
 		<soundWorking>Recipe_Machining</soundWorking>
 		<allowMixingIngredients>true</allowMixingIngredients>
@@ -72,7 +72,7 @@
 			<li>rxBench</li>
 		</recipeUsers>
 		<researchPrerequisite>IEDs</researchPrerequisite>
-		<workSpeedStat>SmithingSpeed</workSpeedStat>
+		<workSpeedStat>GeneralLaborSpeed</workSpeedStat>
 		<effectWorking>Cook</effectWorking>
 		<soundWorking>Recipe_Machining</soundWorking>
 		<allowMixingIngredients>true</allowMixingIngredients>
@@ -134,7 +134,7 @@
 			<li>rxBench</li>
 		</recipeUsers>
 		<researchPrerequisite>rxEmpMine</researchPrerequisite>
-		<workSpeedStat>SmithingSpeed</workSpeedStat>
+		<workSpeedStat>GeneralLaborSpeed</workSpeedStat>
 		<effectWorking>Cook</effectWorking>
 		<soundWorking>Recipe_Machining</soundWorking>
 		<allowMixingIngredients>true</allowMixingIngredients>
@@ -195,7 +195,7 @@
 			<li>rxBench</li>
 		</recipeUsers>
 		<researchPrerequisite>rxRemoteDetonator</researchPrerequisite>
-		<workSpeedStat>SmithingSpeed</workSpeedStat>
+		<workSpeedStat>GeneralLaborSpeed</workSpeedStat>
 		<effectWorking>Cook</effectWorking>
 		<soundWorking>Recipe_Machining</soundWorking>
 		<allowMixingIngredients>true</allowMixingIngredients>
@@ -243,7 +243,7 @@
 		<recipeUsers>
 			<li>rxBench</li>
 		</recipeUsers>
-		<workSpeedStat>SmithingSpeed</workSpeedStat>
+		<workSpeedStat>GeneralLaborSpeed</workSpeedStat>
 		<effectWorking>Cook</effectWorking>
 		<soundWorking>Recipe_Machining</soundWorking>
 		<allowMixingIngredients>true</allowMixingIngredients>
@@ -323,7 +323,7 @@
 			<li>rxBench</li>
 		</recipeUsers>
 		<researchPrerequisite>rxRefinedSleepingGas</researchPrerequisite>
-		<workSpeedStat>SmithingSpeed</workSpeedStat>
+		<workSpeedStat>GeneralLaborSpeed</workSpeedStat>
 		<effectWorking>Cook</effectWorking>
 		<soundWorking>Recipe_Machining</soundWorking>
 		<allowMixingIngredients>true</allowMixingIngredients>
@@ -390,7 +390,7 @@
 			<li>rxBench</li>
 		</recipeUsers>
 		<researchPrerequisite>rxMakeshiftExplosives</researchPrerequisite>
-		<workSpeedStat>TailoringSpeed</workSpeedStat>
+		<workSpeedStat>GeneralLaborSpeed</workSpeedStat>
 		<workSkill>Crafting</workSkill>
 		<effectWorking>Cook</effectWorking>
 		<soundWorking>Recipe_Tailor</soundWorking>
