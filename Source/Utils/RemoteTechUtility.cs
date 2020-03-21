@@ -5,7 +5,6 @@ using HugsLib;
 using RimWorld;
 using UnityEngine;
 using Verse;
-using Verse.AI;
 
 namespace RemoteTech {
 	/// <summary>
@@ -84,7 +83,7 @@ namespace RemoteTech {
 			var entry = new FloatMenuOption("Detonator_detonatenow".Translate(), () => {
 				if (!pawn.IsColonistPlayerControlled) return;
 				if (!detonator.WantsDetonation) detonator.WantsDetonation = true;
-				var job = new Job(Resources.Job.rxDetonateExplosives, detonatorThing);
+				var job = JobMaker.MakeJob(Resources.Job.rxDetonateExplosives, detonatorThing);
 				pawn.jobs.TryTakeOrderedJob(job);
 			});
 			if (pawn.Map.reservationManager.IsReservedAndRespected(detonatorThing, pawn)) {

@@ -21,19 +21,20 @@ namespace RemoteTech {
 				var targetThing = target as Thing;
 				var pathEndMode = (targetThing?.def?.hasInteractionCell ?? false) ? PathEndMode.InteractionCell : PathEndMode.ClosestTouch;
 				if (targetThing != null && pawn.CanReach(targetThing, pathEndMode, Danger.Deadly)) {
-					return new Job(Resources.Job.rxRedButtonFever, targetThing);
+					return JobMaker.MakeJob(Resources.Job.rxRedButtonFever, targetThing);
 				}
 			}
 
 			if (pawn.mindState.nextMoveOrderIsWait) {
-				var job = new Job(JobDefOf.Wait_Wander) { expiryInterval = waitTicks.RandomInRange };
+				var job = JobMaker.MakeJob(JobDefOf.Wait_Wander);
+				job.expiryInterval = waitTicks.RandomInRange;
 				pawn.mindState.nextMoveOrderIsWait = false;
 				return job;
 			}
 			var c = RCellFinder.RandomWanderDestFor(pawn, pawn.Position, 10f, null, Danger.Deadly);
 			if (c.IsValid) {
 				pawn.mindState.nextMoveOrderIsWait = true;
-				return new Job(JobDefOf.GotoWander, c);
+				return JobMaker.MakeJob(JobDefOf.GotoWander, c);
 			}
 			return null;
 		}
