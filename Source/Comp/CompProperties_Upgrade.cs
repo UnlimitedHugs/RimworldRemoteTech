@@ -27,7 +27,7 @@ namespace RemoteTech {
 		// optional referenceId of another upgrade on the same thing that must be installed before this upgrade can be installed
 		public string prerequisiteUpgradeId;
 		// minimum construction skill level on the builder who can install the upgrade
-		public int constructionSkillPrerequisite = 5;
+		public int constructionSkillPrerequisite = 3;
 
 		private string _effectDescription;
 		public string EffectDescription {
