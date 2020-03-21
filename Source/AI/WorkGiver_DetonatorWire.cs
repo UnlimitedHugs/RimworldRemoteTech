@@ -31,7 +31,7 @@ namespace RemoteTech {
 			if (wire == null) return null;
 			if (!wire.WantDrying) return null;
 			var jobDef = Resources.Job.rxDryDetonatorWire;
-			return new Job(jobDef, t);
+			return JobMaker.MakeJob(jobDef, t);
 		}
 	}
 }

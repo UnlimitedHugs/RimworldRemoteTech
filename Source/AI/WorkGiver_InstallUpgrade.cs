@@ -32,10 +32,10 @@ namespace RemoteTech {
 				status = false;
 			}
 			if (status && !comp.PawnMeetsSkillRequirement(pawn)) {
-				JobFailReason.Is("ConstructionSkillTooLow".Translate());
+				JobFailReason.Is("SkillTooLowForConstruction".Translate(SkillDefOf.Construction.LabelCap));
 				status = false;
 			}
-			return status ? new Job(Resources.Job.rxInstallUpgrade, t) : null;
+			return status ? JobMaker.MakeJob(Resources.Job.rxInstallUpgrade, t) : null;
 		}
 
 		public override IEnumerable<Thing> PotentialWorkThingsGlobal(Pawn pawn) {

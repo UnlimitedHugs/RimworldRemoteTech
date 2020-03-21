@@ -20,8 +20,8 @@ namespace RemoteTech {
 			return base.Apply(dinfo, victim);
 		}
 
-		public override void ExplosionAffectCell(Explosion explosion, IntVec3 c, List<Thing> damagedThings, bool canThrowMotes) {
-			base.ExplosionAffectCell(explosion, c, damagedThings, canThrowMotes);
+		public override void ExplosionAffectCell(Explosion explosion, IntVec3 c, List<Thing> damagedThings, List<Thing> ignoredThings, bool canThrowMotes) {
+			base.ExplosionAffectCell(explosion, c, damagedThings, ignoredThings, canThrowMotes);
 			if (ShouldCreateFire()) {
 				FireUtility.TryStartFireIn(c, explosion.Map, Rand.Range(0.2f, 0.6f));
 			}

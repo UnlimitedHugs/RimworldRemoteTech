@@ -143,7 +143,7 @@ namespace RemoteTech {
 
 		public override IEnumerable<Gizmo> GetGizmos() {
 			yield return new Command_Action {
-				defaultLabel = "proxSensor_settings".Translate() + (WantsSwitch()?"RemoteExplosive_channel_switching".Translate():string.Empty),
+				defaultLabel = "proxSensor_settings".Translate() + (WantsSwitch()?"RemoteExplosive_channel_switching".Translate():TaggedString.Empty),
 				icon = Resources.Textures.rxUISensorSettings,
 				action = OpenSettingsDialog
 			};

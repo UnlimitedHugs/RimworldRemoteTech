@@ -47,6 +47,7 @@ namespace RemoteTech {
 		public static class Thing {
 			public static ThingDef rxCollapsedRoofRocks;
 			public static ThingDef rxGas_Sleeping;
+			public static ThingDef rxFoamWall;
 			public static ThingDef rxFoamWallSmooth;
 			public static ThingDef rxFoamWallBricks;
 			public static ThingDef rxPlantSparkweed;

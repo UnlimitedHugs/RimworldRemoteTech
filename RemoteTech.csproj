@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>RemoteTech</RootNamespace>
     <AssemblyName>RemoteTech</AssemblyName>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
   </PropertyGroup>
@@ -17,40 +17,55 @@
     <DebugSymbols>false</DebugSymbols>
     <DebugType>none</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>Mods\RemoteExplosives\Assemblies\</OutputPath>
+    <OutputPath>Mods\RemoteTech\v1.1\Assemblies\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>none</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>Mods\RemoteTech\Assemblies\</OutputPath>
+    <OutputPath>Mods\RemoteTech\v1.1\Assemblies\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
     <RunPostBuildEvent>Always</RunPostBuildEvent>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="0Harmony, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\0Harmony.dll</HintPath>
+    <Reference Include="0Harmony, Version=2.0.0.8, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\Lib.Harmony.2.0.0.8\lib\net472\0Harmony.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Assembly-CSharp">
-      <HintPath>..\Assembly-CSharp.dll</HintPath>
+      <HintPath>..\RimworldManaged\Assembly-CSharp.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="HugsLib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\UnlimitedHugs.Rimworld.HugsLib.7.1.0\lib\net472\HugsLib.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Data" />
+    <Reference Include="System.Runtime.InteropServices.RuntimeInformation" />
     <Reference Include="System.Xml" />
     <Reference Include="UnityEngine">
-      <HintPath>..\UnityEngine.dll</HintPath>
+      <HintPath>..\RimworldManaged\UnityEngine.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.CoreModule">
+      <HintPath>..\RimworldManaged\UnityEngine.CoreModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.IMGUIModule">
+      <HintPath>..\RimworldManaged\UnityEngine.IMGUIModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.TextRenderingModule">
+      <HintPath>..\RimworldManaged\UnityEngine.TextRenderingModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
   </ItemGroup>
@@ -71,8 +86,8 @@
     <Compile Include="Source\Building\Building_GasVent.cs" />
     <Compile Include="Source\Building\Building_ProximitySensor.cs" />
     <Compile Include="Source\Building\Building_RadioMast.cs" />
-    <Compile Include="Source\Building\ISelectedThingPlaceWorker.cs" />
     <Compile Include="Source\Building\SensorSettings.cs" />
+    <Compile Include="Source\Compat\Compat_DoorsExpanded.cs" />
     <Compile Include="Source\Comp\CompAIPilotLight.cs" />
     <Compile Include="Source\Comp\CompBuildGizmo.cs" />
     <Compile Include="Source\Comp\CompGlowerToggleable.cs" />
@@ -118,7 +133,6 @@
     <Compile Include="Source\Patches\CultivatedPlants_DeterminePlantDef_Patch.cs" />
     <Compile Include="Source\Patches\GenLeaving_GetLeaveCalculator_Patch.cs" />
     <Compile Include="Source\Patches\ThingDef_ConnectToPower_Patch.cs" />
-    <Compile Include="Source\Patches\Thing_DrawExtraSelectionOverlays_Patch.cs" />
     <Compile Include="Source\Thing\FullDeconstructionRefund.cs" />
     <Compile Include="Source\Thing\GasCloud_AffectThing.cs" />
     <Compile Include="Source\Thing\GasCloud_DamageDealer.cs" />
@@ -202,18 +216,11 @@
     <Compile Include="Source\AI\WorkGiver_IPawnDetonateable.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\HugsLibChecker\HugsLibChecker.csproj">
-      <Project>{a7dea100-952b-4516-b020-b66c8bcb4b50}</Project>
-      <Name>HugsLibChecker</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\HugsLib\HugsLib.csproj">
-      <Project>{a5d9bd45-533c-4ca0-9298-8950a3da724c}</Project>
-      <Name>HugsLib</Name>
-      <Private>False</Private>
-    </ProjectReference>
+    <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+  </PropertyGroup>
   <PropertyGroup>
     <PostBuildEvent>RimWorldWin64.exe</PostBuildEvent>
   </PropertyGroup>

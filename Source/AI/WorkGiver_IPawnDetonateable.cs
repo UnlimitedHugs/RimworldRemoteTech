@@ -37,7 +37,7 @@ namespace RemoteTech {
 			if(detonator == null) return null;
 			if (!detonator.WantsDetonation) return null;
 			var jobDef = Resources.Job.rxDetonateExplosives;
-			return new Job(jobDef, t);
+			return JobMaker.MakeJob(jobDef, t);
 		}
 	}
 }

@@ -5,7 +5,6 @@ using HugsLib;
 using RimWorld;
 using UnityEngine;
 using Verse;
-using Verse.AI;
 
 namespace RemoteTech {
 	/// <summary>
@@ -84,7 +83,7 @@ namespace RemoteTech {
 			var entry = new FloatMenuOption("Detonator_detonatenow".Translate(), () => {
 				if (!pawn.IsColonistPlayerControlled) return;
 				if (!detonator.WantsDetonation) detonator.WantsDetonation = true;
-				var job = new Job(Resources.Job.rxDetonateExplosives, detonatorThing);
+				var job = JobMaker.MakeJob(Resources.Job.rxDetonateExplosives, detonatorThing);
 				pawn.jobs.TryTakeOrderedJob(job);
 			});
 			if (pawn.Map.reservationManager.IsReservedAndRespected(detonatorThing, pawn)) {
@@ -97,9 +96,10 @@ namespace RemoteTech {
 
 		// Determines if by being placed in the given cell the roof breaker has both a
 		// thick roof within its radius, and a thin roof/no roof adjacent to it
-		public static bool IsEffectiveRoofBreakerPlacement(float explosiveRadius, IntVec3 center, Map map) {
+		public static bool IsEffectiveRoofBreakerPlacement(float explosiveRadius, IntVec3 center, Map map, bool respectFog) {
 			if (explosiveRadius <= 0) return false;
 			var roofGrid = map.roofGrid;
+			var fogGrid = map.fogGrid;
 			var cardinals = GenAdj.CardinalDirections;
 			var effectiveRadiusNumCells = GenRadial.NumCellsInRadius(explosiveRadius);
 			var adjacentWeakRoofFound = false;
@@ -116,7 +116,8 @@ namespace RemoteTech {
 					var cardinalCell = cardinals[j] + radiusCell;
 					if (!cardinalCell.InBounds(map)) continue;
 					var cardinalRoof = roofGrid.RoofAt(cardinalCell);
-					if (cardinalRoof == null || !cardinalRoof.isThickRoof) {
+					if ((!respectFog || !fogGrid.IsFogged(cardinalCell)) 
+						&& (cardinalRoof == null || !cardinalRoof.isThickRoof)) {
 						adjacentWeakRoofFound = true;
 						break;
 					}

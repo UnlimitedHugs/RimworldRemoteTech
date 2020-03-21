@@ -1,4 +1,4 @@
-﻿using Harmony;
+﻿using HarmonyLib;
 using RimWorld;
 using Verse;
 
@@ -7,7 +7,7 @@ namespace RemoteTech.Patches {
 	/// Allows types extending CompPowerTrader to be recognized as power grid connectables
 	/// </summary>
 	[HarmonyPatch(typeof(ThingDef))]
-	[HarmonyPatch("ConnectToPower", PropertyMethod.Getter)]
+	[HarmonyPatch("ConnectToPower", MethodType.Getter)]
 	internal class ThingDef_ConnectToPower_Patch {
 		[HarmonyPostfix]
 		public static void AllowPolymorphicComps(ThingDef __instance, ref bool __result) {

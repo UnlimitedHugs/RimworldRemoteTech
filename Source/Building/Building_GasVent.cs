@@ -5,15 +5,12 @@ using Verse;
 
 namespace RemoteTech {
 	public class Building_GasVent : Building {
-		// improves draining of the last view points from source room
+		// improves draining of the last few points from source room
 		private const float MinSourceConcentration = 3f;
 
-		private Room targetRoom;
-		private Room sourceRoom;
 		private IntVec3 targetCell;
 		private IntVec3 sourceCell;
 		private CompPowerTrader powerComp;
-		private bool roomsAreValid;
 		private float moveBuffer;
 		private BuildingProperties_GasVent ventProps;
 		private CachedValue<float> statVentAmount;
@@ -32,15 +29,21 @@ namespace RemoteTech {
 			if (ventProps == null) {
 				RemoteTechController.Instance.Logger.Error("Building_GasVent requires BuildingProperties_GasVent");
 			}
-			ValidateRooms();
 		}
 
 		public override void Tick() {
 			base.Tick();
 			if(!PowerOn || ventProps == null) return;
 
-			// move gas
-			if (roomsAreValid) {
+			PushGas();
+
+			if (this.IsHashIntervalTick(GenTicks.TicksPerRealSecond)) {
+				PushHeat();
+			}
+		}
+
+		private void PushGas() {
+			if (FrontAndBackAreAccessble()) {
 				var sourceCloud = RemoteTechUtility.TryFindGasCloudAt(Map, sourceCell);
 				if (sourceCloud != null) {
 					RemoteTechUtility.ReportPowerUse(this);
@@ -54,26 +57,24 @@ namespace RemoteTech {
 					}
 				}
 			}
+		}
 
-			// equalize heat
-			if (this.IsHashIntervalTick(GenTicks.TicksPerRealSecond)) {
-				ValidateRooms();
-
-				if (roomsAreValid && ValidateHeatExchange()) {
-					float pointTemp;
-					if (targetRoom.UsesOutdoorTemperature) {
-						pointTemp = targetRoom.Temperature;
-					} else if (sourceRoom.UsesOutdoorTemperature) {
-						pointTemp = sourceRoom.Temperature;
-					} else {
-						pointTemp = (targetRoom.Temperature * targetRoom.CellCount + sourceRoom.Temperature * sourceRoom.CellCount) / (targetRoom.CellCount + sourceRoom.CellCount);
-					}
-					if (!targetRoom.UsesOutdoorTemperature) {
-						EqualizeHeat(targetRoom, pointTemp, ventProps.heatExchangedPerSecond);
-					}
-					if (!sourceRoom.UsesOutdoorTemperature) {
-						EqualizeHeat(sourceRoom, pointTemp, ventProps.heatExchangedPerSecond);
-					}
+		private void PushHeat() {
+			var heatExchangeIsValid = TryGetHeatExchangeRooms(out Room sourceRoom, out Room targetRoom);
+			if (heatExchangeIsValid) {
+				float pointTemp;
+				if (targetRoom.UsesOutdoorTemperature) {
+					pointTemp = targetRoom.Temperature;
+				} else if (sourceRoom.UsesOutdoorTemperature) {
+					pointTemp = sourceRoom.Temperature;
+				} else {
+					pointTemp = (targetRoom.Temperature * targetRoom.CellCount + sourceRoom.Temperature * sourceRoom.CellCount) / (targetRoom.CellCount + sourceRoom.CellCount);
+				}
+				if (!targetRoom.UsesOutdoorTemperature) {
+					EqualizeHeat(targetRoom, pointTemp, ventProps.heatExchangedPerSecond);
+				}
+				if (!sourceRoom.UsesOutdoorTemperature) {
+					EqualizeHeat(sourceRoom, pointTemp, ventProps.heatExchangedPerSecond);
 				}
 			}
 		}
@@ -96,25 +97,27 @@ namespace RemoteTech {
 			var str = new StringBuilder(base.GetInspectString());
 			str.AppendLine();
 			str.Append("GasVent_ventedPerSecond".Translate(statVentAmount.Value));
-			if (!roomsAreValid) {
+			if (!FrontAndBackAreAccessble()) {
 				str.AppendLine();	
 				str.Append("GasVent_blocked".Translate());
 			}
 			return str.ToString();
 		}
 
-		private void ValidateRooms() {
-			if (targetCell.Impassable(Map) || sourceCell.Impassable(Map) || !Map.regionAndRoomUpdater.Enabled) {
-				roomsAreValid = false;
-			} else {
-				targetRoom = GridsUtility.GetRoom(Position + IntVec3.North.RotatedBy(Rotation), Map);
-				sourceRoom = GridsUtility.GetRoom(Position + IntVec3.South.RotatedBy(Rotation), Map);
-				roomsAreValid = targetRoom != null && sourceRoom != null && targetRoom != sourceRoom;
-			}
+		private bool FrontAndBackAreAccessble() {
+			return !(targetCell.Impassable(Map) || sourceCell.Impassable(Map));
 		}
 
-		private bool ValidateHeatExchange() {
-			return !targetRoom.UsesOutdoorTemperature || !sourceRoom.UsesOutdoorTemperature;
+		private bool TryGetHeatExchangeRooms(out Room sourceRoom, out Room targetRoom) {
+			if (FrontAndBackAreAccessble() && Map.regionAndRoomUpdater.Enabled) {
+				targetRoom = GridsUtility.GetRoom(Position + IntVec3.North.RotatedBy(Rotation), Map);
+				sourceRoom = GridsUtility.GetRoom(Position + IntVec3.South.RotatedBy(Rotation), Map);
+				if (targetRoom != null && sourceRoom != null && targetRoom != sourceRoom) {
+					return true;
+				}
+			}
+			sourceRoom = targetRoom = null;
+			return false;
 		}
 	}
 }

@@ -29,7 +29,7 @@ namespace RemoteTech {
 
 		public override Job JobOnThing(Pawn pawn, Thing t, bool forced = false) {
 			var jobDef = Resources.Job.rxSwitchThing;
-			return new Job(jobDef, t);
+			return JobMaker.MakeJob(jobDef, t);
 		}
 	}
 }

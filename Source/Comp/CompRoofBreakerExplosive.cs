@@ -17,7 +17,7 @@ namespace RemoteTech {
 			if (map == null) return;
 			var explosiveProps = props as CompProperties_Explosive;
 			if(explosiveProps == null) return;
-			var canAffectThickRoof = RemoteTechUtility.IsEffectiveRoofBreakerPlacement(explosiveProps.explosiveRadius, position, map);
+			var canAffectThickRoof = RemoteTechUtility.IsEffectiveRoofBreakerPlacement(explosiveProps.explosiveRadius, position, map, false);
 			bool anyThickRoofAffected = false;
 			foreach (var cell in GenRadial.RadialCellsAround(position, explosiveProps.explosiveRadius, true)) {
 				if(!cell.InBounds(map)) continue;
@@ -25,7 +25,7 @@ namespace RemoteTech {
 				if(roof == null || (roof.isThickRoof && !canAffectThickRoof)) continue;
 				if (roof.filthLeaving != null) {
 					for (int j = 0; j < RoofFilthAmount; j++) {
-						FilthMaker.MakeFilth(cell, map, roof.filthLeaving);
+						FilthMaker.TryMakeFilth(cell, map, roof.filthLeaving);
 					}
 				}
 				if (roof.isThickRoof) {

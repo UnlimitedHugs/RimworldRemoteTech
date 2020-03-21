@@ -19,7 +19,7 @@ namespace RemoteTech {
 		public override Job JobOnThing(Pawn pawn, Thing t, bool forced = false) {
 			var wall = t as Building_FoamWall;
 			if (wall == null || !wall.Spawned || !pawn.CanReserveAndReach(t, PathEndMode.Touch, Danger.Deadly)) return null;
-			return new Job(Resources.Job.rxSmoothFoamWall, t);
+			return JobMaker.MakeJob(Resources.Job.rxSmoothFoamWall, t);
 		}
 	}
 }

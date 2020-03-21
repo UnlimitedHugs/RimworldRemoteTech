@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using Harmony;
+using HarmonyLib;
 using HugsLib;
 using HugsLib.Settings;
 using HugsLib.Utils;
@@ -36,6 +36,7 @@ namespace RemoteTech {
 		public SettingHandle<bool> SettingAutoArmCombat { get; private set; }
 		public SettingHandle<bool> SettingAutoArmMining { get; private set; }
 		public SettingHandle<bool> SettingAutoArmUtility { get; private set; }
+		public SettingHandle<bool> SettingMiningChargesForbid { get; private set; }
 		public SettingHandle<bool> SettingLowerStandingCap { get; set; }
 		private SettingHandle<bool> SettingForbidReplaced { get; set; }
 		private SettingHandle<int> SettingForbidTimeout { get; set; }
@@ -67,6 +68,7 @@ namespace RemoteTech {
 			GetSettingsHandles();
 			PrepareReflection();
 			RemoveFoamWallsFromMeteoritePool();
+			Compat_DoorsExpanded.OnDefsLoaded();
 		}
 
 		public override void SceneLoaded(Scene scene) {
@@ -82,7 +84,8 @@ namespace RemoteTech {
 		}
 
 		private void RemoveFoamWallsFromMeteoritePool() {
-			// smoothed foam walls are mineable, but should not appear in a meteorite drop
+			// foam walls are mineable, but should not appear in a meteorite drop
+			ThingSetMaker_Meteorite.nonSmoothedMineables.Remove(Resources.Thing.rxFoamWall);
 			ThingSetMaker_Meteorite.nonSmoothedMineables.Remove(Resources.Thing.rxFoamWallSmooth);
 			ThingSetMaker_Meteorite.nonSmoothedMineables.Remove(Resources.Thing.rxFoamWallBricks);
 			// same for our passable collapsed rock
@@ -106,6 +109,7 @@ namespace RemoteTech {
 			SettingAutoArmCombat = Settings.GetHandle("autoArmCombat", "Setting_autoArmCombat_label".Translate(), "Setting_autoArmCombat_desc".Translate(), true);
 			SettingAutoArmMining = Settings.GetHandle("autoArmMining", "Setting_autoArmMining_label".Translate(), "Setting_autoArmMining_desc".Translate(), true);
 			SettingAutoArmUtility = Settings.GetHandle("autoArmUtility", "Setting_autoArmUtility_label".Translate(), "Setting_autoArmUtility_desc".Translate(), true);
+			SettingMiningChargesForbid = Settings.GetHandle("miningChargesForbid", "Setting_miningChargesForbid_label".Translate(), "Setting_miningChargesForbid_desc".Translate(), true);
 			SettingLowerStandingCap = Settings.GetHandle("lowerStandingCap", "Setting_lowerStandingCap_label".Translate(), "Setting_lowerStandingCap_label".Translate(), true);
 			SettingLowerStandingCap.VisibilityPredicate = () => Prefs.DevMode;
 		}
