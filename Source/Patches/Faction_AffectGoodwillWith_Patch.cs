@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Reflection.Emit;
 using HarmonyLib;
-using HugsLib.Utils;
 using RimWorld;
 using RimWorld.Planet;
 using Verse;
@@ -38,10 +37,9 @@ namespace RemoteTech.Patches {
 		}
 
 		private static int GetNegativeGoodwillCapForFaction(Faction faction) {
-			if (Current.ProgramState != ProgramState.Playing) {
-				return CustomFactionGoodwillCaps.DefaultMinNegativeGoodwill;
-			}
-			return UtilityWorldObjectManager.GetUtilityWorldObject<CustomFactionGoodwillCaps>().GetMinNegativeGoodwill(faction);
+			return Current.ProgramState != ProgramState.Playing
+				? CustomFactionGoodwillCaps.DefaultMinNegativeGoodwill
+				: CustomFactionGoodwillCaps.GetFromWorld().GetMinNegativeGoodwill(faction);
 		}
 	}
 }

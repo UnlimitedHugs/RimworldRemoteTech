@@ -1,5 +1,4 @@
-﻿using HugsLib.Utils;
-using RimWorld;
+﻿using RimWorld;
 using Verse;
 
 namespace RemoteTech {
@@ -30,7 +29,7 @@ namespace RemoteTech {
 			var gasOwnerFaction = Faction.OfPlayer;
 			var goodwillBefore = targetFaction.GoodwillWith(gasOwnerFaction);
 			// ensure that faction goodwill drops below the usual cap- relevant when gassing large groups
-			var caps = UtilityWorldObjectManager.GetUtilityWorldObject<CustomFactionGoodwillCaps>();
+			var caps = CustomFactionGoodwillCaps.GetFromWorld();
 			if (!targetFaction.HostileTo(gasOwnerFaction) && gasOwnerFaction == Faction.OfPlayer) {
 				caps.OnPlayerBetrayedFaction(targetFaction);
 			}

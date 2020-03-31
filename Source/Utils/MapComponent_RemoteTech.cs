@@ -1,5 +1,4 @@
-﻿using HugsLib.Utils;
-using Verse;
+﻿using Verse;
 
 namespace RemoteTech {
 	/// <summary>
@@ -14,7 +13,6 @@ namespace RemoteTech {
 		}
 
 		public MapComponent_RemoteTech(Map map) : base(map) {
-			this.EnsureIsActive();
 			replaceWatcher = new AutoReplaceWatcher();
 			replaceWatcher.SetParentMap(map);
 		}

@@ -1,6 +1,7 @@
-﻿using System.Collections.Generic;
-using HugsLib.Utils;
+﻿using System;
+using System.Collections.Generic;
 using RimWorld;
+using RimWorld.Planet;
 using UnityEngine;
 using Verse;
 
@@ -10,15 +11,22 @@ namespace RemoteTech {
 	/// Lowering the cap circumvents the trader gassing exploit that allows to rob a trader, 
 	/// release them, and end up with net positive faction goodwill in the end.
 	/// </summary>
-	public class CustomFactionGoodwillCaps : UtilityWorldObject {
+	public class CustomFactionGoodwillCaps : WorldComponent {
 		public const int DefaultMinNegativeGoodwill = -100;
 		public const int NegativeGoodwillCap = -5000;
 
+		public static CustomFactionGoodwillCaps GetFromWorld() {
+			return Find.World.GetComponent<CustomFactionGoodwillCaps>()
+				?? throw new NullReferenceException($"Failed to get {nameof(CustomFactionGoodwillCaps)} from world");
+		}
+		
 		private Dictionary<int, int> goodwillCaps = new Dictionary<int, int>();
 		private HashSet<int> betrayedFactions = new HashSet<int>();
 
+		public CustomFactionGoodwillCaps(World world) : base(world) {
+		}
+		
 		public override void ExposeData() {
-			base.ExposeData();
 			Scribe_Collections.Look(ref goodwillCaps, "goodwillCaps", LookMode.Value, LookMode.Value);
 			Scribe_Collections.Look(ref betrayedFactions, "betrayedFactions", LookMode.Value);
 			if (Scribe.mode == LoadSaveMode.PostLoadInit) {
