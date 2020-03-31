@@ -125,7 +125,7 @@
     <Compile Include="Source\Comp\StatPart_Upgradeable.cs" />
     <Compile Include="Source\UI\Dialog_SensorSettings.cs" />
     <Compile Include="Source\Utils\CachedValue.cs" />
-    <Compile Include="Source\Utils\CustomFactionGoodwillCaps.cs" />
+    <Compile Include="Source\Utils\FactionGoodwillCaps.cs" />
     <Compile Include="Source\Damage\DamageWorker_SuperEMP.cs" />
     <Compile Include="Source\Damage\SuperEMPDamageDef.cs" />
     <Compile Include="Source\Graphic\GraphicData_Blinker.cs" />

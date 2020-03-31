@@ -29,11 +29,12 @@ namespace RemoteTech {
 			var gasOwnerFaction = Faction.OfPlayer;
 			var goodwillBefore = targetFaction.GoodwillWith(gasOwnerFaction);
 			// ensure that faction goodwill drops below the usual cap- relevant when gassing large groups
-			var caps = CustomFactionGoodwillCaps.GetFromWorld();
+			var caps = FactionGoodwillCaps.GetFromWorld();
 			if (!targetFaction.HostileTo(gasOwnerFaction) && gasOwnerFaction == Faction.OfPlayer) {
 				caps.OnPlayerBetrayedFaction(targetFaction);
 			}
-			if (caps.HasPlayerBetrayedFaction(targetFaction) && goodwillBefore - goodwillLoss < CustomFactionGoodwillCaps.DefaultMinNegativeGoodwill) {
+			if (caps.HasPlayerBetrayedFaction(targetFaction) && 
+				goodwillBefore - goodwillLoss < FactionGoodwillCaps.DefaultMinNegativeGoodwill) {
 				caps.SetMinNegativeGoodwill(targetFaction, goodwillBefore - goodwillLoss);	
 			}
 			targetFaction.TryAffectGoodwillWith(gasOwnerFaction, -goodwillLoss);

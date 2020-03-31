@@ -38,8 +38,8 @@ namespace RemoteTech.Patches {
 
 		private static int GetNegativeGoodwillCapForFaction(Faction faction) {
 			return Current.ProgramState != ProgramState.Playing
-				? CustomFactionGoodwillCaps.DefaultMinNegativeGoodwill
-				: CustomFactionGoodwillCaps.GetFromWorld().GetMinNegativeGoodwill(faction);
+				? FactionGoodwillCaps.DefaultMinNegativeGoodwill
+				: FactionGoodwillCaps.GetFromWorld().GetMinNegativeGoodwill(faction);
 		}
 	}
 }
