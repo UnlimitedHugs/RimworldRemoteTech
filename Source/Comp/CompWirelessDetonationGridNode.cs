@@ -102,7 +102,7 @@ namespace RemoteTech {
 		public override void PostSpawnSetup(bool respawningAfterLoad) {
 			base.PostSpawnSetup(respawningAfterLoad);
 			powerComp = parent.GetComp<CompPowerTrader>();
-			if (Radius == 0) {
+			if (Radius < float.Epsilon) {
 				RemoteTechController.Instance.Logger.Error($"CompWirelessDetonationGridNode has zero radius. Missing signal range property on def {parent.def.defName}?");
 			}
 			if (Props == null) {
@@ -138,7 +138,7 @@ namespace RemoteTech {
 			return receivers.Select(r => {
 				var closest = transmitters.Select(t => 
 					new KeyValuePair<CompWirelessDetonationGridNode, float>(t, ownPos.DistanceToSquared(r.Position))
-				).Aggregate((min, pair) => min.Value == 0 || pair.Value < min.Value ? pair : min);
+				).Aggregate((min, pair) => min.Value < float.Epsilon || pair.Value < min.Value ? pair : min);
 				return new TransmitterReceiverPair(closest.Key, r);
 			});
 

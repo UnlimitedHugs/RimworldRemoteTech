@@ -10,7 +10,7 @@ namespace RemoteTech {
 	public class CompStatPowerIdle : CompStatPower, IPowerUseNotified {
 		private const string IdlePowerUpgradeReferenceId = "IdlePower";
 		private const float IdlePowerConsumption = 10f;
-		private const float InteractionCellPollIntervalTicks = 20;
+		private const int InteractionCellPollIntervalTicks = 20;
 
 		private bool hasUpgrade;
 

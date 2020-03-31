@@ -241,5 +241,9 @@ namespace RemoteTech {
 		public static CachedValue<float> GetCachedStat(this Thing thing, StatDef stat, int recacheInterval = GenTicks.TicksPerRealSecond) {
 			return new CachedValue<float>(() => thing.GetStatValue(stat), recacheInterval);
 		}
+
+		public static bool ApproximatelyEquals(this float value1, float value2, float tolerance = float.Epsilon) {
+			return Math.Abs(value1 - value2) < tolerance;
+		}
 	}
 }

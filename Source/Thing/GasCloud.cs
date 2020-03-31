@@ -196,7 +196,7 @@ namespace RemoteTech {
 		// this is just a "current + difference / divider", but adjusted for frame rate
 		private float DoAdditiveEasing(float currentValue, float targetValue, float easingDivider, float frameDeltaTime) {
 			const float nominalFrameRate = 60f;
-			var dividerMultiplier = frameDeltaTime == 0 ? 0 : (1f / nominalFrameRate) / frameDeltaTime;
+			var dividerMultiplier = frameDeltaTime < float.Epsilon ? 0 : (1f / nominalFrameRate) / frameDeltaTime;
 			easingDivider *= dividerMultiplier;
 			if (easingDivider < 1) easingDivider = 1;
 			var easingStep = (targetValue - currentValue) / easingDivider;

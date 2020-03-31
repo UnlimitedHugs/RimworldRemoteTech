@@ -69,7 +69,7 @@ namespace RemoteTech {
 					Wetness -= (1/(CustomProps.daysToSelfDry*RareTicksPerDay))*(temperature/CustomProps.baseDryingTemperature);
 				}
 			}
-			if (wantDrying && Wetness == 0) {
+			if (wantDrying && Wetness < float.Epsilon) {
 				wantDrying = false;
 				UpdateDesignation();
 			}

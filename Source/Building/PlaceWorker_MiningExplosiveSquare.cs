@@ -11,7 +11,7 @@ namespace RemoteTech {
 			var compProps = (CompProperties_MiningExplosive)def.comps.FirstOrDefault(c => c is CompProperties_MiningExplosive);
 			if (compProps == null) return;
 			GenDraw.DrawFieldEdges(Building_MiningExplosiveSquare.GetAffectedCellsSquareAtPosition(center, compProps.miningRadius));
-			base.DrawGhost(def, center, rot, ghostCol);
+			base.DrawGhost(def, center, rot, ghostCol, thing);
 		}
 	}
 }

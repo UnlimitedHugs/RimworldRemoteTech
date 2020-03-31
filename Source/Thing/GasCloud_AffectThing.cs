@@ -49,7 +49,7 @@ namespace RemoteTech {
 		}
 
 		protected float GetImmunizingApparelMultiplier(Pawn pawn) {
-			if (Props.immunizingApparelPower != 0 && pawn.apparel != null) {
+			if (Props.immunizingApparelPower > float.Epsilon && pawn.apparel != null) {
 				var apparel = pawn.apparel.WornApparel;
 				for (int i = 0; i < apparel.Count; i++) {
 					if (Props.immunizingApparelDefs.Contains(apparel[i].def))

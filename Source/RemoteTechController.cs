@@ -192,7 +192,7 @@ namespace RemoteTech {
 					break;
 				}
 			}
-			if (resourceCountRequired == 0) return null;
+			if (resourceCountRequired < float.Epsilon) return null;
 
 			var recipeCopy = CloneObject(recipeOriginal);
 			recipeCopy.defName = $"{recipeOriginal.defName}_{replacementIngredient.defName}";

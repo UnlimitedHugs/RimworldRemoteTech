@@ -20,6 +20,7 @@ namespace RemoteTech {
 	/// These are functions that describe the change of a value over time. See http://easings.net/ for more info.
 	/// Swiped from https://gist.github.com/Fonserbc/3d31a25e87fdaa541ddf
 	/// </summary>
+	// ReSharper disable CompareOfFloatsByEqualityOperator
 	public static class InterpolationCurves {
 			public delegate float Curve(float time);
 			

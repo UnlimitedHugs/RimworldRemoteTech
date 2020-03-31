@@ -102,7 +102,7 @@ namespace RemoteTech {
 				}
 				// track pawn and report them to the authorities
 				if (pawn != null && !trackedPawns.Contains(pawn) && GenSight.LineOfSight(Position, cell, Map, true)
-					&& CooldownTime == 0f && PawnMatchesFilter(pawn)) {
+					&& CooldownTime < float.Epsilon && PawnMatchesFilter(pawn)) {
 					TriggerSensor(pawn);
 				}
 				// store cell position for drawing

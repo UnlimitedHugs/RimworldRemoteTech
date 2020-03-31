@@ -102,7 +102,9 @@ namespace RemoteTech {
 					// squint if target is a dirty humanlike
 					var isHumanlike = currentTarget is Pawn p && p.RaceProps != null && p.RaceProps.Humanlike;
 					var targetSquint = isHumanlike ? .5f : 1f;
-					if (blinkSquintAnim.value != targetSquint) blinkSquintAnim.StartInterpolation(targetSquint, SquintAnimDuration, CurveType.CubicInOut);
+					if (!blinkSquintAnim.value.ApproximatelyEquals(targetSquint)) {
+						blinkSquintAnim.StartInterpolation(targetSquint, SquintAnimDuration, CurveType.CubicInOut);
+					}
 				}
 				if (currentTarget != null && targetExpirationTick <= GenTicks.TicksGame) {
 					SetLookTarget(null, false);

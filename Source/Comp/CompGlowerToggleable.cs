@@ -13,7 +13,7 @@ namespace RemoteTech {
 		}
 
 		public void ToggleGlow(bool enable) {
-			if (enable == (originalGlowRadius == Props.glowRadius)) return;
+			if (enable == originalGlowRadius.ApproximatelyEquals(Props.glowRadius)) return;
 			Props.glowRadius = enable ? originalGlowRadius : 0f;
 			// reset cache in parent class
 			RemoteTechController.Instance.CompGlowerGlowOnField.SetValue(this, !(bool)RemoteTechController.Instance.CompGlowerShouldBeLitProperty.GetValue(this, null));

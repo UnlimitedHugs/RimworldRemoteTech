@@ -93,7 +93,7 @@ namespace RemoteTech {
 					color = color,
 					BaseTexPath = "UI/Overlays/TargetHighlight_Side"
 				});
-				material.GetTexture("_MainTex").wrapMode = TextureWrapMode.Clamp;
+				material.mainTexture.wrapMode = TextureWrapMode.Clamp;
 				if (fieldGrid == null) {
 					fieldGrid = new BoolGrid(currentMap);
 				} else {
