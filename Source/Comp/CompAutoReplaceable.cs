@@ -6,7 +6,7 @@ namespace RemoteTech {
 	/// <summary>
 	/// Destroyed buildings with this comp will be replaced as blueprints by AutoReplaceWatcher
 	/// </summary>
-	public class CompAutoReplaceable : ThingComp {
+	public class CompAutoReplaceable : ThingComp, IAutoReplaceExposable {
 		private static readonly string AutoReplaceButtonLabel = "RemoteExplosive_autoReplace_label".Translate();
 		private static readonly string AutoReplaceButtonDesc = "RemoteExplosive_autoReplace_desc".Translate();
 		
@@ -17,6 +17,7 @@ namespace RemoteTech {
 		}
 		public IntVec3 ParentPosition { get; private set; }
 		public Rot4 ParentRotation { get; private set; }
+		public bool WasAutoReplaced { get; private set; }
 		private bool autoDisplayGizmo = true;
 		private bool wasLoaded;
 
@@ -65,6 +66,12 @@ namespace RemoteTech {
 
 		public override IEnumerable<Gizmo> CompGetGizmosExtra() {
 			if(autoDisplayGizmo) yield return MakeGizmo();
+		}
+
+		public void ExposeAutoReplaceValues(AutoReplaceWatcher watcher) {
+			if (watcher.ExposeMode == LoadSaveMode.LoadingVars) {
+				WasAutoReplaced = true;
+			}
 		}
 
 		private void ReplaceGizmoAction() {

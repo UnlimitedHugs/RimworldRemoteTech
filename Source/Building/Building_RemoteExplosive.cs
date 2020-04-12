@@ -73,9 +73,12 @@ namespace RemoteTech {
 			this.RequireComponent(CustomProps);
 			this.RequireComponent(BlinkerData);
 			if (!respawningAfterLoad && CustomProps != null) {
-				if (CustomProps.explosiveType == RemoteExplosiveType.Combat && RemoteTechController.Instance.SettingAutoArmCombat ||
+				var typeShouldAutoArm =
+					CustomProps.explosiveType == RemoteExplosiveType.Combat && RemoteTechController.Instance.SettingAutoArmCombat ||
 					CustomProps.explosiveType == RemoteExplosiveType.Mining && RemoteTechController.Instance.SettingAutoArmMining ||
-					CustomProps.explosiveType == RemoteExplosiveType.Utility && RemoteTechController.Instance.SettingAutoArmUtility) {
+					CustomProps.explosiveType == RemoteExplosiveType.Utility && RemoteTechController.Instance.SettingAutoArmUtility;
+				var builtFromAutoReplacedBlueprint = replaceComp?.WasAutoReplaced ?? false; 
+				if (typeShouldAutoArm && !builtFromAutoReplacedBlueprint) {
 					Arm();
 				}
 			}
@@ -223,8 +226,12 @@ namespace RemoteTech {
 		public void ExposeAutoReplaceValues(AutoReplaceWatcher watcher) {
 			var armed = IsArmed;
 			watcher.ExposeValue(ref armed, "armed");
-			if (watcher.ExposeMode == LoadSaveMode.LoadingVars && armed) {
-				Arm();
+			if (watcher.ExposeMode == LoadSaveMode.LoadingVars) {
+				if (armed) {
+					Arm();
+				} else {
+					Disarm();
+				}
 			}
 		}
 
