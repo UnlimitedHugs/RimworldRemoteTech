@@ -16,7 +16,7 @@ namespace RemoteTech {
 		private class ReplacementEntry : IExposable {
 			public IntVec3 position;
 			public int unforbidTick;
-			public Dictionary<string, ValueType> savedVars;
+			public Dictionary<string, string> savedVars;
 
 			public void ExposeData() {
 				Scribe_Values.Look(ref position, "position");
@@ -26,7 +26,7 @@ namespace RemoteTech {
 		}
 
 		private Map map;
-		private Dictionary<string, ValueType> currentVars;
+		private Dictionary<string, string> currentVars;
 
 		// saved
 		private List<ReplacementEntry> pendingSettings = new List<ReplacementEntry>();
@@ -54,7 +54,7 @@ namespace RemoteTech {
 			var entry = new ReplacementEntry {
 				position = replaceableComp.ParentPosition,
 				unforbidTick = Find.TickManager.TicksGame + RemoteTechController.Instance.BlueprintForbidDuration * GenTicks.TicksPerRealSecond,
-				savedVars = new Dictionary<string, ValueType>()
+				savedVars = new Dictionary<string, string>()
 			};
 			InvokeExposableCallbacks(building, entry.savedVars, LoadSaveMode.Saving);
 			pendingSettings.Add(entry);
@@ -93,27 +93,35 @@ namespace RemoteTech {
 			if (pendingForbiddenBlueprints == null) pendingForbiddenBlueprints = new List<ReplacementEntry>();
 		}
 
-		public bool ExposeValue<T>(ref T value, string name, T fallbackValue = default(T)) where T : struct {
+		public bool ExposeValue<T>(ref T value, string name, T fallbackValue = default) where T : IConvertible {
 			if (name == null) throw new ArgumentNullException(nameof(name));
-			if (ExposeMode == LoadSaveMode.Inactive) throw new InvalidOperationException("Values can only be exposed during IAutoReplaceExposable callbacks");
+			if (ExposeMode == LoadSaveMode.Inactive) {
+				throw new InvalidOperationException("Values can only be exposed during IAutoReplaceExposable callbacks"
+				);
+			}
 			if (ExposeMode == LoadSaveMode.LoadingVars) {
-				if (currentVars.TryGetValue(name, out ValueType storedValue)) {
-					value = (T)storedValue;
-					//RemoteTechController.Instance.Logger.Message($"Loaded {value} as {name}");
-					return true;
-				} else {
-					value = fallbackValue;
-					//RemoteTechController.Instance.Logger.Message($"Loaded fallback {value} as {name}");
+				if (currentVars.TryGetValue(name, out string storedValue)) {
+					try {
+						value = (T)Convert.ChangeType(storedValue, typeof(T));
+						//RemoteTechController.Instance.Logger.Message($"Loaded {value} as {name}");
+						return true;
+					} catch (Exception e) {
+						RemoteTechController.Instance.Logger.Error($"Failed to parse value \"{storedValue}\" as " +
+							$"{typeof(T).Name}, using fallback value. Exception was: {e}"
+						);
+					}
 				}
+				value = fallbackValue;
+				//RemoteTechController.Instance.Logger.Message($"Loaded fallback {value} as {name}");
 			} else if (ExposeMode == LoadSaveMode.Saving) {
 				//RemoteTechController.Instance.Logger.Message($"Saving {value} as {name}");
-				currentVars[name] = value;
+				currentVars[name] = value?.ToString();
 				return true;
 			}
 			return false;
 		}
 
-		private void InvokeExposableCallbacks(ThingWithComps target, Dictionary<string, ValueType> vars, LoadSaveMode mode) {
+		private void InvokeExposableCallbacks(ThingWithComps target, Dictionary<string, string> vars, LoadSaveMode mode) {
 			ExposeMode = mode;
 			currentVars = vars;
 			if(target is IAutoReplaceExposable t) t.ExposeAutoReplaceValues(this);
