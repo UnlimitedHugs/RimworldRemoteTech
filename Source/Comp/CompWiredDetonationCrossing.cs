@@ -43,7 +43,7 @@ namespace RemoteTech {
 		}
 
 		public override void PrintForDetonationGrid(SectionLayer layer) {
-			Resources.Graphics.DetWireOverlayCrossing.Print(layer, parent);
+			Resources.Graphics.DetWireOverlayCrossing.Print(layer, parent, 0f);
 		}
 	}
 }

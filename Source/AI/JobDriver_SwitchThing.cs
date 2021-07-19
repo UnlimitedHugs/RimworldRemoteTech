@@ -20,7 +20,7 @@ namespace RemoteTech {
 				initAction = () => {
 					TargetThingA.TrySwitch();
 					TargetThingA.UpdateSwitchDesignation();
-					for (int i = 0; i <= 10; i++) MoteMaker.ThrowDustPuff(TargetThingA.Position, Map, 1);
+					for (int i = 0; i <= 10; i++) FleckMaker.ThrowDustPuff(TargetThingA.Position, Map, 1);
 				},
 				defaultCompleteMode = ToilCompleteMode.Instant
 			};

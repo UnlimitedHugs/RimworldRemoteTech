@@ -12,6 +12,7 @@ namespace RemoteTech {
 	public class CompMiningExplosive : CompCustomExplosive {
 		private const int MinAffectedCellsToTriggerCaveInSound = 6;
 
+		private Pawn placedBy;
 		private List<IntVec3> customArea;
 
 		public CompProperties_MiningExplosive MiningProps {
@@ -24,6 +25,19 @@ namespace RemoteTech {
 			customArea = cells;
 		}
 
+		public override void PostSpawnSetup(bool respawningAfterLoad) {
+			base.PostSpawnSetup(respawningAfterLoad);
+			if (!respawningAfterLoad) {
+				placedBy = parent.Map.mapPawns.FreeColonistsSpawned
+					.FirstOrDefault(p => p.Position.DistanceTo(parentPosition) < 2.5f);
+			}
+		}
+
+		public override void PostExposeData() {
+			base.PostExposeData();
+			Scribe_References.Look(ref placedBy, "placedBy");
+		}
+		
 		protected override void Detonate() {
 			base.Detonate();
 			if (parentMap == null) return;
@@ -97,11 +111,16 @@ namespace RemoteTech {
 				var tree = (Plant)thing;
 				DamageResourceHolder(tree, explosive.GetStatValue(Resources.Stat.rxExplosiveWoodYield));
 				var yield = tree.YieldNow();
-				tree.PlantCollected();
 				if (yield > 0) {
 					var wood = ThingMaker.MakeThing(thing.def.plant.harvestedThingDef);
 					wood.stackCount = yield;
 					GenPlace.TryPlaceThing(wood, thing.Position, map, ThingPlaceMode.Direct);
+				}
+				var culpritPawn = placedBy ?? Faction.OfPlayer.leader;
+				if (culpritPawn != null) {
+					tree.PlantCollected(placedBy);
+				} else {
+					tree.Destroy();
 				}
 			}
 			return affected;

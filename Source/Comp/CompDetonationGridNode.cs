@@ -25,11 +25,11 @@ namespace RemoteTech {
 		public abstract void PrintForDetonationGrid(SectionLayer layer);
 
 		protected void PrintConnection(SectionLayer layer) {
-			Resources.Graphics.DetWireOverlayAtlas.Print(layer, parent);
+			Resources.Graphics.DetWireOverlayAtlas.Print(layer, parent, 0f);
 		}
 
 		protected void PrintEndpoint(SectionLayer layer) {
-			Resources.Graphics.DetWireOverlayEndpoint.Print(layer, parent);
+			Resources.Graphics.DetWireOverlayEndpoint.Print(layer, parent, 0f);
 		}
 	}
 }

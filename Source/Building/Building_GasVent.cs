@@ -82,9 +82,9 @@ namespace RemoteTech {
 		private void EqualizeHeat(Room room, float targetTemp, float rate) {
 			var moveAmount = Mathf.Abs(room.Temperature - targetTemp) * rate;
 			if (targetTemp < room.Temperature) {
-				room.Group.Temperature = Mathf.Max(targetTemp, room.Temperature - moveAmount);
+				room.Temperature = Mathf.Max(targetTemp, room.Temperature - moveAmount);
 			} else if (targetTemp > room.Temperature) {
-				room.Group.Temperature = Mathf.Min(targetTemp, room.Temperature + moveAmount);
+				room.Temperature = Mathf.Min(targetTemp, room.Temperature + moveAmount);
 			}
 		}
 

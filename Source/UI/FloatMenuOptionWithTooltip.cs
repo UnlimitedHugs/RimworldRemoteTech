@@ -8,7 +8,26 @@ namespace RemoteTech {
 	public class FloatMenuOptionWithTooltip : FloatMenuOption {
 		public TipSignal Tooltip;
 
-		public FloatMenuOptionWithTooltip(string label, Action action, TipSignal tooltip = new TipSignal(), MenuOptionPriority priority = MenuOptionPriority.Default, Action mouseoverGuiAction = null, Thing revalidateClickTarget = null, float extraPartWidth = 0, Func<Rect, bool> extraPartOnGUI = null, WorldObject revalidateWorldClickTarget = null) : base(label, action, priority, mouseoverGuiAction, revalidateClickTarget, extraPartWidth, extraPartOnGUI, revalidateWorldClickTarget) {
+		public FloatMenuOptionWithTooltip(
+				string label,
+				Action action,
+				TipSignal tooltip = new TipSignal(),
+				MenuOptionPriority priority = MenuOptionPriority.Default,
+				Action<Rect> mouseoverGuiAction = null,
+				Thing revalidateClickTarget = null,
+				float extraPartWidth = 0,
+				Func<Rect, bool> extraPartOnGUI = null,
+				WorldObject revalidateWorldClickTarget = null
+			) : base(
+				label,
+				action,
+				priority,
+				mouseoverGuiAction,
+				revalidateClickTarget,
+				extraPartWidth,
+				extraPartOnGUI,
+				revalidateWorldClickTarget
+			) {
 			Tooltip = tooltip;
 		}
 

@@ -40,7 +40,7 @@ namespace RemoteTech {
 			return 139f;
 		}
 
-		public override GizmoResult GizmoOnGUI(Vector2 topLeft, float maxWidth) {
+		public override GizmoResult GizmoOnGUI(Vector2 topLeft, float maxWidth, GizmoRenderParms _) {
 			const int rowSize = 4, padding = 6, gizmoHeight = 75, buttonSpacing = 1;
 			var totalRect = new Rect(topLeft.x, topLeft.y, GetWidth(maxWidth), gizmoHeight);
 			var contentRect = totalRect.ContractedBy(padding);

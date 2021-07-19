@@ -11,7 +11,15 @@ namespace RemoteTech.Patches {
 	/// Allows faction standing to be reduced below the normal -100 limit
 	/// See CustomFactionGoodwillCaps for details
 	/// </summary>
-	[HarmonyPatch(typeof(Faction), "TryAffectGoodwillWith", new []{typeof(Faction), typeof(int), typeof(bool), typeof(bool), typeof(string), typeof(GlobalTargetInfo)})]
+	[HarmonyPatch(typeof(Faction),
+		"TryAffectGoodwillWith",
+		typeof(Faction),
+		typeof(int),
+		typeof(bool),
+		typeof(bool),
+		typeof(HistoryEventDef),
+		typeof(GlobalTargetInfo)
+	)]
 	internal class Faction_AffectGoodwillWith_Patch {
 		private static bool patchApplied;
 

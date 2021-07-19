@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+	<HediffDef Class="RemoteTech.HediffDef_NonLethal">
+		<defName>rxSleepingGas</defName>
+		<description>Effects of inhaled sleeping gas. As concentration increases, the body becomes less capable until eventually falling asleep.\n\nRecovers naturally over time, but only if no additional gas is inhaled.</description>
+		<hediffClass>RemoteTech.Hediff_NonLethal</hediffClass>
+		<defaultLabelColor>(0.7, 0.1 , 1)</defaultLabelColor>
+		<label>sleeping gas</label>
+		<makesSickThought>true</makesSickThought>
+		<chanceToCauseNoPain>1</chanceToCauseNoPain>
+		<vanillaLethalityChance>.1</vanillaLethalityChance>
+		<maxSeverity>2.5</maxSeverity>
+		<comps>
+			<li Class="RemoteTech.HediffCompProps_SeverityRecovery">
+				<compClass>RemoteTech.HediffComp_SeverityRecovery</compClass>
+				<severityRecoveryPerTick>
+					<min>0.0001</min>
+					<max>0.0003</max>
+				</severityRecoveryPerTick>
+				<cooldownAfterSeverityIncrease>300</cooldownAfterSeverityIncrease>
+				<severityIncreaseDetectionThreshold>0.002</severityIncreaseDetectionThreshold>
+			</li>
+		</comps>
+		<stages>
+			<li>
+				<label></label>
+				<minSeverity>0</minSeverity>
+				<becomeVisible>false</becomeVisible>
+				<capMods>
+					<li>
+						<capacity>Consciousness</capacity>
+						<offset>-0.1</offset>
+					</li>
+				</capMods>
+				<lifeThreatening>false</lifeThreatening>
+			</li>
+			<li>
+				<label>tired</label>
+				<minSeverity>0.20</minSeverity>
+				<capMods>
+					<li>
+						<capacity>Consciousness</capacity>
+						<offset>-0.2</offset>
+					</li>
+				</capMods>
+				<lifeThreatening>false</lifeThreatening>
+			</li>
+			<li>
+				<label>drowsy</label>
+				<minSeverity>0.40</minSeverity>
+				<capMods>
+					<li>
+						<capacity>Consciousness</capacity>
+						<offset>-0.4</offset>
+					</li>
+				</capMods>
+				<lifeThreatening>false</lifeThreatening>
+			</li>
+			<li>
+				<label>sleepy</label>
+				<minSeverity>0.60</minSeverity>
+				<capMods>
+					<li>
+						<capacity>Consciousness</capacity>
+						<setMax>0.4</setMax>
+					</li>
+				</capMods>
+				<lifeThreatening>false</lifeThreatening>
+			</li>
+			<li>
+				<label>out cold</label>
+				<minSeverity>0.80</minSeverity>
+				<capMods>
+					<li>
+						<capacity>Consciousness</capacity>
+						<setMax>0.1</setMax>
+					</li>
+				</capMods>
+				<lifeThreatening>false</lifeThreatening>
+			</li>
+		</stages>
+	</HediffDef>
+</Defs>
