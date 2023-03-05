@@ -1,0 +1,183 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+	<ThingDef Name="rxApparelBase" Abstract="True">
+		<thingClass>Apparel</thingClass>
+		<category>Item</category>
+		<selectable>True</selectable>
+		<pathCost>10</pathCost>
+		<useHitPoints>True</useHitPoints>
+		<graphicData>
+			<onGroundRandomRotateAngle>35</onGroundRandomRotateAngle>
+		</graphicData>
+		<drawGUIOverlay>true</drawGUIOverlay>
+		<statBases>
+			<MaxHitPoints>100</MaxHitPoints>
+			<Flammability>1.0</Flammability>
+			<DeteriorationRate>2</DeteriorationRate>
+			<SellPriceFactor>0.5</SellPriceFactor>
+		</statBases>
+		<altitudeLayer>Item</altitudeLayer>
+		<alwaysHaulable>True</alwaysHaulable>
+		<tickerType>Never</tickerType>
+		<comps>
+			<li Class="CompProperties_Forbiddable"/>
+			<li>
+				<compClass>CompColorable</compClass>
+			</li>
+			<li>
+				<compClass>CompQuality</compClass>
+			</li>
+		</comps>
+	</ThingDef>
+
+	<ThingDef Name="rxApparelMakeableBase" ParentName="rxApparelBase" Abstract="True">
+		<recipeMaker>
+			<workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+			<workSkill>Crafting</workSkill>
+			<effectWorking>Tailor</effectWorking>
+			<soundWorking>Recipe_Tailor</soundWorking>
+			<recipeUsers>
+				<li>ElectricTailoringBench</li>
+				<li>HandTailoringBench</li>
+			</recipeUsers>
+			<unfinishedThingDef>UnfinishedApparel</unfinishedThingDef>
+		</recipeMaker>
+	</ThingDef>
+
+	<ThingDef ParentName="rxApparelMakeableBase">
+		<defName>rxApparel_GasMask</defName>
+		<label>gas mask</label>
+		<description>A mask that protects the wearer from toxic gasses and other air-borne contaminants.
+The filters wear out fairly quickly, so it's recommended to wear this only when necessary.</description>
+		<techLevel>Industrial</techLevel>
+		<recipeMaker>
+			<unfinishedThingDef>UnfinishedTechArmor</unfinishedThingDef>
+		</recipeMaker>
+		<graphicData>
+			<texPath>rxGasMask/GasMask</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+		</graphicData>
+		<statBases>
+			<WorkToMake>3500</WorkToMake>
+			<MaxHitPoints>50</MaxHitPoints>
+			<MarketValue>160</MarketValue>
+			<ArmorRating_Blunt>0.05</ArmorRating_Blunt>
+			<ArmorRating_Sharp>0.05</ArmorRating_Sharp>
+			<Mass>1</Mass>
+		</statBases>
+		<generateCommonality>.8</generateCommonality>
+		<thingCategories>
+			<li>Headgear</li>
+		</thingCategories>
+		<costList>
+			<Steel>40</Steel>
+			<ComponentIndustrial>2</ComponentIndustrial>
+			<MedicineIndustrial>2</MedicineIndustrial>
+		</costList>
+		<equippedStatOffsets>
+			<ToxicResistance>0.80</ToxicResistance>
+			<ShootingAccuracyPawn>-0.05</ShootingAccuracyPawn>
+			<SocialImpact>-0.2</SocialImpact>
+		</equippedStatOffsets>
+		<apparel>
+			<bodyPartGroups>
+				<li>FullHead</li>
+			</bodyPartGroups>
+			<wornGraphicPath>rxGasMask/GasMask</wornGraphicPath>
+			<layers>
+				<li>Overhead</li>
+			</layers>
+			<tags>
+				<li>Outlander</li>
+				<li>Military</li>
+			</tags>
+			<defaultOutfitTags>
+				<li>Soldier</li>
+			</defaultOutfitTags> 
+			<wearPerDay>12.5</wearPerDay>
+		</apparel>
+		<colorGenerator Class="ColorGenerator_Options">
+			<options>
+				<li>
+					<weight>10</weight>
+					<only>RGBA(0.33,0.33,0.33,1)</only>
+				</li>
+				<li>
+					<weight>5</weight>
+					<only>RGBA(1,0.56,0.7,1)</only>
+				</li>
+				<li>
+					<weight>10</weight>
+					<only>RGBA(0.9,0.9,0.9,1)</only>
+				</li>
+			</options>
+		</colorGenerator>
+	</ThingDef>
+
+	<ThingDef ParentName="rxApparelBase">
+		<defName>rxApparel_PortableDetonator</defName>
+		<thingClass>RemoteTech.PortableDetonator</thingClass>
+		<label>portable remote detonator</label>
+		<description>A portable version of the detonator table for triggering remote explosives. Has limited range and runs on a non-rechargeable battery- but hey, you can almost fit it in your pocket. Almost.
+Works only on channel 1, but can be upgraded once channels have been researched. Unequip to upgrade.</description>
+		<graphicData>
+			<texPath>rxDetonatorPortable</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+		</graphicData>
+		<statBases>
+			<WorkToMake>3000</WorkToMake>
+			<MaxHitPoints>80</MaxHitPoints>
+			<MarketValue>300</MarketValue>
+			<rxPortableDetonatorNumUses>20</rxPortableDetonatorNumUses>
+			<rxSignalRange>18</rxSignalRange>
+			<Mass>1</Mass>
+		</statBases>
+		<generateCommonality>0.00001</generateCommonality>
+		<recipeMaker>
+			<workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+			<workSkill>Crafting</workSkill>
+			<effectWorking>Smith</effectWorking>
+			<soundWorking>Recipe_Machining</soundWorking>
+			<recipeUsers>
+				<li>rxBench</li>
+			</recipeUsers>
+			<unfinishedThingDef>UnfinishedComponent</unfinishedThingDef>
+			<researchPrerequisite>rxRemoteDetonator</researchPrerequisite>
+		</recipeMaker>
+		<costList>
+			<ComponentIndustrial>2</ComponentIndustrial>
+			<Silver>8</Silver>
+			<Steel>40</Steel>
+		</costList>
+		<thingCategories>
+			<li>Apparel</li>
+		</thingCategories>
+		<apparel>
+			<careIfWornByCorpse>false</careIfWornByCorpse>
+			<bodyPartGroups>
+				<li>Waist</li>
+			</bodyPartGroups>
+			<layers>
+				<li>rxAccessory</li>
+			</layers>
+		</apparel>
+		<comps>
+			<li Class="RemoteTech.CompProperties_ChannelSelector"/>
+			<li Class="RemoteTech.CompProperties_WirelessDetonationGridNode">
+				<endpoint>true</endpoint>
+			</li>
+			<li Class="RemoteTech.CompProperties_Upgrade">
+				<label>Basic channels</label>
+				<referenceId>ChannelsBasic</referenceId>
+				<workAmount>1000</workAmount>
+				<effectDescription>Enables the detonator to trigger explosives on 3 separate channels.</effectDescription>
+				<researchPrerequisite>rxChannels</researchPrerequisite>
+				<costList>
+					<ComponentIndustrial>1</ComponentIndustrial>
+				</costList>
+			</li>
+		</comps>
+	</ThingDef>
+
+</Defs>
